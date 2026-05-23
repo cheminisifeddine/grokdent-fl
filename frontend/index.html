@@ -458,6 +458,175 @@
         max-width: 320px;
       }
     }
+
+    /* Premium Design System Extensions */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .hero-orb-1 {
+      width: 450px;
+      height: 450px;
+      background: var(--accent-teal, #0d9488);
+      top: -100px;
+      left: -50px;
+      animation: float 18s ease-in-out infinite;
+    }
+    
+    .hero-orb-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--accent-coral, #f97316);
+      top: 50px;
+      right: -100px;
+      animation: float 22s ease-in-out infinite reverse;
+    }
+    
+    .hero-orb-3 {
+      width: 350px;
+      height: 350px;
+      background: #8b5cf6;
+      bottom: -150px;
+      left: 30%;
+      animation: float 25s ease-in-out infinite 3s;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: 2;
+      mask-image: radial-gradient(circle at top, black 40%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at top, black 40%, transparent 85%);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(13, 148, 136, 0.4);
+      box-shadow: 0 0 35px rgba(13, 148, 136, 0.15), 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .pricing-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(249, 115, 22, 0.3);
+      box-shadow: 0 0 35px rgba(249, 115, 22, 0.1), 0 20px 45px rgba(0, 0, 0, 0.4);
+    }
+
+    .pricing-card-popular:hover {
+      transform: translateY(-8px);
+      border-color: #0d9488;
+      box-shadow: 0 0 40px rgba(13, 148, 136, 0.25), 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Upgraded Phone Simulator Input Styles */
+    .demo-phone-mockup {
+      padding: 15px !important;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .phone-input-bar {
+      display: flex;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 6px 6px 6px 14px;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      z-index: 10;
+      position: relative;
+    }
+    
+    .phone-input-bar:focus-within {
+      border-color: rgba(13, 148, 136, 0.6);
+      box-shadow: 0 0 15px rgba(13, 148, 136, 0.2);
+    }
+    
+    .phone-input-bar input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 13px;
+      flex: 1;
+      outline: none;
+    }
+    
+    .phone-input-bar input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .phone-input-bar button {
+      background: linear-gradient(135deg, #0d9488, #f97316);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    
+    .phone-input-bar button:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+
+    /* Typing Indicator Styling */
+    .typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 20px;
+      align-self: flex-start;
+      margin-top: 5px;
+    }
+    
+    .typing-indicator span {
+      width: 6px;
+      height: 6px;
+      background: #5eead4;
+      border-radius: 50%;
+      display: inline-block;
+      animation: typing-bounce 1.4s infinite ease-in-out both;
+    }
+    
+    .typing-indicator span:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+    
+    .typing-indicator span:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+    
+    @keyframes typing-bounce {
+      0%, 80%, 100% { 
+        transform: scale(0);
+      } 40% { 
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -477,17 +646,23 @@
 
   <!-- Hero Section -->
   <header class="hero-section">
-    <div class="badge-premium">Powered by xAI Grok-3 Voice Agent API</div>
-    <h1 class="hero-title">
-      Never Miss Another Patient Call. Meet Your 24/7 <span>AI Dental Receptionist.</span>
-    </h1>
-    <p class="hero-subtitle">
-      Always-on, HIPAA-compliant voice assistant custom-tailored for Florida dental clinics. 
-      English & Spanish bilingual, schedules appointments directly into your calendar, and handles triage emergencies automatically.
-    </p>
-    <div class="hero-cta">
-      <a href="signup.html" class="btn btn-primary btn-lg">Provision Your Florida Number</a>
-      <a href="#demo" class="btn btn-secondary btn-lg">Try Call Simulator</a>
+    <div class="grid-overlay"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div style="position: relative; z-index: 10;">
+      <div class="badge-premium">Powered by xAI Grok-3 Voice Agent API</div>
+      <h1 class="hero-title">
+        Never Miss Another Patient Call. Meet Your 24/7 <span>AI Dental Receptionist.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Always-on, HIPAA-compliant voice assistant custom-tailored for Florida dental clinics. 
+        English & Spanish bilingual, schedules appointments directly into your calendar, and handles triage emergencies automatically.
+      </p>
+      <div class="hero-cta">
+        <a href="signup.html" class="btn btn-primary btn-lg">Provision Your Florida Number</a>
+        <a href="#demo" class="btn btn-secondary btn-lg">Try Call Simulator</a>
+      </div>
     </div>
   </header>
 
@@ -565,6 +740,10 @@
           <div class="phone-bubble phone-bubble-ai">
             Thank you for calling Sunshine Smiles Dental in Orlando! I'm your AI assistant. How can I help you today?
           </div>
+        </div>
+        <div class="phone-input-bar">
+          <input type="text" id="simulator-input" placeholder="Type a dental question..." autocomplete="off">
+          <button id="simulator-send-btn">➔</button>
         </div>
       </div>
     </div>
@@ -684,38 +863,240 @@
 
   <!-- Phone Simulator Interactive Script -->
   <script>
+    // Global lock to prevent double entries during simulation
+    let isAIThinking = false;
+
     function simulateUtterance(patientText, aiResponse, state) {
+      if (isAIThinking) return;
+      
       const screen = document.getElementById("chat-screen");
-      const stateBadge = document.getElementById("agent-state-badge");
       
       // Update state badge
-      stateBadge.textContent = state;
-      if (state === 'emergency') {
-        stateBadge.className = 'badge badge-danger';
-      } else if (state === 'booking') {
-        stateBadge.className = 'badge badge-success';
-      } else {
-        stateBadge.className = 'badge badge-warning';
-      }
+      updateStateBadge(state);
 
       // Add user bubble
       const userBubble = document.createElement("div");
-      userBubble.className = "phone-bubble phone-bubble-user";
+      userBubble.className = "phone-bubble phone-bubble-user animate-slideUp";
       userBubble.textContent = patientText;
       screen.appendChild(userBubble);
 
       // Scroll to bottom
       screen.scrollTop = screen.scrollHeight;
 
+      // Show typing indicator
+      showTypingIndicator();
+
       // Add AI Response bubble with subtle delay
       setTimeout(() => {
+        hideTypingIndicator();
         const aiBubble = document.createElement("div");
-        aiBubble.className = "phone-bubble phone-bubble-ai";
+        aiBubble.className = "phone-bubble phone-bubble-ai animate-fadeIn";
         aiBubble.textContent = aiResponse;
         screen.appendChild(aiBubble);
         screen.scrollTop = screen.scrollHeight;
-      }, 1000);
+      }, 1200);
     }
+
+    function updateStateBadge(state) {
+      const stateBadge = document.getElementById("agent-state-badge");
+      stateBadge.textContent = state;
+      if (state === 'emergency') {
+        stateBadge.className = 'badge badge-danger';
+      } else if (state === 'booking') {
+        stateBadge.className = 'badge badge-success';
+      } else if (state === 'insurance') {
+        stateBadge.className = 'badge badge-info';
+      } else if (state === 'faq') {
+        stateBadge.className = 'badge badge-primary';
+      } else {
+        stateBadge.className = 'badge badge-warning';
+      }
+    }
+
+    function showTypingIndicator() {
+      isAIThinking = true;
+      const screen = document.getElementById("chat-screen");
+      const typingBubble = document.createElement("div");
+      typingBubble.className = "phone-bubble phone-bubble-ai typing-indicator";
+      typingBubble.id = "typing-bubble";
+      typingBubble.innerHTML = "<span></span><span></span><span></span>";
+      screen.appendChild(typingBubble);
+      screen.scrollTop = screen.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      isAIThinking = false;
+      const typingBubble = document.getElementById("typing-bubble");
+      if (typingBubble) {
+        typingBubble.remove();
+      }
+    }
+
+    // Parser for custom text inputs
+    function parseCustomInquiry(input) {
+      const text = input.toLowerCase().trim();
+      
+      // Detect Spanish indicators first
+      const isSpanish = /hola|diente|dolor|limpieza|cita|español|espanol|telefono|emergencia|aceptan|seguro|urgente|ayuda/i.test(text);
+
+      if (isSpanish) {
+        // Emergency Spanish
+        if (/dolor|emergencia|sangre|ca|caer|golpe|terrible|grave|duele|urgente/i.test(text)) {
+          return {
+            state: 'emergency',
+            response: '¡Esta es una emergencia dental grave! Por favor conserve el diente en leche y no lo frote. Voy a transferir su llamada de inmediato con la Dra. Patel a nuestro teléfono de guardia para que le atienda ya.'
+          };
+        }
+        // Booking Spanish
+        if (/cita|reservar|limpieza|lunes|martes|miercoles|jueves|viernes|programar/i.test(text)) {
+          return {
+            state: 'booking',
+            response: '¡Perfecto! Veo que el próximo lunes a las 10:00 AM está disponible en nuestro calendario de Sunshine Smiles. He reservado su limpieza dental. ¡Le enviaremos un SMS de confirmación!'
+          };
+        }
+        // Insurance Spanish
+        if (/seguro|aceptan|aseguranza|medicaid|mcna|delta|humana|cigna/i.test(text)) {
+          return {
+            state: 'insurance',
+            response: '¡Sí! Aceptamos la mayoría de los seguros de Florida, incluyendo Delta Dental FL, MCNA Dental (Medicaid de FL), y Humana Dental.'
+          };
+        }
+        // Location Spanish
+        if (/donde|ubicados|direccion|orlando|donde esta|calle/i.test(text)) {
+          return {
+            state: 'faq',
+            response: 'Estamos ubicados en 1234 Orange Blossom Trail, Suite 200, Orlando, FL. Justo en frente del Centro Médico Regional. ¡Hay estacionamiento gratuito disponible!'
+          };
+        }
+        // Default Spanish fallback
+        return {
+          state: 'faq',
+          response: '¡Hola! Con mucho gusto le puedo ayudar a programar una cita, verificar su seguro de Florida, o responder cualquier duda sobre nuestros servicios dentales en Orlando. ¿Qué necesita hoy?'
+        };
+      }
+
+      // English Intents
+      
+      // Emergency
+      if (/emergency|pain|swelling|bleeding|knocked|jaw|hurt|accident|broke|broken|toothache/i.test(text)) {
+        return {
+          state: 'emergency',
+          response: 'That sounds like a severe dental emergency! Please avoid rubbing the tooth and try to place it in milk if it was knocked out. I am transferring your call immediately to Dr. Patel on our on-call emergency line.'
+        };
+      }
+
+      // Booking
+      if (/book|schedule|appointment|cleaning|checkup|visit|dentist|reserve/i.test(text)) {
+        return {
+          state: 'booking',
+          response: 'Perfect! I see next Monday at 10:00 AM is available on our calendar for an adult cleaning and checkup. I have reserved that time slot for you, and a confirmation text is being sent to your phone.'
+        };
+      }
+
+      // Insurance
+      if (/insurance|medicaid|delta|humana|cigna|guardian|aetna|metlife|benefit/i.test(text)) {
+        return {
+          state: 'insurance',
+          response: 'Yes, Sunshine Smiles accepts major dental insurance plans in Florida, including Delta Dental FL, MCNA Medicaid, Humana Dental DHMO, Guardian, Cigna PPO, and Aetna Dental. We verify eligibility in real-time!'
+        };
+      }
+
+      // Location / Address
+      if (/location|address|where|orlando|directions|trail|map/i.test(text)) {
+        return {
+          state: 'faq',
+          response: 'We are located at 1234 Orange Blossom Trail, Suite 200, Orlando, FL 32801. Right across from the Regional Medical Center, and free parking is available for all patients.'
+        };
+      }
+
+      // Hours
+      if (/hours|time|open|close|timing|saturday|sunday/i.test(text)) {
+        return {
+          state: 'faq',
+          response: 'Sunshine Smiles Dental is open Monday through Friday from 8:00 AM to 5:00 PM. But remember, as an AI voice assistant, I am online and available 24/7/365 to handle your calls!'
+        };
+      }
+
+      // Price / Cost
+      if (/price|cost|fee|charge|how much|dollar|pricing/i.test(text)) {
+        return {
+          state: 'faq',
+          response: 'A standard comprehensive checkup and adult dental cleaning is $150. For complete insurance coverage details or procedural questions, we can book a quick consult next Monday!'
+        };
+      }
+
+      // Greetings
+      if (/hello|hi|hey|greetings|morning|afternoon/i.test(text)) {
+        return {
+          state: 'greeting',
+          response: 'Hello! Thank you for calling Sunshine Smiles Dental in Orlando. I can help you schedule appointments, check Florida insurance policies, or answer general FAQs. How can I assist you?'
+        };
+      }
+
+      // Default English fallback
+      return {
+        state: 'faq',
+        response: "I understand! I'd be happy to help with that. I can schedule an appointment, verify your Florida insurance benefits, or answer any office policy questions. What would you prefer?"
+      };
+    }
+
+    // Process user input from input field
+    function handleCustomInput() {
+      if (isAIThinking) return;
+
+      const inputField = document.getElementById("simulator-input");
+      const text = inputField.value.trim();
+      
+      if (!text) return;
+
+      // Clear input
+      inputField.value = "";
+
+      const screen = document.getElementById("chat-screen");
+
+      // Append user bubble
+      const userBubble = document.createElement("div");
+      userBubble.className = "phone-bubble phone-bubble-user animate-slideUp";
+      userBubble.textContent = text;
+      screen.appendChild(userBubble);
+      screen.scrollTop = screen.scrollHeight;
+
+      // Parse response
+      const parsed = parseCustomInquiry(text);
+
+      // Show typing indicator
+      showTypingIndicator();
+
+      // Reply with delay
+      setTimeout(() => {
+        hideTypingIndicator();
+        updateStateBadge(parsed.state);
+
+        const aiBubble = document.createElement("div");
+        aiBubble.className = "phone-bubble phone-bubble-ai animate-fadeIn";
+        aiBubble.textContent = parsed.response;
+        screen.appendChild(aiBubble);
+        screen.scrollTop = screen.scrollHeight;
+      }, 1200);
+    }
+
+    // Set up listeners on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const sendBtn = document.getElementById("simulator-send-btn");
+      const inputField = document.getElementById("simulator-input");
+
+      if (sendBtn) {
+        sendBtn.addEventListener("click", handleCustomInput);
+      }
+
+      if (inputField) {
+        inputField.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            handleCustomInput();
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
