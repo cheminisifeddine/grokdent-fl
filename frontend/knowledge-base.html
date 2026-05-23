@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦷 GrokDent FL</div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
+          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
+          <li><a href="knowledge-base.html" class="active"><span class="nav-icon">📚</span> Knowledge Base</a></li>
+          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
+          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">SM</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout" title="Logout">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1>Knowledge Base</h1>
+        <div class="topbar-actions">
+          <button id="seed-defaults-btn" class="btn btn-secondary">🌱 Seed Defaults</button>
+          <button id="add-kb-btn" class="btn btn-primary">+ Add Entry</button>
+        </div>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="tabs">
+        <button class="tab kb-tab active" data-category="all">All</button>
+        <button class="tab kb-tab" data-category="general">General</button>
+        <button class="tab kb-tab" data-category="services">Services</button>
+        <button class="tab kb-tab" data-category="insurance">Insurance</button>
+        <button class="tab kb-tab" data-category="pricing">Pricing</button>
+        <button class="tab kb-tab" data-category="hours">Hours</button>
+        <button class="tab kb-tab" data-category="location">Location</button>
+        <button class="tab kb-tab" data-category="emergency">Emergency</button>
+        <button class="tab kb-tab" data-category="policies">Policies</button>
+      </div>
+
+      <!-- KB Entries List -->
+      <div class="kb-list" id="kb-list">
+        <div class="kb-item" data-category="general">
+          <div class="flex-between mb-4">
+            <span class="badge badge-info">General</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="kb-question">What services does your dental clinic offer?</div>
+          <div class="kb-answer">We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.</div>
+          <div class="kb-item-actions">
+            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
+            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
+          </div>
+        </div>
+
+        <div class="kb-item" data-category="hours">
+          <div class="flex-between mb-4">
+            <span class="badge badge-info">Hours</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="kb-question">What are your office hours?</div>
+          <div class="kb-answer">We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.</div>
+          <div class="kb-item-actions">
+            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
+            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
+          </div>
+        </div>
+
+        <div class="kb-item" data-category="insurance">
+          <div class="flex-between mb-4">
+            <span class="badge badge-info">Insurance</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="kb-question">What insurance plans do you accept?</div>
+          <div class="kb-answer">We accept most major dental insurance plans including Delta Dental, Humana, MCNA Dental, Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.</div>
+          <div class="kb-item-actions">
+            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
+            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
+          </div>
+        </div>
+
+        <div class="kb-item" data-category="emergency">
+          <div class="flex-between mb-4">
+            <span class="badge badge-danger">Emergency</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="kb-question">What should I do if I have a dental emergency?</div>
+          <div class="kb-answer">If you're experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.</div>
+          <div class="kb-item-actions">
+            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
+            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
+          </div>
+        </div>
+
+        <div class="kb-item" data-category="policies">
+          <div class="flex-between mb-4">
+            <span class="badge badge-info">Policies</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="kb-question">What is your cancellation policy?</div>
+          <div class="kb-answer">We require at least 24 hours notice for appointment cancellations. Cancellations made less than 24 hours in advance may be subject to a $50 cancellation fee. We understand emergencies happen — if you need to cancel on short notice due to an emergency, please let us know and we'll do our best to accommodate you.</div>
+          <div class="kb-item-actions">
+            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
+            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Side Panel for Add/Edit KB Entry -->
+  <div class="side-panel" id="kb-panel">
+    <div class="side-panel-header">
+      <h3>Add Knowledge Entry</h3>
+      <button class="modal-close" id="close-kb-panel">✕</button>
+    </div>
+
+    <form id="kb-form">
+      <div class="form-group">
+        <label for="kb-question">Question</label>
+        <input type="text" id="kb-question" class="input" placeholder="What do patients commonly ask?" required>
+      </div>
+
+      <div class="form-group">
+        <label for="kb-answer">Answer (English)</label>
+        <textarea id="kb-answer" class="textarea" rows="5" placeholder="Provide a detailed answer..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="kb-answer-es">Answer (Spanish) — Optional</label>
+        <textarea id="kb-answer-es" class="textarea" rows="4" placeholder="Proporcione una respuesta detallada..."></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="kb-category">Category</label>
+          <select id="kb-category" class="select">
+            <option value="general">General</option>
+            <option value="services">Services</option>
+            <option value="insurance">Insurance</option>
+            <option value="pricing">Pricing</option>
+            <option value="hours">Hours</option>
+            <option value="location">Location</option>
+            <option value="emergency">Emergency</option>
+            <option value="policies">Policies</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="kb-priority">Priority</label>
+          <select id="kb-priority" class="select">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+          <span>Active</span>
+          <label class="toggle">
+            <input type="checkbox" id="kb-active" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </label>
+      </div>
+
+      <div class="flex gap-3" style="margin-top: 24px;">
+        <button type="submit" class="btn btn-primary" style="flex:1;">Save Entry</button>
+        <button type="button" class="btn btn-secondary" id="close-kb-panel-2" onclick="document.getElementById('kb-panel').classList.remove('open')">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle">☰</button>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Call History</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦷 GrokDent FL</div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+          <li><a href="calls.html" class="active"><span class="nav-icon">📞</span> Calls</a></li>
+          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
+          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
+          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
+          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">SM</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout" title="Logout">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1>Call History</h1>
+        <div class="topbar-actions">
+          <div class="live-indicator">Live</div>
+          <div class="notification-bell">🔔<span class="badge-count">3</span></div>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-mini">
+          <div>
+            <div class="stat-mini-value">1,247</div>
+            <div class="stat-mini-label">Total Calls</div>
+          </div>
+        </div>
+        <div class="stat-mini">
+          <div>
+            <div class="stat-mini-value">3:24</div>
+            <div class="stat-mini-label">Avg Duration</div>
+          </div>
+        </div>
+        <div class="stat-mini">
+          <div>
+            <div class="stat-mini-value">78%</div>
+            <div class="stat-mini-label">English</div>
+          </div>
+        </div>
+        <div class="stat-mini">
+          <div>
+            <div class="stat-mini-value">22%</div>
+            <div class="stat-mini-label">Spanish</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar">
+        <input type="date" class="input" id="call-date-from" style="width:auto; min-width:140px;">
+        <input type="date" class="input" id="call-date-to" style="width:auto; min-width:140px;">
+        <select class="select" id="call-status-filter" style="width:auto; min-width:140px;">
+          <option value="">All Status</option>
+          <option value="completed">Completed</option>
+          <option value="missed">Missed</option>
+          <option value="voicemail">Voicemail</option>
+        </select>
+        <select class="select" id="call-language-filter" style="width:auto; min-width:140px;">
+          <option value="">All Languages</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+        </select>
+        <div class="search-input" style="flex:1; min-width:200px;">
+          <input type="text" class="input" id="call-search" placeholder="Search calls...">
+        </div>
+      </div>
+
+      <!-- Call History Table -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Caller</th>
+                <th>Duration</th>
+                <th>Language</th>
+                <th>Sentiment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-status="completed" data-language="en">
+                <td>May 23, 2026 · 4:52 PM</td>
+                <td>Maria Rodriguez</td>
+                <td>4:05</td>
+                <td>🇪🇸 Spanish</td>
+                <td>😊 Positive</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="en">
+                <td>May 23, 2026 · 4:38 PM</td>
+                <td>James Wilson</td>
+                <td>3:02</td>
+                <td>🇺🇸 English</td>
+                <td>😊 Positive</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="es">
+                <td>May 23, 2026 · 4:15 PM</td>
+                <td>Sofia Martinez</td>
+                <td>5:10</td>
+                <td>🇪🇸 Spanish</td>
+                <td>😐 Neutral</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="en">
+                <td>May 23, 2026 · 3:47 PM</td>
+                <td>Robert Chen</td>
+                <td>1:35</td>
+                <td>🇺🇸 English</td>
+                <td>😊 Positive</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="missed" data-language="en">
+                <td>May 23, 2026 · 2:30 PM</td>
+                <td>(305) 555-0147</td>
+                <td>0:00</td>
+                <td>🇺🇸 English</td>
+                <td>—</td>
+                <td><span class="badge badge-danger">missed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="en">
+                <td>May 23, 2026 · 1:12 PM</td>
+                <td>Patricia Adams</td>
+                <td>6:22</td>
+                <td>🇺🇸 English</td>
+                <td>😊 Positive</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="es">
+                <td>May 23, 2026 · 12:45 PM</td>
+                <td>Juan Morales</td>
+                <td>3:48</td>
+                <td>🇪🇸 Spanish</td>
+                <td>😊 Positive</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="voicemail" data-language="en">
+                <td>May 23, 2026 · 11:20 AM</td>
+                <td>Angela White</td>
+                <td>0:45</td>
+                <td>🇺🇸 English</td>
+                <td>😐 Neutral</td>
+                <td><span class="badge badge-warning">voicemail</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="en">
+                <td>May 23, 2026 · 10:05 AM</td>
+                <td>Michael Brown</td>
+                <td>2:17</td>
+                <td>🇺🇸 English</td>
+                <td>😊 Positive</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+              <tr data-status="completed" data-language="es">
+                <td>May 23, 2026 · 9:33 AM</td>
+                <td>Isabella Ruiz</td>
+                <td>4:55</td>
+                <td>🇪🇸 Spanish</td>
+                <td>😟 Negative</td>
+                <td><span class="badge badge-success">completed</span></td>
+                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="pagination-btn">←</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">4</button>
+        <button class="pagination-btn">5</button>
+        <button class="pagination-btn">→</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Transcript Modal -->
+  <div class="modal-overlay" id="transcript-modal">
+    <div class="modal" style="max-width: 700px;">
+      <div class="modal-header">
+        <div>
+          <h3>Call Transcript</h3>
+          <p class="text-sm text-secondary" style="margin-top:4px;">Maria Rodriguez · May 23, 2026 · 4:05</p>
+        </div>
+        <button class="modal-close">✕</button>
+      </div>
+
+      <div class="transcript-messages">
+        <div class="transcript-bubble ai">
+          <div class="transcript-speaker">🤖 GrokDent AI</div>
+          Thank you for calling Sunshine Dental Care! This is your AI receptionist. How can I help you today?
+        </div>
+        <div class="transcript-bubble patient">
+          <div class="transcript-speaker">👤 Maria Rodriguez</div>
+          Hola, I need to schedule an appointment for a cleaning, please.
+        </div>
+        <div class="transcript-bubble ai">
+          <div class="transcript-speaker">🤖 GrokDent AI</div>
+          ¡Por supuesto! I'd be happy to help you schedule a cleaning. I can see we have availability this week. Would you prefer morning or afternoon?
+        </div>
+        <div class="transcript-bubble patient">
+          <div class="transcript-speaker">👤 Maria Rodriguez</div>
+          Morning would be better, maybe Thursday or Friday?
+        </div>
+        <div class="transcript-bubble ai">
+          <div class="transcript-speaker">🤖 GrokDent AI</div>
+          I have Thursday at 9:00 AM and 10:30 AM available, and Friday at 9:00 AM. Which works best for you?
+        </div>
+        <div class="transcript-bubble patient">
+          <div class="transcript-speaker">👤 Maria Rodriguez</div>
+          Thursday at 9:00 AM, please!
+        </div>
+        <div class="transcript-bubble ai">
+          <div class="transcript-speaker">🤖 GrokDent AI</div>
+          You're all set! I've booked your dental cleaning for Thursday, May 25th at 9:00 AM. You'll receive a confirmation text shortly. Is there anything else I can help you with?
+        </div>
+        <div class="transcript-bubble patient">
+          <div class="transcript-speaker">👤 Maria Rodriguez</div>
+          No, that's all. Thank you so much!
+        </div>
+        <div class="transcript-bubble ai">
+          <div class="transcript-speaker">🤖 GrokDent AI</div>
+          You're welcome, Maria! We'll see you Thursday. Have a wonderful day! 😊
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 16px; padding: 16px;">
+        <h4 style="margin-bottom: 8px;">📋 Call Summary</h4>
+        <p class="text-sm">Patient requested dental cleaning appointment. Scheduled for Thursday, May 25th at 9:00 AM. Language: bilingual (Spanish/English). Sentiment: Positive. Appointment auto-created.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle">☰</button>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

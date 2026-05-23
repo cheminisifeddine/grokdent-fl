@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦷 GrokDent FL</div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
+          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
+          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
+          <li><a href="analytics.html" class="active"><span class="nav-icon">📈</span> Analytics</a></li>
+          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">SM</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout" title="Logout">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1>Analytics</h1>
+        <div class="topbar-actions">
+          <div class="date-range">
+            <button class="date-range-btn active" data-days="7">7d</button>
+            <button class="date-range-btn" data-days="30">30d</button>
+            <button class="date-range-btn" data-days="90">90d</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Row -->
+      <div class="metrics-grid">
+        <div class="card metric-card">
+          <span class="icon">📞</span>
+          <div class="value" data-format="number">304</div>
+          <div class="label">Total Calls (7d)</div>
+          <div class="trend up">↑ +18% vs prev</div>
+        </div>
+        <div class="card metric-card">
+          <span class="icon">📅</span>
+          <div class="value" data-format="number">82</div>
+          <div class="label">Appointments Booked</div>
+          <div class="trend up">↑ +12% vs prev</div>
+        </div>
+        <div class="card metric-card">
+          <span class="icon">⏱️</span>
+          <div class="value">3:18</div>
+          <div class="label">Avg Call Duration</div>
+          <div class="trend neutral">→ No change</div>
+        </div>
+        <div class="card metric-card">
+          <span class="icon">🎯</span>
+          <div class="value" data-format="percent">94</div>
+          <div class="label">Resolution Rate</div>
+          <div class="trend up">↑ +3% vs prev</div>
+        </div>
+      </div>
+
+      <!-- Charts Row 1 -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <h3>📞 Calls Over Time</h3>
+          </div>
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="analytics-calls-chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>📅 Bookings Over Time</h3>
+          </div>
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="analytics-bookings-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row 2 -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <h3>🌐 Language Breakdown</h3>
+          </div>
+          <div class="chart-container" style="height: 300px;">
+            <canvas id="language-chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>🏆 Top Services</h3>
+          </div>
+          <div class="chart-container" style="height: 300px;">
+            <canvas id="top-services-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Calls Summary -->
+      <div class="card">
+        <div class="card-header">
+          <h3>📋 Recent Call Summary</h3>
+          <a href="calls.html" class="btn btn-ghost btn-sm">View All →</a>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Caller</th>
+                <th>Duration</th>
+                <th>Language</th>
+                <th>Result</th>
+                <th>Sentiment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>May 23, 4:52 PM</td>
+                <td>Maria Rodriguez</td>
+                <td>4:05</td>
+                <td>🇪🇸 Spanish</td>
+                <td><span class="badge badge-success">Booked</span></td>
+                <td>😊 Positive</td>
+              </tr>
+              <tr>
+                <td>May 23, 4:38 PM</td>
+                <td>James Wilson</td>
+                <td>3:02</td>
+                <td>🇺🇸 English</td>
+                <td><span class="badge badge-success">Booked</span></td>
+                <td>😊 Positive</td>
+              </tr>
+              <tr>
+                <td>May 23, 4:15 PM</td>
+                <td>Sofia Martinez</td>
+                <td>5:10</td>
+                <td>🇪🇸 Spanish</td>
+                <td><span class="badge badge-info">Info Only</span></td>
+                <td>😐 Neutral</td>
+              </tr>
+              <tr>
+                <td>May 23, 3:47 PM</td>
+                <td>Robert Chen</td>
+                <td>1:35</td>
+                <td>🇺🇸 English</td>
+                <td><span class="badge badge-success">Booked</span></td>
+                <td>😊 Positive</td>
+              </tr>
+              <tr>
+                <td>May 23, 2:30 PM</td>
+                <td>(305) 555-0147</td>
+                <td>0:00</td>
+                <td>—</td>
+                <td><span class="badge badge-danger">Missed</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle">☰</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

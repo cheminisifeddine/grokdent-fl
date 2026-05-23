@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL — 24/7 AI Voice Receptionist for Florida Dental Practices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Premium landing-page specific styles to override default styling if needed */
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      background-color: var(--bg-primary, #0a0a0f);
+      color: #f3f4f6;
+      overflow-x: hidden;
+    }
+    
+    .hero-section {
+      position: relative;
+      padding: 140px 20px 80px 20px;
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(13, 148, 136, 0.15) 0%, rgba(249, 115, 22, 0.05) 50%, rgba(10, 10, 15, 0) 100%);
+    }
+
+    .landing-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #0d9488;
+    }
+
+    .badge-premium {
+      background: linear-gradient(135deg, #0d9488, #f97316);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 1000px;
+      margin: 0 auto 20px auto;
+      letter-spacing: -1px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #0d9488 30%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 750px;
+      margin: 0 auto 40px auto;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    /* Features Section */
+    .section-padding {
+      padding: 100px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .section-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(249, 115, 22, 0.1));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(13, 148, 136, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+      position: relative;
+    }
+
+    .feature-desc {
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Live Interactive Phone Simulator Demo */
+    .demo-section {
+      background: rgba(18, 18, 26, 0.6);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 60px;
+      display: flex;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 80px auto;
+    }
+
+    .demo-info {
+      flex: 1;
+    }
+
+    .demo-phone-mockup {
+      width: 320px;
+      height: 580px;
+      background: #0f0f15;
+      border-radius: 40px;
+      border: 6px solid #222230;
+      padding: 20px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .phone-screen {
+      background: #08080c;
+      flex: 1;
+      border-radius: 28px;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      font-size: 13px;
+      scrollbar-width: none;
+    }
+
+    .phone-screen::-webkit-scrollbar {
+      display: none;
+    }
+
+    .phone-bubble {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.4;
+    }
+
+    .phone-bubble-ai {
+      background: rgba(13, 148, 136, 0.15);
+      color: #5eead4;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(13, 148, 136, 0.2);
+    }
+
+    .phone-bubble-user {
+      background: rgba(249, 115, 22, 0.15);
+      color: #fdba74;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+
+    .interactive-triggers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .trigger-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 10px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+
+    .trigger-btn:hover {
+      background: rgba(13, 148, 136, 0.1);
+      border-color: #0d9488;
+      color: #fff;
+    }
+
+    .insurance-badge-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .ins-badge {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Pricing Overrides */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 50px 40px;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .pricing-card-popular {
+      border-color: #0d9488;
+      box-shadow: 0 10px 30px rgba(13, 148, 136, 0.15);
+      background: radial-gradient(circle at top right, rgba(13, 148, 136, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #0d9488;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .price-value {
+      font-size: 54px;
+      font-weight: 800;
+      color: #fff;
+      margin: 20px 0 10px 0;
+    }
+
+    .price-period {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .features-list {
+      text-align: left;
+      margin: 40px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .feat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .feat-item::before {
+      content: '✓';
+      color: #0d9488;
+      font-weight: bold;
+    }
+
+    .landing-footer {
+      background: #06060a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 80px 40px 40px 40px;
+      margin-top: 120px;
+    }
+
+    .footer-columns {
+      max-width: 1400px;
+      margin: 0 auto 60px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-column-brand {
+      grid-column: span 2;
+    }
+
+    .footer-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-desc {
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: #0d9488;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      .landing-nav {
+        padding: 0 20px;
+      }
+      .nav-links {
+        display: none; /* simple responsive fallback */
+      }
+      .demo-section {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+      .demo-phone-mockup {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Premium Navigation Header -->
+  <nav class="landing-nav">
+    <a href="#" class="nav-logo">🦷 GrokDent FL</a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#demo" class="nav-link">Live Demo</a>
+      <a href="#insurance" class="nav-link">Insurance</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="login.html" class="btn btn-secondary">Sign In</a>
+      <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="badge-premium">Powered by xAI Grok-3 Voice Agent API</div>
+    <h1 class="hero-title">
+      Never Miss Another Patient Call. Meet Your 24/7 <span>AI Dental Receptionist.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Always-on, HIPAA-compliant voice assistant custom-tailored for Florida dental clinics. 
+      English & Spanish bilingual, schedules appointments directly into your calendar, and handles triage emergencies automatically.
+    </p>
+    <div class="hero-cta">
+      <a href="signup.html" class="btn btn-primary btn-lg">Provision Your Florida Number</a>
+      <a href="#demo" class="btn btn-secondary btn-lg">Try Call Simulator</a>
+    </div>
+  </header>
+
+  <!-- Key Features Grid -->
+  <section id="features" class="section-padding">
+    <div class="section-header">
+      <h2 class="section-title">Engineered Exclusively for Dental Practices</h2>
+      <p class="section-subtitle">Stunning voice intelligence built to capture every lead and protect clinical schedules.</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📞</div>
+        <h3 class="feature-title">24/7/365 Call Handling</h3>
+        <p class="feature-desc">Never let a new patient call go to voicemail again. GrokDent handles multiple calls simultaneously, anytime, day or night.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗣️</div>
+        <h3 class="feature-title">English & Spanish Bilingual</h3>
+        <p class="feature-desc">Over 27% of Florida households speak Spanish at home. Our AI detects and switches languages dynamically to serve everyone comfortably.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3 class="feature-title">Direct PMS & Calendar Sync</h3>
+        <p class="feature-desc">Integrated with Google Calendar and local Practice Management Systems. Schedules, reschedules, or cancels appointments directly.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3 class="feature-title">HIPAA Secure at Every Step</h3>
+        <p class="feature-desc">Full application-level AES-256 encryption protects PHI data fields. Immutable audit logs trace every query to secure full compliance.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚨</div>
+        <h3 class="feature-title">Smart Triage Escalation</h3>
+        <p class="feature-desc">Detects dental emergencies (severe pain, knocked-out teeth, swelling) and auto-routes patients to your on-call clinical number instantly.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Interactive Practice Dashboard</h3>
+        <p class="feature-desc">Track real-time call volume, patient sentiment, revenue estimates, and read comprehensive decrypted audio call transcripts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Phone Simulator Section -->
+  <section id="demo" class="section-padding">
+    <div class="demo-section">
+      <div class="demo-info">
+        <h2 class="section-title">Test the Call Intelligence in Real-Time</h2>
+        <p class="section-subtitle" style="text-align: left; margin-bottom: 24px;">
+          GrokDent FL loads your practice's specific guidelines, pricing, hours, and policies automatically. 
+          Click any sample patient utterance below to see how our voice engine reasons, switches states, and books appointments.
+        </p>
+
+        <div class="interactive-triggers">
+          <button class="trigger-btn" onclick="simulateUtterance('Where are you located in Orlando?', 'We are located at 1234 Orange Blossom Trail, Suite 200, Orlando, FL. Right across from the Regional Medical Center, and free parking is available!', 'faq')">📍 Office Location</button>
+          <button class="trigger-btn" onclick="simulateUtterance('Do you accept MCNA Medicaid?', '¡Sí! Aceptamos Medicaid de Florida a través de MCNA Dental tanto para niños como para adultos.', 'insurance')">💳 Accepted Insurance</button>
+          <button class="trigger-btn" onclick="simulateUtterance('I want to schedule an adult cleaning for Monday at 10 AM', 'Perfect! I see next Monday at 10:00 AM is available on our calendar. I have booked your cleaning. Let me send a confirmation SMS!', 'booking')">📅 Book a Cleaning</button>
+          <button class="trigger-btn" onclick="simulateUtterance('Ayuda, se me cayó un diente de un golpe y me duele mucho!', '¡Esta es una emergencia dental grave! Por favor conserve el diente en leche y no lo frote. Voy a transferir su llamada de inmediato con la Dra. Patel a nuestro teléfono de guardia para que le atienda ya.', 'emergency')">🚨 Severe Emergency</button>
+        </div>
+
+        <div style="margin-top: 40px;">
+          <h4 class="footer-title" style="margin-bottom: 10px;">Current Agent State:</h4>
+          <span id="agent-state-badge" class="badge badge-warning" style="font-size: 14px; text-transform: uppercase;">greeting</span>
+        </div>
+      </div>
+
+      <div class="demo-phone-mockup">
+        <div class="phone-screen" id="chat-screen">
+          <div class="phone-bubble phone-bubble-ai">
+            Thank you for calling Sunshine Smiles Dental in Orlando! I'm your AI assistant. How can I help you today?
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accepted Insurance Grid -->
+  <section id="insurance" class="section-padding" style="background: rgba(18, 18, 26, 0.4);">
+    <div class="section-header">
+      <h2 class="section-title">Fully Compatible with Florida Insurers</h2>
+      <p class="section-subtitle">Verifies and explains benefit coverage to dental callers automatically.</p>
+      
+      <div class="insurance-badge-grid" style="justify-content: center; max-width: 900px; margin: 40px auto 0 auto;">
+        <span class="ins-badge">🦷 Delta Dental of Florida</span>
+        <span class="ins-badge">🦷 MCNA Dental (FL Medicaid)</span>
+        <span class="ins-badge">🦷 Humana Dental (FL DHMO)</span>
+        <span class="ins-badge">🦷 Guardian Dental</span>
+        <span class="ins-badge">🦷 Cigna PPO</span>
+        <span class="ins-badge">🦷 Aetna Dental</span>
+        <span class="ins-badge">🦷 MetLife PDP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Cards Section -->
+  <section id="pricing" class="section-padding">
+    <div class="section-header">
+      <h2 class="section-title">Aggressive, ROI-Focused Plans</h2>
+      <p class="section-subtitle">Save up to 90% compared to a dedicated human answering service.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Plan 1 -->
+      <div class="pricing-card">
+        <h3 class="footer-title">Starter Plan</h3>
+        <p style="color: rgba(255,255,255,0.5);">Perfect for solo dentists starting out</p>
+        <div class="price-value">$299<span class="price-period">/mo</span></div>
+        <a href="signup.html?plan=starter" class="btn btn-secondary btn-block" style="margin-top: 20px;">Choose Starter</a>
+        
+        <ul class="features-list">
+          <li class="feat-item">200 calls included per month</li>
+          <li class="feat-item">1 Florida practice location</li>
+          <li class="feat-item">English & Spanish Bilingual</li>
+          <li class="feat-item">Google Calendar synchronization</li>
+          <li class="feat-item">Standard HIPAA audit logs</li>
+        </ul>
+      </div>
+
+      <!-- Plan 2 -->
+      <div class="pricing-card pricing-card-popular">
+        <div class="popular-tag">Recommended</div>
+        <h3 class="footer-title" style="color: #0d9488;">Professional</h3>
+        <p style="color: rgba(255,255,255,0.5);">Best value for growing practices</p>
+        <div class="price-value">$599<span class="price-period">/mo</span></div>
+        <a href="signup.html?plan=professional" class="btn btn-primary btn-block" style="margin-top: 20px;">Choose Professional</a>
+        
+        <ul class="features-list">
+          <li class="feat-item">500 calls included per month</li>
+          <li class="feat-item">Up to 3 practice locations</li>
+          <li class="feat-item">Advanced Real-time Analytics</li>
+          <li class="feat-item">Direct PMS calendar write-backs</li>
+          <li class="feat-item">Full AES-256 field encryption</li>
+        </ul>
+      </div>
+
+      <!-- Plan 3 -->
+      <div class="pricing-card">
+        <h3 class="footer-title">Enterprise</h3>
+        <p style="color: rgba(255,255,255,0.5);">For large dental groups & DSOs</p>
+        <div class="price-value">$999<span class="price-period">/mo</span></div>
+        <a href="signup.html?plan=enterprise" class="btn btn-secondary btn-block" style="margin-top: 20px;">Choose Enterprise</a>
+        
+        <ul class="features-list">
+          <li class="feat-item">Unlimited voice calls</li>
+          <li class="feat-item">Unlimited clinic locations</li>
+          <li class="feat-item">Custom voice cloning options</li>
+          <li class="feat-item">Dedicated Customer Success Manager</li>
+          <li class="feat-item">Custom developer API integration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Landing Page Footer -->
+  <footer class="landing-footer">
+    <div class="footer-columns">
+      <div class="footer-column-brand">
+        <a href="#" class="nav-logo" style="margin-bottom: 20px;">🦷 GrokDent FL</a>
+        <p class="footer-desc">
+          Building state-of-the-art voice AI receptionists exclusively for Florida's premier dental practices. Powered by xAI.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Product</h4>
+        <div class="footer-links">
+          <a href="#features" class="footer-link">Key Features</a>
+          <a href="#demo" class="footer-link">Call Simulator</a>
+          <a href="#pricing" class="footer-link">SaaS Pricing</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Compliance</h4>
+        <div class="footer-links">
+          <a href="docs/HIPAA_COMPLIANCE.md" class="footer-link" target="_blank">HIPAA Safeguards</a>
+          <a href="docs/API_DOCUMENTATION.md" class="footer-link" target="_blank">API Reference</a>
+          <a href="docs/DEPLOYMENT_GUIDE.md" class="footer-link" target="_blank">Deployment Guide</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 GrokDent FL. All Rights Reserved. HIPAA Compliant System.</div>
+      <div>Orlando, Florida, USA ☀️</div>
+    </div>
+  </footer>
+
+  <!-- Phone Simulator Interactive Script -->
+  <script>
+    function simulateUtterance(patientText, aiResponse, state) {
+      const screen = document.getElementById("chat-screen");
+      const stateBadge = document.getElementById("agent-state-badge");
+      
+      // Update state badge
+      stateBadge.textContent = state;
+      if (state === 'emergency') {
+        stateBadge.className = 'badge badge-danger';
+      } else if (state === 'booking') {
+        stateBadge.className = 'badge badge-success';
+      } else {
+        stateBadge.className = 'badge badge-warning';
+      }
+
+      // Add user bubble
+      const userBubble = document.createElement("div");
+      userBubble.className = "phone-bubble phone-bubble-user";
+      userBubble.textContent = patientText;
+      screen.appendChild(userBubble);
+
+      // Scroll to bottom
+      screen.scrollTop = screen.scrollHeight;
+
+      // Add AI Response bubble with subtle delay
+      setTimeout(() => {
+        const aiBubble = document.createElement("div");
+        aiBubble.className = "phone-bubble phone-bubble-ai";
+        aiBubble.textContent = aiResponse;
+        screen.appendChild(aiBubble);
+        screen.scrollTop = screen.scrollHeight;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

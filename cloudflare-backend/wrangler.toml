@@ -1,0 +1,25 @@
+# wrangler.toml — GrokDent FL Cloudflare Workers Config
+
+name = "grokdent-fl-backend"
+main = "src/index.js"
+compatibility_date = "2026-05-23"
+
+# Environment Variables
+[vars]
+APP_NAME = "GrokDent FL"
+XAI_BASE_URL = "https://api.x.ai/v1"
+# JWT_SECRET and ENCRYPTION_KEY should be set securely via:
+# wrangler secret put JWT_SECRET
+# wrangler secret put ENCRYPTION_KEY
+
+# Cloudflare D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "grokdent-d1"
+database_id = "your-d1-database-id-placeholder" # Will be provisioned during wrangler d1 create
+
+# Cloudflare R2 Storage Bucket Binding (for call recordings/transcripts)
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "grokdent-r2"
+preview_bucket_name = "grokdent-r2-preview"

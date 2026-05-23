@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Billing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦷 GrokDent FL</div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
+          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
+          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
+          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
+          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="billing.html" class="active"><span class="nav-icon">💳</span> Billing</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">SM</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout" title="Logout">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1>Billing & Subscription</h1>
+      </div>
+
+      <!-- Current Plan -->
+      <div class="card" style="margin-bottom: 32px;">
+        <div class="flex-between" style="margin-bottom: 20px;">
+          <div>
+            <h3>Current Plan: <span class="text-gradient">Professional</span></h3>
+            <p class="text-sm text-secondary" style="margin-top: 4px;">Your next billing date is June 1, 2026</p>
+          </div>
+          <span class="badge badge-success">Active</span>
+        </div>
+        <div style="margin-bottom: 8px;">
+          <div class="flex-between" style="margin-bottom: 4px;">
+            <span class="text-sm">Calls Used This Month</span>
+            <span class="text-sm"><strong>347</strong> / 500</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 69%;"></div>
+          </div>
+        </div>
+        <p class="text-sm text-secondary">153 calls remaining · Resets June 1</p>
+      </div>
+
+      <!-- Plan Cards -->
+      <div class="three-col" style="margin-bottom: 40px;">
+        <!-- Starter Plan -->
+        <div class="card plan-card">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">$299<span>/mo</span></div>
+          <p class="text-sm text-secondary" style="margin-top: 4px;">Perfect for solo practices</p>
+          <ul class="plan-features">
+            <li>200 calls per month</li>
+            <li>1 clinic location</li>
+            <li>Basic analytics dashboard</li>
+            <li>Email support</li>
+            <li>Standard AI voice</li>
+            <li>English language</li>
+          </ul>
+          <button class="btn btn-secondary btn-block select-plan-btn" data-plan="starter">Select Plan</button>
+        </div>
+
+        <!-- Professional Plan -->
+        <div class="card plan-card featured">
+          <div class="plan-badge">⭐ MOST POPULAR</div>
+          <div class="plan-name">Professional</div>
+          <div class="plan-price">$599<span>/mo</span></div>
+          <p class="text-sm text-secondary" style="margin-top: 4px;">Best for growing clinics</p>
+          <ul class="plan-features">
+            <li>500 calls per month</li>
+            <li>3 clinic locations</li>
+            <li>Full analytics & reports</li>
+            <li>Priority support</li>
+            <li>Custom greeting message</li>
+            <li>English + Spanish bilingual</li>
+            <li>Knowledge base editor</li>
+            <li>Appointment integration</li>
+          </ul>
+          <button class="btn btn-primary btn-block btn-current select-plan-btn" data-plan="professional" style="opacity: 0.7; cursor: default;">Current Plan</button>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="card plan-card">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">$999<span>/mo</span></div>
+          <p class="text-sm text-secondary" style="margin-top: 4px;">For multi-location practices</p>
+          <ul class="plan-features">
+            <li>Unlimited calls</li>
+            <li>Unlimited locations</li>
+            <li>Custom AI voice training</li>
+            <li>Dedicated Customer Success Manager</li>
+            <li>API access & integrations</li>
+            <li>Multi-language support</li>
+            <li>HIPAA compliance audit</li>
+            <li>White-label option</li>
+            <li>Custom analytics reports</li>
+          </ul>
+          <button class="btn btn-secondary btn-block select-plan-btn" data-plan="enterprise">Select Plan</button>
+        </div>
+      </div>
+
+      <!-- Invoice History -->
+      <div class="card invoice-table">
+        <div class="card-header">
+          <h3>Invoice History</h3>
+          <button class="btn btn-ghost btn-sm">Download All</button>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Date</th>
+                <th>Plan</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>INV-2026-0523</td>
+                <td>May 1, 2026</td>
+                <td>Professional</td>
+                <td>$599.00</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+              </tr>
+              <tr>
+                <td>INV-2026-0422</td>
+                <td>Apr 1, 2026</td>
+                <td>Professional</td>
+                <td>$599.00</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+              </tr>
+              <tr>
+                <td>INV-2026-0321</td>
+                <td>Mar 1, 2026</td>
+                <td>Professional</td>
+                <td>$599.00</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+              </tr>
+              <tr>
+                <td>INV-2026-0220</td>
+                <td>Feb 1, 2026</td>
+                <td>Professional</td>
+                <td>$599.00</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+              </tr>
+              <tr>
+                <td>INV-2026-0119</td>
+                <td>Jan 1, 2026</td>
+                <td>Starter</td>
+                <td>$299.00</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+              </tr>
+              <tr>
+                <td>INV-2025-1218</td>
+                <td>Dec 1, 2025</td>
+                <td>Starter</td>
+                <td>$299.00</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle">☰</button>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦷 GrokDent FL</div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
+          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
+          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
+          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
+          <li><a href="settings.html" class="active"><span class="nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">SM</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout" title="Logout">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1>Settings</h1>
+      </div>
+
+      <!-- Settings Tabs -->
+      <div class="tabs">
+        <button class="tab active" data-tab="tab-profile">👤 Profile</button>
+        <button class="tab" data-tab="tab-hours">🕐 Hours</button>
+        <button class="tab" data-tab="tab-services">🦷 Services</button>
+        <button class="tab" data-tab="tab-insurance">🏥 Insurance</button>
+        <button class="tab" data-tab="tab-voice">🎙️ Voice</button>
+        <button class="tab" data-tab="tab-emergency">🚨 Emergency</button>
+      </div>
+
+      <!-- Profile Tab -->
+      <div class="tab-content active" id="tab-profile">
+        <div class="card">
+          <h3 style="margin-bottom: 24px;">Clinic Profile</h3>
+          <form id="profile-form">
+            <div class="form-group">
+              <label for="setting-clinic-name">Clinic Name</label>
+              <input type="text" id="setting-clinic-name" class="input" value="Sunshine Dental Care">
+            </div>
+
+            <div class="form-group">
+              <label for="setting-address">Street Address</label>
+              <input type="text" id="setting-address" class="input" value="1234 Palm Beach Boulevard">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="setting-city">City</label>
+                <input type="text" id="setting-city" class="input" value="Miami">
+              </div>
+              <div class="form-group">
+                <label for="setting-state">State</label>
+                <input type="text" id="setting-state" class="input" value="FL" readonly style="opacity:0.6;">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="setting-zip">ZIP Code</label>
+                <input type="text" id="setting-zip" class="input" value="33101">
+              </div>
+              <div class="form-group">
+                <label for="setting-phone">Phone Number</label>
+                <input type="tel" id="setting-phone" class="input" value="(305) 555-0100">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="setting-email">Email Address</label>
+              <input type="email" id="setting-email" class="input" value="info@sunshinedental.com">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Hours Tab -->
+      <div class="tab-content" id="tab-hours">
+        <div class="card">
+          <h3 style="margin-bottom: 24px;">Office Hours</h3>
+          <form id="hours-form">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Monday</span>
+                <input type="time" class="input" value="08:00" style="width: 140px;">
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="17:00" style="width: 140px;">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Tuesday</span>
+                <input type="time" class="input" value="08:00" style="width: 140px;">
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="17:00" style="width: 140px;">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Wednesday</span>
+                <input type="time" class="input" value="08:00" style="width: 140px;">
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="17:00" style="width: 140px;">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Thursday</span>
+                <input type="time" class="input" value="08:00" style="width: 140px;">
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="17:00" style="width: 140px;">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Friday</span>
+                <input type="time" class="input" value="08:00" style="width: 140px;">
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="16:00" style="width: 140px;">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Saturday</span>
+                <input type="time" class="input" value="09:00" style="width: 140px;">
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="13:00" style="width: 140px;">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div class="flex gap-4" style="align-items: center;">
+                <span style="min-width: 100px; font-weight: 500;">Sunday</span>
+                <input type="time" class="input" value="00:00" style="width: 140px; opacity: 0.4;" disabled>
+                <span style="color: var(--text-secondary);">to</span>
+                <input type="time" class="input" value="00:00" style="width: 140px; opacity: 0.4;" disabled>
+                <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                <span class="badge badge-neutral">Closed</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 24px;">Save Hours</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Services Tab -->
+      <div class="tab-content" id="tab-services">
+        <div class="card">
+          <h3 style="margin-bottom: 24px;">Services & Pricing</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="General Checkup" style="flex:1;">
+              <input type="text" class="input" value="$150" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="Dental Cleaning" style="flex:1;">
+              <input type="text" class="input" value="$200" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="Teeth Whitening" style="flex:1;">
+              <input type="text" class="input" value="$350" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="Dental Implant" style="flex:1;">
+              <input type="text" class="input" value="$3,000" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="Root Canal" style="flex:1;">
+              <input type="text" class="input" value="$800" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="Orthodontics Consult" style="flex:1;">
+              <input type="text" class="input" value="$250" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+            <div class="flex gap-4" style="align-items: center;">
+              <input type="text" class="input" value="Emergency Visit" style="flex:1;">
+              <input type="text" class="input" value="$300" style="width: 120px;">
+              <button class="btn btn-ghost btn-sm" style="color: var(--danger);">🗑️</button>
+            </div>
+          </div>
+          <div class="flex gap-3" style="margin-top: 20px;">
+            <button class="btn btn-secondary">+ Add Service</button>
+            <button class="btn btn-primary">Save Services</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insurance Tab -->
+      <div class="tab-content" id="tab-insurance">
+        <div class="card">
+          <h3 style="margin-bottom: 24px;">Accepted Insurance Providers</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" checked> Delta Dental</label>
+            <label class="checkbox-item"><input type="checkbox" checked> Humana</label>
+            <label class="checkbox-item"><input type="checkbox" checked> MCNA Dental</label>
+            <label class="checkbox-item"><input type="checkbox" checked> Guardian</label>
+            <label class="checkbox-item"><input type="checkbox" checked> Cigna</label>
+            <label class="checkbox-item"><input type="checkbox" checked> MetLife</label>
+            <label class="checkbox-item"><input type="checkbox" checked> Aetna</label>
+            <label class="checkbox-item"><input type="checkbox" checked> Florida Blue</label>
+            <label class="checkbox-item"><input type="checkbox"> UnitedHealthcare</label>
+            <label class="checkbox-item"><input type="checkbox"> Anthem BCBS</label>
+            <label class="checkbox-item"><input type="checkbox"> Medicaid</label>
+            <label class="checkbox-item"><input type="checkbox"> DentaQuest</label>
+          </div>
+          <button class="btn btn-primary" style="margin-top: 24px;">Save Insurance</button>
+        </div>
+      </div>
+
+      <!-- Voice Tab -->
+      <div class="tab-content" id="tab-voice">
+        <div class="card">
+          <h3 style="margin-bottom: 24px;">AI Voice Settings</h3>
+          <form id="voice-form">
+            <div class="form-group">
+              <label for="setting-voice">Voice Selection</label>
+              <select id="setting-voice" class="select">
+                <option value="ara">Ara — Warm, Professional Female</option>
+                <option value="eve" selected>Eve — Friendly, Conversational Female</option>
+                <option value="leo">Leo — Calm, Professional Male</option>
+                <option value="rex">Rex — Confident, Energetic Male</option>
+                <option value="sal">Sal — Neutral, Clear</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="setting-welcome">Welcome Message</label>
+              <textarea id="setting-welcome" class="textarea" rows="4">Thank you for calling Sunshine Dental Care! This is your AI receptionist. How can I help you today?</textarea>
+            </div>
+
+            <div class="form-group">
+              <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                <span>Enable Spanish (Bilingual Mode)</span>
+                <label class="toggle">
+                  <input type="checkbox" id="setting-spanish" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </label>
+              <p class="text-sm text-secondary" style="margin-top: 8px;">When enabled, the AI will automatically detect and respond in Spanish when a caller speaks Spanish.</p>
+            </div>
+
+            <div class="card" style="background: var(--accent-teal-soft); border-color: var(--accent-teal); padding: 16px; margin-bottom: 20px;">
+              <p class="text-sm"><strong>🎧 Voice Preview:</strong> Click play to hear a sample of the selected voice with your welcome message.</p>
+              <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 8px;">▶️ Play Preview</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Voice Settings</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Emergency Tab -->
+      <div class="tab-content" id="tab-emergency">
+        <div class="card">
+          <h3 style="margin-bottom: 24px;">Emergency Settings</h3>
+          <form id="emergency-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="setting-emergency-name">Emergency Contact Name</label>
+                <input type="text" id="setting-emergency-name" class="input" value="Dr. Sarah Mitchell">
+              </div>
+              <div class="form-group">
+                <label for="setting-emergency-phone">Emergency Phone</label>
+                <input type="tel" id="setting-emergency-phone" class="input" value="(305) 555-0199">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="setting-emergency-protocol">Emergency Protocol</label>
+              <textarea id="setting-emergency-protocol" class="textarea" rows="6">For dental emergencies during office hours:
+1. Schedule same-day emergency appointment if slots are available
+2. If no slots available, transfer call to Dr. Mitchell's direct line
+3. Provide basic first aid instructions while patient waits
+
+For after-hours emergencies:
+1. Provide the emergency phone number: (305) 555-0199
+2. If life-threatening, advise patient to call 911
+3. Log the call for morning follow-up</textarea>
+            </div>
+
+            <div class="form-group">
+              <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                <span>Enable after-hours emergency forwarding</span>
+                <label class="toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Emergency Settings</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle">☰</button>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦷 GrokDent FL</div>
+
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="dashboard.html" class="active"><span class="nav-icon">📊</span> Dashboard</a></li>
+          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
+          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
+          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
+          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
+          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">SM</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout" title="Logout">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1>Dashboard</h1>
+        <div class="topbar-actions">
+          <div class="live-indicator">Live</div>
+          <div class="notification-bell">
+            🔔
+            <span class="badge-count">3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="metrics-grid">
+        <div class="card metric-card" id="metric-calls">
+          <span class="icon">📞</span>
+          <div class="value" data-format="number">47</div>
+          <div class="label">Calls Today</div>
+          <div class="trend up">↑ +12%</div>
+        </div>
+        <div class="card metric-card" id="metric-booked">
+          <span class="icon">📅</span>
+          <div class="value" data-format="number">12</div>
+          <div class="label">Booked Today</div>
+          <div class="trend up">↑ +8%</div>
+        </div>
+        <div class="card metric-card" id="metric-revenue">
+          <span class="icon">💰</span>
+          <div class="value" data-format="currency">$3,240</div>
+          <div class="label">Revenue</div>
+          <div class="trend up">↑ +15%</div>
+        </div>
+        <div class="card metric-card" id="metric-satisfaction">
+          <span class="icon">😊</span>
+          <div class="value" data-format="percent">96%</div>
+          <div class="label">Satisfaction</div>
+          <div class="trend up">↑ +2%</div>
+        </div>
+      </div>
+
+      <!-- Recent Calls & Today's Appointments -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Calls</h3>
+            <a href="calls.html" class="btn btn-ghost btn-sm">View All →</a>
+          </div>
+          <div id="recent-calls-list">
+            <div class="call-item">
+              <div class="call-item-avatar">😊</div>
+              <div class="call-item-info">
+                <div class="call-item-name">Maria Rodriguez</div>
+                <div class="call-item-meta">2 min ago · 🇪🇸 Spanish</div>
+              </div>
+              <div class="call-item-right">
+                <div class="call-item-duration">4:05</div>
+                <span class="badge badge-success">completed</span>
+              </div>
+            </div>
+            <div class="call-item">
+              <div class="call-item-avatar">😊</div>
+              <div class="call-item-info">
+                <div class="call-item-name">James Wilson</div>
+                <div class="call-item-meta">15 min ago · 🇺🇸 English</div>
+              </div>
+              <div class="call-item-right">
+                <div class="call-item-duration">3:02</div>
+                <span class="badge badge-success">completed</span>
+              </div>
+            </div>
+            <div class="call-item">
+              <div class="call-item-avatar">😐</div>
+              <div class="call-item-info">
+                <div class="call-item-name">Sofia Martinez</div>
+                <div class="call-item-meta">32 min ago · 🇪🇸 Spanish</div>
+              </div>
+              <div class="call-item-right">
+                <div class="call-item-duration">5:10</div>
+                <span class="badge badge-success">completed</span>
+              </div>
+            </div>
+            <div class="call-item">
+              <div class="call-item-avatar">😊</div>
+              <div class="call-item-info">
+                <div class="call-item-name">Robert Chen</div>
+                <div class="call-item-meta">1h ago · 🇺🇸 English</div>
+              </div>
+              <div class="call-item-right">
+                <div class="call-item-duration">1:35</div>
+                <span class="badge badge-success">completed</span>
+              </div>
+            </div>
+            <div class="call-item">
+              <div class="call-item-avatar">😟</div>
+              <div class="call-item-info">
+                <div class="call-item-name">(305) 555-0147</div>
+                <div class="call-item-meta">2h ago · 🇺🇸 English</div>
+              </div>
+              <div class="call-item-right">
+                <div class="call-item-duration">0:00</div>
+                <span class="badge badge-danger">missed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Today's Appointments</h3>
+            <a href="appointments.html" class="btn btn-ghost btn-sm">View All →</a>
+          </div>
+          <div id="today-appointments-list">
+            <div class="appointment-item confirmed">
+              <div class="appointment-time">9:00 AM</div>
+              <div class="appointment-info">
+                <div class="appointment-patient">Emily Johnson</div>
+                <div class="appointment-service">General Checkup</div>
+              </div>
+              <span class="badge badge-success">confirmed</span>
+            </div>
+            <div class="appointment-item confirmed">
+              <div class="appointment-time">9:30 AM</div>
+              <div class="appointment-info">
+                <div class="appointment-patient">Carlos Hernandez</div>
+                <div class="appointment-service">Dental Implant Consult</div>
+              </div>
+              <span class="badge badge-success">confirmed</span>
+            </div>
+            <div class="appointment-item confirmed">
+              <div class="appointment-time">10:00 AM</div>
+              <div class="appointment-info">
+                <div class="appointment-patient">Lisa Thompson</div>
+                <div class="appointment-service">Teeth Whitening</div>
+              </div>
+              <span class="badge badge-success">confirmed</span>
+            </div>
+            <div class="appointment-item pending">
+              <div class="appointment-time">11:00 AM</div>
+              <div class="appointment-info">
+                <div class="appointment-patient">David Park</div>
+                <div class="appointment-service">Orthodontics Follow-up</div>
+              </div>
+              <span class="badge badge-warning">pending</span>
+            </div>
+            <div class="appointment-item confirmed">
+              <div class="appointment-time">1:30 PM</div>
+              <div class="appointment-info">
+                <div class="appointment-patient">Ana Garcia</div>
+                <div class="appointment-service">Emergency - Toothache</div>
+              </div>
+              <span class="badge badge-success">confirmed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <h3>Calls This Week</h3>
+          </div>
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="calls-chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Top Services</h3>
+          </div>
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="services-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <a href="appointments.html" class="btn btn-secondary">📅 Add Appointment</a>
+        <a href="knowledge-base.html" class="btn btn-secondary">📚 Update KB</a>
+        <a href="analytics.html" class="btn btn-secondary">📈 View Analytics</a>
+        <a href="settings.html" class="btn btn-secondary">⚙️ Settings</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle">☰</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/websocket.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

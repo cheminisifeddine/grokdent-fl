@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrokDent FL - Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="login-page">
+
+  <!-- Animated Gradient Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Signup Card -->
+  <div class="signup-card">
+    <div class="login-logo">🦷 GrokDent FL</div>
+    <p class="login-subtitle">Launch your AI receptionist in minutes</p>
+
+    <!-- Progress Bar -->
+    <div class="signup-progress" style="margin-bottom: 24px;">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 25%"></div>
+      </div>
+    </div>
+
+    <!-- Step Indicators -->
+    <div class="signup-steps">
+      <div class="signup-step active">
+        <div class="step-number">1</div>
+        <span class="step-label">Clinic</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="signup-step">
+        <div class="step-number">2</div>
+        <span class="step-label">Services</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="signup-step">
+        <div class="step-number">3</div>
+        <span class="step-label">Insurance</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="signup-step">
+        <div class="step-number">4</div>
+        <span class="step-label">Launch</span>
+      </div>
+    </div>
+
+    <form id="signup-form">
+
+      <!-- Step 1: Clinic Info -->
+      <div id="step-1">
+        <h3 style="margin-bottom: 20px;">📍 Clinic Information</h3>
+
+        <div class="form-group">
+          <label for="signup-clinic-name">Clinic Name</label>
+          <input type="text" id="signup-clinic-name" class="input" placeholder="Sunshine Dental Care" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-address">Street Address</label>
+          <input type="text" id="signup-address" class="input" placeholder="123 Palm Beach Blvd">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signup-city">City</label>
+            <select id="signup-city" class="select">
+              <option value="">Select city...</option>
+              <option value="Miami">Miami</option>
+              <option value="Orlando">Orlando</option>
+              <option value="Tampa">Tampa</option>
+              <option value="Jacksonville">Jacksonville</option>
+              <option value="Fort Lauderdale">Fort Lauderdale</option>
+              <option value="St. Petersburg">St. Petersburg</option>
+              <option value="Hialeah">Hialeah</option>
+              <option value="Tallahassee">Tallahassee</option>
+              <option value="Cape Coral">Cape Coral</option>
+              <option value="Port St. Lucie">Port St. Lucie</option>
+              <option value="Pembroke Pines">Pembroke Pines</option>
+              <option value="Hollywood">Hollywood</option>
+              <option value="Gainesville">Gainesville</option>
+              <option value="Coral Springs">Coral Springs</option>
+              <option value="Clearwater">Clearwater</option>
+              <option value="Palm Bay">Palm Bay</option>
+              <option value="Lakeland">Lakeland</option>
+              <option value="West Palm Beach">West Palm Beach</option>
+              <option value="Boca Raton">Boca Raton</option>
+              <option value="Naples">Naples</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="signup-zip">ZIP Code</label>
+            <input type="text" id="signup-zip" class="input" placeholder="33101" maxlength="5">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signup-phone">Phone Number</label>
+            <input type="tel" id="signup-phone" class="input" placeholder="(305) 555-0100">
+          </div>
+          <div class="form-group">
+            <label for="signup-clinic-email">Clinic Email</label>
+            <input type="email" id="signup-clinic-email" class="input" placeholder="info@clinic.com">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Services & Hours -->
+      <div id="step-2" class="hidden">
+        <h3 style="margin-bottom: 20px;">🦷 Services Offered</h3>
+
+        <div class="checkbox-group" style="margin-bottom: 24px;">
+          <label class="checkbox-item">
+            <input type="checkbox" value="General Dentistry" checked> General Dentistry
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Cosmetic Dentistry"> Cosmetic Dentistry
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Dental Implants"> Dental Implants
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Orthodontics"> Orthodontics
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Pediatric Dentistry"> Pediatric Dentistry
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Emergency Dental"> Emergency Dental
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Periodontics"> Periodontics
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Endodontics"> Endodontics
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Oral Surgery"> Oral Surgery
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Teeth Whitening"> Teeth Whitening
+          </label>
+        </div>
+
+        <h4 style="margin-bottom: 16px;">🕐 Office Hours</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="form-row" style="align-items: center;">
+            <span style="min-width: 40px; color: var(--text-secondary); font-size: 13px;">Mon</span>
+            <input type="time" class="input" value="08:00" style="width: auto;">
+            <span style="color: var(--text-secondary);">to</span>
+            <input type="time" class="input" value="17:00" style="width: auto;">
+          </div>
+          <div class="form-row" style="align-items: center;">
+            <span style="min-width: 40px; color: var(--text-secondary); font-size: 13px;">Tue</span>
+            <input type="time" class="input" value="08:00" style="width: auto;">
+            <span style="color: var(--text-secondary);">to</span>
+            <input type="time" class="input" value="17:00" style="width: auto;">
+          </div>
+          <div class="form-row" style="align-items: center;">
+            <span style="min-width: 40px; color: var(--text-secondary); font-size: 13px;">Wed</span>
+            <input type="time" class="input" value="08:00" style="width: auto;">
+            <span style="color: var(--text-secondary);">to</span>
+            <input type="time" class="input" value="17:00" style="width: auto;">
+          </div>
+          <div class="form-row" style="align-items: center;">
+            <span style="min-width: 40px; color: var(--text-secondary); font-size: 13px;">Thu</span>
+            <input type="time" class="input" value="08:00" style="width: auto;">
+            <span style="color: var(--text-secondary);">to</span>
+            <input type="time" class="input" value="17:00" style="width: auto;">
+          </div>
+          <div class="form-row" style="align-items: center;">
+            <span style="min-width: 40px; color: var(--text-secondary); font-size: 13px;">Fri</span>
+            <input type="time" class="input" value="08:00" style="width: auto;">
+            <span style="color: var(--text-secondary);">to</span>
+            <input type="time" class="input" value="16:00" style="width: auto;">
+          </div>
+          <div class="form-row" style="align-items: center;">
+            <span style="min-width: 40px; color: var(--text-secondary); font-size: 13px;">Sat</span>
+            <input type="time" class="input" value="09:00" style="width: auto;">
+            <span style="color: var(--text-secondary);">to</span>
+            <input type="time" class="input" value="13:00" style="width: auto;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Insurance & Policies -->
+      <div id="step-3" class="hidden">
+        <h3 style="margin-bottom: 20px;">🏥 Insurance Accepted</h3>
+
+        <div class="checkbox-group" style="margin-bottom: 24px;">
+          <label class="checkbox-item">
+            <input type="checkbox" value="Delta Dental" checked> Delta Dental
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Humana"> Humana
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="MCNA Dental"> MCNA Dental
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Guardian"> Guardian
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Cigna"> Cigna
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="MetLife"> MetLife
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Aetna"> Aetna
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="Florida Blue"> Florida Blue
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-policies">Office Policies & Special Instructions</label>
+          <textarea id="signup-policies" class="textarea" rows="5" placeholder="e.g., We require 24-hour cancellation notice. New patients should arrive 15 minutes early. We accept walk-ins for emergencies only."></textarea>
+        </div>
+      </div>
+
+      <!-- Step 4: Admin Account & Review -->
+      <div id="step-4" class="hidden">
+        <h3 style="margin-bottom: 20px;">🚀 Create Admin Account</h3>
+
+        <div class="form-group">
+          <label for="signup-admin-name">Full Name</label>
+          <input type="text" id="signup-admin-name" class="input" placeholder="Dr. Sarah Mitchell">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signup-admin-email">Email Address</label>
+            <input type="email" id="signup-admin-email" class="input" placeholder="sarah@clinic.com" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-admin-password">Password</label>
+            <input type="password" id="signup-admin-password" class="input" placeholder="Min. 8 characters" required minlength="8">
+          </div>
+        </div>
+
+        <h4 style="margin: 24px 0 16px;">📋 Review Your Setup</h4>
+        <div id="signup-summary" class="card" style="padding: 16px; font-size: 13px; line-height: 2; color: var(--text-secondary);"></div>
+      </div>
+
+    </form>
+
+    <!-- Navigation Buttons -->
+    <div class="signup-nav">
+      <button id="signup-back" class="btn btn-secondary" style="visibility: hidden;">← Back</button>
+      <button id="signup-next" class="btn btn-primary">Next →</button>
+    </div>
+
+    <div class="login-footer">
+      Already have an account? <a href="index.html">Sign in →</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="page-footer">© 2026 GrokDent FL — AI-Powered Dental Reception</div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
