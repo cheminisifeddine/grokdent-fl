@@ -1,0 +1,4 @@
+# Cloudflare Pages Redirects Mapping
+# Proxies frontend requests seamlessly to the Serverless Edge Worker API
+
+/api/* https://grokdent-fl-backend.cheminisifeddine.workers.dev/api/:splat 200
