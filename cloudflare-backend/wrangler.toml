@@ -16,7 +16,7 @@ XAI_BASE_URL = "https://api.x.ai/v1"
 [[d1_databases]]
 binding = "DB"
 database_name = "grokdent-d1"
-database_id = "your-d1-database-id-placeholder" # Will be provisioned during wrangler d1 create
+database_id = "d615d9f9-add9-4f82-985d-30adc6da13dd" # Will be provisioned during wrangler d1 create
 
 # Cloudflare R2 Storage Bucket Binding (for call recordings/transcripts)
 [[r2_buckets]]
