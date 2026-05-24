@@ -133,30 +133,39 @@ Keep responses short and conversational — this is a voice call, not an email.`
   async fetchSessionToken() {
     const now = Date.now();
     if (this.sessionToken && now < (this.tokenExpiresAt - 5000)) {
+      console.log('Reusing existing session token, expires in:', Math.round((this.tokenExpiresAt - now) / 1000), 'seconds');
       return this.sessionToken;
     }
 
     try {
-      const token = localStorage.getItem('renia_token');
-      const headers = { 'Content-Type': 'application/json' };
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-
+      console.log('Fetching new session token from backend...');
+      
       const response = await fetch('/api/v1/voice/session-token', {
         method: 'POST',
-        headers
+        headers: { 'Content-Type': 'application/json' }
       });
 
+      console.log('Session token endpoint response status:', response.status);
+
       if (!response.ok) {
-        throw new Error('Failed to fetch session token');
+        const errorText = await response.text();
+        console.error('Session token endpoint error:', response.status, errorText);
+        throw new Error(`Session token endpoint failed: ${response.status} - ${errorText.substring(0, 100)}`);
       }
 
       const data = await response.json();
+      console.log('Session token received:', data.token ? 'Yes (masked)' : 'No', 'expires_at:', data.expires_at);
+      
+      if (!data.token) {
+        throw new Error('Session token endpoint returned no token');
+      }
+
       this.sessionToken = data.token;
       this.tokenExpiresAt = data.expires_at * 1000;
       return this.sessionToken;
     } catch (err) {
-      console.warn('Session token endpoint failed, trying direct connect with API key:', err);
-      return null;
+      console.error('Session token endpoint failed completely:', err);
+      throw err;
     }
   }
 
@@ -199,72 +208,73 @@ Keep responses short and conversational — this is a voice call, not an email.`
         }
       }
 
-      const source = this.audioContext.createMediaStreamSource(this.mediaStream);
-      
-      if (this.audioContext.audioWorklet) {
-        try {
-          this.workletNode = new AudioWorkletNode(this.audioContext, 'pcm-processor');
-          this.workletNode.port.onmessage = (event) => this.handleMicData(event.data);
-          source.connect(this.workletNode);
-        } catch (e) {
-          console.warn('Falling back to ScriptProcessorNode:', e);
-          this.setupScriptProcessorFallback(source);
-        }
-      } else {
-        this.setupScriptProcessorFallback(source);
-      }
+       const source = this.audioContext.createMediaStreamSource(this.mediaStream);
+       
+       if (this.audioContext.audioWorklet) {
+         try {
+           this.workletNode = new AudioWorkletNode(this.audioContext, 'pcm-processor');
+           this.workletNode.port.onmessage = (event) => this.handleMicData(event.data);
+           source.connect(this.workletNode);
+         } catch (e) {
+           console.warn('Falling back to ScriptProcessorNode:', e);
+           this.setupScriptProcessorFallback(source);
+         }
+       } else {
+         this.setupScriptProcessorFallback(source);
+       }
 
        this.isSessionReady = false;
        this.micBuffer = [];
        this.nextPlayTime = 0;
        this.queuedSources = [];
 
-        const apiKey = this.getSavedApiKey();
-        
-        const connectionTimeout = setTimeout(() => {
-          if (!this.isConnected) {
-            console.log('Connection timeout, cleaning up...');
-            if (this.ws) {
-              this.ws.close();
-              this.ws = null;
-            }
-            this.isConnecting = false;
-            this.setState('disconnected');
-            this.callbacks.onError.forEach(cb => cb(new Error('Connection timeout. Please check your internet and try again.')));
-          }
-        }, 10000);
-        
-        if (sessionToken) {
-          console.log('Connecting with session token...');
-          this.ws = new WebSocket(
-            'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
-            [`xai-client-secret.${sessionToken}`]
-          );
-        } else if (apiKey) {
-          console.log('Connecting with API key...');
-          console.log('API key (first 20 chars):', apiKey.substring(0, 20) + '...');
-          this.ws = new WebSocket(
-            'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
-            [`xai-api-key.${apiKey}`]
-          );
-        } else {
-          clearTimeout(connectionTimeout);
-          throw new Error('No session token or API key available');
-        }
+       if (!sessionToken) {
+         throw new Error('No session token available. Please check your backend connection and API key.');
+       }
 
-        this.ws.onopen = () => {
-          clearTimeout(connectionTimeout);
-          this.handleOpen();
-        };
-        this.ws.onmessage = (event) => this.handleMessage(event);
-        this.ws.onclose = (event) => {
-          clearTimeout(connectionTimeout);
-          this.handleClose(event);
-        };
-        this.ws.onerror = (error) => {
-          clearTimeout(connectionTimeout);
-          this.handleError(error);
-        };
+       console.log('Connecting WebSocket to xAI Realtime API...');
+       console.log('Model: grok-voice-latest');
+       console.log('Session token (first 20 chars):', sessionToken.substring(0, 20) + '...');
+
+       const connectionTimeout = setTimeout(() => {
+         if (!this.isConnected) {
+           console.log('WebSocket connection timeout (10s)');
+           if (this.ws) {
+             try { this.ws.close(); } catch (e) {}
+             this.ws = null;
+           }
+           this.isConnecting = false;
+           this.setState('disconnected');
+           this.callbacks.onError.forEach(cb => cb(new Error('Connection timeout. The xAI API may be unavailable or your API key may not have Realtime Voice API access.')));
+         }
+       }, 15000);
+       
+       this.ws = new WebSocket(
+         'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
+         [`xai-client-secret.${sessionToken}`]
+       );
+
+       this.ws.onopen = () => {
+         clearTimeout(connectionTimeout);
+         console.log('WebSocket connection opened successfully!');
+         this.handleOpen();
+       };
+
+       this.ws.onmessage = (event) => {
+         this.handleMessage(event);
+       };
+
+       this.ws.onclose = (event) => {
+         clearTimeout(connectionTimeout);
+         console.log('WebSocket closed - code:', event.code, 'reason:', event.reason || '(none)');
+         this.handleClose(event);
+       };
+
+       this.ws.onerror = (error) => {
+         clearTimeout(connectionTimeout);
+         console.error('WebSocket error:', error);
+         this.handleError(error);
+       };
 
     } catch (err) {
       this.isConnecting = false;

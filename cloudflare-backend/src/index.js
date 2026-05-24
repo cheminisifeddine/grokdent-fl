@@ -741,10 +741,11 @@ SCENARIO INSTRUCTIONS:
 // -------------------------------------------------------------------------
 // 🔑 xAI Realtime API Session Token Endpoint (For Browser Voice Agents)
 // -------------------------------------------------------------------------
-app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
+app.post('/api/v1/voice/session-token', async (c) => {
   const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
   
   try {
+    console.log('Fetching session token from xAI...');
     const response = await fetch('https://api.x.ai/v1/realtime/client_secrets', {
       method: 'POST',
       headers: {
@@ -756,17 +757,22 @@ app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
       })
     });
 
+    console.log('xAI session token response status:', response.status);
+
     if (!response.ok) {
       const errText = await response.text();
-      return c.json({ error: 'Failed to mint session token', details: errText }, 502);
+      console.error('xAI session token error:', errText);
+      return c.json({ error: 'Failed to mint session token', details: errText, status: response.status }, 502);
     }
 
     const data = await response.json();
+    console.log('Session token received, expires_at:', data.expires_at);
     return c.json({
       token: data.value,
       expires_at: data.expires_at
     });
   } catch (err) {
+    console.error('Session token endpoint error:', err);
     return c.json({ error: 'Session token endpoint error', message: err.message }, 500);
   }
 });
