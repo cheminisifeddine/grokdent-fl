@@ -84,30 +84,57 @@ function debounce(fn, delay = 300) {
  */
 function showToast(message, type = 'success') {
   // Remove existing toasts
-  const existing = document.querySelectorAll('.toast');
-  existing.forEach(t => t.remove());
+  document.querySelectorAll('.renia-toast').forEach(t => t.remove());
+
+  const colors = {
+    success: { bg: '#f0fdf4', border: '#bbf7d0', text: '#166534', icon: '✅' },
+    error:   { bg: '#fef2f2', border: '#fecaca', text: '#991b1b', icon: '❌' },
+    warning: { bg: '#fffbeb', border: '#fde68a', text: '#92400e', icon: '⚠️' },
+    info:    { bg: '#eff6ff', border: '#bfdbfe', text: '#1e40af', icon: 'ℹ️' }
+  };
+  const c = colors[type] || colors.success;
 
   const toast = document.createElement('div');
-  toast.className = `toast toast-${type}`;
-
-  const icons = {
-    success: '✅',
-    error: '❌',
-    warning: '⚠️',
-    info: 'ℹ️'
-  };
-
-  toast.innerHTML = `<span>${icons[type] || ''}</span> <span>${message}</span>`;
+  toast.className = 'renia-toast';
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: ${c.bg};
+    border: 1px solid ${c.border};
+    color: ${c.text};
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    max-width: 420px;
+    animation: toastIn 0.3s cubic-bezier(0.16,1,0.3,1);
+  `;
+  toast.innerHTML = `<span style="font-size:18px">${c.icon}</span><span>${message}</span>`;
   document.body.appendChild(toast);
 
-  // Auto-remove after 3 seconds
+  // Inject keyframes once
+  if (!document.getElementById('toast-keyframes')) {
+    const style = document.createElement('style');
+    style.id = 'toast-keyframes';
+    style.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}';
+    document.head.appendChild(style);
+  }
+
   setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateX(40px)';
     toast.style.transition = 'all 0.3s ease';
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(30px)';
     setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  }, 3500);
 }
+
 
 /**
  * Animate a counter from 0 to target value
