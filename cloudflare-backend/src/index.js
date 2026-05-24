@@ -783,7 +783,7 @@ app.post('/api/v1/voice/session-token', async (c) => {
 app.post('/api/v1/voice/tts', async (c) => {
   try {
     const body = await c.req.json();
-    const { text, voice_id, speed } = body;
+    const { text, voice_id, speed, language } = body;
     
     const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
     
@@ -810,7 +810,8 @@ app.post('/api/v1/voice/tts', async (c) => {
       body: JSON.stringify({
         text: text,
         voice_id: matchedVoice,
-        speed: speed || 1.0
+        speed: speed || 1.0,
+        language: language || 'en'
       })
     });
     
