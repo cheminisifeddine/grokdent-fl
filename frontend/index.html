@@ -1,445 +1,322 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-white antialiased selection:bg-indigo-600 selection:text-white">
+<html lang="en" class="scroll-smooth bg-white selection:bg-indigo-600 selection:text-white">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renia AI — AI Voice Receptionist for Dental Clinics</title>
-  <meta name="description" content="Renia answers every incoming call 24/7, books appointments into your PMS in real-time, and never puts a patient on hold. Built for Florida dental clinics.">
-
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-
+  <title>Renia AI — AI Voice Receptionist for Dental Clinics in Florida</title>
+  <meta name="description" content="Renia answers every incoming call 24/7, books appointments into Dentrix, Eaglesoft and Open Dental in real-time, and never puts a patient on hold. Built for Florida dental clinics.">
+  <meta property="og:title" content="Renia AI — AI Voice Receptionist for Dental Clinics">
+  <meta property="og:description" content="Answers every call 24/7. Books into your PMS instantly. Never loses a patient.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,200&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
           colors: {
-            gray: {
-              950: '#0a0a0b',
-              925: '#111113',
-              900: '#141416',
-              850: '#1a1a1d',
-              800: '#1f1f23',
-              750: '#26262b',
-              700: '#2c2c32',
-              650: '#35353c',
-              600: '#3f3f46',
-              500: '#52525b',
-              400: '#71717a',
-              300: '#a1a1aa',
-              200: '#d4d4d8',
-              150: '#e3e3e8',
-              100: '#f1f1f3',
-              50: '#f7f7f8',
-            },
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              200: '#c7d2fe',
-              300: '#a5b4fc',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#312e81',
-              900: '#1e1b4b',
-            }
+            gray: { 925:'#0c0c0e',950:'#0a0a0b',900:'#141416',850:'#18181b',800:'#1f1f23',750:'#27272a',700:'#2c2c32',650:'#35353b',600:'#3f3f46',500:'#52525b',400:'#71717a',300:'#a1a1aa',200:'#d4d4d8',150:'#e4e4e7',100:'#f1f1f3',50:'#f7f7f8' },
+            brand: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#312e81',900:'#1e1b4b' }
           },
           boxShadow: {
-            'soft': '0 1px 2px 0 rgba(0,0,0,0.03), 0 1px 6px -1px rgba(0,0,0,0.02), 0 2px 4px 0 rgba(0,0,0,0.02)',
-            'card': '0 1px 3px 0 rgba(0,0,0,0.03), 0 1px 2px -1px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.03)',
-            'card-hover': '0 4px 6px -1px rgba(0,0,0,0.04), 0 2px 4px -2px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.04)',
-            'elevated': '0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -5px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.03)',
-            'glow': '0 0 0 1px rgba(99,102,241,0.15), 0 1px 3px rgba(99,102,241,0.1), 0 8px 32px -4px rgba(99,102,241,0.15)',
-            'panel': '0 0 0 1px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.02), 0 8px 24px -4px rgba(0,0,0,0.04)',
+            'soft': '0 1px 2px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02)',
+            'card': '0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04)',
+            'card-hover': '0 8px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.06)',
+            'elevated': '0 4px 12px rgba(0,0,0,0.06), 0 20px 40px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04)',
+            'glow-sm': '0 0 20px rgba(99,102,241,0.15), 0 0 0 1px rgba(99,102,241,0.2)',
+            'dark-card': '0 2px 8px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06)',
           },
           animation: {
-            'fade-up': 'fade-up 0.7s cubic-bezier(0.14, 0.65, 0.2, 1) forwards',
-            'fade-up-slow': 'fade-up 1s cubic-bezier(0.14, 0.65, 0.2, 1) forwards',
-            'fade-in': 'fade-in 0.5s ease-out forwards',
-            'scale-in': 'scale-in 0.4s cubic-bezier(0.14, 0.65, 0.2, 1) forwards',
-            'shimmer': 'shimmer 2s linear infinite',
-            'pulse-ring': 'pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'float': 'float 6s ease-in-out infinite',
-            'marquee': 'marquee 30s linear infinite',
+            'in-up': 'in-up 0.7s cubic-bezier(0.16,1,0.3,1) forwards',
+            'in-down': 'in-down 0.5s cubic-bezier(0.16,1,0.3,1) forwards',
+            'in-scale': 'in-scale 0.5s cubic-bezier(0.16,1,0.3,1) forwards',
+            'marquee': 'marquee 35s linear infinite',
+            'ping-slow': 'ping-slow 3s cubic-bezier(0,0,0.2,1) infinite',
+            'float': 'float 8s ease-in-out infinite',
+            'float-delayed': 'float 8s ease-in-out 2s infinite',
           },
           keyframes: {
-            'fade-up': {
-              '0%': { opacity: '0', transform: 'translateY(24px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            },
-            'fade-in': {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            'scale-in': {
-              '0%': { opacity: '0', transform: 'scale(0.95)' },
-              '100%': { opacity: '1', transform: 'scale(1)' },
-            },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' },
-            },
-            'pulse-ring': {
-              '0%': { transform: 'scale(1)', opacity: '1' },
-              '100%': { transform: 'scale(1.5)', opacity: '0' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-16px)' },
-            },
-            marquee: {
-              '0%': { transform: 'translateX(0%)' },
-              '100%': { transform: 'translateX(-50%)' },
-            },
+            'in-up': { '0%': { opacity:'0', transform:'translateY(30px)' }, '100%': { opacity:'1', transform:'translateY(0)' } },
+            'in-down': { '0%': { opacity:'0', transform:'translateY(-20px)' }, '100%': { opacity:'1', transform:'translateY(0)' } },
+            'in-scale': { '0%': { opacity:'0', transform:'scale(0.95)' }, '100%': { opacity:'1', transform:'scale(1)' } },
+            marquee: { '0%': { transform:'translateX(0)' }, '100%': { transform:'translateX(-50%)' } },
+            'ping-slow': { '0%': { transform:'scale(1)', opacity:'1' }, '100%': { transform:'scale(2.5)', opacity:'0' } },
+            float: { '0%,100%': { transform:'translateY(0px)' }, '50%': { transform:'translateY(-20px)' } },
           }
         }
       }
     }
   </script>
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; }
-    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-thumb{background:#d4d4d8;border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:#a1a1aa}
 
-    ::selection { background: #4f46e5; color: white; }
-
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
-
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.14, 0.65, 0.2, 1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-
-    .noise-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 256px 256px;
-      opacity: 0.5;
-      pointer-events: none;
-      mix-blend-mode: multiply;
+    .gradient-text{
+      background:linear-gradient(135deg,#1e1b4b 0%,#4f46e5 40%,#6366f1 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+    }
+    .gradient-text-white{
+      background:linear-gradient(180deg,#fff 60%,#a1a1aa 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
     }
 
-    .text-balance { text-wrap: balance; }
+    .reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+    .reveal.active{opacity:1;transform:translateY(0)}
+    .reveal-scale{opacity:0;transform:scale(0.92);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+    .reveal-scale.active{opacity:1;transform:scale(1)}
+    .reveal-left{opacity:0;transform:translateX(-40px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+    .reveal-left.active{opacity:1;transform:translateX(0)}
+    .reveal-right{opacity:0;transform:translateX(40px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+    .reveal-right.active{opacity:1;transform:translateX(0)}
+    .delay-1{transition-delay:0.1s}.delay-2{transition-delay:0.2s}.delay-3{transition-delay:0.3s}
+    .delay-4{transition-delay:0.4s}.delay-5{transition-delay:0.5s}.delay-6{transition-delay:0.6s}
+    .delay-7{transition-delay:0.7s}.delay-8{transition-delay:0.8s}
 
-    .gradient-text {
-      background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #6366f1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .magnetic-wrap{display:inline-block;position:relative}
+    .glare-card{position:relative;overflow:hidden}
+    .glare-card::after{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,0.5) 0%,transparent 60%);
+      opacity:0;transition:opacity 0.4s;pointer-events:none;mix-blend-mode:overlay
     }
+    .glare-card:hover::after{opacity:0.12}
 
-    .gradient-text-light {
-      background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .btn-primary{position:relative;overflow:hidden;transition:all 0.35s cubic-bezier(0.16,1,0.3,1)}
+    .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.1) 0%,transparent 100%);opacity:0;transition:opacity 0.3s}
+    .btn-primary:hover::before{opacity:1}
+    .btn-primary:active{transform:scale(0.97)}
 
-    .grid-pattern {
-      background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
+    .grid-dot{background-image:radial-gradient(rgba(0,0,0,0.08) 1px,transparent 0);background-size:24px 24px}
+    .grid-dot-white{background-image:radial-gradient(rgba(255,255,255,0.06) 1px,transparent 0);background-size:24px 24px}
 
-    .grid-pattern-light {
-      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
+    #canvas-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .tilt-card{transform-style:preserve-3d;perspective:1200px}
+    .tilt-card-inner{transition:transform 0.15s ease-out;transform-style:preserve-3d}
 
-    .gradient-border {
-      position: relative;
-    }
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(99,102,241,0.05), rgba(99,102,241,0.3));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
+    .pulse-ring{animation:pulse-ring 2s cubic-bezier(0,0,0.2,1) infinite}
+    @keyframes pulse-ring{0%{transform:scale(0.95);opacity:1}100%{transform:scale(1.8);opacity:0}}
 
-    .magnetic-wrap { display: inline-block; position: relative; }
+    .toggle-switch{position:relative;width:48px;height:26px;border-radius:13px;background:#d4d4d8;cursor:pointer;transition:background 0.3s}
+    .toggle-switch.active{background:#4f46e5}
+    .toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.15);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1)}
+    .toggle-switch.active::after{transform:translateX(22px)}
 
-    .glare-card { position: relative; overflow: hidden; }
-    .glare-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.6) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s;
-      pointer-events: none;
-      mix-blend-mode: overlay;
+    input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;width:100%;position:relative;z-index:10}
+    input[type=range]::-webkit-slider-thumb{
+      -webkit-appearance:none;width:22px;height:22px;background:#fff;
+      border:2.5px solid #4f46e5;border-radius:50%;
+      box-shadow:0 2px 8px rgba(79,70,229,0.25);
+      margin-top:-9px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s
     }
-    .glare-card:hover::after { opacity: 0.1; }
+    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12);box-shadow:0 2px 12px rgba(79,70,229,0.35)}
+    input[type=range]::-webkit-slider-runnable-track{width:100%;height:4px;background:#e4e4e7;border-radius:2px}
 
-    @keyframes soundwave {
-      0%, 100% { height: 20%; }
-      50% { height: 100%; }
-    }
-
-    .typing-cursor::after {
-      content: '|';
-      animation: blink 1s step-end infinite;
-      color: #6366f1;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .btn-primary {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.14, 0.65, 0.2, 1);
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-primary:active { transform: scale(0.97); }
-
-    input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px; height: 20px;
-      background: white;
-      border: 2px solid #4f46e5;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(79,70,229,0.2);
-      margin-top: -8px;
-      cursor: pointer;
-      transition: transform 0.15s;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-    input[type="range"]::-webkit-slider-runnable-track {
-      width: 100%; height: 4px;
-      background: #e4e4e7;
-      border-radius: 2px;
-    }
+    .faq-item .faq-a{display:none}
+    .faq-item.open .faq-a{display:block}
+    .faq-item.open .faq-chevron{transform:rotate(180deg)}
   </style>
 </head>
 <body>
 
-  <!-- ============ NAV ============ -->
-  <header class="fixed top-0 left-0 right-0 z-50" id="header">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 md:h-20 transition-all duration-300" id="nav-container">
-        <a href="/" class="flex items-center gap-2.5 group shrink-0">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform duration-300 group-hover:scale-105">
-            <rect width="32" height="32" rx="8" fill="#141416"/>
-            <path d="M16 8C13.5 8 11.5 9.5 11 12H9.5C9 14 10 16 11.5 17L14 20H10L8 24H24L22 20H18L20.5 17C22 16 23 14 22.5 12H21C20.5 9.5 18.5 8 16 8Z" fill="white" fill-opacity="0.95"/>
-            <circle cx="13.5" cy="13.5" r="1.5" fill="#6366f1"/>
-            <circle cx="18.5" cy="13.5" r="1.5" fill="#6366f1"/>
-          </svg>
-          <span class="font-semibold text-lg tracking-tight text-gray-900">Renia</span>
-        </a>
+<canvas id="canvas-bg"></canvas>
 
-        <nav class="hidden md:flex items-center gap-1">
-          <a href="#how-it-works" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">How it works</a>
-          <a href="#features" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">Features</a>
-          <a href="#roi" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">ROI</a>
-          <a href="#faq" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">FAQ</a>
-        </nav>
+<!-- Mobile CTA -->
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-t border-gray-200 p-3 sm:hidden">
+  <a href="signup.html" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-900 text-white font-semibold rounded-xl text-sm shadow-soft">
+    Start Free Trial
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
 
-        <div class="flex items-center gap-3">
-          <a href="login.html" class="hidden sm:inline-flex text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors px-3 py-2">Sign in</a>
-          <a href="signup.html" class="btn-primary inline-flex items-center gap-1.5 px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-soft">
-            Get Early Access
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5">
-              <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- ====== NAVBAR ====== -->
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
+    <div class="flex items-center justify-between transition-all duration-500" id="nav-inner">
+      <a href="/" class="flex items-center gap-2.5 group shrink-0">
+        <div class="relative w-9 h-9">
+          <div class="absolute inset-0 bg-gray-900 rounded-xl rotate-3 group-hover:rotate-6 transition-transform"></div>
+          <div class="absolute inset-0 bg-gray-900 rounded-xl flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4C9.5 4 7.5 5.5 7 8H5.5C5 10 6 12 7.5 13L10 16H6L4 20H20L18 16H14L16.5 13C18 12 19 10 18.5 8H17C16.5 5.5 14.5 4 12 4Z" fill="white" fill-opacity="0.95"/>
+              <circle cx="9.5" cy="9.5" r="1.5" fill="#6366f1"/><circle cx="14.5" cy="9.5" r="1.5" fill="#6366f1"/>
             </svg>
-          </a>
+          </div>
         </div>
+        <span class="font-semibold text-lg tracking-tight text-gray-900">Renia</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-0.5">
+        <a href="#features" class="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100/70 transition-all">Features</a>
+        <a href="#how-it-works" class="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100/70 transition-all">How it works</a>
+        <a href="#pricing" class="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100/70 transition-all">Pricing</a>
+        <a href="#testimonials" class="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100/70 transition-all">Testimonials</a>
+        <a href="#faq" class="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100/70 transition-all">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="login.html" class="hidden sm:inline-flex text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors px-3 py-2">Sign in</a>
+        <a href="signup.html" class="inline-flex items-center gap-1.5 px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-soft relative overflow-hidden group">
+          <span class="relative z-10">Get Early Access</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="relative z-10 transition-transform duration-200 group-hover:translate-x-0.5"><path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+        </a>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ============ HERO ============ -->
-  <section class="relative pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-    <div class="absolute inset-0 noise-bg pointer-events-none"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-brand-50/30 via-transparent to-white pointer-events-none"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-b from-brand-200/20 via-brand-100/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+<!-- ====== HERO ====== -->
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-50/40 via-white to-white pointer-events-none"></div>
+  <div class="absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-gradient-to-br from-brand-200/20 via-brand-100/10 to-transparent rounded-full blur-[120px] pointer-events-none animate-float"></div>
+  <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-gradient-to-tl from-brand-100/15 via-transparent to-transparent rounded-full blur-[100px] pointer-events-none animate-float-delayed"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <div class="max-w-4xl mx-auto text-center relative">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-8 animate-fade-up">
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
-          Now powering 40+ dental clinics across Florida
-        </div>
-
-        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gray-900 leading-[0.95] mb-6 animate-fade-up" style="animation-delay: 0.1s;">
-          AI that answers<br>
-          <span class="gradient-text">every dental call.</span>
-        </h1>
-
-        <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-up" style="animation-delay: 0.2s;">
-          Renia picks up your clinic's phone 24/7, understands patients in English and Spanish,<br class="hidden sm:block">
-          and books appointments directly into Dentrix, Eaglesoft, or Open Dental — instantly.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.3s;">
-          <a href="signup.html" class="btn-primary inline-flex items-center gap-2 px-7 py-3.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-elevated w-full sm:w-auto justify-center group">
-            Start free trial
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5">
-              <path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a href="#demo" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-gray-700 font-semibold rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all w-full sm:w-auto justify-center group shadow-soft">
-            <span class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs group-hover:bg-gray-200 transition-colors">
-              <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
-                <path d="M1 1L9 6L1 11V1Z" fill="currentColor"/>
-              </svg>
-            </span>
-            See it in action
-          </a>
-        </div>
-
-        <div class="flex items-center justify-center gap-6 sm:gap-10 mt-10 text-sm animate-fade-up" style="animation-delay: 0.4s;">
-          <div class="flex items-center gap-2 text-gray-400">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="text-gray-500 font-medium">No setup fee</span>
-          </div>
-          <div class="flex items-center gap-2 text-gray-400">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="text-gray-500 font-medium">HIPAA compliant</span>
-          </div>
-          <div class="flex items-center gap-2 text-gray-400">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="text-gray-500 font-medium">Cancel anytime</span>
-          </div>
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-5xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white border border-gray-200/80 rounded-full text-xs font-semibold text-gray-500 tracking-wide mb-8 shadow-soft animate-in-down">
+        <span class="relative flex h-2 w-2"><span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
+        <span class="text-gray-700">Now powering <strong class="text-gray-900">40+</strong> dental clinics across Florida</span>
       </div>
 
-      <!-- HERO VISUAL -->
-      <div class="mt-16 md:mt-20 relative animate-fade-up" style="animation-delay: 0.5s;">
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-500/5 via-transparent to-transparent rounded-3xl blur-2xl -z-10"></div>
-        <div class="relative bg-white rounded-2xl shadow-panel border border-gray-100 overflow-hidden">
-          <div class="flex items-center gap-1.5 px-5 py-3.5 border-b border-gray-100 bg-gray-50/50">
-            <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
-            <div class="ml-3 text-xs text-gray-400 font-mono flex items-center gap-1.5">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6H9M9 6L6 3M9 6L6 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              renia.app/call/active
+      <!-- Headline -->
+      <h1 class="text-[3.5rem] sm:text-[5rem] md:text-[6.5rem] lg:text-[8rem] font-black tracking-[-0.04em] text-gray-900 leading-[0.88] mb-7 animate-in-up" style="animation-delay:0.12s">
+        Every call<br><span class="gradient-text">answered.</span><br class="sm:hidden"> Every patient <span class="gradient-text">booked.</span>
+      </h1>
+
+      <!-- Sub -->
+      <p class="text-lg sm:text-xl md:text-2xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10 animate-in-up" style="animation-delay:0.24s" id="hero-sub">
+        Renia picks up your clinic's phone 24/7, understands patients in English <em class="text-gray-700 not-italic">and</em> Spanish, and books directly into Dentrix, Eaglesoft, or Open Dental.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in-up" style="animation-delay:0.36s">
+        <a href="signup.html" class="btn-primary inline-flex items-center gap-2.5 px-8 py-4 bg-gray-900 text-white font-semibold rounded-2xl hover:bg-gray-800 transition-all shadow-elevated w-full sm:w-auto justify-center group text-[15px]">
+          Start Free Trial
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-200 group-hover:translate-x-1"><path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#demo" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-700 font-semibold rounded-2xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50/80 transition-all w-full sm:w-auto justify-center shadow-soft text-[15px] group">
+          <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M1.5 1L10.5 7L1.5 13V1Z" fill="#4f46e5"/></svg>
+          </span>
+          See it in action
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mt-10 text-sm animate-in-up" style="animation-delay:0.48s">
+        <div class="flex items-center gap-2 text-gray-400"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-gray-500 font-medium">No setup fee</span></div>
+        <div class="flex items-center gap-2 text-gray-400"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-gray-500 font-medium">HIPAA compliant</span></div>
+        <div class="flex items-center gap-2 text-gray-400"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-gray-500 font-medium">5-min setup</span></div>
+        <div class="flex items-center gap-2 text-gray-400"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-gray-500 font-medium">Cancel anytime</span></div>
+      </div>
+    </div>
+
+    <!-- 3D Product Mockup -->
+    <div class="mt-16 md:mt-20 max-w-6xl mx-auto animate-in-up" style="animation-delay:0.6s">
+      <div class="tilt-card glare-card" id="hero-mockup">
+        <div class="tilt-card-inner relative bg-white rounded-2xl shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_8px_40px_rgba(0,0,0,0.04),0_40px_120px_rgba(0,0,0,0.08)] overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-gray-50/40">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-gray-200"></div>
+              <div class="w-3 h-3 rounded-full bg-amber-300"></div>
+              <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+              <div class="ml-3 text-xs text-gray-400 font-mono flex items-center gap-1.5">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="text-gray-300"><path d="M6 1V6L8.5 8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                renia.app/call/live
+              </div>
             </div>
-            <div class="ml-auto flex items-center gap-1.5">
+            <div class="flex items-center gap-2 text-[11px] font-medium">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span class="text-[11px] font-medium text-emerald-600">Live</span>
+              <span class="text-emerald-600">Active Call</span>
+              <span class="text-gray-300 mx-1">•</span>
+              <span class="text-gray-400" id="call-timer">00:00</span>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
-            <!-- Left: Call Interface -->
-            <div class="lg:col-span-3 p-5 sm:p-7">
+          <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
+            <!-- Conversation -->
+            <div class="lg:col-span-7 p-5 sm:p-7">
               <div class="flex items-start gap-4 mb-6">
-                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center text-base shrink-0 font-medium text-brand-700">M</div>
-                <div class="min-w-0">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center text-lg shrink-0 font-semibold text-brand-700">M</div>
+                <div class="min-w-0 flex-1">
                   <div class="flex items-center gap-2.5 flex-wrap">
-                    <h3 class="font-semibold text-gray-900 text-sm">Maria Rodriguez</h3>
-                    <span class="text-[11px] font-medium text-brand-600 bg-brand-50 border border-brand-200/60 px-2 py-0.5 rounded-full">New Patient</span>
+                    <h3 class="font-semibold text-gray-900">Maria Rodriguez</h3>
+                    <span class="text-[11px] font-medium text-brand-600 bg-brand-50 border border-brand-200/60 px-2.5 py-0.5 rounded-full">New Patient</span>
                   </div>
                   <p class="text-sm text-gray-400 mt-0.5">+1 (305) 555-0192 — Miami, FL</p>
                 </div>
               </div>
 
-              <!-- Transcript -->
-              <div class="space-y-3 mb-5">
-                <div class="flex items-start gap-3">
-                  <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-semibold text-brand-600 shrink-0 mt-0.5">AI</div>
-                  <div class="bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-700 max-w-[85%]">
-                    Good afternoon, thank you for calling Coastal Smiles Dentistry. How can I help you today?
-                  </div>
+              <div class="space-y-3.5 mb-5">
+                <div class="flex items-start gap-3 opacity-0 chat-bubble" data-delay="0">
+                  <div class="w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center text-xs font-semibold text-brand-600 shrink-0 mt-0.5">AI</div>
+                  <div class="bg-gray-50 border border-gray-100 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-700 max-w-[88%] leading-relaxed">Good afternoon, thank you for calling Coastal Smiles Dentistry. How can I help you today?</div>
                 </div>
-                <div class="flex items-start gap-3 flex-row-reverse">
-                  <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-medium text-gray-500 shrink-0 mt-0.5">M</div>
-                  <div class="bg-brand-500 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm max-w-[85%]">
-                    Hola, hablo español. Necesito una cita para mi hijo. Le duele una muela.
-                  </div>
+                <div class="flex items-start gap-3 flex-row-reverse opacity-0 chat-bubble" data-delay="1">
+                  <div class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs font-medium text-gray-500 shrink-0 mt-0.5">M</div>
+                  <div class="bg-brand-500 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm max-w-[88%] leading-relaxed shadow-sm"><span class="text-brand-200 text-xs font-medium">[Spanish detected]</span><br>Hola, hablo español. Necesito una cita para mi hijo. Le duele una muela.</div>
                 </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-semibold text-brand-600 shrink-0 mt-0.5">AI</div>
-                  <div class="bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-700 max-w-[85%]">
-                    Claro, con gusto le ayudo en español. ¿Cuál es el nombre de su hijo y qué edad tiene?
-                  </div>
+                <div class="flex items-start gap-3 opacity-0 chat-bubble" data-delay="2">
+                  <div class="w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center text-xs font-semibold text-brand-600 shrink-0 mt-0.5">AI</div>
+                  <div class="bg-gray-50 border border-gray-100 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-700 max-w-[88%] leading-relaxed"><span class="text-emerald-600 text-xs font-medium">[Switched to Spanish]</span><br>Claro, con gusto le ayudo en español. ¿Cuál es el nombre de su hijo y qué edad tiene?</div>
                 </div>
               </div>
 
-              <div class="flex items-center gap-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
-                <span class="inline-flex items-center gap-1 font-medium text-brand-600">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1V6L8.5 8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                  1:24
-                </span>
-                <span class="text-gray-300">•</span>
-                <span class="inline-flex items-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C3.5 1 1.5 3 1.5 5.5C1.5 8 3.5 10 6 10C8.5 10 10.5 8 10.5 5.5C10.5 3 8.5 1 6 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M2 10L1 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                  Spanish detected
-                </span>
+              <div class="flex items-center gap-2 border border-gray-200 rounded-xl px-4 py-2.5 bg-white">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-gray-300 shrink-0"><path d="M14 5.5V10C14 12 12.5 13.5 10.5 13.5H5.5C3.5 13.5 2 12 2 10V5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 2V10M8 10L5 7M8 10L11 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="flex-1 text-sm text-gray-400">AI is speaking Spanish...</div>
+                <div class="flex items-center gap-1">
+                  <span class="w-0.5 h-3 bg-brand-500 rounded-full animate-pulse" style="animation-delay:0s"></span>
+                  <span class="w-0.5 h-4 bg-brand-400 rounded-full animate-pulse" style="animation-delay:0.15s"></span>
+                  <span class="w-0.5 h-2.5 bg-brand-300 rounded-full animate-pulse" style="animation-delay:0.3s"></span>
+                  <span class="w-0.5 h-4 bg-emerald-400 rounded-full animate-pulse" style="animation-delay:0.45s"></span>
+                  <span class="w-0.5 h-3 bg-brand-400 rounded-full animate-pulse" style="animation-delay:0.6s"></span>
+                </div>
               </div>
             </div>
 
-            <!-- Right: Info Panel -->
-            <div class="lg:col-span-2 p-5 sm:p-7 bg-gray-50/30">
-              <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-4">Live Analysis</div>
-
+            <!-- Info Panel -->
+            <div class="lg:col-span-5 p-5 sm:p-7 bg-gray-50/30">
+              <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-5 flex items-center gap-2"><span>Live Analysis</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span></div>
               <div class="space-y-3">
                 <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
-                  <div class="text-[11px] font-medium text-gray-400 mb-1.5">DETECTED INTENT</div>
+                  <div class="flex items-center justify-between mb-1.5"><span class="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Detected Intent</span><span class="text-[11px] font-mono text-brand-600">94%</span></div>
                   <div class="text-sm font-semibold text-gray-900">New Patient Appointment</div>
-                  <div class="flex items-center gap-2 mt-2 text-xs text-gray-500">
-                    <span class="bg-brand-50 text-brand-700 font-medium px-2 py-0.5 rounded text-[11px]">Pediatric</span>
-                    <span class="bg-amber-50 text-amber-700 font-medium px-2 py-0.5 rounded text-[11px]">Urgent</span>
+                  <div class="flex flex-wrap items-center gap-1.5 mt-2">
+                    <span class="bg-brand-50 text-brand-700 text-[11px] font-medium px-2 py-0.5 rounded">Pediatric</span>
+                    <span class="bg-amber-50 text-amber-700 text-[11px] font-medium px-2 py-0.5 rounded">Urgent</span>
+                    <span class="bg-emerald-50 text-emerald-700 text-[11px] font-medium px-2 py-0.5 rounded">Spanish</span>
                   </div>
                 </div>
-
                 <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
-                  <div class="text-[11px] font-medium text-gray-400 mb-2">PMS STATUS</div>
+                  <div class="flex items-center justify-between mb-2"><span class="text-[11px] font-medium text-gray-400 uppercase tracking-wider">PMS Connection</span></div>
                   <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                      <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600">DX</div>
-                      <div>
-                        <div class="text-sm font-medium text-gray-900">Dentrix</div>
-                        <div class="text-xs text-gray-400">Live • 24ms</div>
-                      </div>
+                      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-50 to-brand-100 border border-brand-200/60 flex items-center justify-center text-sm font-bold text-brand-600">DX</div>
+                      <div><div class="text-sm font-medium text-gray-900">Dentrix</div><div class="flex items-center gap-1.5 text-xs text-gray-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Connected • 24ms</div></div>
                     </div>
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <div class="text-xs text-emerald-600 font-medium bg-emerald-50 px-2 py-1 rounded-md">Sync Active</div>
                   </div>
                 </div>
-
                 <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
-                  <div class="text-[11px] font-medium text-gray-400 mb-1.5">NEXT ACTION</div>
-                  <div class="font-mono text-xs text-emerald-600 bg-emerald-50 px-2.5 py-1.5 rounded-lg">
-                    > Searching available slots for Dr. Mitchell...
+                  <div class="flex items-center justify-between mb-2"><span class="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Next Action</span><span class="text-[11px] text-gray-400 font-mono">step 3/5</span></div>
+                  <div class="font-mono text-xs text-emerald-600 bg-emerald-50/80 border border-emerald-100/60 px-3 py-2 rounded-lg mb-2"><span class="text-gray-400">$</span> Searching available slots for Dr. Mitchell...</div>
+                  <div class="flex items-center justify-between text-xs"><span class="text-gray-400">Availability found</span><span class="text-gray-900 font-semibold">3 openings</span></div>
+                  <div class="mt-2 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-brand-500 to-emerald-400 rounded-full animate-pulse" style="width:65%"></div></div>
+                </div>
+                <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
+                  <div class="flex items-center gap-3">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1V8L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    <div><div class="text-xs text-gray-900 font-medium">Call duration</div><div class="text-xs text-gray-400">1 min 42 sec • Recording saved</div></div>
                   </div>
-                  <div class="text-xs text-gray-400 mt-2">3 available openings found</div>
                 </div>
               </div>
             </div>
@@ -447,633 +324,528 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ SOCIAL PROOF BANNER ============ -->
-  <section class="relative border-y border-gray-100 bg-gray-50/50 py-12 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-xs font-semibold text-gray-400 uppercase tracking-[0.15em] text-center mb-8">Trusted by leading Florida dental practices</p>
-      <div class="flex overflow-hidden" style="mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);">
-        <div class="flex items-center gap-12 sm:gap-16 min-w-full animate-marquee">
-          <div class="flex items-center gap-3 shrink-0">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M14 8L16.5 13L22 13.5L17.5 17.5L19 23L14 20L9 23L10.5 17.5L6 13.5L11.5 13L14 8Z" fill="white" fill-opacity="0.9"/></svg>
-            <span class="font-semibold text-gray-900 text-lg">Lumina Dental</span>
-          </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f172a"/><circle cx="14" cy="14" r="6" fill="white" fill-opacity="0.9"/><circle cx="14" cy="11" r="2" fill="#6366f1"/></svg>
-            <span class="font-semibold text-gray-900 text-lg">Apex Orthodontics</span>
-          </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#064e3b"/><path d="M8 20L14 8L20 20H8Z" fill="white" fill-opacity="0.9"/></svg>
-            <span class="font-semibold text-gray-900 text-lg">Coastal Smiles</span>
-          </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M10 20V12M14 20V8M18 20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
-            <span class="font-semibold text-gray-900 text-lg">Premier Periodontics</span>
-          </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#312e81"/><circle cx="14" cy="14" r="5" fill="white" fill-opacity="0.9"/></svg>
-            <span class="font-semibold text-gray-900 text-lg">Gulfside Dental</span>
-          </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1c1917"/><path d="M14 6L16.5 11.5L22 12.5L18 16.5L19 22L14 19L9 22L10 16.5L6 12.5L11.5 11.5L14 6Z" fill="white" fill-opacity="0.9"/></svg>
-            <span class="font-semibold text-gray-900 text-lg">Bay Harbor Dental</span>
-          </div>
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-gray-300"><path d="M10 3V17M10 17L5 12M10 17L15 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- ====== SOCIAL PROOF ====== -->
+<section class="relative border-y border-gray-100 bg-gray-50/40 py-10 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] text-center mb-6">Trusted by Florida's leading dental practices</p>
+    <div class="flex overflow-hidden" style="mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent)">
+      <div class="flex items-center gap-14 sm:gap-20 min-w-full animate-marquee" id="logo-track">
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#1e1b4b"/><path d="M12 6L14.5 11L20 11.5L15.5 15.5L17 21L12 18L7 21L8.5 15.5L4 11.5L9.5 11L12 6Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900">Lumina Dental</span></div>
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0f172a"/><circle cx="12" cy="12" r="5" fill="white" fill-opacity="0.9"/><circle cx="12" cy="9.5" r="1.5" fill="#6366f1"/></svg><span class="font-semibold text-gray-900">Apex Orthodontics</span></div>
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#064e3b"/><path d="M6 18L12 6L18 18H6Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900">Coastal Smiles</span></div>
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#1e1b4b"/><path d="M8 18V10M12 18V6M16 18V12" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg><span class="font-semibold text-gray-900">Premier Periodontics</span></div>
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#312e81"/><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900">Gulfside Dental</span></div>
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#1c1917"/><path d="M12 4L14.5 9.5L20 10.5L16 14.5L17 20L12 17L7 20L8 14.5L4 10.5L9.5 9.5L12 4Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900">Bay Harbor Dental</span></div>
+        <div class="flex items-center gap-3 shrink-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#172554"/><circle cx="12" cy="8" r="3" fill="white" fill-opacity="0.9"/><path d="M6 22C6 18 8.5 15 12 15C15.5 15 18 18 18 22" stroke="white" stroke-width="1.5" fill="none"/></svg><span class="font-semibold text-gray-900">Sunshine Smiles</span></div>
+      </div>
+      <div class="flex items-center gap-14 sm:gap-20 min-w-full animate-marquee absolute left-full top-0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROBLEM + STATS ====== -->
+<section class="py-24 md:py-36 relative">
+  <div class="absolute inset-0 grid-dot opacity-40 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">The Problem</span>
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.05] mb-6">Dental clinics lose<br class="hidden sm:block"> <span class="gradient-text">30% of calls.</span></h2>
+        <p class="text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">When your front desk is busy with patients, every incoming call goes to voicemail or hangs up. In Florida, the average dental appointment is worth <strong class="text-gray-900">$327</strong>. A clinic missing 10 calls a day leaves <strong class="text-gray-900">over $100,000</strong> on the table every year.</p>
+        <div class="flex items-center gap-2 text-sm text-gray-400"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1V8L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Source: ADA Practice Survey, 2024</div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 reveal reveal-delay-1" id="stats-grid">
+        <div class="bg-gray-50 rounded-2xl p-6 lg:p-8 border border-gray-100 hover:border-gray-200 transition-colors">
+          <div class="text-4xl lg:text-5xl font-black text-gray-900 mb-1 tabular-nums"><span class="count-up" data-target="30">0</span>%</div>
+          <div class="text-sm text-gray-500 leading-snug">of inbound calls<br>go unanswered</div>
         </div>
-        <div class="flex items-center gap-12 sm:gap-16 min-w-full animate-marquee absolute left-[100%] top-0">
-          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M14 8L16.5 13L22 13.5L17.5 17.5L19 23L14 20L9 23L10.5 17.5L6 13.5L11.5 13L14 8Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Lumina Dental</span></div>
-          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f172a"/><circle cx="14" cy="14" r="6" fill="white" fill-opacity="0.9"/><circle cx="14" cy="11" r="2" fill="#6366f1"/></svg><span class="font-semibold text-gray-900 text-lg">Apex Orthodontics</span></div>
-          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#064e3b"/><path d="M8 20L14 8L20 20H8Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Coastal Smiles</span></div>
-          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M10 20V12M14 20V8M18 20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg><span class="font-semibold text-gray-900 text-lg">Premier Periodontics</span></div>
-          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#312e81"/><circle cx="14" cy="14" r="5" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Gulfside Dental</span></div>
-          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1c1917"/><path d="M14 6L16.5 11.5L22 12.5L18 16.5L19 22L14 19L9 22L10 16.5L6 12.5L11.5 11.5L14 6Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Bay Harbor Dental</span></div>
+        <div class="bg-brand-50 rounded-2xl p-6 lg:p-8 border border-brand-100 hover:border-brand-200 transition-colors">
+          <div class="text-4xl lg:text-5xl font-black text-brand-600 mb-1 tabular-nums">$<span class="count-up" data-target="327">0</span></div>
+          <div class="text-sm text-gray-500 leading-snug">avg value per<br>appointment booked</div>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-6 lg:p-8 border border-gray-100 hover:border-gray-200 transition-colors">
+          <div class="text-4xl lg:text-5xl font-black text-gray-900 mb-1 tabular-nums"><span class="count-up" data-target="4.2">0</span>M</div>
+          <div class="text-sm text-gray-500 leading-snug">dental visits missed<br>yearly in Florida</div>
+        </div>
+        <div class="bg-brand-50 rounded-2xl p-6 lg:p-8 border border-brand-100 hover:border-brand-200 transition-colors">
+          <div class="text-4xl lg:text-5xl font-black text-brand-600 mb-1 tabular-nums"><span class="count-up" data-target="15">0</span>%</div>
+          <div class="text-sm text-gray-500 leading-snug">of patients lost due<br>to language barriers</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ PROBLEM / STATS ============ -->
-  <section class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <div class="reveal">
-          <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">The problem</div>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
-            Dental clinics lose<br class="hidden sm:block"> <span class="gradient-text">30% of their calls.</span>
-          </h2>
-          <p class="text-lg text-gray-500 leading-relaxed mb-8">
-            When your front desk is busy with patients, every incoming call either goes to voicemail or hangs up. 
-            In Florida, the average dental appointment is worth <strong class="text-gray-900">$327</strong>. 
-            A clinic missing 10 calls a day is leaving <strong class="text-gray-900">over $100,000</strong> on the table every year.
-          </p>
-          <div class="flex items-center gap-2 text-sm text-gray-400">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1V8L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Source: ADA Practice Survey, 2024
-          </div>
+<!-- ====== HOW IT WORKS ====== -->
+<section id="how-it-works" class="py-24 md:py-36 bg-gray-900 text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-dot-white opacity-20 pointer-events-none"></div>
+  <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-semibold text-brand-200 tracking-wide mb-5">How It Works</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-5">Go live in <span class="gradient-text-white">5 minutes.</span></h2>
+      <p class="text-lg text-gray-400">No hardware. No training. No IT support needed.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
+      <div class="hidden md:block absolute top-16 left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-10 reveal hover:bg-white/[0.07] transition-colors group">
+        <div class="w-12 h-12 rounded-xl bg-white text-gray-900 flex items-center justify-center text-lg font-bold mb-6 group-hover:scale-105 transition-transform">1</div>
+        <h3 class="text-xl font-semibold text-white mb-3">Forward your number</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Point your clinic's phone number to Renia. No SIP trunking, no PBX changes, no IT involvement required.</p>
+      </div>
+      <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-10 reveal reveal-delay-1 hover:bg-white/[0.07] transition-colors group">
+        <div class="w-12 h-12 rounded-xl bg-white text-gray-900 flex items-center justify-center text-lg font-bold mb-6 group-hover:scale-105 transition-transform">2</div>
+        <h3 class="text-xl font-semibold text-white mb-3">Connect your PMS</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">One-time API connection to Dentrix, Eaglesoft, or Open Dental. Renia writes appointments directly into your ledger.</p>
+      </div>
+      <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-10 reveal reveal-delay-2 hover:bg-white/[0.07] transition-colors group">
+        <div class="w-12 h-12 rounded-xl bg-white text-gray-900 flex items-center justify-center text-lg font-bold mb-6 group-hover:scale-105 transition-transform">3</div>
+        <h3 class="text-xl font-semibold text-white mb-3">Calls start booking</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Renia answers, understands, and books patients instantly. You get a dashboard. Your PMS gets appointments. Everyone wins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section id="features" class="py-24 md:py-36 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Features</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.05] mb-5">Everything your front desk<br class="hidden sm:block"> <span class="gradient-text">wishes it could do.</span></h2>
+      <p class="text-lg text-gray-500">Renia handles the full patient conversation — from first ring to confirmed booking in your PMS.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal glare-card">
+        <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 6V11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="text-base font-semibold text-gray-900 mb-2">24/7 answering</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Never miss a call. Renia picks up every time — lunch, holidays, after hours. Every ring gets answered.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-1 glare-card">
+        <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M2 6L11 10.5L20 6L11 1.5L2 6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 11L11 15.5L20 11" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 16L11 20.5L20 16" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3 class="text-base font-semibold text-gray-900 mb-2">Real-time PMS sync</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Appear in Dentrix, Eaglesoft, or Open Dental instantly. No double-booking. No manual transfer.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-2 glare-card">
+        <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 9C5.5 9 7 5.5 11 5.5C15 5.5 16.5 9 16.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5.5 13C5.5 13 7 16.5 11 16.5C15 16.5 16.5 13 16.5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="11" r="2.5" fill="currentColor"/></svg></div>
+        <h3 class="text-base font-semibold text-gray-900 mb-2">English & Spanish</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Auto-detects language and switches mid-call. Culturally-aware, fluent Spanish for Florida's diverse patients.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal glare-card">
+        <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.5 2 2.5 5.5 2.5 10C2.5 14.5 4.5 18 7 20L11 22L15 20C17.5 18 19.5 14.5 19.5 10C19.5 5.5 15.5 2 11 2Z" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="10" r="2.5" fill="currentColor"/></svg></div>
+        <h3 class="text-base font-semibold text-gray-900 mb-2">Emergency triage</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Detects "swelling", "severe pain", "bleeding" and instantly routes to your on-call provider's mobile line.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-1 glare-card">
+        <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2.5" y="4" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 8.5H19.5" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="13" r="1.5" fill="currentColor"/></svg></div>
+        <h3 class="text-base font-semibold text-gray-900 mb-2">HIPAA compliant</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">AES-256 encryption, BAA provided instantly, full audit trails, and Florida two-party consent built in.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-2 glare-card">
+        <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 6V11L14 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="text-base font-semibold text-gray-900 mb-2">Smart scheduling</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Understands provider availability, procedure durations, and operatory limits to book perfectly every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== COMPARISON ====== -->
+<section class="py-24 md:py-36 bg-gray-50/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Comparison</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.05] mb-5">Renia vs.<br class="hidden sm:block"> <span class="gradient-text">traditional phone systems.</span></h2>
+    </div>
+    <div class="max-w-4xl mx-auto reveal">
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-elevated overflow-hidden">
+        <div class="grid grid-cols-3 divide-x divide-gray-100 border-b border-gray-100 bg-gray-50/50">
+          <div class="p-5 font-semibold text-gray-900 text-sm"></div>
+          <div class="p-5 font-semibold text-gray-900 text-sm text-center flex items-center justify-center gap-1.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="4" fill="#1e1b4b"/><path d="M12 5L7 11L4 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Renia AI</div>
+          <div class="p-5 font-semibold text-gray-400 text-sm text-center">Traditional</div>
         </div>
-
-        <div class="grid grid-cols-2 gap-4 reveal reveal-delay-1">
-          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <div class="text-4xl font-bold text-gray-900 mb-1">30%</div>
-            <div class="text-sm text-gray-500">of inbound calls<br>go unanswered</div>
-          </div>
-          <div class="bg-brand-50 rounded-2xl p-6 border border-brand-100">
-            <div class="text-4xl font-bold text-brand-600 mb-1">$327</div>
-            <div class="text-sm text-gray-500">average value per<br>appointment booked</div>
-          </div>
-          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <div class="text-4xl font-bold text-gray-900 mb-1">4.2M</div>
-            <div class="text-sm text-gray-500">dental visits missed<br>yearly in Florida</div>
-          </div>
-          <div class="bg-brand-50 rounded-2xl p-6 border border-brand-100">
-            <div class="text-4xl font-bold text-brand-600 mb-1">15%</div>
-            <div class="text-sm text-gray-500">of patients lost due<br>to language barriers</div>
-          </div>
+        <div class="divide-y divide-gray-50">
+          <div class="grid grid-cols-3 divide-x divide-gray-50"><div class="p-5 text-sm text-gray-500">Answer speed</div><div class="p-5 text-sm text-gray-900 font-medium text-center flex items-center justify-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> &lt; 1 second</div><div class="p-5 text-sm text-gray-400 text-center">3-15 minutes (voicemail)</div></div>
+          <div class="grid grid-cols-3 divide-x divide-gray-50"><div class="p-5 text-sm text-gray-500">24/7 availability</div><div class="p-5 text-sm text-gray-900 font-medium text-center"><span class="text-emerald-500">●</span> Yes</div><div class="p-5 text-sm text-gray-400 text-center">Business hours only</div></div>
+          <div class="grid grid-cols-3 divide-x divide-gray-50"><div class="p-5 text-sm text-gray-500">PMS integration</div><div class="p-5 text-sm text-gray-900 font-medium text-center"><span class="text-emerald-500">●</span> Real-time 2-way</div><div class="p-5 text-sm text-gray-400 text-center">Manual entry required</div></div>
+          <div class="grid grid-cols-3 divide-x divide-gray-50"><div class="p-5 text-sm text-gray-500">Spanish support</div><div class="p-5 text-sm text-gray-900 font-medium text-center"><span class="text-emerald-500">●</span> Instant, native</div><div class="p-5 text-sm text-gray-400 text-center">Bilingual staff needed</div></div>
+          <div class="grid grid-cols-3 divide-x divide-gray-50"><div class="p-5 text-sm text-gray-500">Call recording</div><div class="p-5 text-sm text-gray-900 font-medium text-center"><span class="text-emerald-500">●</span> Auto + transcript</div><div class="p-5 text-sm text-gray-400 text-center">Separate system needed</div></div>
+          <div class="grid grid-cols-3 divide-x divide-gray-50"><div class="p-5 text-sm text-gray-500">Emergency triage</div><div class="p-5 text-sm text-gray-900 font-medium text-center"><span class="text-emerald-500">●</span> Auto-detect + route</div><div class="p-5 text-sm text-gray-400 text-center">Manual screening</div></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ HOW IT WORKS ============ -->
-  <section id="how-it-works" class="py-20 md:py-28 bg-gray-50/50 border-y border-gray-100 relative">
-    <div class="absolute inset-0 grid-pattern opacity-50 pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">How it works</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
-          Three seconds to pick up.<br> Three clicks to deploy.
-        </h2>
-        <p class="text-lg text-gray-500">No hardware. No training. No integration headaches.</p>
+<!-- ====== TESTIMONIALS ====== -->
+<section id="testimonials" class="py-24 md:py-36 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Testimonials</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.05] mb-5">Built for dentists.<br class="hidden sm:block"> <span class="gradient-text">Trusted by clinics.</span></h2>
+    </div>
+    <div class="relative max-w-5xl mx-auto" id="testimonial-carousel">
+      <div class="overflow-hidden rounded-2xl border border-gray-100 shadow-card">
+        <div class="flex transition-transform duration-500 ease-out" id="testimonial-track">
+          <!-- Slide 1 -->
+          <div class="min-w-full p-8 md:p-12 lg:p-16 bg-white">
+            <div class="flex items-center gap-1 mb-6"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+            <blockquote class="text-xl sm:text-2xl text-gray-900 font-medium leading-relaxed mb-8 max-w-3xl">&ldquo;We were losing 8-10 calls a day. Since deploying Renia, our booked appointments are up <strong class="text-brand-600">34%</strong> and my front desk can finally focus on patients in the chair instead of the phone.&rdquo;</blockquote>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-semibold">DR</div>
+              <div><div class="font-semibold text-gray-900">Dr. Robert Chen</div><div class="text-sm text-gray-400">Lumina Dental, Miami</div></div>
+              <div class="ml-auto text-sm text-emerald-600 font-medium bg-emerald-50 px-3 py-1.5 rounded-full">+34% bookings</div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="min-w-full p-8 md:p-12 lg:p-16 bg-white">
+            <div class="flex items-center gap-1 mb-6"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+            <blockquote class="text-xl sm:text-2xl text-gray-900 font-medium leading-relaxed mb-8 max-w-3xl">&ldquo;The Spanish support alone was worth it. 30% of our patients prefer Spanish. Renia handles it flawlessly and our staff doesn't need to translate anymore.&rdquo;</blockquote>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm font-semibold">SG</div>
+              <div><div class="font-semibold text-gray-900">Sofia Garcia</div><div class="text-sm text-gray-400">Practice Manager, Coastal Smiles</div></div>
+              <div class="ml-auto text-sm text-brand-600 font-medium bg-brand-50 px-3 py-1.5 rounded-full">Bilingual ready</div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="min-w-full p-8 md:p-12 lg:p-16 bg-white">
+            <div class="flex items-center gap-1 mb-6"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+            <blockquote class="text-xl sm:text-2xl text-gray-900 font-medium leading-relaxed mb-8 max-w-3xl">&ldquo;Setup took 10 minutes. The Dentrix integration is seamless — appointments appear in our system before the call even ends. This is the future of dental reception.&rdquo;</blockquote>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-semibold">JM</div>
+              <div><div class="font-semibold text-gray-900">Dr. James Mitchell</div><div class="text-sm text-gray-400">Apex Orthodontics, Orlando</div></div>
+              <div class="ml-auto text-sm text-emerald-600 font-medium bg-emerald-50 px-3 py-1.5 rounded-full">10-min setup</div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-soft reveal reveal-delay-1 hover:shadow-card-hover transition-all duration-300">
-          <div class="w-11 h-11 rounded-xl bg-gray-900 text-white flex items-center justify-center text-sm font-bold mb-6">1</div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-3">Forward your number</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Point your clinic's phone number to Renia. That's it. No SIP trunking, no PBX changes, no IT involvement.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-soft reveal reveal-delay-2 hover:shadow-card-hover transition-all duration-300">
-          <div class="w-11 h-11 rounded-xl bg-gray-900 text-white flex items-center justify-center text-sm font-bold mb-6">2</div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-3">Connect your PMS</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">One-time API connection to Dentrix, Eaglesoft, or Open Dental. Renia writes appointments directly into your ledger.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-soft reveal reveal-delay-3 hover:shadow-card-hover transition-all duration-300">
-          <div class="w-11 h-11 rounded-xl bg-gray-900 text-white flex items-center justify-center text-sm font-bold mb-6">3</div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-3">Go live in 5 minutes</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Renia starts answering calls, booking appointments, and capturing revenue you were leaving on the table.</p>
-        </div>
+      <div class="flex items-center justify-center gap-3 mt-6">
+        <button class="testimonial-dot w-2.5 h-2.5 rounded-full bg-brand-500 transition-all" data-index="0" onclick="goTestimonial(0)"></button>
+        <button class="testimonial-dot w-2.5 h-2.5 rounded-full bg-gray-200 transition-all" data-index="1" onclick="goTestimonial(1)"></button>
+        <button class="testimonial-dot w-2.5 h-2.5 rounded-full bg-gray-200 transition-all" data-index="2" onclick="goTestimonial(2)"></button>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="mt-12 text-center reveal reveal-delay-4">
-        <a href="signup.html" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors group">
-          See full setup guide
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<!-- ====== PRICING ====== -->
+<section id="pricing" class="py-24 md:py-36 bg-gray-50/50 border-y border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Pricing</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.05] mb-5">Simple, transparent<br class="hidden sm:block"> <span class="gradient-text">pricing.</span></h2>
+    </div>
+    <div class="flex items-center justify-center gap-4 mb-12 reveal">
+      <span class="text-sm font-medium text-gray-700" id="billing-label-monthly">Monthly</span>
+      <div class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></div>
+      <span class="text-sm font-medium text-gray-400" id="billing-label-annual">Annual <span class="text-emerald-600 text-xs font-semibold">Save 20%</span></span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="bg-white rounded-2xl p-8 lg:p-10 border border-gray-100 shadow-soft reveal">
+        <div class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Starter</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-gray-900" id="price-starter">$299</span><span class="text-gray-400 text-sm">/mo</span></div>
+        <p class="text-sm text-gray-500 mb-8">For single-location clinics ready to stop missing calls.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 500 calls/month</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>1 PMS integration</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>English + Spanish</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic analytics</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Email support</li>
+        </ul>
+        <a href="signup.html" class="block w-full py-3 bg-gray-900 text-white font-semibold rounded-xl text-center hover:bg-gray-800 transition-all shadow-soft text-sm">Start Free Trial</a>
+      </div>
+      <div class="bg-white rounded-2xl p-8 lg:p-10 border-2 border-brand-200 shadow-glow-sm relative reveal reveal-delay-1 scale-[1.02] md:scale-105">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-semibold px-4 py-1 rounded-full">Most Popular</div>
+        <div class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-2">Professional</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-gray-900" id="price-professional">$599</span><span class="text-gray-400 text-sm">/mo</span></div>
+        <p class="text-sm text-gray-500 mb-8">For growing practices with multiple providers and higher volume.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 2,000 calls/month</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited PMS integrations</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Emergency triage routing</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced analytics + transcripts</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support (phone + chat)</li>
+        </ul>
+        <a href="signup.html" class="block w-full py-3 bg-brand-600 text-white font-semibold rounded-xl text-center hover:bg-brand-700 transition-all shadow-glow-sm text-sm">Start Free Trial</a>
+      </div>
+      <div class="bg-white rounded-2xl p-8 lg:p-10 border border-gray-100 shadow-soft reveal reveal-delay-2">
+        <div class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Enterprise</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-gray-900" id="price-enterprise">$999</span><span class="text-gray-400 text-sm">/mo</span></div>
+        <p class="text-sm text-gray-500 mb-8">For multi-location groups and DSOs with custom requirements.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited calls</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Multi-location support</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom voice persona</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated account manager</li>
+          <li class="flex items-center gap-3 text-sm text-gray-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-emerald-500 shrink-0"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>SLA guarantee + SSO</li>
+        </ul>
+        <a href="signup.html" class="block w-full py-3 bg-gray-900 text-white font-semibold rounded-xl text-center hover:bg-gray-800 transition-all shadow-soft text-sm">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="faq" class="py-24 md:py-36 bg-gray-50/30 border-y border-gray-100">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">FAQ</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.05] mb-5">Questions?<br class="hidden sm:block"> <span class="gradient-text">Answered.</span></h2>
+    </div>
+    <div class="space-y-3 reveal" id="faq-list">
+      <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+        <button class="faq-q w-full flex items-center justify-between px-6 py-4 sm:py-5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+          How long does setup take?
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron shrink-0 transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a px-6 pb-5 text-sm text-gray-500 leading-relaxed">Most clinics are live within 5-10 minutes. You forward your phone number, we connect to your PMS via API, and that's it. No hardware, no on-site visit, no training.</div>
+      </div>
+      <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+        <button class="faq-q w-full flex items-center justify-between px-6 py-4 sm:py-5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+          Which PMS systems do you support?
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron shrink-0 transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a px-6 pb-5 text-sm text-gray-500 leading-relaxed">Dentrix, Eaglesoft, and Open Dental. Real-time appointment creation, provider availability lookup, and patient record updates across all three. More platforms coming.</div>
+      </div>
+      <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+        <button class="faq-q w-full flex items-center justify-between px-6 py-4 sm:py-5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+          Is Renia HIPAA compliant?
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron shrink-0 transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a px-6 pb-5 text-sm text-gray-500 leading-relaxed">Yes. AES-256 encryption at rest, TLS 1.3 in transit, comprehensive audit trails, and BAA provided instantly on signup. Florida's two-party consent law handled automatically.</div>
+      </div>
+      <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+        <button class="faq-q w-full flex items-center justify-between px-6 py-4 sm:py-5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+          Can patients speak Spanish?
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron shrink-0 transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a px-6 pb-5 text-sm text-gray-500 leading-relaxed">Absolutely. Renia auto-detects Spanish and switches instantly mid-call. Full fluency including scheduling, insurance questions, and emergency triage — no transfers needed.</div>
+      </div>
+      <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+        <button class="faq-q w-full flex items-center justify-between px-6 py-4 sm:py-5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+          What if the AI can't handle a call?
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron shrink-0 transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a px-6 pb-5 text-sm text-gray-500 leading-relaxed">Renia handles 95%+ of calls autonomously. For edge cases, it warm-transfers to your front desk or takes a detailed message. Every call is recorded and transcribed.</div>
+      </div>
+      <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+        <button class="faq-q w-full flex items-center justify-between px-6 py-4 sm:py-5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+          Can I try before committing?
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron shrink-0 transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a px-6 pb-5 text-sm text-gray-500 leading-relaxed">Yes. Free trial, no credit card required. We'll set up a demo environment with your clinic's info so you can hear Renia on a test call before going live.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== MEGA CTA ====== -->
+<section class="py-24 md:py-36 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-brand-50/30 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-brand-200/20 via-brand-100/10 to-transparent rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-brand-200/30 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full border border-brand-200/20 pointer-events-none"></div>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+    <div class="reveal">
+      <h2 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[0.95] mb-6">Your clinic is losing <span class="gradient-text">calls right now.</span></h2>
+      <p class="text-lg sm:text-xl text-gray-500 max-w-xl mx-auto mb-10 leading-relaxed">Every ring that goes to voicemail is a patient you'll never see and revenue you'll never recover. Deploy Renia in minutes. Cancel anytime.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="signup.html" class="btn-primary inline-flex items-center gap-2.5 px-8 py-4 bg-gray-900 text-white font-semibold rounded-2xl hover:bg-gray-800 transition-all shadow-elevated w-full sm:w-auto justify-center group text-[15px]">
+          Start Free Trial
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-200 group-hover:translate-x-1"><path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-700 font-semibold rounded-2xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50/80 transition-all w-full sm:w-auto justify-center shadow-soft text-[15px] group">
+          <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M1.5 1L10.5 7L1.5 13V1Z" fill="#4f46e5"/></svg></span>
+          Watch Demo
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ FEATURES ============ -->
-  <section id="features" class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Features</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
-          Everything your front desk<br class="hidden sm:block"> wishes it could do.
-        </h2>
-        <p class="text-lg text-gray-500">Renia handles the full patient conversation lifecycle — from first ring to confirmed booking.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Feature 1 -->
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal glare-card">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-gray-900 mb-2">Answers 24/7</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">Never miss a call. Renia picks up every time, even during lunch, holidays, and after hours.</p>
-        </div>
-        <!-- Feature 2 -->
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-1 glare-card">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5L10 9L18 5L10 1L2 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10L10 14L18 10" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 15L10 19L18 15" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-gray-900 mb-2">Books in real-time</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">Appointments appear in your PMS instantly. No double-booking. No manual data entry.</p>
-        </div>
-        <!-- Feature 3 -->
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-2 glare-card">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M5 8C5 8 6.5 5 10 5C13.5 5 15 8 15 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12C5 12 6.5 15 10 15C13.5 15 15 12 15 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="2" fill="currentColor"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-gray-900 mb-2">English & Spanish</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">Auto-detects language and switches instantly. Culturally-aware responses for Florida's diverse patients.</p>
-        </div>
-        <!-- Feature 4 -->
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal glare-card">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C6 2 2 5 2 9C2 13 4 16 6 18L10 20L14 18C16 16 18 13 18 9C18 5 14 2 10 2Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9" r="2" fill="currentColor"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-gray-900 mb-2">Emergency triage</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">Detects keywords like "swelling" or "severe pain" and routes instantly to your on-call provider.</p>
-        </div>
-        <!-- Feature 5 -->
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-1 glare-card">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 7H18" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="11" r="1" fill="currentColor"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-gray-900 mb-2">HIPAA compliant</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">AES-256 encryption, BAA provided, full audit trails, and Florida two-party consent built in.</p>
-        </div>
-        <!-- Feature 6 -->
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-2 glare-card">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M1 10C1 5 4.5 2 10 2C15.5 2 19 5 19 10C19 15 15.5 18 10 18C7 18 4.5 16.5 3 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10L4 13L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-gray-900 mb-2">Smart scheduling</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">Understands provider availability, operatory limits, and procedure durations to book perfectly.</p>
-        </div>
+      <div class="flex items-center justify-center gap-2 mt-8 text-sm text-gray-400">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C3.5 1 1 3.5 1 7C1 10.5 3.5 13 7 13C10.5 13 13 10.5 13 7C13 3.5 10.5 1 7 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 7L6.5 9L9.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        No credit card required · Setup support included · Cancel anytime
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ INTEGRATIONS DARK SECTION ============ -->
-  <section class="py-20 md:py-28 bg-gray-900 text-white relative overflow-hidden">
-    <div class="absolute inset-0 grid-pattern-light opacity-30 pointer-events-none"></div>
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-500/5 blur-3xl rounded-full pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/5 blur-3xl rounded-full pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <div class="reveal">
-          <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-semibold text-brand-200 tracking-wide mb-5">Integrations</div>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-6">
-            Writes directly into<br class="hidden sm:block"> your PMS.
-          </h2>
-          <p class="text-lg text-gray-400 leading-relaxed mb-8">
-            Renia is not another dashboard to check. It logs appointments, updates patient records, and attaches call transcripts directly into your practice management system. No middleware. No sync delays.
-          </p>
-
-          <div class="space-y-5">
-            <div class="flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 text-sm font-bold">DX</div>
-              <div>
-                <div class="font-semibold text-white mb-1">Dentrix</div>
-                <p class="text-sm text-gray-400">Real-time appointment creation and patient lookup via Dentrix API.</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 text-sm font-bold">ES</div>
-              <div>
-                <div class="font-semibold text-white mb-1">Eaglesoft</div>
-                <p class="text-sm text-gray-400">Bidirectional sync for scheduling, provider availability, and chart notes.</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 text-sm font-bold">OD</div>
-              <div>
-                <div class="font-semibold text-white mb-1">Open Dental</div>
-                <p class="text-sm text-gray-400">Direct database integration with full audit logging and HIPAA compliance.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Animated Code Window -->
-        <div class="reveal reveal-delay-1 glare-card" style="--mouse-x: 50%; --mouse-y: 50%;">
-          <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden shadow-2xl relative">
-            <div class="flex items-center justify-between px-5 py-3.5 border-b border-gray-800">
-              <div class="flex items-center gap-1.5">
-                <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-                <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-                <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
-              </div>
-              <span class="text-[11px] font-mono text-gray-500">POST /v1/pms/dentrix/appointments</span>
-              <div class="w-5 h-5"></div>
-            </div>
-            <div class="p-5 font-mono text-xs leading-relaxed">
-              <div class="text-gray-500 mb-3"><span class="text-gray-400">$</span> renia --book-appointment</div>
-              <div class="space-y-1.5">
-                <div class="text-gray-500">&gt; Detecting language... <span class="text-emerald-400">es</span></div>
-                <div class="text-gray-500">&gt; Extracting intent... <span class="text-brand-400">new_patient_appointment</span></div>
-                <div class="text-gray-500">&gt; Querying provider availability for Dr. Mitchell</div>
-                <div class="text-emerald-400">&gt; Found 3 available slots within requested window</div>
-                <div class="text-gray-500">&gt; Presenting options to patient... <span class="text-gray-400">done</span></div>
-                <div class="text-gray-500">&gt; Patient confirmed: <span class="text-brand-300">Wed, May 27 @ 2:00 PM</span></div>
-                <div class="text-gray-500">&gt; Writing to Dentrix database...</div>
-                <div class="text-emerald-300 mt-2 border-t border-gray-800 pt-2">✓ 201 Created — Appointment #89431</div>
-                <div class="text-gray-500">  ↳ Patient: Maria Rodriguez</div>
-                <div class="text-gray-500">  ↳ Provider: Dr. Mitchell</div>
-                <div class="text-gray-500">  ↳ Duration: 45 min</div>
-                <div class="text-gray-500">  ↳ Audio: <span class="text-brand-400">attached</span> | Transcript: <span class="text-brand-400">saved</span></div>
-              </div>
-              <div class="mt-3 pt-3 border-t border-gray-800">
-                <span class="text-emerald-500">◆</span> <span class="text-gray-400">Call handled in 2 min 14 sec | Patient: "Gracias, muy amable"</span>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- ====== FOOTER ====== -->
+<footer class="border-t border-gray-100 bg-gray-50/30 py-12 md:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-3">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#141416"/><path d="M14 6C11.5 6 9.5 7.5 9 10H7.5C7 12 8 14 9.5 15L12 18H8L6 22H22L20 18H16L18.5 15C20 14 21 12 20.5 10H19C18.5 7.5 16.5 6 14 6Z" fill="white" fill-opacity="0.95"/><circle cx="11.5" cy="11.5" r="1.5" fill="#6366f1"/><circle cx="16.5" cy="11.5" r="1.5" fill="#6366f1"/></svg>
+        <span class="font-semibold text-gray-900 text-lg">Renia</span>
       </div>
+      <div class="flex items-center gap-6 text-sm text-gray-500">
+        <a href="#" class="hover:text-gray-900 transition-colors font-medium">Privacy</a>
+        <a href="#" class="hover:text-gray-900 transition-colors font-medium">Terms</a>
+        <a href="#" class="hover:text-gray-900 transition-colors font-medium">Contact</a>
+        <a href="#" class="hover:text-gray-900 transition-colors font-medium">Status</a>
+        <a href="#" class="hover:text-gray-900 transition-colors font-medium">HIPAA</a>
+      </div>
+      <div class="text-xs text-gray-400">&copy; 2026 Renia AI Technologies. Engineered in Florida.</div>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- ============ TESTIMONIALS ============ -->
-  <section class="py-20 md:py-28 bg-gray-50/30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Testimonials</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
-          Built for dentists.<br class="hidden sm:block"> Trusted by clinics.
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft reveal">
-          <div class="flex items-center gap-1 mb-5">
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed mb-6">
-            "We were losing at least 8-10 calls a day. Since deploying Renia, our booked appointments are up 34% and my front desk can actually focus on patients in the chair."
-          </p>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-semibold">DR</div>
-            <div>
-              <div class="text-sm font-semibold text-gray-900">Dr. Robert Chen</div>
-              <div class="text-xs text-gray-400">Lumina Dental, Miami</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft reveal reveal-delay-1">
-          <div class="flex items-center gap-1 mb-5">
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed mb-6">
-            "The Spanish language support alone was worth it. 30% of our patients prefer Spanish. Renia handles it flawlessly and our staff doesn't need to translate anymore."
-          </p>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-brand-600 flex items-center justify-center text-white text-xs font-semibold">SG</div>
-            <div>
-              <div class="text-sm font-semibold text-gray-900">Sofia Garcia</div>
-              <div class="text-xs text-gray-400">Practice Manager, Coastal Smiles</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft reveal reveal-delay-2">
-          <div class="flex items-center gap-1 mb-5">
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed mb-6">
-            "Setup took 10 minutes. The Dentrix integration is seamless — appointments appear in our system before the call even ends. This is the future of dental reception."
-          </p>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-semibold">JM</div>
-            <div>
-              <div class="text-sm font-semibold text-gray-900">Dr. James Mitchell</div>
-              <div class="text-xs text-gray-400">Apex Orthodontics, Orlando</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ROI CALCULATOR ============ -->
-  <section id="roi" class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center bg-gray-50 rounded-3xl p-8 md:p-12 lg:p-16 border border-gray-100 reveal">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">ROI Calculator</div>
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
-            Calculate what missed calls<br class="hidden sm:block"> are costing you.
-          </h2>
-          <p class="text-gray-500 mb-8 text-base leading-relaxed">
-            The average dental appointment is worth $327. Move the slider to see exactly how much revenue your clinic is losing to unanswered calls.
-          </p>
-
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-sm font-semibold text-gray-700">Missed calls per month</span>
-              <span class="text-2xl font-bold text-gray-900" id="calc-value">120</span>
-            </div>
-            <div class="relative">
-              <input type="range" id="roi-slider" min="20" max="500" value="120" step="10" class="w-full relative z-10" oninput="updateCalc()">
-              <div class="absolute top-1/2 left-0 h-1 bg-gray-200 rounded-full -translate-y-1/2 w-full pointer-events-none"></div>
-              <div class="absolute top-1/2 left-0 h-1 bg-brand-500 rounded-full -translate-y-1/2 pointer-events-none" id="slider-fill" style="width: 21%"></div>
-            </div>
-            <div class="flex justify-between text-xs text-gray-400 mt-2">
-              <span>20</span>
-              <span>500+</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-5">
-          <div class="bg-gray-900 rounded-2xl p-7 border border-gray-800 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 blur-2xl rounded-full pointer-events-none"></div>
-            <div class="relative">
-              <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Annual revenue recovered</div>
-              <div class="text-5xl font-bold text-white mb-1 transition-all duration-300" id="calc-revenue">$0</div>
-              <div class="flex items-center gap-1.5 text-sm text-emerald-400">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M7 13L3 9M7 13L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Directly back into your practice
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft">
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Annual bookings recovered</div>
-            <div class="text-4xl font-bold text-gray-900 mb-1 transition-all duration-300" id="calc-bookings">0</div>
-            <div class="text-sm text-gray-500">New appointments per year</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ ============ -->
-  <section id="faq" class="py-20 md:py-28 bg-gray-50/50 border-y border-gray-100">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">FAQ</div>
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
-          Questions? We've got answers.
-        </h2>
-      </div>
-
-      <div class="space-y-3" id="faq-container">
-        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
-          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
-            How long does setup take?
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
-            Most clinics are live within 5-10 minutes. You forward your phone number to Renia, we connect to your PMS via API, and that's it. No hardware, no on-site visit, no training required.
-          </div>
-        </div>
-        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
-          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
-            Which practice management systems do you support?
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
-            Renia integrates directly with Dentrix, Eaglesoft, and Open Dental. We support real-time appointment creation, provider availability lookup, and patient record updates across all three platforms.
-          </div>
-        </div>
-        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
-          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
-            Is Renia HIPAA compliant?
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
-            Yes. Renia is built HIPAA-compliant from day one. We use AES-256 encryption at rest, TLS 1.3 in transit, maintain comprehensive audit trails, and provide a Business Associate Agreement (BAA) immediately upon signup. Florida's two-party consent law for call recording is handled automatically.
-          </div>
-        </div>
-        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
-          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
-            Can patients really speak Spanish?
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
-            Absolutely. Renia auto-detects when a patient speaks Spanish and switches instantly — no prompts, no transfers. The AI uses culturally-appropriate responses and can handle the full conversation including scheduling, insurance questions, and emergency triage.
-          </div>
-        </div>
-        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
-          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
-            What happens if the AI can't handle a call?
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
-            Renia is designed to handle 95%+ of calls autonomously. For edge cases, it can warm-transfer to your front desk or take a detailed message. Every call is recorded and transcribed, so nothing falls through the cracks.
-          </div>
-        </div>
-        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
-          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
-            Can I try it before committing?
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
-            Yes. Start with a free trial — no credit card required. We'll set up a demo environment with your clinic's info so you can hear Renia in action on a test call before going live.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FINAL CTA ============ -->
-  <section class="py-20 md:py-28 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-brand-50/50 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-brand-200/20 via-brand-100/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-      <div class="reveal">
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
-          Your clinic is losing<br class="hidden sm:block"> calls right now.
-        </h2>
-        <p class="text-lg text-gray-500 max-w-xl mx-auto mb-10 leading-relaxed">
-          Every ring that goes to voicemail is a patient you'll never see and revenue you'll never recover. <br class="hidden sm:block">Deploy Renia in minutes. Cancel anytime.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="signup.html" class="btn-primary inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-elevated w-full sm:w-auto justify-center group text-base">
-            Start Free Trial
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-700 font-semibold rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all w-full sm:w-auto justify-center shadow-soft text-base">
-            <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs">
-              <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M1 1L11 7L1 13V1Z" fill="currentColor"/></svg>
-            </div>
-            Watch Demo
-          </a>
-        </div>
-
-        <div class="flex items-center justify-center gap-2 mt-8 text-sm text-gray-400">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C3.5 1 1 3.5 1 7C1 10.5 3.5 13 7 13C10.5 13 13 10.5 13 7C13 3.5 10.5 1 7 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 7L6.5 9L9.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          No credit card required · Setup support included · Cancel anytime
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="border-t border-gray-100 bg-gray-50/30 py-12 md:py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="flex items-center gap-3">
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="8" fill="#141416"/>
-            <path d="M16 8C13.5 8 11.5 9.5 11 12H9.5C9 14 10 16 11.5 17L14 20H10L8 24H24L22 20H18L20.5 17C22 16 23 14 22.5 12H21C20.5 9.5 18.5 8 16 8Z" fill="white" fill-opacity="0.95"/>
-            <circle cx="13.5" cy="13.5" r="1.5" fill="#6366f1"/>
-            <circle cx="18.5" cy="13.5" r="1.5" fill="#6366f1"/>
-          </svg>
-          <span class="font-semibold text-gray-900 text-lg">Renia</span>
-        </div>
-
-        <div class="flex items-center gap-6 text-sm text-gray-500">
-          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Privacy Policy</a>
-          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Terms of Service</a>
-          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Contact</a>
-          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Status</a>
-        </div>
-
-        <div class="text-xs text-gray-400">
-          &copy; 2026 Renia AI Technologies. Engineered in Florida.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============ SCRIPTS ============ -->
-  <script>
-    /* ===== ROI Calculator ===== */
-    function updateCalc() {
-      const slider = document.getElementById('roi-slider');
-      const val = parseInt(slider.value);
-      const avgApptValue = 327;
-      const missedToBookedRate = 0.7;
-
-      const annualBookings = Math.round(val * 12 * missedToBookedRate);
-      const annualRevenue = annualBookings * avgApptValue;
-
-      document.getElementById('calc-value').textContent = val;
-      document.getElementById('calc-revenue').textContent = '$' + annualRevenue.toLocaleString();
-      document.getElementById('calc-bookings').textContent = annualBookings.toLocaleString();
-
-      const percent = ((val - slider.min) / (slider.max - slider.min)) * 100;
-      document.getElementById('slider-fill').style.width = Math.min(percent, 100) + '%';
+<script>
+/* ===== Canvas Particles ===== */
+(function(){
+  const c = document.getElementById('canvas-bg'), ctx = c.getContext('2d');
+  let p = [], w, h, mx=-1000, my=-1000;
+  function resize(){ w=c.width=window.innerWidth; h=c.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  const n = Math.min(60, Math.floor(w*h/18000));
+  for(let i=0;i<n;i++) p.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*3+1.5,o:Math.random()*0.3+0.05});
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(let q of p){
+      q.x+=q.vx; q.y+=q.vy;
+      if(q.x<-20)q.x=w+20;if(q.x>w+20)q.x=-20;
+      if(q.y<-20)q.y=h+20;if(q.y>h+20)q.y=-20;
+      const dx=mx-q.x,dy=my-q.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<150){q.x-=dx*0.005;q.y-=dy*0.005;}
+      ctx.beginPath();ctx.arc(q.x,q.y,q.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(99,102,241,${q.o})`;ctx.fill();
     }
-    updateCalc();
-
-    /* ===== FAQ Accordion ===== */
-    function toggleFaq(btn) {
-      const answer = btn.nextElementSibling;
-      const chevron = btn.querySelector('.faq-chevron');
-      const isOpen = !answer.classList.contains('hidden');
-      
-      // Close all
-      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
-      document.querySelectorAll('.faq-chevron').forEach(c => c.classList.remove('rotate-180'));
-      
-      if (!isOpen) {
-        answer.classList.remove('hidden');
-        chevron.classList.add('rotate-180');
-      }
+    for(let i=0;i<p.length;i++) for(let j=i+1;j<p.length;j++){
+      const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){ctx.beginPath();ctx.moveTo(p[i].x,p[i].y);ctx.lineTo(p[j].x,p[j].y);ctx.strokeStyle=`rgba(99,102,241,${(1-d/120)*0.1})`;ctx.stroke();}
     }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
-    /* ===== Navbar on scroll ===== */
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('nav-container');
-      if (window.scrollY > 20) {
-        nav.classList.add('bg-white/80', 'backdrop-blur-xl', 'rounded-2xl', 'px-6', 'shadow-soft', 'border', 'border-gray-100/80');
-        nav.classList.remove('h-16', 'md:h-20');
-        nav.style.marginTop = '8px';
-      } else {
-        nav.classList.remove('bg-white/80', 'backdrop-blur-xl', 'rounded-2xl', 'px-6', 'shadow-soft', 'border', 'border-gray-100/80');
-        nav.classList.add('h-16', 'md:h-20');
-        nav.style.marginTop = '0';
-      }
-    });
+/* ===== 3D Tilt Mockup ===== */
+const mockup = document.getElementById('hero-mockup');
+if(mockup){
+  const inner = mockup.querySelector('.tilt-card-inner');
+  mockup.addEventListener('mousemove', e => {
+    const r = mockup.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    inner.style.transform = 'perspective(1200px) rotateY('+((x-0.5)*6)+'deg) rotateX('+((0.5-y)*4)+'deg)';
+    mockup.style.setProperty('--mx', x*100+'%');
+    mockup.style.setProperty('--my', y*100+'%');
+  });
+  mockup.addEventListener('mouseleave', () => { inner.style.transform = ''; });
+}
 
-    /* ===== Scroll Reveal ===== */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { root: null, rootMargin: '0px', threshold: 0.05 });
+/* ===== Chat Bubbles ===== */
+document.querySelectorAll('.chat-bubble').forEach((b,i) => {
+  setTimeout(() => {
+    b.classList.remove('opacity-0');
+    b.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    b.style.transform = 'translateY(0)';
+  }, 600 + parseInt(b.dataset.delay)*800);
+});
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* ===== Call Timer ===== */
+let ts=0;
+setInterval(() => { ts++; document.getElementById('call-timer').textContent = String(Math.floor(ts/60)).padStart(2,'0')+':'+String(ts%60).padStart(2,'0'); }, 1000);
 
-    /* ===== Glare Effect ===== */
-    document.querySelectorAll('.glare-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${((e.clientX - rect.left) / rect.width) * 100}%`);
-        card.style.setProperty('--mouse-y', `${((e.clientY - rect.top) / rect.height) * 100}%`);
-      });
-    });
+/* ===== Count Up ===== */
+const countEls = document.querySelectorAll('.count-up');
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const el = entry.target, target = parseFloat(el.dataset.target), isDec = target%1!==0;
+      let cur = 0, step = Math.max(target/60, isDec?0.01:1);
+      const iv = setInterval(() => { cur+=step; if(cur>=target){cur=target;clearInterval(iv);} el.textContent = isDec?cur.toFixed(1):Math.floor(cur); }, 20);
+      countObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+countEls.forEach(el => countObs.observe(el));
 
-    /* ===== Magnetic Buttons ===== */
-    document.querySelectorAll('.magnetic-wrap').forEach(wrap => {
-      const btn = wrap.querySelector('.btn-primary, .magnetic-btn') || wrap.firstElementChild;
-      wrap.addEventListener('mousemove', (e) => {
-        const rect = wrap.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-      });
-      wrap.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0, 0)';
-      });
-    });
+/* ===== Testimonial Carousel ===== */
+let ti = 0;
+function goTestimonial(i){
+  ti = i;
+  document.getElementById('testimonial-track').style.transform = 'translateX(-'+(i*100)+'%)';
+  document.querySelectorAll('.testimonial-dot').forEach((d,idx) => { d.classList.toggle('bg-brand-500',idx===i); d.classList.toggle('bg-gray-200',idx!==i); });
+}
+let tiv = setInterval(() => { goTestimonial((ti+1)%3); }, 6000);
+const tc = document.getElementById('testimonial-carousel');
+tc.addEventListener('mouseenter', () => clearInterval(tiv));
+tc.addEventListener('mouseleave', () => { tiv = setInterval(() => { goTestimonial((ti+1)%3); }, 6000); });
 
-    /* ===== Smooth anchor scrolls ===== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', (e) => {
-        const href = anchor.getAttribute('href');
-        if (href === '#') return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
+/* ===== Pricing Toggle ===== */
+let billingAnnual = false;
+function toggleBilling(){
+  billingAnnual = !billingAnnual;
+  document.getElementById('billing-toggle').classList.toggle('active', billingAnnual);
+  const discount = billingAnnual ? 0.8 : 1;
+  const prices = [
+    { id:'price-starter', base:299 },
+    { id:'price-professional', base:599 },
+    { id:'price-enterprise', base:999 }
+  ];
+  prices.forEach(p => {
+    document.getElementById(p.id).textContent = '$'+Math.round(p.base*discount);
+  });
+  document.getElementById('billing-label-monthly').classList.toggle('text-gray-400', billingAnnual);
+  document.getElementById('billing-label-monthly').classList.toggle('text-gray-700', !billingAnnual);
+  document.getElementById('billing-label-annual').classList.toggle('text-gray-400', !billingAnnual);
+  document.getElementById('billing-label-annual').classList.toggle('text-gray-700', billingAnnual);
+}
+
+/* ===== FAQ ===== */
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+/* ===== Navbar ===== */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav-inner');
+  if(window.scrollY > 30){
+    nav.classList.add('bg-white/80', 'backdrop-blur-xl', 'rounded-2xl', 'px-6', 'shadow-soft', 'border', 'border-gray-100/80');
+    nav.classList.remove('px-0');
+    nav.style.marginTop = '0';
+  } else {
+    nav.classList.remove('bg-white/80', 'backdrop-blur-xl', 'rounded-2xl', 'px-6', 'shadow-soft', 'border', 'border-gray-100/80');
+    nav.classList.add('px-0');
+    nav.style.marginTop = '0';
+  }
+});
+
+/* ===== Reval Observer ===== */
+const robs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('active'); robs.unobserve(e.target); } });
+}, { rootMargin:'0px', threshold:0.04 });
+document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(el => robs.observe(el));
+
+/* ===== Glare ===== */
+document.querySelectorAll('.glare-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
+
+/* ===== Smooth anchors ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const h = a.getAttribute('href');
+    if(h==='#') return;
+    e.preventDefault();
+    const t = document.querySelector(h);
+    if(t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+});
+</script>
 
 </body>
 </html>
