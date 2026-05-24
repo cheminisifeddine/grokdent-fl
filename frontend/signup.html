@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#FAFAFC] antialiased selection:bg-indigo-500 selection:text-white">
+<html lang="en" class="scroll-smooth bg-[#FAFAFC] antialiased selection:bg-indigo-500 selection:text-white">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Renia AI - Elite Clinical Sign Up</title>
+  <title>Renia AI | Create Your Account</title>
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@300,0,0,24&display=swap" rel="stylesheet">
-  
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
   
   <script>
     tailwind.config = {
@@ -19,7 +19,6 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             brand: {
@@ -34,24 +33,16 @@
             accent: {
               teal: '#0FD8B6',
               cyan: '#06b6d4',
-              coral: '#f43f5e',
             }
           },
           animation: {
             'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'float': 'float 6s ease-in-out infinite',
-            'mesh-rotate': 'mesh-rotate 25s linear infinite',
-            'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'spin-slow': 'spin 12s linear infinite',
+            'mesh-rotate': 'mesh-rotate 20s linear infinite',
           },
           keyframes: {
             'slide-up': {
-              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '0%': { opacity: 0, transform: 'translateY(40px)' },
               '100%': { opacity: 1, transform: 'translateY(0)' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0) scale(1)' },
-              '50%': { transform: 'translateY(-12px) scale(1.02)' },
             },
             'mesh-rotate': {
               '0%': { transform: 'rotate(0deg)' },
@@ -62,885 +53,432 @@
       }
     }
   </script>
-  
+
   <style>
-    body { background-color: #FAFAFC; }
-    
-    /* Premium Glassmorphism */
+    /* Ultra Premium Light Glassmorphism */
     .glass-panel {
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 
-        0 30px 60px -15px rgba(0, 0, 0, 0.04), 
-        inset 0 1px 1px rgba(255, 255, 255, 1);
-    }
-
-    .glass-card-dark {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 1);
+      box-shadow: 0 40px 80px -20px rgba(99, 102, 241, 0.08), inset 0 1px 1px rgba(255, 255, 255, 1);
     }
     
-    /* Stepper Page Transitions */
-    .step-container {
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hidden-step {
-      opacity: 0;
-      transform: translateY(15px) scale(0.98);
-      pointer-events: none;
-      position: absolute;
-      width: 100%;
-    }
-    .active-step {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      position: relative;
-      width: 100%;
-    }
-    
-    /* Interactive Cards */
-    .selectable-card {
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
     }
-    .selectable-card:hover {
-      transform: translateY(-3px);
+    .glass-card:hover {
+      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
       border-color: #cbd5e1;
-      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05);
     }
-    .selectable-card.selected {
-      border-color: #6366F1;
-      background-color: #f5f3ff;
-      box-shadow: 0 0 0 1px #6366F1, 0 10px 25px -5px rgba(99, 102, 241, 0.15);
+    .glass-card.selected {
+      border-color: #6366f1;
+      background-color: #f8fafc;
+      box-shadow: 0 0 0 1px #6366f1, 0 10px 20px -5px rgba(99, 102, 241, 0.15);
     }
-    
-    .progress-bar-fill { transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    
-    /* Mesh Background for Visual Richness */
+
+    /* Abstract Background Mesh for Light Mode */
     .hero-mesh {
       position: absolute;
-      top: -30%;
-      left: -30%;
-      width: 160%;
-      height: 160%;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
       background: 
-        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.07) 0%, transparent 45%),
-        radial-gradient(circle at 25% 65%, rgba(15, 216, 182, 0.05) 0%, transparent 45%);
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 30% 70%, rgba(15, 216, 182, 0.06) 0%, transparent 40%);
       z-index: 0;
       pointer-events: none;
-      filter: blur(50px);
+      filter: blur(40px);
       mix-blend-mode: multiply;
     }
-
+    
     .grid-bg {
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-      background-size: 30px 30px;
-      mask-image: radial-gradient(circle at center, black 50%, transparent 95%);
-      -webkit-mask-image: -webkit-radial-gradient(circle at center, black 50%, transparent 95%);
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+      -webkit-mask-image: -webkit-radial-gradient(circle at center, black 40%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* Glow Focus states */
-    .custom-input {
-      transition: all 0.25s ease;
+    /* Clean Input Styling */
+    .premium-input {
+      transition: all 0.2s ease;
     }
-    .custom-input:focus {
+    .premium-input:focus {
       outline: none;
       border-color: #6366F1;
       background-color: #ffffff;
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08), 0 4px 12px -2px rgba(99, 102, 241, 0.04);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 2px 4px rgba(0,0,0,0.02);
     }
 
-    /* Floating Labels */
-    .floating-group {
-      position: relative;
-    }
-    .floating-group label {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: all 0.2s ease;
-      pointer-events: none;
-      color: #94a3b8;
-    }
-    .floating-group input:focus ~ label,
-    .floating-group input:not(:placeholder-shown) ~ label {
-      top: 0;
-      transform: translateY(-50%) scale(0.85);
-      background: white;
-      padding: 0 0.4rem;
-      color: #6366F1;
-      font-weight: 700;
-    }
-
-    /* Custom Scrollbar for Form Page */
+    /* Step Transitions */
+    .step-content { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .step-hidden { opacity: 0; transform: translateX(20px); pointer-events: none; position: absolute; width: 100%; }
+    .step-active { opacity: 1; transform: translateX(0); position: relative; width: 100%; }
+    
+    /* UI Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 flex overflow-hidden relative">
+<body class="relative min-h-screen text-slate-800 flex flex-col items-center justify-center overflow-x-hidden">
 
-  <!-- Full Screen BG Mesh & Grid -->
-  <div class="absolute inset-0 z-0 bg-[#FAFAFC]">
+  <!-- Background Layer -->
+  <div class="fixed inset-0 z-0 bg-[#FAFAFC] overflow-hidden">
     <div class="hero-mesh animate-mesh-rotate"></div>
-    <div class="absolute inset-0 grid-bg opacity-75"></div>
+    <div class="absolute inset-0 grid-bg"></div>
   </div>
 
-  <!-- ==========================================
-       LEFT SIDEBAR (Visual Showroom & Dynamic Mirror)
-       ========================================== -->
-  <div class="hidden lg:flex w-[43%] relative bg-white border-r border-slate-200 overflow-hidden flex-col justify-between p-12 z-10 shadow-lg">
-    <!-- Showcase Background Mesh -->
-    <div class="absolute inset-0 z-0 bg-[#FAFAFC]">
-      <div class="absolute top-[-20%] right-[-20%] w-[120%] h-[120%] bg-[radial-gradient(circle_at_70%_30%,rgba(99,102,241,0.08)_0%,transparent_50%)] animate-mesh-rotate"></div>
-      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgwem0yMCAwaDIwdjIwSDIwem0wIDIwaDIwdjIwaC0yMHoiIGZpbGw9InJnYmEoMCwwLDAsMC4wMikiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')] opacity-40"></div>
-    </div>
-    
-    <!-- Top Branding -->
-    <a href="index.html" class="relative z-10 flex items-center gap-3 group">
-      <div class="w-10 h-10 rounded-xl bg-brand-900 flex items-center justify-center shadow-md shadow-brand-900/10 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-accent-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="relative text-white text-[16px]">🦷</span>
+  <!-- Top Navigation (Matched exactly to index.html) -->
+  <nav class="fixed top-0 w-full z-50 py-4 pointer-events-none">
+    <div class="max-w-[1200px] mx-auto px-6 pointer-events-auto">
+      <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 rounded-full bg-brand-900 flex items-center justify-center shadow-lg shadow-brand-900/20 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-accent-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span class="relative text-white text-[14px]">🦷</span>
+          </div>
+          <span class="font-display font-bold text-xl tracking-tight text-brand-900">Renia AI</span>
+        </a>
+        
+        <div class="flex items-center gap-4">
+          <span class="text-sm font-semibold text-slate-500 hidden sm:block">Already a partner?</span>
+          <a href="login.html" class="text-sm font-bold text-brand-900 hover:text-brand-600 transition-colors bg-white px-5 py-2 rounded-full border border-slate-200 shadow-sm hover:shadow-md">Sign in</a>
+        </div>
       </div>
-      <span class="font-display font-extrabold text-2xl tracking-tight text-brand-900">Renia AI</span>
-    </a>
+    </div>
+  </nav>
+
+  <!-- Main Centered Onboarding Card -->
+  <main class="relative z-10 w-full max-w-[600px] px-4 pt-28 pb-12 mx-auto">
     
-    <!-- Central Showcase Space: Dynamic Preview Cards -->
-    <div class="relative z-10 w-full max-w-[420px] mx-auto my-auto flex flex-col items-center">
+    <div class="glass-panel rounded-[2.5rem] p-8 sm:p-12 animate-slide-up relative overflow-hidden">
       
-      <!-- Micro Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100/50 mb-8 shadow-sm text-xs font-bold uppercase tracking-wider text-brand-500 animate-slide-up">
-        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse-fast"></span>
-        <span>Interactive Sandbox</span>
+      <!-- Stepper Header -->
+      <div class="flex items-center justify-between mb-10">
+        <div class="flex items-center gap-2 bg-slate-100/80 rounded-full p-1.5 border border-slate-200/60 shadow-inner">
+          <div id="ind-1" class="w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shadow-sm transition-colors">1</div>
+          <div id="line-1" class="w-6 h-0.5 bg-slate-200 rounded-full transition-colors"></div>
+          <div id="ind-2" class="w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors">2</div>
+          <div id="line-2" class="w-6 h-0.5 bg-slate-200 rounded-full transition-colors"></div>
+          <div id="ind-3" class="w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors">3</div>
+          <div id="line-3" class="w-6 h-0.5 bg-slate-200 rounded-full transition-colors"></div>
+          <div id="ind-4" class="w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors">4</div>
+        </div>
+        <span class="text-xs font-bold text-brand-500 uppercase tracking-widest bg-brand-50 border border-brand-100 px-3 py-1 rounded-full" id="step-label">Step 1 of 4</span>
       </div>
 
-      <div class="w-full relative h-[360px] flex items-center justify-center">
+      <!-- Forms Container -->
+      <form id="signup-form" class="relative min-h-[380px] flex items-stretch" onsubmit="event.preventDefault()">
         
-        <!-- STEP 1 PREVIEW: Clinic Badge Mirror -->
-        <div id="preview-step-1" class="absolute w-full p-8 rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.06)] animate-float flex flex-col justify-between h-[280px] transition-all duration-500">
-          <div class="flex justify-between items-start">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-brand-500 flex items-center justify-center shadow-sm">
-                <span class="material-symbols-outlined">storefront</span>
+        <!-- STEP 1: Practice Profile -->
+        <div class="step-content step-active" id="step-1">
+          <div class="mb-8">
+            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Create your practice profile</h2>
+            <p class="text-slate-500 font-medium leading-relaxed">Tell us about your dental practice to customize your AI assistant's knowledge base and greetings.</p>
+          </div>
+          
+          <div class="space-y-5">
+            <div>
+              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Clinic Name</label>
+              <input type="text" id="input-clinic-name" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="e.g. Oceanview Dental Care" required>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">City (Florida)</label>
+                <div class="relative">
+                  <select id="select-city" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm appearance-none cursor-pointer" required>
+                    <option value="" disabled selected>Select a city</option>
+                    <option value="Miami">Miami</option>
+                    <option value="Orlando">Orlando</option>
+                    <option value="Tampa">Tampa</option>
+                    <option value="Jacksonville">Jacksonville</option>
+                    <option value="Fort Lauderdale">Fort Lauderdale</option>
+                    <option value="St. Petersburg">St. Petersburg</option>
+                    <option value="Tallahassee">Tallahassee</option>
+                  </select>
+                  <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+                </div>
               </div>
               <div>
-                <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-widest block">Node Identity</span>
-                <span class="text-xs font-bold text-slate-400" id="preview-city-val">Miami, FL</span>
+                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">ZIP Code</label>
+                <input type="text" id="input-zip" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="e.g. 33101" maxlength="5">
               </div>
             </div>
-            <span class="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[10px] font-mono font-bold text-emerald-600 flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              SECURE
-            </span>
-          </div>
 
-          <div class="my-auto">
-            <h3 class="font-display text-2xl font-black text-brand-900 tracking-tight leading-snug line-clamp-2" id="preview-name-val">Your Clinic Name</h3>
-            <p class="text-xs text-slate-500 font-medium mt-1">Ready for 24/7 bilingual voice operations.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Public Phone</label>
+                <input type="tel" id="input-phone" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="(305) 555-0100" required>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Public Email</label>
+                <input type="email" id="input-email" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="hello@oceanview.com" required>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div class="border-t border-slate-100 pt-4 flex justify-between text-[11px] font-mono text-slate-500">
+        <!-- STEP 2: Clinical Services -->
+        <div class="step-content step-hidden" id="step-2">
+          <div class="mb-8">
+            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Select your clinical services</h2>
+            <p class="text-slate-500 font-medium leading-relaxed">This automatically configures how your AI receptionist answers frequently asked questions.</p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl group-hover:scale-110 transition-transform">🦷</span>
+                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
+              </div>
+              <div class="mt-2">
+                <h4 class="text-sm font-extrabold text-brand-900">General Dentistry</h4>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Cleanings, exams & fillings</p>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl group-hover:scale-110 transition-transform">✨</span>
+                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
+              </div>
+              <div class="mt-2">
+                <h4 class="text-sm font-extrabold text-brand-900">Cosmetic Surgery</h4>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Veneers & whitening</p>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl group-hover:scale-110 transition-transform">🔩</span>
+                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
+              </div>
+              <div class="mt-2">
+                <h4 class="text-sm font-extrabold text-brand-900">Dental Implants</h4>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Crowns & replacement</p>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl group-hover:scale-110 transition-transform">🪥</span>
+                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
+              </div>
+              <div class="mt-2">
+                <h4 class="text-sm font-extrabold text-brand-900">Orthodontics</h4>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Braces & alignment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Connect PMS -->
+        <div class="step-content step-hidden" id="step-3">
+          <div class="mb-8">
+            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Connect your software</h2>
+            <p class="text-slate-500 font-medium leading-relaxed">Select your Practice Management System (PMS) to enable real-time booking and schedule sync.</p>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="glass-card rounded-2xl p-5 flex items-center justify-between" onclick="selectRadioCard(this, 'pms-cards')">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-brand-600 flex items-center justify-center font-black text-lg">DX</div>
+                <div>
+                  <h4 class="text-base font-extrabold text-brand-900">Dentrix</h4>
+                  <p class="text-xs text-slate-500 font-medium">Native API integration</p>
+                </div>
+              </div>
+              <span class="w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-sm text-white font-bold checkbox-circle transition-all"></span>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex items-center justify-between" onclick="selectRadioCard(this, 'pms-cards')">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-black text-lg">OD</div>
+                <div>
+                  <h4 class="text-base font-extrabold text-brand-900">Open Dental</h4>
+                  <p class="text-xs text-slate-500 font-medium">Live sync supported</p>
+                </div>
+              </div>
+              <span class="w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-sm text-white font-bold checkbox-circle transition-all"></span>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex items-center justify-between" onclick="selectRadioCard(this, 'pms-cards')">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center font-black text-lg">ES</div>
+                <div>
+                  <h4 class="text-base font-extrabold text-brand-900">Eaglesoft</h4>
+                  <p class="text-xs text-slate-500 font-medium">Secure bridge connection</p>
+                </div>
+              </div>
+              <span class="w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-sm text-white font-bold checkbox-circle transition-all"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Administrator Account -->
+        <div class="step-content step-hidden" id="step-4">
+          <div class="mb-8">
+            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Set up administrator access</h2>
+            <p class="text-slate-500 font-medium leading-relaxed">Create your primary account to manage your AI receptionist and view analytics.</p>
+          </div>
+          
+          <div class="space-y-5">
             <div>
-              <span class="block text-[9px] uppercase tracking-wider text-slate-400 font-bold">Clinical Hotline</span>
-              <span id="preview-phone-val" class="font-bold text-slate-700">(---) --- ----</span>
-            </div>
-            <div class="text-right">
-              <span class="block text-[9px] uppercase tracking-wider text-slate-400 font-bold">Public Endpoint</span>
-              <span id="preview-email-val" class="font-bold text-slate-700">hello@clinic.com</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 2 PREVIEW: Service Matrix Mirror -->
-        <div id="preview-step-2" class="absolute w-full p-8 rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.06)] opacity-0 pointer-events-none scale-95 transition-all duration-500 flex flex-col justify-between h-[300px]">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-widest">Clinical Capacity</span>
-              <span class="text-xs font-bold text-indigo-500" id="preview-services-count">0 Selected</span>
-            </div>
-            <h4 class="font-display text-xl font-bold text-brand-900 mb-1">Knowledge Routing</h4>
-            <p class="text-xs text-slate-500 font-medium">Select clinical specialties to deploy appropriate FAQ schemas to the voice models.</p>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 my-auto">
-            <div id="preview-srv-1" class="flex items-center gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-400 transition-all duration-300">
-              <span class="text-sm">🦷</span>
-              <span class="text-[11px] font-bold">General</span>
-            </div>
-            <div id="preview-srv-2" class="flex items-center gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-400 transition-all duration-300">
-              <span class="text-sm">✨</span>
-              <span class="text-[11px] font-bold">Cosmetic</span>
-            </div>
-            <div id="preview-srv-3" class="flex items-center gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-400 transition-all duration-300">
-              <span class="text-sm">🔩</span>
-              <span class="text-[11px] font-bold">Implants</span>
-            </div>
-            <div id="preview-srv-4" class="flex items-center gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-400 transition-all duration-300">
-              <span class="text-sm">🪥</span>
-              <span class="text-[11px] font-bold">Ortho</span>
-            </div>
-            <div id="preview-srv-5" class="flex items-center gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-400 transition-all duration-300">
-              <span class="text-sm">🚨</span>
-              <span class="text-[11px] font-bold">Emergency</span>
-            </div>
-            <div id="preview-srv-6" class="flex items-center gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-400 transition-all duration-300">
-              <span class="text-sm">🧸</span>
-              <span class="text-[11px] font-bold">Pediatric</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 3 PREVIEW: PMS Integration Mirror -->
-        <div id="preview-step-3" class="absolute w-full p-8 rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.06)] opacity-0 pointer-events-none scale-95 transition-all duration-500 flex flex-col justify-between h-[300px]">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-widest">PMS Bridge</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-50 text-[10px] font-mono font-bold text-brand-500 uppercase" id="preview-pms-status">Standby</span>
-            </div>
-            <h4 class="font-display text-xl font-bold text-brand-900 mb-1">Calendar & Patient Sync</h4>
-            <p class="text-xs text-slate-500 font-medium">Establishing a 2-way real-time data sync to lock appointments directly.</p>
-          </div>
-
-          <!-- Animated Bridge Graphic -->
-          <div class="my-6 relative py-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between px-6 overflow-hidden">
-            <!-- Sync grid pattern -->
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            
-            <div class="w-10 h-10 rounded-xl bg-brand-900 flex items-center justify-center text-white text-xs font-bold relative z-10 shadow-md shadow-brand-900/20">
-              🦷
+              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Full Name</label>
+              <input type="text" id="input-admin-name" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="e.g. Dr. Sarah Mitchell" required>
             </div>
             
-            <div class="flex-1 px-4 relative flex items-center justify-center">
-              <div class="h-0.5 w-full bg-slate-200 relative overflow-hidden">
-                <div id="pms-sync-line" class="absolute h-full w-12 bg-gradient-to-r from-transparent via-brand-500 to-transparent left-0 transition-all duration-1000"></div>
-              </div>
-              <span class="material-symbols-outlined text-slate-300 absolute animate-pulse text-[18px]">sync_alt</span>
+            <div>
+              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Work Email</label>
+              <input type="email" id="input-admin-email" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="sarah@oceanview.com" required>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Password</label>
+              <input type="password" id="input-admin-password" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="••••••••" required>
             </div>
             
-            <div id="preview-pms-logo" class="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center font-bold text-xs text-slate-400 z-10 transition-all duration-300">
-              PMS
-            </div>
-          </div>
-
-          <div class="flex justify-between text-[10px] font-mono text-slate-400">
-            <span>SYNC_TYPE: <strong class="text-slate-600" id="preview-sync-type">N/A</strong></span>
-            <span>PORT: <strong class="text-slate-600">443 (SSL)</strong></span>
-          </div>
-        </div>
-
-        <!-- STEP 4 PREVIEW: Security Vault Mirror -->
-        <div id="preview-step-4" class="absolute w-full p-8 rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.06)] opacity-0 pointer-events-none scale-95 transition-all duration-500 flex flex-col justify-between h-[300px]">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-widest">Security Protocol</span>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-100 text-[10px] font-mono font-bold text-emerald-600">AES-256</span>
-          </div>
-          
-          <div class="flex items-center gap-4 my-auto bg-slate-50 border border-slate-100 p-4 rounded-2xl relative overflow-hidden">
-            <!-- Scanner line -->
-            <div class="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-brand-500 to-transparent shadow-[0_0_10px_#6366f1] animate-pulse"></div>
-            
-            <div class="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-brand-600 shadow-sm shrink-0">
-              <span class="material-symbols-outlined text-[28px] animate-pulse">security</span>
-            </div>
-            <div class="min-w-0">
-              <span class="text-[10px] font-mono text-slate-400 block font-bold uppercase">HIPAA GATEWAY</span>
-              <span id="preview-admin-name" class="font-display font-bold text-brand-900 text-sm truncate block">Administrator Account</span>
-              <span id="preview-admin-email" class="text-xs text-slate-500 truncate block">awaiting credentials...</span>
-            </div>
-          </div>
-
-          <div class="bg-[#0f172a] rounded-2xl p-4 text-[11px] font-mono text-slate-300 space-y-1 shadow-inner overflow-hidden select-none">
-            <div class="flex justify-between text-indigo-400 font-bold">
-              <span>[SYSTEM_CHECK]</span>
-              <span class="animate-pulse">● ACTIVE</span>
-            </div>
-            <div>&gt; DATABASE_ENCRYPTION: ENABLED</div>
-            <div>&gt; SSL_PORT_FORWARD: SECURE</div>
-            <div class="flex justify-between">
-              <span>&gt; PW_INTEGRITY:</span>
-              <span id="preview-pw-strength" class="text-rose-500 font-bold">EMPTY</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Realtime Feed Message -->
-      <p class="text-center text-xs text-slate-400 font-medium max-w-xs mt-4">
-        As you input your practice details on the right, our network models configure in real-time.
-      </p>
-
-    </div>
-    
-    <!-- Showcase Footer -->
-    <div class="relative z-10 flex justify-between items-center text-xs font-semibold text-slate-400">
-      <span>Renia OS v4.11</span>
-      <span class="flex items-center gap-1">
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
-        FL Clinical Gateway
-      </span>
-    </div>
-  </div>
-
-  <!-- ==========================================
-       RIGHT SIDEBAR (Onboarding Canvas & Form)
-       ========================================== -->
-  <div class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative overflow-y-auto z-10 min-h-screen">
-    
-    <div class="w-full max-w-xl glass-panel rounded-[2.5rem] p-8 sm:p-12 border-white/80 shadow-[0_50px_100px_-20px_rgba(99,102,241,0.1)] relative">
-      
-      <!-- Stepper / Timeline Progress Bar -->
-      <div class="mb-10 relative">
-        <div class="flex justify-between items-center mb-6">
-          <div class="flex flex-col">
-            <span class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest" id="step-label">Step 1 of 4</span>
-            <h2 class="font-display font-extrabold text-xl text-brand-900 mt-0.5" id="step-title-display">Clinic Details</h2>
-          </div>
-          <span class="text-xs font-bold text-slate-400 bg-slate-100 border border-slate-200/50 px-3 py-1 rounded-full">Bilingual Route</span>
-        </div>
-        
-        <!-- Timeline track and nodes -->
-        <div class="relative flex items-center justify-between w-full px-2">
-          <!-- Back line -->
-          <div class="absolute h-0.5 bg-slate-200/80 left-0 right-0 top-1/2 -translate-y-1/2 z-0 rounded-full"></div>
-          <!-- Filled line -->
-          <div id="step-progress-line" class="absolute h-0.5 bg-gradient-to-r from-brand-500 to-indigo-600 left-0 top-1/2 -translate-y-1/2 z-0 rounded-full transition-all duration-500" style="width: 12.5%"></div>
-          
-          <!-- Node 1 -->
-          <div id="step-node-1" class="w-8 h-8 rounded-full border-2 border-brand-500 bg-white flex items-center justify-center text-xs font-extrabold text-brand-900 z-10 shadow-md shadow-brand-500/10 transition-all duration-300">
-            1
-          </div>
-          <!-- Node 2 -->
-          <div id="step-node-2" class="w-8 h-8 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center text-xs font-bold text-slate-400 z-10 transition-all duration-300">
-            2
-          </div>
-          <!-- Node 3 -->
-          <div id="step-node-3" class="w-8 h-8 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center text-xs font-bold text-slate-400 z-10 transition-all duration-300">
-            3
-          </div>
-          <!-- Node 4 -->
-          <div id="step-node-4" class="w-8 h-8 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center text-xs font-bold text-slate-400 z-10 transition-all duration-300">
-            4
-          </div>
-        </div>
-      </div>
-
-      <!-- Form Container -->
-      <form id="signup-form" class="relative min-h-[350px] flex items-stretch" onsubmit="event.preventDefault()">
-        
-        <!-- ==========================================
-             STEP 1: CLINIC INFO
-             ========================================== -->
-        <div class="step-container active-step" id="step-1">
-          <div class="mb-6">
-            <h3 class="text-2xl font-display font-black text-brand-900 tracking-tight leading-none mb-2">Build your clinic's identity</h3>
-            <p class="text-xs text-slate-500 font-medium">Let's initialize your AI receptionist with clinical profile details.</p>
-          </div>
-          
-          <div class="space-y-4">
-            <div class="floating-group">
-              <input type="text" id="input-clinic-name" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" required>
-              <label for="input-clinic-name" class="text-xs font-semibold">Clinic Name</label>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="relative">
-                <select id="select-city" class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm appearance-none cursor-pointer">
-                  <option value="" disabled selected>Select City</option>
-                  <option value="Miami">Miami</option>
-                  <option value="Orlando">Orlando</option>
-                  <option value="Tampa">Tampa</option>
-                  <option value="Jacksonville">Jacksonville</option>
-                  <option value="Fort Lauderdale">Fort Lauderdale</option>
-                  <option value="St. Petersburg">St. Petersburg</option>
-                  <option value="West Palm Beach">West Palm Beach</option>
-                  <option value="Tallahassee">Tallahassee</option>
-                </select>
-                <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-[18px]">keyboard_arrow_down</span>
+            <div class="mt-4 p-4 rounded-2xl bg-brand-50 border border-brand-100/50 flex gap-3 items-start">
+              <span class="material-symbols-outlined text-brand-500 text-[20px] shrink-0 mt-0.5">verified_user</span>
+              <div class="min-w-0">
+                <h4 class="text-xs font-extrabold text-brand-900 leading-tight">Enterprise-Grade Security</h4>
+                <p class="text-[11px] text-slate-500 font-medium leading-relaxed mt-1">Your data is stored securely and is fully HIPAA compliant. We use AES-256 encryption for all sensitive practice records.</p>
               </div>
-              <div class="floating-group">
-                <input type="text" id="input-zip" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" maxlength="5">
-                <label for="input-zip" class="text-xs font-semibold">ZIP Code</label>
-              </div>
-            </div>
-
-            <div class="floating-group">
-              <input type="tel" id="input-phone" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" required>
-              <label for="input-phone" class="text-xs font-semibold">Public Hotline (Phone)</label>
-            </div>
-
-            <div class="floating-group">
-              <input type="email" id="input-email" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" required>
-              <label for="input-email" class="text-xs font-semibold">Public Inquiry Email</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==========================================
-             STEP 2: CLINICAL CAPACITY (SERVICES)
-             ========================================== -->
-        <div class="step-container hidden-step" id="step-2">
-          <div class="mb-6">
-            <h3 class="text-2xl font-display font-black text-brand-900 tracking-tight leading-none mb-2">What services do you offer?</h3>
-            <p class="text-xs text-slate-500 font-medium">Checking these automatically structures the AI's answering capability.</p>
-          </div>
-          
-          <div class="grid grid-cols-2 gap-3" id="services-grid">
-            <div class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex flex-col justify-between h-[95px] shadow-sm relative overflow-hidden" onclick="toggleService(1, 'General')">
-              <div class="flex justify-between items-start">
-                <span class="text-xl">🦷</span>
-                <span class="w-4 h-4 rounded-full border border-slate-200 bg-white flex items-center justify-center text-[10px] text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-xs font-extrabold text-brand-900">General Dentistry</h4>
-                <p class="text-[9px] text-slate-400 font-medium leading-tight mt-0.5">Cleans, exams & fillings</p>
-              </div>
-            </div>
-
-            <div class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex flex-col justify-between h-[95px] shadow-sm relative overflow-hidden" onclick="toggleService(2, 'Cosmetic')">
-              <div class="flex justify-between items-start">
-                <span class="text-xl">✨</span>
-                <span class="w-4 h-4 rounded-full border border-slate-200 bg-white flex items-center justify-center text-[10px] text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-xs font-extrabold text-brand-900">Cosmetic Surgery</h4>
-                <p class="text-[9px] text-slate-400 font-medium leading-tight mt-0.5">Veneers & whitening</p>
-              </div>
-            </div>
-
-            <div class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex flex-col justify-between h-[95px] shadow-sm relative overflow-hidden" onclick="toggleService(3, 'Implants')">
-              <div class="flex justify-between items-start">
-                <span class="text-xl">🔩</span>
-                <span class="w-4 h-4 rounded-full border border-slate-200 bg-white flex items-center justify-center text-[10px] text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-xs font-extrabold text-brand-900">Dental Implants</h4>
-                <p class="text-[9px] text-slate-400 font-medium leading-tight mt-0.5">Crowns & replacement</p>
-              </div>
-            </div>
-
-            <div class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex flex-col justify-between h-[95px] shadow-sm relative overflow-hidden" onclick="toggleService(4, 'Ortho')">
-              <div class="flex justify-between items-start">
-                <span class="text-xl">🪥</span>
-                <span class="w-4 h-4 rounded-full border border-slate-200 bg-white flex items-center justify-center text-[10px] text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-xs font-extrabold text-brand-900">Orthodontics</h4>
-                <p class="text-[9px] text-slate-400 font-medium leading-tight mt-0.5">Braces & alignment</p>
-              </div>
-            </div>
-
-            <div class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex flex-col justify-between h-[95px] shadow-sm relative overflow-hidden" onclick="toggleService(5, 'Emergency')">
-              <div class="flex justify-between items-start">
-                <span class="text-xl">🚨</span>
-                <span class="w-4 h-4 rounded-full border border-slate-200 bg-white flex items-center justify-center text-[10px] text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-xs font-extrabold text-brand-900">Emergency Care</h4>
-                <p class="text-[9px] text-slate-400 font-medium leading-tight mt-0.5">24/7 immediate support</p>
-              </div>
-            </div>
-
-            <div class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex flex-col justify-between h-[95px] shadow-sm relative overflow-hidden" onclick="toggleService(6, 'Pediatric')">
-              <div class="flex justify-between items-start">
-                <span class="text-xl">🧸</span>
-                <span class="w-4 h-4 rounded-full border border-slate-200 bg-white flex items-center justify-center text-[10px] text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-xs font-extrabold text-brand-900">Pediatric Care</h4>
-                <p class="text-[9px] text-slate-400 font-medium leading-tight mt-0.5">Gentle kids treatment</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==========================================
-             STEP 3: PMS INTEGRATION
-             ========================================== -->
-        <div class="step-container hidden-step" id="step-3">
-          <div class="mb-6">
-            <h3 class="text-2xl font-display font-black text-brand-900 tracking-tight leading-none mb-2">Connect practice database</h3>
-            <p class="text-xs text-slate-500 font-medium">Select your current Practice Management System (PMS) to bridge appointments.</p>
-          </div>
-          
-          <div class="space-y-3">
-            <div id="pms-card-dentrix" class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm relative overflow-hidden group" onclick="selectPMS('dentrix', 'DX', 'Dentrix', 'Direct Native API')">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg transition-transform group-hover:scale-105">DX</div>
-                <div>
-                  <h4 class="text-sm font-extrabold text-brand-900">Dentrix</h4>
-                  <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Direct API Connection Ready</p>
-                </div>
-              </div>
-              <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-bold checkbox-circle transition-all"></span>
-            </div>
-
-            <div id="pms-card-open-dental" class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm relative overflow-hidden group" onclick="selectPMS('open-dental', 'OD', 'Open Dental', 'Full Sync Protocol')">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-black text-lg transition-transform group-hover:scale-105">OD</div>
-                <div>
-                  <h4 class="text-sm font-extrabold text-brand-900">Open Dental</h4>
-                  <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">2-Way WebSocket Bridge</p>
-                </div>
-              </div>
-              <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-bold checkbox-circle transition-all"></span>
-            </div>
-
-            <div id="pms-card-eaglesoft" class="selectable-card border border-slate-200 bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm relative overflow-hidden group" onclick="selectPMS('eaglesoft', 'ES', 'Eaglesoft', 'Legacy SQL Bridge')">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center font-black text-lg transition-transform group-hover:scale-105">ES</div>
-                <div>
-                  <h4 class="text-sm font-extrabold text-brand-900">Eaglesoft</h4>
-                  <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Secure ODBC Tunneling</p>
-                </div>
-              </div>
-              <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-bold checkbox-circle transition-all"></span>
-            </div>
-
-            <!-- Spanish Toggle -->
-            <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/50 flex items-center justify-between">
-              <div class="flex gap-3 items-center">
-                <span class="text-xl">🇪🇸</span>
-                <div>
-                  <h4 class="text-xs font-extrabold text-brand-900">Bilingual Support (Spanish)</h4>
-                  <p class="text-[10px] text-slate-400 font-medium">AI handles English and Spanish calls interchangeably.</p>
-                </div>
-              </div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="check-spanish" class="sr-only peer" checked>
-                <div class="w-9 h-5 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-500"></div>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==========================================
-             STEP 4: CLINICAL GATEWAY (ADMIN ACCOUNT)
-             ========================================== -->
-        <div class="step-container hidden-step" id="step-4">
-          <div class="mb-5">
-            <h3 class="text-2xl font-display font-black text-brand-900 tracking-tight leading-none mb-2">Establish clinical security</h3>
-            <p class="text-xs text-slate-500 font-medium">Create your administrative credentials. Encrypted end-to-end.</p>
-          </div>
-          
-          <div class="space-y-4">
-            <div class="floating-group">
-              <input type="text" id="input-admin-name" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" required>
-              <label for="input-admin-name" class="text-xs font-semibold">Administrator Name</label>
-            </div>
-            
-            <div class="floating-group">
-              <input type="email" id="input-admin-email" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" required>
-              <label for="input-admin-email" class="text-xs font-semibold">Administrative Email</label>
-            </div>
-
-            <div class="floating-group">
-              <input type="password" id="input-admin-password" placeholder=" " class="custom-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-semibold shadow-sm text-sm" required oninput="evaluatePasswordStrength(this.value)">
-              <label for="input-admin-password" class="text-xs font-semibold">Security Password</label>
-            </div>
-
-            <!-- Password Strength Indicator -->
-            <div class="space-y-1.5 pt-1">
-              <div class="flex justify-between items-center text-[10px] font-bold text-slate-400">
-                <span>PASSWORD INTEGRITY</span>
-                <span id="label-strength" class="text-rose-500 uppercase">Empty</span>
-              </div>
-              <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden flex gap-0.5">
-                <div id="bar-strength-1" class="h-full w-1/3 bg-slate-200 rounded-l-full transition-all"></div>
-                <div id="bar-strength-2" class="h-full w-1/3 bg-slate-200 transition-all"></div>
-                <div id="bar-strength-3" class="h-full w-1/3 bg-slate-200 rounded-r-full transition-all"></div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-5 p-3.5 rounded-2xl bg-indigo-50/50 border border-indigo-100/50 flex gap-3 items-start">
-            <span class="material-symbols-outlined text-brand-500 text-[20px] shrink-0 mt-0.5 animate-pulse">verified_user</span>
-            <div class="min-w-0">
-              <h4 class="text-[11px] font-extrabold text-brand-900 leading-tight">HIPAA & SOC-2 Compliance Core</h4>
-              <p class="text-[10px] text-slate-500 font-medium leading-snug mt-0.5">Records are fully encrypted using military-grade AES-256 standards before being committed to active nodes.</p>
             </div>
           </div>
         </div>
 
       </form>
 
-      <!-- Navigation buttons -->
-      <div class="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
-        <button id="btn-back" class="px-5 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-brand-900 transition-colors flex items-center gap-1.5 opacity-0 pointer-events-none" onclick="prevStep()">
+      <!-- Bottom Controls -->
+      <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-8">
+        <button id="btn-back" class="px-5 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-brand-900 hover:bg-slate-50 transition-all flex items-center gap-1.5 opacity-0 pointer-events-none" onclick="prevStep()">
           <span class="material-symbols-outlined text-[18px]">arrow_back</span> Back
         </button>
-        <button id="btn-next" class="flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm bg-brand-900 text-white hover:bg-brand-800 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-brand-900/10" onclick="nextStep()">
+        <button id="btn-next" class="flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm bg-brand-900 text-white hover:bg-brand-800 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-brand-900/10" onclick="nextStep()">
           Continue <span class="material-symbols-outlined text-[18px] transition-transform" id="btn-next-arrow">arrow_forward</span>
         </button>
       </div>
-      
-      <!-- Existing Sign In Link -->
-      <div class="mt-6 text-center">
-        <p class="text-xs font-semibold text-slate-400">Already registered? <a href="login.html" class="text-brand-500 hover:text-indigo-600 font-extrabold">Sign in to console</a></p>
-      </div>
 
     </div>
-  </div>
+  </main>
 
   <!-- ==========================================
-       PROVISIONING CONSOLE OVERLAY (Elite Loading Gateway)
+       PROVISIONING OVERLAY (Clean & Professional)
        ========================================== -->
-  <div id="loading-overlay" class="fixed inset-0 z-50 bg-[#FAFAFC]/98 backdrop-blur-xl flex flex-col items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-700">
-    <!-- Center Spinner graphic -->
-    <div class="relative w-28 h-28 flex items-center justify-center mb-8">
-      <!-- Outer spin ring -->
+  <div id="loading-overlay" class="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-700">
+    
+    <!-- Spinner -->
+    <div class="relative w-24 h-24 flex items-center justify-center mb-8">
       <div class="absolute inset-0 rounded-full border-4 border-slate-100 border-t-brand-500 animate-spin"></div>
-      <!-- Inner glowing mesh or tooth -->
-      <div class="w-16 h-16 rounded-3xl bg-white border border-slate-200/80 shadow-md flex items-center justify-center text-2xl relative overflow-hidden animate-pulse-fast">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.1),transparent_70%)]"></div>
-        🦷
+      <div class="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center shadow-sm">
+        <span class="material-symbols-outlined text-brand-600 text-[28px]">support_agent</span>
       </div>
     </div>
 
-    <!-- Main Message -->
-    <h2 class="font-display font-black text-3xl text-brand-900 text-center tracking-tight mb-2">Deploying Clinical Environment</h2>
-    <p class="text-sm font-semibold text-slate-500 text-center max-w-sm mb-8 leading-relaxed">
-      Please hold. We are provisioning your dedicated AI voice receptionist node and establishing server bridges.
+    <h2 class="font-display font-black text-3xl sm:text-4xl text-brand-900 text-center tracking-tight mb-3">Deploying your AI Voice Receptionist</h2>
+    <p class="text-base font-medium text-slate-500 text-center max-w-md mb-10 leading-relaxed" id="loading-status-text">
+      Please wait while we provision your dedicated voice nodes and secure your practice account.
     </p>
 
-    <!-- Visual progress index -->
-    <div class="w-full max-w-md bg-slate-200/80 rounded-full h-1.5 overflow-hidden mb-6 relative border border-slate-100">
-      <div id="loading-progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-accent-teal rounded-full" style="width: 0%"></div>
+    <div class="w-full max-w-[320px] bg-slate-100 rounded-full h-2 overflow-hidden relative shadow-inner">
+      <div id="loading-progress-bar" class="h-full bg-brand-500 rounded-full transition-all duration-300" style="width: 0%"></div>
     </div>
 
-    <!-- Scrolling Console Container -->
-    <div class="w-full max-w-md bg-[#0f172a] rounded-2xl p-6 shadow-2xl border border-white/10 text-xs font-mono text-slate-300 h-44 flex flex-col justify-start overflow-hidden relative shadow-inner">
-      <div class="absolute top-0 inset-x-0 h-4 bg-gradient-to-b from-[#0f172a] to-transparent pointer-events-none z-10"></div>
-      <div id="loading-console" class="space-y-1.5 overflow-y-auto h-full pt-2 pr-1 flex flex-col justify-end">
-        <!-- Lines injected dynamically by JS -->
-      </div>
-      <div class="absolute bottom-0 inset-x-0 h-4 bg-gradient-to-t from-[#0f172a] to-transparent pointer-events-none z-10"></div>
-    </div>
-
-    <div class="mt-8 text-center">
-      <span class="text-[10px] font-mono font-bold text-slate-400 tracking-wider flex items-center gap-2">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        SECURE HIPAA TRANSITION ACTIVE
-      </span>
-    </div>
   </div>
 
-  <!-- ==========================================
-       JAVASCRIPT DYNAMICS & BINDINGS
-       ========================================== -->
   <script>
     let currentStep = 1;
     const totalSteps = 4;
-    const stepTitles = ["Clinic Details", "Clinical capacity", "Database Integration", "Clinical Security"];
     
-    // Dynamic Form Data Bindings
-    const clinicNameInput = document.getElementById('input-clinic-name');
-    const citySelect = document.getElementById('select-city');
-    const phoneInput = document.getElementById('input-phone');
-    const emailInput = document.getElementById('input-email');
-    
-    const adminNameInput = document.getElementById('input-admin-name');
-    const adminEmailInput = document.getElementById('input-admin-email');
-
-    // Dynamic Preview Values
-    const previewName = document.getElementById('preview-name-val');
-    const previewCity = document.getElementById('preview-city-val');
-    const previewPhone = document.getElementById('preview-phone-val');
-    const previewEmail = document.getElementById('preview-email-val');
-
-    const previewAdminName = document.getElementById('preview-admin-name');
-    const previewAdminEmail = document.getElementById('preview-admin-email');
-    const previewPasswordStrength = document.getElementById('preview-pw-strength');
-
-    // Real-time Event Listeners
-    clinicNameInput.addEventListener('input', (e) => {
-      previewName.innerText = e.target.value.trim() || "Your Clinic Name";
-    });
-
-    citySelect.addEventListener('change', (e) => {
-      previewCity.innerText = (e.target.value + ", FL") || "Miami, FL";
-    });
-
-    phoneInput.addEventListener('input', (e) => {
-      previewPhone.innerText = e.target.value.trim() || "(---) --- ----";
-    });
-
-    emailInput.addEventListener('input', (e) => {
-      previewEmail.innerText = e.target.value.trim() || "hello@clinic.com";
-    });
-
-    adminNameInput.addEventListener('input', (e) => {
-      previewAdminName.innerText = e.target.value.trim() || "Administrator Account";
-    });
-
-    adminEmailInput.addEventListener('input', (e) => {
-      previewAdminEmail.innerText = e.target.value.trim() || "awaiting credentials...";
-    });
-
-    // Step 2: Selected Services Logic
-    const selectedServices = new Set();
-    function toggleService(id, codeName) {
-      const card = document.querySelectorAll('#services-grid .selectable-card')[id - 1];
-      const previewItem = document.getElementById('preview-srv-' + id);
-      
-      if (selectedServices.has(codeName)) {
-        selectedServices.delete(codeName);
-        card.classList.remove('selected');
-        previewItem.classList.remove('border-brand-500', 'bg-indigo-50/50', 'text-brand-900');
-        previewItem.classList.add('border-slate-100', 'bg-slate-50/50', 'text-slate-400');
+    // Toggle Selection for Service Cards
+    function toggleSelection(el) {
+      el.classList.toggle('selected');
+      const checkbox = el.querySelector('.checkbox-circle');
+      if (el.classList.contains('selected')) {
+        checkbox.innerHTML = '✓';
+        checkbox.classList.add('bg-brand-500', 'border-brand-500');
+        checkbox.classList.remove('bg-white', 'border-slate-200');
       } else {
-        selectedServices.add(codeName);
-        card.classList.add('selected');
-        previewItem.classList.add('border-brand-500', 'bg-indigo-50/50', 'text-brand-900');
-        previewItem.classList.remove('border-slate-100', 'bg-slate-50/50', 'text-slate-400');
+        checkbox.innerHTML = '';
+        checkbox.classList.remove('bg-brand-500', 'border-brand-500');
+        checkbox.classList.add('bg-white', 'border-slate-200');
       }
-
-      document.getElementById('preview-services-count').innerText = `${selectedServices.size} Selected`;
     }
 
-    // Step 3: Selected PMS Logic
-    let selectedPMSProvider = null;
-    function selectPMS(pmsId, codeLabel, nameLabel, typeLabel) {
-      // Clear selections
-      const cards = ['dentrix', 'open-dental', 'eaglesoft'];
-      cards.forEach(c => {
-        const el = document.getElementById('pms-card-' + c);
-        if (el) el.classList.remove('selected');
+    // Radio Selection for PMS Cards
+    function selectRadioCard(el, groupClass) {
+      const parent = el.parentElement;
+      const allCards = parent.querySelectorAll('.glass-card');
+      
+      allCards.forEach(card => {
+        card.classList.remove('selected');
+        const cb = card.querySelector('.checkbox-circle');
+        cb.innerHTML = '';
+        cb.classList.remove('bg-brand-500', 'border-brand-500');
+        cb.classList.add('bg-white', 'border-slate-200');
       });
 
-      const selectedCard = document.getElementById('pms-card-' + pmsId);
-      selectedCard.classList.add('selected');
-
-      // Update Showcase Mirror
-      selectedPMSProvider = pmsId;
-      document.getElementById('preview-pms-status').innerText = "STANDBY";
-      document.getElementById('preview-sync-type').innerText = typeLabel;
-      
-      const logoEl = document.getElementById('preview-pms-logo');
-      logoEl.innerText = codeLabel;
-      logoEl.classList.remove('text-slate-400', 'border-slate-200', 'bg-white');
-      
-      // Dynamic colors based on PMS brand
-      if (pmsId === 'dentrix') {
-        logoEl.className = "w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-600 flex items-center justify-center font-black text-xs z-10 transition-all duration-300";
-      } else if (pmsId === 'open-dental') {
-        logoEl.className = "w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center font-black text-xs z-10 transition-all duration-300";
-      } else {
-        logoEl.className = "w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 text-orange-600 flex items-center justify-center font-black text-xs z-10 transition-all duration-300";
-      }
-
-      // Trigger line pulse
-      const syncLine = document.getElementById('pms-sync-line');
-      syncLine.classList.remove('duration-1000');
-      syncLine.style.left = "-50%";
-      setTimeout(() => {
-        syncLine.classList.add('duration-1000');
-        syncLine.style.left = "100%";
-      }, 50);
+      el.classList.add('selected');
+      const cb = el.querySelector('.checkbox-circle');
+      cb.innerHTML = '✓';
+      cb.classList.add('bg-brand-500', 'border-brand-500');
+      cb.classList.remove('bg-white', 'border-slate-200');
     }
 
-    // Step 4: Password Evaluation
-    function evaluatePasswordStrength(val) {
-      const bar1 = document.getElementById('bar-strength-1');
-      const bar2 = document.getElementById('bar-strength-2');
-      const bar3 = document.getElementById('bar-strength-3');
-      const label = document.getElementById('label-strength');
-
-      if (!val) {
-        bar1.className = "h-full w-1/3 bg-slate-200 transition-all";
-        bar2.className = "h-full w-1/3 bg-slate-200 transition-all";
-        bar3.className = "h-full w-1/3 bg-slate-200 transition-all";
-        label.innerText = "Empty";
-        label.className = "text-slate-400 font-bold";
-        previewPasswordStrength.innerText = "EMPTY";
-        previewPasswordStrength.className = "text-rose-500 font-bold";
-        return;
-      }
-
-      const score = val.length;
-      if (score < 6) {
-        bar1.className = "h-full w-1/3 bg-rose-500 transition-all";
-        bar2.className = "h-full w-1/3 bg-slate-200 transition-all";
-        bar3.className = "h-full w-1/3 bg-slate-200 transition-all";
-        label.innerText = "Weak";
-        label.className = "text-rose-500 font-bold";
-        previewPasswordStrength.innerText = "WEAK_HASH";
-        previewPasswordStrength.className = "text-rose-500 font-bold";
-      } else if (score < 10) {
-        bar1.className = "h-full w-1/3 bg-amber-400 transition-all";
-        bar2.className = "h-full w-1/3 bg-amber-400 transition-all";
-        bar3.className = "h-full w-1/3 bg-slate-200 transition-all";
-        label.innerText = "Medium";
-        label.className = "text-amber-500 font-bold";
-        previewPasswordStrength.innerText = "MD_COMPLEX";
-        previewPasswordStrength.className = "text-amber-500 font-bold";
-      } else {
-        bar1.className = "h-full w-1/3 bg-emerald-500 transition-all";
-        bar2.className = "h-full w-1/3 bg-emerald-500 transition-all";
-        bar3.className = "h-full w-1/3 bg-emerald-500 transition-all";
-        label.innerText = "Elite Core";
-        label.className = "text-emerald-500 font-bold";
-        previewPasswordStrength.innerText = "SECURE_ENT";
-        previewPasswordStrength.className = "text-emerald-500 font-bold";
-      }
-    }
-
-    // Step Navigation logic
+    // UI Updates
     function updateUI() {
-      // Stepper containers Visibility
+      // Step Contents
       for(let i = 1; i <= totalSteps; i++) {
         const el = document.getElementById('step-' + i);
-        const node = document.getElementById('step-node-' + i);
-        const previewEl = document.getElementById('preview-step-' + i);
-        
         if(i === currentStep) {
-          el.classList.remove('hidden-step');
-          el.classList.add('active-step');
-          
-          node.className = "w-8 h-8 rounded-full border-2 border-brand-500 bg-white flex items-center justify-center text-xs font-extrabold text-brand-900 z-10 shadow-md shadow-brand-500/10 transition-all duration-300 scale-105";
-          
-          if(previewEl) {
-            previewEl.className = "absolute w-full p-8 rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.06)] animate-float flex flex-col justify-between h-[300px] transition-all duration-500 opacity-100 scale-100";
-            if (i === 1) previewEl.style.height = "280px";
-          }
+          el.classList.remove('step-hidden');
+          el.classList.add('step-active');
         } else {
-          el.classList.add('hidden-step');
-          el.classList.remove('active-step');
-          
-          if(i < currentStep) {
-            node.className = "w-8 h-8 rounded-full bg-brand-500 border-2 border-brand-500 flex items-center justify-center text-xs font-bold text-white z-10 transition-all duration-300";
-            node.innerHTML = "<span class='material-symbols-outlined text-[16px]'>check</span>";
-          } else {
-            node.className = "w-8 h-8 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center text-xs font-bold text-slate-400 z-10 transition-all duration-300";
-            node.innerHTML = i;
-          }
-
-          if(previewEl) {
-            previewEl.className = "absolute w-full p-8 rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.06)] opacity-0 pointer-events-none scale-95 transition-all duration-500 flex flex-col justify-between h-[300px]";
-          }
+          el.classList.add('step-hidden');
+          el.classList.remove('step-active');
         }
       }
       
-      // Step timeline fill width calculation
-      const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
-      document.getElementById('step-progress-line').style.width = progressPercent + '%';
+      // Update Stepper visually
+      for(let i = 1; i <= totalSteps; i++) {
+        const ind = document.getElementById('ind-' + i);
+        const line = document.getElementById('line-' + i);
+        
+        if (i < currentStep) {
+          ind.className = "w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-[16px] font-bold shadow-sm transition-colors";
+          ind.innerHTML = "<span class='material-symbols-outlined text-[14px]'>check</span>";
+          if (line) line.className = "w-6 h-0.5 bg-brand-500 rounded-full transition-colors";
+        } else if (i === currentStep) {
+          ind.className = "w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shadow-sm transition-colors";
+          ind.innerHTML = i;
+          if (line) line.className = "w-6 h-0.5 bg-slate-200 rounded-full transition-colors";
+        } else {
+          ind.className = "w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors";
+          ind.innerHTML = i;
+          if (line) line.className = "w-6 h-0.5 bg-slate-200 rounded-full transition-colors";
+        }
+      }
       
       document.getElementById('step-label').innerText = `Step ${currentStep} of ${totalSteps}`;
-      document.getElementById('step-title-display').innerText = stepTitles[currentStep-1];
       
-      // Button states
+      // Buttons
       const btnBack = document.getElementById('btn-back');
       const btnNext = document.getElementById('btn-next');
-      const btnArrow = document.getElementById('btn-next-arrow');
       
       if(currentStep === 1) {
         btnBack.classList.add('opacity-0', 'pointer-events-none');
@@ -949,37 +487,31 @@
       }
       
       if(currentStep === totalSteps) {
-        btnNext.innerHTML = 'Deploy Receptionist <span class="material-symbols-outlined text-[18px]">verified</span>';
-        btnNext.className = "flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-500 to-indigo-600 text-white hover:from-brand-600 hover:to-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-indigo-500/20";
+        btnNext.innerHTML = 'Create Account <span class="material-symbols-outlined text-[18px]">verified</span>';
       } else {
         btnNext.innerHTML = 'Continue <span class="material-symbols-outlined text-[18px] transition-transform" id="btn-next-arrow">arrow_forward</span>';
-        btnNext.className = "flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm bg-brand-900 text-white hover:bg-brand-800 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-brand-900/10";
       }
     }
     
     function nextStep() {
-      // Validate active inputs before moving
+      // Very basic validation visual check
       const activeContainer = document.getElementById('step-' + currentStep);
       const inputs = activeContainer.querySelectorAll('input[required], select[required]');
       let valid = true;
       inputs.forEach(input => {
         if(!input.value.trim()) {
           valid = false;
-          input.classList.add('border-rose-400', 'bg-rose-50/20');
-          setTimeout(() => {
-            input.classList.remove('border-rose-400', 'bg-rose-50/20');
-          }, 3000);
+          input.classList.add('border-rose-400', 'bg-rose-50');
+          setTimeout(() => input.classList.remove('border-rose-400', 'bg-rose-50'), 2500);
         }
       });
-
       if(!valid) return;
 
       if(currentStep < totalSteps) {
         currentStep++;
         updateUI();
       } else {
-        // Trigger Premium Provisioning Console Redirection Flow
-        triggerProvisioningOverlay();
+        triggerLoadingOverlay();
       }
     }
     
@@ -990,61 +522,50 @@
       }
     }
 
-    // High End Logging Redirection Flow
-    function triggerProvisioningOverlay() {
+    function triggerLoadingOverlay() {
       const overlay = document.getElementById('loading-overlay');
       const progressBar = document.getElementById('loading-progress-bar');
-      const consoleLog = document.getElementById('loading-console');
+      const statusText = document.getElementById('loading-status-text');
       
       overlay.classList.remove('pointer-events-none', 'opacity-0');
       overlay.classList.add('opacity-100');
       
-      const logLines = [
-        { time: 100, msg: "<span class='text-indigo-400 font-bold'>[CONNECTING]</span> Establishing secure gate tunnel..." },
-        { time: 500, msg: "<span class='text-indigo-400 font-bold'>[PROVISIONING]</span> Allocating isolated AI voice core instance..." },
-        { time: 900, msg: "<span class='text-indigo-400 font-bold'>[ROUTING]</span> Registering Florida clinical area numbers..." },
-        { time: 1400, msg: `<span class='text-indigo-400 font-bold'>[BRIDGING]</span> Mapping dynamic SQL bridges to ${selectedPMSProvider ? selectedPMSProvider.toUpperCase() : 'PMS'}...` },
-        { time: 1800, msg: "<span class='text-indigo-400 font-bold'>[ENCRYPTING]</span> Writing administrative identity schemas (AES-256-GCM)..." },
-        { time: 2300, msg: "<span class='text-emerald-400 font-bold'>[SYNCHRONIZED]</span> HIPAA Compliant database tunnel: SECURE" },
-        { time: 2700, msg: "<span class='text-indigo-400 font-bold'>[BOOTSTRAP]</span> Tuning Ash voice models (English + Spanish)..." },
-        { time: 3100, msg: "<span class='text-emerald-500 font-bold'>[SUCCESS]</span> clinical system node active. Routing to Dashboard." }
+      const statuses = [
+        "Provisioning dedicated AI voice nodes...",
+        "Establishing secure connection to Practice Management System...",
+        "Applying HIPAA compliant encryption schemas...",
+        "Finalizing administrator access and routing to dashboard..."
       ];
       
-      logLines.forEach(line => {
-        setTimeout(() => {
-          const div = document.createElement('div');
-          div.className = "animate-slide-up";
-          div.innerHTML = `&gt; ${line.msg}`;
-          consoleLog.appendChild(div);
-          consoleLog.scrollTop = consoleLog.scrollHeight;
-        }, line.time);
-      });
-
-      // Progress bar animation
       let progress = 0;
+      let statusIndex = 0;
+      
       const interval = setInterval(() => {
-        progress += 1;
+        progress += 2;
         progressBar.style.width = progress + '%';
+        
+        if (progress === 25) statusText.innerText = statuses[1];
+        if (progress === 50) statusText.innerText = statuses[2];
+        if (progress === 75) statusText.innerText = statuses[3];
+        
         if (progress >= 100) {
           clearInterval(interval);
+          
+          // Generate mock token to bypass dashboard auth loop
+          const adminEmail = document.getElementById('input-admin-email').value || 'admin@clinic.com';
+          const adminName = document.getElementById('input-admin-name').value || 'Admin';
+          
+          localStorage.setItem('renia_token', 'demo_token_' + Date.now());
+          localStorage.setItem('renia_user', JSON.stringify({
+            id: 'usr_' + Date.now(),
+            email: adminEmail,
+            name: adminName,
+            role: 'admin'
+          }));
+          
+          window.location.href = 'dashboard.html';
         }
-      }, 35);
-      
-      // Save Mock Token to bypass authentication loop and redirect to dashboard
-      const mockToken = 'demo_token_' + Date.now();
-      const mockUser = {
-        id: 'usr_' + Date.now(),
-        email: adminEmailInput.value || 'admin@clinic.com',
-        name: adminNameInput.value || 'Dr. Sarah Mitchell',
-        role: 'admin'
-      };
-      
-      localStorage.setItem('renia_token', mockToken);
-      localStorage.setItem('renia_user', JSON.stringify(mockUser));
-      
-      setTimeout(() => {
-        window.location.href = 'dashboard.html';
-      }, 3600);
+      }, 60);
     }
   </script>
 </body>
