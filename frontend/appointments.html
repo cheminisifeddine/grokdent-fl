@@ -82,6 +82,248 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+    /* Premium Dynamic Calendar CSS Grid styles */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: 100px repeat(7, minmax(130px, 1fr));
+      border-top: 1px solid #e2e8f0;
+      border-left: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+    
+    .calendar-cell {
+      min-height: 95px;
+      padding: 6px;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+      transition: background-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 4px;
+    }
+    
+    .calendar-cell.calendar-header {
+      min-height: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #475569;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .calendar-cell.time-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748b;
+      background: #f8fafc;
+      border-right: 2px solid #e2e8f0;
+    }
+    
+    .calendar-cell:not(.calendar-header):not(.time-label):hover {
+      background-color: #f1f5f9;
+      cursor: pointer;
+    }
+    
+    .calendar-cell:not(.calendar-header):not(.time-label):hover::after {
+      content: '+ Book Slot';
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      color: #6366f1;
+      background: #e0e7ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    
+    .appt-block {
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 11px;
+      line-height: 1.4;
+      width: 100%;
+      height: calc(100% - 2px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+      border-left: 4px solid transparent;
+      cursor: pointer;
+      position: relative;
+      box-sizing: border-box;
+    }
+    
+    .appt-block:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      z-index: 10;
+    }
+    
+    .appt-general {
+      background: #eff6ff;
+      color: #1e40af;
+      border-left-color: #3b82f6;
+    }
+    .appt-general:hover { background: #dbeafe; }
+    
+    .appt-cosmetic {
+      background: #faf5ff;
+      color: #6b21a8;
+      border-left-color: #a855f7;
+    }
+    .appt-cosmetic:hover { background: #f3e8ff; }
+    
+    .appt-emergency {
+      background: #fff5f5;
+      color: #9b1c1c;
+      border-left-color: #ef4444;
+      animation: pulse-red-border 2s infinite;
+    }
+    .appt-emergency:hover { background: #fee2e2; }
+    
+    @keyframes pulse-red-border {
+      0%, 100% { border-left-color: #ef4444; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3); }
+      50% { border-left-color: #b91c1c; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+    }
+    
+    /* Day view styles */
+    .day-view-container {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    
+    .day-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      border-bottom: 1px solid #f1f5f9;
+      min-height: 75px;
+    }
+    
+    .day-time {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+    }
+    
+    .day-slot {
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    
+    .day-slot:hover {
+      background-color: #f8fafc;
+      cursor: pointer;
+    }
+    
+    /* Month view styles */
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border-top: 1px solid #e2e8f0;
+      border-left: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+    
+    .month-cell {
+      min-height: 120px;
+      padding: 8px;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: background-color 0.2s ease;
+    }
+    
+    .month-cell:hover {
+      background-color: #f8fafc;
+      cursor: pointer;
+    }
+    
+    .month-cell-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+    }
+    
+    .month-cell.today {
+      background: #f0f3ff;
+    }
+    .month-cell.today .month-cell-header span:first-child {
+      background: #6366f1;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .month-appts-dots {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 6px;
+      max-height: 80px;
+      overflow: hidden;
+    }
+    
+    .month-appt-dot {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-weight: 700;
+    }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .status-scheduled { background: #f1f5f9; color: #475569; }
+    .status-confirmed { background: #dcfce7; color: #15803d; }
+    .status-checked-in { background: #ccfbf1; color: #0f766e; }
+    .status-completed { background: #e2e8f0; color: #64748b; text-decoration: line-through; }
+    .status-cancelled { background: #fee2e2; color: #b91c1c; }
   </style>
 </head>
 <body class="text-slate-800 antialiased h-screen overflow-hidden flex selection:bg-brand-500 selection:text-white">
@@ -166,107 +408,61 @@
         
         <div class="glass-card rounded-2xl overflow-hidden bg-white">
           <!-- Calendar Header Controls -->
-          <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-            <h2 class="text-lg font-bold text-slate-900">Week of May 19 - May 25, 2026</h2>
-            <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-              <button class="px-4 py-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white transition-colors">Day</button>
-              <button class="px-4 py-1.5 text-sm font-semibold bg-white text-indigo-600 rounded-lg shadow-sm">Week</button>
-              <button class="px-4 py-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white transition-colors">Month</button>
+          <div class="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h2 id="calendar-title" class="text-xl font-bold text-slate-900 font-display">Week of May 19 - May 25, 2026</h2>
+              <p class="text-xs font-semibold text-slate-400 mt-0.5">Click any empty slot to book a new appointment instantly</p>
             </div>
-            <div class="flex items-center gap-2">
-              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">←</button>
-              <button class="px-4 py-1.5 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Today</button>
-              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">→</button>
+            
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl shadow-inner">
+                <button id="view-day-btn" class="px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-slate-800 rounded-lg transition-colors">Day</button>
+                <button id="view-week-btn" class="px-4 py-1.5 text-sm font-bold bg-white text-brand-900 rounded-lg shadow-sm">Week</button>
+                <button id="view-month-btn" class="px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-slate-800 rounded-lg transition-colors">Month</button>
+              </div>
+              
+              <div class="flex items-center gap-1">
+                <button id="prev-btn" class="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm font-bold">←</button>
+                <button id="today-btn" class="px-4 py-1.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm">Today</button>
+                <button id="next-btn" class="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm font-bold">→</button>
+              </div>
             </div>
           </div>
 
-          <!-- Calendar Grid -->
-          <div class="calendar-grid">
-            <div class="calendar-cell calendar-header border-none">Time</div>
-            <div class="calendar-cell calendar-header">Mon 19</div>
-            <div class="calendar-cell calendar-header">Tue 20</div>
-            <div class="calendar-cell calendar-header">Wed 21</div>
-            <div class="calendar-cell calendar-header">Thu 22</div>
-            <div class="calendar-cell calendar-header text-indigo-600 font-bold bg-indigo-50/50">Fri 23</div>
-            <div class="calendar-cell calendar-header">Sat 24</div>
-            <div class="calendar-cell calendar-header">Sun 25</div>
+          <!-- Interactive Filter Bar -->
+          <div class="px-6 py-3 bg-slate-50/50 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="relative w-full sm:w-72">
+              <span class="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-slate-400">search</span>
+              <input type="text" id="appt-search" placeholder="Search patient name..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-end">
+              <select id="filter-category" class="py-2 pl-3 pr-8 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 bg-white">
+                <option value="all">📁 All Categories</option>
+                <option value="general">🟦 General & Cleaning</option>
+                <option value="cosmetic">🟪 Cosmetic & Whitening</option>
+                <option value="emergency">🟥 Emergency Care</option>
+              </select>
+              
+              <select id="filter-status" class="py-2 pl-3 pr-8 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 bg-white">
+                <option value="all">🟢 All Statuses</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Checked-in">Checked-in</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
 
-            <!-- 9 AM Row -->
-            <div class="calendar-cell time-label">9:00 AM</div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>9:00</strong> E. Johnson<br>Cleaning</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>9:00</strong> R. Davis<br>Whitening</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>9:00</strong> M. Rodriguez<br>Cleaning</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>9:00</strong> E. Johnson<br>Checkup</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-
-            <!-- 10 AM Row -->
-            <div class="calendar-cell time-label">10:00 AM</div>
-            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>10:00</strong> L. Thompson<br>Veneers</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>10:00</strong> K. Harris<br>Filling</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>10:00</strong> L. Thompson<br>Whitening</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-
-            <!-- 11 AM Row -->
-            <div class="calendar-cell time-label">11:00 AM</div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>11:00</strong> S. Williams<br>Checkup</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>11:00</strong> D. Park<br>Ortho</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>11:00</strong> D. Park<br>Ortho F/U</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-
-            <!-- 12 PM Row -->
-            <div class="calendar-cell time-label">12:00 PM</div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-
-            <!-- 1 PM Row -->
-            <div class="calendar-cell time-label">1:00 PM</div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>1:00</strong> P. Garcia<br>Cleaning</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"><div class="appt-block appt-emergency"><strong>1:30</strong> A. Garcia<br>Emergency</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-emergency"><strong>1:30</strong> A. Garcia<br>Emergency</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-
-            <!-- 2 PM Row -->
-            <div class="calendar-cell time-label">2:00 PM</div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"><div class="appt-block appt-general"><strong>2:00</strong> T. Martinez<br>X-Rays</div></div>
-            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>2:30</strong> N. Taylor<br>Implant Consult</div></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-            <div class="calendar-cell bg-slate-50"></div>
-
-            <!-- 3 PM Row -->
-            <div class="calendar-cell time-label border-b-0">3:00 PM</div>
-            <div class="calendar-cell border-b-0"><div class="appt-block appt-general"><strong>3:00</strong> B. Jackson<br>Root Canal</div></div>
-            <div class="calendar-cell border-b-0"></div>
-            <div class="calendar-cell border-b-0"></div>
-            <div class="calendar-cell border-b-0"><div class="appt-block appt-general"><strong>3:00</strong> H. Lee<br>Filling</div></div>
-            <div class="calendar-cell border-b-0"></div>
-            <div class="calendar-cell border-b-0 bg-slate-50"></div>
-            <div class="calendar-cell border-b-0 bg-slate-50"></div>
-
+          <!-- Dynamic Calendar View Container -->
+          <div id="calendar-view-container" class="relative">
+            <!-- Calendar Grid will be rendered dynamically here -->
           </div>
         </div>
 
       </div>
     </div>
-    </main>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="js/utils.js?v=4"></script>
@@ -277,24 +473,674 @@
   <script src="js/dashboard.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
   <script>
-    // Wire logout
-    document.querySelector('[onclick*="Auth.logout"]')?.addEventListener('click', () => {
-      if (typeof Auth !== 'undefined') Auth.logout();
-    });
-    // Calendar appointment blocks click
-    document.querySelectorAll('.appt-block').forEach(block => {
-      block.style.cursor = 'pointer';
-      block.addEventListener('click', () => {
-        const info = block.textContent.trim();
-        showToast('📅 ' + info.replace(/\s+/g,' '), 'info');
+    // State management for high-fidelity interactive calendar
+    const state = {
+      currentDate: new Date(2026, 4, 23), // Friday May 23, 2026
+      currentView: 'week', // 'day' | 'week' | 'month'
+      searchQuery: '',
+      selectedCategory: 'all',
+      selectedStatus: 'all',
+      appointments: []
+    };
+
+    const DEFAULT_APPTS = [
+      { id: '1', date: '2026-05-19', time: '9:00 AM', name: 'E. Johnson', service: 'Dental Cleaning', category: 'general', status: 'Scheduled', notes: 'Routine checkup and dental cleaning.' },
+      { id: '2', date: '2026-05-19', time: '10:00 AM', name: 'L. Thompson', service: 'Dental Implant Consult', category: 'cosmetic', status: 'Confirmed', notes: 'Consultation for upper veneers.' },
+      { id: '3', date: '2026-05-19', time: '1:00 PM', name: 'P. Garcia', service: 'Dental Cleaning', category: 'general', status: 'Completed', notes: 'Regular cleaning.' },
+      { id: '4', date: '2026-05-19', time: '3:00 PM', name: 'B. Jackson', service: 'Root Canal', category: 'general', status: 'Scheduled', notes: 'Severe lower left molar pain.' },
+      { id: '5', date: '2026-05-20', time: '10:00 AM', name: 'K. Harris', service: 'General Checkup', category: 'general', status: 'Checked-in', notes: 'Tooth filling checkup.' },
+      { id: '6', date: '2026-05-20', time: '2:00 PM', name: 'T. Martinez', service: 'General Checkup', category: 'general', status: 'Scheduled', notes: 'Annual X-rays.' },
+      { id: '7', date: '2026-05-21', time: '9:00 AM', name: 'R. Davis', service: 'Teeth Whitening', category: 'cosmetic', status: 'Confirmed', notes: 'Teeth whitening treatment.' },
+      { id: '8', date: '2026-05-21', time: '11:00 AM', name: 'S. Williams', service: 'General Checkup', category: 'general', status: 'Completed' },
+      { id: '9', date: '2026-05-21', time: '2:30 PM', name: 'N. Taylor', service: 'Dental Implant Consult', category: 'cosmetic', status: 'Scheduled', notes: 'Implant consultation and pricing review.' },
+      { id: '10', date: '2026-05-22', time: '9:00 AM', name: 'M. Rodriguez', service: 'Dental Cleaning', category: 'general', status: 'Scheduled' },
+      { id: '11', date: '2026-05-22', time: '11:00 AM', name: 'D. Park', service: 'Orthodontics', category: 'general', status: 'Confirmed', notes: 'Braces adjustment.' },
+      { id: '12', date: '2026-05-22', time: '1:30 PM', name: 'A. Garcia', service: 'Emergency', category: 'emergency', status: 'Checked-in', notes: 'Chipped front tooth in football game.' },
+      { id: '13', date: '2026-05-23', time: '9:00 AM', name: 'E. Johnson', service: 'General Checkup', category: 'general', status: 'Confirmed' },
+      { id: '14', date: '2026-05-23', time: '10:00 AM', name: 'L. Thompson', service: 'Teeth Whitening', category: 'cosmetic', status: 'Scheduled' },
+      { id: '15', date: '2026-05-23', time: '11:00 AM', name: 'D. Park', service: 'Orthodontics', category: 'general', status: 'Scheduled', notes: 'Orthodontic follow-up.' },
+      { id: '16', date: '2026-05-23', time: '1:30 PM', name: 'A. Garcia', service: 'Emergency', category: 'emergency', status: 'Scheduled', notes: 'Emergency consultation.' },
+      { id: '17', date: '2026-05-22', time: '3:00 PM', name: 'H. Lee', service: 'General Checkup', category: 'general', status: 'Scheduled', notes: 'Cavity filling.' }
+    ];
+
+    // Load from storage or set default
+    function loadAppointments() {
+      const stored = localStorage.getItem('renia_appointments');
+      if (stored) {
+        try {
+          state.appointments = JSON.parse(stored);
+        } catch (e) {
+          state.appointments = [...DEFAULT_APPTS];
+        }
+      } else {
+        state.appointments = [...DEFAULT_APPTS];
+        saveAppointmentsToStorage();
+      }
+    }
+
+    function saveAppointmentsToStorage() {
+      localStorage.setItem('renia_appointments', JSON.stringify(state.appointments));
+    }
+
+    // Helper functions
+    function getWeekDays(d) {
+      const day = d.getDay();
+      // Monday is first day (1), Sunday is last (0)
+      const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+      const monday = new Date(d.getTime());
+      monday.setDate(diff);
+      
+      const days = [];
+      for (let i = 0; i < 7; i++) {
+        const nextDay = new Date(monday.getTime());
+        nextDay.setDate(monday.getDate() + i);
+        days.push(nextDay);
+      }
+      return days;
+    }
+
+    function formatDateStr(d) {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function isSameDay(d1, d2) {
+      return d1.getFullYear() === d2.getFullYear() &&
+             d1.getMonth() === d2.getMonth() &&
+             d1.getDate() === d2.getDate();
+    }
+
+    function matchesFilters(appt) {
+      const q = state.searchQuery.trim().toLowerCase();
+      const cat = state.selectedCategory;
+      const status = state.selectedStatus;
+
+      const matchesQ = !q || appt.name.toLowerCase().includes(q) || appt.service.toLowerCase().includes(q);
+      const matchesCat = cat === 'all' || appt.category === cat;
+      const matchesStatus = status === 'all' || appt.status === status;
+
+      return matchesQ && matchesCat && matchesStatus;
+    }
+
+    // View renderers
+    function renderCalendar() {
+      const container = document.getElementById('calendar-view-container');
+      if (!container) return;
+      
+      updateTitle();
+      
+      if (state.currentView === 'week') {
+        renderWeekView(container);
+      } else if (state.currentView === 'day') {
+        renderDayView(container);
+      } else if (state.currentView === 'month') {
+        renderMonthView(container);
+      }
+    }
+
+    function updateTitle() {
+      const titleEl = document.getElementById('calendar-title');
+      if (!titleEl) return;
+      
+      if (state.currentView === 'week') {
+        const days = getWeekDays(state.currentDate);
+        const start = days[0].toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const end = days[6].toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        titleEl.textContent = `Week of ${start} - ${end}`;
+      } else if (state.currentView === 'day') {
+        titleEl.textContent = state.currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      } else if (state.currentView === 'month') {
+        titleEl.textContent = state.currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      }
+    }
+
+    function renderWeekView(container) {
+      let html = `<div class="calendar-grid">`;
+      
+      // Header cells
+      html += `<div class="calendar-cell calendar-header border-none">Time</div>`;
+      const weekDays = getWeekDays(state.currentDate);
+      const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      
+      weekDays.forEach((dayDate, idx) => {
+        const dayNum = dayDate.getDate();
+        const dayName = dayNames[idx];
+        const isFri = idx === 4; // Highlight Friday 23 in the mock
+        
+        let headerClass = "calendar-cell calendar-header";
+        if (isFri) {
+          headerClass += " text-indigo-600 font-black bg-indigo-50/50";
+        }
+        
+        html += `<div class="${headerClass}"><span>${dayName}</span><span class="text-xs text-slate-400 font-bold">${dayNum}</span></div>`;
+      });
+      
+      // Time Rows
+      const timeSlots = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'];
+      
+      timeSlots.forEach(time => {
+        const isLast = time === '3:00 PM';
+        const borderClass = isLast ? 'border-b-0' : '';
+        
+        html += `<div class="calendar-cell time-label ${borderClass}">${time}</div>`;
+        
+        // 7 days cells
+        weekDays.forEach((dayDate, dayIdx) => {
+          const dateStr = formatDateStr(dayDate);
+          
+          if (time === '12:00 PM') {
+            html += `<div class="calendar-cell bg-slate-50 ${borderClass} flex items-center justify-center text-[10px] font-extrabold text-slate-400 uppercase tracking-wider select-none">Lunch</div>`;
+            return;
+          }
+          
+          // Let's filter appointments for this date and hour row
+          const slotAppts = state.appointments.filter(appt => {
+            if (appt.status === 'Cancelled') return false;
+            if (appt.date !== dateStr) return false;
+            
+            // Match approximate hour
+            const apptHour = appt.time.split(':')[0];
+            const apptAmPm = appt.time.split(' ')[1];
+            const slotHour = time.split(':')[0];
+            const slotAmPm = time.split(' ')[1];
+            
+            return apptHour === slotHour && apptAmPm === slotAmPm;
+          });
+          
+          const filteredSlotAppts = slotAppts.filter(appt => matchesFilters(appt));
+          
+          let cellHtml = '';
+          if (filteredSlotAppts.length > 0) {
+            const appt = filteredSlotAppts[0];
+            const categoryClass = appt.category === 'emergency' ? 'appt-emergency' : (appt.category === 'cosmetic' ? 'appt-cosmetic' : 'appt-general');
+            
+            cellHtml = `
+              <div class="appt-block ${categoryClass}" onclick="event.stopPropagation(); openAppointmentDetails('${appt.id}')">
+                <div class="flex items-center justify-between gap-1 mb-1">
+                  <strong class="font-black text-[10px]">${appt.time}</strong>
+                  <span class="text-[8px] font-black uppercase px-1 rounded bg-white/60">${appt.status}</span>
+                </div>
+                <div class="font-bold text-slate-900 truncate leading-tight text-left">${appt.name}</div>
+                <div class="text-[9px] opacity-80 truncate text-left mt-0.5">${appt.service}</div>
+              </div>
+            `;
+          }
+          
+          const cellBg = (dayIdx === 5 || dayIdx === 6) ? 'bg-slate-50' : '';
+          
+          html += `
+            <div class="calendar-cell ${cellBg} ${borderClass}" onclick="handleCellClick('${dateStr}', '${time}')">
+              ${cellHtml}
+            </div>
+          `;
+        });
+      });
+      
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function renderDayView(container) {
+      const dateStr = formatDateStr(state.currentDate);
+      const friendlyDate = state.currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      
+      let html = `
+        <div class="day-view-container">
+          <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="font-black text-slate-800 text-sm font-display">${friendlyDate}</h3>
+            <span class="status-badge bg-indigo-100 text-indigo-800">Day Timeline</span>
+          </div>
+      `;
+      
+      const timeSlots = [
+        '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+        '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
+        '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
+      ];
+      
+      timeSlots.forEach(time => {
+        if (time === '12:00 PM' || time === '12:30 PM') {
+          html += `
+            <div class="day-row bg-slate-50/50">
+              <div class="day-time">${time}</div>
+              <div class="day-slot select-none flex items-center justify-center text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Lunch Break</div>
+            </div>
+          `;
+          return;
+        }
+        
+        const slotAppts = state.appointments.filter(appt => appt.status !== 'Cancelled' && appt.date === dateStr && appt.time === time);
+        const filteredAppts = slotAppts.filter(appt => matchesFilters(appt));
+        
+        let slotHtml = '';
+        if (filteredAppts.length > 0) {
+          const appt = filteredAppts[0];
+          const categoryClass = appt.category === 'emergency' ? 'appt-emergency' : (appt.category === 'cosmetic' ? 'appt-cosmetic' : 'appt-general');
+          
+          let badgeHtml = `<span class="status-badge status-${appt.status.toLowerCase().replace(' ','-')}">${appt.status}</span>`;
+          
+          slotHtml = `
+            <div class="appt-block ${categoryClass} flex-row justify-between items-center w-full h-auto py-2.5 px-4" onclick="event.stopPropagation(); openAppointmentDetails('${appt.id}')">
+              <div class="flex items-center gap-3">
+                <span class="font-extrabold text-[12px]">${appt.time}</span>
+                <div class="w-px h-4 bg-slate-300"></div>
+                <strong class="font-bold text-slate-900 text-sm">${appt.name}</strong>
+                <span class="text-xs text-slate-500 font-semibold">(${appt.service})</span>
+              </div>
+              <div class="flex items-center gap-3">
+                ${badgeHtml}
+                ${appt.notes ? `<span class="material-symbols-outlined text-[16px] text-slate-400" title="${appt.notes}">notes</span>` : ''}
+              </div>
+            </div>
+          `;
+        } else {
+          slotHtml = `
+            <div class="text-slate-400 text-xs font-semibold italic opacity-0 hover:opacity-100 transition-opacity pointer-events-none">+ Click slot to book appointment at ${time}</div>
+          `;
+        }
+        
+        html += `
+          <div class="day-row" onclick="handleCellClick('${dateStr}', '${time}')">
+            <div class="day-time">${time}</div>
+            <div class="day-slot">
+              ${slotHtml}
+            </div>
+          </div>
+        `;
+      });
+      
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function renderMonthView(container) {
+      let html = `
+        <div class="month-grid">
+          <!-- Week headers -->
+          <div class="calendar-cell calendar-header border-none">Mon</div>
+          <div class="calendar-cell calendar-header border-none">Tue</div>
+          <div class="calendar-cell calendar-header border-none">Wed</div>
+          <div class="calendar-cell calendar-header border-none">Thu</div>
+          <div class="calendar-cell calendar-header border-none">Fri</div>
+          <div class="calendar-cell calendar-header border-none">Sat</div>
+          <div class="calendar-cell calendar-header border-none">Sun</div>
+      `;
+      
+      // May 2026 starts on Friday 1st
+      // So Mon is Apr 27, Tue Apr 28, Wed Apr 29, Thu Apr 30
+      const startDay = new Date(2026, 3, 27); // Apr 27, 2026
+      
+      for (let i = 0; i < 35; i++) {
+        const dayDate = new Date(startDay.getTime());
+        dayDate.setDate(startDay.getDate() + i);
+        
+        const dateStr = formatDateStr(dayDate);
+        const isToday = isSameDay(dayDate, new Date(2026, 4, 23)); // Match current Date May 23
+        const isCurrentMonth = dayDate.getMonth() === 4; // May
+        
+        const slotAppts = state.appointments.filter(appt => appt.status !== 'Cancelled' && appt.date === dateStr);
+        const filteredAppts = slotAppts.filter(appt => matchesFilters(appt));
+        
+        let cellClass = "month-cell";
+        if (isToday) cellClass += " today";
+        if (!isCurrentMonth) cellClass += " bg-slate-50/50 opacity-40";
+        
+        let apptsHtml = '<div class="month-appts-dots">';
+        filteredAppts.forEach(appt => {
+          const dotColor = appt.category === 'emergency' ? 'bg-rose-100 text-rose-800' : (appt.category === 'cosmetic' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800');
+          apptsHtml += `
+            <div class="month-appt-dot ${dotColor} truncate text-left" title="${appt.time} - ${appt.name}: ${appt.service}">
+              ${appt.time.split(' ')[0]} ${appt.name}
+            </div>
+          `;
+        });
+        apptsHtml += '</div>';
+        
+        html += `
+          <div class="${cellClass}" onclick="handleCellClick('${dateStr}', '9:00 AM')">
+            <div class="month-cell-header">
+              <span>${dayDate.getDate()}</span>
+              ${filteredAppts.length > 0 ? `<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 font-black">${filteredAppts.length}</span>` : ''}
+            </div>
+            ${apptsHtml}
+          </div>
+        `;
+      }
+      
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function handleCellClick(dateStr, timeStr) {
+      openAppointmentModal(dateStr, timeStr);
+    }
+
+    // Modal Overrides and Enhanced Form Handling
+    function openAppointmentModal(prefillDate = '', prefillTime = '', apptToEdit = null) {
+      let modal = document.getElementById('appointment-modal');
+      if (modal) modal.remove();
+      
+      const overlay = document.createElement('div');
+      overlay.id = 'appointment-modal';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
+      
+      const title = apptToEdit ? 'Reschedule Appointment' : 'New Appointment';
+      const submitText = apptToEdit ? 'Save Changes' : 'Book Appointment';
+      
+      const patientValue = apptToEdit ? apptToEdit.name : '';
+      const serviceValue = apptToEdit ? apptToEdit.service : 'General Checkup';
+      const dateValue = apptToEdit ? apptToEdit.date : (prefillDate || '2026-05-23');
+      const timeValue = apptToEdit ? apptToEdit.time : (prefillTime || '9:00 AM');
+      const notesValue = apptToEdit ? (apptToEdit.notes || '') : '';
+      
+      overlay.innerHTML = `
+        <div style="background:white;border-radius:20px;width:100%;max-width:520px;box-shadow:0 25px 50px rgba(0,0,0,0.15);overflow:hidden;">
+          <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;">
+            <h2 style="font-size:18px;font-weight:850;color:#0f172a;margin:0;font-family:'Outfit',sans-serif;">${title}</h2>
+            <button id="close-appt-modal" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
+          </div>
+          <form id="appointment-form" style="padding:24px 28px;">
+            <div style="display:grid;gap:16px;">
+              <div>
+                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Patient Name</label>
+                <input type="text" id="appt-patient" placeholder="Enter patient name" required value="${patientValue.replace(/"/g, '&quot;')}" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e2e8f0'">
+              </div>
+              <div>
+                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Service Type</label>
+                <select id="appt-service" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
+                  <option ${serviceValue === 'General Checkup' ? 'selected' : ''}>General Checkup</option>
+                  <option ${serviceValue === 'Dental Cleaning' ? 'selected' : ''}>Dental Cleaning</option>
+                  <option ${serviceValue === 'Dental Implant Consult' ? 'selected' : ''}>Dental Implant Consult</option>
+                  <option ${serviceValue === 'Teeth Whitening' ? 'selected' : ''}>Teeth Whitening</option>
+                  <option ${serviceValue === 'Root Canal' ? 'selected' : ''}>Root Canal</option>
+                  <option ${serviceValue === 'Crown / Bridge' ? 'selected' : ''}>Crown / Bridge</option>
+                  <option ${serviceValue === 'Orthodontics' ? 'selected' : ''}>Orthodontics</option>
+                  <option ${serviceValue === 'Emergency' ? 'selected' : ''}>Emergency</option>
+                </select>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div>
+                  <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Date</label>
+                  <input type="date" id="appt-date" required value="${dateValue}" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e2e8f0'">
+                </div>
+                <div>
+                  <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Time</label>
+                  <select id="appt-time" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
+                    <option ${timeValue === '9:00 AM' ? 'selected' : ''}>9:00 AM</option>
+                    <option ${timeValue === '9:30 AM' ? 'selected' : ''}>9:30 AM</option>
+                    <option ${timeValue === '10:00 AM' ? 'selected' : ''}>10:00 AM</option>
+                    <option ${timeValue === '10:30 AM' ? 'selected' : ''}>10:30 AM</option>
+                    <option ${timeValue === '11:00 AM' ? 'selected' : ''}>11:00 AM</option>
+                    <option ${timeValue === '11:30 AM' ? 'selected' : ''}>11:30 AM</option>
+                    <option ${timeValue === '1:00 PM' ? 'selected' : ''}>1:00 PM</option>
+                    <option ${timeValue === '1:30 PM' ? 'selected' : ''}>1:30 PM</option>
+                    <option ${timeValue === '2:00 PM' ? 'selected' : ''}>2:00 PM</option>
+                    <option ${timeValue === '2:30 PM' ? 'selected' : ''}>2:30 PM</option>
+                    <option ${timeValue === '3:00 PM' ? 'selected' : ''}>3:00 PM</option>
+                    <option ${timeValue === '3:30 PM' ? 'selected' : ''}>3:30 PM</option>
+                    <option ${timeValue === '4:00 PM' ? 'selected' : ''}>4:00 PM</option>
+                    <option ${timeValue === '4:30 PM' ? 'selected' : ''}>4:30 PM</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Notes (optional)</label>
+                <textarea id="appt-notes" rows="3" placeholder="Any additional notes..." style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:none;box-sizing:border-box;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e2e8f0'">${notesValue}</textarea>
+              </div>
+            </div>
+            <div style="margin-top:24px;display:flex;gap:12px;">
+              <button type="button" id="cancel-appt-btn" style="flex:1;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-weight:700;color:#64748b;background:white;cursor:pointer;font-size:14px;">Cancel</button>
+              <button type="submit" style="flex:2;padding:12px;background:#0f172a;color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:14px;">${submitText}</button>
+            </div>
+          </form>
+        </div>
+      `;
+      
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+      document.getElementById('close-appt-modal')?.addEventListener('click', () => overlay.remove());
+      document.getElementById('cancel-appt-btn')?.addEventListener('click', () => overlay.remove());
+      
+      document.getElementById('appointment-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const patient = document.getElementById('appt-patient')?.value;
+        const service = document.getElementById('appt-service')?.value;
+        const date = document.getElementById('appt-date')?.value;
+        const time = document.getElementById('appt-time')?.value;
+        const notes = document.getElementById('appt-notes')?.value || '';
+        
+        if (!patient || !date) {
+          showToast('Patient name and date are required', 'error');
+          return;
+        }
+        
+        // Classify category based on service
+        let category = 'general';
+        if (['Teeth Whitening', 'Dental Implant Consult', 'Veneers'].includes(service)) {
+          category = 'cosmetic';
+        } else if (service === 'Emergency') {
+          category = 'emergency';
+        }
+        
+        if (apptToEdit) {
+          // Edit mode
+          const idx = state.appointments.findIndex(a => a.id === apptToEdit.id);
+          if (idx !== -1) {
+            state.appointments[idx] = {
+              ...apptToEdit,
+              name: patient,
+              service: service,
+              date: date,
+              time: time,
+              category: category,
+              notes: notes
+            };
+            saveAppointmentsToStorage();
+            showToast(`✅ Appointment rescheduled for ${patient} on ${date} at ${time}`, 'success');
+          }
+        } else {
+          // Create mode
+          const newAppt = {
+            id: 'appt_' + Date.now(),
+            name: patient,
+            service: service,
+            date: date,
+            time: time,
+            category: category,
+            status: 'Scheduled',
+            notes: notes
+          };
+          state.appointments.push(newAppt);
+          saveAppointmentsToStorage();
+          showToast(`✅ Appointment booked for ${patient} on ${date} at ${time}`, 'success');
+        }
+        
+        overlay.remove();
+        renderCalendar();
+      });
+    }
+
+    // Appointment Details Modal
+    window.openAppointmentDetails = function(apptId) {
+      const appt = state.appointments.find(a => a.id === apptId);
+      if (!appt) return;
+      
+      const existing = document.getElementById('appt-details-modal');
+      if (existing) existing.remove();
+      
+      const overlay = document.createElement('div');
+      overlay.id = 'appt-details-modal';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
+      
+      let statusBadgeClass = 'status-scheduled';
+      if (appt.status === 'Confirmed') statusBadgeClass = 'status-confirmed';
+      if (appt.status === 'Checked-in') statusBadgeClass = 'status-checked-in';
+      if (appt.status === 'Completed') statusBadgeClass = 'status-completed';
+      if (appt.status === 'Cancelled') statusBadgeClass = 'status-cancelled';
+      
+      overlay.innerHTML = `
+        <div style="background:white;border-radius:20px;width:100%;max-width:480px;box-shadow:0 25px 50px rgba(0,0,0,0.15);overflow:hidden;">
+          <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;">
+            <div>
+              <span class="status-badge ${statusBadgeClass}">${appt.status}</span>
+              <h2 style="font-size:18px;font-weight:850;color:#0f172a;margin:6px 0 0 0;font-family:'Outfit',sans-serif;">Appointment Details</h2>
+            </div>
+            <button onclick="document.getElementById('appt-details-modal').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
+          </div>
+          
+          <div style="padding:24px 28px;">
+            <div style="display:grid;gap:18px;margin-bottom:24px;">
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Patient Name</label>
+                <div style="font-size:16px;font-weight:800;color:#0f172a;">👤 ${appt.name}</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div>
+                  <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Date</label>
+                  <div style="font-size:14px;font-weight:700;color:#334155;">📅 ${appt.date}</div>
+                </div>
+                <div>
+                  <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Time</label>
+                  <div style="font-size:14px;font-weight:700;color:#334155;">🕒 ${appt.time}</div>
+                </div>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Service Type</label>
+                <div style="font-size:14px;font-weight:700;color:#334155;">🦷 ${appt.service}</div>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Notes</label>
+                <div style="font-size:13px;color:#475569;background:#f8fafc;padding:12px;border-radius:10px;line-height:1.6;border:1px solid #f1f5f9;">
+                  ${appt.notes || '<span style="color:#94a3b8;font-style:italic;">No notes provided.</span>'}
+                </div>
+              </div>
+            </div>
+            
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <!-- Quick Status Actions -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                <button onclick="updateApptStatus('${appt.id}', 'Confirmed')" style="padding:10px;font-size:12px;font-weight:700;background:#dcfce7;color:#15803d;border:none;border-radius:10px;cursor:pointer;">Confirm</button>
+                <button onclick="updateApptStatus('${appt.id}', 'Checked-in')" style="padding:10px;font-size:12px;font-weight:700;background:#ccfbf1;color:#0f766e;border:none;border-radius:10px;cursor:pointer;">Check-in</button>
+                <button onclick="updateApptStatus('${appt.id}', 'Completed')" style="padding:10px;font-size:12px;font-weight:700;background:#e2e8f0;color:#475569;border:none;border-radius:10px;cursor:pointer;">Complete</button>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                <button onclick="rescheduleAppt('${appt.id}')" style="padding:12px;font-size:13px;font-weight:700;background:white;color:#475569;border:1px solid #cbd5e1;border-radius:12px;cursor:pointer;">Reschedule</button>
+                <button onclick="cancelAppt('${appt.id}')" style="padding:12px;font-size:13px;font-weight:800;background:#fee2e2;color:#b91c1c;border:none;border-radius:12px;cursor:pointer;">Cancel Appt</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+    };
+
+    window.updateApptStatus = function(apptId, newStatus) {
+      const appt = state.appointments.find(a => a.id === apptId);
+      if (appt) {
+        appt.status = newStatus;
+        saveAppointmentsToStorage();
+        showToast(`Status updated to ${newStatus} ✅`, 'success');
+        document.getElementById('appt-details-modal')?.remove();
+        renderCalendar();
+      }
+    };
+
+    window.cancelAppt = function(apptId) {
+      if (confirm('Are you sure you want to cancel this appointment?')) {
+        const appt = state.appointments.find(a => a.id === apptId);
+        if (appt) {
+          appt.status = 'Cancelled';
+          saveAppointmentsToStorage();
+          showToast('Appointment cancelled successfully 🟥', 'info');
+          document.getElementById('appt-details-modal')?.remove();
+          renderCalendar();
+        }
+      }
+    };
+
+    window.rescheduleAppt = function(apptId) {
+      const appt = state.appointments.find(a => a.id === apptId);
+      if (appt) {
+        document.getElementById('appt-details-modal')?.remove();
+        openAppointmentModal(appt.date, appt.time, appt);
+      }
+    };
+
+    // Initialize all controls and listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAppointments();
+      renderCalendar();
+
+      // Top bar New Appointment
+      document.getElementById('new-appointment-btn')?.addEventListener('click', () => openAppointmentModal());
+
+      // Wire view buttons
+      const dayBtn = document.getElementById('view-day-btn');
+      const weekBtn = document.getElementById('view-week-btn');
+      const monthBtn = document.getElementById('view-month-btn');
+
+      const setView = (view) => {
+        state.currentView = view;
+        [dayBtn, weekBtn, monthBtn].forEach(b => {
+          if (b) {
+            b.classList.remove('bg-white', 'text-brand-900', 'shadow-sm');
+            b.classList.add('text-slate-500');
+          }
+        });
+        const activeBtn = view === 'day' ? dayBtn : (view === 'week' ? weekBtn : monthBtn);
+        if (activeBtn) {
+          activeBtn.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
+          activeBtn.classList.remove('text-slate-500');
+        }
+        renderCalendar();
+      };
+
+      dayBtn?.addEventListener('click', () => setView('day'));
+      weekBtn?.addEventListener('click', () => setView('week'));
+      monthBtn?.addEventListener('click', () => setView('month'));
+
+      // Prev, Next, Today Buttons
+      document.getElementById('prev-btn')?.addEventListener('click', () => {
+        const offset = state.currentView === 'day' ? 1 : (state.currentView === 'week' ? 7 : 30);
+        state.currentDate.setDate(state.currentDate.getDate() - offset);
+        renderCalendar();
+      });
+
+      document.getElementById('next-btn')?.addEventListener('click', () => {
+        const offset = state.currentView === 'day' ? 1 : (state.currentView === 'week' ? 7 : 30);
+        state.currentDate.setDate(state.currentDate.getDate() + offset);
+        renderCalendar();
+      });
+
+      document.getElementById('today-btn')?.addEventListener('click', () => {
+        state.currentDate = new Date(2026, 4, 23); // Reset to demo focus day (Friday May 23)
+        renderCalendar();
+      });
+
+      // Filter controls
+      document.getElementById('appt-search')?.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        renderCalendar();
+      });
+
+      document.getElementById('filter-category')?.addEventListener('change', (e) => {
+        state.selectedCategory = e.target.value;
+        renderCalendar();
+      });
+
+      document.getElementById('filter-status')?.addEventListener('change', (e) => {
+        state.selectedStatus = e.target.value;
+        renderCalendar();
       });
     });
-    // Calendar view toggles
-    document.querySelectorAll('.glass-card button:not(#new-appointment-btn)').forEach(btn => {
-      if (['Day','Week','Month','Today'].includes(btn.textContent.trim())) {
-        btn.addEventListener('click', () => showToast('Switched to ' + btn.textContent.trim() + ' view', 'info'));
-      }
-    });
+
+    // Make sure we override in window so app.js can invoke if needed
+    window.openAppointmentModal = openAppointmentModal;
   </script>
 </body>
 </html>

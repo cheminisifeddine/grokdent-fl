@@ -203,10 +203,27 @@ const Dashboard = {
     ];
   },
 
-  /**
-   * Sample appointments data (fallback)
-   */
   getSampleAppointments() {
+    const stored = localStorage.getItem('renia_appointments');
+    if (stored) {
+      try {
+        const appts = JSON.parse(stored);
+        // Filter for May 23, 2026 (demo focus date) and not cancelled
+        const todayAppts = appts.filter(a => a.date === '2026-05-23' && a.status !== 'Cancelled');
+        if (todayAppts.length > 0) {
+          // Sort by time
+          return todayAppts.map(a => ({
+            patient_name: a.name,
+            time: a.time,
+            service: a.service,
+            status: a.status.toLowerCase()
+          }));
+        }
+      } catch (e) {
+        console.warn('Error reading from renia_appointments in dashboard:', e);
+      }
+    }
+
     return [
       { patient_name: 'Emily Johnson', time: '9:00 AM', service: 'General Checkup', status: 'confirmed' },
       { patient_name: 'Carlos Hernandez', time: '9:30 AM', service: 'Dental Implant Consult', status: 'confirmed' },
