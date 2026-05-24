@@ -1,70 +1,134 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renia AI - Login</title>
+  <title>Renia AI - Sign In</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              indigo: '#6366F1',
+              teal: '#0FD8B6',
+              coral: '#FF6B4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom CSS for transitions and micro-animations */
+    body { background-color: #FAFAFC; }
+    
+    .floating-shape { animation: float 15s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+    
+    .input-field { transition: all 0.2s; }
+    .input-field:focus { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); border-color: #6366F1; }
+  </style>
 </head>
-<body class="login-page">
+<body class="min-h-screen text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900 flex">
 
-  <!-- Animated Gradient Orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-
-  <!-- Login Card -->
-  <div class="login-card">
-    <div class="login-logo flex items-center justify-center gap-2.5">
-      <svg class="w-10 h-10" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#6366F1" />
-            <stop offset="100%" stop-color="#0FD8B6" />
-          </linearGradient>
-        </defs>
-        <path d="M6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10V18C14 20.2091 12.2091 22 10 22C7.79086 22 6 20.2091 6 18V10Z" fill="url(#logo-grad)" opacity="0.85"/>
-        <path d="M18 10C18 7.79086 19.7909 6 22 6C24.2091 6 26 7.79086 26 10V18C26 20.2091 24.2091 22 22 22C19.7909 22 18 20.2091 18 18V10Z" fill="url(#logo-grad)" opacity="0.85"/>
-        <rect x="13" y="10" width="6" height="14" rx="3" fill="url(#logo-grad)"/>
-        <rect x="9" y="10" width="2" height="6" rx="1" fill="#FFFFFF"/>
-        <rect x="21" y="10" width="2" height="6" rx="1" fill="#FFFFFF"/>
-        <rect x="15" y="12" width="2" height="10" rx="1" fill="#FFFFFF"/>
-      </svg>
-      <span>Renia AI</span>
+  <!-- Left Sidebar (Branding) -->
+  <div class="hidden lg:flex w-[45%] relative bg-slate-900 overflow-hidden flex-col justify-between p-12 text-white">
+    <!-- Abstract Background -->
+    <div class="absolute inset-0 z-0 opacity-40">
+      <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-600 rounded-full mix-blend-multiply filter blur-[100px] floating-shape"></div>
+      <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-teal-500 rounded-full mix-blend-multiply filter blur-[100px] floating-shape" style="animation-delay: 2s"></div>
     </div>
-    <p class="login-subtitle">AI Voice Receptionist for Florida Dental Clinics</p>
-
-    <form id="login-form">
-      <div class="form-group">
-        <label for="login-email">Email Address</label>
-        <input type="email" id="login-email" class="input" placeholder="you@clinic.com" required autocomplete="email">
+    
+    <!-- Logo -->
+    <a href="index.html" class="relative z-10 flex items-center gap-3 hover:opacity-80 transition-opacity">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30">🦷</div>
+      <span class="font-display font-bold text-2xl tracking-tight">Renia AI</span>
+    </a>
+    
+    <!-- Content -->
+    <div class="relative z-10 max-w-md">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-md">
+        <span class="material-symbols-outlined text-[16px] text-teal-400">verified_user</span>
+        <span>Secure Portal</span>
       </div>
-
-      <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" id="login-password" class="input" placeholder="Enter your password" required autocomplete="current-password">
+      <h1 class="font-display text-5xl font-bold leading-[1.1] mb-6">Welcome back.</h1>
+      <p class="text-slate-300 text-lg leading-relaxed mb-12">Log in to view call transcripts, manage your AI's schedule, and track missed revenue captured by Renia.</p>
+      
+      <!-- Testimonial -->
+      <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl">
+        <p class="text-sm italic text-slate-300 mb-4">"Renia paid for itself in the first week. It booked 8 patients while we were closed over the weekend."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-bold text-xs">SM</div>
+          <div class="text-xs font-semibold">Dr. Sarah Mitchell<span class="block text-slate-400 font-normal">Miami Dental</span></div>
+        </div>
       </div>
-
-      <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-lg">Sign In</button>
-
-      <div id="login-error" class="login-error"></div>
-    </form>
-
-    <div class="login-footer">
-      New clinic? <a href="signup.html">Sign up here →</a>
+    </div>
+    
+    <!-- Footer -->
+    <div class="relative z-10 text-sm text-slate-500">
+      &copy; 2026 Renia AI. All rights reserved.
     </div>
   </div>
 
-  <!-- Footer -->
-  <div class="page-footer">© 2026 Renia AI — AI-Powered Dental Reception</div>
+  <!-- Right Side (Form) -->
+  <div class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative bg-white">
+    <div class="w-full max-w-md">
+      
+      <!-- Mobile Logo (Hidden on Desktop) -->
+      <a href="index.html" class="lg:hidden flex items-center gap-3 mb-10 justify-center">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30 text-white">🦷</div>
+        <span class="font-display font-bold text-2xl tracking-tight text-slate-900">Renia AI</span>
+      </a>
 
-  <!-- Scripts -->
-  <script src="js/utils.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/app.js"></script>
+      <div class="mb-10 text-center lg:text-left">
+        <h2 class="text-3xl font-display font-bold text-slate-900 mb-2">Sign in to your account</h2>
+        <p class="text-slate-500">Manage your dental AI receptionist.</p>
+      </div>
+
+      <!-- Form Container -->
+      <form id="login-form" class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">Work Email</label>
+          <input type="email" class="input-field w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 outline-none" placeholder="dr.smith@clinic.com" required>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-1.5">
+            <label class="block text-sm font-semibold text-slate-700">Password</label>
+            <a href="#" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700">Forgot password?</a>
+          </div>
+          <input type="password" class="input-field w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 outline-none" placeholder="••••••••" required>
+        </div>
+
+        <div class="flex items-center gap-2 pt-2 pb-4">
+          <input type="checkbox" id="remember" class="w-4 h-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-600 cursor-pointer">
+          <label for="remember" class="text-sm text-slate-600 cursor-pointer">Remember me for 30 days</label>
+        </div>
+
+        <button type="button" class="w-full flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-bold bg-slate-900 text-white hover:bg-indigo-600 transition-all shadow-lg hover:shadow-indigo-500/30 active:scale-95" onclick="this.innerHTML='<span class=\'material-symbols-outlined animate-spin\'>progress_activity</span> Signing in...'; setTimeout(() => window.location.href='dashboard.html', 1000)">
+          Sign in
+        </button>
+      </form>
+      
+      <div class="mt-8 text-center lg:text-left">
+        <p class="text-sm text-slate-500">New to Renia AI? <a href="signup.html" class="font-semibold text-indigo-600 hover:text-indigo-700">Create a clinic account</a></p>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>

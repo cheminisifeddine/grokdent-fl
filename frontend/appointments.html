@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,336 +6,272 @@
   <title>Renia AI - Appointments</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              indigo: '#6366F1',
+              teal: '#0FD8B6',
+              coral: '#FF6B4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAFAFC; }
+    .glass-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E2EC;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+    .nav-item {
+      transition: all 0.2s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 216, 182, 0.08));
+      color: #6366F1;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+    .nav-item.active {
+      box-shadow: inset 0 0 12px rgba(99, 102, 241, 0.03);
+      font-weight: 600;
+    }
+    
+    /* Calendar Grid */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: 80px repeat(7, 1fr);
+      border-top: 1px solid #E2E2EC;
+      border-left: 1px solid #E2E2EC;
+    }
+    .calendar-cell {
+      border-right: 1px solid #E2E2EC;
+      border-bottom: 1px solid #E2E2EC;
+      min-height: 80px;
+      padding: 4px;
+    }
+    .calendar-header {
+      background: #F8F8FC;
+      text-align: center;
+      padding: 12px 8px;
+      font-weight: 600;
+      color: #64748b;
+      font-size: 13px;
+    }
+    .time-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-align: right;
+      padding-right: 8px;
+      padding-top: 8px;
+      background: #FFFFFF;
+    }
+    .appt-block {
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 11px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .appt-block:hover {
+      opacity: 0.8;
+    }
+    .appt-general { background: #e0e7ff; border-left: 3px solid #6366f1; color: #3730a3; }
+    .appt-cosmetic { background: #ccfbf1; border-left: 3px solid #14b8a6; color: #0f766e; }
+    .appt-emergency { background: #ffe4e6; border-left: 3px solid #f43f5e; color: #be123c; }
+  </style>
 </head>
-<body>
-  <div class="layout">
+<body class="text-slate-800 antialiased h-screen overflow-hidden flex">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">🦷 Renia AI</div>
-      <nav>
-        <ul class="sidebar-nav">
-          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
-          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
-          <li><a href="appointments.html" class="active"><span class="nav-icon">📅</span> Appointments</a></li>
-          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
-          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
-          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
-          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
-        </ul>
+  <!-- Sidebar -->
+  <aside class="w-[280px] bg-white/80 backdrop-blur-xl border-r border-slate-200 flex flex-col justify-between h-full z-20 shrink-0">
+    <div>
+      <div class="px-6 py-8 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-white text-sm shadow-lg shadow-indigo-500/20">🦷</div>
+        <span class="font-display font-bold text-xl tracking-tight text-slate-900">Renia AI</span>
+      </div>
+
+      <nav class="px-4 space-y-1">
+        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </a>
+        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">call</span> Calls
+        </a>
+        <a href="appointments.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
+        </a>
+        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
+        </a>
+        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
+        </a>
       </nav>
-      <div class="sidebar-user">
-        <div class="sidebar-user-avatar">SM</div>
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
-          <div class="sidebar-user-role">Admin</div>
-        </div>
-        <button class="sidebar-logout" title="Logout">🚪</button>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <div class="topbar">
-        <h1>Appointments</h1>
-        <div class="topbar-actions">
-          <button id="new-appointment-btn" class="btn btn-primary">+ New Appointment</button>
-        </div>
-      </div>
-
-      <!-- Week View -->
-      <div class="card" style="padding: 16px; overflow: hidden;">
-        <div class="card-header" style="margin-bottom:12px;">
-          <h3>📅 Week of May 19 – May 25, 2026</h3>
-          <div class="flex gap-2">
-            <button class="btn btn-ghost btn-sm">← Prev</button>
-            <button class="btn btn-secondary btn-sm">Today</button>
-            <button class="btn btn-ghost btn-sm">Next →</button>
-          </div>
-        </div>
-
-        <div class="week-view">
-          <!-- Header -->
-          <div class="week-header">
-            <div class="week-header-cell"></div>
-            <div class="week-header-cell">Mon 19</div>
-            <div class="week-header-cell">Tue 20</div>
-            <div class="week-header-cell">Wed 21</div>
-            <div class="week-header-cell">Thu 22</div>
-            <div class="week-header-cell today">Fri 23</div>
-            <div class="week-header-cell">Sat 24</div>
-            <div class="week-header-cell">Sun 25</div>
-          </div>
-
-          <!-- Time Rows -->
-          <div class="week-row">
-            <div class="week-time">8:00 AM</div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>8:30</strong> J. Adams<br><span style="opacity:0.7;">Checkup</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">9:00 AM</div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>9:00</strong> E. Johnson<br><span style="opacity:0.7;">Cleaning</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-cosmetic">
-                <strong>9:00</strong> R. Davis<br><span style="opacity:0.7;">Whitening</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>9:00</strong> M. Rodriguez<br><span style="opacity:0.7;">Cleaning</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>9:00</strong> E. Johnson<br><span style="opacity:0.7;">Checkup</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>9:00</strong> A. Lopez<br><span style="opacity:0.7;">Cleaning</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">10:00 AM</div>
-            <div class="week-cell">
-              <div class="week-appointment service-cosmetic">
-                <strong>10:00</strong> L. Thompson<br><span style="opacity:0.7;">Veneers</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>10:00</strong> K. Harris<br><span style="opacity:0.7;">Filling</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-cosmetic">
-                <strong>10:00</strong> L. Thompson<br><span style="opacity:0.7;">Whitening</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">11:00 AM</div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>11:00</strong> S. Williams<br><span style="opacity:0.7;">Checkup</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>11:00</strong> D. Park<br><span style="opacity:0.7;">Ortho</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>11:00</strong> D. Park<br><span style="opacity:0.7;">Ortho F/U</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">12:00 PM</div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-            <div class="week-cell" style="background: rgba(255,255,255,0.01);"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">1:00 PM</div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>1:00</strong> P. Garcia<br><span style="opacity:0.7;">Cleaning</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-emergency">
-                <strong>1:30</strong> A. Garcia<br><span style="opacity:0.7;">Emergency</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>1:30</strong> A. Garcia<br><span style="opacity:0.7;">Emergency</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">2:00 PM</div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>2:00</strong> T. Martinez<br><span style="opacity:0.7;">X-Rays</span>
-              </div>
-            </div>
-            <div class="week-cell">
-              <div class="week-appointment service-cosmetic">
-                <strong>2:30</strong> N. Taylor<br><span style="opacity:0.7;">Implant Consult</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">3:00 PM</div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>3:00</strong> B. Jackson<br><span style="opacity:0.7;">Root Canal</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>3:00</strong> H. Lee<br><span style="opacity:0.7;">Filling</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">4:00 PM</div>
-            <div class="week-cell"></div>
-            <div class="week-cell">
-              <div class="week-appointment service-general">
-                <strong>4:00</strong> C. Hernandez<br><span style="opacity:0.7;">Implant</span>
-              </div>
-            </div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-
-          <div class="week-row">
-            <div class="week-time">5:00 PM</div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-            <div class="week-cell"></div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- New Appointment Modal -->
-  <div class="modal-overlay" id="appointment-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>📅 New Appointment</h3>
-        <button class="modal-close">✕</button>
-      </div>
-
-      <form id="appointment-form">
-        <div class="form-group">
-          <label for="appt-patient">Patient Name</label>
-          <input type="text" id="appt-patient" class="input" placeholder="Search or enter patient name..." required>
-        </div>
-
-        <div class="form-group">
-          <label for="appt-service">Service</label>
-          <select id="appt-service" class="select" required>
-            <option value="">Select service...</option>
-            <option value="General Checkup">General Checkup</option>
-            <option value="Dental Cleaning">Dental Cleaning</option>
-            <option value="Teeth Whitening">Teeth Whitening</option>
-            <option value="Dental Implant">Dental Implant</option>
-            <option value="Root Canal">Root Canal</option>
-            <option value="Orthodontics">Orthodontics</option>
-            <option value="Cosmetic Veneers">Cosmetic Veneers</option>
-            <option value="Emergency Dental">Emergency Dental</option>
-            <option value="Filling">Filling</option>
-            <option value="Oral Surgery">Oral Surgery</option>
-          </select>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="appt-date">Date</label>
-            <input type="date" id="appt-date" class="input" required>
-          </div>
-          <div class="form-group">
-            <label for="appt-time">Time</label>
-            <input type="time" id="appt-time" class="input" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="appt-duration">Duration (minutes)</label>
-          <select id="appt-duration" class="select">
-            <option value="15">15 minutes</option>
-            <option value="30" selected>30 minutes</option>
-            <option value="45">45 minutes</option>
-            <option value="60">60 minutes</option>
-            <option value="90">90 minutes</option>
-            <option value="120">2 hours</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="appt-notes">Notes</label>
-          <textarea id="appt-notes" class="textarea" rows="3" placeholder="Additional notes..."></textarea>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary modal-close">Cancel</button>
-          <button type="submit" class="btn btn-primary">Create Appointment</button>
-        </div>
-      </form>
     </div>
-  </div>
 
-  <!-- Mobile Sidebar Toggle -->
-  <button class="sidebar-toggle">☰</button>
+    <div class="px-4 pb-8">
+      <div class="mb-4">
+        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+        </a>
+        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
+        </a>
+      </div>
+      
+      <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">SM</div>
+          <div>
+            <div class="text-sm font-bold text-slate-900">Dr. Sarah M.</div>
+            <div class="text-xs text-slate-500">Admin</div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
+      </div>
+    </div>
+  </aside>
 
-  <!-- Scripts -->
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50/50">
+    
+    <!-- Topbar -->
+    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200/60 bg-white/50 backdrop-blur-md z-10 shrink-0">
+      <h1 class="font-display text-2xl font-bold text-slate-900 tracking-tight">Appointments</h1>
+      
+      <div class="flex items-center gap-5">
+        <button class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md shadow-indigo-500/20 hover:bg-indigo-700 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">add</span> New Appointment
+        </button>
+        
+        <button class="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Page Content -->
+    <div class="flex-1 overflow-y-auto p-8">
+      <div class="max-w-[1400px] mx-auto">
+        
+        <div class="glass-card rounded-2xl overflow-hidden bg-white">
+          <!-- Calendar Header Controls -->
+          <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="text-lg font-bold text-slate-900">Week of May 19 - May 25, 2026</h2>
+            <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+              <button class="px-4 py-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white transition-colors">Day</button>
+              <button class="px-4 py-1.5 text-sm font-semibold bg-white text-indigo-600 rounded-lg shadow-sm">Week</button>
+              <button class="px-4 py-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white transition-colors">Month</button>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">←</button>
+              <button class="px-4 py-1.5 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Today</button>
+              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">→</button>
+            </div>
+          </div>
+
+          <!-- Calendar Grid -->
+          <div class="calendar-grid">
+            <div class="calendar-cell calendar-header border-none">Time</div>
+            <div class="calendar-cell calendar-header">Mon 19</div>
+            <div class="calendar-cell calendar-header">Tue 20</div>
+            <div class="calendar-cell calendar-header">Wed 21</div>
+            <div class="calendar-cell calendar-header">Thu 22</div>
+            <div class="calendar-cell calendar-header text-indigo-600 font-bold bg-indigo-50/50">Fri 23</div>
+            <div class="calendar-cell calendar-header">Sat 24</div>
+            <div class="calendar-cell calendar-header">Sun 25</div>
+
+            <!-- 9 AM Row -->
+            <div class="calendar-cell time-label">9:00 AM</div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>9:00</strong> E. Johnson<br>Cleaning</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>9:00</strong> R. Davis<br>Whitening</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>9:00</strong> M. Rodriguez<br>Cleaning</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>9:00</strong> E. Johnson<br>Checkup</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+
+            <!-- 10 AM Row -->
+            <div class="calendar-cell time-label">10:00 AM</div>
+            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>10:00</strong> L. Thompson<br>Veneers</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>10:00</strong> K. Harris<br>Filling</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>10:00</strong> L. Thompson<br>Whitening</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+
+            <!-- 11 AM Row -->
+            <div class="calendar-cell time-label">11:00 AM</div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>11:00</strong> S. Williams<br>Checkup</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>11:00</strong> D. Park<br>Ortho</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>11:00</strong> D. Park<br>Ortho F/U</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+
+            <!-- 12 PM Row -->
+            <div class="calendar-cell time-label">12:00 PM</div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+
+            <!-- 1 PM Row -->
+            <div class="calendar-cell time-label">1:00 PM</div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>1:00</strong> P. Garcia<br>Cleaning</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"><div class="appt-block appt-emergency"><strong>1:30</strong> A. Garcia<br>Emergency</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-emergency"><strong>1:30</strong> A. Garcia<br>Emergency</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+
+            <!-- 2 PM Row -->
+            <div class="calendar-cell time-label">2:00 PM</div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"><div class="appt-block appt-general"><strong>2:00</strong> T. Martinez<br>X-Rays</div></div>
+            <div class="calendar-cell"><div class="appt-block appt-cosmetic"><strong>2:30</strong> N. Taylor<br>Implant Consult</div></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+            <div class="calendar-cell bg-slate-50"></div>
+
+            <!-- 3 PM Row -->
+            <div class="calendar-cell time-label border-b-0">3:00 PM</div>
+            <div class="calendar-cell border-b-0"><div class="appt-block appt-general"><strong>3:00</strong> B. Jackson<br>Root Canal</div></div>
+            <div class="calendar-cell border-b-0"></div>
+            <div class="calendar-cell border-b-0"></div>
+            <div class="calendar-cell border-b-0"><div class="appt-block appt-general"><strong>3:00</strong> H. Lee<br>Filling</div></div>
+            <div class="calendar-cell border-b-0"></div>
+            <div class="calendar-cell border-b-0 bg-slate-50"></div>
+            <div class="calendar-cell border-b-0 bg-slate-50"></div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,199 +6,175 @@
   <title>Renia AI - Billing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              indigo: '#6366F1',
+              teal: '#0FD8B6',
+              coral: '#FF6B4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAFAFC; }
+    .glass-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E2EC;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+    .nav-item {
+      transition: all 0.2s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 216, 182, 0.08));
+      color: #6366F1;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+    .nav-item.active {
+      box-shadow: inset 0 0 12px rgba(99, 102, 241, 0.03);
+      font-weight: 600;
+    }
+  </style>
 </head>
-<body>
-  <div class="layout">
+<body class="text-slate-800 antialiased h-screen overflow-hidden flex">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">🦷 Renia AI</div>
-      <nav>
-        <ul class="sidebar-nav">
-          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
-          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
-          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
-          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
-          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
-          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
-          <li><a href="billing.html" class="active"><span class="nav-icon">💳</span> Billing</a></li>
-        </ul>
+  <!-- Sidebar -->
+  <aside class="w-[280px] bg-white/80 backdrop-blur-xl border-r border-slate-200 flex flex-col justify-between h-full z-20 shrink-0">
+    <div>
+      <div class="px-6 py-8 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-white text-sm shadow-lg shadow-indigo-500/20">🦷</div>
+        <span class="font-display font-bold text-xl tracking-tight text-slate-900">Renia AI</span>
+      </div>
+
+      <nav class="px-4 space-y-1">
+        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </a>
+        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">call</span> Calls
+        </a>
+        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
+        </a>
+        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
+        </a>
+        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
+        </a>
       </nav>
-      <div class="sidebar-user">
-        <div class="sidebar-user-avatar">SM</div>
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
-          <div class="sidebar-user-role">Admin</div>
-        </div>
-        <button class="sidebar-logout" title="Logout">🚪</button>
-      </div>
-    </aside>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <div class="topbar">
-        <h1>Billing & Subscription</h1>
+    <div class="px-4 pb-8">
+      <div class="mb-4">
+        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+        </a>
+        <a href="billing.html" class="nav-item active flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
+        </a>
       </div>
-
-      <!-- Current Plan -->
-      <div class="card" style="margin-bottom: 32px;">
-        <div class="flex-between" style="margin-bottom: 20px;">
+      
+      <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">SM</div>
           <div>
-            <h3>Current Plan: <span class="text-gradient">Professional</span></h3>
-            <p class="text-sm text-secondary" style="margin-top: 4px;">Your next billing date is June 1, 2026</p>
-          </div>
-          <span class="badge badge-success">Active</span>
-        </div>
-        <div style="margin-bottom: 8px;">
-          <div class="flex-between" style="margin-bottom: 4px;">
-            <span class="text-sm">Calls Used This Month</span>
-            <span class="text-sm"><strong>347</strong> / 500</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 69%;"></div>
+            <div class="text-sm font-bold text-slate-900">Dr. Sarah M.</div>
+            <div class="text-xs text-slate-500">Admin</div>
           </div>
         </div>
-        <p class="text-sm text-secondary">153 calls remaining · Resets June 1</p>
+        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
       </div>
+    </div>
+  </aside>
 
-      <!-- Plan Cards -->
-      <div class="three-col" style="margin-bottom: 40px;">
-        <!-- Starter Plan -->
-        <div class="card plan-card">
-          <div class="plan-name">Starter</div>
-          <div class="plan-price">$299<span>/mo</span></div>
-          <p class="text-sm text-secondary" style="margin-top: 4px;">Perfect for solo practices</p>
-          <ul class="plan-features">
-            <li>200 calls per month</li>
-            <li>1 clinic location</li>
-            <li>Basic analytics dashboard</li>
-            <li>Email support</li>
-            <li>Standard AI voice</li>
-            <li>English language</li>
-          </ul>
-          <button class="btn btn-secondary btn-block select-plan-btn" data-plan="starter">Select Plan</button>
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50/50">
+    
+    <!-- Topbar -->
+    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200/60 bg-white/50 backdrop-blur-md z-10 shrink-0">
+      <h1 class="font-display text-2xl font-bold text-slate-900 tracking-tight">Billing & Subscription</h1>
+    </header>
+
+    <!-- Scrollable Page Content -->
+    <div class="flex-1 overflow-y-auto p-8">
+      <div class="max-w-[1000px] mx-auto">
+        
+        <!-- Current Plan Overview -->
+        <div class="glass-card rounded-2xl p-8 mb-8 bg-gradient-to-br from-indigo-900 to-slate-900 text-white border-none shadow-xl">
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-wider mb-4">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Active Plan
+              </div>
+              <h2 class="font-display text-4xl font-bold">Professional Tier</h2>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-bold">$599<span class="text-lg text-slate-400 font-medium">/mo</span></div>
+              <div class="text-sm text-slate-400 mt-1">Renews June 1, 2026</div>
+            </div>
+          </div>
+          
+          <div class="bg-white/10 rounded-xl p-6 backdrop-blur-sm border border-white/10">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold">Monthly Call Allowance</span>
+              <span class="text-sm font-bold">347 / 500 calls</span>
+            </div>
+            <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-teal-400 to-indigo-400 w-[69%] rounded-full"></div>
+            </div>
+          </div>
         </div>
 
-        <!-- Professional Plan -->
-        <div class="card plan-card featured">
-          <div class="plan-badge">⭐ MOST POPULAR</div>
-          <div class="plan-name">Professional</div>
-          <div class="plan-price">$599<span>/mo</span></div>
-          <p class="text-sm text-secondary" style="margin-top: 4px;">Best for growing clinics</p>
-          <ul class="plan-features">
-            <li>500 calls per month</li>
-            <li>3 clinic locations</li>
-            <li>Full analytics & reports</li>
-            <li>Priority support</li>
-            <li>Custom greeting message</li>
-            <li>English + Spanish bilingual</li>
-            <li>Knowledge base editor</li>
-            <li>Appointment integration</li>
-          </ul>
-          <button class="btn btn-primary btn-block btn-current select-plan-btn" data-plan="professional" style="opacity: 0.7; cursor: default;">Current Plan</button>
-        </div>
-
-        <!-- Enterprise Plan -->
-        <div class="card plan-card">
-          <div class="plan-name">Enterprise</div>
-          <div class="plan-price">$999<span>/mo</span></div>
-          <p class="text-sm text-secondary" style="margin-top: 4px;">For multi-location practices</p>
-          <ul class="plan-features">
-            <li>Unlimited calls</li>
-            <li>Unlimited locations</li>
-            <li>Custom AI voice training</li>
-            <li>Dedicated Customer Success Manager</li>
-            <li>API access & integrations</li>
-            <li>Multi-language support</li>
-            <li>HIPAA compliance audit</li>
-            <li>White-label option</li>
-            <li>Custom analytics reports</li>
-          </ul>
-          <button class="btn btn-secondary btn-block select-plan-btn" data-plan="enterprise">Select Plan</button>
-        </div>
-      </div>
-
-      <!-- Invoice History -->
-      <div class="card invoice-table">
-        <div class="card-header">
-          <h3>Invoice History</h3>
-          <button class="btn btn-ghost btn-sm">Download All</button>
-        </div>
-        <div class="table-container">
-          <table class="table">
+        <!-- Invoices -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-display text-xl font-bold text-slate-900 mb-6">Recent Invoices</h3>
+          <table class="w-full text-left">
             <thead>
-              <tr>
-                <th>Invoice</th>
-                <th>Date</th>
-                <th>Plan</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Actions</th>
+              <tr class="border-b border-slate-100 text-slate-500 text-xs uppercase tracking-wider font-semibold">
+                <th class="pb-4">Invoice</th>
+                <th class="pb-4">Date</th>
+                <th class="pb-4">Amount</th>
+                <th class="pb-4">Status</th>
+                <th class="pb-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>INV-2026-0523</td>
-                <td>May 1, 2026</td>
-                <td>Professional</td>
-                <td>$599.00</td>
-                <td><span class="badge badge-success">Paid</span></td>
-                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+            <tbody class="text-sm">
+              <tr class="border-b border-slate-50">
+                <td class="py-4 font-mono text-slate-600">INV-2026-0523</td>
+                <td class="py-4 font-semibold text-slate-900">May 1, 2026</td>
+                <td class="py-4 font-semibold">$599.00</td>
+                <td class="py-4"><span class="bg-emerald-50 text-emerald-600 px-2 py-1 rounded text-xs font-bold uppercase">Paid</span></td>
+                <td class="py-4 text-right"><button class="text-indigo-600 hover:text-indigo-800 font-semibold">Download PDF</button></td>
               </tr>
               <tr>
-                <td>INV-2026-0422</td>
-                <td>Apr 1, 2026</td>
-                <td>Professional</td>
-                <td>$599.00</td>
-                <td><span class="badge badge-success">Paid</span></td>
-                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
-              </tr>
-              <tr>
-                <td>INV-2026-0321</td>
-                <td>Mar 1, 2026</td>
-                <td>Professional</td>
-                <td>$599.00</td>
-                <td><span class="badge badge-success">Paid</span></td>
-                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
-              </tr>
-              <tr>
-                <td>INV-2026-0220</td>
-                <td>Feb 1, 2026</td>
-                <td>Professional</td>
-                <td>$599.00</td>
-                <td><span class="badge badge-success">Paid</span></td>
-                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
-              </tr>
-              <tr>
-                <td>INV-2026-0119</td>
-                <td>Jan 1, 2026</td>
-                <td>Starter</td>
-                <td>$299.00</td>
-                <td><span class="badge badge-success">Paid</span></td>
-                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
-              </tr>
-              <tr>
-                <td>INV-2025-1218</td>
-                <td>Dec 1, 2025</td>
-                <td>Starter</td>
-                <td>$299.00</td>
-                <td><span class="badge badge-success">Paid</span></td>
-                <td><button class="btn btn-ghost btn-sm">📄 PDF</button></td>
+                <td class="py-4 font-mono text-slate-600">INV-2026-0422</td>
+                <td class="py-4 font-semibold text-slate-900">Apr 1, 2026</td>
+                <td class="py-4 font-semibold">$599.00</td>
+                <td class="py-4"><span class="bg-emerald-50 text-emerald-600 px-2 py-1 rounded text-xs font-bold uppercase">Paid</span></td>
+                <td class="py-4 text-right"><button class="text-indigo-600 hover:text-indigo-800 font-semibold">Download PDF</button></td>
               </tr>
             </tbody>
           </table>
         </div>
+
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
 
-  <!-- Mobile Sidebar Toggle -->
-  <button class="sidebar-toggle">☰</button>
-
-  <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>

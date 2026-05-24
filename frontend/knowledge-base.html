@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,198 +6,198 @@
   <title>Renia AI - Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              indigo: '#6366F1',
+              teal: '#0FD8B6',
+              coral: '#FF6B4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAFAFC; }
+    .glass-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E2EC;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+    .nav-item {
+      transition: all 0.2s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 216, 182, 0.08));
+      color: #6366F1;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+    .nav-item.active {
+      box-shadow: inset 0 0 12px rgba(99, 102, 241, 0.03);
+      font-weight: 600;
+    }
+  </style>
 </head>
-<body>
-  <div class="layout">
+<body class="text-slate-800 antialiased h-screen overflow-hidden flex">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">🦷 Renia AI</div>
-      <nav>
-        <ul class="sidebar-nav">
-          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
-          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
-          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
-          <li><a href="knowledge-base.html" class="active"><span class="nav-icon">📚</span> Knowledge Base</a></li>
-          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
-          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
-          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
-        </ul>
+  <!-- Sidebar -->
+  <aside class="w-[280px] bg-white/80 backdrop-blur-xl border-r border-slate-200 flex flex-col justify-between h-full z-20 shrink-0">
+    <div>
+      <div class="px-6 py-8 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-white text-sm shadow-lg shadow-indigo-500/20">🦷</div>
+        <span class="font-display font-bold text-xl tracking-tight text-slate-900">Renia AI</span>
+      </div>
+
+      <nav class="px-4 space-y-1">
+        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </a>
+        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">call</span> Calls
+        </a>
+        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
+        </a>
+        <a href="knowledge-base.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
+        </a>
+        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
+        </a>
       </nav>
-      <div class="sidebar-user">
-        <div class="sidebar-user-avatar">SM</div>
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
-          <div class="sidebar-user-role">Admin</div>
-        </div>
-        <button class="sidebar-logout" title="Logout">🚪</button>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <div class="topbar">
-        <h1>Knowledge Base</h1>
-        <div class="topbar-actions">
-          <button id="seed-defaults-btn" class="btn btn-secondary">🌱 Seed Defaults</button>
-          <button id="add-kb-btn" class="btn btn-primary">+ Add Entry</button>
-        </div>
-      </div>
-
-      <!-- Category Tabs -->
-      <div class="tabs">
-        <button class="tab kb-tab active" data-category="all">All</button>
-        <button class="tab kb-tab" data-category="general">General</button>
-        <button class="tab kb-tab" data-category="services">Services</button>
-        <button class="tab kb-tab" data-category="insurance">Insurance</button>
-        <button class="tab kb-tab" data-category="pricing">Pricing</button>
-        <button class="tab kb-tab" data-category="hours">Hours</button>
-        <button class="tab kb-tab" data-category="location">Location</button>
-        <button class="tab kb-tab" data-category="emergency">Emergency</button>
-        <button class="tab kb-tab" data-category="policies">Policies</button>
-      </div>
-
-      <!-- KB Entries List -->
-      <div class="kb-list" id="kb-list">
-        <div class="kb-item" data-category="general">
-          <div class="flex-between mb-4">
-            <span class="badge badge-info">General</span>
-            <span class="badge badge-success">Active</span>
-          </div>
-          <div class="kb-question">What services does your dental clinic offer?</div>
-          <div class="kb-answer">We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.</div>
-          <div class="kb-item-actions">
-            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
-            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
-          </div>
-        </div>
-
-        <div class="kb-item" data-category="hours">
-          <div class="flex-between mb-4">
-            <span class="badge badge-info">Hours</span>
-            <span class="badge badge-success">Active</span>
-          </div>
-          <div class="kb-question">What are your office hours?</div>
-          <div class="kb-answer">We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.</div>
-          <div class="kb-item-actions">
-            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
-            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
-          </div>
-        </div>
-
-        <div class="kb-item" data-category="insurance">
-          <div class="flex-between mb-4">
-            <span class="badge badge-info">Insurance</span>
-            <span class="badge badge-success">Active</span>
-          </div>
-          <div class="kb-question">What insurance plans do you accept?</div>
-          <div class="kb-answer">We accept most major dental insurance plans including Delta Dental, Humana, MCNA Dental, Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.</div>
-          <div class="kb-item-actions">
-            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
-            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
-          </div>
-        </div>
-
-        <div class="kb-item" data-category="emergency">
-          <div class="flex-between mb-4">
-            <span class="badge badge-danger">Emergency</span>
-            <span class="badge badge-success">Active</span>
-          </div>
-          <div class="kb-question">What should I do if I have a dental emergency?</div>
-          <div class="kb-answer">If you're experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.</div>
-          <div class="kb-item-actions">
-            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
-            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
-          </div>
-        </div>
-
-        <div class="kb-item" data-category="policies">
-          <div class="flex-between mb-4">
-            <span class="badge badge-info">Policies</span>
-            <span class="badge badge-success">Active</span>
-          </div>
-          <div class="kb-question">What is your cancellation policy?</div>
-          <div class="kb-answer">We require at least 24 hours notice for appointment cancellations. Cancellations made less than 24 hours in advance may be subject to a $50 cancellation fee. We understand emergencies happen — if you need to cancel on short notice due to an emergency, please let us know and we'll do our best to accommodate you.</div>
-          <div class="kb-item-actions">
-            <button class="btn btn-ghost btn-sm kb-edit-btn">✏️ Edit</button>
-            <button class="btn btn-ghost btn-sm kb-delete-btn" style="color: var(--danger);">🗑️ Delete</button>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- Side Panel for Add/Edit KB Entry -->
-  <div class="side-panel" id="kb-panel">
-    <div class="side-panel-header">
-      <h3>Add Knowledge Entry</h3>
-      <button class="modal-close" id="close-kb-panel">✕</button>
     </div>
 
-    <form id="kb-form">
-      <div class="form-group">
-        <label for="kb-question">Question</label>
-        <input type="text" id="kb-question" class="input" placeholder="What do patients commonly ask?" required>
+    <div class="px-4 pb-8">
+      <div class="mb-4">
+        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+        </a>
+        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
+        </a>
       </div>
-
-      <div class="form-group">
-        <label for="kb-answer">Answer (English)</label>
-        <textarea id="kb-answer" class="textarea" rows="5" placeholder="Provide a detailed answer..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="kb-answer-es">Answer (Spanish) — Optional</label>
-        <textarea id="kb-answer-es" class="textarea" rows="4" placeholder="Proporcione una respuesta detallada..."></textarea>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="kb-category">Category</label>
-          <select id="kb-category" class="select">
-            <option value="general">General</option>
-            <option value="services">Services</option>
-            <option value="insurance">Insurance</option>
-            <option value="pricing">Pricing</option>
-            <option value="hours">Hours</option>
-            <option value="location">Location</option>
-            <option value="emergency">Emergency</option>
-            <option value="policies">Policies</option>
-          </select>
+      
+      <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">SM</div>
+          <div>
+            <div class="text-sm font-bold text-slate-900">Dr. Sarah M.</div>
+            <div class="text-xs text-slate-500">Admin</div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="kb-priority">Priority</label>
-          <select id="kb-priority" class="select">
-            <option value="low">Low</option>
-            <option value="medium" selected>Medium</option>
-            <option value="high">High</option>
-          </select>
+        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50/50">
+    
+    <!-- Topbar -->
+    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200/60 bg-white/50 backdrop-blur-md z-10 shrink-0">
+      <h1 class="font-display text-2xl font-bold text-slate-900 tracking-tight">Knowledge Base</h1>
+      
+      <div class="flex items-center gap-5">
+        <button class="text-slate-600 font-semibold text-sm hover:text-indigo-600 transition-colors px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-sm">
+          <span class="material-symbols-outlined text-[16px] inline-block align-middle mr-1">auto_awesome</span> Seed Defaults
+        </button>
+
+        <button class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md shadow-indigo-500/20 hover:bg-indigo-700 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">add</span> Add Entry
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Page Content -->
+    <div class="flex-1 overflow-y-auto p-8">
+      <div class="max-w-[1000px] mx-auto">
+        
+        <!-- Category Tabs -->
+        <div class="flex flex-wrap gap-2 mb-8 bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm inline-flex">
+          <button class="px-5 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-900 shadow-sm transition-colors">All</button>
+          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">General</button>
+          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Services</button>
+          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Insurance</button>
+          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Emergency</button>
+          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Policies</button>
         </div>
+
+        <!-- KB Entries -->
+        <div class="space-y-4">
+          
+          <!-- Entry 1 -->
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="bg-blue-50 text-blue-600 border border-blue-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">General</span>
+              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What services does your dental clinic offer?</h3>
+            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.</p>
+            <div class="flex items-center gap-3">
+              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+            </div>
+          </div>
+
+          <!-- Entry 2 -->
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="bg-indigo-50 text-indigo-600 border border-indigo-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Hours</span>
+              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What are your office hours?</h3>
+            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.</p>
+            <div class="flex items-center gap-3">
+              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+            </div>
+          </div>
+
+          <!-- Entry 3 -->
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="bg-teal-50 text-teal-600 border border-teal-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Insurance</span>
+              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What insurance plans do you accept?</h3>
+            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">We accept most major dental insurance plans including Delta Dental, Humana, MCNA Dental, Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.</p>
+            <div class="flex items-center gap-3">
+              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+            </div>
+          </div>
+
+          <!-- Entry 4 -->
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group border-rose-100">
+            <div class="flex items-center justify-between mb-4">
+              <span class="bg-rose-50 text-rose-600 border border-rose-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Emergency</span>
+              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What should I do if I have a dental emergency?</h3>
+            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">If you're experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.</p>
+            <div class="flex items-center gap-3">
+              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+            </div>
+          </div>
+
+        </div>
+
       </div>
+    </div>
+  </main>
 
-      <div class="form-group">
-        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-          <span>Active</span>
-          <label class="toggle">
-            <input type="checkbox" id="kb-active" checked>
-            <span class="toggle-slider"></span>
-          </label>
-        </label>
-      </div>
-
-      <div class="flex gap-3" style="margin-top: 24px;">
-        <button type="submit" class="btn btn-primary" style="flex:1;">Save Entry</button>
-        <button type="button" class="btn btn-secondary" id="close-kb-panel-2" onclick="document.getElementById('kb-panel').classList.remove('open')">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Mobile Sidebar Toggle -->
-  <button class="sidebar-toggle">☰</button>
-
-  <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>

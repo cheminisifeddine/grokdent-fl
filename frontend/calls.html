@@ -1,289 +1,245 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renia AI - Call History</title>
+  <title>Renia AI - Calls</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              indigo: '#6366F1',
+              teal: '#0FD8B6',
+              coral: '#FF6B4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAFAFC; }
+    .glass-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E2EC;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+    .nav-item {
+      transition: all 0.2s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 216, 182, 0.08));
+      color: #6366F1;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+    .nav-item.active {
+      box-shadow: inset 0 0 12px rgba(99, 102, 241, 0.03);
+      font-weight: 600;
+    }
+    .custom-table th {
+      border-bottom: 2px solid #E2E2EC;
+    }
+    .custom-table tr:hover td {
+      background-color: #F8F8FC;
+    }
+  </style>
 </head>
-<body>
-  <div class="layout">
+<body class="text-slate-800 antialiased h-screen overflow-hidden flex">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">🦷 Renia AI</div>
-      <nav>
-        <ul class="sidebar-nav">
-          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
-          <li><a href="calls.html" class="active"><span class="nav-icon">📞</span> Calls</a></li>
-          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
-          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
-          <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
-          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
-          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
-        </ul>
+  <!-- Sidebar -->
+  <aside class="w-[280px] bg-white/80 backdrop-blur-xl border-r border-slate-200 flex flex-col justify-between h-full z-20 shrink-0">
+    <div>
+      <div class="px-6 py-8 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-white text-sm shadow-lg shadow-indigo-500/20">🦷</div>
+        <span class="font-display font-bold text-xl tracking-tight text-slate-900">Renia AI</span>
+      </div>
+
+      <nav class="px-4 space-y-1">
+        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </a>
+        <a href="calls.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">call</span> Calls
+        </a>
+        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
+        </a>
+        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
+        </a>
+        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
+        </a>
       </nav>
-      <div class="sidebar-user">
-        <div class="sidebar-user-avatar">SM</div>
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
-          <div class="sidebar-user-role">Admin</div>
-        </div>
-        <button class="sidebar-logout" title="Logout">🚪</button>
-      </div>
-    </aside>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <div class="topbar">
-        <h1>Call History</h1>
-        <div class="topbar-actions">
-          <div class="live-indicator">Live</div>
-          <div class="notification-bell">🔔<span class="badge-count">3</span></div>
-        </div>
+    <div class="px-4 pb-8">
+      <div class="mb-4">
+        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+        </a>
+        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
+        </a>
       </div>
-
-      <!-- Stats Bar -->
-      <div class="stats-bar">
-        <div class="stat-mini">
+      
+      <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">SM</div>
           <div>
-            <div class="stat-mini-value">1,247</div>
-            <div class="stat-mini-label">Total Calls</div>
+            <div class="text-sm font-bold text-slate-900">Dr. Sarah M.</div>
+            <div class="text-xs text-slate-500">Admin</div>
           </div>
         </div>
-        <div class="stat-mini">
-          <div>
-            <div class="stat-mini-value">3:24</div>
-            <div class="stat-mini-label">Avg Duration</div>
-          </div>
-        </div>
-        <div class="stat-mini">
-          <div>
-            <div class="stat-mini-value">78%</div>
-            <div class="stat-mini-label">English</div>
-          </div>
-        </div>
-        <div class="stat-mini">
-          <div>
-            <div class="stat-mini-value">22%</div>
-            <div class="stat-mini-label">Spanish</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Filters -->
-      <div class="filters-bar">
-        <input type="date" class="input" id="call-date-from" style="width:auto; min-width:140px;">
-        <input type="date" class="input" id="call-date-to" style="width:auto; min-width:140px;">
-        <select class="select" id="call-status-filter" style="width:auto; min-width:140px;">
-          <option value="">All Status</option>
-          <option value="completed">Completed</option>
-          <option value="missed">Missed</option>
-          <option value="voicemail">Voicemail</option>
-        </select>
-        <select class="select" id="call-language-filter" style="width:auto; min-width:140px;">
-          <option value="">All Languages</option>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-        </select>
-        <div class="search-input" style="flex:1; min-width:200px;">
-          <input type="text" class="input" id="call-search" placeholder="Search calls...">
-        </div>
-      </div>
-
-      <!-- Call History Table -->
-      <div class="card" style="padding:0; overflow:hidden;">
-        <div class="table-container">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Date / Time</th>
-                <th>Caller</th>
-                <th>Duration</th>
-                <th>Language</th>
-                <th>Sentiment</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-status="completed" data-language="en">
-                <td>May 23, 2026 · 4:52 PM</td>
-                <td>Maria Rodriguez</td>
-                <td>4:05</td>
-                <td>🇪🇸 Spanish</td>
-                <td>😊 Positive</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="en">
-                <td>May 23, 2026 · 4:38 PM</td>
-                <td>James Wilson</td>
-                <td>3:02</td>
-                <td>🇺🇸 English</td>
-                <td>😊 Positive</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="es">
-                <td>May 23, 2026 · 4:15 PM</td>
-                <td>Sofia Martinez</td>
-                <td>5:10</td>
-                <td>🇪🇸 Spanish</td>
-                <td>😐 Neutral</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="en">
-                <td>May 23, 2026 · 3:47 PM</td>
-                <td>Robert Chen</td>
-                <td>1:35</td>
-                <td>🇺🇸 English</td>
-                <td>😊 Positive</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="missed" data-language="en">
-                <td>May 23, 2026 · 2:30 PM</td>
-                <td>(305) 555-0147</td>
-                <td>0:00</td>
-                <td>🇺🇸 English</td>
-                <td>—</td>
-                <td><span class="badge badge-danger">missed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="en">
-                <td>May 23, 2026 · 1:12 PM</td>
-                <td>Patricia Adams</td>
-                <td>6:22</td>
-                <td>🇺🇸 English</td>
-                <td>😊 Positive</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="es">
-                <td>May 23, 2026 · 12:45 PM</td>
-                <td>Juan Morales</td>
-                <td>3:48</td>
-                <td>🇪🇸 Spanish</td>
-                <td>😊 Positive</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="voicemail" data-language="en">
-                <td>May 23, 2026 · 11:20 AM</td>
-                <td>Angela White</td>
-                <td>0:45</td>
-                <td>🇺🇸 English</td>
-                <td>😐 Neutral</td>
-                <td><span class="badge badge-warning">voicemail</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="en">
-                <td>May 23, 2026 · 10:05 AM</td>
-                <td>Michael Brown</td>
-                <td>2:17</td>
-                <td>🇺🇸 English</td>
-                <td>😊 Positive</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-              <tr data-status="completed" data-language="es">
-                <td>May 23, 2026 · 9:33 AM</td>
-                <td>Isabella Ruiz</td>
-                <td>4:55</td>
-                <td>🇪🇸 Spanish</td>
-                <td>😟 Negative</td>
-                <td><span class="badge badge-success">completed</span></td>
-                <td><button class="btn btn-ghost btn-sm view-call-btn">View</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <button class="pagination-btn">←</button>
-        <button class="pagination-btn active">1</button>
-        <button class="pagination-btn">2</button>
-        <button class="pagination-btn">3</button>
-        <button class="pagination-btn">4</button>
-        <button class="pagination-btn">5</button>
-        <button class="pagination-btn">→</button>
-      </div>
-    </main>
-  </div>
-
-  <!-- Transcript Modal -->
-  <div class="modal-overlay" id="transcript-modal">
-    <div class="modal" style="max-width: 700px;">
-      <div class="modal-header">
-        <div>
-          <h3>Call Transcript</h3>
-          <p class="text-sm text-secondary" style="margin-top:4px;">Maria Rodriguez · May 23, 2026 · 4:05</p>
-        </div>
-        <button class="modal-close">✕</button>
-      </div>
-
-      <div class="transcript-messages">
-        <div class="transcript-bubble ai">
-          <div class="transcript-speaker">🤖 Renia AI AI</div>
-          Thank you for calling Sunshine Dental Care! This is your AI receptionist. How can I help you today?
-        </div>
-        <div class="transcript-bubble patient">
-          <div class="transcript-speaker">👤 Maria Rodriguez</div>
-          Hola, I need to schedule an appointment for a cleaning, please.
-        </div>
-        <div class="transcript-bubble ai">
-          <div class="transcript-speaker">🤖 Renia AI AI</div>
-          ¡Por supuesto! I'd be happy to help you schedule a cleaning. I can see we have availability this week. Would you prefer morning or afternoon?
-        </div>
-        <div class="transcript-bubble patient">
-          <div class="transcript-speaker">👤 Maria Rodriguez</div>
-          Morning would be better, maybe Thursday or Friday?
-        </div>
-        <div class="transcript-bubble ai">
-          <div class="transcript-speaker">🤖 Renia AI AI</div>
-          I have Thursday at 9:00 AM and 10:30 AM available, and Friday at 9:00 AM. Which works best for you?
-        </div>
-        <div class="transcript-bubble patient">
-          <div class="transcript-speaker">👤 Maria Rodriguez</div>
-          Thursday at 9:00 AM, please!
-        </div>
-        <div class="transcript-bubble ai">
-          <div class="transcript-speaker">🤖 Renia AI AI</div>
-          You're all set! I've booked your dental cleaning for Thursday, May 25th at 9:00 AM. You'll receive a confirmation text shortly. Is there anything else I can help you with?
-        </div>
-        <div class="transcript-bubble patient">
-          <div class="transcript-speaker">👤 Maria Rodriguez</div>
-          No, that's all. Thank you so much!
-        </div>
-        <div class="transcript-bubble ai">
-          <div class="transcript-speaker">🤖 Renia AI AI</div>
-          You're welcome, Maria! We'll see you Thursday. Have a wonderful day! 😊
-        </div>
-      </div>
-
-      <div class="card" style="margin-top: 16px; padding: 16px;">
-        <h4 style="margin-bottom: 8px;">📋 Call Summary</h4>
-        <p class="text-sm">Patient requested dental cleaning appointment. Scheduled for Thursday, May 25th at 9:00 AM. Language: bilingual (Spanish/English). Sentiment: Positive. Appointment auto-created.</p>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-secondary modal-close">Close</button>
+        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <!-- Mobile Sidebar Toggle -->
-  <button class="sidebar-toggle">☰</button>
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50/50">
+    
+    <!-- Topbar -->
+    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200/60 bg-white/50 backdrop-blur-md z-10 shrink-0">
+      <h1 class="font-display text-2xl font-bold text-slate-900 tracking-tight">Call History</h1>
+      
+      <div class="flex items-center gap-5">
+        <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
+        </div>
+        
+        <button class="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>
+        </button>
+      </div>
+    </header>
 
-  <!-- Scripts -->
+    <!-- Scrollable Page Content -->
+    <div class="flex-1 overflow-y-auto p-8">
+      <div class="max-w-[1200px] mx-auto">
+        
+        <!-- Filters & Search -->
+        <div class="glass-card rounded-2xl p-4 flex flex-wrap items-center gap-4 mb-8">
+          <div class="flex-1 min-w-[200px] relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+            <input type="text" placeholder="Search by patient name or phone number..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-colors">
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <select class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 outline-none focus:border-indigo-500 transition-colors">
+              <option>All Statuses</option>
+              <option>Resolved</option>
+              <option>Booked</option>
+              <option>Missed</option>
+              <option>Voicemail</option>
+            </select>
+            
+            <select class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 outline-none focus:border-indigo-500 transition-colors">
+              <option>All Languages</option>
+              <option>English</option>
+              <option>Spanish</option>
+            </select>
+            
+            <input type="date" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 outline-none focus:border-indigo-500 transition-colors">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="glass-card rounded-2xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left custom-table">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase tracking-wider font-semibold">
+                  <th class="px-6 py-4">Date / Time</th>
+                  <th class="px-6 py-4">Caller</th>
+                  <th class="px-6 py-4">Duration</th>
+                  <th class="px-6 py-4">Language</th>
+                  <th class="px-6 py-4">Sentiment</th>
+                  <th class="px-6 py-4">Status</th>
+                  <th class="px-6 py-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr class="border-b border-slate-100 transition-colors">
+                  <td class="px-6 py-4 whitespace-nowrap text-slate-500">May 23, 2026 · 4:52 PM</td>
+                  <td class="px-6 py-4 font-bold text-slate-900">Maria Rodriguez</td>
+                  <td class="px-6 py-4 font-mono text-slate-600">4:05</td>
+                  <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">Spanish</span></td>
+                  <td class="px-6 py-4"><span class="text-lg">😊</span></td>
+                  <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-600 border border-emerald-100 px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Booked</span></td>
+                  <td class="px-6 py-4 text-right"><button class="text-indigo-600 font-semibold hover:text-indigo-800 transition-colors bg-indigo-50 px-3 py-1.5 rounded-lg">View Transcript</button></td>
+                </tr>
+                <tr class="border-b border-slate-100 transition-colors">
+                  <td class="px-6 py-4 whitespace-nowrap text-slate-500">May 23, 2026 · 4:38 PM</td>
+                  <td class="px-6 py-4 font-bold text-slate-900">James Wilson</td>
+                  <td class="px-6 py-4 font-mono text-slate-600">3:02</td>
+                  <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">English</span></td>
+                  <td class="px-6 py-4"><span class="text-lg">😊</span></td>
+                  <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-600 border border-emerald-100 px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Booked</span></td>
+                  <td class="px-6 py-4 text-right"><button class="text-indigo-600 font-semibold hover:text-indigo-800 transition-colors bg-indigo-50 px-3 py-1.5 rounded-lg">View Transcript</button></td>
+                </tr>
+                <tr class="border-b border-slate-100 transition-colors">
+                  <td class="px-6 py-4 whitespace-nowrap text-slate-500">May 23, 2026 · 4:15 PM</td>
+                  <td class="px-6 py-4 font-bold text-slate-900">Sofia Martinez</td>
+                  <td class="px-6 py-4 font-mono text-slate-600">5:10</td>
+                  <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">Spanish</span></td>
+                  <td class="px-6 py-4"><span class="text-lg">😐</span></td>
+                  <td class="px-6 py-4"><span class="bg-indigo-50 text-indigo-600 border border-indigo-100 px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Resolved</span></td>
+                  <td class="px-6 py-4 text-right"><button class="text-indigo-600 font-semibold hover:text-indigo-800 transition-colors bg-indigo-50 px-3 py-1.5 rounded-lg">View Transcript</button></td>
+                </tr>
+                <tr class="border-b border-slate-100 transition-colors">
+                  <td class="px-6 py-4 whitespace-nowrap text-slate-500">May 23, 2026 · 2:30 PM</td>
+                  <td class="px-6 py-4 font-bold text-slate-900">(305) 555-0147</td>
+                  <td class="px-6 py-4 font-mono text-slate-600">0:00</td>
+                  <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">English</span></td>
+                  <td class="px-6 py-4"><span class="text-lg text-slate-300">—</span></td>
+                  <td class="px-6 py-4"><span class="bg-rose-50 text-rose-600 border border-rose-100 px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Missed</span></td>
+                  <td class="px-6 py-4 text-right"><button class="text-indigo-600 font-semibold hover:text-indigo-800 transition-colors bg-indigo-50 px-3 py-1.5 rounded-lg">View Details</button></td>
+                </tr>
+                <tr class="transition-colors">
+                  <td class="px-6 py-4 whitespace-nowrap text-slate-500">May 23, 2026 · 1:12 PM</td>
+                  <td class="px-6 py-4 font-bold text-slate-900">Patricia Adams</td>
+                  <td class="px-6 py-4 font-mono text-slate-600">6:22</td>
+                  <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">English</span></td>
+                  <td class="px-6 py-4"><span class="text-lg">😊</span></td>
+                  <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-600 border border-emerald-100 px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Booked</span></td>
+                  <td class="px-6 py-4 text-right"><button class="text-indigo-600 font-semibold hover:text-indigo-800 transition-colors bg-indigo-50 px-3 py-1.5 rounded-lg">View Transcript</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="px-6 py-4 border-t border-slate-100 flex items-center justify-between bg-white">
+            <span class="text-sm text-slate-500">Showing 1 to 5 of 1,247 entries</span>
+            <div class="flex gap-1">
+              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">←</button>
+              <button class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-semibold">1</button>
+              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">2</button>
+              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">3</button>
+              <span class="w-8 h-8 flex items-center justify-center text-slate-400">...</span>
+              <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">→</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>

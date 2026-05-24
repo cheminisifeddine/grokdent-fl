@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,193 +6,179 @@
   <title>Renia AI - Analytics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              indigo: '#6366F1',
+              teal: '#0FD8B6',
+              coral: '#FF6B4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAFAFC; }
+    .glass-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E2EC;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+    .nav-item {
+      transition: all 0.2s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 216, 182, 0.08));
+      color: #6366F1;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+    .nav-item.active {
+      box-shadow: inset 0 0 12px rgba(99, 102, 241, 0.03);
+      font-weight: 600;
+    }
+  </style>
 </head>
-<body>
-  <div class="layout">
+<body class="text-slate-800 antialiased h-screen overflow-hidden flex">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">🦷 Renia AI</div>
-      <nav>
-        <ul class="sidebar-nav">
-          <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
-          <li><a href="calls.html"><span class="nav-icon">📞</span> Calls</a></li>
-          <li><a href="appointments.html"><span class="nav-icon">📅</span> Appointments</a></li>
-          <li><a href="knowledge-base.html"><span class="nav-icon">📚</span> Knowledge Base</a></li>
-          <li><a href="analytics.html" class="active"><span class="nav-icon">📈</span> Analytics</a></li>
-          <li><a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a></li>
-          <li><a href="billing.html"><span class="nav-icon">💳</span> Billing</a></li>
-        </ul>
+  <!-- Sidebar -->
+  <aside class="w-[280px] bg-white/80 backdrop-blur-xl border-r border-slate-200 flex flex-col justify-between h-full z-20 shrink-0">
+    <div>
+      <div class="px-6 py-8 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-400 flex items-center justify-center text-white text-sm shadow-lg shadow-indigo-500/20">🦷</div>
+        <span class="font-display font-bold text-xl tracking-tight text-slate-900">Renia AI</span>
+      </div>
+
+      <nav class="px-4 space-y-1">
+        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </a>
+        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">call</span> Calls
+        </a>
+        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
+        </a>
+        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
+        </a>
+        <a href="analytics.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
+        </a>
       </nav>
-      <div class="sidebar-user">
-        <div class="sidebar-user-avatar">SM</div>
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-name">Dr. Sarah Mitchell</div>
-          <div class="sidebar-user-role">Admin</div>
-        </div>
-        <button class="sidebar-logout" title="Logout">🚪</button>
+    </div>
+
+    <div class="px-4 pb-8">
+      <div class="mb-4">
+        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+        </a>
+        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium text-slate-600 border border-transparent">
+          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
+        </a>
       </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <div class="topbar">
-        <h1>Analytics</h1>
-        <div class="topbar-actions">
-          <div class="date-range">
-            <button class="date-range-btn active" data-days="7">7d</button>
-            <button class="date-range-btn" data-days="30">30d</button>
-            <button class="date-range-btn" data-days="90">90d</button>
+      
+      <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">SM</div>
+          <div>
+            <div class="text-sm font-bold text-slate-900">Dr. Sarah M.</div>
+            <div class="text-xs text-slate-500">Admin</div>
           </div>
         </div>
+        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
       </div>
+    </div>
+  </aside>
 
-      <!-- KPI Row -->
-      <div class="metrics-grid">
-        <div class="card metric-card">
-          <span class="icon">📞</span>
-          <div class="value" data-format="number">304</div>
-          <div class="label">Total Calls (7d)</div>
-          <div class="trend up">↑ +18% vs prev</div>
-        </div>
-        <div class="card metric-card">
-          <span class="icon">📅</span>
-          <div class="value" data-format="number">82</div>
-          <div class="label">Appointments Booked</div>
-          <div class="trend up">↑ +12% vs prev</div>
-        </div>
-        <div class="card metric-card">
-          <span class="icon">⏱️</span>
-          <div class="value">3:18</div>
-          <div class="label">Avg Call Duration</div>
-          <div class="trend neutral">→ No change</div>
-        </div>
-        <div class="card metric-card">
-          <span class="icon">🎯</span>
-          <div class="value" data-format="percent">94</div>
-          <div class="label">Resolution Rate</div>
-          <div class="trend up">↑ +3% vs prev</div>
-        </div>
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50/50">
+    
+    <!-- Topbar -->
+    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200/60 bg-white/50 backdrop-blur-md z-10 shrink-0">
+      <h1 class="font-display text-2xl font-bold text-slate-900 tracking-tight">Analytics & Insights</h1>
+      
+      <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-xl">
+        <button class="px-4 py-1.5 text-sm font-semibold bg-white text-indigo-600 rounded-lg shadow-sm">7 Days</button>
+        <button class="px-4 py-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white transition-colors">30 Days</button>
+        <button class="px-4 py-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white transition-colors">90 Days</button>
       </div>
+    </header>
 
-      <!-- Charts Row 1 -->
-      <div class="two-col">
-        <div class="card">
-          <div class="card-header">
-            <h3>📞 Calls Over Time</h3>
+    <!-- Scrollable Page Content -->
+    <div class="flex-1 overflow-y-auto p-8">
+      <div class="max-w-[1200px] mx-auto">
+        
+        <!-- KPI Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined">call</span></div>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 18%</span>
+            </div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1">304</div>
+            <div class="text-sm font-medium text-slate-500">Total Calls</div>
           </div>
-          <div class="chart-container" style="height: 280px;">
-            <canvas id="analytics-calls-chart"></canvas>
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600"><span class="material-symbols-outlined">event</span></div>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 12%</span>
+            </div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1">82</div>
+            <div class="text-sm font-medium text-slate-500">Appointments Booked</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600"><span class="material-symbols-outlined">timer</span></div>
+              <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_flat</span> 0%</span>
+            </div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1">3:18</div>
+            <div class="text-sm font-medium text-slate-500">Avg Call Duration</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined">done_all</span></div>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 3%</span>
+            </div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1">94%</div>
+            <div class="text-sm font-medium text-slate-500">Resolution Rate</div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">
-            <h3>📅 Bookings Over Time</h3>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Calls Over Time</h3>
+            <div class="h-[280px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+              <canvas id="analytics-calls-chart" class="w-full h-full"></canvas>
+            </div>
           </div>
-          <div class="chart-container" style="height: 280px;">
-            <canvas id="analytics-bookings-chart"></canvas>
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Bookings Over Time</h3>
+            <div class="h-[280px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+              <canvas id="analytics-bookings-chart" class="w-full h-full"></canvas>
+            </div>
           </div>
         </div>
+
       </div>
+    </div>
+  </main>
 
-      <!-- Charts Row 2 -->
-      <div class="two-col">
-        <div class="card">
-          <div class="card-header">
-            <h3>🌐 Language Breakdown</h3>
-          </div>
-          <div class="chart-container" style="height: 300px;">
-            <canvas id="language-chart"></canvas>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <h3>🏆 Top Services</h3>
-          </div>
-          <div class="chart-container" style="height: 300px;">
-            <canvas id="top-services-chart"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent Calls Summary -->
-      <div class="card">
-        <div class="card-header">
-          <h3>📋 Recent Call Summary</h3>
-          <a href="calls.html" class="btn btn-ghost btn-sm">View All →</a>
-        </div>
-        <div class="table-container">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Caller</th>
-                <th>Duration</th>
-                <th>Language</th>
-                <th>Result</th>
-                <th>Sentiment</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>May 23, 4:52 PM</td>
-                <td>Maria Rodriguez</td>
-                <td>4:05</td>
-                <td>🇪🇸 Spanish</td>
-                <td><span class="badge badge-success">Booked</span></td>
-                <td>😊 Positive</td>
-              </tr>
-              <tr>
-                <td>May 23, 4:38 PM</td>
-                <td>James Wilson</td>
-                <td>3:02</td>
-                <td>🇺🇸 English</td>
-                <td><span class="badge badge-success">Booked</span></td>
-                <td>😊 Positive</td>
-              </tr>
-              <tr>
-                <td>May 23, 4:15 PM</td>
-                <td>Sofia Martinez</td>
-                <td>5:10</td>
-                <td>🇪🇸 Spanish</td>
-                <td><span class="badge badge-info">Info Only</span></td>
-                <td>😐 Neutral</td>
-              </tr>
-              <tr>
-                <td>May 23, 3:47 PM</td>
-                <td>Robert Chen</td>
-                <td>1:35</td>
-                <td>🇺🇸 English</td>
-                <td><span class="badge badge-success">Booked</span></td>
-                <td>😊 Positive</td>
-              </tr>
-              <tr>
-                <td>May 23, 2:30 PM</td>
-                <td>(305) 555-0147</td>
-                <td>0:00</td>
-                <td>—</td>
-                <td><span class="badge badge-danger">Missed</span></td>
-                <td>—</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- Mobile Sidebar Toggle -->
-  <button class="sidebar-toggle">☰</button>
-
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/charts.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
