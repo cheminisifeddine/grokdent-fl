@@ -79,19 +79,30 @@ const Dashboard = {
 
     const data = calls || this.getSampleCalls();
 
-    container.innerHTML = data.map(call => `
-      <div class="call-item" data-id="${call.id || ''}">
-        <div class="call-item-avatar">${call.sentiment_emoji || '📞'}</div>
-        <div class="call-item-info">
-          <div class="call-item-name">${escapeHtml(call.caller_name || call.caller_phone || 'Unknown')}</div>
-          <div class="call-item-meta">${call.time || getRelativeTime(call.created_at)} · ${call.language === 'es' ? '🇪🇸 Spanish' : '🇺🇸 English'}</div>
+    container.innerHTML = data.map(call => {
+      const isSpanish = call.language === 'es';
+      const sentiment = call.sentiment_emoji || (call.status === 'missed' ? '😟' : '😊');
+      const textStatus = call.status === 'missed' ? 'Missed' : (call.status === 'completed' ? 'Resolved' : 'Booked');
+      const badgeColor = call.status === 'missed' ? 'text-rose-700 bg-rose-50 border-rose-100' : 'text-emerald-700 bg-emerald-50 border-emerald-100';
+
+      return `
+        <div onclick="window.viewCallTranscript('${call.caller_name || call.caller_phone || 'Unknown'}', '${call.time || '2 min ago'}', '${isSpanish ? 'Spanish' : 'English'}')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-lg shadow-sm">${sentiment}</div>
+            <div>
+              <div class="text-sm font-bold text-brand-900">${escapeHtml(call.caller_name || call.caller_phone || 'Unknown')}</div>
+              <div class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> ${call.time || 'Just now'} • <span class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm text-[10px] uppercase font-bold text-slate-600">${isSpanish ? 'Spanish' : 'English'}</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-brand-900">${formatDuration(call.duration || 0)}</div>
+            <div class="text-[10px] font-bold uppercase ${badgeColor} border px-2 py-0.5 rounded-full mt-1 inline-block">${textStatus}</div>
+          </div>
         </div>
-        <div class="call-item-right">
-          <div class="call-item-duration">${formatDuration(call.duration || 0)}</div>
-          <span class="badge badge-${call.status === 'completed' ? 'success' : call.status === 'missed' ? 'danger' : 'warning'}">${call.status || 'completed'}</span>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   },
 
   /**
@@ -103,16 +114,33 @@ const Dashboard = {
 
     const data = appointments || this.getSampleAppointments();
 
-    container.innerHTML = data.map(appt => `
-      <div class="appointment-item ${appt.status || 'confirmed'}">
-        <div class="appointment-time">${appt.time || formatTime(appt.scheduled_time)}</div>
-        <div class="appointment-info">
-          <div class="appointment-patient">${escapeHtml(appt.patient_name || 'Patient')}</div>
-          <div class="appointment-service">${escapeHtml(appt.service || 'General Checkup')}</div>
+    container.innerHTML = data.map(appt => {
+      const timeVal = appt.time || '9:00 AM';
+      const parts = timeVal.split(' ');
+      const hour = parts[0] || '9:00';
+      const ampm = parts[1] || 'AM';
+      
+      const isEmergency = appt.service.toLowerCase().includes('emergency');
+      const barColor = isEmergency ? 'bg-rose-500' : 'bg-brand-500';
+      const borderClass = isEmergency ? 'border-rose-200 bg-rose-50/10' : 'border-slate-200 bg-white';
+      const badgeColor = isEmergency ? 'text-rose-700 bg-rose-100 border-rose-200' : 'text-brand-700 bg-brand-50 border-brand-100';
+      const label = isEmergency ? 'Urgent' : 'Confirmed';
+
+      return `
+        <div onclick="window.viewAppointmentDetailsDashboard('${appt.patient_name || appt.name || 'Patient'}', '${appt.time}', '${appt.service}', '${appt.status || 'confirmed'}')" class="flex items-center gap-4 p-4 rounded-xl border ${borderClass} shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
+          <div class="absolute left-0 top-0 bottom-0 w-1 ${barColor}"></div>
+          <div class="text-center min-w-[70px]">
+            <div class="font-bold text-brand-900 text-lg">${hour}</div>
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">${ampm}</div>
+          </div>
+          <div class="flex-1">
+            <div class="font-bold text-brand-900">${escapeHtml(appt.patient_name || appt.name || 'Patient')}</div>
+            <div class="text-sm font-semibold text-slate-500">${isEmergency ? '🚨 ' : ''}${escapeHtml(appt.service || 'General Checkup')}</div>
+          </div>
+          <div class="text-[10px] font-bold uppercase ${badgeColor} border px-2.5 py-1 rounded-full">${label}</div>
         </div>
-        <span class="badge badge-${appt.status === 'confirmed' ? 'success' : appt.status === 'pending' ? 'warning' : 'info'}">${appt.status || 'confirmed'}</span>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   },
 
   /**

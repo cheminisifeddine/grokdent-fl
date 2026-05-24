@@ -643,3 +643,127 @@ function initBillingPage() {
     }
   });
 }
+
+// Global modal view helpers for the dashboard feed clicks
+window.viewCallTranscript = function(caller, time, lang) {
+  const modal = document.getElementById('transcript-modal');
+  if (modal) modal.remove();
+  
+  const overlay = document.createElement('div');
+  overlay.id = 'transcript-modal';
+  overlay.className = 'modal-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  
+  const isSpanish = lang.toLowerCase() === 'spanish';
+  
+  let transcriptHtml = '';
+  if (isSpanish) {
+    transcriptHtml = `
+      <div style="margin-bottom:12px;"><strong style="color:#6366f1;">Recepcionista IA:</strong> Gracias por llamar a Sunshine Smiles Dental. Soy la asistente de voz inteligente Ash. ¿En qué puedo ayudarle hoy?</div>
+      <div style="margin-bottom:12px;"><strong style="color:#0f172a;">${caller}:</strong> Hola, buenas tardes. Quisiera programar una cita para una limpieza dental para la próxima semana, por favor.</div>
+      <div style="margin-bottom:12px;"><strong style="color:#6366f1;">Recepcionista IA:</strong> ¡Con mucho gusto! Tengo disponibilidad para el miércoles a las 10:00 AM o el viernes a la 1:30 PM. ¿Cuál de estos horarios le queda mejor?</div>
+      <div style="margin-bottom:12px;"><strong style="color:#0f172a;">${caller}:</strong> El viernes a la 1:30 PM está excelente, gracias.</div>
+      <div style="margin-bottom:12px;"><strong style="color:#6366f1;">Recepcionista IA:</strong> ¡Perfecto! He reservado su cita de limpieza dental para el viernes 23 de mayo a la 1:30 PM. Recibirá un mensaje de confirmación en breve. ¿Hay algo más en lo que pueda asistirle?</div>
+      <div><strong style="color:#0f172a;">${caller}:</strong> No, eso sería todo. ¡Muchísimas gracias!</div>
+    `;
+  } else {
+    transcriptHtml = `
+      <div style="margin-bottom:12px;"><strong style="color:#6366f1;">AI Receptionist:</strong> Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I assist you today?</div>
+      <div style="margin-bottom:12px;"><strong style="color:#0f172a;">${caller}:</strong> Hi, I'd like to book an appointment for a dental checkup and cleaning, please.</div>
+      <div style="margin-bottom:12px;"><strong style="color:#6366f1;">AI Receptionist:</strong> I would be delighted to help you with that! I have availability this week on Wednesday at 10 AM or Friday at 11 AM. Which of those works better for you?</div>
+      <div style="margin-bottom:12px;"><strong style="color:#0f172a;">${caller}:</strong> Wednesday at 10 AM works great.</div>
+      <div style="margin-bottom:12px;"><strong style="color:#6366f1;">AI Receptionist:</strong> Fantastic! I have successfully scheduled your appointment for Wednesday at 10:00 AM. You will receive a confirmation text shortly. Is there anything else I can help you with?</div>
+      <div><strong style="color:#0f172a;">${caller}:</strong> No, that is everything. Thank you!</div>
+    `;
+  }
+
+  const summaryText = isSpanish 
+    ? "La paciente solicitó una cita de limpieza dental. Reservada con éxito para el viernes a la 1:30 PM. Mensaje de confirmación SMS enviado."
+    : "Patient requested a dental cleaning and checkup. Successfully booked for Wednesday at 10:00 AM. Confirmation SMS dispatched.";
+
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:20px;width:100%;max-width:600px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,0.15);">
+      <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;">
+        <div>
+          <h2 style="font-size:18px;font-weight:850;color:#0f172a;margin:0 0 4px;font-family:'Outfit',sans-serif;">${caller}</h2>
+          <p style="font-size:13px;color:#64748b;margin:0;font-weight:600;">🕒 ${time} · 🌐 ${lang}</p>
+        </div>
+        <button onclick="document.getElementById('transcript-modal').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
+      </div>
+      <div style="padding:24px 28px;overflow-y:auto;flex:1;">
+        <div style="background:#f8fafc;border-radius:16px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#334155;border:1px solid #f1f5f9;">
+          ${transcriptHtml}
+        </div>
+        <div style="margin-top:20px;padding:16px;background:#f0fdf4;border-radius:16px;border:1px solid #bbf7d0;display:flex;flex-direction:column;gap:4px;">
+          <div style="font-size:11px;font-weight:800;color:#166534;text-transform:uppercase;letter-spacing:0.05em;">AI Receptionist Summary</div>
+          <div style="font-size:13px;color:#15803d;font-weight:600;line-height:1.5;">${summaryText}</div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+};
+
+window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
+  const existing = document.getElementById('appt-details-modal');
+  if (existing) existing.remove();
+  
+  const overlay = document.createElement('div');
+  overlay.id = 'appt-details-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  
+  const capStatus = status.charAt(0).toUpperCase() + status.slice(1);
+  let statusBadgeClass = 'status-scheduled';
+  if (capStatus === 'Confirmed' || capStatus === 'Success') statusBadgeClass = 'status-confirmed';
+  if (capStatus === 'Checked-in' || capStatus === 'Pending') statusBadgeClass = 'status-checked-in';
+  if (capStatus === 'Completed') statusBadgeClass = 'status-completed';
+  if (capStatus === 'Cancelled') statusBadgeClass = 'status-cancelled';
+  
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:20px;width:100%;max-width:480px;box-shadow:0 25px 50px rgba(0,0,0,0.15);overflow:hidden;">
+      <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;">
+        <div>
+          <span class="status-badge ${statusBadgeClass}">${capStatus}</span>
+          <h2 style="font-size:18px;font-weight:850;color:#0f172a;margin:6px 0 0 0;font-family:'Outfit',sans-serif;">Appointment Details</h2>
+        </div>
+        <button onclick="document.getElementById('appt-details-modal').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
+      </div>
+      
+      <div style="padding:24px 28px;">
+        <div style="display:grid;gap:18px;margin-bottom:24px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Patient Name</label>
+            <div style="font-size:16px;font-weight:800;color:#0f172a;">👤 ${name}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Date</label>
+              <div style="font-size:14px;font-weight:700;color:#334155;">📅 2026-05-23</div>
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Time</label>
+              <div style="font-size:14px;font-weight:700;color:#334155;">🕒 ${time}</div>
+            </div>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Service Type</label>
+            <div style="font-size:14px;font-weight:700;color:#334155;">🦷 ${service}</div>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Triage Notes</label>
+            <div style="font-size:13px;color:#475569;background:#f8fafc;padding:12px;border-radius:10px;line-height:1.6;border:1px solid #f1f5f9;">
+              Patient scheduled through AI Voice Receptionist. Insurance eligibility has been auto-verified.
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex;justify-content:flex-end;">
+          <button onclick="document.getElementById('appt-details-modal').remove()" style="padding:12px 24px;font-size:13px;font-weight:800;background:#0f172a;color:white;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.1);">Close Details</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+};
