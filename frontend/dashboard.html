@@ -513,6 +513,7 @@
 
               <!-- Manual Keyboard input row -->
               <div class="flex items-center gap-2">
+                <button id="sim-mic-btn" onclick="toggleSimMic()" class="w-8 h-8 rounded-xl bg-slate-700 hover:bg-slate-600 text-white flex items-center justify-center shadow-md transition-colors" title="Hold to Talk"><span class="material-symbols-outlined text-[16px]">mic</span></button>
                 <input type="text" id="sim-input-box" placeholder="Or type customized patient reply..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition-colors">
                 <button onclick="handleSimManualSend()" class="w-8 h-8 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-md transition-colors"><span class="material-symbols-outlined text-[16px]">send</span></button>
               </div>
@@ -1162,6 +1163,67 @@ SCENARIO INSTRUCTIONS:
           return 'Fantastic. Glad I could assist! Have a great day, and we will see you tomorrow!';
         }
       }
+    }
+
+    // Voice recognition logic for microphone button
+    let simSpeechRecog = null;
+    let isSimMicActive = false;
+
+    function toggleSimMic() {
+      const micBtn = document.getElementById('sim-mic-btn');
+      const micIcon = micBtn.querySelector('span');
+
+      if (isSimMicActive) {
+        if (simSpeechRecog) simSpeechRecog.stop();
+        return;
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Voice recognition is not supported in your browser.', 'error');
+        return;
+      }
+
+      simSpeechRecog = new SpeechRecognition();
+      simSpeechRecog.lang = simState.scenario === 'carlos' ? 'es-US' : 'en-US';
+      simSpeechRecog.interimResults = false;
+      simSpeechRecog.maxAlternatives = 1;
+
+      simSpeechRecog.onstart = function() {
+        isSimMicActive = true;
+        micBtn.classList.remove('bg-slate-700', 'hover:bg-slate-600');
+        micBtn.classList.add('bg-rose-500', 'hover:bg-rose-600', 'animate-pulse');
+        micIcon.innerText = 'mic_none';
+      };
+
+      simSpeechRecog.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('sim-input-box').value = transcript;
+        handleSimManualSend();
+      };
+
+      simSpeechRecog.onerror = function(event) {
+        console.warn('Speech recog error', event.error);
+        if(event.error !== 'aborted') {
+            showToast('Microphone error: ' + event.error, 'warning');
+        }
+        resetMicUI();
+      };
+
+      simSpeechRecog.onend = function() {
+        resetMicUI();
+      };
+
+      simSpeechRecog.start();
+    }
+
+    function resetMicUI() {
+      isSimMicActive = false;
+      const micBtn = document.getElementById('sim-mic-btn');
+      const micIcon = micBtn.querySelector('span');
+      micBtn.classList.remove('bg-rose-500', 'hover:bg-rose-600', 'animate-pulse');
+      micBtn.classList.add('bg-slate-700', 'hover:bg-slate-600');
+      micIcon.innerText = 'mic';
     }
 
     function hangupSimulatedCall(manual = false) {
