@@ -706,7 +706,7 @@ SCENARIO INSTRUCTIONS:
 3. Keep answers strictly HIPAA-compliant. Do not disclose other patient information.`;
 
     const payload = {
-      model: 'grok-beta',
+      model: 'grok-4.3',
       messages: [
         { role: 'system', content: systemPrompt },
         ...messages

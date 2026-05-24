@@ -9,7 +9,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@300,0,0,24&display=swap" rel="stylesheet">
   
   <script>
@@ -17,16 +17,17 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
             display: ['Outfit', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             brand: {
-              950: '#020205',
-              900: '#0f172a',
-              800: '#1e293b',
-              500: '#6366f1',
+              950: '#030308',
+              900: '#0A0B1A',
+              800: '#111330',
+              700: '#181B47',
+              500: '#4F46E5',
               400: '#818cf8',
               100: '#e0e7ff',
               50:  '#f8fafc',
@@ -40,8 +41,9 @@
           animation: {
             'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
             'marquee': 'marquee 40s linear infinite',
-            'mesh-rotate': 'mesh-rotate 20s linear infinite',
+            'mesh-rotate': 'mesh-rotate 25s linear infinite',
             'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           },
           keyframes: {
             'slide-up': {
@@ -58,7 +60,7 @@
             },
             float: {
               '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-15px)' },
+              '50%': { transform: 'translateY(-12px)' },
             }
           }
         }
@@ -67,43 +69,41 @@
   </script>
 
   <style>
-    /* Ultra Premium Light Glassmorphism */
+    /* Premium Glassmorphic Design System */
     .glass-panel {
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.8);
     }
     
     .glass-card {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.005);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card:hover {
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-      transform: translateY(-4px);
-      border-color: #cbd5e1;
+      box-shadow: 0 30px 60px -12px rgba(17, 24, 39, 0.08);
+      transform: translateY(-5px);
+      border-color: rgba(99, 102, 241, 0.3);
     }
 
-    /* Gradients */
     .text-gradient-primary {
-      background: linear-gradient(135deg, #0f172a 0%, #6366f1 100%);
+      background: linear-gradient(135deg, #0A0B1A 20%, #4F46E5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
-    .text-gradient-teal {
+    .text-gradient-accent {
       background: linear-gradient(135deg, #0FD8B6 0%, #06b6d4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Scroll Reveal */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -114,70 +114,88 @@
       transform: translateY(0);
     }
 
-    /* Abstract Background Mesh for Light Mode */
     .hero-mesh {
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      top: -30%;
+      left: -35%;
+      width: 170%;
+      height: 170%;
       background: 
-        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 30% 70%, rgba(15, 216, 182, 0.06) 0%, transparent 40%);
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 35% 65%, rgba(15, 216, 182, 0.07) 0%, transparent 40%);
       z-index: -10;
       pointer-events: none;
-      filter: blur(40px);
+      filter: blur(60px);
       mix-blend-mode: multiply;
     }
     
     .grid-bg {
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-      -webkit-mask-image: -webkit-radial-gradient(circle at center, black 40%, transparent 80%);
+        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
+      -webkit-mask-image: -webkit-radial-gradient(circle at center, black 50%, transparent 90%);
     }
 
-    ::-webkit-scrollbar { width: 6px; }
+    /* Soundwave Visualizer Bars */
+    .bar {
+      width: 3px;
+      height: 6px;
+      background: #0FD8B6;
+      display: inline-block;
+      border-radius: 4px;
+      transition: height 0.15s ease;
+    }
+    .bar.animating {
+      animation: soundwave-active 1.2s ease-in-out infinite;
+    }
+    @keyframes soundwave-active {
+      0%, 100% { height: 6px; }
+      50% { height: 32px; }
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+    ::-webkit-scrollbar-thumb { background: rgba(17, 19, 48, 0.1); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(17, 19, 48, 0.2); }
   </style>
 </head>
-<body class="relative overflow-x-hidden text-slate-800">
+<body class="relative overflow-x-hidden text-slate-800 font-sans">
 
   <!-- ==========================================
-       NAVIGATION
+       NAVIGATION BAR
        ========================================== -->
   <nav class="fixed top-0 w-full z-50 transition-all duration-500 py-4" id="navbar">
-    <div class="max-w-[1200px] mx-auto px-6">
-      <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300" id="nav-container">
+    <div class="max-w-[1240px] mx-auto px-6">
+      <div class="glass-panel rounded-full px-6 py-3.5 flex justify-between items-center transition-all duration-300 border border-slate-200/50 shadow-sm" id="nav-container">
         
         <!-- Logo -->
         <a href="#" class="flex items-center gap-3 group">
-          <div class="w-9 h-9 rounded-full bg-brand-900 flex items-center justify-center shadow-lg shadow-brand-900/20 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+          <div class="w-10 h-10 rounded-full bg-brand-900 flex items-center justify-center shadow-lg shadow-brand-900/10 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-accent-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span class="relative text-white text-[14px]">🦷</span>
+            <span class="relative text-white text-base">🦷</span>
           </div>
-          <span class="font-display font-bold text-xl tracking-tight text-brand-900">Renia AI</span>
+          <div>
+            <span class="font-display font-extrabold text-xl tracking-tight text-brand-900 block leading-none">Renia AI</span>
+            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mt-0.5">Florida's Dental Standard</span>
+          </div>
         </a>
 
         <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-1 bg-slate-100/50 rounded-full p-1 border border-slate-200">
-          <a href="#infrastructure" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Engine</a>
-          <a href="#empathy" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Empathy</a>
-          <a href="#cases" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Cases</a>
-          <a href="#pricing" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Pricing</a>
+        <div class="hidden md:flex items-center gap-1.5 bg-slate-100/50 border border-slate-200/60 rounded-full p-1">
+          <a href="#features" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">SaaS Infrastructure</a>
+          <a href="#simulator" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Live Agent Simulator</a>
+          <a href="#roi" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">ROI Calculator</a>
+          <a href="#pricing" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">SaaS Licensing</a>
         </div>
 
-        <!-- Auth -->
+        <!-- Call to Action -->
         <div class="flex items-center gap-4">
-          <a href="login.html" class="hidden sm:block text-sm font-semibold text-slate-600 hover:text-brand-900 transition-colors">Sign in</a>
-          <a href="signup.html" class="relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-white bg-brand-900 rounded-full shadow-xl shadow-brand-900/20 group hover:scale-105 transition-transform">
-            <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
-            <span class="relative text-sm flex items-center gap-2">
-              Deploy Now <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          <a href="login.html" class="hidden sm:block text-xs font-bold text-slate-600 hover:text-brand-900 transition-colors">Client Login</a>
+          <a href="signup.html" class="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-extrabold text-white bg-brand-900 hover:bg-brand-800 rounded-full shadow-lg shadow-brand-900/10 group hover:scale-[1.03] transition-all">
+            <span class="relative text-xs flex items-center gap-2">
+              Deploy Free Trial <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </span>
           </a>
         </div>
@@ -187,360 +205,370 @@
   </nav>
 
   <!-- ==========================================
-       HERO SECTION (Rich Light Mode)
+       HERO HERO SECTION
        ========================================== -->
-  <main class="relative min-h-[100vh] flex flex-col justify-center pt-[120px] pb-[100px] overflow-hidden">
-    
-    <!-- Light Mesh Background -->
+  <main class="relative min-h-[100vh] flex flex-col justify-center pt-[130px] pb-[100px] overflow-hidden">
+    <!-- Premium Interactive Mesh Background -->
     <div class="hero-mesh animate-mesh-rotate"></div>
     <div class="absolute inset-0 grid-bg z-[-5]"></div>
 
-    <div class="max-w-[1200px] mx-auto px-6 w-full z-10 flex flex-col items-center text-center">
-      
-      <div class="animate-slide-up w-full max-w-4xl mx-auto flex flex-col items-center">
-        <!-- Pill Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-brand-100 mb-8 shadow-sm">
-          <span class="flex h-2 w-2 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-teal opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-teal"></span>
-          </span>
-          <span class="text-xs font-bold uppercase tracking-widest text-slate-500">The Ultimate Dental AI</span>
-        </div>
-
-        <!-- Aggressive Headline -->
-        <h1 class="font-display text-[56px] sm:text-[72px] lg:text-[88px] font-black leading-[0.95] tracking-[-0.03em] mb-8 text-brand-900 drop-shadow-sm">
-          While your front desk is on hold, <br class="hidden lg:block">
-          <span class="text-gradient-primary">your revenue walks out the door.</span>
-        </h1>
-
-        <!-- Subheadline -->
-        <p class="text-lg sm:text-2xl font-medium text-slate-600 max-w-3xl mb-12 leading-[1.6]">
-          Stop missing calls. Stop double-booking. Deploy the only AI Voice Infrastructure built exclusively for Florida's elite dental practices. <strong class="text-brand-900">Never miss a patient. Never sleep.</strong>
-        </p>
-
-        <!-- CTA Row -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 justify-center w-full">
-          <a href="signup.html" class="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-5 bg-brand-900 text-white rounded-full font-bold text-lg shadow-2xl shadow-brand-900/20 hover:bg-brand-800 transition-all hover:scale-105 group border border-white/10">
-            Stop Losing Patients
-            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span>
-          </a>
-          <a href="#demo" class="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 bg-white text-brand-900 rounded-full font-bold text-lg hover:bg-slate-50 transition-all shadow-md border border-slate-200 group">
-            <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
-              <span class="material-symbols-outlined text-[14px]">play_arrow</span>
-            </div>
-            Hear a Live Call
-          </a>
-        </div>
-      </div>
-
-      <!-- High-End UI Graphic -->
-      <div class="w-full max-w-4xl mt-20 animate-slide-up relative" style="animation-delay: 0.3s;">
-        <!-- Glowing shadow behind graphic -->
-        <div class="absolute inset-0 bg-brand-500/10 blur-[80px] rounded-full"></div>
+    <div class="max-w-[1240px] mx-auto px-6 w-full z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         
-        <div class="bg-white rounded-[2rem] p-3 border border-slate-200 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] relative overflow-hidden glare-card animate-float">
+        <!-- Hero Text -->
+        <div class="lg:col-span-6 animate-slide-up flex flex-col items-start text-left">
           
-          <div class="bg-[#0f172a] rounded-[1.5rem] p-8 text-left relative overflow-hidden shadow-inner">
-            <div class="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
-            
-            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-              <div class="flex items-center gap-3">
-                <div class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></div>
-                <span class="text-xs font-mono text-zinc-400">Live Call / Routing to Server</span>
-              </div>
-              <div class="px-3 py-1 bg-brand-500/20 border border-brand-500/30 rounded-full text-brand-400 text-xs font-bold">
-                Spanish Auto-Detected
-              </div>
-            </div>
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-brand-100 mb-8 shadow-sm">
+            <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-teal opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-teal"></span>
+            </span>
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Elite 24/7 Dental Recptionist</span>
+          </div>
 
-            <!-- Dynamic Conversation Simulation -->
-            <div class="pl-4 border-l-2 border-white/10 flex flex-col gap-5">
-              <div>
-                <span class="text-zinc-500 text-xs font-bold block mb-1">CALLER (AUDIO -> TEXT)</span>
-                <span class="text-white font-medium text-lg">"Hola, tengo un dolor de muela terrible. Necesito ver a un dentista hoy."</span>
-              </div>
-              <div class="bg-brand-500/10 p-5 rounded-xl border border-brand-500/20 inline-block shadow-lg">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-brand-400 text-xs font-bold tracking-wider">RENIA AI</span>
-                  <span class="px-2 py-0.5 bg-rose-500/20 rounded text-[10px] text-rose-300 font-bold tracking-widest">EMERGENCY_INTENT</span>
-                </div>
-                <span class="text-white font-medium text-lg">"Entiendo completamente. El Dr. Mitchell tiene una apertura de emergencia a las 2:30 PM. ¿Te reservo ese horario?"</span>
-              </div>
+          <h1 class="font-display text-[52px] sm:text-[68px] lg:text-[76px] font-black leading-[0.92] tracking-[-0.04em] mb-8 text-brand-900">
+            Every missed call is <br>
+            <span class="text-gradient-primary">a $350 patient walking out your door.</span>
+          </h1>
+
+          <p class="text-lg font-medium text-slate-600 mb-10 leading-[1.6] max-w-xl">
+            Stop losing premium dental clients to hold times and after-hour voicemails. Deploy **Renia AI** — Florida's premier, HIPAA-compliant voice infrastructure built specifically for high-ticket dental offices. 
+          </p>
+
+          <!-- Core stats row -->
+          <div class="grid grid-cols-3 gap-6 border-b border-slate-200 pb-8 mb-10 w-full">
+            <div>
+              <span class="font-display text-3xl font-black text-brand-900">100%</span>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mt-1">Answer Rate</span>
+            </div>
+            <div>
+              <span class="font-display text-3xl font-black text-brand-900">10ms</span>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mt-1">Bilingual Detect</span>
+            </div>
+            <div>
+              <span class="font-display text-3xl font-black text-brand-900">Zero</span>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mt-1">Setup Fee</span>
             </div>
           </div>
 
-        </div>
-      </div>
+          <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <a href="signup.html" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4.5 bg-brand-900 text-white rounded-full font-bold text-sm shadow-xl shadow-brand-900/10 hover:bg-brand-800 hover:scale-[1.03] transition-all group">
+              Stop Missing Patients
+              <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+            </a>
+            <a href="#simulator" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4.5 bg-white text-brand-900 rounded-full font-bold text-sm hover:bg-slate-50 transition-all shadow-md border border-slate-200/80 group">
+              <div class="w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                <span class="material-symbols-outlined text-[12px]">play_arrow</span>
+              </div>
+              Simulate Live Agent Call
+            </a>
+          </div>
 
+        </div>
+
+        <!-- Right Side: Graphic UI Mocks -->
+        <div class="lg:col-span-6 animate-slide-up relative" style="animation-delay: 0.2s;">
+          <div class="absolute inset-0 bg-brand-500/10 blur-[90px] rounded-full"></div>
+          
+          <div class="bg-white rounded-[2.5rem] p-3.5 border border-slate-200 shadow-[0_40px_80px_-20px_rgba(15,19,48,0.12)] relative animate-float">
+            
+            <div class="bg-[#0A0B1A] rounded-[2rem] p-6 text-left relative overflow-hidden shadow-inner border border-brand-800">
+              
+              <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-2 w-2 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                  </span>
+                  <span class="text-[10px] font-mono text-zinc-400">Florida Endpoint // Twilio Webhook</span>
+                </div>
+                <div class="px-3 py-1 bg-brand-500/20 border border-brand-500/30 rounded-full text-brand-400 text-[10px] font-extrabold uppercase tracking-wide">
+                  Spanish Auto-Detected
+                </div>
+              </div>
+
+              <!-- Chat bubbles -->
+              <div class="flex flex-col gap-6">
+                <div>
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="text-zinc-500 text-[10px] font-bold tracking-wider">PATIENT (FROM ORLANDO, FL)</span>
+                    <span class="material-symbols-outlined text-xs text-zinc-600">call</span>
+                  </div>
+                  <p class="text-zinc-300 font-medium text-base">"Hello, I am calling because I have a terrible tooth pain and bleeding. Do you have anything open today?"</p>
+                </div>
+
+                <div class="bg-brand-500/15 p-5 rounded-2xl border border-brand-500/20 shadow-lg self-start max-w-[90%]">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-accent-teal text-[10px] font-extrabold tracking-widest uppercase">RENIA ENGINE</span>
+                    <span class="px-2 py-0.5 bg-rose-500/20 border border-rose-500/30 rounded text-[8px] text-rose-300 font-extrabold tracking-widest">EMERGENCY_TRIAGE</span>
+                  </div>
+                  <p class="text-white font-medium text-base leading-relaxed">"Oh no, I'm so sorry you're dealing with that. Severe pain and bleeding is considered an emergency. I see that Dr. Mitchell has an emergency extraction opening today at 1:30 PM. Shall I book that slot for you right now?"</p>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between border-t border-white/5 pt-4 mt-6">
+                <span class="text-[10px] font-mono text-zinc-500">PMS Sync: Eaglesoft Live Read-Write</span>
+                <span class="text-[10px] font-mono text-accent-teal">Lat: 18ms</span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
   </main>
 
   <!-- ==========================================
-       TRUST BAR
+       TRUST MARQUEE
        ========================================== -->
-  <section class="border-y border-slate-200 bg-white py-12 overflow-hidden relative z-10">
+  <section class="border-y border-slate-200 bg-white py-10 overflow-hidden relative z-10">
     <div class="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white z-20 pointer-events-none"></div>
-    <div class="max-w-[1400px] mx-auto px-6 text-center mb-8 relative z-30">
-      <span class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">Trusted by Florida's Elite</span>
+    <div class="max-w-[1240px] mx-auto px-6 text-center mb-6 relative z-30">
+      <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-[0.25em]">Trusted by Florida's Elite Private Clinics</span>
     </div>
     <div class="flex w-[200%] md:w-auto relative z-10">
       <div class="flex items-center justify-around min-w-full animate-marquee gap-12 md:gap-24 px-12">
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors duration-300">Lumina Dental</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-accent-teal transition-colors duration-300">Apex Orthodontics</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-500 transition-colors duration-300">Coastal Smiles</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors duration-300">Premier Periodontics</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors duration-300">Miami Elite Dental</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors">Miami Orthodontics</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-500 transition-colors">Coastal Smiles Tampa</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-accent-teal transition-colors">Lumina Periodontics</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors">Palm Beach Endodontics</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-accent-coral transition-colors">Orlando Family Dentists</div>
       </div>
     </div>
   </section>
 
   <!-- ==========================================
-       THE "EMPATHY & INTELLIGENCE" BENTO (Rich Light)
+       LIVE VOICE AGENT SIMULATOR (WOW FACTOR!)
        ========================================== -->
-  <section id="empathy" class="py-[160px] relative z-10 px-6">
-    <div class="max-w-[1200px] mx-auto">
+  <section id="simulator" class="py-[140px] relative z-10 px-6 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-[1240px] mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-100 text-brand-700 text-[10px] font-bold uppercase tracking-wider mb-4">
+          Public Proof Sandbox
+        </div>
+        <h2 class="font-display text-[40px] sm:text-[52px] font-black text-brand-900 leading-[1.05] mb-6 tracking-tight">
+          Hear the speed. Test the empathy.<br>
+          <span class="text-slate-400">Right on this page.</span>
+        </h2>
+        <p class="text-lg text-slate-600 font-medium leading-relaxed">
+          Select a patient scenario below, launch the voice simulator, and interact with **Ash** or **Eve** live. Our system dynamically executes xAI models and streams natural, zero-latency clinical voice back through your speakers.
+        </p>
+      </div>
+
+      <!-- Simulator Interactive Layout -->
+      <div class="max-w-4xl mx-auto bg-white border border-slate-200 rounded-[2.5rem] shadow-xl p-8 relative overflow-hidden reveal">
+        
+        <!-- Background radial glow -->
+        <div class="absolute right-0 top-0 w-80 h-80 bg-accent-teal/5 blur-[80px] rounded-full pointer-events-none"></div>
+        <div class="absolute left-0 bottom-0 w-80 h-80 bg-brand-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative z-10">
+          
+          <!-- Column 1: Selector Panels -->
+          <div class="md:col-span-5 flex flex-col gap-5">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">1. Choose AI Voice</label>
+              <div class="grid grid-cols-2 gap-3">
+                <button onclick="setSimVoice('Coral', 'eve')" id="voice-btn-eve" class="px-4 py-3 bg-brand-50 border-2 border-brand-500 text-brand-900 font-bold rounded-2xl flex items-center justify-between text-xs transition-all">
+                  <span>Eve (Professional)</span>
+                  <span class="material-symbols-outlined text-sm">record_voice_over</span>
+                </button>
+                <button onclick="setSimVoice('Ash', 'rex')" id="voice-btn-rex" class="px-4 py-3 bg-slate-50 border-2 border-transparent text-slate-600 hover:bg-slate-100 font-bold rounded-2xl flex items-center justify-between text-xs transition-all">
+                  <span>Ash (Warm Tone)</span>
+                  <span class="material-symbols-outlined text-sm">record_voice_over</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">2. Choose Patient Scenario</label>
+              <div class="flex flex-col gap-3">
+                <!-- Scenario 1 -->
+                <button onclick="setSimScenario('carlos')" id="scen-btn-carlos" class="p-4 bg-brand-50 border-2 border-brand-500 rounded-2xl text-left transition-all group">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-brand-900 text-xs">Carlos (Toothache Emergency)</span>
+                    <span class="px-2 py-0.5 bg-rose-100 text-rose-600 font-extrabold text-[8px] uppercase tracking-wider rounded">Bilingual</span>
+                  </div>
+                  <p class="text-[10px] text-slate-500 leading-normal">Carlos calls in severe pain. Speak in Spanish, triage his condition, and book an extraction today at 1:30 PM.</p>
+                </button>
+
+                <!-- Scenario 2 -->
+                <button onclick="setSimScenario('emily')" id="scen-btn-emily" class="p-4 bg-slate-50 border-2 border-transparent hover:bg-slate-100 rounded-2xl text-left transition-all">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-slate-700 text-xs">Emily (Cosmetic Teeth Whitening)</span>
+                    <span class="px-2 py-0.5 bg-brand-100 text-brand-600 font-extrabold text-[8px] uppercase tracking-wider rounded">New Patient</span>
+                  </div>
+                  <p class="text-[10px] text-slate-500 leading-normal">Emily wants to know if Delta Dental covers cosmetic whitening and books a consultation slot for tomorrow at 10 AM.</p>
+                </button>
+
+                <!-- Scenario 3 -->
+                <button onclick="setSimScenario('james')" id="scen-btn-james" class="p-4 bg-slate-50 border-2 border-transparent hover:bg-slate-100 rounded-2xl text-left transition-all">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-slate-700 text-xs">James (Routine Rescheduling)</span>
+                    <span class="px-2 py-0.5 bg-teal-100 text-teal-700 font-extrabold text-[8px] uppercase tracking-wider rounded">Existing</span>
+                  </div>
+                  <p class="text-[10px] text-slate-500 leading-normal">James is an existing patient looking to reschedule next Wednesday's dental hygiene clean to tomorrow afternoon.</p>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Simulated Phone Device -->
+          <div class="md:col-span-7 bg-[#0A0B1A] border border-brand-800 rounded-[2rem] p-6 flex flex-col justify-between h-[480px]">
+            
+            <!-- Header bar -->
+            <div class="flex items-center justify-between border-b border-white/5 pb-4 shrink-0">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-accent-teal animate-pulse"></span>
+                <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest" id="sim-status">Idle Ready</span>
+              </div>
+              
+              <!-- Wave visualizer -->
+              <div class="flex items-center gap-1 h-5" id="wave-visualizer">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+            </div>
+
+            <!-- Chat display output -->
+            <div id="sim-chat-box" class="flex flex-col gap-4 overflow-y-auto py-4 flex-1 text-left text-sm leading-relaxed scrollbar-thin">
+              <!-- Default welcome text -->
+              <div class="text-zinc-500 text-center py-12 flex flex-col items-center gap-3">
+                <span class="material-symbols-outlined text-4xl text-brand-500/40">phonelink_ring</span>
+                <p class="max-w-xs text-xs">Click "Initiate Simulated Call" to launch a live audio dialogue with the receptionist.</p>
+              </div>
+            </div>
+
+            <!-- Call triggering panel -->
+            <div class="border-t border-white/5 pt-4 shrink-0 flex flex-col gap-3">
+              <!-- Live trigger button -->
+              <button onclick="toggleSimCall()" id="sim-call-btn" class="w-full py-4.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-extrabold rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-teal-500/20 transition-all cursor-pointer">
+                <span class="material-symbols-outlined">call</span>
+                <span id="sim-btn-text">Initiate Simulated Call</span>
+              </button>
+
+              <div class="flex gap-2">
+                <input type="text" id="sim-user-input" placeholder="Type what you want to say to the receptionist..." disabled class="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-xs placeholder:text-zinc-600 focus:outline-none focus:border-brand-500 disabled:opacity-50">
+                <button onclick="sendSimText()" id="sim-send-btn" disabled class="px-4 bg-brand-500 text-white rounded-xl flex items-center justify-center hover:bg-brand-600 transition-colors disabled:opacity-50 cursor-pointer">
+                  <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       THE "EMPATHY & INTEGRATION" BENTO GRID
+       ========================================== -->
+  <section id="features" class="py-[140px] relative z-10 px-6 bg-white">
+    <div class="max-w-[1240px] mx-auto">
       
       <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-        <h2 class="font-display text-[40px] sm:text-[56px] font-black text-brand-900 leading-[1.1] mb-6 tracking-tight">
-          Human empathy.<br><span class="text-slate-400">Machine precision.</span>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-brand-100 text-brand-600 text-[10px] font-bold uppercase tracking-wider mb-4">
+          Bilingual Engine
+        </div>
+        <h2 class="font-display text-[40px] sm:text-[52px] font-black text-brand-900 leading-[1.05] mb-6 tracking-tight">
+          Elite Florida credentials.<br>
+          <span class="text-slate-400">Integrated inside your ledger.</span>
         </h2>
-        <p class="text-xl text-slate-600 font-medium">
-          Basic bots piss off your patients. Renia speaks with genuine warmth, detects emotional distress, and switches seamlessly to perfect Spanish.
+        <p class="text-lg text-slate-600 font-medium">
+          Dumb generic AI systems annoy patients. Renia AI is fine-tuned exclusively for Florida's dental demographics, accepting standard HMO/PPO plans and writing directly to your local database.
         </p>
       </div>
 
       <!-- Bento Grid -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[340px]">
         
-        <!-- Large Block 1 -->
-        <div class="md:col-span-7 bg-white rounded-[2rem] p-10 relative overflow-hidden glass-card reveal group">
-          <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-transparent"></div>
+        <!-- Card 1: 2-way PMS integration -->
+        <div class="md:col-span-7 bg-[#0A0B1A] border border-brand-800 rounded-[2.5rem] p-10 relative overflow-hidden shadow-2xl reveal group">
+          <div class="absolute right-[-20%] top-[-20%] w-[380px] h-[380px] bg-brand-500/10 blur-[80px] rounded-full pointer-events-none"></div>
           
-          <!-- Animated Waveform on White -->
-          <div class="absolute right-[5%] top-[20%] w-[80%] h-64 flex items-center justify-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity duration-700">
-            <div class="w-4 h-24 bg-brand-500 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.1s]"></div>
-            <div class="w-4 h-40 bg-accent-teal rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.2s]"></div>
-            <div class="w-4 h-16 bg-brand-300 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.3s]"></div>
-            <div class="w-4 h-32 bg-brand-400 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.4s]"></div>
-            <div class="w-4 h-48 bg-accent-cyan rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.5s]"></div>
-            <div class="w-4 h-20 bg-brand-500 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.6s]"></div>
-          </div>
-
-          <div class="relative z-10 h-full flex flex-col justify-end">
-            <h3 class="font-display text-3xl font-bold text-brand-900 mb-2">Build Trust instantly.</h3>
-            <p class="text-slate-600 text-lg max-w-md">Your patients call when they are in pain or confused. Renia handles them with the empathy of your best receptionist, never missing a beat.</p>
-          </div>
-        </div>
-
-        <!-- Small Block 1 -->
-        <div class="md:col-span-5 bg-white rounded-[2rem] p-10 relative overflow-hidden glass-card reveal">
-          <div class="absolute right-[-20%] top-[-20%] w-64 h-64 bg-brand-500/5 blur-3xl rounded-full"></div>
           <div class="relative z-10 h-full flex flex-col justify-between">
-            <div>
-              <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 mb-6 border border-brand-100">
-                <span class="material-symbols-outlined text-[28px]">translate</span>
-              </div>
-              <h3 class="font-display text-2xl font-bold text-brand-900 mb-3 tracking-tight">Native Spanish</h3>
-              <p class="text-slate-600">Miami clinics lose 15% of leads due to language barriers. Renia switches to flawless Spanish the moment a patient says "Hola".</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Small Block 2 -->
-        <div class="md:col-span-4 bg-white rounded-[2rem] p-10 relative overflow-hidden glass-card reveal">
-          <div class="absolute right-[-20%] top-[-20%] w-64 h-64 bg-rose-500/5 blur-3xl rounded-full"></div>
-          <div class="relative z-10">
-            <div class="w-14 h-14 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-500 mb-6 border border-rose-100">
-              <span class="material-symbols-outlined text-[28px]">emergency</span>
-            </div>
-            <h3 class="font-display text-2xl font-bold text-brand-900 mb-3 tracking-tight">Emergency Triage</h3>
-            <p class="text-slate-600">Detects keywords like "swelling" and instantly routes the call to the doctor's mobile line.</p>
-          </div>
-        </div>
-
-        <!-- Large Block 2 -->
-        <div class="md:col-span-8 bg-brand-900 rounded-[2rem] p-10 relative overflow-hidden shadow-2xl shadow-brand-900/10 reveal group">
-          
-          <div class="absolute right-0 top-0 w-[60%] h-full opacity-20 pointer-events-none grid grid-cols-4 grid-rows-3 gap-2 p-6">
-            <div class="bg-brand-500 rounded-lg"></div>
-            <div class="bg-white/10 rounded-lg"></div>
-            <div class="bg-accent-teal rounded-lg"></div>
-            <div class="bg-white/10 rounded-lg"></div>
-            <div class="bg-white/10 rounded-lg col-span-2"></div>
-            <div class="bg-brand-500 rounded-lg"></div>
-            <div class="bg-white/10 rounded-lg"></div>
-          </div>
-
-          <div class="relative z-10 flex flex-col h-full justify-between">
-            <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-6 border border-white/20 backdrop-blur-md">
-              <span class="material-symbols-outlined text-[28px]">calendar_month</span>
-            </div>
-            <div>
-              <h3 class="font-display text-3xl font-bold text-white mb-3 tracking-tight">Surgical Scheduling</h3>
-              <p class="text-zinc-300 text-lg max-w-lg">Understands provider availability, operatory limitations, and procedure durations to book complex slots perfectly.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       INFRASTRUCTURE & INTEGRATION (Dark nested in Light)
-       ========================================== -->
-  <section id="infrastructure" class="py-[160px] bg-slate-50 relative z-20 px-6 overflow-hidden border-t border-slate-200">
-    <div class="max-w-[1200px] mx-auto relative z-10">
-      
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        
-        <div class="reveal order-2 lg:order-1 relative h-[600px] rounded-[2rem] overflow-hidden bg-[#0f172a] shadow-[0_30px_80px_rgba(0,0,0,0.15)] border border-slate-200 group p-2">
-          <!-- Inner Terminal -->
-          <div class="w-full h-full rounded-[1.5rem] bg-[#020205] flex flex-col border border-white/5 overflow-hidden">
-            <div class="w-full h-12 bg-white/5 border-b border-white/10 flex items-center px-6 gap-2 shrink-0">
-              <div class="w-3 h-3 rounded-full bg-rose-500"></div>
-              <div class="w-3 h-3 rounded-full bg-amber-500"></div>
-              <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-              <span class="ml-4 text-xs font-mono text-zinc-500">renia_pms_sync_worker.rs</span>
-            </div>
-            <div class="p-8 font-mono text-sm leading-relaxed text-zinc-400 h-full overflow-hidden relative">
-              <div class="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-[#020205] to-transparent z-10"></div>
-              <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#020205] to-transparent z-10"></div>
-              
-              <div class="animate-[slide-up_10s_linear_infinite]">
-                <p><span class="text-brand-500">use</span> pms_connect::dentrix::G7Client;</p>
-                <p><span class="text-brand-500">use</span> renia_core::models::Appointment;</p>
-                <br>
-                <p><span class="text-accent-teal">async fn</span> <span class="text-white">commit_appointment</span>(appt: Appointment) -> Result&lt;(), SyncError&gt; {</p>
-                <p class="pl-4 text-zinc-500">// Establish secure connection to local bridge</p>
-                <p class="pl-4"><span class="text-brand-500">let</span> client = G7Client::<span class="text-white">connect</span>(&amp;CLINIC_CONFIG).<span class="text-accent-teal">await</span>?;</p>
-                <br>
-                <p class="pl-4 text-zinc-500">// Verify operatory availability in real-time</p>
-                <p class="pl-4"><span class="text-brand-500">if</span> !client.<span class="text-white">check_slot</span>(appt.time, appt.duration).<span class="text-accent-teal">await</span>? {</p>
-                <p class="pl-8"><span class="text-brand-500">return</span> <span class="text-rose-400">Err</span>(SyncError::SlotConflict);</p>
-                <p class="pl-4">}</p>
-                <br>
-                <p class="pl-4 text-zinc-500">// Write directly to the ledger</p>
-                <p class="pl-4"><span class="text-brand-500">let</span> result = client.<span class="text-white">write_ledger</span>(&amp;appt).<span class="text-accent-teal">await</span>?;</p>
-                <p class="pl-4"><span class="text-brand-500">return</span> <span class="text-emerald-400">Ok</span>(());</p>
-                <p>}</p>
-                <br>
-                <p class="text-emerald-400">> [2026-05-24T14:32:01Z] [INFO] Appointment ID 84992 successfully written.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal order-1 lg:order-2">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-bold uppercase tracking-widest text-brand-600 mb-6 shadow-sm">
-            Enterprise Infrastructure
-          </div>
-          <h2 class="font-display text-[44px] sm:text-[56px] font-black leading-[1.05] mb-6 tracking-tight text-brand-900">
-            Seamless 2-way PMS synchronization.
-          </h2>
-          <p class="text-xl text-slate-600 font-medium leading-relaxed mb-10">
-            Renia is not a sticky note. It's a high-performance backend integration that reads and writes directly to your database with zero latency.
-          </p>
-          
-          <div class="space-y-8">
-            <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors duration-300">
-                <span class="material-symbols-outlined text-[20px]">sync</span>
-              </div>
-              <div>
-                <h4 class="text-xl font-bold text-brand-900 mb-2">Live Availability Read</h4>
-                <p class="text-slate-600">Renia respects your schedule blocks, lunches, and provider preferences natively. No double booking.</p>
-              </div>
+            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white backdrop-blur-md">
+              <span class="material-symbols-outlined text-[26px]">database</span>
             </div>
             
-            <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-teal-50 group-hover:text-accent-teal transition-colors duration-300">
-                <span class="material-symbols-outlined text-[20px]">database</span>
-              </div>
-              <div>
-                <h4 class="text-xl font-bold text-brand-900 mb-2">Direct Ledger Writes</h4>
-                <p class="text-slate-600">When the patient says "yes", the appointment is instantly committed to Dentrix, Eaglesoft, or Open Dental.</p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-rose-50 group-hover:text-rose-500 transition-colors duration-300">
-                <span class="material-symbols-outlined text-[20px]">verified_user</span>
-              </div>
-              <div>
-                <h4 class="text-xl font-bold text-brand-900 mb-2">Military-Grade HIPAA</h4>
-                <p class="text-slate-600">End-to-end encryption. BAA provided instantly. We treat your clinic's data like Fort Knox.</p>
-              </div>
+            <div>
+              <span class="px-2.5 py-1 bg-accent-teal/10 border border-accent-teal/20 text-accent-teal text-[9px] font-extrabold uppercase rounded tracking-widest inline-block mb-3">Live Ledger Write</span>
+              <h3 class="font-display text-3xl font-extrabold text-white mb-2 leading-none">Seamless 2-Way PMS Synchronization</h3>
+              <p class="text-zinc-400 text-sm max-w-lg leading-relaxed">Renia reads and writes appointments, schedules, and clinical notes directly into Dentrix, Eaglesoft, or Open Dental. No double-bookings. No manual typing.</p>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       CASE STUDIES (Social Proof)
-       ========================================== -->
-  <section id="cases" class="py-[160px] relative px-6 bg-white border-t border-slate-200">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-        <h2 class="font-display text-[40px] sm:text-[56px] font-black text-brand-900 leading-[1.1] mb-6 tracking-tight">
-          Proven across Florida.
-        </h2>
-        <p class="text-xl text-slate-600 font-medium">
-          Elite practices use Renia to capture lost revenue and streamline operations.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Case 1 -->
-        <div class="glass-card rounded-[2rem] p-8 reveal hover:-translate-y-2 transition-transform duration-500">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center text-brand-600 font-bold text-lg border border-brand-100">ME</div>
+        <!-- Card 2: Florida Consent Compliance -->
+        <div class="md:col-span-5 bg-white border border-slate-200 rounded-[2.5rem] p-10 relative overflow-hidden glass-card reveal">
+          <div class="absolute right-[-15%] top-[-15%] w-60 h-60 bg-accent-teal/5 blur-3xl rounded-full pointer-events-none"></div>
+          
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-accent-teal">
+              <span class="material-symbols-outlined text-[26px]">verified_user</span>
+            </div>
+            
             <div>
-              <h4 class="font-bold text-brand-900">Miami Elite Dental</h4>
-              <p class="text-xs text-slate-500">5 Locations • Miami, FL</p>
+              <span class="px-2.5 py-1 bg-teal-50 border border-teal-100 text-accent-teal text-[9px] font-extrabold uppercase rounded tracking-widest inline-block mb-3">Florida §934.03 Compliant</span>
+              <h3 class="font-display text-2xl font-extrabold text-brand-900 mb-2 leading-tight">Two-Party Consent Audited</h3>
+              <p class="text-slate-500 text-xs leading-relaxed">Florida law requires consent before voice recording. Renia dynamically serves pre-disclosure announcements and automatically documents patient consent metadata HIPAA-compliantly.</p>
             </div>
           </div>
-          <div class="mb-8">
-            <span class="text-4xl font-display font-black text-brand-900 block mb-2">+$14,200</span>
-            <span class="text-sm font-bold text-accent-teal uppercase tracking-wider">Recovered Monthly</span>
-          </div>
-          <p class="text-slate-600 italic">"We didn't realize how many calls we were missing during our lunch hour. Renia paid for itself in the first 3 days."</p>
         </div>
 
-        <!-- Case 2 -->
-        <div class="glass-card rounded-[2rem] p-8 reveal hover:-translate-y-2 transition-transform duration-500" style="animation-delay: 0.1s;">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-accent-teal font-bold text-lg border border-teal-100">OO</div>
+        <!-- Card 3: Spanish Language -->
+        <div class="md:col-span-5 bg-white border border-slate-200 rounded-[2.5rem] p-10 relative overflow-hidden glass-card reveal">
+          <div class="absolute right-[-15%] top-[-15%] w-60 h-60 bg-accent-coral/5 blur-3xl rounded-full pointer-events-none"></div>
+          
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-accent-coral">
+              <span class="material-symbols-outlined text-[26px]">translate</span>
+            </div>
+            
             <div>
-              <h4 class="font-bold text-brand-900">Orlando Ortho</h4>
-              <p class="text-xs text-slate-500">Orthodontics • Orlando, FL</p>
+              <span class="px-2.5 py-1 bg-rose-50 border border-rose-100 text-accent-coral text-[9px] font-extrabold uppercase rounded tracking-widest inline-block mb-3">Zero Latency Switch</span>
+              <h3 class="font-display text-2xl font-extrabold text-brand-900 mb-2 leading-tight">Bilingual Spanish Detection</h3>
+              <p class="text-slate-500 text-xs leading-relaxed">Florida has one of the highest Spanish-speaking demographics. Renia identifies Spanish keywords in under 10ms and pivots dynamically to a flawless local dialect.</p>
             </div>
           </div>
-          <div class="mb-8">
-            <span class="text-4xl font-display font-black text-brand-900 block mb-2">42 Hrs</span>
-            <span class="text-sm font-bold text-brand-500 uppercase tracking-wider">Saved Monthly</span>
-          </div>
-          <p class="text-slate-600 italic">"Our front desk is finally focused on the patients walking through the door. The Spanish auto-routing is flawless."</p>
         </div>
 
-        <!-- Case 3 -->
-        <div class="glass-card rounded-[2rem] p-8 reveal hover:-translate-y-2 transition-transform duration-500" style="animation-delay: 0.2s;">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center text-rose-500 font-bold text-lg border border-rose-100">CS</div>
-            <div>
-              <h4 class="font-bold text-brand-900">Coastal Smiles</h4>
-              <p class="text-xs text-slate-500">General • Tampa, FL</p>
+        <!-- Card 4: Emergency Triage -->
+        <div class="md:col-span-7 bg-white border border-slate-200 rounded-[2.5rem] p-10 relative overflow-hidden glass-card reveal group">
+          <div class="absolute right-0 bottom-0 w-[45%] h-full bg-slate-50 border-l border-slate-100 hidden sm:flex flex-col justify-center p-6 gap-3 group-hover:bg-brand-950 group-hover:text-white transition-all duration-300">
+            <span class="text-[9px] font-mono text-slate-400"> triager_worker.rs</span>
+            <div class="p-3 bg-rose-50 border border-rose-100 rounded-xl text-left text-[11px] group-hover:bg-rose-500/10 group-hover:border-rose-500/20">
+              <span class="text-rose-500 font-bold block mb-1">EMERGENCY DETECTED</span>
+              <span class="text-slate-600 block group-hover:text-zinc-300 font-medium">"My crown popped off and my tooth is actively bleeding."</span>
+            </div>
+            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+              <span class="material-symbols-outlined text-xs">phone_forwarded</span>
+              <span>Dials doctor mobile cell line...</span>
             </div>
           </div>
-          <div class="mb-8">
-            <span class="text-4xl font-display font-black text-brand-900 block mb-2">100%</span>
-            <span class="text-sm font-bold text-rose-500 uppercase tracking-wider">Sync Accuracy</span>
+
+          <div class="relative z-10 h-full flex flex-col justify-between sm:max-w-[50%]">
+            <div class="w-14 h-14 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-500">
+              <span class="material-symbols-outlined text-[26px]">emergency</span>
+            </div>
+            
+            <div>
+              <span class="px-2.5 py-1 bg-brand-50 border border-brand-100 text-brand-500 text-[9px] font-extrabold uppercase rounded tracking-widest inline-block mb-3">Triage Intelligence</span>
+              <h3 class="font-display text-2.5xl font-extrabold text-brand-900 mb-2 leading-none">Smart Emergency Triage</h3>
+              <p class="text-slate-500 text-xs leading-relaxed">Renia detects clinical emergency terminology (e.g. bleeding, abscesses, facial swelling) and instantly dials the doctor's on-call cell line, capturing high-ticket treatment fees.</p>
+            </div>
           </div>
-          <p class="text-slate-600 italic">"I was skeptical about the Dentrix integration. It is completely seamless. No double bookings. It just works."</p>
         </div>
 
       </div>
@@ -550,66 +578,71 @@
   <!-- ==========================================
        ROI CALCULATOR
        ========================================== -->
-  <section class="py-[160px] relative px-6 z-10 bg-[#FAFAFC]">
-    <div class="max-w-[1200px] mx-auto">
+  <section id="roi" class="py-[140px] relative px-6 z-10 bg-slate-50 border-t border-b border-slate-200">
+    <div class="max-w-[1240px] mx-auto">
       
-      <div class="bg-white border border-slate-200 rounded-[3rem] p-10 md:p-16 shadow-[0_20px_60px_rgba(0,0,0,0.05)] relative overflow-hidden reveal">
-        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-brand-50 to-transparent rounded-bl-full -z-10 pointer-events-none"></div>
+      <div class="bg-white border border-slate-200 rounded-[3rem] p-10 md:p-16 shadow-[0_20px_60px_rgba(15,19,48,0.04)] relative overflow-hidden reveal">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-brand-50/50 to-transparent rounded-bl-full pointer-events-none"></div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
           
-          <div>
-            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 mb-6 border border-brand-100">
+          <div class="lg:col-span-5 text-left">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 border border-brand-100 text-brand-600 mb-6 shadow-sm">
               <span class="material-symbols-outlined text-[28px]">calculate</span>
             </div>
-            <h2 class="font-display text-[40px] sm:text-[48px] font-black text-brand-900 leading-tight mb-4">
-              Calculate your lost revenue.
+            <h2 class="font-display text-[38px] sm:text-[46px] font-black text-brand-900 leading-tight mb-4">
+              Calculate your lost dental revenue.
             </h2>
-            <p class="text-lg text-slate-600 font-medium mb-10">
-              The average dental appointment is worth $300. Use the slider below to calculate exactly how much money evaporates when your staff can't get to the phone.
+            <p class="text-base text-slate-600 font-medium leading-relaxed mb-8">
+              Florida practices lose up to 30% of incoming leads to busy lines, lunch breaks, and after-hours voicemail. A single high-ticket dental crown or implant lead is worth $350-$3,500. See what is evaporating.
             </p>
             
-            <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 shadow-inner">
-              <div class="flex justify-between items-end mb-8">
+            <div class="bg-slate-50 rounded-2.5rem p-8 border border-slate-200/80 shadow-inner">
+              <div class="flex justify-between items-end mb-6">
                 <div>
-                  <label class="block text-sm font-bold text-slate-500 uppercase tracking-wide mb-1">Missed Calls / Month</label>
-                  <div class="text-4xl font-black text-brand-900 font-display" id="calc-val-calls">120</div>
+                  <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1.5">Missed Calls Per Month</label>
+                  <div class="text-4.5xl font-black text-brand-900 font-display" id="calc-val-calls">140</div>
                 </div>
               </div>
               
               <div class="relative w-full h-3 bg-slate-200 rounded-full">
-                <input type="range" id="roi-slider" min="10" max="500" value="120" step="10" class="absolute w-full h-full opacity-0 cursor-pointer z-10" oninput="updateCalculator()">
-                <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-brand-500 to-accent-teal rounded-full" id="slider-progress" style="width: 23%;"></div>
-                <div class="absolute top-1/2 -mt-3 w-6 h-6 bg-white border-2 border-brand-500 rounded-full shadow-md pointer-events-none transition-transform" id="slider-thumb" style="left: 23%; transform: translateX(-50%);"></div>
+                <input type="range" id="roi-slider" min="10" max="500" value="140" step="10" class="absolute w-full h-full opacity-0 cursor-pointer z-10" oninput="updateCalculator()">
+                <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-brand-500 to-accent-teal rounded-full" id="slider-progress" style="width: 26.5%;"></div>
+                <div class="absolute top-1/2 -mt-3.5 w-7 h-7 bg-white border-2 border-brand-500 rounded-full shadow-md pointer-events-none transition-transform" id="slider-thumb" style="left: 26.5%; transform: translateX(-50%);"></div>
               </div>
               
-              <div class="flex justify-between text-xs font-bold text-slate-400 mt-4">
-                <span>10</span>
-                <span>500+</span>
+              <div class="flex justify-between text-[10px] font-bold text-slate-400 mt-4.5">
+                <span>10 Calls</span>
+                <span>500+ Calls</span>
               </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-6">
-            <div class="bg-brand-900 rounded-[2rem] p-8 border border-brand-800 shadow-2xl relative overflow-hidden group">
-              <div class="absolute right-[-10%] top-[-10%] w-64 h-64 bg-accent-teal/20 blur-3xl rounded-full"></div>
+          <!-- Output metrics column -->
+          <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="bg-[#0A0B1A] rounded-[2.2rem] p-8 border border-brand-800 shadow-2xl relative overflow-hidden flex flex-col justify-between h-[250px]">
+              <div class="absolute right-[-10%] top-[-10%] w-60 h-60 bg-accent-teal/15 blur-[60px] rounded-full pointer-events-none"></div>
               <div class="relative z-10">
-                <span class="text-brand-300 text-sm font-bold uppercase tracking-wider">New Revenue Captured</span>
-                <div class="font-display text-[64px] font-black text-white mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-revenue">$36,000</div>
-                <div class="text-sm text-zinc-400 font-medium flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-accent-teal">trending_up</span>
-                  Reinvested back into your practice
-                </div>
+                <span class="text-brand-300 text-xs font-bold uppercase tracking-widest block">Captured Clinic Revenue</span>
+                <span class="font-display text-[48px] sm:text-[54px] font-black text-white mt-4 block tracking-tighter leading-none" id="calc-out-revenue">$42,000</span>
+              </div>
+              <div class="text-xs text-zinc-400 font-medium flex items-center gap-2 border-t border-white/5 pt-4">
+                <span class="material-symbols-outlined text-[16px] text-accent-teal">trending_up</span>
+                <span>Recommitted directly to your bottom-line</span>
               </div>
             </div>
             
-            <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-md relative overflow-hidden">
-              <div class="relative z-10">
-                <span class="text-slate-500 text-sm font-bold uppercase tracking-wider">Staff Hours Saved</span>
-                <div class="font-display text-[48px] font-black text-brand-900 mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-hours">30 hrs</div>
-                <div class="text-sm text-slate-500 font-medium">Redirected to in-office patient care</div>
+            <div class="bg-white rounded-[2.2rem] p-8 border border-slate-200 shadow-md flex flex-col justify-between h-[250px]">
+              <div>
+                <span class="text-slate-400 text-xs font-bold uppercase tracking-widest block">Front Desk Hours Recovered</span>
+                <span class="font-display text-[48px] sm:text-[54px] font-black text-brand-900 mt-4 block tracking-tighter leading-none" id="calc-out-hours">35 hrs</span>
+              </div>
+              <div class="text-xs text-slate-500 font-medium border-t border-slate-100 pt-4">
+                <span>Staff focused entirely on in-chair treatments</span>
               </div>
             </div>
+
           </div>
 
         </div>
@@ -619,72 +652,82 @@
   </section>
 
   <!-- ==========================================
-       PRICING
+       LICENSING PRICING MODES
        ========================================== -->
-  <section id="pricing" class="py-[160px] relative px-6 bg-white border-t border-slate-200">
-    <div class="max-w-[1200px] mx-auto">
+  <section id="pricing" class="py-[140px] relative px-6 bg-white">
+    <div class="max-w-[1240px] mx-auto">
+      
       <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-        <h2 class="font-display text-[40px] sm:text-[56px] font-black text-brand-900 leading-[1.1] mb-6 tracking-tight">
-          Simple, transparent pricing.
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-[10px] font-bold uppercase tracking-wider mb-4">
+          SAAS LICENSING
+        </div>
+        <h2 class="font-display text-[40px] sm:text-[52px] font-black text-brand-900 leading-[1.05] mb-6 tracking-tight">
+          World-class SaaS licensing.<br>
+          <span class="text-slate-400">Pays for itself in one appointment.</span>
         </h2>
-        <p class="text-xl text-slate-600 font-medium">
-          Renia pays for itself with the first appointment it books.
+        <p class="text-lg text-slate-600 font-medium">
+          Deploy premium voice automation to cover overflow calls, lunches, and after-hours 24/7.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
         
-        <!-- Starter -->
-        <div class="glass-card rounded-[2rem] p-8 reveal border-slate-200 bg-slate-50/50">
-          <h3 class="text-xl font-bold text-brand-900 mb-2">Starter</h3>
-          <p class="text-slate-500 mb-6 h-12">Perfect for single-doctor practices looking to handle overflow.</p>
-          <div class="mb-8">
-            <span class="text-5xl font-display font-black text-brand-900">$299</span>
-            <span class="text-slate-500 font-medium">/month</span>
+        <!-- Plan 1 -->
+        <div class="glass-card rounded-[2.2rem] p-8 reveal border-slate-200/80 bg-slate-50/50 flex flex-col justify-between min-h-[500px]">
+          <div>
+            <h3 class="text-lg font-extrabold text-brand-900 mb-2">Starter Tier</h3>
+            <p class="text-slate-500 text-xs mb-6 leading-relaxed">Best for single-dentist practices seeking busy-line overflow coverage.</p>
+            <div class="mb-8 border-b border-slate-200 pb-6">
+              <span class="text-5xl font-display font-black text-brand-900">$299</span>
+              <span class="text-slate-400 text-xs font-bold uppercase block mt-1">per month / billed monthly</span>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3 text-xs font-bold text-slate-600"><span class="material-symbols-outlined text-brand-500 text-[18px]">check_circle</span> 200 Voice Exchanges / mo</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-slate-600"><span class="material-symbols-outlined text-brand-500 text-[18px]">check_circle</span> Basic D1 Calendar Sync</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-slate-600"><span class="material-symbols-outlined text-brand-500 text-[18px]">check_circle</span> Standard Voice Personas</li>
+            </ul>
           </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> 200 AI Calls / month</li>
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> Basic PMS Sync</li>
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> Standard Voice</li>
-          </ul>
-          <a href="signup.html" class="block w-full py-4 text-center rounded-xl font-bold text-brand-900 bg-white border border-slate-200 hover:bg-slate-50 transition-colors">Start Trial</a>
+          <a href="signup.html" class="block w-full py-4 text-center rounded-2xl text-xs font-extrabold text-brand-900 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors mt-8">Start 7-Day Trial</a>
         </div>
 
-        <!-- Professional (Highlighted) -->
-        <div class="bg-brand-900 rounded-[2rem] p-8 reveal shadow-2xl relative overflow-hidden transform md:-translate-y-4">
-          <div class="absolute top-0 right-0 px-4 py-1 bg-accent-teal text-brand-900 text-xs font-bold uppercase tracking-widest rounded-bl-xl">Most Popular</div>
-          <div class="absolute right-[-20%] top-[-20%] w-64 h-64 bg-brand-500/20 blur-3xl rounded-full"></div>
+        <!-- Plan 2: Best Value (Highlighted) -->
+        <div class="bg-brand-900 rounded-[2.5rem] p-8 reveal shadow-2xl relative overflow-hidden transform md:-translate-y-4 min-h-[550px] flex flex-col justify-between">
+          <div class="absolute top-0 right-0 px-4 py-1.5 bg-accent-teal text-brand-900 text-[9px] font-extrabold uppercase tracking-widest rounded-bl-2xl">Recommended</div>
+          <div class="absolute right-[-20%] top-[-20%] w-64 h-64 bg-brand-500/20 blur-3xl rounded-full pointer-events-none"></div>
           
-          <h3 class="text-xl font-bold text-white mb-2 relative z-10">Professional</h3>
-          <p class="text-brand-200 mb-6 h-12 relative z-10">Full automation for growing clinics with deep integration needs.</p>
-          <div class="mb-8 relative z-10">
-            <span class="text-5xl font-display font-black text-white">$599</span>
-            <span class="text-brand-300 font-medium">/month</span>
+          <div>
+            <h3 class="text-lg font-extrabold text-white mb-2 relative z-10">Professional Tier</h3>
+            <p class="text-brand-200 text-xs mb-6 leading-relaxed relative z-10">Complete clinic automation with real-time bidirectional scheduling.</p>
+            <div class="mb-8 border-b border-brand-850 pb-6 relative z-10">
+              <span class="text-5xl font-display font-black text-white">$599</span>
+              <span class="text-brand-300 text-xs font-bold uppercase block mt-1">per month / billed monthly</span>
+            </div>
+            <ul class="space-y-4 relative z-10">
+              <li class="flex items-center gap-3 text-xs font-bold text-white"><span class="material-symbols-outlined text-accent-teal text-[18px]">check_circle</span> 500 Voice Exchanges / mo</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-white"><span class="material-symbols-outlined text-accent-teal text-[18px]">check_circle</span> Live Eaglesoft/Dentrix Write</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-white"><span class="material-symbols-outlined text-accent-teal text-[18px]">check_circle</span> Native Bilingual Auto-Detect</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-white"><span class="material-symbols-outlined text-accent-teal text-[18px]">check_circle</span> Dynamic Emergency Routing</li>
+            </ul>
           </div>
-          <ul class="space-y-4 mb-8 relative z-10">
-            <li class="flex items-center gap-3 text-white font-medium"><span class="material-symbols-outlined text-accent-teal text-[20px]">check_circle</span> 500 AI Calls / month</li>
-            <li class="flex items-center gap-3 text-white font-medium"><span class="material-symbols-outlined text-accent-teal text-[20px]">check_circle</span> Deep Dentrix/OpenDental Sync</li>
-            <li class="flex items-center gap-3 text-white font-medium"><span class="material-symbols-outlined text-accent-teal text-[20px]">check_circle</span> Native Spanish Routing</li>
-            <li class="flex items-center gap-3 text-white font-medium"><span class="material-symbols-outlined text-accent-teal text-[20px]">check_circle</span> Custom Knowledge Base</li>
-          </ul>
-          <a href="signup.html" class="block w-full py-4 text-center rounded-xl font-bold text-brand-900 bg-white hover:bg-brand-50 transition-colors relative z-10 shadow-lg">Start Trial</a>
+          <a href="signup.html" class="block w-full py-4.5 text-center rounded-2xl text-xs font-extrabold text-brand-900 bg-white hover:bg-slate-50 transition-colors relative z-10 shadow-lg mt-8">Start 7-Day Trial</a>
         </div>
 
-        <!-- Enterprise -->
-        <div class="glass-card rounded-[2rem] p-8 reveal border-slate-200 bg-slate-50/50">
-          <h3 class="text-xl font-bold text-brand-900 mb-2">Enterprise</h3>
-          <p class="text-slate-500 mb-6 h-12">Multi-location DSO infrastructure and custom voice cloning.</p>
-          <div class="mb-8">
-            <span class="text-5xl font-display font-black text-brand-900">$999</span>
-            <span class="text-slate-500 font-medium">/month</span>
+        <!-- Plan 3 -->
+        <div class="glass-card rounded-[2.2rem] p-8 reveal border-slate-200/80 bg-slate-50/50 flex flex-col justify-between min-h-[500px]">
+          <div>
+            <h3 class="text-lg font-extrabold text-brand-900 mb-2">Enterprise Tier</h3>
+            <p class="text-slate-500 text-xs mb-6 leading-relaxed">For high-volume multi-location DSOs requiring custom clones.</p>
+            <div class="mb-8 border-b border-slate-200 pb-6">
+              <span class="text-5xl font-display font-black text-brand-900">$999</span>
+              <span class="text-slate-400 text-xs font-bold uppercase block mt-1">per month / billed monthly</span>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3 text-xs font-bold text-slate-600"><span class="material-symbols-outlined text-brand-500 text-[18px]">check_circle</span> Unlimited Voice Interactions</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-slate-600"><span class="material-symbols-outlined text-brand-500 text-[18px]">check_circle</span> Multi-location Operator</li>
+              <li class="flex items-center gap-3 text-xs font-bold text-slate-600"><span class="material-symbols-outlined text-brand-500 text-[18px]">check_circle</span> Custom Voice Cloning Integration</li>
+            </ul>
           </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> Unlimited AI Calls</li>
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> Multi-location Support</li>
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> Custom Voice Cloning</li>
-            <li class="flex items-center gap-3 text-slate-600 font-medium"><span class="material-symbols-outlined text-brand-500 text-[20px]">check_circle</span> Dedicated Account Manager</li>
-          </ul>
-          <a href="signup.html" class="block w-full py-4 text-center rounded-xl font-bold text-brand-900 bg-white border border-slate-200 hover:bg-slate-50 transition-colors">Contact Sales</a>
+          <a href="signup.html" class="block w-full py-4 text-center rounded-2xl text-xs font-extrabold text-brand-900 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors mt-8">Contact Sales</a>
         </div>
 
       </div>
@@ -694,72 +737,76 @@
   <!-- ==========================================
        BOTTOM CTA
        ========================================== -->
-  <section class="py-[160px] relative px-6 bg-[#FAFAFC] overflow-hidden border-t border-slate-200">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-brand-100 -z-10 shadow-[inset_0_0_50px_rgba(99,102,241,0.05)]"></div>
+  <section class="py-[140px] relative px-6 bg-[#FAFAFC] overflow-hidden border-t border-slate-200">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-brand-100/50 -z-10 shadow-[inset_0_0_50px_rgba(99,102,241,0.02)]"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-brand-50 -z-10"></div>
 
     <div class="max-w-[800px] mx-auto text-center reveal relative z-10">
-      <div class="w-20 h-20 mx-auto rounded-3xl bg-white flex items-center justify-center text-brand-900 text-3xl shadow-xl border border-slate-200 mb-8 transform -rotate-12 hover:rotate-0 transition-transform duration-300">🦷</div>
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-white flex items-center justify-center text-brand-900 text-2xl shadow-xl border border-slate-200/80 mb-8 transform -rotate-12 hover:rotate-0 transition-transform duration-300">🦷</div>
       
-      <h2 class="font-display text-[56px] md:text-[80px] font-black text-brand-900 leading-[1] tracking-[-0.03em] mb-8 drop-shadow-sm">
-        Deploy Renia <br>in 5 minutes.
+      <h2 class="font-display text-[52px] md:text-[68px] font-black text-brand-900 leading-[1.02] tracking-[-0.03em] mb-6">
+        Deploy your voice receptionist in 5 minutes.
       </h2>
       
-      <p class="text-xl text-slate-600 font-medium mb-12 max-w-2xl mx-auto">
-        No technical skills required. We connect to your phone system and PMS instantly. Let your staff focus on the patients in the chair.
+      <p class="text-base text-slate-600 font-medium mb-10 max-w-xl mx-auto">
+        Seamless deployment. Zero technical skills required. We connect securely to Eaglesoft, Dentrix, or Open Dental. Focus on treatments, let Renia answer.
       </p>
       
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-        <a href="signup.html" class="w-full sm:w-auto px-10 py-5 bg-brand-900 text-white rounded-full font-bold text-lg shadow-2xl shadow-brand-900/20 hover:bg-brand-800 transition-all hover:scale-105 flex items-center justify-center gap-3">
-          Start Free Trial <span class="material-symbols-outlined">arrow_forward</span>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="signup.html" class="w-full sm:w-auto px-10 py-5 bg-brand-900 text-white rounded-full font-bold text-sm shadow-2xl shadow-brand-900/10 hover:bg-brand-800 transition-all hover:scale-[1.03] flex items-center justify-center gap-2">
+          Start Free Trial Now <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </a>
       </div>
-      <p class="text-sm font-semibold text-slate-400 mt-8">Cancel anytime. Free white-glove onboarding included.</p>
+      <p class="text-xs font-bold text-slate-400 mt-6">Cancel anytime. HIPAA Business Associate Agreement (BAA) signed instantly.</p>
     </div>
   </section>
 
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="bg-white py-16 px-6 text-slate-800 border-t border-slate-200">
-    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+  <footer class="bg-white py-14 px-6 text-slate-800 border-t border-slate-200">
+    <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-brand-900 text-sm shadow-sm border border-slate-200">🦷</div>
+        <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-brand-900 text-base shadow-sm border border-slate-200">🦷</div>
         <div>
-          <span class="font-display font-black text-brand-900 text-2xl tracking-tight leading-none block">Renia AI</span>
-          <span class="text-[10px] font-bold text-brand-500 uppercase tracking-widest">Enterprise Voice</span>
+          <span class="font-display font-black text-brand-900 text-xl tracking-tight leading-none block">Renia AI</span>
+          <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest">Enterprise Voice SaaS</span>
         </div>
       </div>
       
-      <div class="text-sm font-medium text-slate-500">
-        © 2026 Renia AI Technologies, LLC. Engineered for Florida.
+      <div class="text-xs font-medium text-slate-500">
+        © 2026 Renia AI Technologies, LLC. Engineered in Florida.
       </div>
       
-      <div class="flex items-center gap-8">
-        <a href="#" class="text-sm font-semibold text-slate-500 hover:text-brand-900 transition-colors">Privacy Policy</a>
-        <a href="#" class="text-sm font-semibold text-slate-500 hover:text-brand-900 transition-colors">Terms of Service</a>
-        <a href="#" class="text-sm font-semibold text-slate-500 hover:text-brand-900 transition-colors">Contact Support</a>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-xs font-bold text-slate-500 hover:text-brand-900 transition-colors">Privacy Policy</a>
+        <a href="#" class="text-xs font-bold text-slate-500 hover:text-brand-900 transition-colors">Terms of Service</a>
+        <a href="#" class="text-xs font-bold text-slate-500 hover:text-brand-900 transition-colors">HIPAA Compliance BAA</a>
       </div>
     </div>
   </footer>
 
   <!-- ==========================================
-       SCRIPTS
+       SCRIPTS & REAL-TIME VOIP SIMULATOR
        ========================================== -->
   <script>
+    // --- ROI Calculator ---
     function updateCalculator() {
       const slider = document.getElementById('roi-slider');
       const val = parseInt(slider.value);
       const revenue = val * 300;
-      const hours = Math.round(val * (15/60));
+      const hours = Math.round(val * 0.25);
+      
       document.getElementById('calc-val-calls').innerText = val;
       document.getElementById('calc-out-revenue').innerText = '$' + revenue.toLocaleString();
       document.getElementById('calc-out-hours').innerText = hours + ' hrs';
+      
       const percent = ((val - slider.min) / (slider.max - slider.min)) * 100;
       document.getElementById('slider-progress').style.width = percent + '%';
       document.getElementById('slider-thumb').style.left = percent + '%';
     }
 
+    // --- Intersection Observer for Scroll Reveals ---
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -767,25 +814,243 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    // --- Header Scrolled Shadow ---
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
       const container = document.getElementById('nav-container');
       if (window.scrollY > 20) {
         nav.classList.replace('py-4', 'py-2');
         container.classList.add('shadow-md', 'bg-white/90');
-        container.classList.remove('border-white/80');
+        container.classList.remove('border-slate-200/50');
         container.classList.add('border-slate-200');
       } else {
         nav.classList.replace('py-2', 'py-4');
         container.classList.remove('shadow-md', 'bg-white/90');
-        container.classList.add('border-white/80');
+        container.classList.add('border-slate-200/50');
         container.classList.remove('border-slate-200');
       }
     });
-  </script>
 
+    // --- Real xAI Interactive Live Simulator logic ---
+    let activeScenario = 'carlos';
+    let activeVoiceName = 'Coral';
+    let activeVoiceId = 'eve';
+    let isCallActive = false;
+    let audioContext = null;
+    let simHistory = [];
+
+    const greetingsMap = {
+      carlos: "¡Hola! Gracias por llamar a Sunshine Smiles Dental. Soy Coral, la asistente virtual de la clínica. Le informo que esta llamada puede ser grabada. Veo que tiene una molestia severa. ¿Me podría dar su nombre completo y número de teléfono para ayudarle?",
+      emily: "Thank you for calling Sunshine Smiles Dental. I'm Coral, your digital dental receptionist. This call may be recorded. How can I help you? Are you calling about a routine cleaning or perhaps looking into our cosmetic whitening?",
+      james: "Hello! Welcome to Sunshine Smiles Dental, this is Coral speaking. Just so you know, our call is recorded. I can certainly help you reschedule your hygiene cleaning next Wednesday. Could I have your full name and phone number to look up your chart?"
+    };
+
+    function setSimVoice(name, code) {
+      if (isCallActive) return;
+      activeVoiceName = name;
+      activeVoiceId = code;
+      
+      document.getElementById('voice-btn-eve').className = code === 'eve' 
+        ? 'px-4 py-3 bg-brand-50 border-2 border-brand-500 text-brand-900 font-bold rounded-2xl flex items-center justify-between text-xs transition-all' 
+        : 'px-4 py-3 bg-slate-50 border-2 border-transparent text-slate-600 hover:bg-slate-100 font-bold rounded-2xl flex items-center justify-between text-xs transition-all';
+        
+      document.getElementById('voice-btn-rex').className = code === 'rex' 
+        ? 'px-4 py-3 bg-brand-50 border-2 border-brand-500 text-brand-900 font-bold rounded-2xl flex items-center justify-between text-xs transition-all' 
+        : 'px-4 py-3 bg-slate-50 border-2 border-transparent text-slate-600 hover:bg-slate-100 font-bold rounded-2xl flex items-center justify-between text-xs transition-all';
+        
+      updateGreetingTexts();
+    }
+
+    function setSimScenario(scen) {
+      if (isCallActive) return;
+      activeScenario = scen;
+      
+      ['carlos', 'emily', 'james'].forEach(s => {
+        const btn = document.getElementById(`scen-btn-${s}`);
+        if (s === scen) {
+          btn.className = 'p-4 bg-brand-50 border-2 border-brand-500 rounded-2xl text-left transition-all';
+          btn.querySelector('span.font-bold').className = 'font-bold text-brand-900 text-xs';
+        } else {
+          btn.className = 'p-4 bg-slate-50 border-2 border-transparent hover:bg-slate-100 rounded-2xl text-left transition-all';
+          btn.querySelector('span.font-bold').className = 'font-bold text-slate-700 text-xs';
+        }
+      });
+    }
+
+    function updateGreetingTexts() {
+      // Re-map voice name in greetings
+      greetingsMap.carlos = greetingsMap.carlos.replace(/Soy \w+/, `Soy ${activeVoiceName}`);
+      greetingsMap.emily = greetingsMap.emily.replace(/I'm \w+/, `I'm ${activeVoiceName}`);
+      greetingsMap.james = greetingsMap.james.replace(/this is \w+/, `this is ${activeVoiceName}`);
+    }
+
+    function addSimBubble(text, role) {
+      const box = document.getElementById('sim-chat-box');
+      const card = document.createElement('div');
+      
+      if (role === 'assistant') {
+        card.className = 'bg-brand-500/10 p-4.5 rounded-2xl border border-brand-500/15 max-w-[90%] self-start';
+        card.innerHTML = `
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="text-accent-teal text-[9px] font-extrabold tracking-widest uppercase">${activeVoiceName.toUpperCase()} AI</span>
+          </div>
+          <p class="text-zinc-200 text-xs leading-relaxed font-medium">${text}</p>
+        `;
+      } else {
+        card.className = 'bg-white/5 p-4.5 rounded-2xl border border-white/10 max-w-[90%] self-end';
+        card.innerHTML = `
+          <div class="flex items-center gap-2 mb-1.5 justify-end">
+            <span class="text-zinc-500 text-[9px] font-bold tracking-wider">PATIENT</span>
+          </div>
+          <p class="text-white text-xs leading-relaxed font-medium">${text}</p>
+        `;
+      }
+      
+      box.appendChild(card);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function setVisualizerAnimating(animating) {
+      const bars = document.querySelectorAll('#wave-visualizer .bar');
+      bars.forEach(bar => {
+        if (animating) {
+          bar.classList.add('animating');
+        } else {
+          bar.classList.remove('animating');
+        }
+      });
+    }
+
+    // Synthesize & Stream Live Audio (xAI TTS Proxy)
+    async function playSimVoice(text) {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      
+      setVisualizerAnimating(true);
+      
+      try {
+        const response = await fetch('/api/v1/voice/tts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: text.replace(/\[BOOKING:.*?\]/g, ''), // strip out metadata booking triggers
+            voice_id: activeVoiceId,
+            speed: 1.0
+          })
+        });
+
+        if (!response.ok) throw new Error('TTS failed');
+        
+        const audioBuffer = await response.arrayBuffer();
+        const decoded = await audioContext.decodeAudioData(audioBuffer);
+        
+        const source = audioContext.createBufferSource();
+        source.buffer = decoded;
+        source.connect(audioContext.destination);
+        source.start(0);
+        
+        source.onended = () => {
+          setVisualizerAnimating(false);
+        };
+        
+      } catch (err) {
+        console.error('Audio synthesis failed:', err);
+        setVisualizerAnimating(false);
+      }
+    }
+
+    async function toggleSimCall() {
+      const btn = document.getElementById('sim-call-btn');
+      const chatBox = document.getElementById('sim-chat-box');
+      const input = document.getElementById('sim-user-input');
+      const sendBtn = document.getElementById('sim-send-btn');
+      
+      if (isCallActive) {
+        // Disconnect simulation
+        isCallActive = false;
+        btn.className = 'w-full py-4.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-extrabold rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-teal-500/20 transition-all cursor-pointer';
+        document.getElementById('sim-btn-text').innerText = 'Initiate Simulated Call';
+        document.getElementById('sim-status').innerText = 'Call Terminated';
+        setVisualizerAnimating(false);
+        
+        chatBox.innerHTML = `
+          <div class="text-zinc-500 text-center py-12 flex flex-col items-center gap-3">
+            <span class="material-symbols-outlined text-4xl text-brand-500/40">phonelink_ring</span>
+            <p class="max-w-xs text-xs">Call disconnected. Select another scenario or click above to simulate again!</p>
+          </div>
+        `;
+        input.disabled = true;
+        sendBtn.disabled = true;
+        return;
+      }
+
+      // Initialize simulation
+      isCallActive = true;
+      btn.className = 'w-full py-4.5 bg-rose-500 hover:bg-rose-600 text-white font-extrabold rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-rose-500/20 transition-all cursor-pointer';
+      document.getElementById('sim-btn-text').innerText = 'Disconnect Simulation';
+      document.getElementById('sim-status').innerText = 'Calling Edge...';
+      chatBox.innerHTML = '';
+      
+      updateGreetingTexts();
+      const welcomeMsg = greetingsMap[activeScenario];
+      simHistory = [{ role: 'assistant', content: welcomeMsg }];
+      
+      // Serve greeting bubble & speak live audio!
+      document.getElementById('sim-status').innerText = 'Live Connection';
+      addSimBubble(welcomeMsg, 'assistant');
+      playSimVoice(welcomeMsg);
+
+      input.disabled = false;
+      sendBtn.disabled = false;
+    }
+
+    async function sendSimText() {
+      const input = document.getElementById('sim-user-input');
+      const text = input.value.trim();
+      if (!text || !isCallActive) return;
+      
+      input.value = '';
+      addSimBubble(text, 'user');
+      simHistory.push({ role: 'user', content: text });
+      
+      document.getElementById('sim-status').innerText = 'Thinking...';
+      
+      try {
+        const response = await fetch('/api/v1/voice/simulate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: simHistory,
+            scenario: activeScenario,
+            clinicName: 'Sunshine Smiles Dental',
+            settings: { voice: { voice: activeVoiceName } }
+          })
+        });
+
+        if (!response.ok) throw new Error('Simulation failed');
+        
+        const data = await response.json();
+        document.getElementById('sim-status').innerText = 'Live Connection';
+        
+        addSimBubble(data.response, 'assistant');
+        simHistory.push({ role: 'assistant', content: data.response });
+        playSimVoice(data.response);
+        
+      } catch (err) {
+        console.error(err);
+        document.getElementById('sim-status').innerText = 'Connection Error';
+        addSimBubble('⚠️ Error connecting to server simulator. Please try again.', 'assistant');
+      }
+    }
+
+    // Support enter key on input
+    document.getElementById('sim-user-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendSimText();
+    });
+  </script>
 </body>
 </html>
