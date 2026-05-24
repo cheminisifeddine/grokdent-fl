@@ -1,89 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#FAFAFC] antialiased selection:bg-indigo-500 selection:text-white">
+<html lang="en" class="scroll-smooth bg-white antialiased selection:bg-indigo-600 selection:text-white">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Renia AI | Enterprise Voice Infrastructure for Dental Clinics</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renia AI — AI Voice Receptionist for Dental Clinics</title>
+  <meta name="description" content="Renia answers every incoming call 24/7, books appointments into your PMS in real-time, and never puts a patient on hold. Built for Florida dental clinics.">
+
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@300,0,0,24&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,200&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['Fira Code', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
-            brand: {
-              900: '#09090b', // Ultra dark zinc
-              800: '#18181b',
-              500: '#6366f1', // Primary Indigo
-              400: '#818cf8',
-              100: '#e0e7ff',
-              50:  '#f8fafc',
+            gray: {
+              950: '#0a0a0b',
+              925: '#111113',
+              900: '#141416',
+              850: '#1a1a1d',
+              800: '#1f1f23',
+              750: '#26262b',
+              700: '#2c2c32',
+              650: '#35353c',
+              600: '#3f3f46',
+              500: '#52525b',
+              400: '#71717a',
+              300: '#a1a1aa',
+              200: '#d4d4d8',
+              150: '#e3e3e8',
+              100: '#f1f1f3',
+              50: '#f7f7f8',
             },
-            accent: {
-              teal: '#0FD8B6',
-              cyan: '#06b6d4',
-              coral: '#f43f5e',
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#312e81',
+              900: '#1e1b4b',
             }
           },
           boxShadow: {
-            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
-            'glass-hover': '0 12px 48px 0 rgba(99, 102, 241, 0.15)',
-            'glow-indigo': '0 0 40px -10px rgba(99, 102, 241, 0.5)',
-            'glow-teal': '0 0 40px -10px rgba(15, 216, 182, 0.5)',
-            'btn': '0 4px 14px 0 rgba(99, 102, 241, 0.39)',
-            'card': '0 0 0 1px rgba(0,0,0,.03), 0 2px 4px rgba(0,0,0,.04), 0 12px 24px rgba(0,0,0,.04)',
+            'soft': '0 1px 2px 0 rgba(0,0,0,0.03), 0 1px 6px -1px rgba(0,0,0,0.02), 0 2px 4px 0 rgba(0,0,0,0.02)',
+            'card': '0 1px 3px 0 rgba(0,0,0,0.03), 0 1px 2px -1px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.03)',
+            'card-hover': '0 4px 6px -1px rgba(0,0,0,0.04), 0 2px 4px -2px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.04)',
+            'elevated': '0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -5px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.03)',
+            'glow': '0 0 0 1px rgba(99,102,241,0.15), 0 1px 3px rgba(99,102,241,0.1), 0 8px 32px -4px rgba(99,102,241,0.15)',
+            'panel': '0 0 0 1px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.02), 0 8px 24px -4px rgba(0,0,0,0.04)',
           },
           animation: {
-            'mesh': 'mesh 15s ease-in-out infinite alternate',
+            'fade-up': 'fade-up 0.7s cubic-bezier(0.14, 0.65, 0.2, 1) forwards',
+            'fade-up-slow': 'fade-up 1s cubic-bezier(0.14, 0.65, 0.2, 1) forwards',
+            'fade-in': 'fade-in 0.5s ease-out forwards',
+            'scale-in': 'scale-in 0.4s cubic-bezier(0.14, 0.65, 0.2, 1) forwards',
+            'shimmer': 'shimmer 2s linear infinite',
+            'pulse-ring': 'pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             'float': 'float 6s ease-in-out infinite',
-            'float-delayed': 'float 6s ease-in-out 3s infinite',
-            'spin-slow': 'spin 12s linear infinite',
-            'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'marquee': 'marquee 40s linear infinite',
-            'marquee-reverse': 'marquee-reverse 40s linear infinite',
-            'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'fade-in': 'fade-in 1s ease-out forwards',
+            'marquee': 'marquee 30s linear infinite',
           },
           keyframes: {
-            mesh: {
-              '0%': { transform: 'scale(1) rotate(0deg)' },
-              '100%': { transform: 'scale(1.2) rotate(15deg)' },
+            'fade-up': {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            'fade-in': {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            'scale-in': {
+              '0%': { opacity: '0', transform: 'scale(0.95)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            },
+            'pulse-ring': {
+              '0%': { transform: 'scale(1)', opacity: '1' },
+              '100%': { transform: 'scale(1.5)', opacity: '0' },
             },
             float: {
               '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-20px)' },
-            },
-            'pulse-glow': {
-              '0%, 100%': { opacity: 1, filter: 'brightness(1)' },
-              '50%': { opacity: .7, filter: 'brightness(1.5)' },
+              '50%': { transform: 'translateY(-16px)' },
             },
             marquee: {
               '0%': { transform: 'translateX(0%)' },
               '100%': { transform: 'translateX(-50%)' },
             },
-            'marquee-reverse': {
-              '0%': { transform: 'translateX(-50%)' },
-              '100%': { transform: 'translateX(0%)' },
-            },
-            'slide-up': {
-              '0%': { opacity: 0, transform: 'translateY(40px)' },
-              '100%': { opacity: 1, transform: 'translateY(0)' },
-            },
-            'fade-in': {
-              '0%': { opacity: 0 },
-              '100%': { opacity: 1 },
-            }
           }
         }
       }
@@ -91,785 +107,971 @@
   </script>
 
   <style>
-    /* Premium Glassmorphism Utilities */
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-    }
-    
-    .glass-panel-dark {
-      background: rgba(9, 9, 11, 0.7);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+
+    ::selection { background: #4f46e5; color: white; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.14, 0.65, 0.2, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .noise-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      opacity: 0.5;
+      pointer-events: none;
+      mix-blend-mode: multiply;
     }
 
-    /* Gradients */
-    .text-gradient-primary {
-      background: linear-gradient(135deg, #09090b 0%, #4338ca 100%);
+    .text-balance { text-wrap: balance; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #6366f1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
-    .text-gradient-accent {
-      background: linear-gradient(to right, #6366f1, #06b6d4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
 
-    .text-gradient-dark {
+    .gradient-text-light {
       background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Background Patterns */
-    .bg-grid-pattern {
-      background-image: 
-        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black, transparent 80%);
-      -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+    .grid-pattern {
+      background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
 
-    .bg-grid-pattern-dark {
-      background-image: 
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black, transparent 80%);
-      -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+    .grid-pattern-light {
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
 
-    /* Interactive Glare Effect for Cards */
-    .glare-card {
+    .gradient-border {
       position: relative;
-      overflow: hidden;
     }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(99,102,241,0.05), rgba(99,102,241,0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .magnetic-wrap { display: inline-block; position: relative; }
+
+    .glare-card { position: relative; overflow: hidden; }
     .glare-card::after {
       content: '';
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.8) 0%, transparent 50%);
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.6) 0%, transparent 60%);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.4s;
       pointer-events: none;
       mix-blend-mode: overlay;
     }
-    .glare-card:hover::after {
-      opacity: 0.15;
+    .glare-card:hover::after { opacity: 0.1; }
+
+    @keyframes soundwave {
+      0%, 100% { height: 20%; }
+      50% { height: 100%; }
     }
 
-    /* Magnetic Button Wrapper */
-    .magnetic-wrap {
-      display: inline-block;
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: #6366f1;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .btn-primary {
       position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.14, 0.65, 0.2, 1);
     }
-    
-    /* Scroll Reveal Classes */
-    .reveal {
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.3s;
     }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:active { transform: scale(0.97); }
 
-    /* Hide Scrollbar but keep functionality */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+    input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      background: white;
+      border: 2px solid #4f46e5;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(79,70,229,0.2);
+      margin-top: -8px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type="range"]::-webkit-slider-runnable-track {
+      width: 100%; height: 4px;
+      background: #e4e4e7;
+      border-radius: 2px;
+    }
   </style>
 </head>
-<body class="relative">
+<body>
 
-  <!-- ==========================================
-       BACKGROUND AMBIENCE (Global)
-       ========================================== -->
-  <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-    <!-- Grid -->
-    <div class="absolute inset-0 bg-grid-pattern z-0"></div>
-    <!-- Mesh Gradients -->
-    <div class="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.1)_0%,rgba(255,255,255,0)_60%)] animate-mesh blur-[60px] z-0"></div>
-    <div class="absolute top-[20%] right-[-20%] w-[80vw] h-[80vw] rounded-full bg-[radial-gradient(circle,rgba(15,216,182,0.08)_0%,rgba(255,255,255,0)_60%)] animate-mesh blur-[80px] z-0" style="animation-direction: alternate-reverse;"></div>
-  </div>
-
-  <!-- ==========================================
-       NAVIGATION
-       ========================================== -->
-  <nav class="fixed top-0 w-full z-50 transition-all duration-500 py-4" id="navbar">
-    <div class="max-w-[1200px] mx-auto px-6">
-      <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300 border border-white/40 shadow-sm" id="nav-container">
-        
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="w-9 h-9 rounded-full bg-brand-900 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-accent-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span class="relative text-white text-[14px]">🦷</span>
-          </div>
-          <span class="font-display font-bold text-xl tracking-tight text-brand-900">Renia</span>
+  <!-- ============ NAV ============ -->
+  <header class="fixed top-0 left-0 right-0 z-50" id="header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20 transition-all duration-300" id="nav-container">
+        <a href="/" class="flex items-center gap-2.5 group shrink-0">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform duration-300 group-hover:scale-105">
+            <rect width="32" height="32" rx="8" fill="#141416"/>
+            <path d="M16 8C13.5 8 11.5 9.5 11 12H9.5C9 14 10 16 11.5 17L14 20H10L8 24H24L22 20H18L20.5 17C22 16 23 14 22.5 12H21C20.5 9.5 18.5 8 16 8Z" fill="white" fill-opacity="0.95"/>
+            <circle cx="13.5" cy="13.5" r="1.5" fill="#6366f1"/>
+            <circle cx="18.5" cy="13.5" r="1.5" fill="#6366f1"/>
+          </svg>
+          <span class="font-semibold text-lg tracking-tight text-gray-900">Renia</span>
         </a>
 
-        <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-1 bg-slate-100/50 rounded-full p-1 border border-slate-200/50">
-          <a href="#infrastructure" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Infrastructure</a>
-          <a href="#intelligence" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Intelligence</a>
-          <a href="#pms" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Integrations</a>
-        </div>
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="#how-it-works" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">How it works</a>
+          <a href="#features" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">Features</a>
+          <a href="#roi" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">ROI</a>
+          <a href="#faq" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all">FAQ</a>
+        </nav>
 
-        <!-- Auth -->
-        <div class="flex items-center gap-4">
-          <a href="login.html" class="hidden sm:block text-sm font-semibold text-slate-600 hover:text-brand-900 transition-colors">Sign in</a>
-          <div class="magnetic-wrap">
-            <a href="signup.html" class="magnetic-btn relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-white bg-brand-900 rounded-full shadow-2xl group">
-              <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
-              <span class="relative text-sm flex items-center gap-2">
-                Get Access <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-              </span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </nav>
-
-  <!-- ==========================================
-       HERO SECTION (Cinematic & Interactive)
-       ========================================== -->
-  <main class="relative pt-[180px] pb-[100px] lg:pt-[240px] lg:pb-[140px] px-6 overflow-hidden flex flex-col items-center">
-    
-    <!-- Hero Text -->
-    <div class="max-w-[900px] mx-auto text-center z-10 flex flex-col items-center animate-slide-up">
-      
-      <!-- Pill Badge -->
-      <a href="#infrastructure" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-500/20 mb-8 hover:scale-105 transition-transform cursor-pointer group shadow-sm">
-        <span class="flex h-2 w-2 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-teal opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-teal"></span>
-        </span>
-        <span class="text-xs font-bold uppercase tracking-widest text-brand-900">Renia Engine v2.0 Live</span>
-        <span class="material-symbols-outlined text-[14px] text-brand-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
-      </a>
-
-      <!-- Headline -->
-      <h1 class="font-display text-[60px] sm:text-[80px] lg:text-[100px] font-black leading-[0.95] tracking-[-0.03em] mb-8 text-brand-900">
-        Voice AI that <br>
-        <span class="relative inline-block">
-          <span class="absolute -inset-2 bg-brand-100/50 rounded-3xl blur-xl -z-10"></span>
-          <span class="text-gradient-primary">actually thinks.</span>
-        </span>
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="text-lg sm:text-2xl font-medium text-slate-500 max-w-3xl mb-12 leading-[1.6]">
-        Not a phone tree. Not a basic chatbot. Renia is an elite conversational engine that answers calls, negotiates scheduling, and writes directly into Dentrix, Eaglesoft, and Open Dental in <strong class="text-brand-900">real-time.</strong>
-      </p>
-
-      <!-- CTA Row -->
-      <div class="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto justify-center">
-        <div class="magnetic-wrap w-full sm:w-auto">
-          <a href="signup.html" class="magnetic-btn w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-brand-500 text-white rounded-full font-bold text-lg shadow-btn hover:bg-brand-600 transition-all hover:shadow-glow-indigo group">
-            Start Free Trial
-            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span>
+        <div class="flex items-center gap-3">
+          <a href="login.html" class="hidden sm:inline-flex text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors px-3 py-2">Sign in</a>
+          <a href="signup.html" class="btn-primary inline-flex items-center gap-1.5 px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-soft">
+            Get Early Access
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5">
+              <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
         </div>
-        <a href="#demo" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-brand-900 rounded-full font-bold text-lg hover:border-brand-500/30 hover:bg-slate-50 transition-all shadow-sm group">
-          <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-[14px]">play_arrow</span>
-          </div>
-          Hear a Live Call
-        </a>
       </div>
     </div>
+  </header>
 
-    <!-- Interactive Hero Visual (The "Dashboard/Engine" Mockup) -->
-    <div class="w-full max-w-[1200px] mt-24 relative z-20 animate-slide-up" style="animation-delay: 0.2s;">
-      
-      <!-- Halo Glow -->
-      <div class="absolute inset-0 bg-gradient-to-b from-brand-500/20 to-accent-teal/20 blur-[100px] -z-10 rounded-[3rem]"></div>
-      
-      <!-- The Glass Window -->
-      <div class="glass-panel-dark rounded-[2rem] p-4 sm:p-8 border border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.4)] relative overflow-hidden glare-card">
-        
-        <!-- Window Controls -->
-        <div class="flex items-center gap-2 mb-6 border-b border-white/10 pb-4">
-          <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
-          <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
-          <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-          <div class="ml-4 text-xs font-mono text-zinc-500 flex items-center gap-2">
-            <span class="material-symbols-outlined text-[14px]">lock</span>
-            renia.ai / engine / active-call-0938
-          </div>
+  <!-- ============ HERO ============ -->
+  <section class="relative pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <div class="absolute inset-0 noise-bg pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-50/30 via-transparent to-white pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-b from-brand-200/20 via-brand-100/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-4xl mx-auto text-center relative">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-8 animate-fade-up">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+          Now powering 40+ dental clinics across Florida
         </div>
 
-        <!-- Inner Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
-          <!-- Left: Call Visualizer -->
-          <div class="lg:col-span-7 flex flex-col gap-6">
-            <div class="bg-zinc-900/50 rounded-2xl p-6 border border-white/5 relative overflow-hidden flex flex-col h-[300px]">
-              <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/20 blur-3xl rounded-full"></div>
-              
-              <div class="flex justify-between items-start mb-auto z-10">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center border border-zinc-700">
-                    <span class="text-xl">🧑‍🦳</span>
-                  </div>
-                  <div>
-                    <h3 class="text-white font-semibold text-lg">Maria Rodriguez (New Patient)</h3>
-                    <p class="text-zinc-400 text-sm font-mono">+1 (305) 555-0192 • Miami, FL</p>
-                  </div>
-                </div>
-                <div class="px-3 py-1 bg-brand-500/20 border border-brand-500/30 rounded-full text-brand-400 text-xs font-bold flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span> INBOUND
-                </div>
-              </div>
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gray-900 leading-[0.95] mb-6 animate-fade-up" style="animation-delay: 0.1s;">
+          AI that answers<br>
+          <span class="gradient-text">every dental call.</span>
+        </h1>
 
-              <!-- Animated Audio Waves -->
-              <div class="flex items-end justify-center gap-[4px] h-[100px] z-10 mt-8 opacity-80">
-                <!-- Using inline styles for random looking heights in CSS animation -->
-                <div class="w-1.5 bg-zinc-600 rounded-full h-[20%]"></div>
-                <div class="w-1.5 bg-zinc-600 rounded-full h-[40%]"></div>
-                <div class="w-1.5 bg-zinc-600 rounded-full h-[30%]"></div>
-                
-                <div class="w-1.5 bg-brand-500 rounded-full h-[80%] animate-[soundwave_1s_ease-in-out_infinite_0.1s]"></div>
-                <div class="w-1.5 bg-brand-400 rounded-full h-[100%] animate-[soundwave_1s_ease-in-out_infinite_0.2s]"></div>
-                <div class="w-1.5 bg-brand-300 rounded-full h-[60%] animate-[soundwave_1s_ease-in-out_infinite_0.3s]"></div>
-                <div class="w-1.5 bg-accent-teal rounded-full h-[90%] animate-[soundwave_1s_ease-in-out_infinite_0.4s]"></div>
-                <div class="w-1.5 bg-accent-teal rounded-full h-[100%] animate-[soundwave_1s_ease-in-out_infinite_0.2s]"></div>
-                <div class="w-1.5 bg-brand-400 rounded-full h-[70%] animate-[soundwave_1s_ease-in-out_infinite_0.5s]"></div>
-                <div class="w-1.5 bg-brand-500 rounded-full h-[50%] animate-[soundwave_1s_ease-in-out_infinite_0.1s]"></div>
-
-                <div class="w-1.5 bg-zinc-600 rounded-full h-[30%]"></div>
-                <div class="w-1.5 bg-zinc-600 rounded-full h-[40%]"></div>
-                <div class="w-1.5 bg-zinc-600 rounded-full h-[20%]"></div>
-              </div>
-              
-              <div class="text-center mt-4 z-10">
-                <span class="text-white text-sm font-medium tracking-wide">"Hola, hablo español. Necesito una cita para mi hijo."</span>
-                <p class="text-brand-400 text-xs font-bold uppercase tracking-widest mt-2 flex items-center justify-center gap-1">
-                  <span class="material-symbols-outlined text-[14px]">translate</span> Spanish Auto-Detected
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Live Terminal & Integrations -->
-          <div class="lg:col-span-5 flex flex-col gap-4">
-            
-            <!-- Terminal -->
-            <div class="bg-black rounded-2xl p-5 border border-zinc-800 font-mono text-[11px] leading-relaxed text-zinc-400 h-[190px] overflow-hidden relative">
-              <div class="text-emerald-500 mb-2">▶ renia_engine --analyze-intent</div>
-              <div>[14:22:01] <span class="text-brand-400">INFO</span> Intent: New Patient Appointment</div>
-              <div>[14:22:01] <span class="text-brand-400">INFO</span> Entity Extraction: {"lang": "es", "patient_type": "child"}</div>
-              <div>[14:22:02] <span class="text-zinc-500">SYS</span> Querying Dentrix database via API...</div>
-              <div class="animate-pulse-glow text-accent-teal mt-1">[14:22:02] <span class="text-accent-teal font-bold">SUCCESS</span> Found 3 available slots for Dr. Smith.</div>
-              <div>[14:22:03] <span class="text-zinc-500">SYS</span> Generating synthesized Spanish response (Model: Grok-3)...</div>
-              
-              <!-- Fading bottom edge -->
-              <div class="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-black to-transparent"></div>
-            </div>
-
-            <!-- PMS Node Sync -->
-            <div class="bg-zinc-900/80 rounded-2xl p-4 border border-zinc-800 flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center text-white font-display font-bold border border-zinc-700 shadow-inner">DX</div>
-                <div>
-                  <h4 class="text-white text-sm font-semibold">Dentrix Database</h4>
-                  <span class="text-xs text-zinc-500">Connected • Latency 24ms</span>
-                </div>
-              </div>
-              <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                <span class="material-symbols-outlined text-[18px]">cloud_sync</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- ==========================================
-       TRUST BAR (Elite Logo Farm)
-       ========================================== -->
-  <section class="border-y border-slate-200/50 bg-white py-12 overflow-hidden relative z-10">
-    <div class="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white z-10 pointer-events-none"></div>
-    <div class="max-w-[1400px] mx-auto px-6 text-center mb-8">
-      <span class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">Powering Florida's Elite Dental Practices</span>
-    </div>
-    
-    <div class="flex w-[200%] md:w-auto relative">
-      <!-- First Marquee -->
-      <div class="flex items-center justify-around min-w-full animate-marquee gap-12 md:gap-24 px-12">
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-brand-900">spa</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Lumina Dental</span>
-        </div>
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-accent-teal">health_and_safety</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Apex Orthodontics</span>
-        </div>
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-brand-500">dentistry</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Coastal Smiles</span>
-        </div>
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-brand-900">diamond</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Premier Periodontics</span>
-        </div>
-      </div>
-      <!-- Cloned Marquee for smooth infinite scroll -->
-      <div class="flex items-center justify-around min-w-full animate-marquee gap-12 md:gap-24 px-12 absolute left-[100%]">
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-brand-900">spa</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Lumina Dental</span>
-        </div>
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-accent-teal">health_and_safety</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Apex Orthodontics</span>
-        </div>
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-brand-500">dentistry</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Coastal Smiles</span>
-        </div>
-        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-          <span class="material-symbols-outlined text-[40px] text-brand-900">diamond</span>
-          <span class="font-display font-bold text-2xl tracking-tighter text-brand-900">Premier Periodontics</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       THE "INTELLIGENCE" VALUE PROP (Bento Grid)
-       ========================================== -->
-  <section id="intelligence" class="py-[160px] relative z-10 px-6">
-    <div class="max-w-[1200px] mx-auto">
-      
-      <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-        <h2 class="font-display text-[40px] sm:text-[56px] font-black text-brand-900 leading-[1.1] mb-6 tracking-tight">
-          Human empathy.<br>Machine precision.
-        </h2>
-        <p class="text-xl text-slate-500 font-medium">
-          Renia doesn't just route calls. It resolves them. By plugging directly into your clinic's brain, it handles the entire patient lifecycle from hello to scheduled.
+        <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-up" style="animation-delay: 0.2s;">
+          Renia picks up your clinic's phone 24/7, understands patients in English and Spanish,<br class="hidden sm:block">
+          and books appointments directly into Dentrix, Eaglesoft, or Open Dental — instantly.
         </p>
-      </div>
 
-      <!-- Bento Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[320px]">
-        
-        <!-- Large Block 1 -->
-        <div class="md:col-span-2 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500">
-          <div class="absolute right-0 top-0 w-64 h-64 bg-gradient-to-bl from-brand-100 to-transparent opacity-50 rounded-bl-full"></div>
-          <div class="relative z-10 flex flex-col h-full justify-between">
-            <div>
-              <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-500 mb-6 border border-slate-100">
-                <span class="material-symbols-outlined text-[28px]">calendar_month</span>
-              </div>
-              <h3 class="font-display text-3xl font-bold text-brand-900 mb-3 tracking-tight">Complex Scheduling</h3>
-              <p class="text-slate-600 text-lg max-w-md">Understands provider availability, operatory limitations, and procedure durations to book slots perfectly.</p>
-            </div>
-            
-            <!-- Mini UI injection -->
-            <div class="bg-white/80 rounded-xl p-4 border border-white shadow-sm flex items-center gap-4 max-w-sm">
-              <div class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-600 font-bold text-xs">AI</div>
-              <div class="text-sm font-medium text-brand-900">"I found a 45-minute opening with Dr. Mitchell at 2:00 PM tomorrow. Shall I lock that in?"</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Small Block 1 -->
-        <div class="md:col-span-1 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500" style="transition-delay: 100ms;">
-          <div class="absolute inset-0 bg-gradient-to-br from-rose-50 to-transparent"></div>
-          <div class="relative z-10">
-            <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-rose-500 mb-6 border border-slate-100">
-              <span class="material-symbols-outlined text-[28px]">local_hospital</span>
-            </div>
-            <h3 class="font-display text-2xl font-bold text-brand-900 mb-3 tracking-tight">Emergency Triage</h3>
-            <p class="text-slate-600">Detects keywords like "swelling" or "severe pain" and instantly routes to the doctor's emergency mobile line.</p>
-          </div>
-        </div>
-
-        <!-- Small Block 2 -->
-        <div class="md:col-span-1 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500" style="transition-delay: 200ms;">
-          <div class="absolute inset-0 bg-gradient-to-br from-accent-teal/10 to-transparent"></div>
-          <div class="relative z-10">
-            <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-accent-teal mb-6 border border-slate-100">
-              <span class="material-symbols-outlined text-[28px]">shield_person</span>
-            </div>
-            <h3 class="font-display text-2xl font-bold text-brand-900 mb-3 tracking-tight">HIPAA Compliant</h3>
-            <p class="text-slate-600">Enterprise-grade encryption for all call logs, transcripts, and patient data. BAA provided instantly.</p>
-          </div>
-        </div>
-
-        <!-- Large Block 2 -->
-        <div class="md:col-span-2 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500" style="transition-delay: 300ms;">
-          <div class="absolute right-[-10%] bottom-[-20%] w-80 h-80 bg-brand-500/10 blur-3xl rounded-full"></div>
-          <div class="relative z-10 flex flex-col h-full justify-between">
-            <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-600 mb-6 border border-slate-100">
-              <span class="material-symbols-outlined text-[28px]">translate</span>
-            </div>
-            <div>
-              <h3 class="font-display text-3xl font-bold text-brand-900 mb-3 tracking-tight">Native Spanish Fluency</h3>
-              <p class="text-slate-600 text-lg max-w-md">Florida clinics lose 15% of patients due to language barriers. Renia switches to perfect, culturally-aware Spanish the moment a patient says "Hola".</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       DEEP INTEGRATION (Dark Section)
-       ========================================== -->
-  <section id="pms" class="py-[160px] bg-brand-900 text-white relative z-20 px-6 overflow-hidden">
-    <!-- Abstract dark background -->
-    <div class="absolute inset-0 bg-grid-pattern-dark opacity-30"></div>
-    <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-500/10 rounded-full blur-[100px]"></div>
-
-    <div class="max-w-[1200px] mx-auto relative z-10">
-      
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        <div class="reveal">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-widest text-brand-100 mb-6">
-            Database Architecture
-          </div>
-          <h2 class="font-display text-[44px] sm:text-[56px] font-black leading-[1.05] mb-6 tracking-tight">
-            Seamless 2-way PMS synchronization.
-          </h2>
-          <p class="text-xl text-zinc-400 font-medium leading-relaxed mb-10">
-            Renia is not a third-party dashboard you have to check. It logs directly into your existing infrastructure.
-          </p>
-          
-          <div class="space-y-8">
-            <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-brand-500 transition-colors duration-300">
-                <span class="font-display font-black text-lg">1</span>
-              </div>
-              <div>
-                <h4 class="text-xl font-bold text-white mb-2">Live Availability Read</h4>
-                <p class="text-zinc-400">Renia reads your schedule in real-time, never double-booking and respecting provider-specific blocks.</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-accent-teal transition-colors duration-300">
-                <span class="font-display font-black text-lg">2</span>
-              </div>
-              <div>
-                <h4 class="text-xl font-bold text-white mb-2">Direct Appointment Writing</h4>
-                <p class="text-zinc-400">When a patient agrees to a time, the appointment is instantly committed to your Dentrix/Eaglesoft ledger.</p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-accent-cyan transition-colors duration-300">
-                <span class="font-display font-black text-lg">3</span>
-              </div>
-              <div>
-                <h4 class="text-xl font-bold text-white mb-2">Chart Notes & Audio Logs</h4>
-                <p class="text-zinc-400">A perfect summary of the call and a link to the secure audio recording is attached to the patient file.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3D Interactive Mockup Graphic -->
-        <div class="relative h-[600px] flex items-center justify-center perspective-[1000px] reveal">
-          <div class="w-[450px] h-[500px] bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_100px_rgba(99,102,241,0.2)] transform rotate-y-[-15deg] rotate-x-[5deg] hover:rotate-y-[0deg] hover:rotate-x-[0deg] transition-all duration-700 ease-out p-6 flex flex-col relative overflow-hidden">
-            
-            <div class="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-50"></div>
-
-            <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
-              <span class="font-display font-bold text-white text-lg">Dentrix Live Sync</span>
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            </div>
-
-            <div class="flex-1 space-y-4">
-              <!-- Mock row -->
-              <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex justify-between items-center animate-pulse-glow" style="animation-delay: 0s;">
-                <div>
-                  <div class="text-white font-semibold">9:00 AM - Checkup</div>
-                  <div class="text-zinc-500 text-xs">Dr. Mitchell • Op 1</div>
-                </div>
-                <div class="text-brand-400 text-xs font-bold border border-brand-400/30 bg-brand-500/10 px-2 py-1 rounded">Renia AI Booked</div>
-              </div>
-
-              <!-- Mock row -->
-              <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex justify-between items-center opacity-50">
-                <div>
-                  <div class="text-white font-semibold">10:00 AM - Blocked</div>
-                  <div class="text-zinc-500 text-xs">Staff Meeting</div>
-                </div>
-              </div>
-
-               <!-- Mock row -->
-               <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex justify-between items-center animate-pulse-glow" style="animation-delay: 1.5s;">
-                <div>
-                  <div class="text-white font-semibold">11:30 AM - Consult</div>
-                  <div class="text-zinc-500 text-xs">Dr. Mitchell • Op 2</div>
-                </div>
-                <div class="text-accent-teal text-xs font-bold border border-accent-teal/30 bg-accent-teal/10 px-2 py-1 rounded">Renia AI Booked</div>
-              </div>
-            </div>
-
-            <!-- Fake code overlay -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-black/60 backdrop-blur-md border-t border-white/10 font-mono text-[10px] text-brand-300">
-              <p>> POST /v1/pms/dentrix/appointments</p>
-              <p class="text-emerald-400">> 201 Created (ID: 89431)</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================
-       ROI CALCULATOR (High-End Interactive)
-       ========================================== -->
-  <section class="py-[160px] relative px-6 z-10 bg-white">
-    <div class="max-w-[1200px] mx-auto">
-      
-      <div class="glass-panel border border-slate-200 rounded-[3rem] p-10 md:p-16 shadow-2xl relative overflow-hidden reveal">
-        <!-- Decoration -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-brand-100 to-transparent rounded-bl-full -z-10"></div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          <div>
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-900 text-white mb-6 shadow-md">
-              <span class="material-symbols-outlined text-[24px]">calculate</span>
-            </div>
-            <h2 class="font-display text-[40px] sm:text-[48px] font-black text-brand-900 leading-tight mb-4">
-              Stop guessing your missed revenue.
-            </h2>
-            <p class="text-lg text-slate-500 font-medium mb-10">
-              The average dental appointment is worth $300. Use the slider below to calculate exactly how much money is evaporating when your staff can't get to the phone.
-            </p>
-            
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-              <div class="flex justify-between items-end mb-6">
-                <div>
-                  <label class="block text-sm font-bold text-slate-400 uppercase tracking-wide mb-1">Missed Calls / Month</label>
-                  <div class="text-3xl font-black text-brand-900 font-display" id="calc-val-calls">120</div>
-                </div>
-              </div>
-              
-              <!-- Custom range input styling via Tailwind classes -->
-              <div class="relative w-full h-3 bg-slate-100 rounded-full">
-                <input type="range" id="roi-slider" min="10" max="500" value="120" step="10" class="absolute w-full h-full opacity-0 cursor-pointer z-10" oninput="updateCalculator()">
-                <!-- Visual progress bar -->
-                <div class="absolute top-0 left-0 h-full bg-brand-500 rounded-full" id="slider-progress" style="width: 23%;"></div>
-                <!-- Visual thumb -->
-                <div class="absolute top-1/2 -mt-3 w-6 h-6 bg-white border-2 border-brand-500 rounded-full shadow-md pointer-events-none transition-transform" id="slider-thumb" style="left: 23%; transform: translateX(-50%);"></div>
-              </div>
-              
-              <div class="flex justify-between text-xs font-bold text-slate-400 mt-4">
-                <span>10</span>
-                <span>500+</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dynamic Output Cards -->
-          <div class="grid grid-cols-1 gap-6">
-            <div class="bg-brand-900 rounded-[2rem] p-8 border border-brand-800 shadow-2xl relative overflow-hidden group">
-              <div class="absolute right-[-10%] top-[-10%] w-40 h-40 bg-accent-teal/20 blur-2xl rounded-full"></div>
-              <div class="relative z-10">
-                <span class="text-brand-300 text-sm font-bold uppercase tracking-wider">New Revenue Captured</span>
-                <div class="font-display text-[56px] font-black text-white mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-revenue">$36,000</div>
-                <div class="text-sm text-zinc-400 font-medium flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-accent-teal">trending_up</span>
-                  Reinvested back into your practice
-                </div>
-              </div>
-            </div>
-            
-            <div class="bg-brand-50 rounded-[2rem] p-8 border border-brand-100 shadow-sm relative overflow-hidden group">
-              <div class="relative z-10">
-                <span class="text-brand-600 text-sm font-bold uppercase tracking-wider">Staff Hours Saved</span>
-                <div class="font-display text-[48px] font-black text-brand-900 mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-hours">30 hrs</div>
-                <div class="text-sm text-slate-500 font-medium">Redirected to in-office patient care</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================
-       BOTTOM CTA (Massive & Bold)
-       ========================================== -->
-  <section class="py-[160px] relative px-6 bg-brand-50 overflow-hidden">
-    <!-- Concentric circles background -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-brand-200/50 -z-10"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-brand-200/30 -z-10"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1600px] h-[1600px] rounded-full border border-brand-200/10 -z-10"></div>
-
-    <div class="max-w-[800px] mx-auto text-center reveal">
-      <div class="w-20 h-20 mx-auto rounded-3xl bg-brand-900 flex items-center justify-center text-white text-3xl shadow-xl shadow-brand-900/20 mb-8 transform -rotate-12 hover:rotate-0 transition-transform duration-300">🦷</div>
-      
-      <h2 class="font-display text-[56px] md:text-[80px] font-black text-brand-900 leading-[1] tracking-[-0.03em] mb-8">
-        Deploy Renia <br>in 5 minutes.
-      </h2>
-      
-      <p class="text-xl text-slate-600 font-medium mb-12 max-w-2xl mx-auto">
-        No technical skills required. We connect to your phone system and PMS instantly. Try it risk-free.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-        <div class="magnetic-wrap">
-          <a href="signup.html" class="magnetic-btn px-10 py-5 bg-brand-900 text-white rounded-full font-bold text-lg shadow-2xl hover:bg-black transition-all hover:scale-105 flex items-center gap-3 group">
-            Start Free Trial <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.3s;">
+          <a href="signup.html" class="btn-primary inline-flex items-center gap-2 px-7 py-3.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-elevated w-full sm:w-auto justify-center group">
+            Start free trial
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5">
+              <path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#demo" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-gray-700 font-semibold rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all w-full sm:w-auto justify-center group shadow-soft">
+            <span class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs group-hover:bg-gray-200 transition-colors">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                <path d="M1 1L9 6L1 11V1Z" fill="currentColor"/>
+              </svg>
+            </span>
+            See it in action
           </a>
         </div>
-        <a href="#demo" class="px-10 py-5 bg-white border border-slate-200 text-brand-900 rounded-full font-bold text-lg hover:border-brand-300 shadow-sm transition-all">
-          Book a Demo
-        </a>
+
+        <div class="flex items-center justify-center gap-6 sm:gap-10 mt-10 text-sm animate-fade-up" style="animation-delay: 0.4s;">
+          <div class="flex items-center gap-2 text-gray-400">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-gray-500 font-medium">No setup fee</span>
+          </div>
+          <div class="flex items-center gap-2 text-gray-400">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-gray-500 font-medium">HIPAA compliant</span>
+          </div>
+          <div class="flex items-center gap-2 text-gray-400">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 3.5L6 11L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-gray-500 font-medium">Cancel anytime</span>
+          </div>
+        </div>
       </div>
-      <p class="text-sm font-semibold text-slate-400 mt-8">Cancel anytime. Setup support included.</p>
+
+      <!-- HERO VISUAL -->
+      <div class="mt-16 md:mt-20 relative animate-fade-up" style="animation-delay: 0.5s;">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-500/5 via-transparent to-transparent rounded-3xl blur-2xl -z-10"></div>
+        <div class="relative bg-white rounded-2xl shadow-panel border border-gray-100 overflow-hidden">
+          <div class="flex items-center gap-1.5 px-5 py-3.5 border-b border-gray-100 bg-gray-50/50">
+            <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
+            <div class="ml-3 text-xs text-gray-400 font-mono flex items-center gap-1.5">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6H9M9 6L6 3M9 6L6 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              renia.app/call/active
+            </div>
+            <div class="ml-auto flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[11px] font-medium text-emerald-600">Live</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
+            <!-- Left: Call Interface -->
+            <div class="lg:col-span-3 p-5 sm:p-7">
+              <div class="flex items-start gap-4 mb-6">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center text-base shrink-0 font-medium text-brand-700">M</div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2.5 flex-wrap">
+                    <h3 class="font-semibold text-gray-900 text-sm">Maria Rodriguez</h3>
+                    <span class="text-[11px] font-medium text-brand-600 bg-brand-50 border border-brand-200/60 px-2 py-0.5 rounded-full">New Patient</span>
+                  </div>
+                  <p class="text-sm text-gray-400 mt-0.5">+1 (305) 555-0192 — Miami, FL</p>
+                </div>
+              </div>
+
+              <!-- Transcript -->
+              <div class="space-y-3 mb-5">
+                <div class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-semibold text-brand-600 shrink-0 mt-0.5">AI</div>
+                  <div class="bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-700 max-w-[85%]">
+                    Good afternoon, thank you for calling Coastal Smiles Dentistry. How can I help you today?
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 flex-row-reverse">
+                  <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-medium text-gray-500 shrink-0 mt-0.5">M</div>
+                  <div class="bg-brand-500 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm max-w-[85%]">
+                    Hola, hablo español. Necesito una cita para mi hijo. Le duele una muela.
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-semibold text-brand-600 shrink-0 mt-0.5">AI</div>
+                  <div class="bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-700 max-w-[85%]">
+                    Claro, con gusto le ayudo en español. ¿Cuál es el nombre de su hijo y qué edad tiene?
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
+                <span class="inline-flex items-center gap-1 font-medium text-brand-600">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1V6L8.5 8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  1:24
+                </span>
+                <span class="text-gray-300">•</span>
+                <span class="inline-flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C3.5 1 1.5 3 1.5 5.5C1.5 8 3.5 10 6 10C8.5 10 10.5 8 10.5 5.5C10.5 3 8.5 1 6 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M2 10L1 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  Spanish detected
+                </span>
+              </div>
+            </div>
+
+            <!-- Right: Info Panel -->
+            <div class="lg:col-span-2 p-5 sm:p-7 bg-gray-50/30">
+              <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-4">Live Analysis</div>
+
+              <div class="space-y-3">
+                <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
+                  <div class="text-[11px] font-medium text-gray-400 mb-1.5">DETECTED INTENT</div>
+                  <div class="text-sm font-semibold text-gray-900">New Patient Appointment</div>
+                  <div class="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                    <span class="bg-brand-50 text-brand-700 font-medium px-2 py-0.5 rounded text-[11px]">Pediatric</span>
+                    <span class="bg-amber-50 text-amber-700 font-medium px-2 py-0.5 rounded text-[11px]">Urgent</span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
+                  <div class="text-[11px] font-medium text-gray-400 mb-2">PMS STATUS</div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600">DX</div>
+                      <div>
+                        <div class="text-sm font-medium text-gray-900">Dentrix</div>
+                        <div class="text-xs text-gray-400">Live • 24ms</div>
+                      </div>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-100 p-4 shadow-soft">
+                  <div class="text-[11px] font-medium text-gray-400 mb-1.5">NEXT ACTION</div>
+                  <div class="font-mono text-xs text-emerald-600 bg-emerald-50 px-2.5 py-1.5 rounded-lg">
+                    > Searching available slots for Dr. Mitchell...
+                  </div>
+                  <div class="text-xs text-gray-400 mt-2">3 available openings found</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       FOOTER
-       ========================================== -->
-  <footer class="bg-white border-t border-slate-200 py-16 px-6">
-    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-brand-900 flex items-center justify-center text-white text-sm shadow-md">🦷</div>
-        <div>
-          <span class="font-display font-black text-brand-900 text-2xl tracking-tight leading-none block">Renia AI</span>
-          <span class="text-[10px] font-bold text-brand-500 uppercase tracking-widest">Enterprise Voice</span>
+  <!-- ============ SOCIAL PROOF BANNER ============ -->
+  <section class="relative border-y border-gray-100 bg-gray-50/50 py-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-[0.15em] text-center mb-8">Trusted by leading Florida dental practices</p>
+      <div class="flex overflow-hidden" style="mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);">
+        <div class="flex items-center gap-12 sm:gap-16 min-w-full animate-marquee">
+          <div class="flex items-center gap-3 shrink-0">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M14 8L16.5 13L22 13.5L17.5 17.5L19 23L14 20L9 23L10.5 17.5L6 13.5L11.5 13L14 8Z" fill="white" fill-opacity="0.9"/></svg>
+            <span class="font-semibold text-gray-900 text-lg">Lumina Dental</span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f172a"/><circle cx="14" cy="14" r="6" fill="white" fill-opacity="0.9"/><circle cx="14" cy="11" r="2" fill="#6366f1"/></svg>
+            <span class="font-semibold text-gray-900 text-lg">Apex Orthodontics</span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#064e3b"/><path d="M8 20L14 8L20 20H8Z" fill="white" fill-opacity="0.9"/></svg>
+            <span class="font-semibold text-gray-900 text-lg">Coastal Smiles</span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M10 20V12M14 20V8M18 20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+            <span class="font-semibold text-gray-900 text-lg">Premier Periodontics</span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#312e81"/><circle cx="14" cy="14" r="5" fill="white" fill-opacity="0.9"/></svg>
+            <span class="font-semibold text-gray-900 text-lg">Gulfside Dental</span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1c1917"/><path d="M14 6L16.5 11.5L22 12.5L18 16.5L19 22L14 19L9 22L10 16.5L6 12.5L11.5 11.5L14 6Z" fill="white" fill-opacity="0.9"/></svg>
+            <span class="font-semibold text-gray-900 text-lg">Bay Harbor Dental</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-12 sm:gap-16 min-w-full animate-marquee absolute left-[100%] top-0">
+          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M14 8L16.5 13L22 13.5L17.5 17.5L19 23L14 20L9 23L10.5 17.5L6 13.5L11.5 13L14 8Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Lumina Dental</span></div>
+          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f172a"/><circle cx="14" cy="14" r="6" fill="white" fill-opacity="0.9"/><circle cx="14" cy="11" r="2" fill="#6366f1"/></svg><span class="font-semibold text-gray-900 text-lg">Apex Orthodontics</span></div>
+          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#064e3b"/><path d="M8 20L14 8L20 20H8Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Coastal Smiles</span></div>
+          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1e1b4b"/><path d="M10 20V12M14 20V8M18 20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg><span class="font-semibold text-gray-900 text-lg">Premier Periodontics</span></div>
+          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#312e81"/><circle cx="14" cy="14" r="5" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Gulfside Dental</span></div>
+          <div class="flex items-center gap-3 shrink-0"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1c1917"/><path d="M14 6L16.5 11.5L22 12.5L18 16.5L19 22L14 19L9 22L10 16.5L6 12.5L11.5 11.5L14 6Z" fill="white" fill-opacity="0.9"/></svg><span class="font-semibold text-gray-900 text-lg">Bay Harbor Dental</span></div>
         </div>
       </div>
-      
-      <div class="text-sm font-medium text-slate-500">
-        © 2026 Renia AI Technologies, LLC. Engineered for Florida.
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM / STATS ============ -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">The problem</div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
+            Dental clinics lose<br class="hidden sm:block"> <span class="gradient-text">30% of their calls.</span>
+          </h2>
+          <p class="text-lg text-gray-500 leading-relaxed mb-8">
+            When your front desk is busy with patients, every incoming call either goes to voicemail or hangs up. 
+            In Florida, the average dental appointment is worth <strong class="text-gray-900">$327</strong>. 
+            A clinic missing 10 calls a day is leaving <strong class="text-gray-900">over $100,000</strong> on the table every year.
+          </p>
+          <div class="flex items-center gap-2 text-sm text-gray-400">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1V8L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Source: ADA Practice Survey, 2024
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 reveal reveal-delay-1">
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+            <div class="text-4xl font-bold text-gray-900 mb-1">30%</div>
+            <div class="text-sm text-gray-500">of inbound calls<br>go unanswered</div>
+          </div>
+          <div class="bg-brand-50 rounded-2xl p-6 border border-brand-100">
+            <div class="text-4xl font-bold text-brand-600 mb-1">$327</div>
+            <div class="text-sm text-gray-500">average value per<br>appointment booked</div>
+          </div>
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+            <div class="text-4xl font-bold text-gray-900 mb-1">4.2M</div>
+            <div class="text-sm text-gray-500">dental visits missed<br>yearly in Florida</div>
+          </div>
+          <div class="bg-brand-50 rounded-2xl p-6 border border-brand-100">
+            <div class="text-4xl font-bold text-brand-600 mb-1">15%</div>
+            <div class="text-sm text-gray-500">of patients lost due<br>to language barriers</div>
+          </div>
+        </div>
       </div>
-      
-      <div class="flex items-center gap-8">
-        <a href="#" class="text-sm font-semibold text-slate-500 hover:text-brand-900 transition-colors">Privacy Policy</a>
-        <a href="#" class="text-sm font-semibold text-slate-500 hover:text-brand-900 transition-colors">Terms of Service</a>
-        <a href="#" class="text-sm font-semibold text-slate-500 hover:text-brand-900 transition-colors">Contact Support</a>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how-it-works" class="py-20 md:py-28 bg-gray-50/50 border-y border-gray-100 relative">
+    <div class="absolute inset-0 grid-pattern opacity-50 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">How it works</div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
+          Three seconds to pick up.<br> Three clicks to deploy.
+        </h2>
+        <p class="text-lg text-gray-500">No hardware. No training. No integration headaches.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-soft reveal reveal-delay-1 hover:shadow-card-hover transition-all duration-300">
+          <div class="w-11 h-11 rounded-xl bg-gray-900 text-white flex items-center justify-center text-sm font-bold mb-6">1</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Forward your number</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Point your clinic's phone number to Renia. That's it. No SIP trunking, no PBX changes, no IT involvement.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-soft reveal reveal-delay-2 hover:shadow-card-hover transition-all duration-300">
+          <div class="w-11 h-11 rounded-xl bg-gray-900 text-white flex items-center justify-center text-sm font-bold mb-6">2</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Connect your PMS</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">One-time API connection to Dentrix, Eaglesoft, or Open Dental. Renia writes appointments directly into your ledger.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-soft reveal reveal-delay-3 hover:shadow-card-hover transition-all duration-300">
+          <div class="w-11 h-11 rounded-xl bg-gray-900 text-white flex items-center justify-center text-sm font-bold mb-6">3</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Go live in 5 minutes</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Renia starts answering calls, booking appointments, and capturing revenue you were leaving on the table.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center reveal reveal-delay-4">
+        <a href="signup.html" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors group">
+          See full setup guide
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section id="features" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Features</div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
+          Everything your front desk<br class="hidden sm:block"> wishes it could do.
+        </h2>
+        <p class="text-lg text-gray-500">Renia handles the full patient conversation lifecycle — from first ring to confirmed booking.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Feature 1 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal glare-card">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-2">Answers 24/7</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Never miss a call. Renia picks up every time, even during lunch, holidays, and after hours.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-1 glare-card">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5L10 9L18 5L10 1L2 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10L10 14L18 10" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 15L10 19L18 15" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-2">Books in real-time</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Appointments appear in your PMS instantly. No double-booking. No manual data entry.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-2 glare-card">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M5 8C5 8 6.5 5 10 5C13.5 5 15 8 15 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12C5 12 6.5 15 10 15C13.5 15 15 12 15 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="2" fill="currentColor"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-2">English & Spanish</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Auto-detects language and switches instantly. Culturally-aware responses for Florida's diverse patients.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal glare-card">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C6 2 2 5 2 9C2 13 4 16 6 18L10 20L14 18C16 16 18 13 18 9C18 5 14 2 10 2Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9" r="2" fill="currentColor"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-2">Emergency triage</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Detects keywords like "swelling" or "severe pain" and routes instantly to your on-call provider.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-1 glare-card">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 7H18" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="11" r="1" fill="currentColor"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-2">HIPAA compliant</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">AES-256 encryption, BAA provided, full audit trails, and Florida two-party consent built in.</p>
+        </div>
+        <!-- Feature 6 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft hover:shadow-card-hover transition-all duration-300 reveal reveal-delay-2 glare-card">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 mb-5">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M1 10C1 5 4.5 2 10 2C15.5 2 19 5 19 10C19 15 15.5 18 10 18C7 18 4.5 16.5 3 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10L4 13L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-2">Smart scheduling</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Understands provider availability, operatory limits, and procedure durations to book perfectly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTEGRATIONS DARK SECTION ============ -->
+  <section class="py-20 md:py-28 bg-gray-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 grid-pattern-light opacity-30 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-500/5 blur-3xl rounded-full pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/5 blur-3xl rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-semibold text-brand-200 tracking-wide mb-5">Integrations</div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-6">
+            Writes directly into<br class="hidden sm:block"> your PMS.
+          </h2>
+          <p class="text-lg text-gray-400 leading-relaxed mb-8">
+            Renia is not another dashboard to check. It logs appointments, updates patient records, and attaches call transcripts directly into your practice management system. No middleware. No sync delays.
+          </p>
+
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 text-sm font-bold">DX</div>
+              <div>
+                <div class="font-semibold text-white mb-1">Dentrix</div>
+                <p class="text-sm text-gray-400">Real-time appointment creation and patient lookup via Dentrix API.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 text-sm font-bold">ES</div>
+              <div>
+                <div class="font-semibold text-white mb-1">Eaglesoft</div>
+                <p class="text-sm text-gray-400">Bidirectional sync for scheduling, provider availability, and chart notes.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 text-sm font-bold">OD</div>
+              <div>
+                <div class="font-semibold text-white mb-1">Open Dental</div>
+                <p class="text-sm text-gray-400">Direct database integration with full audit logging and HIPAA compliance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animated Code Window -->
+        <div class="reveal reveal-delay-1 glare-card" style="--mouse-x: 50%; --mouse-y: 50%;">
+          <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden shadow-2xl relative">
+            <div class="flex items-center justify-between px-5 py-3.5 border-b border-gray-800">
+              <div class="flex items-center gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-gray-700"></div>
+              </div>
+              <span class="text-[11px] font-mono text-gray-500">POST /v1/pms/dentrix/appointments</span>
+              <div class="w-5 h-5"></div>
+            </div>
+            <div class="p-5 font-mono text-xs leading-relaxed">
+              <div class="text-gray-500 mb-3"><span class="text-gray-400">$</span> renia --book-appointment</div>
+              <div class="space-y-1.5">
+                <div class="text-gray-500">&gt; Detecting language... <span class="text-emerald-400">es</span></div>
+                <div class="text-gray-500">&gt; Extracting intent... <span class="text-brand-400">new_patient_appointment</span></div>
+                <div class="text-gray-500">&gt; Querying provider availability for Dr. Mitchell</div>
+                <div class="text-emerald-400">&gt; Found 3 available slots within requested window</div>
+                <div class="text-gray-500">&gt; Presenting options to patient... <span class="text-gray-400">done</span></div>
+                <div class="text-gray-500">&gt; Patient confirmed: <span class="text-brand-300">Wed, May 27 @ 2:00 PM</span></div>
+                <div class="text-gray-500">&gt; Writing to Dentrix database...</div>
+                <div class="text-emerald-300 mt-2 border-t border-gray-800 pt-2">✓ 201 Created — Appointment #89431</div>
+                <div class="text-gray-500">  ↳ Patient: Maria Rodriguez</div>
+                <div class="text-gray-500">  ↳ Provider: Dr. Mitchell</div>
+                <div class="text-gray-500">  ↳ Duration: 45 min</div>
+                <div class="text-gray-500">  ↳ Audio: <span class="text-brand-400">attached</span> | Transcript: <span class="text-brand-400">saved</span></div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-gray-800">
+                <span class="text-emerald-500">◆</span> <span class="text-gray-400">Call handled in 2 min 14 sec | Patient: "Gracias, muy amable"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="py-20 md:py-28 bg-gray-50/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">Testimonials</div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
+          Built for dentists.<br class="hidden sm:block"> Trusted by clinics.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft reveal">
+          <div class="flex items-center gap-1 mb-5">
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">
+            "We were losing at least 8-10 calls a day. Since deploying Renia, our booked appointments are up 34% and my front desk can actually focus on patients in the chair."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-semibold">DR</div>
+            <div>
+              <div class="text-sm font-semibold text-gray-900">Dr. Robert Chen</div>
+              <div class="text-xs text-gray-400">Lumina Dental, Miami</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft reveal reveal-delay-1">
+          <div class="flex items-center gap-1 mb-5">
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">
+            "The Spanish language support alone was worth it. 30% of our patients prefer Spanish. Renia handles it flawlessly and our staff doesn't need to translate anymore."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brand-600 flex items-center justify-center text-white text-xs font-semibold">SG</div>
+            <div>
+              <div class="text-sm font-semibold text-gray-900">Sofia Garcia</div>
+              <div class="text-xs text-gray-400">Practice Manager, Coastal Smiles</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft reveal reveal-delay-2">
+          <div class="flex items-center gap-1 mb-5">
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">
+            "Setup took 10 minutes. The Dentrix integration is seamless — appointments appear in our system before the call even ends. This is the future of dental reception."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-semibold">JM</div>
+            <div>
+              <div class="text-sm font-semibold text-gray-900">Dr. James Mitchell</div>
+              <div class="text-xs text-gray-400">Apex Orthodontics, Orlando</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROI CALCULATOR ============ -->
+  <section id="roi" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center bg-gray-50 rounded-3xl p-8 md:p-12 lg:p-16 border border-gray-100 reveal">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">ROI Calculator</div>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
+            Calculate what missed calls<br class="hidden sm:block"> are costing you.
+          </h2>
+          <p class="text-gray-500 mb-8 text-base leading-relaxed">
+            The average dental appointment is worth $327. Move the slider to see exactly how much revenue your clinic is losing to unanswered calls.
+          </p>
+
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-semibold text-gray-700">Missed calls per month</span>
+              <span class="text-2xl font-bold text-gray-900" id="calc-value">120</span>
+            </div>
+            <div class="relative">
+              <input type="range" id="roi-slider" min="20" max="500" value="120" step="10" class="w-full relative z-10" oninput="updateCalc()">
+              <div class="absolute top-1/2 left-0 h-1 bg-gray-200 rounded-full -translate-y-1/2 w-full pointer-events-none"></div>
+              <div class="absolute top-1/2 left-0 h-1 bg-brand-500 rounded-full -translate-y-1/2 pointer-events-none" id="slider-fill" style="width: 21%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-400 mt-2">
+              <span>20</span>
+              <span>500+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div class="bg-gray-900 rounded-2xl p-7 border border-gray-800 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 blur-2xl rounded-full pointer-events-none"></div>
+            <div class="relative">
+              <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Annual revenue recovered</div>
+              <div class="text-5xl font-bold text-white mb-1 transition-all duration-300" id="calc-revenue">$0</div>
+              <div class="flex items-center gap-1.5 text-sm text-emerald-400">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M7 13L3 9M7 13L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Directly back into your practice
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-soft">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Annual bookings recovered</div>
+            <div class="text-4xl font-bold text-gray-900 mb-1 transition-all duration-300" id="calc-bookings">0</div>
+            <div class="text-sm text-gray-500">New appointments per year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="py-20 md:py-28 bg-gray-50/50 border-y border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 rounded-full text-xs font-semibold text-brand-700 tracking-wide mb-5">FAQ</div>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 leading-tight mb-5">
+          Questions? We've got answers.
+        </h2>
+      </div>
+
+      <div class="space-y-3" id="faq-container">
+        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+            How long does setup take?
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
+            Most clinics are live within 5-10 minutes. You forward your phone number to Renia, we connect to your PMS via API, and that's it. No hardware, no on-site visit, no training required.
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+            Which practice management systems do you support?
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
+            Renia integrates directly with Dentrix, Eaglesoft, and Open Dental. We support real-time appointment creation, provider availability lookup, and patient record updates across all three platforms.
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+            Is Renia HIPAA compliant?
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
+            Yes. Renia is built HIPAA-compliant from day one. We use AES-256 encryption at rest, TLS 1.3 in transit, maintain comprehensive audit trails, and provide a Business Associate Agreement (BAA) immediately upon signup. Florida's two-party consent law for call recording is handled automatically.
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+            Can patients really speak Spanish?
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
+            Absolutely. Renia auto-detects when a patient speaks Spanish and switches instantly — no prompts, no transfers. The AI uses culturally-appropriate responses and can handle the full conversation including scheduling, insurance questions, and emergency triage.
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+            What happens if the AI can't handle a call?
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
+            Renia is designed to handle 95%+ of calls autonomously. For edge cases, it can warm-transfer to your front desk or take a detailed message. Every call is recorded and transcribed, so nothing falls through the cracks.
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 shadow-soft overflow-hidden">
+          <button class="faq-question w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold text-gray-900 hover:bg-gray-50/50 transition-colors" onclick="toggleFaq(this)">
+            Can I try it before committing?
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="faq-chevron transition-transform duration-200"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 text-sm text-gray-500 leading-relaxed hidden">
+            Yes. Start with a free trial — no credit card required. We'll set up a demo environment with your clinic's info so you can hear Renia in action on a test call before going live.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="py-20 md:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-brand-50/50 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-brand-200/20 via-brand-100/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      <div class="reveal">
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
+          Your clinic is losing<br class="hidden sm:block"> calls right now.
+        </h2>
+        <p class="text-lg text-gray-500 max-w-xl mx-auto mb-10 leading-relaxed">
+          Every ring that goes to voicemail is a patient you'll never see and revenue you'll never recover. <br class="hidden sm:block">Deploy Renia in minutes. Cancel anytime.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="signup.html" class="btn-primary inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all shadow-elevated w-full sm:w-auto justify-center group text-base">
+            Start Free Trial
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-700 font-semibold rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all w-full sm:w-auto justify-center shadow-soft text-base">
+            <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs">
+              <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M1 1L11 7L1 13V1Z" fill="currentColor"/></svg>
+            </div>
+            Watch Demo
+          </a>
+        </div>
+
+        <div class="flex items-center justify-center gap-2 mt-8 text-sm text-gray-400">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C3.5 1 1 3.5 1 7C1 10.5 3.5 13 7 13C10.5 13 13 10.5 13 7C13 3.5 10.5 1 7 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 7L6.5 9L9.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          No credit card required · Setup support included · Cancel anytime
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-gray-100 bg-gray-50/30 py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex items-center gap-3">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="#141416"/>
+            <path d="M16 8C13.5 8 11.5 9.5 11 12H9.5C9 14 10 16 11.5 17L14 20H10L8 24H24L22 20H18L20.5 17C22 16 23 14 22.5 12H21C20.5 9.5 18.5 8 16 8Z" fill="white" fill-opacity="0.95"/>
+            <circle cx="13.5" cy="13.5" r="1.5" fill="#6366f1"/>
+            <circle cx="18.5" cy="13.5" r="1.5" fill="#6366f1"/>
+          </svg>
+          <span class="font-semibold text-gray-900 text-lg">Renia</span>
+        </div>
+
+        <div class="flex items-center gap-6 text-sm text-gray-500">
+          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Privacy Policy</a>
+          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Terms of Service</a>
+          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Contact</a>
+          <a href="#" class="hover:text-gray-900 transition-colors font-medium">Status</a>
+        </div>
+
+        <div class="text-xs text-gray-400">
+          &copy; 2026 Renia AI Technologies. Engineered in Florida.
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ==========================================
-       SCRIPTS (Interactions & Observers)
-       ========================================== -->
+  <!-- ============ SCRIPTS ============ -->
   <script>
-    /* ROI Calculator Logic */
-    function updateCalculator() {
+    /* ===== ROI Calculator ===== */
+    function updateCalc() {
       const slider = document.getElementById('roi-slider');
       const val = parseInt(slider.value);
-      
-      // Calculate outputs
-      const revenue = val * 300; // $300 avg per appointment
-      const hours = Math.round(val * (15/60)); // 15 mins per call
-      
-      // Update DOM with animation class toggle
-      document.getElementById('calc-val-calls').innerText = val;
-      
-      const revEl = document.getElementById('calc-out-revenue');
-      const hrEl = document.getElementById('calc-out-hours');
-      
-      revEl.innerText = '$' + revenue.toLocaleString();
-      hrEl.innerText = hours + ' hrs';
-      
-      // Update custom slider visual
+      const avgApptValue = 327;
+      const missedToBookedRate = 0.7;
+
+      const annualBookings = Math.round(val * 12 * missedToBookedRate);
+      const annualRevenue = annualBookings * avgApptValue;
+
+      document.getElementById('calc-value').textContent = val;
+      document.getElementById('calc-revenue').textContent = '$' + annualRevenue.toLocaleString();
+      document.getElementById('calc-bookings').textContent = annualBookings.toLocaleString();
+
       const percent = ((val - slider.min) / (slider.max - slider.min)) * 100;
-      document.getElementById('slider-progress').style.width = percent + '%';
-      document.getElementById('slider-thumb').style.left = percent + '%';
+      document.getElementById('slider-fill').style.width = Math.min(percent, 100) + '%';
+    }
+    updateCalc();
+
+    /* ===== FAQ Accordion ===== */
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer.classList.contains('hidden');
+      
+      // Close all
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+      document.querySelectorAll('.faq-chevron').forEach(c => c.classList.remove('rotate-180'));
+      
+      if (!isOpen) {
+        answer.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      }
     }
 
-    /* Scroll Reveal Observer (Fade up sections on scroll) */
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
+    /* ===== Navbar on scroll ===== */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav-container');
+      if (window.scrollY > 20) {
+        nav.classList.add('bg-white/80', 'backdrop-blur-xl', 'rounded-2xl', 'px-6', 'shadow-soft', 'border', 'border-gray-100/80');
+        nav.classList.remove('h-16', 'md:h-20');
+        nav.style.marginTop = '8px';
+      } else {
+        nav.classList.remove('bg-white/80', 'backdrop-blur-xl', 'rounded-2xl', 'px-6', 'shadow-soft', 'border', 'border-gray-100/80');
+        nav.classList.add('h-16', 'md:h-20');
+        nav.style.marginTop = '0';
+      }
+    });
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    /* ===== Scroll Reveal ===== */
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
           observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { root: null, rootMargin: '0px', threshold: 0.05 });
 
-    document.querySelectorAll('.reveal').forEach(el => {
-      observer.observe(el);
-    });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    /* Glare Effect for 3D Cards */
+    /* ===== Glare Effect ===== */
     document.querySelectorAll('.glare-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const xPercent = (x / rect.width) * 100;
-        const yPercent = (y / rect.height) * 100;
-        
-        card.style.setProperty('--mouse-x', `${xPercent}%`);
-        card.style.setProperty('--mouse-y', `${yPercent}%`);
+        card.style.setProperty('--mouse-x', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        card.style.setProperty('--mouse-y', `${((e.clientY - rect.top) / rect.height) * 100}%`);
       });
     });
 
-    /* Magnetic Buttons Effect */
+    /* ===== Magnetic Buttons ===== */
     document.querySelectorAll('.magnetic-wrap').forEach(wrap => {
-      const btn = wrap.querySelector('.magnetic-btn');
-      
+      const btn = wrap.querySelector('.btn-primary, .magnetic-btn') || wrap.firstElementChild;
       wrap.addEventListener('mousemove', (e) => {
         const rect = wrap.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        
-        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
       });
-      
       wrap.addEventListener('mouseleave', () => {
-        btn.style.transform = `translate(0px, 0px)`;
+        btn.style.transform = 'translate(0, 0)';
       });
     });
 
-    /* Navbar Glass Effect on Scroll */
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      const container = document.getElementById('nav-container');
-      
-      if (window.scrollY > 20) {
-        nav.classList.remove('py-4');
-        nav.classList.add('py-2');
-        // Container already has glass effect, maybe deepen shadow
-        container.classList.add('shadow-md');
-      } else {
-        nav.classList.add('py-4');
-        nav.classList.remove('py-2');
-        container.classList.remove('shadow-md');
-      }
+    /* ===== Smooth anchor scrolls ===== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
   </script>
 
