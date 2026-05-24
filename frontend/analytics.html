@@ -137,15 +137,14 @@
   </aside>
 
   <!-- Main Content Area -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-    
-
-    
-    <!-- Topbar -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden relative">      <!-- Topbar -->
     <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
       <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Analytics</h1>
       
-      <div class="flex items-center gap-5">
+      <div class="flex items-center gap-4">
+        <button onclick="Analytics.exportCSV()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm">
+          <span class="material-symbols-outlined text-[16px]">download</span> Export CSV
+        </button>
         <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
@@ -162,43 +161,53 @@
     <div class="flex-1 overflow-y-auto p-8">
       <div class="max-w-[1200px] mx-auto">
         
+        <!-- Date Range Selector -->
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-1.5 bg-white rounded-xl border border-slate-200 p-1 shadow-sm">
+            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-2 rounded-lg text-xs font-bold text-slate-900 bg-brand-50 border border-brand-200 transition-all">7 Days</button>
+            <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all">30 Days</button>
+            <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all">90 Days</button>
+          </div>
+          <span class="text-xs font-semibold text-slate-400" id="analytics-date-range-label">Last 7 days</span>
+        </div>
+
         <!-- KPI Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-total-calls">
             <div class="flex items-center justify-between mb-4">
               <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined">call</span></div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 18%</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[12px]">trending_up</span> 18%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1">304</div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="number">304</div>
             <div class="text-sm font-medium text-slate-500">Total Calls</div>
           </div>
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-total-booked">
             <div class="flex items-center justify-between mb-4">
               <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600"><span class="material-symbols-outlined">event</span></div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 12%</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[12px]">trending_up</span> 12%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1">82</div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="number">82</div>
             <div class="text-sm font-medium text-slate-500">Appointments Booked</div>
           </div>
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-avg-duration">
             <div class="flex items-center justify-between mb-4">
               <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600"><span class="material-symbols-outlined">timer</span></div>
-              <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_flat</span> 0%</span>
+              <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[12px]">trending_flat</span> 0%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1">3:18</div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="duration">3:18</div>
             <div class="text-sm font-medium text-slate-500">Avg Call Duration</div>
           </div>
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-resolution-rate">
             <div class="flex items-center justify-between mb-4">
               <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined">done_all</span></div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 3%</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[12px]">trending_up</span> 3%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1">94%</div>
+            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="percent">94%</div>
             <div class="text-sm font-medium text-slate-500">Resolution Rate</div>
           </div>
         </div>
 
-        <!-- Charts Grid -->
+        <!-- Charts Grid Row 1 -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <div class="glass-card rounded-2xl p-6">
             <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Calls Over Time</h3>
@@ -210,6 +219,47 @@
             <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Bookings Over Time</h3>
             <div class="h-[280px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
               <canvas id="analytics-bookings-chart" class="w-full h-full"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Grid Row 2: Services & Language -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Top Services by Volume</h3>
+            <div class="h-[300px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+              <canvas id="analytics-services-chart" class="w-full h-full"></canvas>
+            </div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Language Distribution</h3>
+            <div class="h-[300px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+              <canvas id="analytics-language-chart" class="w-full h-full"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue Attribution -->
+        <div class="glass-card rounded-2xl p-6 mb-8">
+          <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Revenue Attribution</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-100 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-emerald-600 mb-2">payments</span>
+              <div class="font-display text-3xl font-black text-slate-900" id="rev-captured">$12,450</div>
+              <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mt-1">Revenue Captured</div>
+              <div class="text-[10px] text-slate-400 mt-1">From booked appointments</div>
+            </div>
+            <div class="bg-rose-50 rounded-xl p-5 border border-rose-100 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-rose-600 mb-2">money_off</span>
+              <div class="font-display text-3xl font-black text-slate-900" id="rev-missed">$4,280</div>
+              <div class="text-xs font-bold text-rose-600 uppercase tracking-wider mt-1">Revenue Missed</div>
+              <div class="text-[10px] text-slate-400 mt-1">From unanswered calls</div>
+            </div>
+            <div class="bg-brand-50 rounded-xl p-5 border border-brand-100 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-brand-600 mb-2">trending_up</span>
+              <div class="font-display text-3xl font-black text-slate-900" id="rev-capture-rate">74.4%</div>
+              <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-1">Capture Rate</div>
+              <div class="text-[10px] text-slate-400 mt-1">Revenue capture efficiency</div>
             </div>
           </div>
         </div>
@@ -230,6 +280,209 @@
   <script src="js/dashboard.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
   <script>
+    /* Analytics Page Module */
+    const Analytics = {
+      currentDays: 7,
+      charts: {},
+
+      async load(days = 7) {
+        this.currentDays = days;
+        document.getElementById('analytics-date-range-label').textContent = `Last ${days} days`;
+
+        // Try API first, fallback to sample data
+        try {
+          const [callsData, bookingsData, servicesData, languageData] = await Promise.all([
+            API.getCallsOverTime(days),
+            API.getBookingsOverTime(days),
+            API.getTopServices(),
+            API.getLanguageBreakdown()
+          ]);
+          this.renderAll(callsData, bookingsData, servicesData, languageData);
+        } catch (err) {
+          console.warn('Analytics API unavailable, using sample data:', err.message);
+          this.renderWithSampleData(days);
+        }
+      },
+
+      renderAll(callsData, bookingsData, servicesData, languageData) {
+        // Update KPI cards
+        this.updateKPIs(callsData);
+        // Update revenue
+        this.updateRevenue(callsData);
+        // Render charts
+        this.renderCharts(callsData, bookingsData, servicesData, languageData);
+      },
+
+      renderWithSampleData(days) {
+        const labels = this.generateDateLabels(days);
+        const callsValues = this.generateRandomData(days, 30, 70);
+        const bookingsValues = callsValues.map(v => Math.round(v * 0.25 + Math.random() * 5));
+
+        const totalCalls = callsValues.reduce((a, b) => a + b, 0);
+        const totalBookings = bookingsValues.reduce((a, b) => a + b, 0);
+
+        // Update KPIs manually
+        this.updateKPIManual(totalCalls, totalBookings, callsValues[callsValues.length - 1], bookingsValues[bookingsValues.length - 1]);
+        this.updateRevenueManual(totalBookings);
+
+        // Render charts
+        this.renderChartsDirect(labels, callsValues, bookingsValues);
+      },
+
+      updateKPIManual(totalCalls, totalBookings, latestCalls, latestBookings) {
+        const callsEl = document.querySelector('#kpi-total-calls .kpi-value');
+        const bookedEl = document.querySelector('#kpi-total-booked .kpi-value');
+        const durationEl = document.querySelector('#kpi-avg-duration .kpi-value');
+        const resolutionEl = document.querySelector('#kpi-resolution-rate .kpi-value');
+        if (callsEl) callsEl.textContent = totalCalls;
+        if (bookedEl) bookedEl.textContent = totalBookings;
+        // Average duration: derive from data
+        if (durationEl) durationEl.textContent = totalCalls > 0 ? Math.round(totalCalls / (totalCalls * 0.8 + 1) * 3.5) + ':00' : '0:00';
+      },
+
+      updateRevenueManual(totalBookings) {
+        const avgRevenue = 350;
+        const captured = totalBookings * avgRevenue;
+        const missed = Math.round(captured * 0.34);
+        const rate = Math.round((captured / (captured + missed)) * 100);
+
+        const capEl = document.getElementById('rev-captured');
+        const missEl = document.getElementById('rev-missed');
+        const rateEl = document.getElementById('rev-capture-rate');
+        if (capEl) capEl.textContent = formatCurrency(captured);
+        if (missEl) missEl.textContent = formatCurrency(missed);
+        if (rateEl) rateEl.textContent = rate + '%';
+      },
+
+      updateKPIs(data) {
+        const summary = data.summary || data;
+        const callsEl = document.querySelector('#kpi-total-calls .kpi-value');
+        const bookedEl = document.querySelector('#kpi-total-booked .kpi-value');
+        const durationEl = document.querySelector('#kpi-avg-duration .kpi-value');
+        const resolutionEl = document.querySelector('#kpi-resolution-rate .kpi-value');
+        if (callsEl && summary.total_calls != null) callsEl.textContent = summary.total_calls;
+        if (bookedEl && summary.total_booked != null) bookedEl.textContent = summary.total_booked;
+        if (durationEl && summary.avg_duration != null) durationEl.textContent = formatDuration(summary.avg_duration);
+        if (resolutionEl && summary.resolution_rate != null) resolutionEl.textContent = summary.resolution_rate + '%';
+      },
+
+      updateRevenue(data) {
+        const summary = data.summary || {};
+        const capEl = document.getElementById('rev-captured');
+        const missEl = document.getElementById('rev-missed');
+        const rateEl = document.getElementById('rev-capture-rate');
+        if (capEl && summary.revenue_captured) capEl.textContent = formatCurrency(summary.revenue_captured);
+        if (missEl && summary.revenue_missed) missEl.textContent = formatCurrency(summary.revenue_missed);
+        if (rateEl && summary.capture_rate) rateEl.textContent = summary.capture_rate.toFixed(1) + '%';
+      },
+
+      renderCharts(callsData, bookingsData, servicesData, languageData) {
+        // Destroy existing charts
+        Object.values(this.charts).forEach(c => { if (c) c.destroy(); });
+        this.charts = {};
+
+        if (typeof initChartDefaults === 'function') initChartDefaults();
+
+        const callsLabels = callsData.labels || callsData.dates || this.generateDateLabels(this.currentDays);
+        const callsValues = callsData.values || callsData.data || callsData;
+        const bookingsValues = bookingsData.values || bookingsData.data || bookingsData;
+
+        if (typeof initCallsLineChart === 'function') {
+          this.charts.calls = initCallsLineChart('analytics-calls-chart', callsLabels, Array.isArray(callsValues) ? callsValues : this.generateRandomData(this.currentDays, 30, 70));
+          this.charts.bookings = initBookingsLineChart('analytics-bookings-chart', callsLabels, Array.isArray(bookingsValues) ? bookingsValues : callsValues.map(v => Math.round(v * 0.25)));
+        }
+
+        const servicesLabels = servicesData.labels || servicesData.map(s => s.name || s.service) || ['General', 'Cosmetic', 'Implants', 'Ortho', 'Emergency'];
+        const servicesValues = servicesData.values || servicesData.map(s => s.count || s.value) || [145, 89, 67, 52, 38];
+        if (typeof initServicesHorizontalBarChart === 'function') {
+          this.charts.services = initServicesHorizontalBarChart('analytics-services-chart', servicesLabels, servicesValues);
+        }
+
+        const langData = Array.isArray(languageData) ? languageData : [{ label: 'English', value: 78 }, { label: 'Spanish', value: 22 }];
+        if (typeof initLanguageDoughnutChart === 'function') {
+          this.charts.language = initLanguageDoughnutChart('analytics-language-chart', langData);
+        }
+      },
+
+      renderChartsDirect(labels, callsValues, bookingsValues) {
+        Object.values(this.charts).forEach(c => { if (c) c.destroy(); });
+        this.charts = {};
+
+        if (typeof initChartDefaults === 'function') initChartDefaults();
+
+        if (typeof initCallsLineChart === 'function') {
+          this.charts.calls = initCallsLineChart('analytics-calls-chart', labels, callsValues);
+          this.charts.bookings = initBookingsLineChart('analytics-bookings-chart', labels, bookingsValues);
+        }
+
+        if (typeof initServicesHorizontalBarChart === 'function') {
+          this.charts.services = initServicesHorizontalBarChart('analytics-services-chart',
+            ['General Dentistry', 'Cosmetic', 'Dental Implants', 'Orthodontics', 'Emergency', 'Teeth Whitening'],
+            [145, 89, 67, 52, 38, 31]
+          );
+        }
+
+        if (typeof initLanguageDoughnutChart === 'function') {
+          this.charts.language = initLanguageDoughnutChart('analytics-language-chart', [
+            { label: 'English', value: 78 },
+            { label: 'Spanish', value: 22 }
+          ]);
+        }
+      },
+
+      setDateRange(days, btn) {
+        if (!btn) return;
+        document.querySelectorAll('.date-range-btn').forEach(b => {
+          b.classList.remove('active', 'bg-brand-50', 'border-brand-200', 'text-slate-900');
+          b.classList.add('text-slate-500');
+        });
+        btn.classList.add('active', 'bg-brand-50', 'border-brand-200', 'text-slate-900');
+        btn.classList.remove('text-slate-500');
+        this.load(days);
+      },
+
+      generateDateLabels(days) {
+        const labels = [];
+        for (let i = days - 1; i >= 0; i--) {
+          const d = new Date();
+          d.setDate(d.getDate() - i);
+          labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+        }
+        return labels;
+      },
+
+      generateRandomData(days, min, max) {
+        return Array.from({ length: days }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+      },
+
+      exportCSV() {
+        const rows = [['Metric', 'Value']];
+
+        // Collect KPI data
+        const kpiCards = document.querySelectorAll('.kpi-value');
+        const kpiLabels = document.querySelectorAll('#kpi-total-calls .text-sm, #kpi-total-booked .text-sm, #kpi-avg-duration .text-sm, #kpi-resolution-rate .text-sm');
+        kpiCards.forEach((el, i) => {
+          if (kpiLabels[i]) rows.push([kpiLabels[i].textContent.trim(), el.textContent.trim()]);
+        });
+
+        // Revenue
+        rows.push(['']);
+        rows.push(['Revenue Captured', document.getElementById('rev-captured')?.textContent || '']);
+        rows.push(['Revenue Missed', document.getElementById('rev-missed')?.textContent || '']);
+        rows.push(['Capture Rate', document.getElementById('rev-capture-rate')?.textContent || '']);
+
+        const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `renia-analytics-${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Analytics exported to CSV! 📊', 'success');
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       // Wire logout button
       const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
@@ -240,6 +493,25 @@
           else window.location.href = 'index.html';
         });
       }
+
+      // Note: Analytics.load() is called by app.js initAnalyticsPage() to avoid double-init.
+      // Charts will render once via that path.
+
+      // Animate KPI counters after data is loaded
+      setTimeout(() => {
+        document.querySelectorAll('.kpi-value[data-format]').forEach(el => {
+          const fmt = el.getAttribute('data-format');
+          const text = el.textContent.replace(/[$,%]/g, '').replace(/,/g, '').trim();
+          // Handle duration format (e.g. "3:18")
+          if (fmt === 'duration') return;
+          const target = parseFloat(text) || 0;
+          if (target > 0 && typeof animateCounter === 'function') {
+            if (fmt === 'currency') el.setAttribute('data-format', 'currency');
+            else if (fmt === 'percent') el.setAttribute('data-format', 'percent');
+            animateCounter(el, target, 1200);
+          }
+        });
+      }, 600);
     });
   </script>
 </body>

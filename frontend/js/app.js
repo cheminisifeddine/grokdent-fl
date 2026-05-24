@@ -141,104 +141,8 @@ function initDashboardInteractivity() {
 /* ============================================
    Calls Page
    ============================================ */
-function initCallsPage() {
-  // Search filter
-  const searchInput = document.getElementById('call-search');
-  if (searchInput) {
-    searchInput.addEventListener('input', debounce(filterCalls, 300));
-  }
-
-  // Status filter
-  const statusFilter = document.getElementById('call-status-filter');
-  if (statusFilter) statusFilter.addEventListener('change', filterCalls);
-
-  // Language filter
-  const langFilter = document.getElementById('call-language-filter');
-  if (langFilter) langFilter.addEventListener('change', filterCalls);
-
-  // View transcript buttons — open modal
-  document.querySelectorAll('.view-transcript-btn').forEach(btn => {
-    btn.addEventListener('click', () => openTranscriptModal(btn));
-  });
-
-  // Pagination buttons
-  document.querySelectorAll('.page-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.page-btn').forEach(b => {
-        b.classList.remove('bg-indigo-600', 'text-white');
-        b.classList.add('border', 'border-slate-200', 'text-slate-500');
-      });
-      btn.classList.add('bg-indigo-600', 'text-white');
-      btn.classList.remove('border', 'border-slate-200', 'text-slate-500');
-    });
-  });
-}
-
-function filterCalls() {
-  const search = (document.getElementById('call-search')?.value || '').toLowerCase();
-  const status = document.getElementById('call-status-filter')?.value || '';
-  const language = document.getElementById('call-language-filter')?.value || '';
-
-  document.querySelectorAll('tbody tr[data-status]').forEach(row => {
-    const text = row.textContent.toLowerCase();
-    const rowStatus = (row.getAttribute('data-status') || '').toLowerCase();
-    const rowLang = (row.getAttribute('data-language') || '').toLowerCase();
-
-    const matchSearch = !search || text.includes(search);
-    const matchStatus = !status || rowStatus.includes(status.toLowerCase());
-    const matchLang = !language || rowLang.includes(language.toLowerCase());
-
-    row.style.display = matchSearch && matchStatus && matchLang ? '' : 'none';
-  });
-}
-
-function openTranscriptModal(btn) {
-  const modal = document.getElementById('transcript-modal');
-  if (!modal) {
-    // Create a simple transcript modal on the fly
-    const overlay = document.createElement('div');
-    overlay.id = 'transcript-modal';
-    overlay.className = 'modal-overlay';
-    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
-    
-    const row = btn.closest('tr');
-    const caller = row?.querySelector('td:nth-child(2)')?.textContent?.trim() || 'Unknown Caller';
-    const time = row?.querySelector('td:nth-child(1)')?.textContent?.trim() || '';
-    const lang = row?.querySelector('td:nth-child(4) span')?.textContent?.trim() || 'English';
-    const status = row?.querySelector('td:nth-child(6) span')?.textContent?.trim() || '';
-
-    overlay.innerHTML = `
-      <div style="background:white;border-radius:20px;width:100%;max-width:600px;max-height:80vh;overflow:auto;box-shadow:0 25px 50px rgba(0,0,0,0.15);">
-        <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;">
-          <div>
-            <h2 style="font-size:18px;font-weight:800;color:#0f172a;margin:0 0 4px;">${caller}</h2>
-            <p style="font-size:13px;color:#64748b;margin:0;">${time} · ${lang}</p>
-          </div>
-          <button onclick="document.getElementById('transcript-modal').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
-        </div>
-        <div style="padding:24px 28px;">
-          <div style="background:#f8fafc;border-radius:12px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#334155;">
-            <div style="margin-bottom:12px;"><strong style="color:#6366f1;">AI Receptionist:</strong> Thank you for calling Sunshine Dental Care. This is your AI receptionist. How can I help you today?</div>
-            <div style="margin-bottom:12px;"><strong style="color:#0f172a;">${caller}:</strong> Hi, I'd like to schedule a dental cleaning appointment, please.</div>
-            <div style="margin-bottom:12px;"><strong style="color:#6366f1;">AI Receptionist:</strong> I'd be happy to help with that! I have availability this week on Wednesday at 10 AM and Thursday at 2 PM. Which works better for you?</div>
-            <div style="margin-bottom:12px;"><strong style="color:#0f172a;">${caller}:</strong> Wednesday at 10 works great.</div>
-            <div style="margin-bottom:12px;"><strong style="color:#6366f1;">AI Receptionist:</strong> Perfect! I've scheduled a dental cleaning for Wednesday at 10:00 AM. You'll receive a confirmation text shortly. Is there anything else I can help you with?</div>
-            <div><strong style="color:#0f172a;">${caller}:</strong> No, that's everything. Thank you!</div>
-          </div>
-          <div style="margin-top:16px;padding:16px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
-            <div style="font-size:12px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">AI Summary</div>
-            <div style="font-size:14px;color:#15803d;">Patient requested dental cleaning. Successfully booked for Wednesday at 10:00 AM. Confirmation sent via SMS.</div>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-    return;
-  }
-  modal.style.display = 'flex';
-  modal.classList.remove('hidden');
-}
+// Calls page is fully initialized by its inline script (calls.html)
+function initCallsPage() { /* no-op: inline script handles everything */ }
 
 /* ============================================
    Appointments Page
@@ -356,162 +260,20 @@ function openAppointmentModal() {
 /* ============================================
    Knowledge Base Page
    ============================================ */
-function initKnowledgeBasePage() {
-  // Category tabs
-  document.querySelectorAll('.kb-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.kb-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      filterKBByCategory(tab.getAttribute('data-category') || 'all');
-    });
-  });
-
-  // Seed defaults
-  const seedBtn = document.getElementById('seed-defaults-btn');
-  if (seedBtn) {
-    seedBtn.addEventListener('click', async () => {
-      seedBtn.textContent = 'Loading...';
-      try { await API.seedKnowledge(); } catch (err) {
-        console.warn('Seed knowledge API failed:', err.message);
-      }
-      showToast('Knowledge base loaded with 8 default entries! ✅', 'success');
-      seedBtn.textContent = 'Seed Defaults';
-    });
-  }
-
-  // Add entry button → open panel
-  const addBtn = document.getElementById('add-kb-btn');
-  const kbPanel = document.getElementById('kb-panel');
-  if (addBtn) {
-    addBtn.addEventListener('click', () => {
-      if (kbPanel) {
-        kbPanel.classList.add('open');
-        document.getElementById('kb-form')?.reset();
-        document.getElementById('kb-panel-title').textContent = 'Add New Entry';
-      } else {
-        openKBModal();
-      }
-    });
-  }
-
-  // Close panel
-  const closePanel = document.getElementById('close-kb-panel');
-  if (closePanel && kbPanel) {
-    closePanel.addEventListener('click', () => kbPanel.classList.remove('open'));
-  }
-
-  // KB form submit
-  const kbForm = document.getElementById('kb-form');
-  if (kbForm) {
-    kbForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = {
-        question: document.getElementById('kb-question')?.value,
-        answer: document.getElementById('kb-answer')?.value,
-        answer_es: document.getElementById('kb-answer-es')?.value,
-        category: document.getElementById('kb-category')?.value,
-        active: true
-      };
-      if (!data.question || !data.answer) { showToast('Question and answer are required', 'error'); return; }
-      try { await API.createKnowledge(data); } catch (err) {
-        console.warn('Create knowledge API failed:', err.message);
-      }
-      showToast('Knowledge entry saved! ✅', 'success');
-      if (kbPanel) kbPanel.classList.remove('open');
-      kbForm.reset();
-    });
-  }
-
-  // Edit buttons
-  document.querySelectorAll('.kb-edit-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.kb-item');
-      if (kbPanel) {
-        kbPanel.classList.add('open');
-        if (document.getElementById('kb-panel-title')) document.getElementById('kb-panel-title').textContent = 'Edit Entry';
-        const q = item?.querySelector('.kb-question')?.textContent;
-        const a = item?.querySelector('.kb-answer')?.textContent;
-        if (q && document.getElementById('kb-question')) document.getElementById('kb-question').value = q;
-        if (a && document.getElementById('kb-answer')) document.getElementById('kb-answer').value = a;
-      } else {
-        const q = item?.querySelector('.kb-question')?.textContent || '';
-        const a = item?.querySelector('.kb-answer')?.textContent || '';
-        openKBModal(q, a);
-      }
-    });
-  });
-
-  // Delete buttons
-  document.querySelectorAll('.kb-delete-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (confirm('Delete this entry?')) {
-        const item = btn.closest('.kb-item');
-        if (item) {
-          item.style.transition = 'all 0.3s ease';
-          item.style.opacity = '0';
-          item.style.transform = 'translateX(-20px)';
-          setTimeout(() => item.remove(), 300);
-          showToast('Entry deleted', 'success');
-        }
-      }
-    });
-  });
-}
-
-function filterKBByCategory(category) {
-  document.querySelectorAll('.kb-item').forEach(item => {
-    const match = category === 'all' || item.getAttribute('data-category') === category;
-    item.style.display = match ? '' : 'none';
-  });
-}
-
-function openKBModal(question = '', answer = '') {
-  const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
-  const title = question ? 'Edit Knowledge Entry' : 'Add Knowledge Entry';
-  overlay.innerHTML = `
-    <div style="background:white;border-radius:20px;width:100%;max-width:560px;max-height:80vh;overflow:auto;box-shadow:0 25px 50px rgba(0,0,0,0.15);">
-      <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;">
-        <h2 style="font-size:18px;font-weight:800;color:#0f172a;margin:0;">${title}</h2>
-        <button onclick="this.closest('[style*=fixed]').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;">×</button>
-      </div>
-      <form style="padding:24px 28px;" onsubmit="event.preventDefault();this.closest('[style*=fixed]').remove();showToast('Entry saved!','success');">
-        <div style="display:grid;gap:16px;">
-          <div>
-            <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Category</label>
-            <select style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
-              <option>General</option><option>Hours</option><option>Services</option><option>Insurance</option><option>Pricing</option><option>Emergency</option><option>Policies</option>
-            </select>
-          </div>
-          <div>
-            <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Question</label>
-            <input type="text" required value="${question.replace(/"/g, '&quot;')}" placeholder="e.g. What are your office hours?" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
-          </div>
-          <div>
-            <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Answer (English)</label>
-            <textarea required rows="4" placeholder="Clear, concise answer..." style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:vertical;box-sizing:border-box;">${answer.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
-          </div>
-          <div>
-            <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Answer (Spanish) <span style="font-weight:400;color:#94a3b8;">optional</span></label>
-            <textarea rows="2" placeholder="Respuesta en español..." style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:none;box-sizing:border-box;"></textarea>
-          </div>
-        </div>
-        <div style="margin-top:20px;display:flex;gap:12px;">
-          <button type="button" onclick="this.closest('[style*=fixed]').remove()" style="flex:1;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-weight:600;color:#64748b;background:white;cursor:pointer;font-size:14px;">Cancel</button>
-          <button type="submit" style="flex:2;padding:12px;background:#0f172a;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">Save Entry</button>
-        </div>
-      </form>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-}
+// Knowledge Base page is fully initialized by its inline script (knowledge-base.html)
+function initKnowledgeBasePage() { /* no-op: inline script handles everything */ }
 
 /* ============================================
    Analytics Page
    ============================================ */
 function initAnalyticsPage() {
-  // Init chart defaults
+  // Delegate to the Analytics module defined in analytics.html
+  if (typeof Analytics !== 'undefined' && typeof Analytics.load === 'function') {
+    Analytics.load(7);
+    return;
+  }
+
+  // Fallback if Analytics module not loaded (direct chart rendering)
   if (typeof initChartDefaults === 'function') initChartDefaults();
 
   const dateLabels7 = [];
@@ -524,17 +286,17 @@ function initAnalyticsPage() {
   if (typeof initCallsLineChart === 'function') {
     initCallsLineChart('analytics-calls-chart', dateLabels7, [35, 42, 38, 55, 47, 61, 53]);
     initBookingsLineChart('analytics-bookings-chart', dateLabels7, [8, 12, 10, 15, 11, 14, 12]);
-    initLanguageDoughnutChart('language-chart', [
-      { label: 'English', value: 78 },
-      { label: 'Spanish', value: 22 }
-    ]);
-    initServicesHorizontalBarChart('top-services-chart',
+    initServicesHorizontalBarChart('analytics-services-chart',
       ['General Dentistry', 'Cosmetic', 'Dental Implants', 'Orthodontics', 'Emergency', 'Whitening'],
       [145, 89, 67, 52, 38, 31]
     );
+    initLanguageDoughnutChart('analytics-language-chart', [
+      { label: 'English', value: 78 },
+      { label: 'Spanish', value: 22 }
+    ]);
   }
 
-  // Date range buttons
+  // Wire date range buttons (inline in analytics.html)
   document.querySelectorAll('.date-range-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.date-range-btn').forEach(b => b.classList.remove('active'));

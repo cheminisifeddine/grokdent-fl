@@ -211,7 +211,7 @@
                   <div class="flex gap-2">
                     <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
                     <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
-                      Hello! This is your clinic's AI voice receptionist receptionist. You can ask me any question about our services, hours, accepted insurance, or clinic policies, and I will generate an answer dynamically from your customized knowledge base! Try typing below.
+                      Hello! This is your clinic's AI voice receptionist. You can ask me any question about our services, hours, accepted insurance, or clinic policies, and I will generate an answer dynamically from your customized knowledge base! Try typing below.
                     </div>
                   </div>
                 </div>
@@ -500,104 +500,98 @@
       return "That is a great question! I couldn't find a direct match for that in my custom knowledge base. However, I can let you know that our general clinic number is (305) 555-0100 and we would be happy to discuss details with you! (Try adding a custom Q&A to my Knowledge Base settings to see me answer this instantly!)";
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadKnowledgeBase();
-      renderKnowledgeBase();
+    // Init on load (runs after all scripts loaded; app.js initKnowledgeBasePage is no-op)
+    loadKnowledgeBase();
+    renderKnowledgeBase();
 
-      // Wire logout
-      document.querySelector('[onclick*="Auth.logout"]')?.addEventListener('click', () => {
-        if (typeof Auth !== 'undefined') Auth.logout();
-      });
+    // Top Add button
+    document.getElementById('add-kb-btn')?.addEventListener('click', () => openKBModal());
 
-      // Top Add button
-      document.getElementById('add-kb-btn')?.addEventListener('click', () => openKBModal());
-
-      // Seed Defaults
-      document.getElementById('seed-defaults-btn')?.addEventListener('click', async () => {
-        if (confirm('Reset knowledge base to default Florida dental FAQs?')) {
-          localStorage.removeItem('renia_knowledge_base');
-          try { await API.seedKnowledge(); } catch {}
-          loadKnowledgeBase();
-          renderKnowledgeBase();
-          showToast('Knowledge Base loaded with default FAQ seed data! 🦷✅', 'success');
-        }
-      });
-
-      // Search bar
-      document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
-        state.searchQuery = e.target.value;
+    // Seed Defaults
+    document.getElementById('seed-defaults-btn')?.addEventListener('click', async () => {
+      if (confirm('Reset knowledge base to default Florida dental FAQs?')) {
+        localStorage.removeItem('renia_knowledge_base');
+        try { await API.seedKnowledge(); } catch {}
+        loadKnowledgeBase();
         renderKnowledgeBase();
-      });
-
-      // Tabs switcher
-      const tabs = document.querySelectorAll('.kb-tab');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => {
-            t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-            t.classList.add('text-slate-500');
-          });
-          tab.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-          tab.classList.remove('text-slate-500');
-          
-          state.selectedCategory = tab.getAttribute('data-category') || 'all';
-          renderKnowledgeBase();
-        });
-      });
-
-      // AI Simulator Form
-      const simForm = document.getElementById('simulator-form');
-      const simInput = document.getElementById('simulator-input');
-      const simHistory = document.getElementById('simulator-chat-history');
-
-      if (simForm && simInput && simHistory) {
-        simForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const query = simInput.value.trim();
-          if (!query) return;
-
-          // Append User query
-          simHistory.innerHTML += `
-            <div class="flex gap-2 justify-end">
-              <div class="bg-indigo-600 text-white px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-right">
-                ${escapeHtml(query)}
-              </div>
-              <div class="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center text-xs text-indigo-900 font-bold shrink-0 select-none">👤</div>
-            </div>
-          `;
-          
-          simInput.value = '';
-          simHistory.scrollTop = simHistory.scrollHeight;
-
-          // Simulating typing
-          const typingId = 'typing_' + Date.now();
-          simHistory.innerHTML += `
-            <div class="flex gap-2" id="${typingId}">
-              <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-              <div class="bg-indigo-950/20 border border-indigo-800/20 px-3 py-1.5 rounded-2xl text-xs text-slate-400 italic">
-                AI Agent is thinking...
-              </div>
-            </div>
-          `;
-          simHistory.scrollTop = simHistory.scrollHeight;
-
-          setTimeout(() => {
-            document.getElementById(typingId)?.remove();
-            
-            const response = getSimulatedAIResponse(query);
-            simHistory.innerHTML += `
-              <div class="flex gap-2">
-                <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-                <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
-                  ${escapeHtml(response)}
-                </div>
-              </div>
-            `;
-            simHistory.scrollTop = simHistory.scrollHeight;
-          }, 600);
-        });
+        showToast('Knowledge Base loaded with default FAQ seed data! 🦷✅', 'success');
       }
     });
+
+    // Search bar
+    document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      renderKnowledgeBase();
+    });
+
+    // Tabs switcher
+    const tabs = document.querySelectorAll('.kb-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+          t.classList.add('text-slate-500');
+        });
+        tab.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+        tab.classList.remove('text-slate-500');
+        
+        state.selectedCategory = tab.getAttribute('data-category') || 'all';
+        renderKnowledgeBase();
+      });
+    });
+
+    // AI Simulator Form
+    const simForm = document.getElementById('simulator-form');
+    const simInput = document.getElementById('simulator-input');
+    const simHistory = document.getElementById('simulator-chat-history');
+
+    if (simForm && simInput && simHistory) {
+      simForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = simInput.value.trim();
+        if (!query) return;
+
+        // Append User query
+        simHistory.innerHTML += `
+          <div class="flex gap-2 justify-end">
+            <div class="bg-indigo-600 text-white px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-right">
+              ${escapeHtml(query)}
+            </div>
+            <div class="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center text-xs text-indigo-900 font-bold shrink-0 select-none">👤</div>
+          </div>
+        `;
+        
+        simInput.value = '';
+        simHistory.scrollTop = simHistory.scrollHeight;
+
+        // Simulating typing
+        const typingId = 'typing_' + Date.now();
+        simHistory.innerHTML += `
+          <div class="flex gap-2" id="${typingId}">
+            <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+            <div class="bg-indigo-950/20 border border-indigo-800/20 px-3 py-1.5 rounded-2xl text-xs text-slate-400 italic">
+              AI Agent is thinking...
+            </div>
+          </div>
+        `;
+        simHistory.scrollTop = simHistory.scrollHeight;
+
+        setTimeout(() => {
+          document.getElementById(typingId)?.remove();
+          
+          const response = getSimulatedAIResponse(query);
+          simHistory.innerHTML += `
+            <div class="flex gap-2">
+              <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+              <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
+                ${escapeHtml(response)}
+              </div>
+            </div>
+          `;
+          simHistory.scrollTop = simHistory.scrollHeight;
+        }, 600);
+      });
+    }
   </script>
 </body>
 </html>
