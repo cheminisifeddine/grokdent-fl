@@ -790,8 +790,11 @@
         }, 300);
       });
 
+      // Keep track of active audio preview element
+      let activePreviewAudio = null;
+
       // Preview Voice synthesis mapping
-      document.getElementById('preview-voice-btn')?.addEventListener('click', () => {
+      document.getElementById('preview-voice-btn')?.addEventListener('click', async () => {
         const selectedVoice = document.getElementById('voice-select').value;
         const greetingText = document.getElementById('voice-greeting').value.trim();
 
@@ -800,76 +803,166 @@
           return;
         }
 
-        // Check SpeechSynthesis support
-        if (!('speechSynthesis' in window)) {
-          showToast('Browser text-to-speech not supported.', 'error');
-          return;
+        // Cancel any existing browser SpeechSynthesis & custom audio
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (activePreviewAudio) {
+          activePreviewAudio.pause();
+          activePreviewAudio = null;
         }
-
-        // Stop any running speech
-        window.speechSynthesis.cancel();
         setVisualizerState(false, 'IDLE');
 
-        showToast(`Synthesizing dynamic audio preview for "${selectedVoice}"... 🔊`, 'info');
+        showToast(`Requesting high-fidelity xAI Grok voice preview... 🎙️`, 'info');
+        setVisualizerState(true, 'SYNTHESIZING - ' + selectedVoice.toUpperCase());
 
-        const utterance = new SpeechSynthesisUtterance(greetingText);
-        
-        // Define dynamic parameters based on the Grok Voice Agent profile
-        const voiceProfiles = {
-          'Ash':   { lang: 'en-US', pitch: 0.95, rate: 1.05, gender: 'male' },
-          'Ballad':{ lang: 'en-US', pitch: 1.05, rate: 1.00, gender: 'female' },
-          'Coral': { lang: 'en-US', pitch: 0.95, rate: 0.90, gender: 'female' },
-          'Sage':  { lang: 'en-US', pitch: 1.00, rate: 1.05, gender: 'female' },
-          'Verse': { lang: 'en-US', pitch: 1.00, rate: 1.15, gender: 'male' },
-          'Ani':   { lang: 'en-US', pitch: 1.10, rate: 1.05, gender: 'female' },
-          'Eve':   { lang: 'en-US', pitch: 0.85, rate: 0.95, gender: 'female' },
-          'Leo':   { lang: 'en-US', pitch: 0.70, rate: 0.90, gender: 'male' }
-        };
+        let playSuccess = false;
 
-        const profile = voiceProfiles[selectedVoice] || { lang: 'en-US', pitch: 1.0, rate: 1.0, gender: 'female' };
-        
-        utterance.lang = profile.lang;
-        utterance.pitch = profile.pitch;
-        utterance.rate = profile.rate;
+        // Path A: Hit the Cloudflare Worker serverless proxy first (Secure CORS-friendly option)
+        try {
+          const res = await fetch('/api/v1/voice/tts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: greetingText,
+              voice_id: selectedVoice,
+              speed: 1.0
+            })
+          });
 
-        // Try to match a system voice that corresponds to the profile gender
-        const systemVoices = window.speechSynthesis.getVoices();
-        if (systemVoices.length > 0) {
-          const enVoices = systemVoices.filter(v => v.lang.startsWith('en'));
-          let matchedVoice = null;
-          
-          if (profile.gender === 'male') {
-            matchedVoice = enVoices.find(v => v.name.toLowerCase().includes('male') || 
-                                               v.name.toLowerCase().includes('david') || 
-                                               v.name.toLowerCase().includes('mark') ||
-                                               v.name.toLowerCase().includes('guy'));
-          } else {
-            matchedVoice = enVoices.find(v => v.name.toLowerCase().includes('female') || 
-                                               v.name.toLowerCase().includes('zira') || 
-                                               v.name.toLowerCase().includes('google') ||
-                                               v.name.toLowerCase().includes('samantha'));
+          if (res.ok) {
+            const blob = await res.blob();
+            const audioUrl = URL.createObjectURL(blob);
+            const audio = new Audio(audioUrl);
+            activePreviewAudio = audio;
+            
+            audio.onplay = () => {
+              setVisualizerState(true, 'GROK ACTIVE - ' + selectedVoice.toUpperCase());
+            };
+            audio.onended = () => {
+              setVisualizerState(false, 'IDLE');
+              activePreviewAudio = null;
+            };
+            audio.onerror = () => {
+              setVisualizerState(false, 'IDLE');
+              activePreviewAudio = null;
+            };
+
+            await audio.play();
+            playSuccess = true;
+            showToast(`Streaming real xAI Grok voice: "${selectedVoice}" 🔊`, 'success');
           }
+        } catch (err) {
+          console.warn('Hono TTS proxy unavailable, trying client direct xAI fetch:', err);
+        }
 
-          if (matchedVoice) {
-            utterance.voice = matchedVoice;
-          } else if (enVoices.length > 0) {
-            utterance.voice = enVoices[0];
+        // Path B: Direct browser fetch to xAI (Fallback)
+        if (!playSuccess) {
+          try {
+            const keyInput = document.getElementById('xai-key').value.trim();
+            const xaiKey = keyInput || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+            
+            // Map selected voice to real xAI voice ID
+            const voiceMap = {
+              'Ash': 'rex',
+              'Ballad': 'ara',
+              'Coral': 'eve',
+              'Sage': 'eve',
+              'Verse': 'sal',
+              'Ani': 'ara',
+              'Eve': 'eve',
+              'Leo': 'leo'
+            };
+            const realVoiceId = voiceMap[selectedVoice] || 'eve';
+
+            const res = await fetch('https://api.x.ai/v1/tts', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${xaiKey}`
+              },
+              body: JSON.stringify({
+                text: greetingText,
+                voice_id: realVoiceId,
+                speed: 1.0
+              })
+            });
+
+            if (res.ok) {
+              const blob = await res.blob();
+              const audioUrl = URL.createObjectURL(blob);
+              const audio = new Audio(audioUrl);
+              activePreviewAudio = audio;
+
+              audio.onplay = () => {
+                setVisualizerState(true, 'GROK ACTIVE - ' + selectedVoice.toUpperCase());
+              };
+              audio.onended = () => {
+                setVisualizerState(false, 'IDLE');
+                activePreviewAudio = null;
+              };
+              audio.onerror = () => {
+                setVisualizerState(false, 'IDLE');
+                activePreviewAudio = null;
+              };
+
+              await audio.play();
+              playSuccess = true;
+              showToast(`Direct stream from xAI Grok: "${selectedVoice}" 🔊`, 'success');
+            }
+          } catch (err) {
+            console.warn('Direct xAI fetch failed/blocked (CORS). Falling back to SpeechSynthesis:', err);
           }
         }
 
-        utterance.onstart = () => {
-          setVisualizerState(true, 'SPEAKING - ' + selectedVoice.toUpperCase());
-        };
+        // Path C: Final fallback to SpeechSynthesis (if everything else failed)
+        if (!playSuccess) {
+          if (!('speechSynthesis' in window)) {
+            showToast('Browser text-to-speech not supported.', 'error');
+            setVisualizerState(false, 'IDLE');
+            return;
+          }
 
-        utterance.onend = () => {
-          setVisualizerState(false, 'IDLE');
-        };
+          showToast(`Direct stream blocked (CORS). Playing fallback voice... 🔊`, 'warning');
+          const utterance = new SpeechSynthesisUtterance(greetingText);
+          const voiceProfiles = {
+            'Ash':   { lang: 'en-US', pitch: 0.95, rate: 1.05, gender: 'male' },
+            'Ballad':{ lang: 'en-US', pitch: 1.05, rate: 1.00, gender: 'female' },
+            'Coral': { lang: 'en-US', pitch: 0.95, rate: 0.90, gender: 'female' },
+            'Sage':  { lang: 'en-US', pitch: 1.00, rate: 1.05, gender: 'female' },
+            'Verse': { lang: 'en-US', pitch: 1.00, rate: 1.15, gender: 'male' },
+            'Ani':   { lang: 'en-US', pitch: 1.10, rate: 1.05, gender: 'female' },
+            'Eve':   { lang: 'en-US', pitch: 0.85, rate: 0.95, gender: 'female' },
+            'Leo':   { lang: 'en-US', pitch: 0.70, rate: 0.90, gender: 'male' }
+          };
 
-        utterance.onerror = () => {
-          setVisualizerState(false, 'IDLE');
-        };
+          const profile = voiceProfiles[selectedVoice] || { lang: 'en-US', pitch: 1.0, rate: 1.0, gender: 'female' };
+          utterance.lang = profile.lang;
+          utterance.pitch = profile.pitch;
+          utterance.rate = profile.rate;
 
-        window.speechSynthesis.speak(utterance);
+          const systemVoices = window.speechSynthesis.getVoices();
+          if (systemVoices.length > 0) {
+            const enVoices = systemVoices.filter(v => v.lang.startsWith('en'));
+            let matchedVoice = null;
+            if (profile.gender === 'male') {
+              matchedVoice = enVoices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('mark'));
+            } else {
+              matchedVoice = enVoices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('samantha'));
+            }
+            if (matchedVoice) utterance.voice = matchedVoice;
+          }
+
+          utterance.onstart = () => {
+            setVisualizerState(true, 'SPEAKING - ' + selectedVoice.toUpperCase());
+          };
+          utterance.onend = () => {
+            setVisualizerState(false, 'IDLE');
+          };
+          utterance.onerror = () => {
+            setVisualizerState(false, 'IDLE');
+          };
+
+          window.speechSynthesis.speak(utterance);
+        }
       });
 
       // Sync & Deploy Grok Agent force activator

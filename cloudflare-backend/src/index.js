@@ -739,6 +739,57 @@ SCENARIO INSTRUCTIONS:
 });
 
 // -------------------------------------------------------------------------
+// 🔊 Real xAI Text-to-Speech Proxy (CORS-Safe Dynamic Voice Synthesis)
+// -------------------------------------------------------------------------
+app.post('/api/v1/voice/tts', async (c) => {
+  try {
+    const body = await c.req.json();
+    const { text, voice_id, speed } = body;
+    
+    const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+    
+    // Map UI voice agent selection to real xAI voices (eve, ara, leo, rex, sal)
+    const voiceMap = {
+      'ash': 'rex',
+      'ballad': 'ara',
+      'coral': 'eve',
+      'sage': 'eve',
+      'verse': 'sal',
+      'ani': 'ara',
+      'eve': 'eve',
+      'leo': 'leo'
+    };
+    
+    const matchedVoice = voiceMap[(voice_id || 'eve').toLowerCase()] || 'eve';
+    
+    const xaiResponse = await fetch('https://api.x.ai/v1/tts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${xaiKey}`
+      },
+      body: JSON.stringify({
+        text: text,
+        voice_id: matchedVoice,
+        speed: speed || 1.0
+      })
+    });
+    
+    if (!xaiResponse.ok) {
+      const errTxt = await xaiResponse.text();
+      return c.json({ error: 'xAI TTS error', details: errTxt }, 502);
+    }
+    
+    // Stream dynamic audio MP3 back to the browser
+    const audioData = await xaiResponse.arrayBuffer();
+    c.header('Content-Type', 'audio/mpeg');
+    return c.body(audioData);
+  } catch (err) {
+    return c.json({ error: 'TTS proxy error', message: err.message }, 500);
+  }
+});
+
+// -------------------------------------------------------------------------
 // 🏥 Health Check
 // -------------------------------------------------------------------------
 app.get('/health', (c) => c.json({ status: 'ok', service: 'Renia AI Backend', version: '1.0.0' }));

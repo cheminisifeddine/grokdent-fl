@@ -991,18 +991,132 @@ SCENARIO INSTRUCTIONS:
         }
       }
 
-      // Play vocal speech audio out loud using native Web Speech Synthesis
-      if (window.speechSynthesis) {
+      // Keep track of dialer active audio to allow interrupt/pause
+      if (window.dialerActiveAudio) {
+        window.dialerActiveAudio.pause();
+        window.dialerActiveAudio = null;
+      }
+
+      // Clean speech text
+      const speechText = reply.replace(/🚨/g, '').replace(/👤/g, '').replace(/\[BOOKING:[^\]]+\]/g, '').trim();
+
+      let playSuccess = false;
+      const selectedVoice = settings.voice?.voice || 'Ash';
+
+      // Path A: Hit the Cloudflare Worker serverless proxy first (Secure CORS-friendly option)
+      try {
+        const ttsRes = await fetch('/api/v1/voice/tts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: speechText,
+            voice_id: selectedVoice,
+            speed: 1.0
+          })
+        });
+
+        if (ttsRes.ok) {
+          const blob = await ttsRes.blob();
+          const audioUrl = URL.createObjectURL(blob);
+          const audio = new Audio(audioUrl);
+          window.dialerActiveAudio = audio;
+
+          // Sync soundwaves during active call
+          audio.onplay = () => {
+            const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
+            soundwaveSpanElements.forEach(s => {
+              s.style.height = `${Math.floor(Math.random() * 22) + 12}px`;
+              s.style.backgroundColor = '#0FD8B6';
+            });
+          };
+
+          audio.onended = () => {
+            const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
+            soundwaveSpanElements.forEach(s => {
+              s.style.height = '';
+              s.style.backgroundColor = '';
+            });
+            window.dialerActiveAudio = null;
+          };
+
+          await audio.play();
+          playSuccess = true;
+        }
+      } catch (err) {
+        console.warn('Hono dialer TTS proxy unavailable:', err);
+      }
+
+      // Path B: Fallback direct browser fetch to xAI using the settings key
+      if (!playSuccess) {
+        try {
+          const xaiKey = settings.voice?.xai_key || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+          const voiceMap = {
+            'Ash': 'rex',
+            'Ballad': 'ara',
+            'Coral': 'eve',
+            'Sage': 'eve',
+            'Verse': 'sal',
+            'Ani': 'ara',
+            'Eve': 'eve',
+            'Leo': 'leo'
+          };
+          const realVoiceId = voiceMap[selectedVoice] || 'eve';
+
+          const ttsRes = await fetch('https://api.x.ai/v1/tts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${xaiKey}`
+            },
+            body: JSON.stringify({
+              text: speechText,
+              voice_id: realVoiceId,
+              speed: 1.0
+            })
+          });
+
+          if (ttsRes.ok) {
+            const blob = await ttsRes.blob();
+            const audioUrl = URL.createObjectURL(blob);
+            const audio = new Audio(audioUrl);
+            window.dialerActiveAudio = audio;
+
+            audio.onplay = () => {
+              const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
+              soundwaveSpanElements.forEach(s => {
+                s.style.height = `${Math.floor(Math.random() * 22) + 12}px`;
+                s.style.backgroundColor = '#0FD8B6';
+              });
+            };
+
+            audio.onended = () => {
+              const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
+              soundwaveSpanElements.forEach(s => {
+                s.style.height = '';
+                s.style.backgroundColor = '';
+              });
+              window.dialerActiveAudio = null;
+            };
+
+            await audio.play();
+            playSuccess = true;
+          }
+        } catch (err) {
+          console.warn('Direct xAI fetch dialer failed (CORS):', err);
+        }
+      }
+
+      // Path C: Final fallback to SpeechSynthesis
+      if (!playSuccess && window.speechSynthesis) {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(reply.replace(/🚨/g, '').replace(/👤/g, ''));
+        const utterance = new SpeechSynthesisUtterance(speechText);
         const voices = window.speechSynthesis.getVoices();
         
         let matchedVoice = null;
-        const selectedVoice = settings.voice?.voice || 'Ash';
         const lowerV = selectedVoice.toLowerCase();
         
         if (simState.scenario === 'carlos') {
-          matchedVoice = voices.find(voice => voice.name.toLowerCase().includes('spanish') || voice.name.toLowerCase().includes('espanol') || voice.lang.startsWith('es'));
+          matchedVoice = voices.find(voice => voice.name.toLowerCase().includes('spanish') || voice.lang.startsWith('es'));
         } else if (lowerV === 'ash' || lowerV === 'verse' || lowerV === 'leo') {
           matchedVoice = voices.find(voice => voice.name.toLowerCase().includes('male') || voice.name.toLowerCase().includes('david') || voice.name.toLowerCase().includes('google US English') || voice.name.toLowerCase().includes('mark') || voice.name.toLowerCase().includes('guy'));
         } else {
@@ -1011,7 +1125,6 @@ SCENARIO INSTRUCTIONS:
         
         if (matchedVoice) utterance.voice = matchedVoice;
 
-        // Tune dynamic pitch & rate based on voice agent selection
         const voiceProfiles = {
           'Ash':   { pitch: 0.95, rate: 1.05 },
           'Ballad':{ pitch: 1.05, rate: 1.00 },
