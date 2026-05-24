@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#FAFAFC] antialiased selection:bg-indigo-500 selection:text-white">
+<html lang="en" class="scroll-smooth bg-[#09090b] antialiased selection:bg-indigo-500 selection:text-white">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -9,20 +9,22 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@300,0,0,24&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             display: ['Outfit', 'sans-serif'],
-            mono: ['Fira Code', 'monospace'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             brand: {
+              950: '#020205',
               900: '#09090b',
               800: '#18181b',
               500: '#6366f1',
@@ -36,26 +38,17 @@
               coral: '#f43f5e',
             }
           },
-          boxShadow: {
-            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
-            'btn': '0 4px 14px 0 rgba(99, 102, 241, 0.39)',
-            'glow-indigo': '0 0 40px -10px rgba(99, 102, 241, 0.5)',
-          },
           animation: {
-            'float': 'float 6s ease-in-out infinite',
-            'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'glow-pulse': 'glow-pulse 8s ease-in-out infinite alternate',
             'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
             'marquee': 'marquee 40s linear infinite',
-            'slow-pan': 'slow-pan 30s ease-in-out infinite alternate',
+            'mesh-rotate': 'mesh-rotate 20s linear infinite',
+            'typing': 'typing 3s steps(40, end)',
           },
           keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-20px)' },
-            },
-            'pulse-glow': {
-              '0%, 100%': { opacity: 1, filter: 'brightness(1)' },
-              '50%': { opacity: .7, filter: 'brightness(1.5)' },
+            'glow-pulse': {
+              '0%': { transform: 'scale(1) translate(0, 0)', opacity: '0.4' },
+              '100%': { transform: 'scale(1.2) translate(2%, 2%)', opacity: '0.7' },
             },
             'slide-up': {
               '0%': { opacity: 0, transform: 'translateY(40px)' },
@@ -65,9 +58,13 @@
               '0%': { transform: 'translateX(0%)' },
               '100%': { transform: 'translateX(-50%)' },
             },
-            'slow-pan': {
-              '0%': { transform: 'scale(1.05) translate(0, 0)' },
-              '100%': { transform: 'scale(1.15) translate(-1%, -1%)' },
+            'mesh-rotate': {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            typing: {
+              from: { width: '0' },
+              to: { width: '100%' }
             }
           }
         }
@@ -76,32 +73,37 @@
   </script>
 
   <style>
-    /* Premium Glassmorphism */
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.65);
+    /* Ultra Premium Dark Glassmorphism */
+    .glass-panel-dark {
+      background: rgba(24, 24, 27, 0.4);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
     }
     
-    .glass-panel-dark {
-      background: rgba(9, 9, 11, 0.6);
-      backdrop-filter: blur(32px);
-      -webkit-backdrop-filter: blur(32px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    .glass-panel-light {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     /* Gradients */
     .text-gradient-primary {
-      background: linear-gradient(135deg, #09090b 0%, #4338ca 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .text-gradient-teal {
+      background: linear-gradient(135deg, #0FD8B6 0%, #06b6d4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Interactive Glare Effect for Cards */
+    /* Interactive Glare */
     .glare-card {
       position: relative;
       overflow: hidden;
@@ -110,14 +112,14 @@
       content: '';
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.8) 0%, transparent 50%);
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08) 0%, transparent 40%);
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
-      mix-blend-mode: overlay;
+      mix-blend-mode: screen;
     }
     .glare-card:hover::after {
-      opacity: 0.15;
+      opacity: 1;
     }
 
     /* Scroll Reveal */
@@ -131,54 +133,65 @@
       transform: translateY(0);
     }
 
-    /* Photo Masking for Organic Shapes */
-    .photo-mask {
-      mask-image: radial-gradient(white, black);
-      -webkit-mask-image: -webkit-radial-gradient(white, black);
-      border-radius: 2rem;
+    /* Abstract Background Mesh */
+    .hero-mesh {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 30% 70%, rgba(15, 216, 182, 0.1) 0%, transparent 40%);
+      z-index: -10;
+      pointer-events: none;
+      filter: blur(60px);
     }
-
-    /* Hero Parallax Overlay */
-    .hero-overlay {
-      background: linear-gradient(180deg, rgba(9,9,11,0.1) 0%, #FAFAFC 100%);
+    
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+      -webkit-mask-image: -webkit-radial-gradient(circle at center, black 40%, transparent 80%);
     }
 
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
   </style>
 </head>
-<body class="relative overflow-x-hidden">
+<body class="relative overflow-x-hidden text-zinc-300">
 
   <!-- ==========================================
        NAVIGATION
        ========================================== -->
   <nav class="fixed top-0 w-full z-50 transition-all duration-500 py-4" id="navbar">
     <div class="max-w-[1200px] mx-auto px-6">
-      <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300 border border-white/40 shadow-sm" id="nav-container">
+      <div class="glass-panel-dark rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300" id="nav-container">
         
         <!-- Logo -->
         <a href="#" class="flex items-center gap-3 group">
-          <div class="w-9 h-9 rounded-full bg-brand-900 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-accent-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span class="relative text-white text-[14px]">🦷</span>
+          <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+            <span class="relative text-brand-900 text-[14px]">🦷</span>
           </div>
-          <span class="font-display font-bold text-xl tracking-tight text-brand-900">Renia</span>
+          <span class="font-display font-bold text-xl tracking-tight text-white">Renia AI</span>
         </a>
 
         <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-1 bg-slate-100/50 rounded-full p-1 border border-slate-200/50">
-          <a href="#infrastructure" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Engine</a>
-          <a href="#empathy" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">Empathy</a>
-          <a href="#pms" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-900 hover:bg-white hover:shadow-sm transition-all">PMS Sync</a>
+        <div class="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/10">
+          <a href="#infrastructure" class="px-5 py-2 rounded-full text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-all">Engine</a>
+          <a href="#empathy" class="px-5 py-2 rounded-full text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-all">Empathy</a>
+          <a href="#pms" class="px-5 py-2 rounded-full text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-all">PMS Sync</a>
         </div>
 
         <!-- Auth -->
         <div class="flex items-center gap-4">
-          <a href="login.html" class="hidden sm:block text-sm font-semibold text-slate-600 hover:text-brand-900 transition-colors">Sign in</a>
-          <a href="signup.html" class="relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-white bg-brand-900 rounded-full shadow-2xl group hover:scale-105 transition-transform">
-            <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+          <a href="login.html" class="hidden sm:block text-sm font-medium text-zinc-400 hover:text-white transition-colors">Sign in</a>
+          <a href="signup.html" class="relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-brand-900 bg-white rounded-full shadow-[0_0_30px_rgba(255,255,255,0.2)] group hover:scale-105 transition-all">
+            <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black/20"></span>
             <span class="relative text-sm flex items-center gap-2">
               Deploy Now <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </span>
@@ -190,53 +203,45 @@
   </nav>
 
   <!-- ==========================================
-       HERO SECTION (Photorealistic & Aggressive Copy)
+       HERO SECTION (Pure Abstract Tech)
        ========================================== -->
   <main class="relative min-h-[100vh] flex flex-col justify-center pt-[120px] pb-[100px] overflow-hidden">
     
-    <!-- AI Generated Hero Image Background -->
-    <div class="absolute inset-0 -z-20 w-full h-full overflow-hidden">
-      <img src="assets/hero_bg.png" alt="Futuristic Miami Dental Office" class="w-full h-full object-cover object-center animate-slow-pan opacity-80" />
-    </div>
-    
-    <!-- Gradient Overlay to blend image into background color -->
-    <div class="absolute inset-0 hero-overlay -z-10"></div>
-    <!-- Bottom fade out -->
-    <div class="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#FAFAFC] to-transparent -z-10"></div>
+    <!-- Abstract Mesh Background -->
+    <div class="hero-mesh animate-mesh-rotate"></div>
+    <div class="absolute inset-0 grid-bg z-[-5]"></div>
 
-    <div class="max-w-[1200px] mx-auto px-6 w-full z-10 flex flex-col lg:flex-row items-center gap-12">
+    <div class="max-w-[1200px] mx-auto px-6 w-full z-10 flex flex-col items-center text-center">
       
-      <!-- Left: Copy -->
-      <div class="flex-1 text-center lg:text-left animate-slide-up">
-        
+      <div class="animate-slide-up w-full max-w-4xl mx-auto flex flex-col items-center">
         <!-- Pill Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-500/20 mb-8 shadow-sm">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-light border border-brand-500/30 mb-8 shadow-[0_0_20px_rgba(99,102,241,0.2)]">
           <span class="flex h-2 w-2 relative">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-teal opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-teal"></span>
           </span>
-          <span class="text-xs font-bold uppercase tracking-widest text-brand-900">The Ultimate Dental AI</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-zinc-300">The Ultimate Dental AI</span>
         </div>
 
         <!-- Aggressive Headline -->
-        <h1 class="font-display text-[56px] sm:text-[72px] lg:text-[88px] font-black leading-[0.95] tracking-[-0.03em] mb-6 text-brand-900 drop-shadow-xl">
+        <h1 class="font-display text-[56px] sm:text-[72px] lg:text-[88px] font-black leading-[0.95] tracking-[-0.03em] mb-8 text-white drop-shadow-2xl">
           While your front desk is on hold, <br class="hidden lg:block">
           <span class="text-gradient-primary">your revenue walks out the door.</span>
         </h1>
 
         <!-- Subheadline -->
-        <p class="text-lg sm:text-2xl font-medium text-slate-700 max-w-2xl mx-auto lg:mx-0 mb-10 leading-[1.6] drop-shadow-sm">
-          Stop missing calls. Stop double-booking. Deploy the only AI Voice Infrastructure built exclusively for Florida's elite dental practices. <strong class="text-brand-900">Never miss a patient. Never sleep.</strong>
+        <p class="text-lg sm:text-2xl font-medium text-zinc-400 max-w-3xl mb-12 leading-[1.6]">
+          Stop missing calls. Stop double-booking. Deploy the only AI Voice Infrastructure built exclusively for Florida's elite dental practices. <strong class="text-white">Never miss a patient. Never sleep.</strong>
         </p>
 
         <!-- CTA Row -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-          <a href="signup.html" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-brand-900 text-white rounded-full font-bold text-lg shadow-2xl hover:bg-brand-800 transition-all hover:scale-105 group border border-white/20">
+        <div class="flex flex-col sm:flex-row items-center gap-6 justify-center w-full">
+          <a href="signup.html" class="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-5 bg-white text-brand-900 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:bg-zinc-100 transition-all hover:scale-105 group">
             Stop Losing Patients
             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span>
           </a>
-          <a href="#demo" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 glass-panel text-brand-900 rounded-full font-bold text-lg hover:bg-white/80 transition-all shadow-sm group">
-            <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+          <a href="#demo" class="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 glass-panel-light text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all group">
+            <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-brand-500 transition-colors">
               <span class="material-symbols-outlined text-[14px]">play_arrow</span>
             </div>
             Hear a Live Call
@@ -244,44 +249,49 @@
         </div>
       </div>
 
-      <!-- Right: UI Overlay over the Hero Image -->
-      <div class="flex-1 w-full max-w-lg lg:max-w-none animate-slide-up" style="animation-delay: 0.2s;">
-        <div class="glass-panel-dark rounded-[2rem] p-6 border border-white/20 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden glare-card transform lg:rotate-y-[-10deg] lg:rotate-x-[5deg] perspective-[1000px] transition-transform duration-700 hover:rotate-0">
-          
-          <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-            <div class="flex items-center gap-3">
-              <div class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></div>
-              <span class="text-xs font-mono text-zinc-300">Live Call / Patient #8942</span>
+      <!-- Abstract UI Hero Element -->
+      <div class="w-full max-w-5xl mt-20 animate-slide-up" style="animation-delay: 0.3s;">
+        <div class="glass-panel-dark rounded-[2rem] p-2 border border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] relative overflow-hidden glare-card">
+          <!-- Top bar -->
+          <div class="bg-zinc-900/50 rounded-t-[1.5rem] px-4 py-3 flex items-center gap-2 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+            <div class="ml-4 text-xs font-mono text-zinc-500">terminal@renia-core:~</div>
+          </div>
+          <!-- Terminal Content -->
+          <div class="p-8 font-mono text-sm sm:text-base text-zinc-400 h-[300px] flex flex-col gap-3 relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-64 h-full bg-gradient-to-l from-[#09090b] to-transparent z-10 pointer-events-none"></div>
+            
+            <div class="flex items-center gap-3 opacity-50">
+              <span class="text-brand-500">❯</span>
+              <span>Initializing voice models... [OK]</span>
             </div>
-            <div class="px-3 py-1 bg-brand-500/20 border border-brand-500/30 rounded-full text-brand-400 text-xs font-bold">
-              Spanish Auto-Detected
+            <div class="flex items-center gap-3 opacity-70">
+              <span class="text-brand-500">❯</span>
+              <span>Connecting to Dentrix G7 database... [OK]</span>
+            </div>
+            <div class="flex items-center gap-3 mt-4">
+              <span class="text-emerald-400">● INBOUND CALL</span>
+              <span class="text-zinc-500">+1 (305) 555-0142 | Miami, FL</span>
+            </div>
+            
+            <!-- Dynamic Conversation Simulation -->
+            <div class="mt-4 pl-4 border-l-2 border-white/10 flex flex-col gap-4">
+              <div>
+                <span class="text-zinc-500 text-xs block mb-1">CALLER (AUDIO -> TEXT)</span>
+                <span class="text-white">"Hola, tengo un dolor de muela terrible. Necesito ver a un dentista hoy."</span>
+              </div>
+              <div class="bg-brand-500/10 p-4 rounded-xl border border-brand-500/20 inline-block">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-brand-400 text-xs font-bold">RENIA AI</span>
+                  <span class="px-2 py-0.5 bg-brand-500/20 rounded text-[10px] text-brand-300">SPANISH_DETECTED</span>
+                  <span class="px-2 py-0.5 bg-rose-500/20 rounded text-[10px] text-rose-300">EMERGENCY_INTENT</span>
+                </div>
+                <span class="text-white">"Entiendo completamente. El Dr. Mitchell tiene una apertura de emergencia a las 2:30 PM. ¿Te reservo ese horario?"</span>
+              </div>
             </div>
           </div>
-
-          <!-- Dynamic Audio UI -->
-          <div class="flex items-end justify-center gap-1 h-24 mb-6 opacity-80">
-            <div class="w-2 bg-brand-500 rounded-full h-[80%] animate-[soundwave_1s_ease-in-out_infinite_0.1s]"></div>
-            <div class="w-2 bg-accent-teal rounded-full h-[100%] animate-[soundwave_1s_ease-in-out_infinite_0.2s]"></div>
-            <div class="w-2 bg-brand-300 rounded-full h-[60%] animate-[soundwave_1s_ease-in-out_infinite_0.3s]"></div>
-            <div class="w-2 bg-white rounded-full h-[90%] animate-[soundwave_1s_ease-in-out_infinite_0.4s]"></div>
-            <div class="w-2 bg-brand-400 rounded-full h-[70%] animate-[soundwave_1s_ease-in-out_infinite_0.5s]"></div>
-          </div>
-
-          <div class="space-y-4">
-            <div class="bg-zinc-800/80 p-4 rounded-xl border border-white/5">
-              <p class="text-sm font-medium text-white mb-1">🗣️ Maria Rodriguez (Caller)</p>
-              <p class="text-zinc-400 text-sm">"Hola, tengo un dolor de muela terrible. Necesito ver a un dentista hoy."</p>
-            </div>
-            <div class="bg-brand-500/10 p-4 rounded-xl border border-brand-500/20 shadow-inner">
-              <p class="text-sm font-bold text-brand-400 mb-1">🤖 Renia AI (Response)</p>
-              <p class="text-white text-sm font-medium">"Entiendo completamente. El Dr. Mitchell tiene una apertura de emergencia a las 2:30 PM. ¿Te reservo ese horario?"</p>
-            </div>
-            <div class="flex items-center justify-between mt-4 px-2">
-              <span class="text-emerald-400 text-xs font-mono">▶ Action: Querying Dentrix database...</span>
-              <span class="text-zinc-500 text-xs font-mono">Latency: 14ms</span>
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -291,32 +301,33 @@
   <!-- ==========================================
        TRUST BAR
        ========================================== -->
-  <section class="border-y border-slate-200/50 bg-white py-12 overflow-hidden relative z-10 shadow-sm">
-    <div class="max-w-[1400px] mx-auto px-6 text-center mb-8">
-      <span class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">Trusted by Florida's Elite</span>
+  <section class="border-y border-white/5 bg-[#09090b] py-12 overflow-hidden relative z-10">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#09090b] via-transparent to-[#09090b] z-20 pointer-events-none"></div>
+    <div class="max-w-[1400px] mx-auto px-6 text-center mb-8 relative z-30">
+      <span class="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em]">Trusted by Florida's Elite</span>
     </div>
-    <div class="flex w-[200%] md:w-auto relative">
+    <div class="flex w-[200%] md:w-auto relative z-10">
       <div class="flex items-center justify-around min-w-full animate-marquee gap-12 md:gap-24 px-12">
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors duration-300">Lumina Dental</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-accent-teal transition-colors duration-300">Apex Orthodontics</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-500 transition-colors duration-300">Coastal Smiles</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors duration-300">Premier Periodontics</div>
-        <div class="font-display font-bold text-2xl tracking-tighter text-slate-300 hover:text-brand-900 transition-colors duration-300">Miami Elite Dental</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-zinc-700 hover:text-white transition-colors duration-300">Lumina Dental</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-zinc-700 hover:text-accent-teal transition-colors duration-300">Apex Orthodontics</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-zinc-700 hover:text-brand-500 transition-colors duration-300">Coastal Smiles</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-zinc-700 hover:text-white transition-colors duration-300">Premier Periodontics</div>
+        <div class="font-display font-bold text-2xl tracking-tighter text-zinc-700 hover:text-white transition-colors duration-300">Miami Elite Dental</div>
       </div>
     </div>
   </section>
 
   <!-- ==========================================
-       THE "EMPATHY & INTELLIGENCE" BENTO
+       THE "EMPATHY & INTELLIGENCE" BENTO (Pure CSS)
        ========================================== -->
-  <section id="empathy" class="py-[160px] relative z-10 px-6">
+  <section id="empathy" class="py-[160px] relative z-10 px-6 bg-[#09090b]">
     <div class="max-w-[1200px] mx-auto">
       
       <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-        <h2 class="font-display text-[40px] sm:text-[56px] font-black text-brand-900 leading-[1.1] mb-6 tracking-tight">
-          Human empathy.<br>Machine precision.
+        <h2 class="font-display text-[40px] sm:text-[56px] font-black text-white leading-[1.1] mb-6 tracking-tight">
+          Human empathy.<br><span class="text-zinc-500">Machine precision.</span>
         </h2>
-        <p class="text-xl text-slate-500 font-medium">
+        <p class="text-xl text-zinc-400 font-medium">
           Basic bots piss off your patients. Renia speaks with genuine warmth, detects emotional distress, and switches seamlessly to perfect Spanish.
         </p>
       </div>
@@ -324,53 +335,72 @@
       <!-- Bento Grid -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[340px]">
         
-        <!-- Asset Block (Image) -->
-        <div class="md:col-span-7 rounded-[2rem] relative overflow-hidden reveal shadow-xl group">
-          <img src="assets/patient_empathy.png" alt="Patient Empathy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-8">
+        <!-- Large Abstract Block 1 -->
+        <div class="md:col-span-7 glass-panel-dark rounded-[2rem] p-10 relative overflow-hidden glare-card reveal group">
+          <div class="absolute inset-0 bg-gradient-to-br from-brand-900 via-zinc-900 to-[#020205]"></div>
+          
+          <!-- Animated CSS Waveform -->
+          <div class="absolute right-[-10%] top-[20%] w-[120%] h-64 flex items-center justify-center gap-2 opacity-20 group-hover:opacity-40 transition-opacity duration-700 blur-[2px]">
+            <div class="w-4 h-24 bg-brand-500 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.1s]"></div>
+            <div class="w-4 h-40 bg-accent-teal rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.2s]"></div>
+            <div class="w-4 h-16 bg-white rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.3s]"></div>
+            <div class="w-4 h-32 bg-brand-400 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.4s]"></div>
+            <div class="w-4 h-48 bg-accent-cyan rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.5s]"></div>
+            <div class="w-4 h-20 bg-brand-500 rounded-full animate-[soundwave_1.2s_ease-in-out_infinite_0.6s]"></div>
+          </div>
+
+          <div class="relative z-10 h-full flex flex-col justify-end">
             <h3 class="font-display text-3xl font-bold text-white mb-2">Build Trust instantly.</h3>
-            <p class="text-slate-200 text-lg max-w-md">Your patients call when they are in pain or confused. Renia handles them with the empathy of your best receptionist.</p>
+            <p class="text-zinc-400 text-lg max-w-md">Your patients call when they are in pain or confused. Renia handles them with the empathy of your best receptionist, never missing a beat.</p>
           </div>
         </div>
 
         <!-- Small Block 1 -->
-        <div class="md:col-span-5 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-brand-50 to-transparent"></div>
+        <div class="md:col-span-5 glass-panel-dark rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500">
+          <div class="absolute right-[-20%] top-[-20%] w-64 h-64 bg-brand-500/10 blur-3xl rounded-full"></div>
           <div class="relative z-10 h-full flex flex-col justify-between">
             <div>
-              <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-500 mb-6 border border-slate-100">
+              <div class="w-14 h-14 rounded-2xl bg-white/10 shadow-sm flex items-center justify-center text-white mb-6 border border-white/10 backdrop-blur-md">
                 <span class="material-symbols-outlined text-[28px]">translate</span>
               </div>
-              <h3 class="font-display text-2xl font-bold text-brand-900 mb-3 tracking-tight">Native Spanish</h3>
-              <p class="text-slate-600">Miami clinics lose 15% of leads due to language barriers. Renia switches to flawless Spanish the moment a patient says "Hola".</p>
+              <h3 class="font-display text-2xl font-bold text-white mb-3 tracking-tight">Native Spanish</h3>
+              <p class="text-zinc-400">Miami clinics lose 15% of leads due to language barriers. Renia switches to flawless Spanish the moment a patient says "Hola".</p>
             </div>
           </div>
         </div>
 
         <!-- Small Block 2 -->
-        <div class="md:col-span-4 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-rose-50 to-transparent"></div>
+        <div class="md:col-span-4 glass-panel-dark rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500">
+          <div class="absolute right-[-20%] top-[-20%] w-64 h-64 bg-rose-500/10 blur-3xl rounded-full"></div>
           <div class="relative z-10">
-            <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-rose-500 mb-6 border border-slate-100">
-              <span class="material-symbols-outlined text-[28px]">local_hospital</span>
+            <div class="w-14 h-14 rounded-2xl bg-rose-500/20 shadow-sm flex items-center justify-center text-rose-400 mb-6 border border-rose-500/20">
+              <span class="material-symbols-outlined text-[28px]">emergency</span>
             </div>
-            <h3 class="font-display text-2xl font-bold text-brand-900 mb-3 tracking-tight">Emergency Triage</h3>
-            <p class="text-slate-600">Detects keywords like "swelling" and immediately routes the call to the doctor's mobile line.</p>
+            <h3 class="font-display text-2xl font-bold text-white mb-3 tracking-tight">Emergency Triage</h3>
+            <p class="text-zinc-400">Detects keywords like "swelling" and instantly routes the call to the doctor's mobile line.</p>
           </div>
         </div>
 
         <!-- Large Block 2 -->
-        <div class="md:col-span-8 glass-panel rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500 bg-brand-900">
-          <!-- Dark bento box inside light grid -->
-          <div class="absolute right-[-10%] bottom-[-20%] w-80 h-80 bg-brand-500/20 blur-3xl rounded-full"></div>
+        <div class="md:col-span-8 glass-panel-dark rounded-[2rem] p-10 relative overflow-hidden glare-card reveal hover:-translate-y-1 transition-transform duration-500">
+          <!-- Abstract Grid UI -->
+          <div class="absolute right-0 top-0 w-[60%] h-full opacity-30 pointer-events-none grid grid-cols-4 grid-rows-3 gap-2 p-6">
+            <div class="bg-brand-500/20 rounded-lg border border-brand-500/30"></div>
+            <div class="bg-white/5 rounded-lg border border-white/10"></div>
+            <div class="bg-accent-teal/20 rounded-lg border border-accent-teal/30"></div>
+            <div class="bg-white/5 rounded-lg border border-white/10"></div>
+            <div class="bg-white/5 rounded-lg border border-white/10 col-span-2"></div>
+            <div class="bg-brand-500/20 rounded-lg border border-brand-500/30"></div>
+            <div class="bg-white/5 rounded-lg border border-white/10"></div>
+          </div>
+
           <div class="relative z-10 flex flex-col h-full justify-between">
-            <div class="w-14 h-14 rounded-2xl bg-white/10 shadow-sm flex items-center justify-center text-brand-400 mb-6 border border-white/10 backdrop-blur-md">
+            <div class="w-14 h-14 rounded-2xl bg-accent-teal/20 shadow-sm flex items-center justify-center text-accent-teal mb-6 border border-accent-teal/20">
               <span class="material-symbols-outlined text-[28px]">calendar_month</span>
             </div>
             <div>
               <h3 class="font-display text-3xl font-bold text-white mb-3 tracking-tight">Surgical Scheduling</h3>
-              <p class="text-zinc-400 text-lg max-w-lg">Understands provider availability, operatory limitations, and procedure durations to book complex slots perfectly, not just 30-minute blocks.</p>
+              <p class="text-zinc-400 text-lg max-w-lg">Understands provider availability, operatory limitations, and procedure durations to book complex slots perfectly.</p>
             </div>
           </div>
         </div>
@@ -380,49 +410,75 @@
   </section>
 
   <!-- ==========================================
-       INFRASTRUCTURE & INTEGRATION (Dark Section)
+       INFRASTRUCTURE & INTEGRATION (Terminal Vibes)
        ========================================== -->
-  <section id="pms" class="py-[160px] bg-[#09090b] text-white relative z-20 px-6 overflow-hidden">
+  <section id="pms" class="py-[160px] bg-[#020205] text-white relative z-20 px-6 overflow-hidden border-t border-white/5">
+    <!-- Background Grid -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgwem0yMCAwaDIwdjIwSDIwem0wIDIwaDIwdjIwaC0yMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMSkiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')] opacity-50 z-0"></div>
+
     <div class="max-w-[1200px] mx-auto relative z-10">
-      
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         
-        <div class="reveal order-2 lg:order-1 relative h-[600px] rounded-[2rem] overflow-hidden shadow-[0_0_100px_rgba(15,216,182,0.15)] border border-white/10 group">
-          <img src="assets/tech_infra.png" alt="Tech Infrastructure" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-          
-          <!-- Code Overlay -->
-          <div class="absolute bottom-8 left-8 right-8 glass-panel-dark p-6 rounded-xl border border-white/10 font-mono text-sm">
-            <p class="text-zinc-400">Connecting to <span class="text-white">Dentrix G7</span>...</p>
-            <p class="text-emerald-400 mt-2">> Connection Established (12ms)</p>
-            <p class="text-brand-400">> Write Appointment: ID 84992 [SUCCESS]</p>
+        <div class="reveal order-2 lg:order-1 relative h-[600px] rounded-[2rem] overflow-hidden glass-panel-dark border border-white/10 group shadow-[0_0_80px_rgba(15,216,182,0.1)]">
+          <!-- Server UI Mockup -->
+          <div class="w-full h-12 bg-white/5 border-b border-white/10 flex items-center px-6 gap-2">
+            <div class="w-3 h-3 rounded-full bg-white/20"></div>
+            <div class="w-3 h-3 rounded-full bg-white/20"></div>
+            <div class="w-3 h-3 rounded-full bg-white/20"></div>
+            <span class="ml-4 text-xs font-mono text-zinc-500">renia_pms_sync_worker.rs</span>
+          </div>
+          <div class="p-8 font-mono text-sm leading-relaxed text-zinc-400 h-full overflow-hidden relative">
+            <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#020205] to-transparent z-10"></div>
+            <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#020205] to-transparent z-10"></div>
+            
+            <div class="animate-[slide-up_10s_linear_infinite]">
+              <p><span class="text-brand-500">use</span> pms_connect::dentrix::G7Client;</p>
+              <p><span class="text-brand-500">use</span> renia_core::models::Appointment;</p>
+              <br>
+              <p><span class="text-accent-teal">async fn</span> <span class="text-white">commit_appointment</span>(appt: Appointment) -> Result&lt;(), SyncError&gt; {</p>
+              <p class="pl-4 text-zinc-500">// Establish secure connection to local bridge</p>
+              <p class="pl-4"><span class="text-brand-500">let</span> client = G7Client::<span class="text-white">connect</span>(&amp;CLINIC_CONFIG).<span class="text-accent-teal">await</span>?;</p>
+              <br>
+              <p class="pl-4 text-zinc-500">// Verify operatory availability in real-time</p>
+              <p class="pl-4"><span class="text-brand-500">if</span> !client.<span class="text-white">check_slot</span>(appt.time, appt.duration).<span class="text-accent-teal">await</span>? {</p>
+              <p class="pl-8"><span class="text-brand-500">return</span> <span class="text-rose-400">Err</span>(SyncError::SlotConflict);</p>
+              <p class="pl-4">}</p>
+              <br>
+              <p class="pl-4 text-zinc-500">// Write directly to the ledger</p>
+              <p class="pl-4"><span class="text-brand-500">let</span> result = client.<span class="text-white">write_ledger</span>(&amp;appt).<span class="text-accent-teal">await</span>?;</p>
+              <p class="pl-4"><span class="text-brand-500">return</span> <span class="text-emerald-400">Ok</span>(());</p>
+              <p>}</p>
+              <br>
+              <p class="text-emerald-400">> [2026-05-24T14:32:01Z] [INFO] Appointment ID 84992 successfully written to Dentrix.</p>
+              <p class="text-emerald-400">> [2026-05-24T14:32:01Z] [INFO] Latency: 14ms</p>
+            </div>
           </div>
         </div>
 
         <div class="reveal order-1 lg:order-2">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-widest text-brand-100 mb-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-xs font-bold uppercase tracking-widest text-brand-400 mb-6">
             Enterprise Infrastructure
           </div>
           <h2 class="font-display text-[44px] sm:text-[56px] font-black leading-[1.05] mb-6 tracking-tight">
             Seamless 2-way PMS synchronization.
           </h2>
           <p class="text-xl text-zinc-400 font-medium leading-relaxed mb-10">
-            Renia is not a sticky note. It's a high-performance integration that reads and writes directly to your database with zero latency.
+            Renia is not a sticky note. It's a high-performance backend integration that reads and writes directly to your database with zero latency.
           </p>
           
           <div class="space-y-8">
             <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-brand-500 transition-colors duration-300">
+              <div class="w-12 h-12 rounded-full glass-panel-light flex items-center justify-center text-white shrink-0 group-hover:bg-brand-500 group-hover:border-brand-500 transition-colors duration-300">
                 <span class="material-symbols-outlined text-[20px]">sync</span>
               </div>
               <div>
                 <h4 class="text-xl font-bold text-white mb-2">Live Availability Read</h4>
-                <p class="text-zinc-400">Renia respects your schedule blocks, lunches, and provider preferences natively.</p>
+                <p class="text-zinc-400">Renia respects your schedule blocks, lunches, and provider preferences natively. No double booking.</p>
               </div>
             </div>
             
             <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-accent-teal transition-colors duration-300">
+              <div class="w-12 h-12 rounded-full glass-panel-light flex items-center justify-center text-white shrink-0 group-hover:bg-accent-teal group-hover:border-accent-teal transition-colors duration-300">
                 <span class="material-symbols-outlined text-[20px]">database</span>
               </div>
               <div>
@@ -432,12 +488,12 @@
             </div>
 
             <div class="flex items-start gap-5 group">
-              <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-rose-500 transition-colors duration-300">
+              <div class="w-12 h-12 rounded-full glass-panel-light flex items-center justify-center text-white shrink-0 group-hover:bg-rose-500 group-hover:border-rose-500 transition-colors duration-300">
                 <span class="material-symbols-outlined text-[20px]">verified_user</span>
               </div>
               <div>
                 <h4 class="text-xl font-bold text-white mb-2">Military-Grade HIPAA</h4>
-                <p class="text-zinc-400">End-to-end encryption. BAA provided instantly. We treat your data like Fort Knox.</p>
+                <p class="text-zinc-400">End-to-end encryption. BAA provided instantly. We treat your clinic's data like Fort Knox.</p>
               </div>
             </div>
           </div>
@@ -448,42 +504,42 @@
   </section>
 
   <!-- ==========================================
-       ROI CALCULATOR (High-End Interactive)
+       ROI CALCULATOR (High-End Interactive Dark Mode)
        ========================================== -->
-  <section class="py-[160px] relative px-6 z-10 bg-[#FAFAFC]">
+  <section class="py-[160px] relative px-6 z-10 bg-[#09090b]">
     <div class="max-w-[1200px] mx-auto">
       
-      <div class="glass-panel border border-slate-200 rounded-[3rem] p-10 md:p-16 shadow-2xl relative overflow-hidden reveal">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-brand-100 to-transparent rounded-bl-full -z-10"></div>
+      <div class="glass-panel-dark border border-brand-500/20 rounded-[3rem] p-10 md:p-16 shadow-[0_0_100px_rgba(99,102,241,0.1)] relative overflow-hidden reveal">
+        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-brand-900/50 to-transparent rounded-bl-full -z-10 pointer-events-none blur-3xl"></div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           
           <div>
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-900 text-white mb-6 shadow-md">
-              <span class="material-symbols-outlined text-[24px]">calculate</span>
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-500/20 border border-brand-500/30 text-brand-400 mb-6 shadow-md">
+              <span class="material-symbols-outlined text-[28px]">calculate</span>
             </div>
-            <h2 class="font-display text-[40px] sm:text-[48px] font-black text-brand-900 leading-tight mb-4">
+            <h2 class="font-display text-[40px] sm:text-[48px] font-black text-white leading-tight mb-4">
               Stop guessing your missed revenue.
             </h2>
-            <p class="text-lg text-slate-500 font-medium mb-10">
-              The average dental appointment is worth $300. Use the slider below to calculate exactly how much money is evaporating when your staff can't get to the phone.
+            <p class="text-lg text-zinc-400 font-medium mb-10">
+              The average dental appointment is worth $300. Use the slider below to calculate exactly how much money evaporates when your staff can't get to the phone.
             </p>
             
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-              <div class="flex justify-between items-end mb-6">
+            <div class="glass-panel-light rounded-2xl p-8 border border-white/10 shadow-sm">
+              <div class="flex justify-between items-end mb-8">
                 <div>
-                  <label class="block text-sm font-bold text-slate-400 uppercase tracking-wide mb-1">Missed Calls / Month</label>
-                  <div class="text-3xl font-black text-brand-900 font-display" id="calc-val-calls">120</div>
+                  <label class="block text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Missed Calls / Month</label>
+                  <div class="text-4xl font-black text-white font-display" id="calc-val-calls">120</div>
                 </div>
               </div>
               
-              <div class="relative w-full h-3 bg-slate-100 rounded-full">
+              <div class="relative w-full h-3 bg-white/5 rounded-full">
                 <input type="range" id="roi-slider" min="10" max="500" value="120" step="10" class="absolute w-full h-full opacity-0 cursor-pointer z-10" oninput="updateCalculator()">
-                <div class="absolute top-0 left-0 h-full bg-brand-500 rounded-full" id="slider-progress" style="width: 23%;"></div>
-                <div class="absolute top-1/2 -mt-3 w-6 h-6 bg-white border-2 border-brand-500 rounded-full shadow-md pointer-events-none transition-transform" id="slider-thumb" style="left: 23%; transform: translateX(-50%);"></div>
+                <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-brand-500 to-accent-teal rounded-full" id="slider-progress" style="width: 23%;"></div>
+                <div class="absolute top-1/2 -mt-3 w-6 h-6 bg-white border-2 border-brand-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.5)] pointer-events-none transition-transform" id="slider-thumb" style="left: 23%; transform: translateX(-50%);"></div>
               </div>
               
-              <div class="flex justify-between text-xs font-bold text-slate-400 mt-4">
+              <div class="flex justify-between text-xs font-bold text-zinc-600 mt-4">
                 <span>10</span>
                 <span>500+</span>
               </div>
@@ -491,11 +547,11 @@
           </div>
 
           <div class="grid grid-cols-1 gap-6">
-            <div class="bg-brand-900 rounded-[2rem] p-8 border border-brand-800 shadow-2xl relative overflow-hidden group">
-              <div class="absolute right-[-10%] top-[-10%] w-40 h-40 bg-accent-teal/20 blur-2xl rounded-full"></div>
+            <div class="glass-panel-dark rounded-[2rem] p-8 border border-brand-500/30 shadow-2xl relative overflow-hidden group">
+              <div class="absolute right-[-10%] top-[-10%] w-64 h-64 bg-accent-teal/10 blur-3xl rounded-full"></div>
               <div class="relative z-10">
-                <span class="text-brand-300 text-sm font-bold uppercase tracking-wider">New Revenue Captured</span>
-                <div class="font-display text-[56px] font-black text-white mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-revenue">$36,000</div>
+                <span class="text-brand-400 text-sm font-bold uppercase tracking-wider">New Revenue Captured</span>
+                <div class="font-display text-[64px] font-black text-white mt-2 mb-2 tracking-tight transition-all duration-300 drop-shadow-lg" id="calc-out-revenue">$36,000</div>
                 <div class="text-sm text-zinc-400 font-medium flex items-center gap-2">
                   <span class="material-symbols-outlined text-[16px] text-accent-teal">trending_up</span>
                   Reinvested back into your practice
@@ -503,11 +559,11 @@
               </div>
             </div>
             
-            <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="glass-panel-light rounded-[2rem] p-8 border border-white/5 shadow-sm relative overflow-hidden">
               <div class="relative z-10">
-                <span class="text-brand-600 text-sm font-bold uppercase tracking-wider">Staff Hours Saved</span>
-                <div class="font-display text-[48px] font-black text-brand-900 mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-hours">30 hrs</div>
-                <div class="text-sm text-slate-500 font-medium">Redirected to in-office patient care</div>
+                <span class="text-zinc-500 text-sm font-bold uppercase tracking-wider">Staff Hours Saved</span>
+                <div class="font-display text-[48px] font-black text-white mt-2 mb-2 tracking-tight transition-all duration-300" id="calc-out-hours">30 hrs</div>
+                <div class="text-sm text-zinc-400 font-medium">Redirected to in-office patient care</div>
               </div>
             </div>
           </div>
@@ -519,53 +575,55 @@
   </section>
 
   <!-- ==========================================
-       BOTTOM CTA (Massive & Bold)
+       BOTTOM CTA (Abstract & Powerful)
        ========================================== -->
-  <section class="py-[160px] relative px-6 bg-white overflow-hidden border-t border-slate-200">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-brand-100 -z-10"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-brand-50 -z-10"></div>
+  <section class="py-[160px] relative px-6 bg-[#020205] overflow-hidden border-t border-white/5">
+    <!-- Abstract circular glowing rings -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/5 -z-10 shadow-[inset_0_0_100px_rgba(255,255,255,0.02)]"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-white/5 -z-10"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-brand-500/5 -z-10 blur-3xl"></div>
 
-    <div class="max-w-[800px] mx-auto text-center reveal">
-      <div class="w-20 h-20 mx-auto rounded-3xl bg-brand-900 flex items-center justify-center text-white text-3xl shadow-xl shadow-brand-900/20 mb-8 transform -rotate-12 hover:rotate-0 transition-transform duration-300">🦷</div>
+    <div class="max-w-[800px] mx-auto text-center reveal relative z-10">
+      <div class="w-20 h-20 mx-auto rounded-3xl glass-panel-light flex items-center justify-center text-white text-3xl shadow-[0_0_30px_rgba(255,255,255,0.1)] mb-8 transform -rotate-12 hover:rotate-0 transition-transform duration-300 border border-white/20">🦷</div>
       
-      <h2 class="font-display text-[56px] md:text-[80px] font-black text-brand-900 leading-[1] tracking-[-0.03em] mb-8">
+      <h2 class="font-display text-[56px] md:text-[80px] font-black text-white leading-[1] tracking-[-0.03em] mb-8 drop-shadow-2xl">
         Deploy Renia <br>in 5 minutes.
       </h2>
       
-      <p class="text-xl text-slate-600 font-medium mb-12 max-w-2xl mx-auto">
+      <p class="text-xl text-zinc-400 font-medium mb-12 max-w-2xl mx-auto">
         No technical skills required. We connect to your phone system and PMS instantly. Let your staff focus on the patients in the chair.
       </p>
       
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="signup.html" class="w-full sm:w-auto px-10 py-5 bg-brand-900 text-white rounded-full font-bold text-lg shadow-2xl hover:bg-black transition-all hover:scale-105 flex items-center justify-center gap-3">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a href="signup.html" class="w-full sm:w-auto px-10 py-5 bg-white text-brand-900 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:bg-zinc-200 transition-all hover:scale-105 flex items-center justify-center gap-3">
           Start Free Trial <span class="material-symbols-outlined">arrow_forward</span>
         </a>
       </div>
-      <p class="text-sm font-semibold text-slate-400 mt-8">Cancel anytime. Free white-glove onboarding included.</p>
+      <p class="text-sm font-medium text-zinc-500 mt-8">Cancel anytime. Free white-glove onboarding included.</p>
     </div>
   </section>
 
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="bg-brand-900 py-16 px-6 text-white border-t border-brand-800">
+  <footer class="bg-[#09090b] py-16 px-6 text-white border-t border-white/5">
     <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white text-sm shadow-md border border-white/20">🦷</div>
+        <div class="w-10 h-10 rounded-xl glass-panel-light flex items-center justify-center text-white text-sm shadow-md border border-white/10">🦷</div>
         <div>
           <span class="font-display font-black text-white text-2xl tracking-tight leading-none block">Renia AI</span>
-          <span class="text-[10px] font-bold text-brand-400 uppercase tracking-widest">Enterprise Voice</span>
+          <span class="text-[10px] font-bold text-brand-500 uppercase tracking-widest">Enterprise Voice</span>
         </div>
       </div>
       
-      <div class="text-sm font-medium text-zinc-400">
+      <div class="text-sm font-medium text-zinc-600">
         © 2026 Renia AI Technologies, LLC. Engineered for Florida.
       </div>
       
       <div class="flex items-center gap-8">
-        <a href="#" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">Privacy Policy</a>
-        <a href="#" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">Terms of Service</a>
-        <a href="#" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">Contact Support</a>
+        <a href="#" class="text-sm font-medium text-zinc-500 hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="text-sm font-medium text-zinc-500 hover:text-white transition-colors">Terms of Service</a>
+        <a href="#" class="text-sm font-medium text-zinc-500 hover:text-white transition-colors">Contact Support</a>
       </div>
     </div>
   </footer>
@@ -610,12 +668,14 @@
       const container = document.getElementById('nav-container');
       if (window.scrollY > 20) {
         nav.classList.replace('py-4', 'py-2');
-        container.classList.add('shadow-md', 'bg-white/90');
-        container.classList.remove('border-white/40');
+        container.classList.add('shadow-[0_4px_30px_rgba(0,0,0,0.5)]', 'bg-[#09090b]/80');
+        container.classList.remove('border-white/10');
+        container.classList.add('border-white/5');
       } else {
         nav.classList.replace('py-2', 'py-4');
-        container.classList.remove('shadow-md', 'bg-white/90');
-        container.classList.add('border-white/40');
+        container.classList.remove('shadow-[0_4px_30px_rgba(0,0,0,0.5)]', 'bg-[#09090b]/80');
+        container.classList.add('border-white/10');
+        container.classList.remove('border-white/5');
       }
     });
   </script>
