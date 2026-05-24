@@ -329,22 +329,28 @@
     </div>
   </main>
 
-  <!-- IMPORTANT: Must keep auth logic intact -->
+    <!-- IMPORTANT: Must keep auth logic intact -->
   <script src="js/api.js?v=2"></script>
   <script src="js/auth.js?v=2"></script>
   <script>
-    // Just a small script to grab the user name from localStorage if it exists
+    // Security check and user load
     document.addEventListener('DOMContentLoaded', () => {
       try {
-        const userStr = localStorage.getItem('renia_user');
-        if(userStr) {
-          const user = JSON.parse(userStr);
-          const nameDisplay = document.getElementById('user-name-display');
-          if(nameDisplay && user.name) {
-            nameDisplay.textContent = user.name;
+        if(typeof Auth !== 'undefined') {
+          Auth.checkAuth();
+          
+          const userStr = localStorage.getItem('renia_user');
+          if(userStr) {
+            const user = JSON.parse(userStr);
+            const nameDisplay = document.getElementById('user-name-display');
+            if(nameDisplay && user.name) {
+              nameDisplay.textContent = user.name;
+            }
           }
         }
-      } catch(e) {}
+      } catch(e) {
+        console.error("Auth error", e);
+      }
     });
   </script>
 </body>
