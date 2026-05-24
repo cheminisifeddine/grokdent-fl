@@ -312,8 +312,14 @@
 
               <div>
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">AI Greeting Welcome Message</label>
-                <textarea id="voice-greeting" rows="3" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed">Thank you for calling Sunshine Dental Care. This is your AI receptionist Ash. How can I help you today?</textarea>
+                <textarea id="voice-greeting" rows="2" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed">Thank you for calling Sunshine Dental Care. This is your AI receptionist Ash. How can I help you today?</textarea>
                 <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">The first sentence the AI receptionist says when greeting incoming callers.</p>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">AI Receptionist Instructions & Persona</label>
+                <textarea id="voice-instructions" rows="12" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed font-mono"></textarea>
+                <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">Full system prompt that defines the AI receptionist's personality, knowledge, and behavior. Edit to customize for your clinic.</p>
               </div>
 
               <!-- Glow waveform visualizer -->
@@ -414,11 +420,12 @@
         { name: 'Orthodontics', price: 3500 },
         { name: 'Emergency', price: 199 }
       ],
-      voice: {
-        voice: 'Ash',
-        greeting: 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I help you today?',
-        spanish: true
-      },
+       voice: {
+         voice: 'Ash',
+         greeting: 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I help you today?',
+         spanish: true,
+         instructions: ''
+       },
       emergency: {
         name: 'Dr. Sarah Martinez',
         phone: '(305) 555-0199',
@@ -563,12 +570,42 @@
       }
     };
 
+    function getDefaultInstructions() {
+      const clinicName = state.settings.profile?.name || 'Sunshine Smiles Dental';
+      return `You are Ash, the elite AI voice receptionist for ${clinicName} in Florida. 
+
+WHO YOU ARE
+You are highly professional, warm, and speak with a friendly, patient, and empathetic tone. You represent a high-end dental practice. You are NOT an AI assistant, you are the digital receptionist. Never mention that you are an AI or language model. 
+
+CLINIC KNOWLEDGE
+- Name: ${clinicName}
+- Location: Florida
+- Hours: Mon-Fri 9:00 AM to 5:00 PM. Closed weekends.
+- Accepted Insurance: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
+- Services: General checkups, teeth whitening, orthodontics, emergency extractions, dental implants.
+
+YOUR MISSION
+Answer patient questions, check appointment availability, schedule new appointments, and process cancellations. Be concise, audio-friendly, and conversational. Do not output long lists or bullet points. Speak naturally. Use the provided tools when a patient wants to book, check, or cancel an appointment.
+
+BEHAVIORAL RULES
+1. If a patient asks for availability, use the 'check_availability' tool.
+2. If a patient wants to book, collect their name, phone, date/time, and reason, then use the 'schedule_appointment' tool.
+3. If a patient has a dental emergency (severe pain, bleeding), advise them to seek immediate care and offer the earliest possible slot.
+4. If asked about insurance, confirm only from the accepted list.
+
+Keep responses short and conversational — this is a voice call, not an email.`;
+    }
+
     // Populate Voice Form
     function populateVoice() {
       const voice = state.settings.voice;
       document.getElementById('voice-select').value = voice.voice || 'Ash';
       document.getElementById('voice-greeting').value = voice.greeting || '';
       document.getElementById('voice-spanish-toggle').checked = voice.spanish;
+      
+      const instructions = voice.instructions || getDefaultInstructions();
+      document.getElementById('voice-instructions').value = instructions;
+      
       // Key split to prevent Github secret scanning from blocking the push
       document.getElementById('xai-key').value = voice.xai_key || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
     }
@@ -777,6 +814,7 @@
           greeting: document.getElementById('voice-greeting').value.trim(),
           spanish: document.getElementById('voice-spanish-toggle').checked,
           xai_key: document.getElementById('xai-key').value.trim(),
+          instructions: document.getElementById('voice-instructions').value.trim(),
           grok_agent_status: 'active',
           grok_agent_id: state.settings.voice.grok_agent_id || 'grok_agent_' + Math.random().toString(36).substr(2, 9)
         };

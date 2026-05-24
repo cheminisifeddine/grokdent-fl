@@ -144,12 +144,18 @@
     <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
       <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Overview</h1>
       
-      <div class="flex items-center gap-5">
-        <!-- Live Call Simulator Trigger -->
-        <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-          <span class="material-symbols-outlined text-[16px] animate-pulse">phone_in_talk</span>
-          <span>Inbound Call Simulator</span>
-        </button>
+       <div class="flex items-center gap-5">
+         <!-- Live Call Simulator Trigger -->
+         <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+           <span class="material-symbols-outlined text-[16px] animate-pulse">phone_in_talk</span>
+           <span>Inbound Call Simulator</span>
+         </button>
+
+         <!-- Voice Agent Live Test -->
+         <button onclick="openVoiceAgentWidget()" class="flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg shadow-teal-500/20 hover:shadow-teal-500/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+           <span class="material-symbols-outlined text-[16px]">mic</span>
+           <span>Voice Agent Test</span>
+         </button>
 
         <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -342,6 +348,7 @@
   <script src="js/auth.js?v=4"></script>
   <script src="js/charts.js?v=4"></script>
   <script src="js/websocket.js?v=4"></script>
+  <script src="js/voice-agent.js?v=1"></script>
   <script src="js/dashboard.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
   <script>
@@ -1318,20 +1325,287 @@ SCENARIO INSTRUCTIONS:
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Wire logout button
-      const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
-      if (lBtn && !lBtn.hasAttribute('data-logout-wired')) {
-        lBtn.setAttribute('data-logout-wired','1');
-        lBtn.addEventListener('click', () => {
-          if (typeof Auth !== 'undefined') Auth.logout();
-          else window.location.href = 'index.html';
-        });
+     document.addEventListener('DOMContentLoaded', () => {
+       // Wire logout button
+       const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
+       if (lBtn && !lBtn.hasAttribute('data-logout-wired')) {
+         lBtn.setAttribute('data-logout-wired','1');
+         lBtn.addEventListener('click', () => {
+           if (typeof Auth !== 'undefined') Auth.logout();
+           else window.location.href = 'index.html';
+         });
+       }
+       
+       // Auto inject simulator panel overlay
+       injectSimulatorWidget();
+       injectVoiceAgentWidget();
+     });
+
+    let voiceAgentWidgetInjected = false;
+    let voiceAgent = null;
+    let voiceAgentTranscript = [];
+
+    function injectVoiceAgentWidget() {
+      if (voiceAgentWidgetInjected) return;
+      voiceAgentWidgetInjected = true;
+
+      const widget = document.createElement('div');
+      widget.id = 'voice-agent-widget';
+      widget.className = 'fixed bottom-6 right-6 z-[9999] w-[400px] h-[520px] bg-white border border-slate-200 rounded-[28px] shadow-[0_25px_60px_rgba(15,23,42,0.15)] flex flex-col overflow-hidden transition-all duration-500 transform translate-y-[600px] opacity-0 select-none';
+      widget.style.fontFamily = "'Inter', sans-serif";
+
+      widget.innerHTML = `
+        <div class="px-5 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-white text-[20px]">mic</span>
+            <span class="text-sm font-black text-white tracking-wide">Grok Voice Agent</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="va-status-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
+            <span id="va-status-text" class="text-[10px] font-bold text-teal-200 uppercase">Disconnected</span>
+            <button onclick="closeVoiceAgentWidget()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-colors text-sm">×</button>
+          </div>
+        </div>
+
+        <div id="va-transcript-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50">
+          <div class="text-center py-8">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
+              <span class="material-symbols-outlined text-[32px]">settings_voice</span>
+            </div>
+            <p class="text-xs text-slate-500 font-semibold leading-relaxed">Click "Start Voice Session" below<br>to begin a real-time voice conversation<br>with your AI receptionist.</p>
+          </div>
+        </div>
+
+        <div id="va-controls" class="p-4 bg-white border-t border-slate-200 shrink-0">
+          <div class="flex flex-col items-center gap-3">
+            <button id="va-toggle-btn" onclick="toggleVoiceAgentSession()" class="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group">
+              <span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>
+            </button>
+            <span id="va-btn-label" class="text-xs font-bold text-slate-600">Start Voice Session</span>
+          </div>
+
+          <div class="mt-3 flex items-center gap-2">
+            <input type="text" id="va-text-input" placeholder="Or type a message..." class="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs outline-none focus:border-teal-500 transition-colors" disabled>
+            <button id="va-send-text-btn" onclick="sendVoiceAgentText()" class="px-3 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-xl text-xs font-bold cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+              Send
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(widget);
+
+      document.getElementById('va-text-input')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') sendVoiceAgentText();
+      });
+    }
+
+    function openVoiceAgentWidget() {
+      const widget = document.getElementById('voice-agent-widget');
+      if (!widget) return;
+      
+      widget.classList.remove('translate-y-[600px]', 'opacity-0');
+      widget.classList.add('translate-y-0', 'opacity-100');
+    }
+
+    function closeVoiceAgentWidget() {
+      const widget = document.getElementById('voice-agent-widget');
+      if (!widget) return;
+      
+      if (voiceAgent && voiceAgent.isConnected) {
+        voiceAgent.disconnect();
       }
       
-      // Auto inject simulator panel overlay
-      injectSimulatorWidget();
-    });
+      widget.classList.add('translate-y-[600px]', 'opacity-0');
+      widget.classList.remove('translate-y-0', 'opacity-100');
+    }
+
+    function updateVoiceAgentStatus(status, text) {
+      const dot = document.getElementById('va-status-dot');
+      const statusText = document.getElementById('va-status-text');
+      
+      if (dot && statusText) {
+        switch (status) {
+          case 'connected':
+            dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+            statusText.textContent = 'Connected';
+            statusText.className = 'text-[10px] font-bold text-emerald-300 uppercase';
+            break;
+          case 'connecting':
+            dot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
+            statusText.textContent = 'Connecting...';
+            statusText.className = 'text-[10px] font-bold text-amber-300 uppercase';
+            break;
+          case 'speaking':
+            dot.className = 'w-2 h-2 rounded-full bg-teal-400 animate-pulse';
+            statusText.textContent = 'AI Speaking';
+            statusText.className = 'text-[10px] font-bold text-teal-300 uppercase';
+            break;
+          case 'listening':
+            dot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse';
+            statusText.textContent = 'Listening';
+            statusText.className = 'text-[10px] font-bold text-cyan-300 uppercase';
+            break;
+          default:
+            dot.className = 'w-2 h-2 rounded-full bg-slate-400';
+            statusText.textContent = 'Disconnected';
+            statusText.className = 'text-[10px] font-bold text-slate-400 uppercase';
+        }
+      }
+    }
+
+    function addVoiceAgentMessage(text, role) {
+      const container = document.getElementById('va-transcript-container');
+      if (!container) return;
+
+      const welcome = container.querySelector('.text-center.py-8');
+      if (welcome) welcome.remove();
+
+      const bubble = document.createElement('div');
+      bubble.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+      
+      const bg = role === 'user' ? 'bg-teal-500 text-white' : 'bg-white border border-slate-200 text-slate-800';
+      const rounding = role === 'user' 
+        ? 'rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl' 
+        : 'rounded-tl-2xl rounded-tr-2xl rounded-br-2xl';
+
+      bubble.innerHTML = `
+        <div class="max-w-[85%] p-3 ${bg} ${rounding} text-xs font-semibold leading-relaxed shadow-sm">
+          ${escapeHtml(text)}
+        </div>
+      `;
+
+      container.appendChild(bubble);
+      container.scrollTop = container.scrollHeight;
+
+      voiceAgentTranscript.push({ role, text, timestamp: Date.now() });
+    }
+
+    async function toggleVoiceAgentSession() {
+      const btn = document.getElementById('va-toggle-btn');
+      const btnLabel = document.getElementById('va-btn-label');
+      const textInput = document.getElementById('va-text-input');
+      const sendBtn = document.getElementById('va-send-text-btn');
+
+      if (voiceAgent && voiceAgent.isConnected) {
+        await voiceAgent.disconnect();
+        voiceAgent = null;
+        
+        if (btn) {
+          btn.className = 'w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group';
+          btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>';
+        }
+        if (btnLabel) btnLabel.textContent = 'Start Voice Session';
+        if (textInput) textInput.disabled = true;
+        if (sendBtn) sendBtn.disabled = true;
+        
+        updateVoiceAgentStatus('disconnected');
+        addVoiceAgentMessage('Session ended.', 'assistant');
+        
+      } else {
+        const settings = localStorage.getItem('renia_settings') 
+          ? JSON.parse(localStorage.getItem('renia_settings')) 
+          : { 
+              profile: { name: 'Sunshine Smiles Dental' }, 
+              voice: { voice: 'Eve', instructions: '' } 
+            };
+
+        const voiceMap = {
+          'Ash': 'rex',
+          'Ballad': 'ara',
+          'Coral': 'eve',
+          'Sage': 'eve',
+          'Verse': 'sal',
+          'Ani': 'ara',
+          'Eve': 'eve',
+          'Leo': 'leo'
+        };
+
+        const selectedVoice = settings.voice?.voice || 'Eve';
+        const realVoiceId = voiceMap[selectedVoice] || 'eve';
+        
+        const defaultInstructions = `You are ${selectedVoice}, the elite AI voice receptionist for ${settings.profile?.name || 'Sunshine Smiles Dental'} in Florida. 
+You are highly professional, warm, and friendly. Never mention you are an AI.
+Accepted Insurance: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
+Services: General checkups, teeth whitening, orthodontics, emergency extractions, dental implants.
+Be concise — this is a voice call.`;
+
+        voiceAgent = new GrokVoiceAgent({
+          voice: realVoiceId,
+          instructions: settings.voice?.instructions || defaultInstructions,
+          clinicName: settings.profile?.name || 'Sunshine Smiles Dental'
+        });
+
+        voiceAgent.on('onConnect', () => {
+          updateVoiceAgentStatus('connected');
+          if (btn) {
+            btn.className = 'w-16 h-16 rounded-full bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-rose-500/30 group';
+            btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">call_end</span>';
+          }
+          if (btnLabel) btnLabel.textContent = 'End Session';
+          if (textInput) textInput.disabled = false;
+          if (sendBtn) sendBtn.disabled = false;
+          
+          addVoiceAgentMessage('Voice session connected. Start speaking!', 'assistant');
+        });
+
+        voiceAgent.on('onDisconnect', () => {
+          updateVoiceAgentStatus('disconnected');
+        });
+
+        voiceAgent.on('onError', (err) => {
+          const errMsg = err.message || String(err);
+          if (errMsg.includes('UserMedia') || errMsg.includes('Permission') || errMsg.includes('microphone')) {
+            addVoiceAgentMessage('⚠️ Microphone access denied. Please allow microphone access in your browser settings to use the voice agent.', 'assistant');
+          } else {
+            addVoiceAgentMessage('⚠️ Connection error: ' + errMsg.substring(0, 100), 'assistant');
+          }
+          updateVoiceAgentStatus('disconnected');
+        });
+
+        voiceAgent.on('onTranscript', (text, role) => {
+          if (role === 'user' && text && text.trim()) {
+            updateVoiceAgentStatus('listening');
+            addVoiceAgentMessage(text, 'user');
+          }
+        });
+
+        voiceAgent.on('onAssistantTranscript', (text, role) => {
+          updateVoiceAgentStatus('speaking');
+        });
+
+        voiceAgent.on('onStateChange', (state) => {
+          console.log('Voice agent state:', state);
+        });
+
+        updateVoiceAgentStatus('connecting');
+        addVoiceAgentMessage('Connecting to Grok Voice API...', 'assistant');
+        
+        try {
+          await voiceAgent.connect();
+        } catch (err) {
+          console.error('Failed to connect voice agent:', err);
+        }
+      }
+    }
+
+    function sendVoiceAgentText() {
+      const input = document.getElementById('va-text-input');
+      if (!input || !input.value.trim() || !voiceAgent) return;
+      
+      const text = input.value.trim();
+      input.value = '';
+      
+      addVoiceAgentMessage(text, 'user');
+      voiceAgent.sendText(text);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
   </script>
 </body>
 </html>

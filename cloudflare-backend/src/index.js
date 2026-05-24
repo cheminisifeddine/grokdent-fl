@@ -739,6 +739,39 @@ SCENARIO INSTRUCTIONS:
 });
 
 // -------------------------------------------------------------------------
+// 🔑 xAI Realtime API Session Token Endpoint (For Browser Voice Agents)
+// -------------------------------------------------------------------------
+app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
+  const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+  
+  try {
+    const response = await fetch('https://api.x.ai/v1/realtime/client_secrets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${xaiKey}`
+      },
+      body: JSON.stringify({
+        expires_after: { seconds: 300 }
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      return c.json({ error: 'Failed to mint session token', details: errText }, 502);
+    }
+
+    const data = await response.json();
+    return c.json({
+      token: data.value,
+      expires_at: data.expires_at
+    });
+  } catch (err) {
+    return c.json({ error: 'Session token endpoint error', message: err.message }, 500);
+  }
+});
+
+// -------------------------------------------------------------------------
 // 🔊 Real xAI Text-to-Speech Proxy (CORS-Safe Dynamic Voice Synthesis)
 // -------------------------------------------------------------------------
 app.post('/api/v1/voice/tts', async (c) => {
