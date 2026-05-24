@@ -164,17 +164,20 @@
         
         <!-- Tabs Menu -->
         <div class="w-[200px] shrink-0 space-y-1">
-          <button class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-100">Clinic Profile</button>
-          <button class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Office Hours</button>
-          <button class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Services</button>
-          <button class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">AI Voice settings</button>
-          <button class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Emergency Protocol</button>
+          <button data-target="profile" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-100">Clinic Profile</button>
+          <button data-target="hours" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Office Hours</button>
+          <button data-target="services" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Services</button>
+          <button data-target="voice" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">AI Voice settings</button>
+          <button data-target="emergency" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Emergency Protocol</button>
         </div>
 
         <!-- Settings Content -->
         <div class="flex-1">
-          <div class="glass-card rounded-2xl p-8">
-            <h2 class="font-display text-xl font-bold text-slate-900 mb-6">Clinic Profile</h2>
+          <form class="settings-form glass-card rounded-2xl p-8" id="profile-form">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-display text-xl font-bold text-slate-900">Clinic Profile</h2>
+              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-xl font-bold text-sm transition-colors shadow-md">Save Changes</button>
+            </div>
             
             <div class="space-y-5">
               <div>
@@ -204,7 +207,7 @@
               </div>
 
             </div>
-          </div>
+          </form>
         </div>
 
       </div>

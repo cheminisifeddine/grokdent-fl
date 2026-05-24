@@ -427,6 +427,10 @@ function initKnowledgeBasePage() {
         const a = item?.querySelector('.kb-answer')?.textContent;
         if (q && document.getElementById('kb-question')) document.getElementById('kb-question').value = q;
         if (a && document.getElementById('kb-answer')) document.getElementById('kb-answer').value = a;
+      } else {
+        const q = item?.querySelector('.kb-question')?.textContent || '';
+        const a = item?.querySelector('.kb-answer')?.textContent || '';
+        openKBModal(q, a);
       }
     });
   });
@@ -455,13 +459,14 @@ function filterKBByCategory(category) {
   });
 }
 
-function openKBModal() {
+function openKBModal(question = '', answer = '') {
   const overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  const title = question ? 'Edit Knowledge Entry' : 'Add Knowledge Entry';
   overlay.innerHTML = `
     <div style="background:white;border-radius:20px;width:100%;max-width:560px;max-height:80vh;overflow:auto;box-shadow:0 25px 50px rgba(0,0,0,0.15);">
       <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;">
-        <h2 style="font-size:18px;font-weight:800;color:#0f172a;margin:0;">Add Knowledge Entry</h2>
+        <h2 style="font-size:18px;font-weight:800;color:#0f172a;margin:0;">${title}</h2>
         <button onclick="this.closest('[style*=fixed]').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;">×</button>
       </div>
       <form style="padding:24px 28px;" onsubmit="event.preventDefault();this.closest('[style*=fixed]').remove();showToast('Entry saved!','success');">
@@ -474,11 +479,11 @@ function openKBModal() {
           </div>
           <div>
             <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Question</label>
-            <input type="text" required placeholder="e.g. What are your office hours?" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
+            <input type="text" required value="${question.replace(/"/g, '&quot;')}" placeholder="e.g. What are your office hours?" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
           </div>
           <div>
             <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Answer (English)</label>
-            <textarea rows="3" required placeholder="Enter the answer..." style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:none;box-sizing:border-box;"></textarea>
+            <textarea required rows="4" placeholder="Clear, concise answer..." style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:vertical;box-sizing:border-box;">${answer.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
           </div>
           <div>
             <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Answer (Spanish) <span style="font-weight:400;color:#94a3b8;">optional</span></label>

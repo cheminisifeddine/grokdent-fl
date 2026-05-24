@@ -146,6 +146,12 @@
       <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Knowledge Base</h1>
       
       <div class="flex items-center gap-5">
+        <button id="add-kb-btn" class="flex items-center gap-2 bg-brand-900 text-white px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-600 transition-colors shadow-md">
+          <span class="material-symbols-outlined text-[18px]">add</span> Add Entry
+        </button>
+        <button id="seed-defaults-btn" class="flex items-center gap-2 bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-[18px]">download</span> Seed Defaults
+        </button>
         <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
@@ -164,70 +170,70 @@
         
         <!-- Category Tabs -->
         <div class="flex flex-wrap gap-2 mb-8 bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm inline-flex">
-          <button class="px-5 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-900 shadow-sm transition-colors">All</button>
-          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">General</button>
-          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Services</button>
-          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Insurance</button>
-          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Emergency</button>
-          <button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Policies</button>
+          <button data-category="all" class="kb-tab active px-5 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-900 shadow-sm transition-colors">All</button>
+          <button data-category="general" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">General</button>
+          <button data-category="services" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Services</button>
+          <button data-category="insurance" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Insurance</button>
+          <button data-category="emergency" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Emergency</button>
+          <button data-category="policies" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Policies</button>
         </div>
 
         <!-- KB Entries -->
         <div class="space-y-4">
           
           <!-- Entry 1 -->
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div data-category="general" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group">
             <div class="flex items-center justify-between mb-4">
               <span class="bg-blue-50 text-blue-600 border border-blue-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">General</span>
               <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
             </div>
-            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What services does your dental clinic offer?</h3>
-            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.</p>
+            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What services does your dental clinic offer?</h3>
+            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.</p>
             <div class="flex items-center gap-3">
-              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
             </div>
           </div>
 
           <!-- Entry 2 -->
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div data-category="hours" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group">
             <div class="flex items-center justify-between mb-4">
               <span class="bg-indigo-50 text-indigo-600 border border-indigo-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Hours</span>
               <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
             </div>
-            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What are your office hours?</h3>
-            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.</p>
+            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What are your office hours?</h3>
+            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.</p>
             <div class="flex items-center gap-3">
-              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
             </div>
           </div>
 
           <!-- Entry 3 -->
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+          <div data-category="insurance" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group">
             <div class="flex items-center justify-between mb-4">
               <span class="bg-teal-50 text-teal-600 border border-teal-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Insurance</span>
               <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
             </div>
-            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What insurance plans do you accept?</h3>
-            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">We accept most major dental insurance plans including Delta Dental, Humana, MCNA Dental, Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.</p>
+            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What insurance plans do you accept?</h3>
+            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">We accept most major dental insurance plans including Delta Dental, Humana, MCNA Dental, Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.</p>
             <div class="flex items-center gap-3">
-              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
             </div>
           </div>
 
           <!-- Entry 4 -->
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group border-rose-100">
+          <div data-category="emergency" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group border-rose-100">
             <div class="flex items-center justify-between mb-4">
               <span class="bg-rose-50 text-rose-600 border border-rose-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Emergency</span>
               <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
             </div>
-            <h3 class="font-display text-xl font-bold text-slate-900 mb-3">What should I do if I have a dental emergency?</h3>
-            <p class="text-slate-600 leading-relaxed text-[15px] mb-6">If you're experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.</p>
+            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What should I do if I have a dental emergency?</h3>
+            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">If you're experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.</p>
             <div class="flex items-center gap-3">
-              <button class="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
+              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
             </div>
           </div>
 
