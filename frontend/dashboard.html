@@ -1553,15 +1553,54 @@ Be concise — this is a voice call.`;
           updateVoiceAgentStatus('disconnected');
         });
 
-        voiceAgent.on('onError', (err) => {
-          const errMsg = err.message || String(err);
-          if (errMsg.includes('UserMedia') || errMsg.includes('Permission') || errMsg.includes('microphone')) {
-            addVoiceAgentMessage('⚠️ Microphone access denied. Please allow microphone access in your browser settings to use the voice agent.', 'assistant');
-          } else {
-            addVoiceAgentMessage('⚠️ Connection error: ' + errMsg.substring(0, 100), 'assistant');
-          }
-          updateVoiceAgentStatus('disconnected');
-        });
+         voiceAgent.on('onError', (err) => {
+           let errMsg = 'Unknown error';
+           
+           if (err instanceof Error) {
+             errMsg = err.message;
+           } else if (err && typeof err === 'object') {
+             if (err.type) {
+               errMsg = `Connection error (${err.type})`;
+             } else if (err.message) {
+               errMsg = err.message;
+             } else {
+               try {
+                 errMsg = JSON.stringify(err).substring(0, 150);
+               } catch (e) {
+                 errMsg = 'Connection failed';
+               }
+             }
+           } else {
+             errMsg = String(err);
+           }
+           
+           console.error('Voice agent error:', err, '->', errMsg);
+           
+           if (errMsg.includes('UserMedia') || errMsg.includes('Permission') || errMsg.includes('microphone') || errMsg.includes('denied')) {
+             addVoiceAgentMessage('⚠️ Microphone access denied. Please allow microphone access in your browser settings to use the voice agent.', 'assistant');
+           } else if (errMsg.includes('401') || errMsg.includes('Unauthorized') || errMsg.includes('auth') || errMsg.includes('token')) {
+             addVoiceAgentMessage('⚠️ Authentication failed. Please check your xAI API key in Settings > AI Voice Configuration.', 'assistant');
+           } else if (errMsg.includes('1006') || errMsg.includes('network') || errMsg.includes('internet') || errMsg.includes('failed')) {
+             addVoiceAgentMessage('⚠️ Connection failed. Please check your internet connection and try again.', 'assistant');
+           } else {
+             addVoiceAgentMessage('⚠️ Error: ' + errMsg.substring(0, 100), 'assistant');
+           }
+           
+           updateVoiceAgentStatus('disconnected');
+           
+           const btn = document.getElementById('va-toggle-btn');
+           const btnLabel = document.getElementById('va-btn-label');
+           const textInput = document.getElementById('va-text-input');
+           const sendBtn = document.getElementById('va-send-text-btn');
+           
+           if (btn) {
+             btn.className = 'w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group';
+             btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>';
+           }
+           if (btnLabel) btnLabel.textContent = 'Start Voice Session';
+           if (textInput) textInput.disabled = true;
+           if (sendBtn) sendBtn.disabled = true;
+         });
 
         voiceAgent.on('onTranscript', (text, role) => {
           if (role === 'user' && text && text.trim()) {
@@ -1584,7 +1623,43 @@ Be concise — this is a voice call.`;
         try {
           await voiceAgent.connect();
         } catch (err) {
-          console.error('Failed to connect voice agent:', err);
+          console.error('Failed to connect voice agent (initial):', err);
+          
+          let errMsg = 'Unknown error';
+          if (err instanceof Error) {
+            errMsg = err.message;
+          } else if (err && typeof err === 'object') {
+            try {
+              errMsg = JSON.stringify(err).substring(0, 100);
+            } catch (e) {
+              errMsg = 'Connection failed';
+            }
+          } else {
+            errMsg = String(err);
+          }
+          
+          if (errMsg.includes('UserMedia') || errMsg.includes('Permission') || errMsg.includes('microphone') || errMsg.includes('denied')) {
+            addVoiceAgentMessage('⚠️ Microphone access denied. Please allow microphone access in your browser settings to use the voice agent.', 'assistant');
+          } else if (errMsg.includes('401') || errMsg.includes('Unauthorized') || errMsg.includes('auth') || errMsg.includes('token')) {
+            addVoiceAgentMessage('⚠️ Authentication failed. Please check your xAI API key in Settings > AI Voice Configuration.', 'assistant');
+          } else {
+            addVoiceAgentMessage('⚠️ Connection failed: ' + errMsg.substring(0, 80), 'assistant');
+          }
+          
+          updateVoiceAgentStatus('disconnected');
+          
+          const btn = document.getElementById('va-toggle-btn');
+          const btnLabel = document.getElementById('va-btn-label');
+          const textInput = document.getElementById('va-text-input');
+          const sendBtn = document.getElementById('va-send-text-btn');
+          
+          if (btn) {
+            btn.className = 'w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group';
+            btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>';
+          }
+          if (btnLabel) btnLabel.textContent = 'Start Voice Session';
+          if (textInput) textInput.disabled = true;
+          if (sendBtn) sendBtn.disabled = true;
         }
       }
     }

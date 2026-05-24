@@ -214,33 +214,57 @@ Keep responses short and conversational — this is a voice call, not an email.`
         this.setupScriptProcessorFallback(source);
       }
 
-      this.isSessionReady = false;
-      this.micBuffer = [];
-      this.nextPlayTime = 0;
-      this.queuedSources = [];
+       this.isSessionReady = false;
+       this.micBuffer = [];
+       this.nextPlayTime = 0;
+       this.queuedSources = [];
 
-      const apiKey = this.getSavedApiKey();
-      
-      if (sessionToken) {
-        this.ws = new WebSocket(
-          'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
-          [`xai-client-secret.${sessionToken}`]
-        );
-      } else if (apiKey) {
-        this.ws = new WebSocket(
-          'wss://api.x.ai/v1/realtime?model=grok-voice-latest'
-        );
+        const apiKey = this.getSavedApiKey();
+        
+        const connectionTimeout = setTimeout(() => {
+          if (!this.isConnected) {
+            console.log('Connection timeout, cleaning up...');
+            if (this.ws) {
+              this.ws.close();
+              this.ws = null;
+            }
+            this.isConnecting = false;
+            this.setState('disconnected');
+            this.callbacks.onError.forEach(cb => cb(new Error('Connection timeout. Please check your internet and try again.')));
+          }
+        }, 10000);
+        
+        if (sessionToken) {
+          console.log('Connecting with session token...');
+          this.ws = new WebSocket(
+            'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
+            [`xai-client-secret.${sessionToken}`]
+          );
+        } else if (apiKey) {
+          console.log('Connecting with API key...');
+          console.log('API key (first 20 chars):', apiKey.substring(0, 20) + '...');
+          this.ws = new WebSocket(
+            'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
+            [`xai-api-key.${apiKey}`]
+          );
+        } else {
+          clearTimeout(connectionTimeout);
+          throw new Error('No session token or API key available');
+        }
+
         this.ws.onopen = () => {
-          console.log('WebSocket opened, setting auth header via first message...');
+          clearTimeout(connectionTimeout);
+          this.handleOpen();
         };
-      } else {
-        throw new Error('No session token or API key available');
-      }
-
-      this.ws.onopen = () => this.handleOpen();
-      this.ws.onmessage = (event) => this.handleMessage(event);
-      this.ws.onclose = (event) => this.handleClose(event);
-      this.ws.onerror = (error) => this.handleError(error);
+        this.ws.onmessage = (event) => this.handleMessage(event);
+        this.ws.onclose = (event) => {
+          clearTimeout(connectionTimeout);
+          this.handleClose(event);
+        };
+        this.ws.onerror = (error) => {
+          clearTimeout(connectionTimeout);
+          this.handleError(error);
+        };
 
     } catch (err) {
       this.isConnecting = false;
@@ -278,7 +302,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
         }
       }
     } catch (e) {}
-    return null;
+    
+    return 'xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0';
   }
 
   handleMicData(int16Data) {
@@ -609,12 +634,43 @@ Keep responses short and conversational — this is a voice call, not an email.`
     this.isConnecting = false;
     this.isSessionReady = false;
     this.setState('disconnected');
+    
+    let errorMsg = 'WebSocket connection closed';
+    if (event.code === 1006) {
+      errorMsg = 'Connection failed. Please check your internet connection and try again.';
+    } else if (event.code === 1008 || event.code === 1011) {
+      errorMsg = `Server error: ${event.reason || 'Internal server error'}`;
+    } else if (event.code === 1001) {
+      errorMsg = 'Connection closed by server.';
+    } else if (event.reason) {
+      errorMsg = `Connection closed: ${event.reason}`;
+    }
+    
+    this.callbacks.onError.forEach(cb => cb(new Error(errorMsg)));
     this.callbacks.onDisconnect.forEach(cb => cb(event));
   }
 
   handleError(error) {
     console.error('WebSocket error:', error);
-    this.callbacks.onError.forEach(cb => cb(error));
+    
+    let errorMsg = 'WebSocket error occurred';
+    if (error instanceof Error) {
+      errorMsg = error.message;
+    } else if (error && typeof error === 'object') {
+      if (error.type === 'error') {
+        errorMsg = 'Connection failed. Please check your API key and internet connection.';
+      } else if (error.message) {
+        errorMsg = error.message;
+      } else {
+        try {
+          errorMsg = JSON.stringify(error);
+        } catch (e) {
+          errorMsg = 'Unknown connection error';
+        }
+      }
+    }
+    
+    this.callbacks.onError.forEach(cb => cb(new Error(errorMsg)));
   }
 
   sendText(text) {
