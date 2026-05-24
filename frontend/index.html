@@ -1,50 +1,109 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html class="light" lang="en">
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Renia AI - World-Class Dental AI Receptionist</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
           theme: {
             extend: {
               "colors": {
-                      "outline-variant": "rgba(255,255,255,0.08)",
-                      "primary": "#0df2c9",
-                      "on-primary": "#030303",
-                      "inverse-primary": "#030303",
-                      "background": "#030303",
-                      "surface": "#070709",
-                      "surface-variant": "rgba(10, 10, 15, 0.6)",
-                      "on-surface": "#ffffff",
-                      "on-background": "#ffffff",
-                      "secondary-auralis": "#a1a1aa", 
-                      "panel-auralis": "#0a0a0f",
-                      "card-auralis": "#070709",
-                      "auralis": "rgba(255,255,255,0.06)",
+                      "outline-variant": "#c4c7c7",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "tertiary-container": "#1d1b1a",
+                      "surface-tint": "#5f5e5e",
+                      "on-secondary-container": "#626262",
+                      "surface-container-low": "#f7f3f2",
+                      "on-surface": "#1c1b1b",
+                      "on-secondary-fixed-variant": "#464747",
+                      "primary": "#000000",
+                      "surface-container-highest": "#e5e2e1",
+                      "inverse-on-surface": "#f4f0ef",
+                      "on-tertiary-container": "#868381",
+                      "on-error-container": "#93000a",
+                      "outline": "#747878",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#c8c6c5",
+                      "surface-container-high": "#ebe7e6",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#fdf8f8",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "background": "#fdf8f8",
+                      "surface-variant": "#e5e2e1",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#1b1c1c",
+                      "inverse-surface": "#313030",
+                      "secondary-container": "#e1dfdf",
+                      "primary-container": "#1c1b1b",
+                      "surface": "#fdf8f8",
+                      "on-surface-variant": "#444748",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#5e5e5e",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#c7c6c6",
+                      "on-primary-fixed-variant": "#474646",
+                      "surface-dim": "#ddd9d8",
+                      "tertiary": "#000000",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "surface-container": "#f1edec",
+                      "on-primary-fixed": "#1c1b1b",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "on-background": "#1c1b1b",
+                      "tertiary-fixed": "#e6e1df",
+                      "secondary-fixed": "#e4e2e2",
+                      "primary-fixed": "#e5e2e1",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#858383"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px",
+                      "2xl": "1.5rem",
+                      "3xl": "1.75rem"
+              },
+              "spacing": {
+                      "unit_base": "8px",
+                      "max_width": "1280px",
+                      "gutter": "32px",
+                      "columns": "12",
+                      "section_gap_max": "180px",
+                      "container_padding": "32px",
+                      "section_gap_min": "140px"
               },
               "fontFamily": {
-                      "h1": ["Outfit", "sans-serif"],
-                      "h2": ["Outfit", "sans-serif"],
-                      "h3": ["Outfit", "sans-serif"],
-                      "label-caps": ["Plus Jakarta Sans", "sans-serif"],
-                      "body-md": ["Plus Jakarta Sans", "sans-serif"],
-                      "body-lg": ["Plus Jakarta Sans", "sans-serif"]
+                      "h1": ["Geist"],
+                      "h2": ["Geist"],
+                      "label-caps": ["Geist"],
+                      "body-md": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "h3": ["Geist"]
+              },
+              "fontSize": {
+                      "h1": ["84px", {"lineHeight": "1.05", "letterSpacing": "-0.04em", "fontWeight": "600"}],
+                      "h2": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                      "h3": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
               }
             }
           }
         }
     </script>
 <style>
-        body { background-color: #030303; color: #ffffff; }
-        .text-secondary-auralis { color: #a1a1aa; }
-        .bg-panel-auralis { background-color: rgba(10, 10, 15, 0.6); backdrop-filter: blur(30px); }
-        .bg-card-auralis { background-color: rgba(7, 7, 9, 0.8); backdrop-filter: blur(20px); }
-        .border-auralis { border-color: rgba(255,255,255,0.06); }
+        body { background-color: #F7F7F5; color: #111111; }
+        .text-secondary-auralis { color: #6B6B6B; }
+        .bg-panel-auralis { background-color: #F3F2EF; }
+        .bg-card-auralis { background-color: #FCFCFB; }
+        .border-auralis { border-color: #E7E7E4; }
         
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -69,22 +128,22 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
 <!-- TOP NAVIGATION -->
-<nav class="fixed top-0 w-full z-50 border-b border-auralis bg-[#030303]/80 backdrop-blur-md transition-all">
+<nav class="fixed top-0 w-full z-50 border-b border-zinc-200/60 bg-[#F7F7F5]/80 backdrop-blur-md transition-all">
 <div class="max-w-[1280px] mx-auto px-8 flex justify-between items-center h-[72px]">
 <div class="flex items-center gap-12">
-<a class="text-lg font-bold tracking-tighter text-white text-[20px] font-h1" href="#">
+<a class="text-lg font-bold tracking-tighter text-zinc-900 text-[20px] font-h1" href="#">
                     Renia AI
                 </a>
 <div class="hidden md:flex items-center gap-6">
-<a class="text-sm font-medium tracking-tight text-secondary-auralis hover:text-primary transition-colors duration-200 font-body-md" href="#">Platform</a>
-<a class="text-sm font-medium tracking-tight text-secondary-auralis hover:text-primary transition-colors duration-200 font-body-md" href="#">Features</a>
-<a class="text-sm font-medium tracking-tight text-secondary-auralis hover:text-primary transition-colors duration-200 font-body-md" href="#">Integration</a>
-<a class="text-sm font-medium tracking-tight text-secondary-auralis hover:text-primary transition-colors duration-200 font-body-md" href="#">Pricing</a>
+<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#">Platform</a>
+<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#">Features</a>
+<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#">Integration</a>
+<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#">Pricing</a>
 </div>
 </div>
-<div class="flex items-center gap-4">
-<a class="text-sm font-medium tracking-tight text-white hover:text-primary transition-colors duration-200 font-body-md" href="login.html">Sign in</a>
-<a class="bg-primary text-on-primary px-4 py-2 rounded-full font-medium transition-all hover:opacity-90 active:scale-95 text-[14px] font-body-md shadow-[0_0_15px_rgba(13,242,201,0.3)]" href="signup.html">
+<div class="flex items-center gap-6">
+<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="login.html">Sign in</a>
+<a class="bg-primary text-on-primary px-4 py-2 rounded-full font-medium transition-all scale-98 active:opacity-80 text-[14px] font-body-md" href="signup.html">
                     Get Started
                 </a>
 </div>
@@ -96,10 +155,10 @@
 <section class="max-w-[1280px] mx-auto px-8 mb-[140px]">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 <div class="lg:col-span-8 flex flex-col gap-8">
-<h1 class="font-h1 text-[84px] leading-[0.95] tracking-[-0.04em] font-semibold text-white">The world-class AI receptionist for your <span class="text-primary">dental clinic.</span></h1>
+<h1 class="font-h1 text-h1 text-primary">Dental AI that sounds human.</h1>
 <div class="flex flex-wrap items-center gap-4 mt-4">
-<a class="bg-primary text-on-primary px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 shadow-[0_0_20px_rgba(13,242,201,0.3)]" href="signup.html">Launch your AI</a>
-<a class="bg-transparent border border-auralis text-white px-6 py-3 rounded-full font-medium transition-all hover:bg-white/10" href="#">Book a Demo</a>
+<a class="bg-primary text-on-primary px-6 py-3 rounded-full font-medium transition-all hover:bg-opacity-90" href="signup.html">Launch your AI</a>
+<a class="bg-transparent border border-outline text-primary px-6 py-3 rounded-full font-medium transition-all hover:bg-surface-variant" href="#">Book a Demo</a>
 </div>
 </div>
 <div class="lg:col-span-4 flex justify-end">
@@ -111,33 +170,35 @@
 </section>
 <!-- HERO PRODUCT PANEL -->
 <section class="max-w-[1280px] mx-auto px-8 mb-[180px]">
-<div class="bg-panel-auralis rounded-3xl p-8 flex flex-col relative overflow-hidden border border-auralis min-h-[600px] justify-between">
+<div class="bg-panel-auralis rounded-3xl p-8 flex flex-col relative overflow-hidden border border-auralis min-h-[600px] flex justify-between">
 <!-- Top Tabs -->
 <div class="flex justify-between items-center z-10">
-<div class="flex bg-card-auralis p-1 rounded-full border border-auralis shadow-sm">
-<button class="px-4 py-2 bg-surface text-primary rounded-full text-sm font-medium shadow-[0_0_10px_rgba(13,242,201,0.1)] border border-primary/20">Live Call Dashboard</button>
-<button class="px-4 py-2 text-secondary-auralis rounded-full text-sm font-medium hover:text-white transition-colors">Smart Scheduling</button>
-<button class="px-4 py-2 text-secondary-auralis rounded-full text-sm font-medium hover:text-white transition-colors">Insurance Verification</button>
+<div class="flex bg-surface-container-low p-1 rounded-full border border-auralis shadow-sm">
+<button class="px-4 py-2 bg-surface text-primary rounded-full text-sm font-medium shadow-sm">Live Call Dashboard</button>
+<button class="px-4 py-2 text-secondary-auralis rounded-full text-sm font-medium hover:text-primary transition-colors">Smart Scheduling</button>
+<button class="px-4 py-2 text-secondary-auralis rounded-full text-sm font-medium hover:text-primary transition-colors">Insurance Verification</button>
 </div>
-<div class="bg-card-auralis px-4 py-2 rounded-full border border-auralis flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(13,242,201,0.8)]"></span>
-<span class="text-sm font-medium text-white">System Active</span>
+<div class="bg-surface-container-low px-4 py-2 rounded-full border border-auralis flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-sm font-medium">System Active</span>
 </div>
 </div>
 <!-- Center Orbs (Simulated with gradients) -->
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-50 mix-blend-screen">
-<div class="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-[#0df2c9]/40 to-[#ff5e3a]/40 blur-[100px] absolute -ml-40"></div>
-<div class="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-[#7c3aed]/40 to-[#0df2c9]/40 blur-[120px] absolute"></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-100">
+<div class="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-rose-400 to-orange-300 blur-3xl absolute -ml-40"></div>
+<div class="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-indigo-300 to-purple-400 blur-3xl absolute"></div>
+<div class="w-[250px] h-[250px] rounded-full bg-gradient-to-tr from-emerald-300 to-teal-200 blur-3xl absolute ml-40 mt-20"></div>
+<div class="w-[350px] h-[350px] rounded-full bg-gradient-to-tr from-sky-300 to-blue-400 blur-3xl absolute ml-80 -mt-20"></div>
 </div>
 <!-- Play Button Center -->
 <div class="z-10 self-center my-auto flex flex-col items-center gap-4">
-<button class="w-24 h-24 bg-card-auralis rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(13,242,201,0.2)] border border-primary/30 transition-all hover:scale-105 hover:shadow-[0_0_60px_rgba(13,242,201,0.4)] group backdrop-blur-md">
-<span class="material-symbols-outlined text-5xl text-white pl-2 group-hover:text-primary transition-colors">play_arrow</span>
+<button class="w-20 h-20 bg-surface rounded-full flex items-center justify-center shadow-lg border border-auralis transition-transform hover:scale-105 group">
+<span class="material-symbols-outlined text-4xl text-primary pl-1 group-hover:text-emerald-600 transition-colors">play_arrow</span>
 </button>
-<span class="text-sm font-medium text-primary uppercase tracking-widest mt-2">Listen to Renia</span>
+<span class="text-sm font-medium text-secondary-auralis uppercase tracking-widest mt-2">Listen to Renia</span>
 </div>
 <!-- Bottom Bar -->
-<div class="flex justify-between items-center z-10 bg-card-auralis/80 backdrop-blur-xl p-4 rounded-2xl border border-auralis">
+<div class="flex justify-between items-center z-10 bg-surface/80 backdrop-blur-md p-4 rounded-2xl border border-auralis">
 <div class="flex gap-6 overflow-x-auto no-scrollbar">
 <span class="text-sm font-medium text-primary">Capabilities:</span>
 <span class="text-sm font-medium text-secondary-auralis">Emergency Triage</span>
@@ -145,199 +206,286 @@
 <span class="text-sm font-medium text-secondary-auralis">Rescheduling</span>
 <span class="text-sm font-medium text-secondary-auralis">Voicemail Handling</span>
 </div>
-<a class="bg-primary text-on-primary px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap shadow-[0_0_10px_rgba(13,242,201,0.3)] hover:opacity-90" href="signup.html">Start Free Trial</a>
+<a class="bg-primary text-on-primary px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap" href="signup.html">Start Free Trial</a>
 </div>
 </div>
 </section>
 <!-- TRUST STRIP -->
 <section class="max-w-[1280px] mx-auto px-8 text-center mb-10">
-<h3 class="font-label-caps text-label-caps text-secondary-auralis uppercase tracking-[0.2em] mb-0">Trusted by modern dental practices</h3>
+<h3 class="font-label-caps text-label-caps text-secondary-auralis uppercase tracking-widest mb-0">Trusted by modern Florida dental practices</h3>
 </section>
 <!-- LOGO MARQUEE SECTION -->
 <section class="w-full overflow-hidden mt-0 mb-[140px] py-4">
 <div class="flex whitespace-nowrap overflow-hidden group">
 <div class="flex items-center gap-24 animate-marquee group-hover:pause-marquee"><!-- Logo Set -->
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">dentistry</span>Sunshine Dental</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">health_and_safety</span>Apex Ortho</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">medical_services</span>Coastal Smiles</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">healing</span>Lumina Care</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">favorite</span>Premier Dental</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">spa</span>Zenith Periodontics</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">child_care</span>Kids First Dental</div></div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">dentistry</span>Sunshine Dental</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">health_and_safety</span>Apex Ortho</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">medical_services</span>Coastal Smiles</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">healing</span>Lumina Care</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">favorite</span>Premier Dental</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">spa</span>Zenith Periodontics</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">child_care</span>Kids First Dental</div></div>
 <div aria-hidden="true" class="flex items-center gap-24 animate-marquee group-hover:pause-marquee"><!-- Logo Set -->
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">dentistry</span>Sunshine Dental</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">health_and_safety</span>Apex Ortho</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">medical_services</span>Coastal Smiles</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">healing</span>Lumina Care</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">favorite</span>Premier Dental</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">spa</span>Zenith Periodontics</div>
-<div class="flex items-center gap-2 text-white/30 font-bold text-xl uppercase tracking-tighter"><span class="material-symbols-outlined text-3xl">child_care</span>Kids First Dental</div></div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">dentistry</span>Sunshine Dental</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">health_and_safety</span>Apex Ortho</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">medical_services</span>Coastal Smiles</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">healing</span>Lumina Care</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">favorite</span>Premier Dental</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">spa</span>Zenith Periodontics</div>
+<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">child_care</span>Kids First Dental</div></div>
 </div>
 </section>
 <!-- PLATFORM OVERVIEW -->
 <section class="max-w-[1280px] mx-auto px-8 mb-[180px]">
 <div class="text-center max-w-3xl mx-auto mb-16">
-<h2 class="font-h2 text-[48px] font-semibold text-white mb-6">Fully integrated with your PMS</h2>
+<h2 class="font-h2 text-h2 text-primary mb-6">Fully integrated with your PMS</h2>
 <p class="font-body-lg text-body-lg text-secondary-auralis">Renia AI seamlessly connects to Dentrix, Open Dental, and Eaglesoft to write notes, schedule appointments, and update patient records automatically.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"><!-- Large Card 1 -->
-<div class="bg-card-auralis rounded-3xl p-8 border border-auralis h-[300px] flex flex-col justify-between relative overflow-hidden group hover:border-[#0df2c9]/50 transition-colors cursor-pointer">
-<div class="absolute inset-0 bg-gradient-to-br from-[#0df2c9]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="bg-card-auralis rounded-2xl p-6 border border-auralis h-[300px] flex flex-col justify-between relative overflow-hidden group hover:shadow-sm transition-shadow">
+<div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/20 opacity-40 group-hover:opacity-60 transition-opacity"></div>
 <div class="flex justify-between items-start z-10">
-<span class="material-symbols-outlined text-primary text-3xl">calendar_month</span>
+<span class="material-symbols-outlined text-secondary-auralis">calendar_month</span>
 </div>
 <div class="z-10">
-<h4 class="font-h3 text-[24px] mb-2 text-white">Smart Scheduling</h4>
-<p class="text-[16px] text-secondary-auralis">Renia finds available slots, blocks off time, and confirms appointments with patients naturally over the phone.</p>
+<h4 class="font-h3 text-[20px] mb-2">Smart Scheduling</h4>
+<p class="text-sm text-secondary-auralis">Renia finds available slots, blocks off time, and confirms appointments with patients naturally over the phone.</p>
 </div>
 </div>
 <!-- Large Card 2 -->
-<div class="bg-card-auralis rounded-3xl p-8 border border-auralis h-[300px] flex flex-col justify-between relative overflow-hidden group hover:border-[#ff5e3a]/50 transition-colors cursor-pointer">
-<div class="absolute inset-0 bg-gradient-to-br from-[#ff5e3a]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="bg-card-auralis rounded-2xl p-6 border border-auralis h-[300px] flex flex-col justify-between relative overflow-hidden group hover:shadow-sm transition-shadow">
+<div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/20 opacity-40 group-hover:opacity-60 transition-opacity"></div>
 <div class="flex justify-between items-start z-10">
-<span class="material-symbols-outlined text-[#ff5e3a] text-3xl">verified_user</span>
+<span class="material-symbols-outlined text-secondary-auralis">verified_user</span>
 </div>
 <div class="z-10">
-<h4 class="font-h3 text-[24px] mb-2 text-white">Insurance Verification</h4>
-<p class="text-[16px] text-secondary-auralis">Instantly checks Delta Dental, Humana, and other major Florida providers before the patient even hangs up.</p>
+<h4 class="font-h3 text-[20px] mb-2">Insurance Verification</h4>
+<p class="text-sm text-secondary-auralis">Instantly checks Delta Dental, Humana, and other major Florida providers before the patient even hangs up.</p>
 </div>
 </div></div>
-<div class="w-full aspect-[16/9] bg-panel-auralis rounded-[40px] border border-auralis flex items-center justify-center overflow-hidden relative group p-12">
-<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwYzAgMTEuMDQ2IDguOTU0IDIwIDIwIDIwcy0yMC04Ljk1NC0yMC0yMCA4Ljk1NC0yMCAyMC0yMDIwIDguOTU0IDIwIDIwek0wIDIwQzAgOC45NTQgOC45NTQgMCAyMCAwczIwIDguOTU0IDIwIDIwaC00MnoiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+')] opacity-20"></div>
 
-<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-<div class="absolute w-[500px] h-[500px] bg-[#0df2c9]/10 rounded-full blur-[120px]"></div>
+<div class="w-full aspect-[16/9] bg-panel-auralis rounded-3xl border border-auralis flex items-center justify-center overflow-hidden relative group">
+<img alt="Dashboard Preview" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" data-alt="A pristine, light-mode dashboard interface displayed on a high-end monitor in a minimalist studio environment." src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&amp;w=987&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+<div class="absolute inset-0 flex items-center justify-center z-20">
+<!-- Glowing Accent Backgrounds -->
+<div class="absolute w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] -translate-x-20 -translate-y-10"></div>
+<div class="absolute w-64 h-64 bg-purple-500/20 rounded-full blur-[80px] translate-x-20 translate-y-10"></div>
+<!-- Glassmorphic Widget Container -->
+<div class="relative w-[440px] bg-white/25 backdrop-blur-3xl border border-white/40 rounded-[2rem] p-8 shadow-[0_48px_96px_-24px_rgba(0,0,0,0.25),inset_0_0_0_1px_rgba(255,255,255,0.4)] flex flex-col gap-8">
+<!-- Header: Status & Identifier -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50 mb-1">Renia Voice Engine v4.2</span>
+<span class="text-sm font-semibold text-primary tracking-tight">Dental Assistant Active</span>
 </div>
-
-<div class="relative w-full max-w-[800px] h-full bg-[#070709]/80 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden z-20">
-<!-- Fake Mac Header -->
-<div class="h-12 border-b border-white/5 flex items-center px-4 gap-2 bg-white/[0.02]">
-  <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-  <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-  <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-  <div class="mx-auto text-xs font-medium text-white/40 font-mono tracking-widest">dashboard.renia.ai</div>
-</div>
-<!-- Interface Content -->
-<div class="flex-1 p-8 flex flex-col gap-6">
-  <div class="flex justify-between items-center">
-    <div>
-      <h3 class="text-xl font-bold text-white mb-1">Live Call Feed</h3>
-      <p class="text-sm text-secondary-auralis">Monitoring active AI receptionists.</p>
-    </div>
-    <div class="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/20">
-      <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-      <span class="text-[10px] font-bold uppercase tracking-widest">3 Active Calls</span>
-    </div>
-  </div>
-  
-  <div class="flex-1 border border-white/5 rounded-xl bg-white/[0.01] overflow-hidden flex flex-col gap-px">
-    <!-- Call Row -->
-    <div class="p-4 bg-white/[0.02] flex items-center justify-between hover:bg-white/[0.04] transition-colors border-l-2 border-l-primary cursor-pointer">
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-          <span class="material-symbols-outlined text-primary text-[20px]">phone_in_talk</span>
-        </div>
-        <div>
-          <div class="text-sm font-semibold text-white">(305) 555-0198</div>
-          <div class="text-xs text-secondary-auralis">Scheduling Consultation</div>
-        </div>
-      </div>
-      <div class="text-right">
-        <div class="text-sm font-mono text-primary">02:14</div>
-        <div class="text-xs text-secondary-auralis">Confidence: 99%</div>
-      </div>
-    </div>
-    <!-- Call Row -->
-    <div class="p-4 bg-white/[0.02] flex items-center justify-between hover:bg-white/[0.04] transition-colors border-l-2 border-l-purple-500 cursor-pointer">
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-          <span class="material-symbols-outlined text-purple-400 text-[20px]">local_hospital</span>
-        </div>
-        <div>
-          <div class="text-sm font-semibold text-white">John Smith</div>
-          <div class="text-xs text-secondary-auralis">Toothache / Emergency</div>
-        </div>
-      </div>
-      <div class="text-right">
-        <div class="text-sm font-mono text-white">00:45</div>
-        <div class="text-xs text-purple-400 font-medium">Triage Protocol</div>
-      </div>
-    </div>
-  </div>
+<div class="flex items-center gap-2.5 bg-emerald-500/15 px-3 py-1.5 rounded-full border border-emerald-500/25">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Live Call</span>
 </div>
 </div>
-
+<!-- Enhanced Spectral Visualization -->
+<div class="flex items-end justify-between h-24 gap-1">
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[25%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[40%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[65%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[55%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-purple-500/40 to-purple-600 rounded-full h-[85%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-purple-500/40 to-purple-600 rounded-full h-[95%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-purple-500/40 to-purple-600 rounded-full h-[70%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[45%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[60%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[30%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[50%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[20%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[35%]"></div>
+<div class="w-1.5 bg-gradient-to-t from-blue-500/40 to-blue-500 rounded-full h-[15%]"></div>
 </div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-3 gap-6 py-2">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] uppercase tracking-widest text-secondary-auralis font-semibold">Latency</span>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-primary">24</span>
+<span class="text-xs text-secondary-auralis font-medium">ms</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[10px] uppercase tracking-widest text-secondary-auralis font-semibold">Confidence</span>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-primary">99.8</span>
+<span class="text-xs text-secondary-auralis font-medium">%</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[10px] uppercase tracking-widest text-secondary-auralis font-semibold">Stability</span>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-primary">0.02</span>
+<span class="text-xs text-secondary-auralis font-medium">jitter</span>
+</div>
+</div>
+</div>
+<!-- Playback Controls -->
+<div class="flex items-center justify-between border-t border-black/5 pt-6">
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-2xl text-primary/50 hover:text-primary transition-colors">skip_previous</button>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined fill text-2xl">play_arrow</span>
+</button>
+<button class="material-symbols-outlined text-2xl text-primary/50 hover:text-primary transition-colors">skip_next</button>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-[12px] font-mono font-bold text-primary bg-white/50 px-3 py-1 rounded-lg border border-white/60 shadow-sm">00:42.12</span>
+<span class="text-[9px] font-bold text-secondary-auralis/60 uppercase tracking-tighter">Total Length 04:20</span>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <!-- FEATURES MODULE -->
 <section class="max-w-[1280px] mx-auto px-8 mb-[180px]">
 <div class="flex items-center gap-4 mb-8">
-<span class="font-label-caps text-[12px] uppercase tracking-widest bg-auralis text-white px-4 py-1.5 rounded-full border border-white/10">Zero Missed Opportunities</span>
+<span class="font-label-caps text-label-caps bg-surface-variant text-primary px-3 py-1 rounded-full">Zero Missed Opportunities</span>
 <div class="h-px bg-auralis flex-grow opacity-50"></div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
-<div class="lg:col-span-6">
-<h2 class="font-h2 text-[48px] font-semibold text-white leading-tight">Capture every patient, even after hours.</h2>
+<div class="lg:col-span-5">
+<h2 class="font-h2 text-[48px] text-primary leading-tight">Capture every patient, even after hours.</h2>
 </div>
-<div class="lg:col-span-5 lg:col-start-8 flex items-end">
+<div class="lg:col-span-6 lg:col-start-7 flex items-end">
 <p class="font-body-lg text-body-lg text-secondary-auralis">Missed calls cost dental practices thousands of dollars a month. Renia AI ensures every call is answered instantly, whether your staff is busy with a patient or it's 2 AM on a Sunday.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<!-- Large Card 1 -->
+<div class="bg-card-auralis rounded-2xl p-6 border border-auralis h-[300px] flex flex-col justify-between relative overflow-hidden group hover:shadow-sm transition-shadow">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-surface-variant/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<span class="material-symbols-outlined text-secondary-auralis">translate</span>
+</div>
+<div class="z-10">
+<h4 class="font-h3 text-[20px] mb-2">Bilingual Support</h4>
+<p class="text-sm text-secondary-auralis">Fluent in English and Spanish natively to assist all your patients.</p>
+</div>
+</div>
+<!-- Large Card 2 -->
+<div class="bg-card-auralis rounded-2xl p-6 border border-auralis h-[300px] flex flex-col justify-between relative overflow-hidden group hover:shadow-sm transition-shadow">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-surface-variant/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<span class="material-symbols-outlined text-secondary-auralis">quick_reference_all</span>
+</div>
+<div class="z-10">
+<h4 class="font-h3 text-[20px] mb-2">Clinic Knowledge Base</h4>
+<p class="text-sm text-secondary-auralis">Answers FAQs about your specific clinic's services, hours, policies, and parking.</p>
+</div>
 </div>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
 <!-- Small Cards -->
-<div class="bg-panel-auralis rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:border-[#0df2c9]/50 transition-colors cursor-pointer">
-<div class="w-12 h-12 rounded-xl bg-[#0df2c9]/10 flex items-center justify-center">
-  <span class="material-symbols-outlined text-primary text-2xl">translate</span>
+<div class="bg-panel-auralis rounded-xl p-5 border border-auralis flex flex-col gap-3 items-start hover:bg-surface-variant/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary">local_hospital</span>
+<span class="font-medium text-sm">Emergency Triage</span>
 </div>
-<span class="font-bold text-white text-lg">Bilingual</span>
-<p class="text-sm text-secondary-auralis">Fluent in English and Spanish natively.</p>
+<div class="bg-panel-auralis rounded-xl p-5 border border-auralis flex flex-col gap-3 items-start hover:bg-surface-variant/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+<span class="font-medium text-sm">Smart Scheduling</span>
 </div>
-<div class="bg-panel-auralis rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:border-[#7c3aed]/50 transition-colors cursor-pointer">
-<div class="w-12 h-12 rounded-xl bg-[#7c3aed]/10 flex items-center justify-center">
-  <span class="material-symbols-outlined text-[#7c3aed] text-2xl">quick_reference_all</span>
+<div class="bg-panel-auralis rounded-xl p-5 border border-auralis flex flex-col gap-3 items-start hover:bg-surface-variant/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<span class="font-medium text-sm">Insurance Check</span>
 </div>
-<span class="font-bold text-white text-lg">Knowledgeable</span>
-<p class="text-sm text-secondary-auralis">Answers FAQs about your specific clinic.</p>
-</div>
-<div class="bg-panel-auralis rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:border-[#ff5e3a]/50 transition-colors cursor-pointer">
-<div class="w-12 h-12 rounded-xl bg-[#ff5e3a]/10 flex items-center justify-center">
-  <span class="material-symbols-outlined text-[#ff5e3a] text-2xl">support_agent</span>
-</div>
-<span class="font-bold text-white text-lg">Escalation</span>
-<p class="text-sm text-secondary-auralis">Transfers emergencies to the on-call doctor.</p>
-</div>
-<div class="bg-panel-auralis rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:border-blue-400/50 transition-colors cursor-pointer">
-<div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-  <span class="material-symbols-outlined text-blue-400 text-2xl">shield_lock</span>
-</div>
-<span class="font-bold text-white text-lg">HIPAA Compliant</span>
-<p class="text-sm text-secondary-auralis">Enterprise-grade security and encryption.</p>
+<div class="bg-panel-auralis rounded-xl p-5 border border-auralis flex flex-col gap-3 items-start hover:bg-surface-variant/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary">shield_lock</span>
+<span class="font-medium text-sm">HIPAA Secure</span>
 </div>
 </div>
 </section>
-
+<!-- AURALIS AGENTS MODULE -->
+<section class="max-w-[1280px] mx-auto px-8 mb-[140px]">
+<div class="flex items-center gap-4 mb-8">
+<span class="font-label-caps text-label-caps bg-surface-variant text-primary px-3 py-1 rounded-full">Renia Voice Agents</span>
+<div class="h-px bg-auralis flex-grow opacity-50"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+<div class="lg:col-span-6">
+<h2 class="font-h2 text-[48px] text-primary leading-tight">Voice agents that feel completely natural</h2>
+</div>
+<div class="lg:col-span-5 lg:col-start-8 flex items-end">
+<p class="font-body-lg text-body-lg text-secondary-auralis">Using state-of-the-art Grok voice models, Renia voice receptionists speak naturally, understand patient intent accurately, and resolve bookings on the fly.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Agent Card 1 -->
+<div class="bg-card-auralis rounded-3xl p-8 border border-auralis h-[450px] flex flex-col relative overflow-hidden group">
+<div class="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+<div class="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-blue-200 to-cyan-100 blur-2xl absolute -ml-20 -mt-20"></div>
+<div class="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-purple-200 to-pink-100 blur-2xl absolute ml-20 mt-20"></div>
+</div>
+<div class="z-10 bg-surface/80 backdrop-blur-sm self-start px-4 py-2 rounded-full border border-auralis text-sm font-medium mb-auto">
+                        Patient Conversation
+                    </div>
+<div class="z-10 mt-auto bg-surface/90 backdrop-blur-md p-6 rounded-2xl border border-auralis">
+<div class="flex gap-4 items-center mb-4">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-sm">smart_toy</span>
+</div>
+<div class="bg-surface-variant px-4 py-2 rounded-2xl rounded-tl-sm text-sm">
+                                Hello! Sunshine Dental. How can I assist you today?
+                            </div>
+</div>
+<div class="flex gap-4 items-center flex-row-reverse">
+<div class="w-10 h-10 bg-surface-variant rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-auralis text-sm">person</span>
+</div>
+<div class="bg-primary text-on-primary px-4 py-2 rounded-2xl rounded-tr-sm text-sm">
+                                I have a severe toothache and need to book an emergency appointment.
+                            </div>
+</div>
+</div>
+</div>
+<!-- Agent Card 2 -->
+<div class="bg-card-auralis rounded-3xl p-8 border border-auralis h-[450px] flex flex-col relative overflow-hidden group">
+<div class="absolute inset-0 flex items-end justify-center pb-8 opacity-50 group-hover:opacity-80 transition-opacity duration-500">
+<!-- Abstract Chart Representation -->
+<div class="flex items-end gap-2 h-40 w-full px-8">
+<div class="w-full bg-surface-variant rounded-t-sm h-[30%]"></div>
+<div class="w-full bg-surface-variant rounded-t-sm h-[50%]"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[80%] relative">
+<div class="absolute -top-3 -right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center border-2 border-surface"><div class="w-2 h-2 bg-surface rounded-full"></div></div>
+</div>
+<div class="w-full bg-surface-variant rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-surface-variant rounded-t-sm h-[40%]"></div>
+</div>
+</div>
+<div class="z-10 bg-surface/80 backdrop-blur-sm self-start px-4 py-2 rounded-full border border-auralis text-sm font-medium mb-auto">
+                        Practice Analytics
+                    </div>
+<div class="z-10 mt-auto bg-surface/90 backdrop-blur-md p-6 rounded-2xl border border-auralis">
+<h4 class="font-h3 text-[20px] mb-2">Performance Insights</h4>
+<p class="text-sm text-secondary-auralis">Track call volumes, scheduling conversion rates, and patient satisfaction scores in real-time.</p>
+</div>
+</div>
+</div>
+</section>
 <!-- SIGN OFF SECTION -->
 <section class="max-w-[1280px] mx-auto px-8 mb-[140px] text-center flex flex-col items-center">
-<div class="w-24 h-24 mb-8 bg-gradient-to-br from-primary to-[#7c3aed] rounded-3xl blur-[40px] opacity-40 absolute"></div>
-<h2 class="font-h2 text-[56px] font-bold text-white mb-8 max-w-3xl leading-tight relative z-10">Upgrade your front desk.</h2>
-<div class="flex flex-wrap justify-center items-center gap-4 relative z-10">
-<a class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 shadow-[0_0_30px_rgba(13,242,201,0.3)]" href="signup.html">Deploy Renia AI</a>
+<h2 class="font-h2 text-[48px] text-primary mb-8 max-w-3xl leading-tight">Upgrade your front desk today.</h2>
+<div class="flex flex-wrap justify-center items-center gap-4">
+<a class="bg-primary text-on-primary px-6 py-3 rounded-full font-medium transition-all hover:bg-opacity-90" href="signup.html">Deploy Renia AI</a>
+<a class="bg-transparent border border-outline text-primary px-6 py-3 rounded-full font-medium transition-all hover:bg-surface-variant" href="#">Book a Demo</a>
 </div>
-<p class="mt-6 text-sm text-secondary-auralis relative z-10">Setup takes less than 5 minutes. No coding required.</p>
 </section>
 </main>
 <!-- FOOTER -->
-<footer class="w-full border-t border-auralis bg-[#030303] mt-auto py-12 relative overflow-hidden">
-<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
-<div class="max-w-[1280px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+<footer class="w-full border-t border-zinc-200 bg-background mt-auto py-12">
+<div class="max-w-[1280px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
 <div class="flex items-center gap-8">
-<span class="text-xl font-bold tracking-tighter text-white font-h1">Renia AI</span>
+<span class="text-lg font-bold tracking-tighter text-zinc-900 font-h3 text-[20px]">Renia AI</span>
 <span class="text-sm text-secondary-auralis font-body-md">© 2026 Renia AI. Engineered for Dental Clinics.</span>
 </div>
 <div class="flex flex-wrap items-center gap-6">
-<a class="text-sm text-secondary-auralis hover:text-white transition-colors font-body-md" href="#">Platform</a>
-<a class="text-sm text-secondary-auralis hover:text-white transition-colors font-body-md" href="#">Privacy</a>
-<a class="text-sm text-secondary-auralis hover:text-white transition-colors font-body-md" href="#">Terms</a>
+<a class="text-sm text-secondary-auralis hover:text-primary transition-colors font-body-md" href="#">Platform</a>
+<a class="text-sm text-secondary-auralis hover:text-primary transition-colors font-body-md" href="#">Privacy</a>
+<a class="text-sm text-secondary-auralis hover:text-primary transition-colors font-body-md" href="#">Terms</a>
 </div>
 </div>
 </footer>
