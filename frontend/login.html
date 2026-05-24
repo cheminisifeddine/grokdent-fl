@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,23 @@
 
   <!-- Login Card -->
   <div class="login-card">
-    <div class="login-logo">🦷 Renia AI</div>
+    <div class="login-logo flex items-center justify-center gap-2.5">
+      <svg class="w-10 h-10" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366F1" />
+            <stop offset="100%" stop-color="#0FD8B6" />
+          </linearGradient>
+        </defs>
+        <path d="M6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10V18C14 20.2091 12.2091 22 10 22C7.79086 22 6 20.2091 6 18V10Z" fill="url(#logo-grad)" opacity="0.85"/>
+        <path d="M18 10C18 7.79086 19.7909 6 22 6C24.2091 6 26 7.79086 26 10V18C26 20.2091 24.2091 22 22 22C19.7909 22 18 20.2091 18 18V10Z" fill="url(#logo-grad)" opacity="0.85"/>
+        <rect x="13" y="10" width="6" height="14" rx="3" fill="url(#logo-grad)"/>
+        <rect x="9" y="10" width="2" height="6" rx="1" fill="#FFFFFF"/>
+        <rect x="21" y="10" width="2" height="6" rx="1" fill="#FFFFFF"/>
+        <rect x="15" y="12" width="2" height="10" rx="1" fill="#FFFFFF"/>
+      </svg>
+      <span>Renia AI</span>
+    </div>
     <p class="login-subtitle">AI Voice Receptionist for Florida Dental Clinics</p>
 
     <form id="login-form">
