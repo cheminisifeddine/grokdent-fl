@@ -44,6 +44,10 @@ const API = {
 
       // Handle 401 Unauthorized
       if (response.status === 401) {
+        const currentToken = localStorage.getItem('renia_token');
+        if (currentToken && currentToken.startsWith('demo_token_')) {
+          throw new Error('Demo token not accepted by backend, using fallback data');
+        }
         localStorage.removeItem('renia_token');
         localStorage.removeItem('renia_user');
         window.location.href = 'index.html';

@@ -1,847 +1,572 @@
-﻿<!DOCTYPE html>
-<html class="light" lang="en">
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Renia AI - World-Class Dental AI Receptionist</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "outline-variant": "#E2E2E9",
-                      "surface-tint": "#6366F1",
-                      "surface-container-low": "#F4F4F8",
-                      "on-surface": "#0F0F15",
-                      "primary": "#0F0F15",
-                      "outline": "#8E8E9F",
-                      "on-primary": "#FFFFFF",
-                      "background": "#F9F9FC",
-                      "surface-variant": "#EAEAEF",
-                      "surface": "#FFFFFF",
-                      "on-secondary": "#FFFFFF",
-                      "secondary": "#6B6B7F",
-                      "accent-coral": "#FF6B4A",
-                      "accent-teal": "#0FD8B6",
-                      "accent-indigo": "#6366F1",
-                      "border-auralis": "#E4E4EC",
-                      "bg-panel-auralis": "#F1F1F6",
-                      "bg-card-auralis": "#FFFFFF"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.375rem",
-                      "lg": "0.75rem",
-                      "xl": "1rem",
-                      "full": "9999px",
-                      "2xl": "1.5rem",
-                      "3xl": "2.25rem"
-              },
-              "fontFamily": {
-                      "h1": ["Outfit", "sans-serif"],
-                      "h2": ["Outfit", "sans-serif"],
-                      "h3": ["Outfit", "sans-serif"],
-                      "label-caps": ["Plus Jakarta Sans", "sans-serif"],
-                      "body-md": ["Plus Jakarta Sans", "sans-serif"],
-                      "body-lg": ["Plus Jakarta Sans", "sans-serif"]
-              }
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Renia AI - The Elite AI Receptionist for Modern Dental Clinics</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#6366f1', // Indigo
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              950: '#0F0F15',
+            },
+            accent: {
+              teal: '#0FD8B6',
+              coral: '#FF6B4A',
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'scrolling': 'scrolling 40s linear infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            scrolling: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
             }
           }
         }
-    </script>
-<style>
-        body { background-color: #F8F8FC; color: #111116; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .text-secondary-auralis { color: #62627A; }
-        .bg-panel-auralis { background-color: #F3F3F7; }
-        .bg-card-auralis { background-color: #FFFFFF; }
-        .border-auralis { border-color: #E2E2EC; }
-        
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .material-symbols-outlined.fill {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+      }
+    }
+  </script>
+  
+  <style>
+    body { 
+      background-color: #FAFAFC; 
+      color: #0F0F15; 
+      overflow-x: hidden;
+    }
     
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-        .animate-marquee {
-            display: flex;
-            animation: marquee 40s linear infinite;
-            min-width: 100%;
-        }
-        .group-hover\:pause-marquee:hover {
-            animation-play-state: paused;
-        }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226, 226, 236, 0.8);
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 226, 236, 0.8);
+      box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.04), 0 0 1px 1px rgba(255,255,255,0.9) inset;
+    }
 
-        /* Soundwave animation */
-        @keyframes soundwave {
-            0%, 100% { height: 8px; }
-            50% { height: 38px; }
-        }
-        .wave-bar {
-            animation: soundwave 1.2s ease-in-out infinite;
-        }
-        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
-        .wave-bar:nth-child(3) { animation-delay: 0.25s; }
-        .wave-bar:nth-child(4) { animation-delay: 0.4s; }
-        .wave-bar:nth-child(5) { animation-delay: 0.15s; }
-        .wave-bar:nth-child(6) { animation-delay: 0.3s; }
-        .wave-bar:nth-child(7) { animation-delay: 0.5s; }
-        .wave-bar:nth-child(8) { animation-delay: 0.2s; }
-        .wave-bar:nth-child(9) { animation-delay: 0.35s; }
-        .wave-bar:nth-child(10) { animation-delay: 0.45s; }
+    .hero-gradient-text {
+      background: linear-gradient(135deg, #0F0F15 0%, #312e81 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        /* Floating pastels */
-        .aura-1 {
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(255,255,255,0) 70%);
-        }
-        .aura-2 {
-            background: radial-gradient(circle, rgba(15, 216, 182, 0.12) 0%, rgba(255,255,255,0) 70%);
-        }
-        .aura-3 {
-            background: radial-gradient(circle, rgba(255, 107, 74, 0.12) 0%, rgba(255,255,255,0) 70%);
-        }
+    .accent-gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #0FD8B6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        /* Dotted animated line */
-        @keyframes dash {
-            to {
-                stroke-dashoffset: -40;
-            }
-        }
-        .animated-dot-line {
-            stroke-dasharray: 6, 6;
-            animation: dash 2s linear infinite;
-        }
+    /* Waveform Animation */
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 40px;
+    }
+    .waveform-bar {
+      width: 4px;
+      border-radius: 99px;
+      animation: soundwave 1.2s ease-in-out infinite;
+    }
+    @keyframes soundwave {
+      0%, 100% { height: 12px; opacity: 0.5; }
+      50% { height: 40px; opacity: 1; }
+    }
+    .w-1 { animation-delay: 0.0s; }
+    .w-2 { animation-delay: 0.1s; }
+    .w-3 { animation-delay: 0.2s; }
+    .w-4 { animation-delay: 0.3s; }
+    .w-5 { animation-delay: 0.4s; }
+    .w-6 { animation-delay: 0.5s; }
+    .w-7 { animation-delay: 0.2s; }
+    .w-8 { animation-delay: 0.1s; }
+    
+    /* Connectors */
+    .connector-line {
+      stroke-dasharray: 8 8;
+      animation: dash 2s linear infinite;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -16; }
+    }
 
-        /* Custom scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-</style>
+    /* Hide Scrollbar */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col overflow-x-hidden relative">
+<body class="antialiased">
 
-<!-- FLOATING BACKGROUND AURAS -->
-<div class="absolute top-[10%] left-[-10%] w-[600px] h-[600px] aura-1 rounded-full pointer-events-none z-0"></div>
-<div class="absolute top-[40%] right-[-10%] w-[700px] h-[700px] aura-2 rounded-full pointer-events-none z-0"></div>
-<div class="absolute bottom-[10%] left-[20%] w-[600px] h-[600px] aura-3 rounded-full pointer-events-none z-0"></div>
-
-<!-- TOP NAVIGATION -->
-<nav class="fixed top-0 w-full z-50 border-b border-zinc-200/50 bg-white/70 backdrop-blur-xl transition-all duration-300" id="main-nav">
-<div class="max-w-[1280px] mx-auto px-8 flex justify-between items-center h-[72px]">
-<div class="flex items-center gap-12">
-<a class="text-xl font-bold tracking-tight text-zinc-900 flex items-center gap-2 font-h1" href="#">
-                    <span class="w-8 h-8 rounded-xl bg-gradient-to-tr from-accent-indigo to-accent-teal flex items-center justify-center text-white text-[16px]">🦷</span>
-                    <span>Renia AI</span>
-                </a>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#features">Features</a>
-<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#integration">PMS Integration</a>
-<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#roi-calculator">ROI Calculator</a>
-<a class="text-sm font-medium tracking-tight text-zinc-500 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="#demo">Live Demo</a>
-</div>
-</div>
-<div class="flex items-center gap-6">
-<a class="text-sm font-medium tracking-tight text-zinc-600 hover:text-zinc-900 transition-colors duration-200 font-body-md" href="login.html">Sign in</a>
-<a class="bg-primary text-on-primary px-5 py-2.5 rounded-full font-medium transition-all scale-98 active:scale-95 active:opacity-90 text-[14px] font-body-md shadow-md shadow-black/5 hover:shadow-lg hover:shadow-black/10" href="signup.html">
-                    Get Started
-                </a>
-</div>
-</div>
-</nav>
-
-<!-- MAIN CONTENT CANVAS -->
-<main class="flex-grow pt-[120px] pb-12 z-10 relative">
-
-    <!-- LANGUAGE SWITCHER HEADER -->
-    <div class="flex justify-center mb-8">
-        <div class="bg-zinc-200/60 p-1 rounded-full border border-zinc-300/40 flex shadow-inner">
-            <button class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 shadow-sm bg-white text-zinc-900" id="lang-en-btn" onclick="switchLanguage('en')">English</button>
-            <button class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 text-zinc-500 hover:text-zinc-900" id="lang-es-btn" onclick="switchLanguage('es')">Español</button>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-center h-[80px]">
+      <div class="flex items-center gap-12">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-accent-teal flex items-center justify-center text-white text-lg shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform duration-300">🦷</div>
+          <span class="font-display text-2xl font-bold tracking-tight text-brand-950">Renia AI</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#platform" class="text-sm font-semibold text-slate-500 hover:text-brand-950 transition-colors">Platform</a>
+          <a href="#integration" class="text-sm font-semibold text-slate-500 hover:text-brand-950 transition-colors">Integration</a>
+          <a href="#roi" class="text-sm font-semibold text-slate-500 hover:text-brand-950 transition-colors">ROI</a>
         </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <!-- Language Switcher -->
+        <div class="hidden lg:flex items-center bg-slate-100 p-1 rounded-full border border-slate-200">
+          <button id="lang-en" class="px-3 py-1 rounded-full text-xs font-bold bg-white text-brand-950 shadow-sm" onclick="setLang('en')">EN</button>
+          <button id="lang-es" class="px-3 py-1 rounded-full text-xs font-bold text-slate-500 hover:text-brand-950" onclick="setLang('es')">ES</button>
+        </div>
+        <a href="login.html" class="text-sm font-bold text-slate-600 hover:text-brand-950 transition-colors">Sign in</a>
+        <a href="signup.html" class="bg-brand-950 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-800 hover:shadow-xl hover:shadow-brand-900/20 hover:-translate-y-0.5 transition-all duration-300">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-[180px] pb-[120px] lg:pt-[240px] lg:pb-[180px] overflow-hidden">
+    <!-- Abstract Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+      <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-200/40 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob"></div>
+      <div class="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-accent-teal/20 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-2000"></div>
+      <div class="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] bg-indigo-200/30 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-4000"></div>
+      
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMjYsIDIyNiwgMjM2LCAwLjUpIiBzdHJva2Utd2lkdGg9IjAuNSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40 mix-blend-overlay mask-image-gradient"></div>
     </div>
 
-<!-- HERO SECTION -->
-<section class="max-w-[1280px] mx-auto px-8 mb-[120px]">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-7 flex flex-col gap-8">
-<div class="inline-flex self-start items-center gap-2 bg-gradient-to-r from-accent-indigo/10 to-accent-teal/10 border border-accent-indigo/20 px-4 py-2 rounded-full">
-    <span class="w-2 h-2 rounded-full bg-accent-indigo animate-pulse"></span>
-    <span class="text-xs font-semibold text-accent-indigo tracking-wide uppercase" id="badge-live">Next-Gen voice AI agent</span>
-</div>
-<h1 class="font-h1 text-[64px] sm:text-[76px] lg:text-[84px] leading-[1.02] text-zinc-900 tracking-[-0.04em] font-extrabold" id="hero-title">
-    Dental AI that sounds human.
-</h1>
-<p class="font-body-lg text-lg sm:text-xl text-secondary-auralis max-w-xl leading-relaxed" id="hero-desc">
-    Renia AI handles phone calls, schedules appointments, and verifies insurance with 99.9% accuracy—giving your front desk team their time back.
-</p>
-<div class="flex flex-wrap items-center gap-4 mt-2">
-<a class="bg-primary text-on-primary px-8 py-4 rounded-full font-semibold transition-all hover:bg-zinc-800 active:scale-95 shadow-lg shadow-black/10 flex items-center gap-2" href="signup.html" id="cta-primary">
-    <span>Launch your AI</span>
-    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</a>
-<a class="bg-white border border-zinc-200 text-zinc-800 px-8 py-4 rounded-full font-semibold transition-all hover:bg-zinc-50 hover:border-zinc-300 active:scale-95 flex items-center gap-2 shadow-sm" href="#demo" id="cta-secondary">
-    <span>Book a Demo</span>
-</a>
-</div>
-</div>
-<div class="lg:col-span-5 flex justify-center">
-    <!-- Live AI Receptionist Widget -->
-    <div class="w-full max-w-[420px] bg-white border border-zinc-200/80 rounded-[2.25rem] p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.06),0_0_1px_1px_rgba(255,255,255,0.8)] relative group overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-tr from-accent-indigo/5 to-accent-teal/5 opacity-50"></div>
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         
-        <!-- Header -->
-        <div class="flex items-center justify-between pb-6 border-b border-zinc-100 z-10 relative">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-accent-indigo/10 flex items-center justify-center text-accent-indigo">
-                    <span class="material-symbols-outlined">support_agent</span>
+        <!-- Hero Text -->
+        <div class="lg:col-span-6 flex flex-col items-start z-10">
+          <div class="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md border border-brand-500/20 px-4 py-2 rounded-full mb-8 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+            <span class="text-xs font-bold text-brand-700 tracking-wider uppercase">Next-Gen Voice AI</span>
+          </div>
+          
+          <h1 class="font-display text-[60px] sm:text-[72px] lg:text-[88px] leading-[1.05] tracking-tight font-extrabold mb-8 hero-gradient-text" id="hero-title">
+            The dental receptionist that never sleeps.
+          </h1>
+          
+          <p class="text-xl sm:text-2xl text-slate-600 mb-10 leading-relaxed font-medium max-w-2xl" id="hero-subtitle">
+            Renia AI perfectly mimics a top-tier Florida front desk manager. It books appointments, verifies insurance, and handles emergencies 24/7 with 99.9% accuracy.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
+            <a href="signup.html" class="w-full sm:w-auto bg-brand-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-600 hover:shadow-xl hover:shadow-brand-500/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+              Deploy Your AI <span class="material-symbols-outlined">rocket_launch</span>
+            </a>
+            <a href="#demo" class="w-full sm:w-auto bg-white border-2 border-slate-200 text-brand-950 px-8 py-4 rounded-full font-bold text-lg hover:border-brand-500 hover:text-brand-500 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm">
+              Listen to Renia <span class="material-symbols-outlined">play_circle</span>
+            </a>
+          </div>
+          
+          <div class="mt-10 flex items-center gap-4 text-sm font-semibold text-slate-500">
+            <div class="flex -space-x-3">
+              <img src="https://i.pravatar.cc/100?img=1" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" alt="User">
+              <img src="https://i.pravatar.cc/100?img=5" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" alt="User">
+              <img src="https://i.pravatar.cc/100?img=9" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" alt="User">
+              <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-bold">+500</div>
+            </div>
+            <p>Trusted by 500+ Florida practices</p>
+          </div>
+        </div>
+
+        <!-- Hero Visual (Interactive AI Dashboard representation) -->
+        <div class="lg:col-span-6 relative z-10 lg:pl-12">
+          <!-- Main Float Card -->
+          <div class="glass-card rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden animate-float border-t-2 border-t-white/80">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-accent-teal/20 to-transparent rounded-bl-full pointer-events-none"></div>
+            
+            <div class="flex items-center justify-between mb-8">
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-slate-800 to-brand-950 flex items-center justify-center shadow-lg relative">
+                  <span class="material-symbols-outlined text-white text-2xl">graphic_eq</span>
+                  <div class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-400 border-2 border-white rounded-full"></div>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold text-zinc-900">Renia AI Receptionist</h4>
-                    <span class="text-[10px] uppercase font-bold text-accent-indigo tracking-wider" id="badge-active-status">Active Call Simulation</span>
+                  <h3 class="font-display text-xl font-bold text-brand-950">Renia Voice Engine</h3>
+                  <p class="text-sm font-semibold text-emerald-600 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Active Call
+                  </p>
                 </div>
-            </div>
-            <div class="bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-[9px] font-bold text-emerald-700 uppercase" id="badge-sim-live">Online</span>
-            </div>
-        </div>
-
-        <!-- Simulation Screen (Conversations) -->
-        <div class="py-8 flex flex-col gap-4 min-h-[220px] justify-center relative z-10">
-            <!-- Simulated Waveform -->
-            <div class="flex items-center justify-center gap-1 h-[48px] my-4 opacity-50" id="soundwave-container" style="display: none;">
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 12px"></div>
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 24px"></div>
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 38px"></div>
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 18px"></div>
-                <div class="w-1 bg-accent-teal rounded-full wave-bar" style="height: 28px"></div>
-                <div class="w-1 bg-accent-teal rounded-full wave-bar" style="height: 42px"></div>
-                <div class="w-1 bg-accent-teal rounded-full wave-bar" style="height: 32px"></div>
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 20px"></div>
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 35px"></div>
-                <div class="w-1 bg-accent-indigo rounded-full wave-bar" style="height: 14px"></div>
+              </div>
+              <div class="px-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-sm font-mono font-bold text-slate-600 shadow-inner">
+                02:14
+              </div>
             </div>
 
-            <!-- Dialogue Text Bubble -->
-            <div id="sim-dialogue-box" class="text-center px-4 transition-all duration-300">
-                <p class="text-xs text-zinc-400 font-semibold uppercase tracking-wider mb-2" id="sim-speaker">Interactive Demo</p>
-                <p class="text-[15px] font-medium text-zinc-800 leading-relaxed" id="sim-text">Click play below to hear a realistic Florida dental patient call simulated by Renia AI.</p>
+            <!-- Visualizer -->
+            <div class="bg-brand-50 rounded-2xl p-8 flex items-center justify-center mb-8 border border-brand-100 relative overflow-hidden">
+              <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoOTksIDEwMiwgMjQxLCAwLjEpIi8+PC9zdmc+')]"></div>
+              <div class="waveform z-10">
+                <div class="waveform-bar bg-brand-300 w-1"></div>
+                <div class="waveform-bar bg-brand-400 w-2"></div>
+                <div class="waveform-bar bg-brand-500 w-3"></div>
+                <div class="waveform-bar bg-brand-600 w-4"></div>
+                <div class="waveform-bar bg-accent-teal w-5"></div>
+                <div class="waveform-bar bg-accent-teal w-6"></div>
+                <div class="waveform-bar bg-accent-teal w-7"></div>
+                <div class="waveform-bar bg-brand-600 w-8"></div>
+                <div class="waveform-bar bg-brand-500 w-1"></div>
+                <div class="waveform-bar bg-brand-400 w-2"></div>
+                <div class="waveform-bar bg-brand-300 w-3"></div>
+              </div>
             </div>
-        </div>
 
-        <!-- Call Action controls -->
-        <div class="pt-6 border-t border-zinc-100 flex flex-col gap-4 z-10 relative">
-            <div class="flex items-center justify-between">
-                <button class="w-14 h-14 bg-zinc-950 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform" id="btn-play-sim" onclick="toggleVoiceSim()">
-                    <span class="material-symbols-outlined fill text-2xl" id="sim-play-icon">play_arrow</span>
-                </button>
-                <div class="text-right">
-                    <span class="text-xs font-mono font-bold text-zinc-900 bg-zinc-100 px-2 py-1 rounded border border-zinc-200 shadow-sm" id="sim-timer">00:00</span>
+            <!-- Subtitles Simulation -->
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <div class="w-8 h-8 rounded-full bg-slate-200 shrink-0 flex items-center justify-center text-xs font-bold text-slate-500">PT</div>
+                <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 text-sm font-medium text-slate-700 w-11/12 border border-slate-200">
+                  "Hi, I woke up with severe pain in my lower left jaw. Do you have any availability today?"
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</section>
-
-<!-- HERO PRODUCT PANEL / LIVE PREVIEW -->
-<section class="max-w-[1280px] mx-auto px-8 mb-[140px]" id="demo">
-<div class="bg-panel-auralis rounded-3xl p-8 flex flex-col relative overflow-hidden border border-auralis min-h-[600px] justify-between">
-<!-- Top Tabs -->
-<div class="flex justify-between items-center z-10">
-<div class="flex bg-surface-container-low p-1 rounded-full border border-auralis shadow-sm">
-<button class="px-4 py-2 bg-surface text-primary rounded-full text-sm font-semibold shadow-sm">Live Call Dashboard</button>
-<button class="px-4 py-2 text-secondary-auralis rounded-full text-sm font-semibold hover:text-primary transition-colors">Smart Scheduling</button>
-<button class="px-4 py-2 text-secondary-auralis rounded-full text-sm font-semibold hover:text-primary transition-colors">Insurance Verification</button>
-</div>
-<div class="bg-surface-container-low px-4 py-2 rounded-full border border-auralis flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-<span class="text-sm font-semibold text-zinc-700" id="system-status-indicator">Active Voice Generator</span>
-</div>
-</div>
-<!-- Center Orbs (Simulated with gradients) -->
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-100">
-<div class="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-rose-400 to-orange-300 blur-3xl absolute -ml-40"></div>
-<div class="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-indigo-300 to-purple-400 blur-3xl absolute"></div>
-<div class="w-[250px] h-[250px] rounded-full bg-gradient-to-tr from-emerald-300 to-teal-200 blur-3xl absolute ml-40 mt-20"></div>
-<div class="w-[350px] h-[350px] rounded-full bg-gradient-to-tr from-sky-300 to-blue-400 blur-3xl absolute ml-80 -mt-20"></div>
-</div>
-<!-- Play Button Center -->
-<div class="z-10 self-center my-auto flex flex-col items-center gap-4">
-<button class="w-20 h-20 bg-surface rounded-full flex items-center justify-center shadow-lg border border-auralis transition-transform hover:scale-105 group" onclick="toggleVoiceSim()">
-<span class="material-symbols-outlined text-4xl text-primary pl-1 group-hover:text-accent-indigo transition-colors">play_arrow</span>
-</button>
-<span class="text-xs font-bold text-zinc-600 uppercase tracking-widest mt-2" id="sim-play-caption">Listen to Renia</span>
-</div>
-<!-- Bottom Bar -->
-<div class="flex justify-between items-center z-10 bg-surface/80 backdrop-blur-md p-4 rounded-2xl border border-auralis">
-<div class="flex gap-6 overflow-x-auto no-scrollbar">
-<span class="text-sm font-semibold text-primary" id="sim-cap-badge">Capabilities:</span>
-<span class="text-sm font-medium text-secondary-auralis">Emergency Triage</span>
-<span class="text-sm font-medium text-secondary-auralis">Spanish Support</span>
-<span class="text-sm font-medium text-secondary-auralis">Rescheduling</span>
-<span class="text-sm font-medium text-secondary-auralis">Voicemail Handling</span>
-</div>
-<a class="bg-primary text-on-primary px-6 py-2 rounded-full text-sm font-semibold whitespace-nowrap hover:bg-zinc-800" href="signup.html" id="sim-trial-btn">Start Free Trial</a>
-</div>
-</div>
-</section>
-
-<!-- TRUST STRIP -->
-<section class="max-w-[1280px] mx-auto px-8 text-center mb-10">
-<h3 class="font-label-caps text-xs font-semibold text-secondary-auralis uppercase tracking-[0.15em] mb-0" id="trust-strip-title">Trusted by modern Florida dental practices</h3>
-</section>
-<!-- LOGO MARQUEE SECTION -->
-<section class="w-full overflow-hidden mt-0 mb-[120px] py-4">
-<div class="flex whitespace-nowrap overflow-hidden group">
-<div class="flex items-center gap-24 animate-marquee group-hover:pause-marquee"><!-- Logo Set -->
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">dentistry</span>Sunshine Dental</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">health_and_safety</span>Apex Ortho</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">medical_services</span>Coastal Smiles</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">healing</span>Lumina Care</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">favorite</span>Premier Dental</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">spa</span>Zenith Periodontics</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">child_care</span>Kids First Dental</div></div>
-<div aria-hidden="true" class="flex items-center gap-24 animate-marquee group-hover:pause-marquee"><!-- Logo Set -->
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">dentistry</span>Sunshine Dental</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">health_and_safety</span>Apex Ortho</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">medical_services</span>Coastal Smiles</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">healing</span>Lumina Care</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">favorite</span>Premier Dental</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">spa</span>Zenith Periodontics</div>
-<div class="flex items-center gap-2 text-secondary-auralis/30 font-bold text-xl uppercase tracking-tighter italic"><span class="material-symbols-outlined text-3xl">child_care</span>Kids First Dental</div></div>
-</div>
-</section>
-
-<!-- PMS INTEGRATION FLOW DIAGRAM -->
-<section class="max-w-[1280px] mx-auto px-8 mb-[120px]" id="integration">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold text-accent-indigo uppercase tracking-wider" id="badge-pms">Real-Time Connectivity</span>
-        <h2 class="font-h2 text-[36px] sm:text-[48px] font-bold text-zinc-900 mt-2 mb-6" id="pms-title">Seamlessly integrates with your PMS</h2>
-        <p class="font-body-lg text-lg text-secondary-auralis" id="pms-desc">Renia AI writes appointment requests, notes, and patient details directly into Dentrix, Eaglesoft, and Open Dental in real-time.</p>
-    </div>
-
-    <!-- Node Map -->
-    <div class="w-full bg-white rounded-3xl border border-zinc-200 p-8 shadow-sm flex flex-col md:flex-row items-center justify-around gap-12 relative overflow-hidden">
-        
-        <!-- Left: PMS nodes -->
-        <div class="flex flex-col gap-6 w-full md:w-auto">
-            <!-- Node Dentrix -->
-            <div class="bg-zinc-50 border border-zinc-200/80 rounded-2xl p-4 flex items-center gap-4 w-[240px] shadow-sm relative z-10">
-                <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 font-bold">DX</div>
-                <div>
-                    <h5 class="text-[15px] font-bold text-zinc-900">Dentrix</h5>
-                    <span class="text-[10px] text-zinc-400 font-semibold" id="pms-node-status-1">Connected</span>
+              </div>
+              <div class="flex gap-4 flex-row-reverse">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-500 to-accent-teal shrink-0 flex items-center justify-center text-xs text-white"><span class="material-symbols-outlined text-[16px]">smart_toy</span></div>
+                <div class="bg-brand-950 rounded-2xl rounded-tr-none p-4 text-sm font-medium text-white w-11/12 shadow-md">
+                  "I'm so sorry to hear you're in pain! Yes, we reserve emergency slots. Dr. Mitchell can see you at 2:30 PM today. Let me get your information so we can prepare for your arrival."
                 </div>
+              </div>
             </div>
-            <!-- Node Open Dental -->
-            <div class="bg-zinc-50 border border-zinc-200/80 rounded-2xl p-4 flex items-center gap-4 w-[240px] shadow-sm relative z-10">
-                <div class="w-10 h-10 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-500 font-bold">OD</div>
-                <div>
-                    <h5 class="text-[15px] font-bold text-zinc-900">Open Dental</h5>
-                    <span class="text-[10px] text-zinc-400 font-semibold" id="pms-node-status-2">Connected</span>
-                </div>
-            </div>
-            <!-- Node Eaglesoft -->
-            <div class="bg-zinc-50 border border-zinc-200/80 rounded-2xl p-4 flex items-center gap-4 w-[240px] shadow-sm relative z-10">
-                <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 font-bold">ES</div>
-                <div>
-                    <h5 class="text-[15px] font-bold text-zinc-900">Eaglesoft</h5>
-                    <span class="text-[10px] text-zinc-400 font-semibold" id="pms-node-status-3">Connected</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- Center Animation Canvas (SVG lines connecting) -->
-        <div class="hidden md:block absolute inset-0 pointer-events-none">
-            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                <!-- Lines from Left (PMS nodes) to Center (Renia Core) -->
-                <path d="M 280 120 L 520 220" stroke="#E2E2EC" stroke-width="2" fill="none" />
-                <path d="M 280 220 L 520 220" stroke="#E2E2EC" stroke-width="2" fill="none" />
-                <path d="M 280 320 L 520 220" stroke="#E2E2EC" stroke-width="2" fill="none" />
-                
-                <!-- Pulsing Active Dots -->
-                <path d="M 280 120 L 520 220" stroke="url(#gradient-line)" stroke-width="2" fill="none" class="animated-dot-line" />
-                <path d="M 280 220 L 520 220" stroke="url(#gradient-line)" stroke-width="2" fill="none" class="animated-dot-line" />
-                <path d="M 280 320 L 520 220" stroke="url(#gradient-line)" stroke-width="2" fill="none" class="animated-dot-line" />
+          </div>
 
-                <!-- Definition for Gradients -->
-                <defs>
-                    <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#6366F1" />
-                        <stop offset="100%" stop-color="#0FD8B6" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
-        <!-- Right: Renia Core Node -->
-        <div class="flex flex-col items-center gap-4 relative z-10">
-            <div class="w-32 h-32 rounded-[2.5rem] bg-gradient-to-tr from-accent-indigo to-accent-teal p-[2px] shadow-lg shadow-accent-indigo/20 flex items-center justify-center animate-pulse">
-                <div class="w-full h-full bg-white rounded-[2.4rem] flex flex-col items-center justify-center gap-1">
-                    <span class="material-symbols-outlined text-4xl text-zinc-900">sync_alt</span>
-                    <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest">Renia Core</span>
-                </div>
-            </div>
-            <div class="bg-zinc-100 px-3 py-1.5 rounded-full border border-zinc-200 text-xs font-semibold text-zinc-600 flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent-teal"></span>
-                <span id="pms-diagram-sync">2-Way Sync Active</span>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- INTERACTIVE ROI SAVINGS CALCULATOR -->
-<section class="max-w-[1280px] mx-auto px-8 mb-[120px]" id="roi-calculator">
-    <div class="bg-zinc-900 rounded-3xl p-8 sm:p-12 border border-zinc-800 text-white relative overflow-hidden shadow-xl">
-        <div class="absolute inset-0 bg-gradient-to-tr from-accent-indigo/10 to-transparent opacity-50"></div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+          <!-- Floating Data Cards -->
+          <div class="absolute -right-8 top-1/4 glass-card p-4 rounded-2xl shadow-xl border border-white/60 flex items-center gap-4 animate-float" style="animation-delay: 1s;">
+            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined">verified</span></div>
             <div>
-                <span class="text-xs font-bold text-accent-teal uppercase tracking-widest" id="roi-badge">ROI Estimator</span>
-                <h2 class="font-h2 text-[36px] sm:text-[44px] font-bold mt-2 mb-6" id="roi-title">Calculate your practice savings</h2>
-                <p class="text-zinc-400 leading-relaxed mb-8" id="roi-desc">Florida dental practices miss an average of 35% of incoming calls. Move the slider below to see how much missed revenue and staff hours Renia AI instantly recovers.</p>
-                
-                <!-- Range Slider -->
-                <div class="flex flex-col gap-4">
-                    <div class="flex justify-between items-center">
-                        <label for="calls-slider" class="text-sm font-semibold" id="slider-label">Missed Calls Per Month</label>
-                        <span class="text-2xl font-extrabold text-accent-teal" id="calls-value">80</span>
-                    </div>
-                    <input type="range" id="calls-slider" min="10" max="300" value="80" class="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-accent-teal" oninput="calculateSavings()">
-                </div>
+              <div class="text-xs font-bold text-slate-500 uppercase">Delta Dental</div>
+              <div class="text-sm font-extrabold text-brand-950">Verified Instantly</div>
             </div>
+          </div>
+          
+          <div class="absolute -left-12 bottom-1/4 glass-card p-4 rounded-2xl shadow-xl border border-white/60 flex items-center gap-4 animate-float" style="animation-delay: 2s;">
+            <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600"><span class="material-symbols-outlined">event_available</span></div>
+            <div>
+              <div class="text-xs font-bold text-slate-500 uppercase">Dentrix Sync</div>
+              <div class="text-sm font-extrabold text-brand-950">Appt Written</div>
+            </div>
+          </div>
 
-            <!-- Savings metrics -->
-            <div class="grid grid-cols-2 gap-6 bg-zinc-800/40 p-8 rounded-2xl border border-zinc-800">
-                <div class="flex flex-col">
-                    <span class="text-xs text-zinc-400 font-semibold tracking-wide uppercase" id="metric-captured-label">Captured Revenue</span>
-                    <span class="text-3xl sm:text-4xl font-extrabold text-accent-teal mt-2" id="metric-captured-value">$16,000</span>
-                    <span class="text-[10px] text-zinc-500 mt-1" id="metric-captured-sub">Reinvested in growth</span>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xs text-zinc-400 font-semibold tracking-wide uppercase" id="metric-hours-label">Staff Time Saved</span>
-                    <span class="text-3xl sm:text-4xl font-extrabold text-accent-teal mt-2" id="metric-hours-value">20 hrs</span>
-                    <span class="text-[10px] text-zinc-500 mt-1" id="metric-hours-sub">Redirected to in-office care</span>
-                </div>
-                <div class="col-span-2 border-t border-zinc-700/50 pt-6 mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                        <span class="text-xs text-zinc-400 font-semibold block uppercase" id="roi-cost-label">Renia AI Starter Cost</span>
-                        <span class="text-lg font-bold text-white mt-1">$299/mo</span>
-                    </div>
-                    <a class="bg-accent-teal text-zinc-950 px-6 py-3 rounded-full font-bold text-sm hover:bg-teal-400 active:scale-95 transition-all shadow-md shadow-accent-teal/10" href="signup.html" id="roi-start-btn">Start Saving Now</a>
-                </div>
-            </div>
         </div>
+
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- PLATFORM OVERVIEW (FEATURES CARD GRID) -->
-<section class="max-w-[1280px] mx-auto px-8 mb-[120px]" id="features">
-<div class="text-center max-w-3xl mx-auto mb-16">
-<span class="text-xs font-bold text-accent-indigo uppercase tracking-wider" id="badge-opportunities">Zero Missed Opportunities</span>
-<h2 class="font-h2 text-[36px] sm:text-[48px] font-bold text-zinc-900 mt-2 mb-6" id="features-title">Capture every patient, even after hours</h2>
-<p class="font-body-lg text-lg text-secondary-auralis" id="features-desc">Missed calls cost dental practices thousands of dollars a month. Renia AI ensures every call is answered instantly, whether your staff is busy with a patient or it's 2 AM on a Sunday.</p>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-<!-- Large Card 1 -->
-<div class="bg-card-auralis rounded-3xl p-8 border border-auralis h-[320px] flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
-<div class="absolute inset-0 bg-gradient-to-br from-accent-indigo/5 to-accent-indigo/10 opacity-30 group-hover:opacity-50 transition-opacity"></div>
-<div class="flex justify-between items-start z-10">
-    <div class="w-12 h-12 rounded-xl bg-accent-indigo/10 flex items-center justify-center text-accent-indigo">
-        <span class="material-symbols-outlined text-2xl">translate</span>
+  <!-- Logo Cloud -->
+  <section class="border-y border-slate-200/60 bg-white/50 backdrop-blur-sm overflow-hidden py-10 relative z-20">
+    <div class="text-center mb-6"><span class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">Integrated directly with Florida's leading providers</span></div>
+    <div class="relative flex overflow-x-hidden w-full group">
+      <div class="animate-scrolling flex whitespace-nowrap group-hover:[animation-play-state:paused]">
+        <!-- Set 1 -->
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-brand-500">dentistry</span><span class="font-display font-bold text-2xl">Dentrix</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-brand-500">dataset</span><span class="font-display font-bold text-2xl">Eaglesoft</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-brand-500">source</span><span class="font-display font-bold text-2xl">Open Dental</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-blue-500">health_and_safety</span><span class="font-display font-bold text-2xl">Delta Dental</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-emerald-500">verified</span><span class="font-display font-bold text-2xl">Humana</span></div>
+      </div>
+      <div class="animate-scrolling flex whitespace-nowrap group-hover:[animation-play-state:paused] absolute top-0" style="left: 100%;">
+        <!-- Set 2 -->
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-brand-500">dentistry</span><span class="font-display font-bold text-2xl">Dentrix</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-brand-500">dataset</span><span class="font-display font-bold text-2xl">Eaglesoft</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-brand-500">source</span><span class="font-display font-bold text-2xl">Open Dental</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-blue-500">health_and_safety</span><span class="font-display font-bold text-2xl">Delta Dental</span></div>
+        <div class="mx-12 flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer"><span class="material-symbols-outlined text-4xl text-emerald-500">verified</span><span class="font-display font-bold text-2xl">Humana</span></div>
+      </div>
     </div>
-</div>
-<div class="z-10">
-<h4 class="font-h3 text-xl font-bold text-zinc-900 mb-2" id="feature-card-1-title">Bilingual Support</h4>
-<p class="text-[15px] text-secondary-auralis leading-relaxed" id="feature-card-1-desc">Fluent in English and Spanish natively to assist all Florida patients, updating preference dynamically inside your PMS.</p>
-</div>
-</div>
-<!-- Large Card 2 -->
-<div class="bg-card-auralis rounded-3xl p-8 border border-auralis h-[320px] flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
-<div class="absolute inset-0 bg-gradient-to-br from-accent-teal/5 to-accent-teal/10 opacity-30 group-hover:opacity-50 transition-opacity"></div>
-<div class="flex justify-between items-start z-10">
-    <div class="w-12 h-12 rounded-xl bg-accent-teal/10 flex items-center justify-center text-accent-teal">
-        <span class="material-symbols-outlined text-2xl">quick_reference_all</span>
+  </section>
+
+  <!-- Feature Grid / Value Prop -->
+  <section id="platform" class="py-[140px] relative">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-4xl mx-auto mb-20">
+        <h2 class="font-display text-[44px] sm:text-[56px] font-extrabold text-brand-950 leading-tight mb-6 tracking-tight">
+          Stop sending your growth<br><span class="accent-gradient-text">straight to voicemail.</span>
+        </h2>
+        <p class="text-xl text-slate-600 font-medium leading-relaxed">
+          In 2026, 42% of patients who hit a clinic's voicemail instantly hang up and call the next dentist on Google. Renia AI ensures you never miss a patient again.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="glass-card rounded-[2rem] p-10 hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 mb-8 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+            <span class="material-symbols-outlined text-3xl">record_voice_over</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-brand-950 mb-4">Hyper-Realistic Voice</h3>
+          <p class="text-slate-600 leading-relaxed font-medium">Powered by Grok-3, Renia pauses, uses filler words, and detects interruptions. Patients truly believe they are speaking to your staff.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="glass-card rounded-[2rem] p-10 hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="w-16 h-16 rounded-2xl bg-accent-teal/10 flex items-center justify-center text-accent-teal mb-8 group-hover:scale-110 group-hover:bg-accent-teal group-hover:text-white transition-all duration-300">
+            <span class="material-symbols-outlined text-3xl">language</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-brand-950 mb-4">Native Bilingual (FL)</h3>
+          <p class="text-slate-600 leading-relaxed font-medium">Crucial for Florida markets, Renia instantly detects Spanish and switches languages seamlessly, never dropping a patient's context.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="glass-card rounded-[2rem] p-10 hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="w-16 h-16 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-500 mb-8 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
+            <span class="material-symbols-outlined text-3xl">local_hospital</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-brand-950 mb-4">Emergency Triage</h3>
+          <p class="text-slate-600 leading-relaxed font-medium">Understands dental symptoms. Routes severe emergencies (like knocked out teeth) to the doctor's direct line based on your custom protocol.</p>
+        </div>
+      </div>
     </div>
-</div>
-<div class="z-10">
-<h4 class="font-h3 text-xl font-bold text-zinc-900 mb-2" id="feature-card-2-title">Clinic Knowledge Base</h4>
-<p class="text-[15px] text-secondary-auralis leading-relaxed" id="feature-card-2-desc">Answers complex practice queries about accepted insurance plans, office locations, hours, cancellation policies, and emergency instructions.</p>
-</div>
-</div>
-</div>
+  </section>
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-<!-- Small Cards -->
-<div class="bg-white rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:-translate-y-1 transition-all duration-300 shadow-sm cursor-pointer group">
-<div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-500 group-hover:bg-rose-100 transition-colors">
-    <span class="material-symbols-outlined text-xl">local_hospital</span>
-</div>
-<span class="font-bold text-zinc-900 text-sm" id="feat-pill-1">Emergency Triage</span>
-</div>
-<div class="bg-white rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:-translate-y-1 transition-all duration-300 shadow-sm cursor-pointer group">
-<div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-accent-indigo group-hover:bg-indigo-100 transition-colors">
-    <span class="material-symbols-outlined text-xl">calendar_month</span>
-</div>
-<span class="font-bold text-zinc-900 text-sm" id="feat-pill-2">Smart Scheduling</span>
-</div>
-<div class="bg-white rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:-translate-y-1 transition-all duration-300 shadow-sm cursor-pointer group">
-<div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-100 transition-colors">
-    <span class="material-symbols-outlined text-xl">verified_user</span>
-</div>
-<span class="font-bold text-zinc-900 text-sm" id="feat-pill-3">Insurance Check</span>
-</div>
-<div class="bg-white rounded-2xl p-6 border border-auralis flex flex-col gap-4 items-start hover:-translate-y-1 transition-all duration-300 shadow-sm cursor-pointer group">
-<div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 group-hover:bg-teal-100 transition-colors">
-    <span class="material-symbols-outlined text-xl">shield_lock</span>
-</div>
-<span class="font-bold text-zinc-900 text-sm" id="feat-pill-4">HIPAA Secure</span>
-</div>
-</div>
-</section>
+  <!-- Deep Integration Section -->
+  <section id="integration" class="py-[140px] bg-brand-950 text-white relative overflow-hidden rounded-[3rem] mx-4 lg:mx-12 shadow-2xl">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg5OSwgMTAyLCAyNDEsIDAuMikiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
+    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-brand-600/30 to-transparent rounded-bl-full pointer-events-none"></div>
 
-<!-- SIGN OFF SECTION -->
-<section class="max-w-[1280px] mx-auto px-8 mb-[120px] text-center flex flex-col items-center">
-<h2 class="font-h2 text-[48px] sm:text-[56px] text-zinc-900 mb-8 max-w-3xl leading-tight font-extrabold" id="footer-cta-title">Upgrade your front desk today.</h2>
-<div class="flex flex-wrap justify-center items-center gap-4">
-<a class="bg-primary text-on-primary px-8 py-4 rounded-full font-semibold transition-all hover:bg-zinc-800 active:scale-95 shadow-md" href="signup.html" id="footer-cta-btn">Deploy Renia AI</a>
-<a class="bg-white border border-zinc-200 text-zinc-800 px-8 py-4 rounded-full font-semibold transition-all hover:bg-zinc-50 active:scale-95 shadow-sm" href="#demo" id="footer-cta-demo">Book a Demo</a>
-</div>
-</section>
-</main>
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <span class="inline-block py-1.5 px-4 rounded-full bg-brand-800 border border-brand-700 text-xs font-bold text-brand-200 uppercase tracking-widest mb-6">Real-Time Database Sync</span>
+          <h2 class="font-display text-[40px] sm:text-[52px] font-extrabold leading-tight mb-8">
+            Writes directly into your Practice Management System.
+          </h2>
+          <p class="text-xl text-slate-400 font-medium leading-relaxed mb-10">
+            Renia AI isn't just a chatbot. It has bidirectional sync with Dentrix, Open Dental, and Eaglesoft. When Renia books a 2:30 PM appointment, it instantly appears on your front desk's calendar.
+          </p>
+          
+          <ul class="space-y-6">
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-accent-teal/20 flex items-center justify-center text-accent-teal mt-1 shrink-0"><span class="material-symbols-outlined text-lg">check</span></div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">Calendar Reading & Writing</h4>
+                <p class="text-slate-400">Instantly finds gaps in your schedule and commits new appointments to your DB.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-accent-teal/20 flex items-center justify-center text-accent-teal mt-1 shrink-0"><span class="material-symbols-outlined text-lg">check</span></div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">Automated Patient Profiles</h4>
+                <p class="text-slate-400">Collects Name, DOB, and Insurance info, creating a new patient record perfectly formatted.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-accent-teal/20 flex items-center justify-center text-accent-teal mt-1 shrink-0"><span class="material-symbols-outlined text-lg">check</span></div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">Clinical Note Generation</h4>
+                <p class="text-slate-400">Summarizes the symptom complaints and attaches the audio transcript to the patient file.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-<!-- FOOTER -->
-<footer class="w-full border-t border-zinc-200/60 bg-white py-12 z-10 relative">
-<div class="max-w-[1280px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex items-center gap-8">
-<span class="text-lg font-bold tracking-tight text-zinc-950 font-h3 text-[20px] flex items-center gap-2">
-    <span class="w-6 h-6 rounded-lg bg-gradient-to-tr from-accent-indigo to-accent-teal flex items-center justify-center text-white text-[12px]">🦷</span>
-    <span>Renia AI</span>
-</span>
-<span class="text-sm text-secondary-auralis font-body-md" id="footer-copy">© 2026 Renia AI. Engineered for Dental Clinics.</span>
-</div>
-<div class="flex flex-wrap items-center gap-6">
-<a class="text-sm text-secondary-auralis hover:text-primary transition-colors font-body-md" href="#features">Platform</a>
-<a class="text-sm text-secondary-auralis hover:text-primary transition-colors font-body-md" href="#">Privacy</a>
-<a class="text-sm text-secondary-auralis hover:text-primary transition-colors font-body-md" href="#">Terms</a>
-</div>
-</div>
-</footer>
+        <!-- Animated Data Flow Diagram -->
+        <div class="relative bg-brand-900/50 rounded-3xl border border-brand-800 p-8 h-[500px] flex items-center justify-center backdrop-blur-xl">
+          <div class="flex items-center justify-between w-full max-w-[400px]">
+            <!-- Agent Node -->
+            <div class="flex flex-col items-center gap-3 relative z-10">
+              <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-brand-500 to-accent-teal flex items-center justify-center shadow-xl shadow-brand-500/50 relative">
+                <span class="material-symbols-outlined text-white text-4xl">smart_toy</span>
+                <span class="absolute -top-2 -right-2 w-4 h-4 bg-emerald-400 border-2 border-brand-900 rounded-full animate-pulse"></span>
+              </div>
+              <span class="font-bold text-white tracking-wide">Renia Core</span>
+            </div>
+            
+            <!-- Flow Lines -->
+            <div class="flex-1 h-32 relative mx-4">
+              <svg width="100%" height="100%" preserveAspectRatio="none">
+                <path d="M0,30 C50,30 50,30 100%,30" stroke="#4f46e5" stroke-width="3" fill="none" class="connector-line"/>
+                <path d="M100%,90 C50,90 50,90 0,90" stroke="#0FD8B6" stroke-width="3" fill="none" class="connector-line"/>
+              </svg>
+              <div class="absolute top-2 left-1/2 -translate-x-1/2 bg-brand-800 px-3 py-1 rounded text-[10px] font-bold text-brand-300">GET: Availability</div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2 bg-brand-800 px-3 py-1 rounded text-[10px] font-bold text-accent-teal">POST: Appointment</div>
+            </div>
 
-<script>
-    // Language Switcher Dictionary
-    const content = {
-        en: {
-            badgeLive: "Next-Gen voice AI agent",
-            heroTitle: "Dental AI that sounds human.",
-            heroDesc: "Renia AI handles phone calls, schedules appointments, and verifies insurance with 99.9% accuracy—giving your front desk team their time back.",
-            ctaPrimary: "Launch your AI",
-            ctaSecondary: "Book a Demo",
-            badgeActiveStatus: "Active Call Simulation",
-            badgeSimLive: "Online",
-            systemStatusIndicator: "Active Voice Generator",
-            simPlayCaption: "Listen to Renia",
-            simCapBadge: "Capabilities:",
-            trustStripTitle: "Trusted by modern Florida dental practices",
-            badgePms: "Real-Time Connectivity",
-            pmsTitle: "Seamlessly integrates with your PMS",
-            pmsDesc: "Renia AI writes appointment requests, notes, and patient details directly into Dentrix, Eaglesoft, and Open Dental in real-time.",
-            pmsNodeStatus1: "Connected",
-            pmsNodeStatus2: "Connected",
-            pmsNodeStatus3: "Connected",
-            pmsDiagramSync: "2-Way Sync Active",
-            roiBadge: "ROI Estimator",
-            roiTitle: "Calculate your practice savings",
-            roiDesc: "Florida dental practices miss an average of 35% of incoming calls. Move the slider below to see how much missed revenue and staff hours Renia AI instantly recovers.",
-            sliderLabel: "Missed Calls Per Month",
-            metricCapturedLabel: "Captured Revenue",
-            metricHoursLabel: "Staff Time Saved",
-            roiCostLabel: "Renia AI Starter Cost",
-            roiStartBtn: "Start Saving Now",
-            badgeOpportunities: "Zero Missed Opportunities",
-            featuresTitle: "Capture every patient, even after hours",
-            featuresDesc: "Missed calls cost dental practices thousands of dollars a month. Renia AI ensures every call is answered instantly, whether your staff is busy with a patient or it's 2 AM on a Sunday.",
-            featureCard1Title: "Bilingual Support",
-            featureCard1Desc: "Fluent in English and Spanish natively to assist all Florida patients, updating preference dynamically inside your PMS.",
-            featureCard2Title: "Clinic Knowledge Base",
-            featureCard2Desc: "Answers complex practice queries about accepted insurance plans, office locations, hours, cancellation policies, and emergency instructions.",
-            featPill1: "Emergency Triage",
-            featPill2: "Smart Scheduling",
-            featPill3: "Insurance Check",
-            featPill4: "HIPAA Secure",
-            footerCtaTitle: "Upgrade your front desk today.",
-            footerCtaBtn: "Deploy Renia AI",
-            footerCtaDemo: "Book a Demo",
-            footerCopy: "© 2026 Renia AI. Engineered for Dental Clinics."
-        },
-        es: {
-            badgeLive: "Agente IA de voz de última generación",
-            heroTitle: "Inteligencia Artificial Dental con voz humana.",
-            heroDesc: "Renia AI atiende llamadas, agenda citas y verifica seguros con 99.9% de precisión, devolviéndole el tiempo a su equipo de recepción.",
-            ctaPrimary: "Iniciar mi IA",
-            ctaSecondary: "Ver Demostración",
-            badgeActiveStatus: "Simulación de llamada activa",
-            badgeSimLive: "En línea",
-            systemStatusIndicator: "Generador de voz activo",
-            simPlayCaption: "Escuchar a Renia",
-            simCapBadge: "Funciones:",
-            trustStripTitle: "De confianza para clínicas dentales de Florida",
-            badgePms: "Conectividad en Tiempo Real",
-            pmsTitle: "Integrado perfectamente a su PMS",
-            pmsDesc: "Renia AI escribe solicitudes de citas, notas e información de pacientes directamente en Dentrix, Eaglesoft y Open Dental al instante.",
-            pmsNodeStatus1: "Conectado",
-            pmsNodeStatus2: "Conedatado",
-            pmsNodeStatus3: "Conectado",
-            pmsDiagramSync: "Sincronización bidireccional activa",
-            roiBadge: "Estimador de ROI",
-            roiTitle: "Calcule el ahorro en su práctica",
-            roiDesc: "Las clínicas dentales de Florida pierden en promedio el 35% de las llamadas entrantes. Mueva el control deslizante para ver cuánto recupera al instante.",
-            sliderLabel: "Llamadas perdidas al mes",
-            metricCapturedLabel: "Ingresos Capturados",
-            metricHoursLabel: "Tiempo de Personal Ahorrado",
-            roiCostLabel: "Costo Inicial de Renia AI",
-            roiStartBtn: "Empezar a Ahorrar Ahora",
-            badgeOpportunities: "Cero Oportunidades Perdidas",
-            featuresTitle: "Capture cada paciente, incluso fuera de horario",
-            featuresDesc: "Las llamadas perdidas cuestan a las clínicas dentales miles de dólares al mes. Renia AI asegura respuestas inmediatas a todas las llamadas 24/7/365.",
-            featureCard1Title: "Soporte Bilingüe",
-            featureCard1Desc: "Habla inglés y español de forma nativa para asistir a todos los pacientes de Florida, actualizando preferencias dinámicamente.",
-            featureCard2Title: "Base de Conocimientos",
-            featureCard2Desc: "Responde consultas complejas sobre seguros aceptados, ubicaciones, horarios de atención y protocolos de emergencia.",
-            featPill1: "Triaje de Emergencia",
-            featPill2: "Agenda Inteligente",
-            featPill3: "Verificación de Seguro",
-            featPill4: "Seguro HIPAA",
-            footerCtaTitle: "Mejore su recepción hoy mismo.",
-            footerCtaBtn: "Desplegar Renia AI",
-            footerCtaDemo: "Ver Demostración",
-            footerCopy: "© 2026 Renia AI. Diseñado para clínicas dentales."
-        }
+            <!-- PMS Node -->
+            <div class="flex flex-col gap-4 relative z-10">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center shadow-xl relative">
+                <span class="font-display font-black text-2xl text-blue-600">DX</span>
+              </div>
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center shadow-xl relative opacity-50">
+                <span class="font-display font-black text-2xl text-teal-600">OD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive ROI Calculator -->
+  <section id="roi" class="py-[140px] relative">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+      <div class="glass-card rounded-[3rem] p-10 lg:p-16 border-2 border-brand-500/10 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          <div>
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">ROI Calculator</span>
+            <h2 class="font-display text-[40px] font-extrabold text-brand-950 mt-4 mb-6 leading-tight">Quantify your exact monthly savings.</h2>
+            <p class="text-lg text-slate-600 mb-10 font-medium">Adjust the slider below to represent the average number of missed calls your practice receives per month.</p>
+            
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+              <div class="flex justify-between items-center mb-6">
+                <label class="font-bold text-brand-950 text-lg">Missed Calls / Month</label>
+                <div class="bg-white px-4 py-2 rounded-xl border border-slate-200 font-display text-2xl font-black text-brand-600 shadow-inner" id="calc-display-calls">150</div>
+              </div>
+              <input type="range" id="roi-slider" min="20" max="500" value="150" step="10" class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500">
+              <div class="flex justify-between text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
+                <span>20 calls</span>
+                <span>500 calls</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-6">
+            <div class="bg-gradient-to-br from-brand-900 to-brand-950 rounded-2xl p-8 border border-brand-800 text-white shadow-xl relative overflow-hidden group">
+              <div class="absolute inset-0 bg-brand-500/20 blur-3xl rounded-full scale-150 group-hover:bg-brand-500/30 transition-colors"></div>
+              <div class="relative z-10">
+                <span class="text-brand-300 font-bold uppercase tracking-wider text-xs">New Revenue Recovered</span>
+                <div class="font-display text-5xl font-black text-white mt-3 mb-1" id="calc-display-revenue">$45,000</div>
+                <span class="text-sm text-brand-200">Based on $300 avg patient value</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-lg relative overflow-hidden group">
+              <div class="absolute inset-0 bg-accent-teal/5 blur-3xl rounded-full scale-150 group-hover:bg-accent-teal/10 transition-colors"></div>
+              <div class="relative z-10">
+                <span class="text-slate-500 font-bold uppercase tracking-wider text-xs">Staff Hours Saved</span>
+                <div class="font-display text-5xl font-black text-brand-950 mt-3 mb-1" id="calc-display-hours">38 hrs</div>
+                <span class="text-sm text-slate-500">Based on 15 mins per call/scheduling</span>
+              </div>
+            </div>
+            
+            <div class="mt-4 flex items-center justify-between px-4">
+              <div>
+                <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Renia AI Cost</span>
+                <span class="text-xl font-bold text-brand-950">$599/mo</span>
+              </div>
+              <a href="signup.html" class="bg-brand-50 text-brand-600 px-6 py-3 rounded-full font-bold hover:bg-brand-100 transition-colors">Start Free Trial</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-[120px] text-center border-t border-slate-200 bg-white">
+    <div class="max-w-[800px] mx-auto px-6">
+      <h2 class="font-display text-[48px] sm:text-[64px] font-black text-brand-950 leading-tight mb-8">
+        Your new front desk manager is waiting.
+      </h2>
+      <p class="text-xl text-slate-600 font-medium mb-12">Takes 5 minutes to set up. Requires zero technical knowledge. Operates flawlessly on day one.</p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a href="signup.html" class="w-full sm:w-auto bg-brand-950 text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-brand-800 hover:-translate-y-1 transition-all shadow-xl shadow-brand-900/20">
+          Create Free Account
+        </a>
+        <a href="login.html" class="text-brand-600 font-bold hover:text-brand-800 transition-colors">Or sign in to existing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-50 border-t border-slate-200 py-12">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500 to-accent-teal flex items-center justify-center text-white text-sm">🦷</div>
+        <span class="font-display font-bold text-brand-950 text-xl">Renia AI</span>
+      </div>
+      <p class="text-sm font-medium text-slate-500">© 2026 Renia AI. Engineered specifically for modern dental clinics.</p>
+      <div class="flex gap-6">
+        <a href="#" class="text-slate-400 hover:text-brand-950 transition-colors"><span class="material-symbols-outlined">mail</span></a>
+        <a href="#" class="text-slate-400 hover:text-brand-950 transition-colors"><span class="material-symbols-outlined">help</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ROI Calculator Script
+    const slider = document.getElementById('roi-slider');
+    const displayCalls = document.getElementById('calc-display-calls');
+    const displayRevenue = document.getElementById('calc-display-revenue');
+    const displayHours = document.getElementById('calc-display-hours');
+    
+    function updateCalc() {
+      const calls = parseInt(slider.value);
+      const revenue = calls * 300; // $300 avg LTV per appointment booked
+      const hours = Math.round(calls * 15 / 60); // 15 mins saved per call
+      
+      displayCalls.textContent = calls;
+      displayRevenue.textContent = '$' + revenue.toLocaleString();
+      displayHours.textContent = hours + ' hrs';
+    }
+    
+    slider.addEventListener('input', updateCalc);
+    
+    // Language Switcher (Mock)
+    const texts = {
+      en: { title: "The dental receptionist that never sleeps." },
+      es: { title: "La recepcionista dental que nunca duerme." }
     };
-
-    let activeLanguage = 'en';
-
-    function switchLanguage(lang) {
-        activeLanguage = lang;
-        
-        // Update styling of buttons
-        const enBtn = document.getElementById('lang-en-btn');
-        const esBtn = document.getElementById('lang-es-btn');
-        
-        if (lang === 'en') {
-            enBtn.classList.add('bg-white', 'text-zinc-900', 'shadow-sm');
-            enBtn.classList.remove('text-zinc-500');
-            esBtn.classList.remove('bg-white', 'text-zinc-900', 'shadow-sm');
-            esBtn.classList.add('text-zinc-500');
-        } else {
-            esBtn.classList.add('bg-white', 'text-zinc-900', 'shadow-sm');
-            esBtn.classList.remove('text-zinc-500');
-            enBtn.classList.remove('bg-white', 'text-zinc-900', 'shadow-sm');
-            enBtn.classList.add('text-zinc-500');
-        }
-
-        // Apply translations
-        document.getElementById('badge-live').innerText = content[lang].badgeLive;
-        document.getElementById('hero-title').innerText = content[lang].heroTitle;
-        document.getElementById('hero-desc').innerText = content[lang].heroDesc;
-        document.getElementById('cta-primary').querySelector('span').innerText = content[lang].ctaPrimary;
-        document.getElementById('cta-secondary').querySelector('span').innerText = content[lang].ctaSecondary;
-        document.getElementById('badge-active-status').innerText = content[lang].badgeActiveStatus;
-        document.getElementById('badge-sim-live').innerText = content[lang].badgeSimLive;
-        document.getElementById('system-status-indicator').innerText = content[lang].systemStatusIndicator;
-        document.getElementById('sim-play-caption').innerText = content[lang].simPlayCaption;
-        document.getElementById('sim-cap-badge').innerText = content[lang].simCapBadge;
-        document.getElementById('trust-strip-title').innerText = content[lang].trustStripTitle;
-        document.getElementById('badge-pms').innerText = content[lang].badgePms;
-        document.getElementById('pms-title').innerText = content[lang].pmsTitle;
-        document.getElementById('pms-desc').innerText = content[lang].pmsDesc;
-        document.getElementById('pms-node-status-1').innerText = content[lang].pmsNodeStatus1;
-        document.getElementById('pms-node-status-2').innerText = content[lang].pmsNodeStatus2;
-        document.getElementById('pms-node-status-3').innerText = content[lang].pmsNodeStatus3;
-        document.getElementById('pms-diagram-sync').innerText = content[lang].pmsDiagramSync;
-        document.getElementById('roi-badge').innerText = content[lang].roiBadge;
-        document.getElementById('roi-title').innerText = content[lang].roiTitle;
-        document.getElementById('roi-desc').innerText = content[lang].roiDesc;
-        document.getElementById('slider-label').innerText = content[lang].sliderLabel;
-        document.getElementById('metric-captured-label').innerText = content[lang].metricCapturedLabel;
-        document.getElementById('metric-hours-label').innerText = content[lang].metricHoursLabel;
-        document.getElementById('roi-cost-label').innerText = content[lang].roiCostLabel;
-        document.getElementById('roi-start-btn').innerText = content[lang].roiStartBtn;
-        document.getElementById('badge-opportunities').innerText = content[lang].badgeOpportunities;
-        document.getElementById('features-title').innerText = content[lang].featuresTitle;
-        document.getElementById('features-desc').innerText = content[lang].featuresDesc;
-        document.getElementById('feature-card-1-title').innerText = content[lang].featureCard1Title;
-        document.getElementById('feature-card-1-desc').innerText = content[lang].featureCard1Desc;
-        document.getElementById('feature-card-2-title').innerText = content[lang].featureCard2Title;
-        document.getElementById('feature-card-2-desc').innerText = content[lang].featureCard2Desc;
-        document.getElementById('feat-pill-1').innerText = content[lang].featPill1;
-        document.getElementById('feat-pill-2').innerText = content[lang].featPill2;
-        document.getElementById('feat-pill-3').innerText = content[lang].featPill3;
-        document.getElementById('feat-pill-4').innerText = content[lang].featPill4;
-        document.getElementById('footer-cta-title').innerText = content[lang].footerCtaTitle;
-        document.getElementById('footer-cta-btn').innerText = content[lang].footerCtaBtn;
-        document.getElementById('footer-cta-demo').innerText = content[lang].footerCtaDemo;
-        document.getElementById('footer-copy').innerText = content[lang].footerCopy;
-
-        // Reset demo dialogue text to default in the selected language
-        if (!simInterval) {
-            document.getElementById('sim-speaker').innerText = lang === 'en' ? "Interactive Demo" : "Demostración Interactiva";
-            document.getElementById('sim-text').innerText = lang === 'en' ? 
-                "Click play below to hear a realistic Florida dental patient call simulated by Renia AI." :
-                "Haga clic en reproducir abajo para escuchar una simulación de llamada dental real.";
-        }
+    
+    function setLang(lang) {
+      document.getElementById('lang-en').className = lang === 'en' ? "px-3 py-1 rounded-full text-xs font-bold bg-white text-brand-950 shadow-sm" : "px-3 py-1 rounded-full text-xs font-bold text-slate-500 hover:text-brand-950";
+      document.getElementById('lang-es').className = lang === 'es' ? "px-3 py-1 rounded-full text-xs font-bold bg-white text-brand-950 shadow-sm" : "px-3 py-1 rounded-full text-xs font-bold text-slate-500 hover:text-brand-950";
+      
+      document.getElementById('hero-title').textContent = texts[lang].title;
     }
-
-    // ROI Calculator logic
-    function calculateSavings() {
-        const missedCalls = parseInt(document.getElementById('calls-slider').value);
-        document.getElementById('calls-value').innerText = missedCalls;
-
-        // 20% of missed calls are potential new patients, each worth an average of $1000 in lifetime value.
-        const capturedRevenue = missedCalls * 0.20 * 1000;
-        // Each call takes about 15 minutes of front desk processing time
-        const staffHours = Math.round(missedCalls * 0.25);
-
-        // Format and update values
-        document.getElementById('metric-captured-value').innerText = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            maximumFractionDigits: 0
-        }).format(capturedRevenue);
-
-        document.getElementById('metric-hours-value').innerText = staffHours + (activeLanguage === 'en' ? " hrs" : " horas");
-    }
-
-    // Interactive Voice Demo Simulation
-    let simInterval = null;
-    let simSeconds = 0;
-    let simIsPlaying = false;
-
-    const dialogueScript = {
-        en: [
-            { speaker: "SYSTEM", text: "[Ring... Ring... Call Connected]" },
-            { speaker: "RENIA AI", text: "Thank you for calling Sunshine Smiles. I am Renia, the practice AI receptionist. I can book, reschedule, or answer any office questions today. How may I help you?" },
-            { speaker: "PATIENT", text: "Hi, yes! I woke up with a really bad toothache. Do you have any emergency appointments open today?" },
-            { speaker: "RENIA AI", text: "I'm so sorry you're in pain. Let me check the schedule immediately... Yes, Dr. Mitchell has an emergency opening at 2:30 PM today. Would that work?" },
-            { speaker: "PATIENT", text: "That is perfect! Yes. Also, do you accept Delta Dental?" },
-            { speaker: "RENIA AI", text: "Absolutely, we are in-network with Delta Dental of Florida. I will go ahead and secure this 2:30 PM slot for you. Could I please get your full name?" },
-            { speaker: "SYSTEM", text: "[Success! Appointment written to Dentrix]" }
-        ],
-        es: [
-            { speaker: "SISTEMA", text: "[Llamada entrante... Conectada]" },
-            { speaker: "RENIA AI", text: "Gracias por llamar a Sunshine Smiles. Soy Renia, la recepcionista virtual. ¿En qué puedo ayudarle hoy?" },
-            { speaker: "PACIENTE", text: "Hola, sí. Desperté con un dolor de muela terrible. ¿Tienen alguna cita de emergencia hoy?" },
-            { speaker: "RENIA AI", text: "Lamento mucho que sienta dolor. Déjeme revisar la agenda... Sí, la Dra. Mitchell tiene un espacio disponible para emergencias a las 2:30 PM de hoy. ¿Le sirve?" },
-            { speaker: "PACIENTE", text: "¡Sí, por favor! Eso es perfecto. ¿Aceptan Delta Dental?" },
-            { speaker: "RENIA AI", text: "Por supuesto, somos proveedores dentro de la red de Delta Dental de Florida. Agendaré el espacio de las 2:30 PM para usted. ¿Me da su nombre completo?" },
-            { speaker: "SISTEMA", text: "[¡Éxito! Cita agendada en Open Dental]" }
-        ]
-    };
-
-    function formatTime(secs) {
-        const m = Math.floor(secs / 60).toString().padStart(2, '0');
-        const s = (secs % 60).toString().padStart(2, '0');
-        return `${m}:${s}`;
-    }
-
-    function toggleVoiceSim() {
-        simIsPlaying = !simIsPlaying;
-        const playIcon = document.getElementById('sim-play-icon');
-        const soundwave = document.getElementById('soundwave-container');
-        const dialogueBox = document.getElementById('sim-dialogue-box');
-        
-        if (simIsPlaying) {
-            playIcon.innerText = "pause";
-            soundwave.style.display = "flex";
-            
-            simSeconds = 0;
-            let scriptIndex = 0;
-            
-            // Instantly play first step
-            playStep(scriptIndex);
-            
-            simInterval = setInterval(() => {
-                simSeconds++;
-                document.getElementById('sim-timer').innerText = formatTime(simSeconds);
-                
-                // Switch dialog every 4 seconds
-                if (simSeconds > 0 && simSeconds % 4 === 0) {
-                    scriptIndex++;
-                    if (scriptIndex < dialogueScript[activeLanguage].length) {
-                        playStep(scriptIndex);
-                    } else {
-                        // Reset simulation at the end
-                        toggleVoiceSim();
-                    }
-                }
-            }, 1000);
-
-        } else {
-            playIcon.innerText = "play_arrow";
-            soundwave.style.display = "none";
-            clearInterval(simInterval);
-            simInterval = null;
-            document.getElementById('sim-timer').innerText = "00:00";
-            
-            // Revert dialogue screen to initial
-            document.getElementById('sim-speaker').innerText = activeLanguage === 'en' ? "Interactive Demo" : "Demostración Interactiva";
-            document.getElementById('sim-text').innerText = activeLanguage === 'en' ? 
-                "Click play below to hear a realistic Florida dental patient call simulated by Renia AI." :
-                "Haga clic en reproducir abajo para escuchar una simulación de llamada dental real.";
-        }
-    }
-
-    function playStep(index) {
-        const step = dialogueScript[activeLanguage][index];
-        const speakerEl = document.getElementById('sim-speaker');
-        const textEl = document.getElementById('sim-text');
-
-        // Apply transition class
-        textEl.style.opacity = 0;
-        
-        setTimeout(() => {
-            speakerEl.innerText = step.speaker;
-            textEl.innerText = step.text;
-            
-            // Adjust speaker tag color based on role
-            if (step.speaker.includes("AI")) {
-                speakerEl.className = "text-xs font-bold text-accent-indigo uppercase tracking-wider mb-2";
-            } else if (step.speaker.includes("PATIENT") || step.speaker.includes("PACIENTE")) {
-                speakerEl.className = "text-xs font-bold text-accent-teal uppercase tracking-wider mb-2";
-            } else {
-                speakerEl.className = "text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2";
-            }
-            
-            textEl.style.opacity = 1;
-        }, 150);
-    }
-
-    // Shrink navbar on scroll
-    window.addEventListener('scroll', () => {
-        const nav = document.getElementById('main-nav');
-        if (window.scrollY > 50) {
-            nav.classList.add('shadow-md', 'h-[64px]');
-            nav.classList.remove('h-[72px]');
-        } else {
-            nav.classList.remove('shadow-md', 'h-[64px]');
-            nav.classList.add('h-[72px]');
-        }
-    });
-
-</script>
-</body></html>
+  </script>
+</body>
+</html>
