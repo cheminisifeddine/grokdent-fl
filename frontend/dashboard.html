@@ -145,6 +145,12 @@
       <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Overview</h1>
       
       <div class="flex items-center gap-5">
+        <!-- Live Call Simulator Trigger -->
+        <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+          <span class="material-symbols-outlined text-[16px] animate-pulse">phone_in_talk</span>
+          <span>Inbound Call Simulator</span>
+        </button>
+
         <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
@@ -339,6 +345,654 @@
   <script src="js/dashboard.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
   <script>
+    // Pure synthesized sound effects via Web Audio API
+    const AudioSynth = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      },
+      playRing() {
+        this.init();
+        if (!this.ctx) return;
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc1.frequency.value = 440;
+        osc2.frequency.value = 480;
+        gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+        
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc1.start();
+        osc2.start();
+        
+        setTimeout(() => {
+          osc1.stop();
+          osc2.stop();
+        }, 800);
+      },
+      playHangup() {
+        this.init();
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.frequency.setValueAtTime(350, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.3);
+      },
+      playClick() {
+        this.init();
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+        gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.05);
+      }
+    };
+
+    // Live Simulator Conversation State Engine
+    const simState = {
+      scenario: '', // 'carlos' | 'emily' | 'james'
+      step: 0,
+      active: false,
+      transcript: [],
+      patientDetails: { name: '', phone: '', time: '', date: '2026-05-23', service: '' }
+    };
+
+    // Create the simulator markup inside the DOM dynamically on page load
+    function injectSimulatorWidget() {
+      if (document.getElementById('sim-phone-widget')) return;
+
+      const widget = document.createElement('div');
+      widget.id = 'sim-phone-widget';
+      widget.className = 'fixed bottom-6 right-6 z-[9999] w-[380px] h-[580px] bg-white border border-slate-200 rounded-[35px] shadow-[0_20px_50px_rgba(15,23,42,0.15)] flex flex-col overflow-hidden transition-all duration-500 transform translate-y-[650px] opacity-0 select-none';
+      widget.style.fontFamily = "'Inter', sans-serif";
+
+      widget.innerHTML = `
+        <!-- Header Bar -->
+        <div class="px-6 py-4 bg-slate-50 border-b border-slate-100 flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+            <span class="text-xs font-black text-slate-800 font-display uppercase tracking-wider">AI Receptionist Simulator</span>
+          </div>
+          <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer flex items-center justify-center font-bold text-slate-500 transition-colors shadow-sm text-sm">×</button>
+        </div>
+
+        <!-- Dynamic Views -->
+        <div class="flex-1 flex flex-col overflow-hidden relative" id="sim-views-container">
+          
+          <!-- View 1: Onboarding / Scenario Selection -->
+          <div id="sim-view-onboarding" class="flex-1 flex flex-col justify-between p-6 overflow-y-auto">
+            <div>
+              <h4 class="font-display text-md font-extrabold text-slate-900 mb-1">Pick a Caller Scenario</h4>
+              <p class="text-[11px] text-slate-500 mb-4 font-semibold leading-relaxed">Choose a dental patient scenario to test the conversational intelligence of the AI Voice Receptionist.</p>
+              
+              <div class="space-y-3">
+                <!-- Scenario A -->
+                <div onclick="selectSimScenario('carlos')" id="scen-card-carlos" class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3">
+                  <span class="text-2xl mt-0.5">🚨</span>
+                  <div>
+                    <div class="text-xs font-black text-slate-800">Carlos Hernandez (Emergency)</div>
+                    <div class="text-[10px] text-slate-500 font-semibold mt-0.5 leading-relaxed">Experiencing severe tooth swelling & bleeding. Prefers Spanish. Needs a quick extraction booking today.</div>
+                  </div>
+                </div>
+
+                <!-- Scenario B -->
+                <div onclick="selectSimScenario('emily')" id="scen-card-emily" class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3">
+                  <span class="text-2xl mt-0.5">🦷</span>
+                  <div>
+                    <div class="text-xs font-black text-slate-800">Emily Johnson (New Whitening)</div>
+                    <div class="text-[10px] text-slate-500 font-semibold mt-0.5 leading-relaxed">Wants cosmetic whitening. Asks if Delta Dental PPO insurance is accepted and checks available times.</div>
+                  </div>
+                </div>
+
+                <!-- Scenario C -->
+                <div onclick="selectSimScenario('james')" id="scen-card-james" class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3">
+                  <span class="text-2xl mt-0.5">📅</span>
+                  <div>
+                    <div class="text-xs font-black text-slate-800">James Wilson (Reschedule)</div>
+                    <div class="text-[10px] text-slate-500 font-semibold mt-0.5 leading-relaxed">Routine cleaner. Needs to shift his dental checkup slot from next Wednesday to tomorrow afternoon.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" onclick="initiateSimulatedCall()" id="sim-start-call-btn" class="w-full py-3 bg-brand-900 hover:bg-indigo-600 text-white rounded-2xl font-bold text-xs border border-transparent shadow-md transition-all flex items-center justify-center gap-1 opacity-50 pointer-events-none select-none">
+              <span class="material-symbols-outlined text-[16px] animate-pulse">phone_forwarded</span> Initiate Call Integration
+            </button>
+          </div>
+
+          <!-- View 2: Call In Progress -->
+          <div id="sim-view-active" class="hidden flex-1 flex flex-col justify-between overflow-hidden bg-slate-900 text-white">
+            
+            <!-- Upper Caller Stats Banner -->
+            <div class="p-4 bg-slate-950/60 border-b border-slate-850 flex flex-col items-center shrink-0">
+              <div class="w-12 h-12 rounded-full bg-indigo-600/30 border border-indigo-500/40 text-indigo-400 flex items-center justify-center text-lg shadow-inner mb-1.5" id="sim-caller-avatar">👤</div>
+              <div class="text-xs font-black font-display text-white tracking-wide" id="sim-caller-name-title">Carlos Hernandez</div>
+              <div class="text-[9px] font-bold text-teal-400 uppercase tracking-widest mt-0.5 flex items-center gap-1" id="sim-caller-status">
+                <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span> AI Call in Progress
+              </div>
+              
+              <!-- soundwave animations -->
+              <div class="flex items-center gap-1 justify-center py-2 mt-1 h-[25px]" id="soundwave-bar-container">
+                <span class="w-[3px] h-3 bg-indigo-500 rounded-full transition-all duration-150 animate-pulse"></span>
+                <span class="w-[3px] h-4 bg-indigo-400 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.15s"></span>
+                <span class="w-[3px] h-2 bg-teal-400 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.3s"></span>
+                <span class="w-[3px] h-5 bg-indigo-300 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.05s"></span>
+                <span class="w-[3px] h-2 bg-teal-500 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.25s"></span>
+              </div>
+            </div>
+
+            <!-- Middle Conversation bubble log -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-3.5" id="sim-chat-box">
+              <!-- bubble list -->
+            </div>
+
+            <!-- Bottom Panel: Pre-written contextual inputs & manual fields -->
+            <div class="p-4 bg-slate-950/60 border-t border-slate-850 shrink-0">
+              <div class="mb-3">
+                <div class="text-[9px] font-bold text-indigo-300 uppercase tracking-wider mb-2">Suggested Patient Answers</div>
+                <div class="flex flex-wrap gap-2" id="sim-quick-replies-list">
+                  <!-- quick replies -->
+                </div>
+              </div>
+
+              <!-- Manual Keyboard input row -->
+              <div class="flex items-center gap-2">
+                <input type="text" id="sim-input-box" placeholder="Or type customized patient reply..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition-colors">
+                <button onclick="handleSimManualSend()" class="w-8 h-8 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-md transition-colors"><span class="material-symbols-outlined text-[16px]">send</span></button>
+              </div>
+
+              <!-- Glowing Hang Up phone button -->
+              <div class="flex justify-center mt-3 pt-2 border-t border-slate-850/50">
+                <button onclick="hangupSimulatedCall(true)" class="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-[10px] uppercase rounded-full flex items-center gap-1.5 shadow-lg shadow-rose-600/30 transition-all select-none">
+                  <span class="material-symbols-outlined text-[14px]">phone_disabled</span> Hang Up Call
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- View 3: Complete Success Summary -->
+          <div id="sim-view-complete" class="hidden flex-1 flex flex-col justify-between p-6 text-center">
+            <div class="my-auto space-y-4">
+              <div class="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-3xl mx-auto shadow-md animate-bounce">✓</div>
+              <h4 class="font-display text-lg font-black text-slate-800">Voice call simulation resolved!</h4>
+              <p class="text-xs text-slate-500 leading-relaxed font-semibold">The AI receptionist successfully managed and completed the booking request. Practice protection saved!</p>
+              
+              <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100/50 text-left space-y-2 max-w-[280px] mx-auto shadow-inner">
+                <div class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Simulation Stats</div>
+                <div class="text-xs font-bold text-slate-700">👤 Patient: <span id="sum-pat-name">Carlos Hernandez</span></div>
+                <div class="text-xs font-bold text-slate-700">🦷 Service: <span id="sum-pat-svc">Emergency extraction</span></div>
+                <div class="text-xs font-bold text-slate-700">🕒 Appointment: <span id="sum-pat-time">Today, 1:30 PM</span></div>
+                <div class="text-xs font-bold text-emerald-700 flex items-center gap-0.5">💰 Revenue protected: <strong>+$350.00</strong></div>
+              </div>
+            </div>
+
+            <button onclick="finishSimAndRefreshDashboard()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold text-xs shadow-md transition-all">
+              Save & Sync Dashboard Feeds 🚀
+            </button>
+          </div>
+
+        </div>
+      `;
+
+      document.body.appendChild(widget);
+      
+      // Wire input enter key trigger
+      document.getElementById('sim-input-box').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleSimManualSend();
+      });
+    }
+
+    function openCallSimulatorWidget() {
+      injectSimulatorWidget();
+      AudioSynth.playClick();
+      
+      const widget = document.getElementById('sim-phone-widget');
+      if (widget) {
+        widget.classList.remove('translate-y-[650px]', 'opacity-0');
+        widget.classList.add('translate-y-0', 'opacity-100');
+        
+        // Reset to initial screen
+        document.getElementById('sim-view-onboarding').classList.remove('hidden');
+        document.getElementById('sim-view-active').classList.add('hidden');
+        document.getElementById('sim-view-complete').classList.add('hidden');
+        
+        // Unselect scenario
+        document.querySelectorAll("[id^='scen-card-']").forEach(c => {
+          c.className = 'p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3';
+        });
+        simState.scenario = '';
+        const startBtn = document.getElementById('sim-start-call-btn');
+        startBtn.classList.add('opacity-50', 'pointer-events-none');
+      }
+    }
+
+    function closeCallSimulatorWidget() {
+      AudioSynth.playClick();
+      const widget = document.getElementById('sim-phone-widget');
+      if (widget) {
+        widget.classList.add('translate-y-[650px]', 'opacity-0');
+        widget.classList.remove('translate-y-0', 'opacity-100');
+      }
+    }
+
+    function selectSimScenario(scen) {
+      AudioSynth.playClick();
+      simState.scenario = scen;
+      
+      document.querySelectorAll("[id^='scen-card-']").forEach(c => {
+        c.className = 'p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3';
+      });
+
+      const selectedEl = document.getElementById(`scen-card-${scen}`);
+      if (selectedEl) {
+        selectedEl.className = 'p-3.5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/20 cursor-pointer transition-all flex items-start gap-3 shadow-sm';
+      }
+
+      const startBtn = document.getElementById('sim-start-call-btn');
+      startBtn.classList.remove('opacity-50', 'pointer-events-none');
+    }
+
+    // Trigger ringtone sound effect, then start caller interface
+    function initiateSimulatedCall() {
+      AudioSynth.playClick();
+      
+      const startBtn = document.getElementById('sim-start-call-btn');
+      startBtn.textContent = 'Dials forwarders... 📞';
+      startBtn.disabled = true;
+
+      // Play 2 ringtone signals
+      AudioSynth.playRing();
+      setTimeout(() => {
+        AudioSynth.playRing();
+      }, 1500);
+
+      setTimeout(() => {
+        startBtn.textContent = 'Initiate Call Integration';
+        startBtn.disabled = false;
+        
+        // Open Calling screen
+        document.getElementById('sim-view-onboarding').classList.add('hidden');
+        document.getElementById('sim-view-active').classList.remove('hidden');
+        
+        // Populate metadata
+        const callerNameEl = document.getElementById('sim-caller-name-title');
+        const callerAvatar = document.getElementById('sim-caller-avatar');
+        
+        if (simState.scenario === 'carlos') {
+          callerNameEl.textContent = 'Carlos Hernandez';
+          callerAvatar.textContent = '🇲🇽';
+          simState.patientDetails = { name: 'Carlos Hernandez', phone: '(305) 555-9876', time: '1:30 PM', date: '2026-05-23', service: 'Emergency - Extraction' };
+        } else if (simState.scenario === 'emily') {
+          callerNameEl.textContent = 'Emily Johnson';
+          callerAvatar.textContent = '👩';
+          simState.patientDetails = { name: 'Emily Johnson', phone: '(407) 555-1234', time: '10:00 AM', date: '2026-05-24', service: 'Teeth Whitening Consultation' };
+        } else {
+          callerNameEl.textContent = 'James Wilson';
+          callerAvatar.textContent = '👨';
+          simState.patientDetails = { name: 'James Wilson', phone: '(954) 555-7788', time: '2:00 PM', date: '2026-05-24', service: 'Routine Cleaning Reschedule' };
+        }
+
+        // Initialize Chat Box
+        const chatBox = document.getElementById('sim-chat-box');
+        chatBox.innerHTML = '';
+        simState.step = 0;
+        simState.transcript = [];
+        simState.active = true;
+
+        // Play initial AI Receptionist Voice Greeting
+        setTimeout(() => {
+          triggerAISayGreeting();
+        }, 800);
+      }, 3000);
+    }
+
+    function triggerAISayGreeting() {
+      let msg = '';
+      if (simState.scenario === 'carlos') {
+        msg = 'Gracias por llamar a Sunshine Smiles Dental. Soy la asistente de voz virtual inteligente Ash. ¿Cómo puedo ayudarle hoy?';
+      } else {
+        msg = 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I assist you today?';
+      }
+      appendSimBubble('ai', msg);
+      updateSimQuickReplies();
+    }
+
+    function appendSimBubble(sender, text) {
+      const chatBox = document.getElementById('sim-chat-box');
+      if (!chatBox) return;
+
+      const bubble = document.createElement('div');
+      bubble.className = `flex ${sender === 'ai' ? 'justify-start' : 'justify-end'} animate-pulse`;
+      
+      const avatarHtml = sender === 'ai' ? `<span class="text-sm">🦷</span>` : ``;
+      const bg = sender === 'ai' ? 'bg-slate-800 text-slate-100 border border-slate-700/50' : 'bg-indigo-600 text-white';
+      const borderRounding = sender === 'ai' ? 'rounded-tr-2xl rounded-br-2xl rounded-bl-2xl' : 'rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl';
+
+      bubble.innerHTML = `
+        <div class="flex gap-2 items-end max-w-[80%]">
+          ${sender === 'ai' ? `<div class="w-6 h-6 rounded-full bg-slate-950 flex items-center justify-center border border-slate-750 text-[10px] shrink-0">${avatarHtml}</div>` : ''}
+          <div class="p-3 ${borderRounding} ${bg} text-xs font-semibold leading-relaxed shadow-sm">
+            ${text}
+          </div>
+        </div>
+      `;
+
+      chatBox.appendChild(bubble);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      bubble.classList.remove('animate-pulse');
+
+      AudioSynth.playClick();
+      simState.transcript.push(`${sender === 'ai' ? 'AI Voice' : 'Patient'}: ${text}`);
+    }
+
+    function updateSimQuickReplies() {
+      const listEl = document.getElementById('sim-quick-replies-list');
+      if (!listEl) return;
+
+      let replies = [];
+      const step = simState.step;
+
+      if (simState.scenario === 'carlos') {
+        if (step === 0) {
+          replies = [
+            'Hola, tengo mucho dolor de muela y sangrado',
+            'Buenas tardes, ¿hablan español? Tengo una emergencia'
+          ];
+        } else if (step === 1) {
+          replies = [
+            'Sí, hoy a la 1:30 PM está excelente, por favor',
+            '¿Tiene alguna opción para mañana por la mañana?'
+          ];
+        } else if (step === 2) {
+          replies = [
+            'Mi nombre es Carlos Hernandez, (305) 555-9876',
+            'Carlos Hernandez, móvil (305) 555-9876'
+          ];
+        } else {
+          replies = [
+            'Muchas gracias por la ayuda, nos vemos hoy',
+            'Excelente servicio virtual, ¡gracias!'
+          ];
+        }
+      } else if (simState.scenario === 'emily') {
+        if (step === 0) {
+          replies = [
+            "Hi, I want to book teeth whitening. Do you accept Delta Dental PPO?",
+            "Hello, does your clinic accept Delta Dental insurance for PPO?"
+          ];
+        } else if (step === 1) {
+          replies = [
+            "Tomorrow at 10:00 AM works perfectly!",
+            "Do you have any slots available on Friday afternoon?"
+          ];
+        } else if (step === 2) {
+          replies = [
+            "Emily Johnson, cell is (407) 555-1234",
+            "My name is Emily Johnson, phone (407) 555-1234"
+          ];
+        } else {
+          replies = [
+            "Great, thank you so much! See you tomorrow.",
+            "Thanks for verifying my benefits, bye!"
+          ];
+        }
+      } else { // james
+        if (step === 0) {
+          replies = [
+            "Hi, I need to reschedule my cleaning appointment tomorrow.",
+            "Hello, can I move my cleaning appointment next week to tomorrow?"
+          ];
+        } else if (step === 1) {
+          replies = [
+            "Tomorrow at 2:00 PM is perfect, thank you!",
+            "Do you have an opening at 3:30 PM instead?"
+          ];
+        } else if (step === 2) {
+          replies = [
+            "James Wilson, phone number is (954) 555-7788",
+            "James Wilson, cell (954) 555-7788"
+          ];
+        } else {
+          replies = [
+            "Awesome, see you tomorrow at 2:00 PM!",
+            "Perfect, thank you so much!"
+          ];
+        }
+      }
+
+      listEl.innerHTML = replies.map(r => `
+        <button onclick="handleSimReplySelect('${r.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-slate-800 hover:bg-indigo-600 border border-slate-700 text-white rounded-lg text-[10px] font-bold transition-all text-left max-w-full">${r}</button>
+      `).join('');
+    }
+
+    function handleSimReplySelect(text) {
+      appendSimBubble('patient', text);
+      document.getElementById('sim-quick-replies-list').innerHTML = ''; // Clear options during thinking
+      
+      // Typing indicators ripple effect
+      const chatBox = document.getElementById('sim-chat-box');
+      const loader = document.createElement('div');
+      loader.id = 'sim-thinking-bubble';
+      loader.className = 'flex justify-start animate-pulse';
+      loader.innerHTML = `
+        <div class="flex gap-2 items-center">
+          <div class="w-6 h-6 rounded-full bg-slate-950 flex items-center justify-center border border-slate-750 text-[10px] shrink-0"><span>🦷</span></div>
+          <div class="px-3 py-2 rounded-xl bg-slate-850 text-indigo-300 font-mono text-[9px] font-bold">AI voice agent is speaking... 🔊</div>
+        </div>
+      `;
+      chatBox.appendChild(loader);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Ripple active wave amplitude heights
+      const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
+      soundwaveSpanElements.forEach(s => {
+        s.style.height = `${Math.floor(Math.random() * 20) + 10}px`;
+        s.style.backgroundColor = '#0FD8B6'; // Highlight waves green!
+      });
+
+      setTimeout(() => {
+        loader.remove();
+        soundwaveSpanElements.forEach(s => {
+          s.style.height = '';
+          s.style.backgroundColor = '';
+        });
+        
+        processAISimulatorUtterance(text);
+      }, 1500);
+    }
+
+    function handleSimManualSend() {
+      const input = document.getElementById('sim-input-box');
+      if (!input || !input.value.trim() || !simState.active) return;
+      const txt = input.value.trim();
+      input.value = '';
+      handleSimReplySelect(txt);
+    }
+
+    // Dynamic rule parsing matching dental context
+    function processAISimulatorUtterance(text) {
+      let response = '';
+      const step = simState.step;
+      const lower = text.toLowerCase();
+
+      if (simState.scenario === 'carlos') {
+        if (step === 0) {
+          response = '¡Oh, no! Lamento muchísimo escuchar que tiene tanto dolor. Sí, tomamos los dolores agudos y sangrados de emergencia muy en serio. Tengo un espacio disponible de emergencia hoy a la 1:30 PM o mañana a las 9:00 AM. ¿Cuál le queda mejor?';
+          simState.step = 1;
+        } else if (step === 1) {
+          if (lower.includes('mañana') || lower.includes('9')) {
+            simState.patientDetails.time = '9:00 AM';
+            simState.patientDetails.date = '2026-05-24';
+            response = 'Perfecto, reservaremos el espacio de emergencia de mañana a las 9:00 AM. ¿Podría darme su nombre completo y su teléfono móvil para completar el registro médico, por favor?';
+          } else {
+            simState.patientDetails.time = '1:30 PM';
+            simState.patientDetails.date = '2026-05-23';
+            response = 'Entendido, reservamos el espacio para hoy mismo a las 1:30 PM. ¿Podría proporcionarme su nombre completo y su número celular para registrar su expediente de urgencia, por favor?';
+          }
+          simState.step = 2;
+        } else if (step === 2) {
+          response = `¡Muchas gracias, señor Hernandez! Su cita de extracción de emergencia ha quedado confirmada para el ${simState.patientDetails.date === '2026-05-23' ? 'hoy' : 'mañana'} a las ${simState.patientDetails.time}. He enviado una confirmación por SMS al celular registrado. ¿Hay algo más en lo que pueda ayudarle?`;
+          simState.step = 3;
+        } else {
+          response = 'De nada. Nos vemos pronto. ¡Que tenga un excelente día y cuídese mucho!';
+          setTimeout(() => hangupSimulatedCall(false), 2000);
+        }
+      } else if (simState.scenario === 'emily') {
+        if (step === 0) {
+          response = 'Yes, absolutely! Sunshine Smiles Dental proudly accepts Delta Dental PPO, along with Humana, Guardian, and MCNA. Your dental cosmetic cleaning consult is fully eligible! I have availability tomorrow at 10:00 AM or Friday at 3:00 PM. Which works best?';
+          simState.step = 1;
+        } else if (step === 1) {
+          if (lower.includes('friday') || lower.includes('3')) {
+            simState.patientDetails.time = '3:00 PM';
+            simState.patientDetails.date = '2026-05-25'; // Friday
+          } else {
+            simState.patientDetails.time = '10:00 AM';
+            simState.patientDetails.date = '2026-05-24'; // Tomorrow Thursday
+          }
+          response = `Wonderful! I have locked in that appointment slot for you on ${simState.patientDetails.date === '2026-05-24' ? 'tomorrow' : 'Friday'} at ${simState.patientDetails.time}. May I please have your full name and mobile phone number to secure the record?`;
+          simState.step = 2;
+        } else if (step === 2) {
+          response = `Perfect, Emily! Your whitening consult is confirmed for ${simState.patientDetails.date === '2026-05-24' ? 'tomorrow' : 'Friday'} at ${simState.patientDetails.time}. The SMS verification receipt is dispatched to your cell phone. Is there anything else I can help you with today?`;
+          simState.step = 3;
+        } else {
+          response = 'You are very welcome! Have a fantastic day, and we look forward to seeing you!';
+          setTimeout(() => hangupSimulatedCall(false), 2000);
+        }
+      } else { // james
+        if (step === 0) {
+          response = 'Certainly, James! Let me look up your account details... Ah, yes! I see your scheduled routine cleaning for next Wednesday. I can release that and move it to tomorrow afternoon. I have availability at 2:00 PM or 3:30 PM. Which is better?';
+          simState.step = 1;
+        } else if (step === 1) {
+          if (lower.includes('3:30') || lower.includes('3')) {
+            simState.patientDetails.time = '3:30 PM';
+          } else {
+            simState.patientDetails.time = '2:00 PM';
+          }
+          simState.patientDetails.date = '2026-05-24';
+          response = `Great choice! I can secure tomorrow afternoon at ${simState.patientDetails.time}. Could you please confirm your full name and mobile number to authenticate the transfer?`;
+          simState.step = 2;
+        } else if (step === 2) {
+          response = `Got it, James Wilson! I have successfully rescheduled your appointment to tomorrow at ${simState.patientDetails.time} and released your next week slot. You will receive the updated SMS calendar link shortly. Anything else I can do for you?`;
+          simState.step = 3;
+        } else {
+          response = 'Fantastic. Glad I could assist! Have a great day, and we will see you tomorrow!';
+          setTimeout(() => hangupSimulatedCall(false), 2000);
+        }
+      }
+
+      appendSimBubble('ai', response);
+      updateSimQuickReplies();
+    }
+
+    function hangupSimulatedCall(manual = false) {
+      AudioSynth.playHangup();
+      simState.active = false;
+      
+      if (manual && simState.step < 2) {
+        // Just close and do nothing if hung up early
+        closeCallSimulatorWidget();
+        showToast('Call simulation ended early.', 'info');
+        return;
+      }
+
+      // Save success result!
+      document.getElementById('sim-view-active').classList.add('hidden');
+      document.getElementById('sim-view-complete').classList.remove('hidden');
+
+      // Populate summary view
+      document.getElementById('sum-pat-name').textContent = simState.patientDetails.name;
+      document.getElementById('sum-pat-svc').textContent = simState.patientDetails.service;
+      document.getElementById('sum-pat-time').textContent = `${simState.patientDetails.date}, ${simState.patientDetails.time}`;
+    }
+
+    function finishSimAndRefreshDashboard() {
+      // 1. Inject Call Log
+      const storedCalls = localStorage.getItem('renia_calls');
+      let callsList = [];
+      if (storedCalls) {
+        try { callsList = JSON.parse(storedCalls); } catch(e){}
+      }
+      
+      const newCall = {
+        id: generateId(),
+        caller_name: simState.patientDetails.name,
+        caller_phone: simState.patientDetails.phone,
+        time: 'Just now',
+        duration: 134,
+        language: simState.scenario === 'carlos' ? 'es' : 'en',
+        sentiment_emoji: '😊',
+        status: 'completed',
+        transcript: simState.transcript
+      };
+      callsList.unshift(newCall);
+      localStorage.setItem('renia_calls', JSON.stringify(callsList));
+
+      // 2. Inject Appointment
+      const storedAppts = localStorage.getItem('renia_appointments');
+      let apptsList = [];
+      if (storedAppts) {
+        try { apptsList = JSON.parse(storedAppts); } catch(e){}
+      }
+
+      const newAppt = {
+        id: generateId(),
+        name: simState.patientDetails.name,
+        date: simState.patientDetails.date,
+        time: simState.patientDetails.time,
+        service: simState.patientDetails.service,
+        status: 'Confirmed'
+      };
+      apptsList.unshift(newAppt);
+      localStorage.setItem('renia_appointments', JSON.stringify(apptsList));
+
+      // 3. Increment Metrics
+      const storedMetrics = localStorage.getItem('renia_metrics');
+      let metrics = {
+        calls_today: 47,
+        calls_trend: '+12%',
+        booked_today: 12,
+        booked_trend: '+8%',
+        revenue_today: 3240,
+        revenue_trend: '+15%',
+        satisfaction: 96,
+        satisfaction_trend: '+2%'
+      };
+      if (storedMetrics) {
+        try { metrics = JSON.parse(storedMetrics); } catch(e){}
+      }
+      
+      metrics.calls_today += 1;
+      metrics.booked_today += 1;
+      metrics.revenue_today += 350;
+      localStorage.setItem('renia_metrics', JSON.stringify(metrics));
+
+      // Close Widget
+      closeCallSimulatorWidget();
+      showToast(`🎉 Simulation saved! Appointment booked for ${simState.patientDetails.name}!`, 'success');
+
+      // 4. Force Hot Dashboard Data reload!
+      if (typeof Dashboard !== 'undefined' && typeof Dashboard.loadDashboard === 'function') {
+        Dashboard.loadDashboard();
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       // Wire logout button
       const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
@@ -349,6 +1003,9 @@
           else window.location.href = 'index.html';
         });
       }
+      
+      // Auto inject simulator panel overlay
+      injectSimulatorWidget();
     });
   </script>
 </body>

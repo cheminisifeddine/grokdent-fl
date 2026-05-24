@@ -206,29 +206,46 @@ const Dashboard = {
    * Sample metrics data (fallback)
    */
   getSampleMetrics() {
-    return {
-      calls_today: 47,
-      calls_trend: '+12%',
-      booked_today: 12,
-      booked_trend: '+8%',
-      revenue_today: 3240,
-      revenue_trend: '+15%',
-      satisfaction: 96,
-      satisfaction_trend: '+2%'
-    };
+    const stored = localStorage.getItem('renia_metrics');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {}
+    } else {
+      const defaults = {
+        calls_today: 47,
+        calls_trend: '+12%',
+        booked_today: 12,
+        booked_trend: '+8%',
+        revenue_today: 3240,
+        revenue_trend: '+15%',
+        satisfaction: 96,
+        satisfaction_trend: '+2%'
+      };
+      localStorage.setItem('renia_metrics', JSON.stringify(defaults));
+      return defaults;
+    }
   },
 
   /**
    * Sample calls data (fallback)
    */
   getSampleCalls() {
-    return [
+    const stored = localStorage.getItem('renia_calls');
+    let custom = [];
+    if (stored) {
+      try {
+        custom = JSON.parse(stored);
+      } catch (e) {}
+    }
+    const defaults = [
       { id: '1', caller_name: 'Maria Rodriguez', time: '2 min ago', duration: 245, language: 'es', sentiment_emoji: '😊', status: 'completed' },
       { id: '2', caller_name: 'James Wilson', time: '15 min ago', duration: 182, language: 'en', sentiment_emoji: '😊', status: 'completed' },
       { id: '3', caller_name: 'Sofia Martinez', time: '32 min ago', duration: 310, language: 'es', sentiment_emoji: '😐', status: 'completed' },
       { id: '4', caller_name: 'Robert Chen', time: '1h ago', duration: 95, language: 'en', sentiment_emoji: '😊', status: 'completed' },
       { id: '5', caller_name: '(305) 555-0147', time: '2h ago', duration: 0, language: 'en', sentiment_emoji: '😟', status: 'missed' }
     ];
+    return [...custom, ...defaults];
   },
 
   getSampleAppointments() {
