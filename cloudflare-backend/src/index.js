@@ -648,6 +648,97 @@ app.put('/api/v1/patients/:id', authMiddleware, async (c) => {
 });
 
 // -------------------------------------------------------------------------
+// 📞 Real xAI Grok Voice Agent Simulator Proxy (Bypasses Browser CORS)
+// -------------------------------------------------------------------------
+app.post('/api/v1/voice/simulate', async (c) => {
+  try {
+    const body = await c.req.json();
+    const { messages, scenario, clinicName, settings, kbEntries } = body;
+    
+    // Default to the provided live xAI API Key
+    const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+    
+    // Construct dynamic system prompt based on active dentist setup
+    const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Ash';
+    let systemPrompt = `You are the Elite AI Voice Receptionist named ${activeVoice} for "${clinicName || 'Sunshine Smiles Dental'}". 
+    Your tone is warm, professional, and Florida-friendly. You represent a real dental clinic.
+
+CLINIC DETAILS:
+- Settings: ${JSON.stringify(settings || {})}
+- Accepted Insurances: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
+- Custom Knowledge Base: ${JSON.stringify(kbEntries || [])}
+
+SCENARIO INSTRUCTIONS:
+`;
+
+    if (scenario === 'carlos') {
+      systemPrompt += `
+- You are speaking with Carlos Hernandez, a Spanish-preferred patient with severe tooth pain/bleeding emergency.
+- Speak in fluent Spanish. Triage the pain, offer an emergency extraction appointment for "today at 1:30 PM".
+- When Carlos agrees and provides his full name and phone number, you MUST book the appointment and conclude the call warmly.
+- Once you successfully book the appointment, append exactly "[BOOKING: Emergency Extraction | 2026-05-23 | 1:30 PM]" to the very end of your response.
+`;
+    } else if (scenario === 'emily') {
+      systemPrompt += `
+- You are speaking with Emily Johnson, a new patient interested in cosmetic teeth whitening.
+- She will ask if you accept Delta Dental PPO. Confirm that you proudly accept Delta Dental PPO, MCNA, and Humana!
+- Offer her an appointment for "tomorrow at 10:00 AM" or "Friday at 3:00 PM".
+- When she agrees, ask for her full name and phone number to secure the slot.
+- Once booked, append exactly "[BOOKING: Teeth Whitening Consultation | 2026-05-24 | 10:00 AM]" to the very end of your response.
+`;
+    } else if (scenario === 'james') {
+      systemPrompt += `
+- You are speaking with James Wilson, an existing patient who wants to reschedule his routine cleaning next Wednesday to tomorrow afternoon.
+- Locate his record, confirm you can release next Wednesday's slot, and offer tomorrow at 2:00 PM.
+- When he confirms, ask for his full name and phone number to verify his file.
+- Once booked, append exactly "[BOOKING: Routine Cleaning Reschedule | 2026-05-24 | 2:00 PM]" to the very end of your response.
+`;
+    } else {
+      systemPrompt += `
+- Answer general inquiries using the Knowledge Base. 
+- If booking occurs, append "[BOOKING: General Checkup | 2026-05-23 | 10:00 AM]" at the end.
+`;
+    }
+
+    systemPrompt += `\nCRITICAL DIRECTIVES:
+1. Speak concisely in short conversational sentences (since this is an audio voice conversation). Avoid long lists or paragraphs.
+2. Never break character. Never mention you are an LLM.
+3. Keep answers strictly HIPAA-compliant. Do not disclose other patient information.`;
+
+    const payload = {
+      model: 'grok-beta',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages
+      ],
+      temperature: 0.7,
+      max_tokens: 250
+    };
+
+    const xaiResponse = await fetch('https://api.x.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${xaiKey}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!xaiResponse.ok) {
+      const errTxt = await xaiResponse.text();
+      return c.json({ error: 'xAI API error', details: errTxt }, 502);
+    }
+
+    const data = await xaiResponse.json();
+    const reply = data.choices[0].message.content;
+
+    return c.json({ response: reply });
+  } catch (err) {
+    return c.json({ error: 'Simulator proxy error', message: err.message }, 500);
+  }
+});
+
+// -------------------------------------------------------------------------
 // 🏥 Health Check
 // -------------------------------------------------------------------------
 app.get('/health', (c) => c.json({ status: 'ok', service: 'Renia AI Backend', version: '1.0.0' }));

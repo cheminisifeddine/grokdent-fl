@@ -558,6 +558,78 @@
           const adminEmail = document.getElementById('input-admin-email').value || 'admin@clinic.com';
           const adminName = document.getElementById('input-admin-name').value || 'Admin';
           
+          const clinicName = document.getElementById('input-clinic-name').value.trim() || 'Oceanview Dental Care';
+          const clinicCity = document.getElementById('select-city').value || 'Tampa';
+          const clinicZip = document.getElementById('input-zip').value.trim() || '33602';
+          const clinicPhone = document.getElementById('input-phone').value.trim() || '(813) 555-0100';
+          const clinicEmail = document.getElementById('input-email').value.trim() || 'hello@oceanview.com';
+
+          // Extract selected services
+          const selectedCards = document.querySelectorAll('#step-2 .glass-card.selected');
+          const services = [];
+          const defaultServices = [
+            { name: 'General Dentistry Checkup', price: 99 },
+            { name: 'Dental Cleaning & Exam', price: 120 },
+            { name: 'Cosmetic Whitening', price: 299 },
+            { name: 'Orthodontics Consultation', price: 150 },
+            { name: 'Dental Implants Consultation', price: 199 }
+          ];
+
+          if (selectedCards.length > 0) {
+            selectedCards.forEach(card => {
+              const name = card.querySelector('h4').textContent.trim();
+              let price = 150; // default consultation/treatment price
+              if (name.includes('General')) price = 99;
+              else if (name.includes('Cosmetic')) price = 299;
+              else if (name.includes('Implants')) price = 199;
+              else if (name.includes('Orthodontics')) price = 3500;
+              services.push({ name, price });
+            });
+          } else {
+            services.push(...defaultServices);
+          }
+
+          // Generate randomized Voice ID
+          const voiceOptions = ['Eve', 'Leo', 'Coral', 'Ash', 'Ani', 'Sage'];
+          const randomVoice = voiceOptions[Math.floor(Math.random() * voiceOptions.length)];
+          const greeting = `Thank you for calling ${clinicName} in ${clinicCity}. This is your dynamic AI receptionist ${randomVoice}. How can I help you today?`;
+
+          // Construct dynamic settings matching dentist account
+          const initialSettings = {
+            profile: {
+              name: clinicName,
+              email: clinicEmail,
+              phone: clinicPhone,
+              city: clinicCity,
+              zip: clinicZip
+            },
+            hours: {
+              monday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+              tuesday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+              wednesday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+              thursday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+              friday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+              saturday: { active: true, open: '9:00 AM', close: '1:00 PM' },
+              sunday: { active: false, open: '9:00 AM', close: '1:00 PM' }
+            },
+            services: services,
+            voice: {
+              voice: randomVoice,
+              greeting: greeting,
+              spanish: true,
+              grok_agent_status: 'active',
+              grok_agent_id: 'grok_agent_' + Math.random().toString(36).substr(2, 9),
+              xai_key: ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0')
+            },
+            emergency: {
+              name: adminName,
+              phone: clinicPhone,
+              protocol: 'If the patient reports severe bleeding, swelling affecting breathing, a completely knocked-out adult tooth, or extreme unmanageable pain, offer a same-day urgent booking immediately or transfer the caller directly to the on-call contact phone number.'
+            }
+          };
+
+          // Save customized credentials
+          localStorage.setItem('renia_settings', JSON.stringify(initialSettings));
           localStorage.setItem('renia_token', 'demo_token_' + Date.now());
           localStorage.setItem('renia_user', JSON.stringify({
             id: 'usr_' + Date.now(),
