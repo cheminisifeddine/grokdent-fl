@@ -278,3 +278,92 @@ const Dashboard = {
     ];
   }
 };
+
+window.viewCallTranscript = function(name, time, lang) {
+  const modalHtml = \`
+    <div id="call-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+          <div>
+            <h3 class="font-bold text-slate-800">Call Details</h3>
+            <div class="text-xs text-slate-500">\${time} • \${lang}</div>
+          </div>
+          <button onclick="document.getElementById('call-modal').remove()" class="text-slate-400 hover:text-slate-600">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-6 overflow-y-auto max-h-[60vh]">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-xl">👤</div>
+            <div>
+              <div class="font-bold text-lg text-slate-900">\${escapeHtml(name)}</div>
+              <div class="text-sm text-emerald-600 font-semibold">Resolved Successfully</div>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
+              <span class="font-bold text-indigo-700">AI Receptionist:</span> Thank you for calling Sunshine Smiles Dental. How can I help you?
+            </div>
+            <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50 text-sm">
+              <span class="font-bold text-slate-700">Patient:</span> I'd like to book an appointment.
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
+              <span class="font-bold text-indigo-700">AI Receptionist:</span> I can help with that. Are you an existing patient?
+            </div>
+            <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50 text-sm">
+              <span class="font-bold text-slate-700">Patient:</span> Yes, my name is \${escapeHtml(name)}.
+            </div>
+            <div class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mt-4">End of Transcript</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  \`;
+  const div = document.createElement('div');
+  div.innerHTML = modalHtml;
+  document.body.appendChild(div.firstElementChild);
+};
+
+window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
+  const isEmergency = service.toLowerCase().includes('emergency');
+  const badgeClass = isEmergency ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700';
+  const modalHtml = \`
+    <div id="appt-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden flex flex-col">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+          <h3 class="font-bold text-slate-800">Appointment Details</h3>
+          <button onclick="document.getElementById('appt-modal').remove()" class="text-slate-400 hover:text-slate-600">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-6">
+          <div class="flex flex-col items-center text-center mb-6">
+            <div class="w-16 h-16 rounded-full bg-slate-100 border-4 border-white shadow-sm flex items-center justify-center text-2xl mb-3">📅</div>
+            <h2 class="font-bold text-xl text-slate-900">\${escapeHtml(name)}</h2>
+            <div class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase mt-2 \${badgeClass}">\${status}</div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+              <span class="text-sm text-slate-500 font-medium">Service</span>
+              <span class="text-sm font-bold text-slate-800">\${escapeHtml(service)}</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+              <span class="text-sm text-slate-500 font-medium">Time</span>
+              <span class="text-sm font-bold text-slate-800">\${time}</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+              <span class="text-sm text-slate-500 font-medium">Provider</span>
+              <span class="text-sm font-bold text-slate-800">Dr. Sarah M.</span>
+            </div>
+          </div>
+          <button onclick="document.getElementById('appt-modal').remove()" class="w-full mt-6 bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-3 font-bold text-sm transition-colors">
+            Close Details
+          </button>
+        </div>
+      </div>
+    </div>
+  \`;
+  const div = document.createElement('div');
+  div.innerHTML = modalHtml;
+  document.body.appendChild(div.firstElementChild);
+};

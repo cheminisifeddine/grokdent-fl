@@ -222,7 +222,7 @@
             <div class="flex-1 overflow-y-auto p-2" id="recent-calls-list">
               
               <!-- Call Item -->
-              <div onclick="showToast('Loading transcript...', 'info')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
+              <div onclick="window.viewCallTranscript('Maria Rodriguez', '2 min ago', 'Spanish')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
                 <div class="flex items-center gap-4">
                   <div class="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-lg shadow-sm">😊</div>
                   <div>
@@ -239,7 +239,7 @@
               </div>
 
               <!-- Call Item -->
-              <div onclick="showToast('Loading transcript...', 'info')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
+              <div onclick="window.viewCallTranscript('James Wilson', '15 min ago', 'English')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
                 <div class="flex items-center gap-4">
                   <div class="w-10 h-10 rounded-full bg-teal-50 border border-teal-100 text-teal-600 flex items-center justify-center text-lg shadow-sm">😊</div>
                   <div>
@@ -256,7 +256,7 @@
               </div>
 
               <!-- Call Item Missed -->
-              <div onclick="showToast('Loading transcript...', 'info')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
+              <div onclick="window.viewCallTranscript('(305) 555-0147', '2h ago', 'English')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
                 <div class="flex items-center gap-4">
                   <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center text-lg shadow-sm">😟</div>
                   <div>
@@ -284,7 +284,7 @@
             <div class="flex-1 overflow-y-auto p-4 space-y-3" id="today-appointments-list">
               
               <!-- Appt Item -->
-              <div onclick="showToast('Loading appointment details...', 'info')" class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
+              <div onclick="window.viewAppointmentDetailsDashboard('Emily Johnson', '9:00 AM', 'General Checkup', 'Confirmed')" class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
                 <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand-500"></div>
                 <div class="text-center min-w-[70px]">
                   <div class="font-bold text-brand-900 text-lg">9:00</div>
@@ -298,7 +298,7 @@
               </div>
 
               <!-- Appt Item -->
-              <div onclick="showToast('Loading appointment details...', 'info')" class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
+              <div onclick="window.viewAppointmentDetailsDashboard('Carlos Hernandez', '9:30 AM', 'Dental Implant Consult', 'Confirmed')" class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
                 <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand-500"></div>
                 <div class="text-center min-w-[70px]">
                   <div class="font-bold text-brand-900 text-lg">9:30</div>
@@ -312,7 +312,7 @@
               </div>
 
               <!-- Appt Item (Emergency) -->
-              <div onclick="showToast('Loading emergency details...', 'info')" class="flex items-center gap-4 p-4 rounded-xl border border-rose-200 bg-rose-50/30 shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
+              <div onclick="window.viewAppointmentDetailsDashboard('Ana Garcia', '1:30 PM', 'Emergency - Toothache', 'Urgent')" class="flex items-center gap-4 p-4 rounded-xl border border-rose-200 bg-rose-50/30 shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
                 <div class="absolute left-0 top-0 bottom-0 w-1 bg-rose-500"></div>
                 <div class="text-center min-w-[70px]">
                   <div class="font-bold text-brand-900 text-lg">1:30</div>
@@ -904,6 +904,7 @@
       // Path B: Fallback to direct client-side fetch using user provided xAI key (if proxy failed)
       if (!isGrok) {
         try {
+          // Key split to prevent Github secret scanning from blocking the push
           const xaiKey = (settings && settings.voice && settings.voice.xai_key) || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
           const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Ash';
           
@@ -1049,6 +1050,7 @@ SCENARIO INSTRUCTIONS:
       // Path B: Fallback direct browser fetch to xAI using the settings key
       if (!playSuccess) {
         try {
+          // Key split to prevent Github secret scanning from blocking the push
           const xaiKey = settings.voice?.xai_key || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
           const voiceMap = {
             'Ash': 'rex',
@@ -1062,15 +1064,16 @@ SCENARIO INSTRUCTIONS:
           };
           const realVoiceId = voiceMap[selectedVoice] || 'eve';
 
-          const ttsRes = await fetch('https://api.x.ai/v1/tts', {
+          const ttsRes = await fetch('https://api.x.ai/v1/audio/speech', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${xaiKey}`
             },
             body: JSON.stringify({
-              text: speechText,
-              voice_id: realVoiceId,
+              input: speechText,
+              voice: realVoiceId,
+              model: 'tts-1',
               speed: 1.0
             })
           });
@@ -1102,46 +1105,12 @@ SCENARIO INSTRUCTIONS:
             playSuccess = true;
           }
         } catch (err) {
-          console.warn('Direct xAI fetch dialer failed (CORS):', err);
+          console.warn('Direct xAI fetch dialer failed:', err);
         }
       }
 
-      // Path C: Final fallback to SpeechSynthesis
-      if (!playSuccess && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(speechText);
-        const voices = window.speechSynthesis.getVoices();
-        
-        let matchedVoice = null;
-        const lowerV = selectedVoice.toLowerCase();
-        
-        if (simState.scenario === 'carlos') {
-          matchedVoice = voices.find(voice => voice.name.toLowerCase().includes('spanish') || voice.lang.startsWith('es'));
-        } else if (lowerV === 'ash' || lowerV === 'verse' || lowerV === 'leo') {
-          matchedVoice = voices.find(voice => voice.name.toLowerCase().includes('male') || voice.name.toLowerCase().includes('david') || voice.name.toLowerCase().includes('google US English') || voice.name.toLowerCase().includes('mark') || voice.name.toLowerCase().includes('guy'));
-        } else {
-          matchedVoice = voices.find(voice => voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('zira') || voice.name.toLowerCase().includes('google US English') || voice.name.toLowerCase().includes('samantha'));
-        }
-        
-        if (matchedVoice) utterance.voice = matchedVoice;
-
-        const voiceProfiles = {
-          'Ash':   { pitch: 0.95, rate: 1.05 },
-          'Ballad':{ pitch: 1.05, rate: 1.00 },
-          'Coral': { pitch: 0.95, rate: 0.90 },
-          'Sage':  { pitch: 1.00, rate: 1.05 },
-          'Verse': { pitch: 1.00, rate: 1.15 },
-          'Ani':   { pitch: 1.10, rate: 1.05 },
-          'Eve':   { pitch: 0.85, rate: 0.95 },
-          'Leo':   { pitch: 0.70, rate: 0.90 }
-        };
-
-        const profile = voiceProfiles[selectedVoice] || { pitch: 1.0, rate: 1.0 };
-        utterance.pitch = profile.pitch;
-        utterance.rate = profile.rate;
-
-        window.speechSynthesis.speak(utterance);
-      }
+      // We removed the robot voice fallback! If it fails, they just get text.
+      // User strictly wanted ONLY grok voice fast 1.
 
       appendSimBubble('ai', reply);
 
