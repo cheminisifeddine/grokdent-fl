@@ -12,7 +12,7 @@ class WebSocketClient {
       statusChange: []
     };
     this.reconnectAttempts = 0;
-    this.maxReconnectAttempts = 10;
+    this.maxReconnectAttempts = 2;
     this.reconnectDelay = 1000;
     this.clinicId = null;
     this.isConnected = false;
@@ -24,9 +24,17 @@ class WebSocketClient {
   connect(clinicId) {
     this.clinicId = clinicId;
 
+    // Graceful degradation: Skip WebSocket if not supported by backend
+    // Cloudflare Workers don't support WebSockets without Durable Objects
+    const token = localStorage.getItem('renia_token');
+    if (!token || token.startsWith('demo_token_')) {
+      console.info('WebSocket: Running in demo mode, skipping connection');
+      this.updateStatus(false);
+      return;
+    }
+
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = window.location.host;
-    const token = localStorage.getItem('renia_token');
     const wsUrl = `${protocol}//${host}/ws?clinic_id=${clinicId}&token=${token}`;
 
     try {

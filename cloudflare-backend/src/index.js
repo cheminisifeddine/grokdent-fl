@@ -324,4 +324,333 @@ app.get('/api/v1/analytics/dashboard', authMiddleware, async (c) => {
   });
 });
 
+// -------------------------------------------------------------------------
+// 🔐 Auth — Get Current User
+// -------------------------------------------------------------------------
+app.get('/api/v1/auth/me', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const dbUser = await c.env.DB.prepare('SELECT id, clinic_id, email, full_name, role FROM users WHERE id = ?').bind(user.sub).first();
+  if (!dbUser) return c.json({ error: 'User not found' }, 404);
+  return c.json(dbUser);
+});
+
+// -------------------------------------------------------------------------
+// 📅 Appointments — Today, Update, Delete
+// -------------------------------------------------------------------------
+app.get('/api/v1/appointments/today', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const today = new Date().toISOString().split('T')[0];
+  const appts = await c.env.DB.prepare(
+    "SELECT * FROM appointments WHERE clinic_id = ? AND appointment_datetime LIKE ? ORDER BY appointment_datetime"
+  ).bind(user.clinic_id, today + '%').all();
+  return c.json(appts.results);
+});
+
+app.get('/api/v1/appointments/availability', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const date = c.req.query('date') || new Date().toISOString().split('T')[0];
+  const booked = await c.env.DB.prepare(
+    "SELECT appointment_datetime FROM appointments WHERE clinic_id = ? AND appointment_datetime LIKE ? AND status != 'cancelled'"
+  ).bind(user.clinic_id, date + '%').all();
+  const bookedTimes = booked.results.map(a => a.appointment_datetime);
+  const allSlots = ['09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+  const available = allSlots.filter(slot => !bookedTimes.some(bt => bt.includes(slot)));
+  return c.json(available.map(t => ({ time: t, available: true })));
+});
+
+app.put('/api/v1/appointments/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  const body = await c.req.json();
+  await c.env.DB.prepare(
+    'UPDATE appointments SET appointment_datetime = ?, service_type = ?, status = ?, notes = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?'
+  ).bind(body.appointment_datetime || '', body.service_type || '', body.status || 'scheduled', body.notes || '', id, user.clinic_id).run();
+  return c.json({ message: 'Appointment updated' });
+});
+
+app.delete('/api/v1/appointments/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  await c.env.DB.prepare(
+    "UPDATE appointments SET status = 'cancelled', updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?"
+  ).bind(id, user.clinic_id).run();
+  return c.json({ message: 'Appointment cancelled' });
+});
+
+// -------------------------------------------------------------------------
+// 📞 Calls — Recent, Stats, Detail
+// -------------------------------------------------------------------------
+app.get('/api/v1/calls/recent', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const calls = await c.env.DB.prepare(
+    'SELECT * FROM call_logs WHERE clinic_id = ? ORDER BY created_at DESC LIMIT 10'
+  ).bind(user.clinic_id).all();
+  return c.json(calls.results);
+});
+
+app.get('/api/v1/calls/stats', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const db = c.env.DB;
+  const total = await db.prepare('SELECT COUNT(id) as count FROM call_logs WHERE clinic_id = ?').bind(user.clinic_id).first();
+  const completed = await db.prepare("SELECT COUNT(id) as count FROM call_logs WHERE clinic_id = ? AND status = 'completed'").bind(user.clinic_id).first();
+  const missed = await db.prepare("SELECT COUNT(id) as count FROM call_logs WHERE clinic_id = ? AND status = 'missed'").bind(user.clinic_id).first();
+  const avgDuration = await db.prepare('SELECT AVG(duration_seconds) as avg FROM call_logs WHERE clinic_id = ?').bind(user.clinic_id).first();
+  return c.json({
+    total_calls: total?.count || 0,
+    completed_calls: completed?.count || 0,
+    missed_calls: missed?.count || 0,
+    average_duration: Math.round(avgDuration?.avg || 0)
+  });
+});
+
+app.get('/api/v1/calls/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const call = await c.env.DB.prepare('SELECT * FROM call_logs WHERE id = ? AND clinic_id = ?').bind(id, user.clinic_id).first();
+  if (!call) return c.json({ error: 'Call not found' }, 404);
+  call.transcript = call.transcript_encrypted ? await decryptData(call.transcript_encrypted, encKey) : null;
+  return c.json(call);
+});
+
+// -------------------------------------------------------------------------
+// 📚 Knowledge Base — Full CRUD + Seed
+// -------------------------------------------------------------------------
+app.get('/api/v1/knowledge', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const category = c.req.query('category');
+  let query = 'SELECT * FROM knowledge_base WHERE clinic_id = ?';
+  const params = [user.clinic_id];
+  if (category && category !== 'all') {
+    query += ' AND category = ?';
+    params.push(category);
+  }
+  query += ' ORDER BY priority DESC, created_at DESC';
+  const stmt = c.env.DB.prepare(query);
+  const result = params.length === 2 ? await stmt.bind(params[0], params[1]).all() : await stmt.bind(params[0]).all();
+  return c.json(result.results);
+});
+
+app.post('/api/v1/knowledge', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const body = await c.req.json();
+  const id = crypto.randomUUID();
+  await c.env.DB.prepare(
+    'INSERT INTO knowledge_base (id, clinic_id, category, question, answer, answer_spanish, priority) VALUES (?, ?, ?, ?, ?, ?, ?)'
+  ).bind(id, user.clinic_id, body.category || 'general', body.question, body.answer, body.answer_es || '', body.priority || 0).run();
+  return c.json({ id, message: 'Knowledge entry created' }, 201);
+});
+
+app.put('/api/v1/knowledge/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  const body = await c.req.json();
+  await c.env.DB.prepare(
+    'UPDATE knowledge_base SET category = ?, question = ?, answer = ?, answer_spanish = ?, priority = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?'
+  ).bind(body.category || 'general', body.question, body.answer, body.answer_es || '', body.priority || 0, body.active ? 1 : 0, id, user.clinic_id).run();
+  return c.json({ message: 'Knowledge entry updated' });
+});
+
+app.delete('/api/v1/knowledge/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  await c.env.DB.prepare('DELETE FROM knowledge_base WHERE id = ? AND clinic_id = ?').bind(id, user.clinic_id).run();
+  return c.json({ message: 'Knowledge entry deleted' });
+});
+
+app.post('/api/v1/knowledge/seed', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const defaults = [
+    { category: 'hours', question: 'What are your office hours?', answer: 'We are open Monday through Friday, 8:00 AM to 5:00 PM, and Saturday 9:00 AM to 1:00 PM. We are closed on Sundays.', answer_es: 'Estamos abiertos de lunes a viernes de 8:00 AM a 5:00 PM, y sábados de 9:00 AM a 1:00 PM. Los domingos estamos cerrados.' },
+    { category: 'emergency', question: 'What should I do in a dental emergency?', answer: 'If you are experiencing a dental emergency such as severe pain, swelling, or a knocked-out tooth, please call our office immediately. We offer same-day emergency appointments during business hours.', answer_es: 'Si tiene una emergencia dental como dolor severo, hinchazón o un diente que se le cayó, por favor llame a nuestra oficina de inmediato. Ofrecemos citas de emergencia el mismo día durante horario laboral.' },
+    { category: 'insurance', question: 'What insurance do you accept?', answer: 'We accept most major dental insurance plans including Delta Dental, Cigna, MetLife, Aetna, Guardian, Humana, and Florida Medicaid (MCNA Dental). Please contact us to verify your specific plan.', answer_es: 'Aceptamos la mayoría de los seguros dentales incluyendo Delta Dental, Cigna, MetLife, Aetna, Guardian, Humana y Medicaid de Florida (MCNA Dental). Por favor contáctenos para verificar su plan específico.' },
+    { category: 'services', question: 'What services do you offer?', answer: 'We offer comprehensive dental care including general dentistry, cosmetic dentistry, dental implants, orthodontics, teeth whitening, root canals, crowns, bridges, veneers, and emergency dental services.', answer_es: 'Ofrecemos atención dental integral incluyendo odontología general, cosmética, implantes dentales, ortodoncia, blanqueamiento, endodoncias, coronas, puentes, carillas y servicios dentales de emergencia.' },
+    { category: 'pricing', question: 'How much does a dental cleaning cost?', answer: 'A routine dental cleaning and exam starts at $99 for new patients. For patients with insurance, your copay will vary based on your plan. We also offer affordable payment plans through CareCredit.', answer_es: 'Una limpieza dental de rutina y examen comienza en $99 para nuevos pacientes. Para pacientes con seguro, su copago variará según su plan. También ofrecemos planes de pago accesibles a través de CareCredit.' },
+    { category: 'location', question: 'Where are you located?', answer: 'We are conveniently located in the heart of Florida. Free parking is available. Our office is wheelchair accessible.', answer_es: 'Estamos convenientemente ubicados en el corazón de Florida. Estacionamiento gratuito disponible. Nuestra oficina es accesible para sillas de ruedas.' },
+    { category: 'policies', question: 'What is your cancellation policy?', answer: 'We require 24 hours advance notice for cancellations. Late cancellations or no-shows may be subject to a $50 fee. We understand emergencies happen and will work with you on a case-by-case basis.', answer_es: 'Requerimos 24 horas de anticipación para cancelaciones. Cancelaciones tardías o ausencias pueden estar sujetas a un cargo de $50. Entendemos que las emergencias suceden y trabajaremos con usted caso por caso.' },
+    { category: 'general', question: 'Do you see new patients?', answer: 'Absolutely! We welcome new patients of all ages. You can schedule your first appointment online or by calling our office. New patient appointments include a comprehensive exam, X-rays, and cleaning.', answer_es: '¡Absolutamente! Damos la bienvenida a nuevos pacientes de todas las edades. Puede programar su primera cita en línea o llamando a nuestra oficina. Las citas de nuevos pacientes incluyen un examen completo, radiografías y limpieza.' }
+  ];
+  
+  const stmts = defaults.map(d => 
+    c.env.DB.prepare('INSERT INTO knowledge_base (id, clinic_id, category, question, answer, answer_spanish, priority) VALUES (?, ?, ?, ?, ?, ?, ?)')
+      .bind(crypto.randomUUID(), user.clinic_id, d.category, d.question, d.answer, d.answer_es, 5)
+  );
+  await c.env.DB.batch(stmts);
+  return c.json({ message: `Seeded ${defaults.length} default knowledge base entries` }, 201);
+});
+
+// -------------------------------------------------------------------------
+// 🏥 Clinic — Hours, Voice Settings
+// -------------------------------------------------------------------------
+app.put('/api/v1/clinics/hours', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const body = await c.req.json();
+  await c.env.DB.prepare('UPDATE clinics SET hours = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+    .bind(JSON.stringify(body), user.clinic_id).run();
+  return c.json({ message: 'Hours updated' });
+});
+
+app.put('/api/v1/clinics/services', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const body = await c.req.json();
+  await c.env.DB.prepare('UPDATE clinics SET services = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+    .bind(JSON.stringify(body.services || body), user.clinic_id).run();
+  return c.json({ message: 'Services updated' });
+});
+
+app.put('/api/v1/clinics/insurance', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const body = await c.req.json();
+  await c.env.DB.prepare('UPDATE clinics SET insurance_accepted = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+    .bind(JSON.stringify(body.insurance || body), user.clinic_id).run();
+  return c.json({ message: 'Insurance list updated' });
+});
+
+app.put('/api/v1/clinics/voice-settings', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const body = await c.req.json();
+  await c.env.DB.prepare('UPDATE clinics SET grok_voice_id = ?, welcome_message = ?, spanish_enabled = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+    .bind(body.voice || 'Ash', body.welcome_message || '', body.spanish_enabled ? 1 : 0, user.clinic_id).run();
+  return c.json({ message: 'Voice settings updated' });
+});
+
+// -------------------------------------------------------------------------
+// 📊 Analytics — Full Suite
+// -------------------------------------------------------------------------
+app.get('/api/v1/analytics/calls-over-time', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const days = parseInt(c.req.query('days')) || 7;
+  const results = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const count = await c.env.DB.prepare(
+      "SELECT COUNT(id) as count FROM call_logs WHERE clinic_id = ? AND created_at LIKE ?"
+    ).bind(user.clinic_id, dateStr + '%').first();
+    results.push({ date: dateStr, count: count?.count || 0 });
+  }
+  return c.json(results);
+});
+
+app.get('/api/v1/analytics/bookings-over-time', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const days = parseInt(c.req.query('days')) || 7;
+  const results = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const count = await c.env.DB.prepare(
+      "SELECT COUNT(id) as count FROM appointments WHERE clinic_id = ? AND created_at LIKE ?"
+    ).bind(user.clinic_id, dateStr + '%').first();
+    results.push({ date: dateStr, count: count?.count || 0 });
+  }
+  return c.json(results);
+});
+
+app.get('/api/v1/analytics/top-services', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const services = await c.env.DB.prepare(
+    "SELECT service_type, COUNT(id) as count FROM appointments WHERE clinic_id = ? AND service_type IS NOT NULL GROUP BY service_type ORDER BY count DESC LIMIT 10"
+  ).bind(user.clinic_id).all();
+  return c.json(services.results);
+});
+
+app.get('/api/v1/analytics/language-breakdown', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const langs = await c.env.DB.prepare(
+    "SELECT language, COUNT(id) as count FROM call_logs WHERE clinic_id = ? GROUP BY language"
+  ).bind(user.clinic_id).all();
+  return c.json(langs.results);
+});
+
+// -------------------------------------------------------------------------
+// 💳 Billing — Checkout, Subscription, Cancel
+// -------------------------------------------------------------------------
+app.post('/api/v1/billing/checkout', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const body = await c.req.json();
+  const plan = body.plan || 'starter';
+  // In production, this would create a Stripe checkout session
+  // For now, update the subscription directly
+  await c.env.DB.prepare('UPDATE clinics SET subscription_plan = ?, subscription_status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+    .bind(plan, 'active', user.clinic_id).run();
+  return c.json({ message: `Subscribed to ${plan} plan`, checkout_url: null });
+});
+
+app.get('/api/v1/billing/subscription', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const clinic = await c.env.DB.prepare('SELECT subscription_plan, subscription_status, stripe_customer_id FROM clinics WHERE id = ?').bind(user.clinic_id).first();
+  return c.json({
+    plan: clinic?.subscription_plan || 'starter',
+    status: clinic?.subscription_status || 'trial',
+    customer_id: clinic?.stripe_customer_id || null
+  });
+});
+
+app.post('/api/v1/billing/cancel', authMiddleware, async (c) => {
+  const user = c.get('user');
+  await c.env.DB.prepare("UPDATE clinics SET subscription_status = 'cancelled', updated_at = CURRENT_TIMESTAMP WHERE id = ?")
+    .bind(user.clinic_id).run();
+  return c.json({ message: 'Subscription cancelled' });
+});
+
+// -------------------------------------------------------------------------
+// 👤 Patients — Search, Detail, Update
+// -------------------------------------------------------------------------
+app.get('/api/v1/patients/search', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const q = c.req.query('q') || '';
+  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const patients = await c.env.DB.prepare(
+    "SELECT * FROM patients WHERE clinic_id = ? AND (first_name LIKE ? OR last_name LIKE ?)"
+  ).bind(user.clinic_id, `%${q}%`, `%${q}%`).all();
+  const decrypted = await Promise.all(patients.results.map(async p => ({
+    id: p.id, first_name: p.first_name, last_name: p.last_name,
+    phone: p.phone_encrypted ? await decryptData(p.phone_encrypted, encKey) : null,
+    email: p.email_encrypted ? await decryptData(p.email_encrypted, encKey) : null,
+    insurance_provider: p.insurance_provider, preferred_language: p.preferred_language
+  })));
+  return c.json(decrypted);
+});
+
+app.get('/api/v1/patients/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const p = await c.env.DB.prepare('SELECT * FROM patients WHERE id = ? AND clinic_id = ?').bind(id, user.clinic_id).first();
+  if (!p) return c.json({ error: 'Patient not found' }, 404);
+  return c.json({
+    id: p.id, first_name: p.first_name, last_name: p.last_name,
+    phone: p.phone_encrypted ? await decryptData(p.phone_encrypted, encKey) : null,
+    email: p.email_encrypted ? await decryptData(p.email_encrypted, encKey) : null,
+    dob: p.dob_encrypted ? await decryptData(p.dob_encrypted, encKey) : null,
+    insurance_provider: p.insurance_provider,
+    insurance_id: p.insurance_id_encrypted ? await decryptData(p.insurance_id_encrypted, encKey) : null,
+    preferred_language: p.preferred_language,
+    notes: p.notes_encrypted ? await decryptData(p.notes_encrypted, encKey) : null
+  });
+});
+
+app.put('/api/v1/patients/:id', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const id = c.req.param('id');
+  const body = await c.req.json();
+  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const phoneEnc = body.phone ? await encryptData(body.phone, encKey) : '';
+  const emailEnc = body.email ? await encryptData(body.email, encKey) : '';
+  const notesEnc = body.notes ? await encryptData(body.notes, encKey) : '';
+  await c.env.DB.prepare(
+    'UPDATE patients SET first_name = ?, last_name = ?, phone_encrypted = ?, email_encrypted = ?, insurance_provider = ?, notes_encrypted = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?'
+  ).bind(body.first_name, body.last_name, phoneEnc, emailEnc, body.insurance_provider || '', notesEnc, id, user.clinic_id).run();
+  return c.json({ message: 'Patient updated' });
+});
+
+// -------------------------------------------------------------------------
+// 🏥 Health Check
+// -------------------------------------------------------------------------
+app.get('/health', (c) => c.json({ status: 'ok', service: 'Renia AI Backend', version: '1.0.0' }));
+
 export default app;
+

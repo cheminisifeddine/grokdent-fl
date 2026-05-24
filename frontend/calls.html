@@ -271,29 +271,16 @@
     </div>
     </main>
 
-  <!-- IMPORTANT: Must keep auth logic intact -->
-  <script src="js/api.js?v=2"></script>
-  <script src="js/auth.js?v=2"></script>
-  <script>
-    // Security check and user load
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        if(typeof Auth !== 'undefined') {
-          Auth.checkAuth();
-          
-          const userStr = localStorage.getItem('renia_user');
-          if(userStr) {
-            const user = JSON.parse(userStr);
-            const nameDisplay = document.getElementById('user-name-display');
-            if(nameDisplay && user.name) {
-              nameDisplay.textContent = user.name;
-            }
-          }
-        }
-      } catch(e) {
-        console.error("Auth error", e);
-      }
-    });
-  </script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- App Scripts (order matters: utils first, then api, auth, then features) -->
+  <script src="js/utils.js?v=3"></script>
+  <script src="js/api.js?v=3"></script>
+  <script src="js/auth.js?v=3"></script>
+  <script src="js/charts.js?v=3"></script>
+  <script src="js/websocket.js?v=3"></script>
+  <script src="js/dashboard.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>

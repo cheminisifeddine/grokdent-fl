@@ -2,29 +2,29 @@
    Renia AI — Chart Module (Chart.js)
    ============================================ */
 
-// Chart.js global defaults for dark theme
+// Chart.js global defaults for LIGHT theme
 function initChartDefaults() {
   if (typeof Chart === 'undefined') {
     console.warn('Chart.js not loaded');
     return;
   }
 
-  Chart.defaults.color = '#8888a0';
-  Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.06)';
+  Chart.defaults.color = '#64748b';
+  Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.06)';
   Chart.defaults.font.family = "'Inter', sans-serif";
   Chart.defaults.font.size = 12;
   Chart.defaults.plugins.legend.labels.usePointStyle = true;
   Chart.defaults.plugins.legend.labels.padding = 16;
-  Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(18, 18, 26, 0.95)';
-  Chart.defaults.plugins.tooltip.titleColor = '#f0f0f5';
-  Chart.defaults.plugins.tooltip.bodyColor = '#8888a0';
-  Chart.defaults.plugins.tooltip.borderColor = 'rgba(255, 255, 255, 0.1)';
+  Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15, 23, 42, 0.9)';
+  Chart.defaults.plugins.tooltip.titleColor = '#f8fafc';
+  Chart.defaults.plugins.tooltip.bodyColor = '#cbd5e1';
+  Chart.defaults.plugins.tooltip.borderColor = 'rgba(0, 0, 0, 0.1)';
   Chart.defaults.plugins.tooltip.borderWidth = 1;
   Chart.defaults.plugins.tooltip.cornerRadius = 10;
   Chart.defaults.plugins.tooltip.padding = 12;
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.scale.grid = Chart.defaults.scale.grid || {};
-  Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.04)';
+  Chart.defaults.scale.grid.color = 'rgba(0, 0, 0, 0.04)';
 }
 
 /**
@@ -76,13 +76,13 @@ function initCallsBarChart(canvasId, labels, data) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#8888a0' }
+          ticks: { color: '#64748b' }
         },
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(255,255,255,0.04)' },
+          grid: { color: 'rgba(0,0,0,0.04)' },
           ticks: {
-            color: '#8888a0',
+            color: '#64748b',
             stepSize: 10
           }
         }
@@ -114,7 +114,7 @@ function initCallsLineChart(canvasId, labels, data) {
         fill: true,
         tension: 0.4,
         pointBackgroundColor: '#0d9488',
-        pointBorderColor: '#0a0a0f',
+        pointBorderColor: '#ffffff',
         pointBorderWidth: 2,
         pointRadius: 4,
         pointHoverRadius: 6
@@ -134,12 +134,12 @@ function initCallsLineChart(canvasId, labels, data) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#8888a0' }
+          ticks: { color: '#64748b' }
         },
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: '#8888a0' }
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { color: '#64748b' }
         }
       }
     }
@@ -169,7 +169,7 @@ function initBookingsLineChart(canvasId, labels, data) {
         fill: true,
         tension: 0.4,
         pointBackgroundColor: '#f97316',
-        pointBorderColor: '#0a0a0f',
+        pointBorderColor: '#ffffff',
         pointBorderWidth: 2,
         pointRadius: 4,
         pointHoverRadius: 6
@@ -189,12 +189,12 @@ function initBookingsLineChart(canvasId, labels, data) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#8888a0' }
+          ticks: { color: '#64748b' }
         },
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: '#8888a0' }
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { color: '#64748b' }
         }
       }
     }
@@ -245,7 +245,7 @@ function initLanguageDoughnutChart(canvasId, data) {
             padding: 20,
             usePointStyle: true,
             pointStyleWidth: 10,
-            color: '#8888a0'
+            color: '#64748b'
           }
         },
         tooltip: {
@@ -311,12 +311,12 @@ function initServicesHorizontalBarChart(canvasId, labels, data) {
       scales: {
         x: {
           beginAtZero: true,
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: '#8888a0' }
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { color: '#64748b' }
         },
         y: {
           grid: { display: false },
-          ticks: { color: '#f0f0f5', font: { size: 12 } }
+          ticks: { color: '#334155', font: { size: 12 } }
         }
       }
     }
