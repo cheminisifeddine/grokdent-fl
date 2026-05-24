@@ -5,7 +5,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Detect current page
   const path = window.location.pathname;
-  const currentPage = path.split('/').pop() || 'index.html';
+  const rawPage = path.split('/').pop() || 'index';
+  const currentPage = rawPage.replace('.html', '');
 
   // Check authentication
   Auth.checkAuth();
@@ -33,8 +34,9 @@ function setActiveSidebarLink(currentPage) {
   const navLinks = document.querySelectorAll('.sidebar-nav a');
   navLinks.forEach(link => {
     link.classList.remove('active');
-    const href = link.getAttribute('href');
-    if (href === currentPage) {
+    const href = link.getAttribute('href') || '';
+    const cleanedHref = href.replace('.html', '');
+    if (cleanedHref === currentPage) {
       link.classList.add('active');
     }
   });
@@ -45,41 +47,41 @@ function setActiveSidebarLink(currentPage) {
  */
 function initPage(page) {
   switch (page) {
-    case 'login.html':
-    case 'index.html':
+    case 'login':
+    case 'index':
     case '':
       Auth.initLoginForm();
       break;
 
-    case 'signup.html':
+    case 'signup':
       Auth.initSignupForm();
       break;
 
-    case 'dashboard.html':
+    case 'dashboard':
       Dashboard.loadDashboard();
       break;
 
-    case 'calls.html':
+    case 'calls':
       initCallsPage();
       break;
 
-    case 'appointments.html':
+    case 'appointments':
       initAppointmentsPage();
       break;
 
-    case 'knowledge-base.html':
+    case 'knowledge-base':
       initKnowledgeBasePage();
       break;
 
-    case 'analytics.html':
+    case 'analytics':
       initAnalyticsPage();
       break;
 
-    case 'settings.html':
+    case 'settings':
       initSettingsPage();
       break;
 
-    case 'billing.html':
+    case 'billing':
       initBillingPage();
       break;
   }

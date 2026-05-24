@@ -11,8 +11,9 @@ const Auth = {
    * Skip redirect on login and signup pages.
    */
   checkAuth() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const publicPages = ['index.html', 'signup.html', 'login.html', ''];
+    const rawPage = window.location.pathname.split('/').pop() || 'index';
+    const currentPage = rawPage.replace('.html', '');
+    const publicPages = ['index', 'signup', 'login', ''];
 
     if (publicPages.includes(currentPage)) {
       // If already logged in, redirect to dashboard
