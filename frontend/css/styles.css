@@ -6,27 +6,27 @@
 /* ---------- CSS Custom Properties ---------- */
 :root {
   /* Backgrounds */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-tertiary: #1a1a2e;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.05);
-  --bg-input: rgba(255, 255, 255, 0.03);
-  --bg-overlay: rgba(0, 0, 0, 0.7);
+  --bg-primary: #030303;
+  --bg-secondary: #08080c;
+  --bg-tertiary: #0c0c14;
+  --bg-card: rgba(10, 10, 15, 0.6);
+  --bg-card-hover: rgba(18, 18, 26, 0.85);
+  --bg-input: rgba(255, 255, 255, 0.02);
+  --bg-overlay: rgba(0, 0, 0, 0.85);
 
   /* Accent Colors */
-  --accent-teal: #0d9488;
-  --accent-coral: #f97316;
-  --accent-gradient: linear-gradient(135deg, #0d9488, #f97316);
-  --accent-gradient-reverse: linear-gradient(135deg, #f97316, #0d9488);
-  --accent-teal-soft: rgba(13, 148, 136, 0.15);
-  --accent-coral-soft: rgba(249, 115, 22, 0.15);
+  --accent-teal: #0df2c9;
+  --accent-coral: #ff5e3a;
+  --accent-gradient: linear-gradient(135deg, #0df2c9 0%, #ff5e3a 50%, #7c3aed 100%);
+  --accent-gradient-reverse: linear-gradient(135deg, #7c3aed 0%, #ff5e3a 50%, #0df2c9 100%);
+  --accent-teal-soft: rgba(13, 242, 201, 0.08);
+  --accent-coral-soft: rgba(255, 94, 58, 0.08);
 
   /* Text */
-  --text-primary: #f0f0f5;
-  --text-secondary: #8888a0;
-  --text-tertiary: #55556a;
-  --text-accent: #0d9488;
+  --text-primary: #f5f5fa;
+  --text-secondary: #9494b0;
+  --text-tertiary: #5c5c70;
+  --text-accent: #0df2c9;
 
   /* Status Colors */
   --success: #10b981;
@@ -39,10 +39,10 @@
   --info-soft: rgba(59, 130, 246, 0.15);
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-light: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-light: rgba(255, 255, 255, 0.07);
   --border-medium: rgba(255, 255, 255, 0.12);
-  --border-accent: rgba(13, 148, 136, 0.3);
+  --border-accent: rgba(13, 242, 201, 0.35);
 
   /* Spacing (4px increments) */
   --space-1: 4px;
@@ -59,7 +59,7 @@
   --space-16: 64px;
 
   /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-xs: 12px;
   --font-sm: 13px;
   --font-base: 14px;
@@ -263,8 +263,10 @@ p {
   left: 0;
   width: var(--sidebar-width);
   height: 100vh;
-  background: var(--bg-secondary);
-  border-right: 1px solid var(--border-subtle);
+  background: rgba(6, 6, 9, 0.7) !important;
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border-right: 1px solid rgba(255, 255, 255, 0.04) !important;
   display: flex;
   flex-direction: column;
   padding: var(--space-6) var(--space-4);
@@ -306,14 +308,15 @@ p {
 }
 
 .sidebar-nav a:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text-primary);
 }
 
 .sidebar-nav a.active {
-  background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(249, 115, 22, 0.15));
+  background: linear-gradient(135deg, rgba(13, 242, 201, 0.08), rgba(255, 94, 58, 0.08)) !important;
   color: var(--text-primary);
-  border: 1px solid rgba(13, 148, 136, 0.3);
+  border: 1px solid rgba(13, 242, 201, 0.25) !important;
+  box-shadow: inset 0 0 12px rgba(13, 242, 201, 0.05);
 }
 
 .sidebar-nav .nav-icon {
@@ -446,19 +449,19 @@ p {
 
 /* ---------- Cards ---------- */
 .card {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
+  background: rgba(10, 10, 15, 0.4) !important;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
   border-radius: var(--radius-xl);
   padding: var(--space-6);
-  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-medium);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
 .card-header {
@@ -484,22 +487,34 @@ p {
   text-align: center;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  background: rgba(10, 10, 15, 0.4) !important;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(13, 242, 201, 0.3) !important;
+  box-shadow: 0 0 35px rgba(13, 242, 201, 0.12), 0 15px 35px rgba(0, 0, 0, 0.6) !important;
 }
 
 .metric-card::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 3px;
   background: var(--accent-gradient);
-  opacity: 0;
-  transition: opacity var(--transition-base);
+  box-shadow: 0 0 10px var(--accent-teal);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .metric-card:hover::before {
-  opacity: 1;
+  width: 100%;
 }
 
 .metric-card .icon {
@@ -657,23 +672,24 @@ p {
 .input,
 .select,
 .textarea {
-  background: var(--bg-input);
-  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.015) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
   color: var(--text-primary);
   font-family: inherit;
   font-size: var(--font-base);
   width: 100%;
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .input:focus,
 .select:focus,
 .textarea:focus {
   outline: none;
-  border-color: var(--accent-teal);
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+  border-color: var(--accent-teal) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: 0 0 18px rgba(13, 242, 201, 0.18), inset 0 0 0 1px var(--accent-teal) !important;
 }
 
 .input::placeholder,
@@ -1610,33 +1626,61 @@ p {
 }
 
 .login-card {
-  background: rgba(18, 18, 26, 0.8);
+  background: rgba(8, 8, 12, 0.7);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: var(--radius-2xl);
   padding: var(--space-10) var(--space-10);
   width: 100%;
   max-width: 420px;
   position: relative;
   z-index: 10;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-xl), 0 20px 50px rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.8s ease;
 }
 
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: -1px; right: -1px; bottom: -1px;
+  border-radius: var(--radius-2xl);
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(13, 242, 201, 0.45), rgba(255, 94, 58, 0.15), rgba(124, 58, 237, 0.45));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .signup-card {
-  background: rgba(18, 18, 26, 0.8);
+  background: rgba(8, 8, 12, 0.7);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: var(--radius-2xl);
   padding: var(--space-10);
   width: 100%;
   max-width: 640px;
   position: relative;
   z-index: 10;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-xl), 0 20px 50px rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.8s ease;
+}
+
+.signup-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: -1px; right: -1px; bottom: -1px;
+  border-radius: var(--radius-2xl);
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(13, 242, 201, 0.45), rgba(255, 94, 58, 0.15), rgba(124, 58, 237, 0.45));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .login-logo {
