@@ -139,8 +139,6 @@
   <!-- Main Content Area -->
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
     
-
-    
     <!-- Topbar -->
     <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
       <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Knowledge Base</h1>
@@ -166,87 +164,81 @@
 
     <!-- Scrollable Page Content -->
     <div class="flex-1 overflow-y-auto p-8">
-      <div class="max-w-[1000px] mx-auto">
+      <div class="max-w-[1400px] mx-auto">
         
-        <!-- Category Tabs -->
-        <div class="flex flex-wrap gap-2 mb-8 bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm inline-flex">
-          <button data-category="all" class="kb-tab active px-5 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-900 shadow-sm transition-colors">All</button>
-          <button data-category="general" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">General</button>
-          <button data-category="services" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Services</button>
-          <button data-category="insurance" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Insurance</button>
-          <button data-category="emergency" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Emergency</button>
-          <button data-category="policies" class="kb-tab px-5 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Policies</button>
-        </div>
-
-        <!-- KB Entries -->
-        <div class="space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          <!-- Entry 1 -->
-          <div data-category="general" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="flex items-center justify-between mb-4">
-              <span class="bg-blue-50 text-blue-600 border border-blue-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">General</span>
-              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
+          <!-- Left Column: KB Management (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Search & Filters -->
+            <div class="glass-card rounded-2xl p-4 bg-white flex flex-col sm:flex-row gap-3 items-center justify-between shadow-sm">
+              <div class="relative w-full">
+                <span class="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-slate-400">search</span>
+                <input type="text" id="kb-search-input" placeholder="Search questions or answers..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+              </div>
             </div>
-            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What services does your dental clinic offer?</h3>
-            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.</p>
-            <div class="flex items-center gap-3">
-              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+            
+            <!-- Category Tabs -->
+            <div class="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 inline-flex shadow-inner">
+              <button data-category="all" class="kb-tab active px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition-all">All</button>
+              <button data-category="general" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">General</button>
+              <button data-category="hours" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Hours</button>
+              <button data-category="services" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Services</button>
+              <button data-category="insurance" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Insurance</button>
+              <button data-category="emergency" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Emergency</button>
+              <button data-category="policies" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Policies</button>
             </div>
-          </div>
-
-          <!-- Entry 2 -->
-          <div data-category="hours" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="flex items-center justify-between mb-4">
-              <span class="bg-indigo-50 text-indigo-600 border border-indigo-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Hours</span>
-              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
-            </div>
-            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What are your office hours?</h3>
-            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.</p>
-            <div class="flex items-center gap-3">
-              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
-            </div>
-          </div>
-
-          <!-- Entry 3 -->
-          <div data-category="insurance" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="flex items-center justify-between mb-4">
-              <span class="bg-teal-50 text-teal-600 border border-teal-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Insurance</span>
-              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
-            </div>
-            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What insurance plans do you accept?</h3>
-            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">We accept most major dental insurance plans including Delta Dental, Humana, MCNA Dental, Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.</p>
-            <div class="flex items-center gap-3">
-              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+            
+            <!-- Q&A List -->
+            <div id="kb-entries-container" class="space-y-4">
+              <!-- Rendered dynamically -->
             </div>
           </div>
-
-          <!-- Entry 4 -->
-          <div data-category="emergency" class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group border-rose-100">
-            <div class="flex items-center justify-between mb-4">
-              <span class="bg-rose-50 text-rose-600 border border-rose-100 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Emergency</span>
-              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active</span>
-            </div>
-            <h3 class="kb-question font-display text-xl font-bold text-slate-900 mb-3">What should I do if I have a dental emergency?</h3>
-            <p class="kb-answer text-slate-600 leading-relaxed text-[15px] mb-6">If you're experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.</p>
-            <div class="flex items-center gap-3">
-              <button class="kb-edit-btn text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Edit Entry</button>
-              <button class="kb-delete-btn text-sm font-semibold text-slate-500 hover:text-rose-600 transition-colors bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">Delete</button>
+          
+          <!-- Right Column: AI Agent Simulator (5 cols) -->
+          <div class="lg:col-span-5">
+            <div class="glass-card rounded-3xl p-6 bg-gradient-to-br from-slate-900 to-indigo-950 text-white border-none shadow-xl sticky top-8">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-xl">🤖</div>
+                <div>
+                  <h3 class="font-display font-bold text-base tracking-tight text-white">AI Agent Simulator</h3>
+                  <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-0.5">Real-time Response Tester</p>
+                </div>
+              </div>
+              
+              <div class="space-y-4 mb-6 min-h-[280px] bg-slate-950/50 rounded-2xl p-4 border border-slate-800/80 flex flex-col justify-between">
+                <div id="simulator-chat-history" class="space-y-4 overflow-y-auto max-h-[250px] text-left pr-1">
+                  <div class="flex gap-2">
+                    <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+                    <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
+                      Hello! This is your clinic's AI voice receptionist receptionist. You can ask me any question about our services, hours, accepted insurance, or clinic policies, and I will generate an answer dynamically from your customized knowledge base! Try typing below.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <form id="simulator-form" class="space-y-3">
+                <div class="relative">
+                  <input type="text" id="simulator-input" placeholder="Type a patient question (e.g. Do you accept Cigna?)..." required class="w-full bg-slate-950/80 border border-slate-800 rounded-xl py-3 pl-4 pr-10 text-xs text-white placeholder-slate-500 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                  <button type="submit" class="absolute right-2 top-2.5 w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center hover:bg-brand-400 transition-all">
+                    <span class="material-symbols-outlined text-[15px] text-white">send</span>
+                  </button>
+                </div>
+                <p class="text-[9px] text-slate-500 text-center font-bold uppercase tracking-wider">Simulates what the voice caller hears instantly</p>
+              </form>
             </div>
           </div>
-
+          
         </div>
 
       </div>
     </div>
-    </main>
+  </main>
 
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-  <!-- App Scripts (order matters: utils first, then api, auth, then features) -->
+  <!-- App Scripts -->
   <script src="js/utils.js?v=4"></script>
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
@@ -254,15 +246,355 @@
   <script src="js/websocket.js?v=4"></script>
   <script src="js/dashboard.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
+  
   <script>
+    const state = {
+      knowledgeBase: [],
+      searchQuery: '',
+      selectedCategory: 'all'
+    };
+
+    const DEFAULT_KB = [
+      { id: '1', category: 'general', question: 'What services does your dental clinic offer?', answer: 'We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.', active: true },
+      { id: '2', category: 'hours', question: 'What are your office hours?', answer: 'We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.', active: true },
+      { id: '3', category: 'insurance', question: 'What insurance plans do you accept?', answer: 'We accept most major dental insurance plans including Delta Dental FL, Humana, MCNA Dental (Medicaid), Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.', active: true },
+      { id: '4', category: 'emergency', question: 'What should I do if I have a dental emergency?', answer: 'If you are experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.', active: true },
+      { id: '5', category: 'policies', question: 'What is your appointment cancellation policy?', answer: 'We value your time and request that you provide us with at least 24 hours notice if you need to cancel or reschedule your appointment. Cancellations made with less than 24 hours notice may be subject to a fee of $50.', active: true },
+      { id: '6', category: 'services', question: 'Do you offer cosmetic dentistry or teeth whitening?', answer: 'Yes! We offer premium cosmetic services including porcelain veneers, composite bonding, full mouth reconstruction, and both in-office and take-home professional teeth whitening treatments using advanced whitening technology.', active: true },
+      { id: '7', category: 'general', question: 'Where is your dental clinic located?', answer: 'Our clinic is conveniently located at 1200 Brickell Avenue, Suite 450, Miami, FL 33131. Parking validation is available for all patients in the building garage.', active: true }
+    ];
+
+    function loadKnowledgeBase() {
+      const stored = localStorage.getItem('renia_knowledge_base');
+      if (stored) {
+        try {
+          state.knowledgeBase = JSON.parse(stored);
+        } catch (e) {
+          state.knowledgeBase = [...DEFAULT_KB];
+        }
+      } else {
+        state.knowledgeBase = [...DEFAULT_KB];
+        saveKBToStorage();
+      }
+    }
+
+    function saveKBToStorage() {
+      localStorage.setItem('renia_knowledge_base', JSON.stringify(state.knowledgeBase));
+    }
+
+    function renderKnowledgeBase() {
+      const container = document.getElementById('kb-entries-container');
+      if (!container) return;
+
+      const q = state.searchQuery.trim().toLowerCase();
+      const cat = state.selectedCategory;
+
+      const filtered = state.knowledgeBase.filter(entry => {
+        const matchesQ = !q || entry.question.toLowerCase().includes(q) || entry.answer.toLowerCase().includes(q);
+        const matchesCat = cat === 'all' || entry.category === cat;
+        return matchesQ && matchesCat;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card rounded-2xl p-8 text-center bg-white border border-slate-200">
+            <span class="material-symbols-outlined text-[48px] text-slate-300 mb-2">find_in_page</span>
+            <h3 class="font-bold text-slate-700 text-base">No entries found</h3>
+            <p class="text-xs text-slate-400 mt-1">Try expanding your search query or select another category filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(entry => {
+        let badgeColor = 'bg-blue-50 text-blue-600 border-blue-100';
+        if (entry.category === 'hours') badgeColor = 'bg-indigo-50 text-indigo-600 border-indigo-100';
+        if (entry.category === 'insurance') badgeColor = 'bg-teal-50 text-teal-600 border-teal-100';
+        if (entry.category === 'emergency') badgeColor = 'bg-rose-50 text-rose-600 border-rose-100';
+        if (entry.category === 'policies') badgeColor = 'bg-amber-50 text-amber-600 border-amber-100';
+        if (entry.category === 'services') badgeColor = 'bg-purple-50 text-purple-600 border-purple-100';
+
+        return `
+          <div class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group bg-white border border-slate-200 transition-all duration-300" id="kb_card_${entry.id}">
+            <div class="flex items-center justify-between mb-4">
+              <span class="${badgeColor} border px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">${entry.category}</span>
+              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Active</span>
+            </div>
+            <h3 class="kb-question font-display text-lg font-bold text-slate-900 mb-2.5 leading-snug">${escapeHtml(entry.question)}</h3>
+            <p class="kb-answer text-slate-600 leading-relaxed text-sm mb-5">${escapeHtml(entry.answer)}</p>
+            <div class="flex items-center gap-2">
+              <button onclick="openKBModal('${entry.id}')" class="kb-edit-btn text-xs font-bold text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/50 transition-all bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[15px]">edit</span> Edit Entry
+              </button>
+              <button onclick="deleteKBEntry('${entry.id}')" class="kb-delete-btn text-xs font-bold text-slate-600 hover:text-rose-600 hover:bg-rose-50/50 transition-all bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[15px]">delete</span> Delete
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Modal Add / Edit
+    function openKBModal(entryId = null) {
+      const entry = entryId ? state.knowledgeBase.find(e => e.id === entryId) : null;
+      
+      const overlay = document.createElement('div');
+      overlay.id = 'kb-modal';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
+      
+      const title = entry ? 'Edit Knowledge Entry' : 'Add Knowledge Entry';
+      const submitText = entry ? 'Save Changes' : 'Create Entry';
+      
+      const qVal = entry ? entry.question : '';
+      const aVal = entry ? entry.answer : '';
+      const catVal = entry ? entry.category : 'general';
+
+      overlay.innerHTML = `
+        <div style="background:white;border-radius:20px;width:100%;max-width:560px;box-shadow:0 25px 50px rgba(0,0,0,0.15);overflow:hidden;">
+          <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;">
+            <h2 style="font-size:18px;font-weight:850;color:#0f172a;margin:0;font-family:'Outfit',sans-serif;">${title}</h2>
+            <button onclick="document.getElementById('kb-modal').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
+          </div>
+          <form id="kb-modal-form" style="padding:24px 28px;">
+            <div style="display:grid;gap:16px;">
+              <div>
+                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Category</label>
+                <select id="modal-kb-category" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;background:white;">
+                  <option value="general" ${catVal === 'general' ? 'selected' : ''}>General</option>
+                  <option value="hours" ${catVal === 'hours' ? 'selected' : ''}>Hours</option>
+                  <option value="services" ${catVal === 'services' ? 'selected' : ''}>Services</option>
+                  <option value="insurance" ${catVal === 'insurance' ? 'selected' : ''}>Insurance</option>
+                  <option value="emergency" ${catVal === 'emergency' ? 'selected' : ''}>Emergency</option>
+                  <option value="policies" ${catVal === 'policies' ? 'selected' : ''}>Policies</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Question (English)</label>
+                <input type="text" id="modal-kb-question" placeholder="e.g. Do you accept Humana?" required value="${qVal.replace(/"/g, '&quot;')}" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
+              </div>
+              <div>
+                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Answer (English)</label>
+                <textarea id="modal-kb-answer" rows="4" placeholder="Clear, friendly answer..." required style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.5;">${aVal}</textarea>
+              </div>
+            </div>
+            <div style="margin-top:24px;display:flex;gap:12px;">
+              <button type="button" onclick="document.getElementById('kb-modal').remove()" style="flex:1;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-weight:700;color:#64748b;background:white;cursor:pointer;font-size:14px;">Cancel</button>
+              <button type="submit" style="flex:2;padding:12px;background:#0f172a;color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:14px;">${submitText}</button>
+            </div>
+          </form>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+
+      document.getElementById('kb-modal-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const category = document.getElementById('modal-kb-category').value;
+        const question = document.getElementById('modal-kb-question').value;
+        const answer = document.getElementById('modal-kb-answer').value;
+
+        if (entry) {
+          // Edit mode
+          const idx = state.knowledgeBase.findIndex(ek => ek.id === entry.id);
+          if (idx !== -1) {
+            state.knowledgeBase[idx] = { ...entry, category, question, answer };
+            saveKBToStorage();
+            try { await API.updateKnowledge(entry.id, state.knowledgeBase[idx]); } catch {}
+            showToast('Knowledge entry updated successfully! ✅', 'success');
+          }
+        } else {
+          // Create mode
+          const newEntry = {
+            id: 'kb_' + Date.now(),
+            category,
+            question,
+            answer,
+            active: true
+          };
+          state.knowledgeBase.push(newEntry);
+          saveKBToStorage();
+          try { await API.createKnowledge(newEntry); } catch {}
+          showToast('Knowledge entry created! ✅', 'success');
+        }
+
+        overlay.remove();
+        renderKnowledgeBase();
+      });
+    }
+
+    window.openKBModal = openKBModal;
+
+    window.deleteKBEntry = function(id) {
+      if (confirm('Are you sure you want to delete this knowledge entry?')) {
+        const idx = state.knowledgeBase.findIndex(e => e.id === id);
+        if (idx !== -1) {
+          state.knowledgeBase.splice(idx, 1);
+          saveKBToStorage();
+          try { API.deleteKnowledge(id); } catch {}
+          
+          const card = document.getElementById(`kb_card_${id}`);
+          if (card) {
+            card.style.transform = 'translateX(-20px) scale(0.95)';
+            card.style.opacity = '0';
+            setTimeout(() => {
+              renderKnowledgeBase();
+              showToast('Entry deleted successfully 🟥', 'info');
+            }, 250);
+          } else {
+            renderKnowledgeBase();
+            showToast('Entry deleted', 'info');
+          }
+        }
+      }
+    };
+
+    // AI Response Tester logic
+    function getSimulatedAIResponse(query) {
+      const normQuery = query.toLowerCase();
+      let bestMatch = null;
+      let highestScore = 0;
+      
+      state.knowledgeBase.forEach(entry => {
+        if (!entry.active) return;
+        
+        const qWords = entry.question.toLowerCase().split(/\W+/).filter(w => w.length > 3);
+        const queryWords = normQuery.split(/\W+/).filter(w => w.length > 3);
+        
+        let matchCount = 0;
+        qWords.forEach(qw => {
+          if (queryWords.includes(qw)) matchCount++;
+        });
+        
+        if (normQuery.includes(entry.question.toLowerCase())) {
+          matchCount += 8;
+        }
+
+        const exactCategoryKeywordMatch = normQuery.includes(entry.category);
+        if (exactCategoryKeywordMatch) {
+          matchCount += 2;
+        }
+        
+        if (matchCount > highestScore) {
+          highestScore = matchCount;
+          bestMatch = entry;
+        }
+      });
+      
+      if (bestMatch && highestScore > 0) {
+        return bestMatch.answer;
+      }
+      
+      // Dynamic helpful fallback responses
+      if (normQuery.includes('book') || normQuery.includes('appointment') || normQuery.includes('schedule') || normQuery.includes('checkup') || normQuery.includes('cleaning')) {
+        return "I would be delighted to assist you with booking! I have open time slots this week on Wednesday at 10:00 AM and Friday at 1:30 PM. Would you like me to book one of those for you?";
+      }
+      if (normQuery.includes('hello') || normQuery.includes('hi') || normQuery.includes('hey')) {
+        return "Hello! I am your clinic's AI voice receptionist. I'm here to assist with booking appointments, accepting insurance, explaining services, and answering general clinic FAQs. How can I help you today?";
+      }
+      if (normQuery.includes('price') || normQuery.includes('cost') || normQuery.includes('charge')) {
+        return "For general checkups, our standard price is $99 and cleanings are $120. We accept most major insurance plans which often cover these 100%! What service were you inquiring about?";
+      }
+      
+      return "That is a great question! I couldn't find a direct match for that in my custom knowledge base. However, I can let you know that our general clinic number is (305) 555-0100 and we would be happy to discuss details with you! (Try adding a custom Q&A to my Knowledge Base settings to see me answer this instantly!)";
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Wire logout button
-      const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
-      if (lBtn && !lBtn.hasAttribute('data-logout-wired')) {
-        lBtn.setAttribute('data-logout-wired','1');
-        lBtn.addEventListener('click', () => {
-          if (typeof Auth !== 'undefined') Auth.logout();
-          else window.location.href = 'index.html';
+      loadKnowledgeBase();
+      renderKnowledgeBase();
+
+      // Wire logout
+      document.querySelector('[onclick*="Auth.logout"]')?.addEventListener('click', () => {
+        if (typeof Auth !== 'undefined') Auth.logout();
+      });
+
+      // Top Add button
+      document.getElementById('add-kb-btn')?.addEventListener('click', () => openKBModal());
+
+      // Seed Defaults
+      document.getElementById('seed-defaults-btn')?.addEventListener('click', async () => {
+        if (confirm('Reset knowledge base to default Florida dental FAQs?')) {
+          localStorage.removeItem('renia_knowledge_base');
+          try { await API.seedKnowledge(); } catch {}
+          loadKnowledgeBase();
+          renderKnowledgeBase();
+          showToast('Knowledge Base loaded with default FAQ seed data! 🦷✅', 'success');
+        }
+      });
+
+      // Search bar
+      document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        renderKnowledgeBase();
+      });
+
+      // Tabs switcher
+      const tabs = document.querySelectorAll('.kb-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+            t.classList.add('text-slate-500');
+          });
+          tab.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+          tab.classList.remove('text-slate-500');
+          
+          state.selectedCategory = tab.getAttribute('data-category') || 'all';
+          renderKnowledgeBase();
+        });
+      });
+
+      // AI Simulator Form
+      const simForm = document.getElementById('simulator-form');
+      const simInput = document.getElementById('simulator-input');
+      const simHistory = document.getElementById('simulator-chat-history');
+
+      if (simForm && simInput && simHistory) {
+        simForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const query = simInput.value.trim();
+          if (!query) return;
+
+          // Append User query
+          simHistory.innerHTML += `
+            <div class="flex gap-2 justify-end">
+              <div class="bg-indigo-600 text-white px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-right">
+                ${escapeHtml(query)}
+              </div>
+              <div class="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center text-xs text-indigo-900 font-bold shrink-0 select-none">👤</div>
+            </div>
+          `;
+          
+          simInput.value = '';
+          simHistory.scrollTop = simHistory.scrollHeight;
+
+          // Simulating typing
+          const typingId = 'typing_' + Date.now();
+          simHistory.innerHTML += `
+            <div class="flex gap-2" id="${typingId}">
+              <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+              <div class="bg-indigo-950/20 border border-indigo-800/20 px-3 py-1.5 rounded-2xl text-xs text-slate-400 italic">
+                AI Agent is thinking...
+              </div>
+            </div>
+          `;
+          simHistory.scrollTop = simHistory.scrollHeight;
+
+          setTimeout(() => {
+            document.getElementById(typingId)?.remove();
+            
+            const response = getSimulatedAIResponse(query);
+            simHistory.innerHTML += `
+              <div class="flex gap-2">
+                <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+                <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
+                  ${escapeHtml(response)}
+                </div>
+              </div>
+            `;
+            simHistory.scrollTop = simHistory.scrollHeight;
+          }, 600);
         });
       }
     });

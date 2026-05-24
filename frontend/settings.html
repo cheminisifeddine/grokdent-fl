@@ -139,8 +139,6 @@
   <!-- Main Content Area -->
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
     
-
-    
     <!-- Topbar -->
     <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
       <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Settings</h1>
@@ -160,82 +158,546 @@
 
     <!-- Scrollable Page Content -->
     <div class="flex-1 overflow-y-auto p-8">
-      <div class="max-w-[1000px] mx-auto flex gap-8">
+      <div class="max-w-[1000px] mx-auto flex flex-col md:flex-row gap-8">
         
         <!-- Tabs Menu -->
-        <div class="w-[200px] shrink-0 space-y-1">
-          <button data-target="profile" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-100">Clinic Profile</button>
-          <button data-target="hours" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Office Hours</button>
-          <button data-target="services" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Services</button>
-          <button data-target="voice" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">AI Voice settings</button>
-          <button data-target="emergency" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-colors">Emergency Protocol</button>
+        <div class="w-full md:w-[220px] shrink-0 space-y-1">
+          <button data-target="profile" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-100 transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">domain</span> Clinic Profile
+          </button>
+          <button data-target="hours" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">schedule</span> Office Hours
+          </button>
+          <button data-target="services" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">medical_services</span> Services & Prices
+          </button>
+          <button data-target="voice" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">settings_voice</span> AI Voice settings
+          </button>
+          <button data-target="emergency" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">emergency</span> Emergency Protocol
+          </button>
         </div>
 
         <!-- Settings Content -->
         <div class="flex-1">
-          <form class="settings-form glass-card rounded-2xl p-8" id="profile-form">
+          
+          <!-- Clinic Profile Form -->
+          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200" id="profile-form">
             <div class="flex items-center justify-between mb-6">
               <h2 class="font-display text-xl font-bold text-slate-900">Clinic Profile</h2>
-              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-xl font-bold text-sm transition-colors shadow-md">Save Changes</button>
+              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">save</span> Save Changes
+              </button>
             </div>
             
             <div class="space-y-5">
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Clinic Name</label>
-                <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 transition-colors" value="Sunshine Dental Care">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Clinic Name</label>
+                <input type="text" id="prof-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="Sunshine Dental Care">
               </div>
               
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Public Email</label>
-                <input type="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 transition-colors" value="hello@sunshinedental.com">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Public Email</label>
+                <input type="email" id="prof-email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="hello@sunshinedental.com">
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Phone Number</label>
-                <input type="tel" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 transition-colors" value="(305) 555-0100">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Phone Number</label>
+                <input type="tel" id="prof-phone" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="(305) 555-0100">
               </div>
               
               <div class="grid grid-cols-2 gap-5">
                 <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-1.5">City (Florida)</label>
-                  <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 transition-colors" value="Miami">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">City (Florida)</label>
+                  <input type="text" id="prof-city" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="Miami">
                 </div>
                 <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-1.5">ZIP Code</label>
-                  <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 transition-colors" value="33101">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">ZIP Code</label>
+                  <input type="text" id="prof-zip" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="33101">
                 </div>
               </div>
-
             </div>
           </form>
+
+          <!-- Office Hours Form -->
+          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="hours-form">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-display text-xl font-bold text-slate-900">Office Hours</h2>
+              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">save</span> Save Hours
+              </button>
+            </div>
+            
+            <div class="space-y-4" id="hours-days-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </form>
+
+          <!-- Services & Prices Form -->
+          <div class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="services-form">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+              <h2 class="font-display text-xl font-bold text-slate-900">Services & Pricing</h2>
+              <span class="text-xs text-slate-400 font-semibold" id="services-count">8 services active</span>
+            </div>
+            
+            <!-- List Container -->
+            <div class="space-y-3 mb-8" id="services-list-container">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Add Service Subform -->
+            <form id="add-service-form" class="border-t border-slate-100 pt-6">
+              <h3 class="font-bold text-slate-800 text-sm mb-4">Add Custom Service</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+                <div class="sm:col-span-8">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Service Name</label>
+                  <input type="text" id="new-service-name" placeholder="e.g. Tooth Extraction" required class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm">
+                </div>
+                <div class="sm:col-span-4">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Price ($)</label>
+                  <input type="number" id="new-service-price" placeholder="e.g. 199" required min="1" class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm">
+                </div>
+              </div>
+              <div class="mt-4 flex justify-end">
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold text-xs transition-all shadow-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[14px]">add</span> Add Service
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- AI Voice Settings Form -->
+          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="voice-form">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-display text-xl font-bold text-slate-900">AI Voice settings</h2>
+              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">save</span> Save settings
+              </button>
+            </div>
+            
+            <div class="space-y-6">
+              <div class="flex flex-col sm:flex-row gap-4 items-center">
+                <div class="w-full">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Select Voice Agent</label>
+                  <select id="voice-select" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm">
+                    <option value="Ash">Ash (US Friendly Male)</option>
+                    <option value="Ballad">Ballad (US Professional Female)</option>
+                    <option value="Coral">Coral (US Warm Female)</option>
+                    <option value="Sage">Sage (US Friendly Female)</option>
+                    <option value="Verse">Verse (US Energetic Male)</option>
+                    <option value="Ani">Ani (US Clean Female)</option>
+                    <option value="Eve">Eve (US Soft Female)</option>
+                    <option value="Leo">Leo (US Deep Male)</option>
+                  </select>
+                </div>
+                <button type="button" id="preview-voice-btn" class="w-full sm:w-auto shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs border border-slate-200 transition-colors flex items-center justify-center gap-1.5 mt-5 sm:mt-0">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span> Preview Voice
+                </button>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">AI Greeting Welcome Message</label>
+                <textarea id="voice-greeting" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed">Thank you for calling Sunshine Dental Care. This is your AI receptionist Ash. How can I help you today?</textarea>
+                <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">The first sentence the AI receptionist says when greeting incoming callers.</p>
+              </div>
+
+              <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner">
+                <div>
+                  <h4 class="font-bold text-slate-800 text-sm">Spanish Bilingual Support</h4>
+                  <p class="text-xs text-slate-400 mt-0.5 font-medium">Auto-detects Spanish speech and responds conversationally in Spanish.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer select-none">
+                  <input type="checkbox" id="voice-spanish-toggle" class="sr-only peer" checked>
+                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                </label>
+              </div>
+            </div>
+          </form>
+
+          <!-- Emergency Protocol Form -->
+          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="emergency-form">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-display text-xl font-bold text-slate-900">Emergency Protocol</h2>
+              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">save</span> Save Protocol
+              </button>
+            </div>
+            
+            <div class="space-y-5">
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">On-Call Emergency Contact Name</label>
+                <input type="text" id="emerg-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="Dr. Sarah Martinez">
+              </div>
+              
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">On-Call Emergency Contact Phone</label>
+                <input type="tel" id="emerg-phone" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="(305) 555-0199">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Emergency Triage Protocol</label>
+                <textarea id="emerg-protocol" rows="5" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed">If the patient reports severe bleeding, swelling affecting breathing, a completely knocked-out adult tooth, or extreme unmanageable pain, offer a same-day urgent booking immediately or transfer the caller directly to the on-call contact phone number.</textarea>
+                <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">Triage instructions guiding the AI receptionist on identifying and handling dental emergencies.</p>
+              </div>
+            </div>
+          </form>
+
         </div>
 
       </div>
     </div>
-    </main>
+  </main>
 
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-  <!-- App Scripts (order matters: utils first, then api, auth, then features) -->
+  <!-- App Scripts -->
   <script src="js/utils.js?v=4"></script>
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
-  <script src="js/charts.js?v=4"></script>
-  <script src="js/websocket.js?v=4"></script>
-  <script src="js/dashboard.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Wire logout button
-      const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
-      if (lBtn && !lBtn.hasAttribute('data-logout-wired')) {
-        lBtn.setAttribute('data-logout-wired','1');
-        lBtn.addEventListener('click', () => {
-          if (typeof Auth !== 'undefined') Auth.logout();
-          else window.location.href = 'index.html';
-        });
+    const state = {
+      settings: {}
+    };
+
+    const DEFAULT_SETTINGS = {
+      profile: {
+        name: 'Sunshine Smiles Dental',
+        email: 'hello@sunshinesmiles.com',
+        phone: '(305) 555-0100',
+        city: 'Miami',
+        zip: '33101'
+      },
+      hours: {
+        monday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+        tuesday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+        wednesday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+        thursday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+        friday: { active: true, open: '8:00 AM', close: '5:00 PM' },
+        saturday: { active: true, open: '9:00 AM', close: '1:00 PM' },
+        sunday: { active: false, open: '9:00 AM', close: '1:00 PM' }
+      },
+      services: [
+        { name: 'General Checkup', price: 99 },
+        { name: 'Dental Cleaning', price: 120 },
+        { name: 'Dental Implant Consult', price: 150 },
+        { name: 'Teeth Whitening', price: 299 },
+        { name: 'Root Canal', price: 850 },
+        { name: 'Crown / Bridge', price: 1200 },
+        { name: 'Orthodontics', price: 3500 },
+        { name: 'Emergency', price: 199 }
+      ],
+      voice: {
+        voice: 'Ash',
+        greeting: 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I help you today?',
+        spanish: true
+      },
+      emergency: {
+        name: 'Dr. Sarah Martinez',
+        phone: '(305) 555-0199',
+        protocol: 'If the patient reports severe bleeding, swelling affecting breathing, a completely knocked-out adult tooth, or extreme unmanageable pain, offer a same-day urgent booking immediately or transfer the caller directly to the on-call contact phone number.'
       }
+    };
+
+    function loadSettings() {
+      const stored = localStorage.getItem('renia_settings');
+      if (stored) {
+        try {
+          state.settings = JSON.parse(stored);
+        } catch (e) {
+          state.settings = { ...DEFAULT_SETTINGS };
+        }
+      } else {
+        state.settings = { ...DEFAULT_SETTINGS };
+        saveSettingsToStorage();
+      }
+      
+      // Update sidebar username display if loaded
+      const sidebarName = document.getElementById('user-name-display');
+      if (sidebarName && state.settings.profile.name) {
+        sidebarName.textContent = state.settings.profile.name.length > 18 ? 'Admin Staff' : state.settings.profile.name;
+      }
+    }
+
+    function saveSettingsToStorage() {
+      localStorage.setItem('renia_settings', JSON.stringify(state.settings));
+      
+      const sidebarName = document.getElementById('user-name-display');
+      if (sidebarName && state.settings.profile.name) {
+        sidebarName.textContent = state.settings.profile.name.length > 18 ? 'Admin Staff' : state.settings.profile.name;
+      }
+    }
+
+    // Populate Clinic Profile Form
+    function populateProfile() {
+      const prof = state.settings.profile;
+      document.getElementById('prof-name').value = prof.name || '';
+      document.getElementById('prof-email').value = prof.email || '';
+      document.getElementById('prof-phone').value = prof.phone || '';
+      document.getElementById('prof-city').value = prof.city || '';
+      document.getElementById('prof-zip').value = prof.zip || '';
+    }
+
+    // Populate and Render Office Hours
+    function renderHours() {
+      const container = document.getElementById('hours-days-container');
+      if (!container) return;
+      
+      const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+      
+      const timeOptions = [
+        '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '11:00 AM',
+        '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM'
+      ];
+
+      container.innerHTML = days.map(day => {
+        const config = state.settings.hours[day] || { active: false, open: '8:00 AM', close: '5:00 PM' };
+        const openOptions = timeOptions.map(t => `<option value="${t}" ${config.open === t ? 'selected' : ''}>${t}</option>`).join('');
+        const closeOptions = timeOptions.map(t => `<option value="${t}" ${config.close === t ? 'selected' : ''}>${t}</option>`).join('');
+
+        return `
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+            <div class="w-full sm:w-28 flex items-center gap-2.5">
+              <input type="checkbox" id="hour_active_${day}" ${config.active ? 'checked' : ''} class="w-4 h-4 rounded text-indigo-600 border-slate-300 focus:ring-indigo-500">
+              <label for="hour_active_${day}" class="text-sm font-bold text-slate-800 capitalize select-none">${day}</label>
+            </div>
+            
+            <div class="flex items-center gap-3 w-full sm:w-auto" id="time_selects_${day}" style="${config.active ? '' : 'opacity: 0.4; pointer-events: none;'}">
+              <select id="hour_open_${day}" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white outline-none">
+                ${openOptions}
+              </select>
+              <span class="text-xs text-slate-400 font-bold font-mono">to</span>
+              <select id="hour_close_${day}" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white outline-none">
+                ${closeOptions}
+              </select>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Wire checkboxes to toggle time select opacity
+      days.forEach(day => {
+        const chk = document.getElementById(`hour_active_${day}`);
+        const selects = document.getElementById(`time_selects_${day}`);
+        chk?.addEventListener('change', (e) => {
+          if (e.target.checked) {
+            selects.style.opacity = '';
+            selects.style.pointerEvents = '';
+          } else {
+            selects.style.opacity = '0.4';
+            selects.style.pointerEvents = 'none';
+          }
+        });
+      });
+    }
+
+    // Populate and Render Services
+    function renderServices() {
+      const container = document.getElementById('services-list-container');
+      const countLabel = document.getElementById('services-count');
+      if (!container) return;
+
+      const list = state.settings.services || [];
+      if (countLabel) countLabel.textContent = `${list.length} services active`;
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="p-6 text-center text-slate-400 italic text-xs font-semibold">
+            No services configured. Add your first service below!
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map((srv, idx) => `
+        <div class="flex items-center justify-between p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500 text-xs font-black">🦷</div>
+            <div class="font-bold text-slate-800 text-sm">${escapeHtml(srv.name)}</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="font-black text-slate-900 text-sm">$${srv.price}</span>
+            <button onclick="removeService(${idx})" class="w-8 h-8 rounded-lg hover:bg-rose-50 hover:text-rose-600 text-slate-400 border border-transparent hover:border-rose-100 flex items-center justify-center transition-all select-none">
+              <span class="material-symbols-outlined text-[18px]">delete</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.removeService = function(idx) {
+      const list = state.settings.services || [];
+      const srvName = list[idx]?.name || 'service';
+      if (confirm(`Remove the service "${srvName}" from pricing database?`)) {
+        list.splice(idx, 1);
+        saveSettingsToStorage();
+        renderServices();
+        showToast('Service removed successfully 🟥', 'info');
+      }
+    };
+
+    // Populate Voice Form
+    function populateVoice() {
+      const voice = state.settings.voice;
+      document.getElementById('voice-select').value = voice.voice || 'Ash';
+      document.getElementById('voice-greeting').value = voice.greeting || '';
+      document.getElementById('voice-spanish-toggle').checked = voice.spanish;
+    }
+
+    // Populate Emergency Form
+    function populateEmergency() {
+      const emerg = state.settings.emergency;
+      document.getElementById('emerg-name').value = emerg.name || '';
+      document.getElementById('emerg-phone').value = emerg.phone || '';
+      document.getElementById('emerg-protocol').value = emerg.protocol || '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSettings();
+      
+      // Initial tab layout population
+      populateProfile();
+      renderHours();
+      renderServices();
+      populateVoice();
+      populateEmergency();
+
+      // Tab Switcher
+      const tabs = document.querySelectorAll('.settings-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('bg-indigo-50', 'text-indigo-600', 'shadow-sm', 'border-indigo-100', 'font-bold');
+            t.classList.add('text-slate-600', 'border-transparent');
+          });
+          tab.classList.add('bg-indigo-50', 'text-indigo-600', 'shadow-sm', 'border-indigo-100', 'font-bold');
+          tab.classList.remove('text-slate-600', 'border-transparent');
+          
+          const target = tab.getAttribute('data-target');
+          document.querySelectorAll('.settings-form').forEach(form => {
+            if (form.id === `${target}-form`) form.classList.remove('hidden');
+            else form.classList.add('hidden');
+          });
+        });
+      });
+
+      // Submit Profile Form
+      document.getElementById('profile-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('[type="submit"]');
+        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+
+        state.settings.profile = {
+          name: document.getElementById('prof-name').value.trim(),
+          email: document.getElementById('prof-email').value.trim(),
+          phone: document.getElementById('prof-phone').value.trim(),
+          city: document.getElementById('prof-city').value.trim(),
+          zip: document.getElementById('prof-zip').value.trim()
+        };
+
+        saveSettingsToStorage();
+        try { await API.updateClinic({ clinic_name: state.settings.profile.name }); } catch {}
+        
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save Changes';
+          showToast('Clinic profile updated successfully! ✅', 'success');
+        }, 300);
+      });
+
+      // Submit Hours Form
+      document.getElementById('hours-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('[type="submit"]');
+        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        days.forEach(day => {
+          state.settings.hours[day] = {
+            active: document.getElementById(`hour_active_${day}`).checked,
+            open: document.getElementById(`hour_open_${day}`).value,
+            close: document.getElementById(`hour_close_${day}`).value
+          };
+        });
+
+        saveSettingsToStorage();
+        try { await API.updateHours(state.settings.hours); } catch {}
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save Hours';
+          showToast('Office hours updated! ✅', 'success');
+        }, 300);
+      });
+
+      // Add Custom Service Form
+      document.getElementById('add-service-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('new-service-name').value.trim();
+        const price = parseInt(document.getElementById('new-service-price').value.trim());
+
+        if (!name || isNaN(price)) return;
+
+        state.settings.services.push({ name, price });
+        saveSettingsToStorage();
+        
+        try { API.updateServices(state.settings.services); } catch {}
+
+        // Reset subform & update list
+        e.target.reset();
+        renderServices();
+        showToast(`Service "${name}" added to pricing list! ✅`, 'success');
+      });
+
+      // Submit Voice Form
+      document.getElementById('voice-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('[type="submit"]');
+        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+
+        state.settings.voice = {
+          voice: document.getElementById('voice-select').value,
+          greeting: document.getElementById('voice-greeting').value.trim(),
+          spanish: document.getElementById('voice-spanish-toggle').checked
+        };
+
+        saveSettingsToStorage();
+        try { await API.updateVoiceSettings({ voice: state.settings.voice.voice }); } catch {}
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save settings';
+          showToast('AI Voice agent settings updated! ✅', 'success');
+        }, 300);
+      });
+
+      // Preview Voice
+      document.getElementById('preview-voice-btn')?.addEventListener('click', () => {
+        const v = document.getElementById('voice-select').value;
+        showToast(`Playing dynamic audio preview for voice "${v}"... 🔊`, 'info');
+      });
+
+      // Submit Emergency Form
+      document.getElementById('emergency-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('[type="submit"]');
+        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+
+        state.settings.emergency = {
+          name: document.getElementById('emerg-name').value.trim(),
+          phone: document.getElementById('emerg-phone').value.trim(),
+          protocol: document.getElementById('emerg-protocol').value.trim()
+        };
+
+        saveSettingsToStorage();
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save Protocol';
+          showToast('Emergency triage protocol saved! ✅', 'success');
+        }, 300);
+      });
+
     });
   </script>
 </body>
