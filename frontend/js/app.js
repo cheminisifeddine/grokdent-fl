@@ -45,6 +45,7 @@ function setActiveSidebarLink(currentPage) {
  */
 function initPage(page) {
   switch (page) {
+    case 'login.html':
     case 'index.html':
     case '':
       Auth.initLoginForm();

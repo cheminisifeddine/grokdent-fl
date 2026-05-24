@@ -12,7 +12,7 @@ const Auth = {
    */
   checkAuth() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const publicPages = ['index.html', 'signup.html', ''];
+    const publicPages = ['index.html', 'signup.html', 'login.html', ''];
 
     if (publicPages.includes(currentPage)) {
       // If already logged in, redirect to dashboard
