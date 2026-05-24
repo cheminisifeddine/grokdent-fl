@@ -116,37 +116,47 @@
       <div id="step-2" class="hidden">
         <h3 style="margin-bottom: 20px;">🦷 Services Offered</h3>
 
-        <div class="checkbox-group" style="margin-bottom: 24px;">
-          <label class="checkbox-item">
-            <input type="checkbox" value="General Dentistry" checked> General Dentistry
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Cosmetic Dentistry"> Cosmetic Dentistry
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Dental Implants"> Dental Implants
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Orthodontics"> Orthodontics
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Pediatric Dentistry"> Pediatric Dentistry
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Emergency Dental"> Emergency Dental
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Periodontics"> Periodontics
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Endodontics"> Endodontics
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Oral Surgery"> Oral Surgery
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Teeth Whitening"> Teeth Whitening
-          </label>
+        <div class="toggle-grid" style="margin-bottom: 24px;">
+          <div class="toggle-card active" data-value="General Dentistry">
+            <div class="toggle-icon">🦷</div>
+            <span>General Dentistry</span>
+          </div>
+          <div class="toggle-card" data-value="Cosmetic Dentistry">
+            <div class="toggle-icon">✨</div>
+            <span>Cosmetic Dentistry</span>
+          </div>
+          <div class="toggle-card" data-value="Dental Implants">
+            <div class="toggle-icon">🔩</div>
+            <span>Dental Implants</span>
+          </div>
+          <div class="toggle-card" data-value="Orthodontics">
+            <div class="toggle-icon">🪥</div>
+            <span>Orthodontics</span>
+          </div>
+          <div class="toggle-card" data-value="Pediatric Dentistry">
+            <div class="toggle-icon">🧸</div>
+            <span>Pediatric Dentistry</span>
+          </div>
+          <div class="toggle-card" data-value="Emergency Dental">
+            <div class="toggle-icon">🚨</div>
+            <span>Emergency Dental</span>
+          </div>
+          <div class="toggle-card" data-value="Periodontics">
+            <div class="toggle-icon">⚕️</div>
+            <span>Periodontics</span>
+          </div>
+          <div class="toggle-card" data-value="Endodontics">
+            <div class="toggle-icon">🔬</div>
+            <span>Endodontics</span>
+          </div>
+          <div class="toggle-card" data-value="Oral Surgery">
+            <div class="toggle-icon">😷</div>
+            <span>Oral Surgery</span>
+          </div>
+          <div class="toggle-card" data-value="Teeth Whitening">
+            <div class="toggle-icon">🌟</div>
+            <span>Teeth Whitening</span>
+          </div>
         </div>
 
         <h4 style="margin-bottom: 16px;">🕐 Office Hours</h4>
@@ -194,31 +204,39 @@
       <div id="step-3" class="hidden">
         <h3 style="margin-bottom: 20px;">🏥 Insurance Accepted</h3>
 
-        <div class="checkbox-group" style="margin-bottom: 24px;">
-          <label class="checkbox-item">
-            <input type="checkbox" value="Delta Dental" checked> Delta Dental
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Humana"> Humana
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="MCNA Dental"> MCNA Dental
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Guardian"> Guardian
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Cigna"> Cigna
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="MetLife"> MetLife
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Aetna"> Aetna
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" value="Florida Blue"> Florida Blue
-          </label>
+        <div class="toggle-grid" style="margin-bottom: 24px;">
+          <div class="toggle-card active" data-value="Delta Dental">
+            <div class="toggle-icon">🛡️</div>
+            <span>Delta Dental</span>
+          </div>
+          <div class="toggle-card" data-value="Humana">
+            <div class="toggle-icon">🏥</div>
+            <span>Humana</span>
+          </div>
+          <div class="toggle-card" data-value="MCNA Dental">
+            <div class="toggle-icon">🦷</div>
+            <span>MCNA Dental</span>
+          </div>
+          <div class="toggle-card" data-value="Guardian">
+            <div class="toggle-icon">🗡️</div>
+            <span>Guardian</span>
+          </div>
+          <div class="toggle-card" data-value="Cigna">
+            <div class="toggle-icon">🤝</div>
+            <span>Cigna</span>
+          </div>
+          <div class="toggle-card" data-value="MetLife">
+            <div class="toggle-icon">🏢</div>
+            <span>MetLife</span>
+          </div>
+          <div class="toggle-card" data-value="Aetna">
+            <div class="toggle-icon">❤️</div>
+            <span>Aetna</span>
+          </div>
+          <div class="toggle-card" data-value="Florida Blue">
+            <div class="toggle-icon">🌊</div>
+            <span>Florida Blue</span>
+          </div>
         </div>
 
         <div class="form-group">
@@ -248,7 +266,7 @@
         </div>
 
         <h4 style="margin: 24px 0 16px;">📋 Review Your Setup</h4>
-        <div id="signup-summary" class="card" style="padding: 16px; font-size: 13px; line-height: 2; color: var(--text-secondary);"></div>
+        <div id="signup-summary" class="summary-container"></div>
       </div>
 
     </form>

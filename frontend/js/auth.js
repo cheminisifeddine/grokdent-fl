@@ -179,13 +179,60 @@ const Auth = {
     const form = document.getElementById('signup-form');
     if (!form) return;
 
+    // Prevent default form submission on enter
+    form.addEventListener('submit', (e) => e.preventDefault());
+
+    // Initialize toggle cards
+    document.querySelectorAll('.toggle-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('active');
+      });
+    });
+
     let currentStep = 1;
     const totalSteps = 4;
+
+    const validateStep = (step) => {
+      if (step === 1) {
+        const name = document.getElementById('signup-clinic-name').value.trim();
+        const email = document.getElementById('signup-clinic-email').value.trim();
+        if (!name) {
+          showToast('Clinic Name is required', 'error');
+          return false;
+        }
+        if (!email) {
+          showToast('Clinic Email is required', 'error');
+          return false;
+        }
+      }
+      if (step === 4) {
+        const adminEmail = document.getElementById('signup-admin-email').value.trim();
+        const adminPass = document.getElementById('signup-admin-password').value;
+        if (!adminEmail || !adminPass) {
+          showToast('Admin Email and Password are required', 'error');
+          return false;
+        }
+        if (adminPass.length < 8) {
+          showToast('Password must be at least 8 characters', 'error');
+          return false;
+        }
+      }
+      return true;
+    };
 
     const showStep = (step) => {
       for (let i = 1; i <= totalSteps; i++) {
         const stepEl = document.getElementById(`step-${i}`);
-        if (stepEl) stepEl.classList.toggle('hidden', i !== step);
+        if (stepEl) {
+          if (i === step) {
+            stepEl.classList.remove('hidden');
+            // Slight delay to trigger CSS transition
+            setTimeout(() => stepEl.classList.add('slide-in'), 10);
+          } else {
+            stepEl.classList.remove('slide-in');
+            stepEl.classList.add('hidden');
+          }
+        }
       }
 
       // Update step indicators
@@ -214,10 +261,10 @@ const Auth = {
       const nextBtn = document.getElementById('signup-next');
       if (nextBtn) {
         if (step === totalSteps) {
-          nextBtn.textContent = '🚀 Launch Your AI Receptionist';
+          nextBtn.innerHTML = '🚀 Launch Your AI Receptionist';
           nextBtn.classList.add('btn-lg');
         } else {
-          nextBtn.textContent = 'Next →';
+          nextBtn.innerHTML = 'Next &rarr;';
           nextBtn.classList.remove('btn-lg');
         }
       }
@@ -228,7 +275,8 @@ const Auth = {
     // Back button
     const backBtn = document.getElementById('signup-back');
     if (backBtn) {
-      backBtn.addEventListener('click', () => {
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         if (currentStep > 1) showStep(currentStep - 1);
       });
     }
@@ -236,14 +284,17 @@ const Auth = {
     // Next button
     const nextBtn = document.getElementById('signup-next');
     if (nextBtn) {
-      nextBtn.addEventListener('click', async () => {
-        if (currentStep < totalSteps) {
-          showStep(currentStep + 1);
+      nextBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
 
-          // If moving to step 4, populate summary
-          if (currentStep === 4) {
+        if (!validateStep(currentStep)) return;
+
+        if (currentStep < totalSteps) {
+          // Calculate the next step summary if going to step 4
+          if (currentStep + 1 === 4) {
             Auth.populateSignupSummary();
           }
+          showStep(currentStep + 1);
         } else {
           // Submit signup
           nextBtn.disabled = true;
@@ -260,7 +311,7 @@ const Auth = {
           } else {
             showToast(result.error, 'error');
             nextBtn.disabled = false;
-            nextBtn.textContent = '🚀 Launch Your AI Receptionist';
+            nextBtn.innerHTML = '🚀 Launch Your AI Receptionist';
           }
         }
       });
@@ -280,8 +331,8 @@ const Auth = {
       zip: document.getElementById('signup-zip')?.value || '',
       phone: document.getElementById('signup-phone')?.value || '',
       clinic_email: document.getElementById('signup-clinic-email')?.value || '',
-      services: Array.from(document.querySelectorAll('#step-2 input[type="checkbox"]:checked')).map(cb => cb.value),
-      insurance: Array.from(document.querySelectorAll('#step-3 input[type="checkbox"]:checked')).map(cb => cb.value),
+      services: Array.from(document.querySelectorAll('#step-2 .toggle-card.active')).map(card => card.dataset.value),
+      insurance: Array.from(document.querySelectorAll('#step-3 .toggle-card.active')).map(card => card.dataset.value),
       policies: document.getElementById('signup-policies')?.value || '',
       email: document.getElementById('signup-admin-email')?.value || '',
       password: document.getElementById('signup-admin-password')?.value || '',
@@ -297,16 +348,38 @@ const Auth = {
     const summaryEl = document.getElementById('signup-summary');
     if (!summaryEl) return;
 
-    const services = data.services.length ? data.services.join(', ') : 'None selected';
-    const insurance = data.insurance.length ? data.insurance.join(', ') : 'None selected';
+    const servicesCount = data.services.length;
+    const insuranceCount = data.insurance.length;
 
     summaryEl.innerHTML = `
-      <div class="summary-row"><strong>Clinic:</strong> ${escapeHtml(data.clinic_name)}</div>
-      <div class="summary-row"><strong>Location:</strong> ${escapeHtml(data.address)}, ${escapeHtml(data.city)}, FL ${escapeHtml(data.zip)}</div>
-      <div class="summary-row"><strong>Phone:</strong> ${formatPhone(data.phone)}</div>
-      <div class="summary-row"><strong>Services:</strong> ${escapeHtml(services)}</div>
-      <div class="summary-row"><strong>Insurance:</strong> ${escapeHtml(insurance)}</div>
-      <div class="summary-row"><strong>Admin:</strong> ${escapeHtml(data.email)}</div>
+      <div class="summary-dashboard">
+        <div class="summary-header">
+          <div class="summary-clinic-name">${escapeHtml(data.clinic_name) || 'New Clinic'}</div>
+          <div class="summary-clinic-contact">${escapeHtml(data.clinic_email)} &bull; ${formatPhone(data.phone)}</div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-card-icon">📍</div>
+            <div class="summary-card-label">Location</div>
+            <div class="summary-card-value">${escapeHtml(data.city) || 'City'}, FL ${escapeHtml(data.zip)}</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-card-icon">🦷</div>
+            <div class="summary-card-label">Services</div>
+            <div class="summary-card-value">${servicesCount} Selected</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-card-icon">🏥</div>
+            <div class="summary-card-label">Insurance</div>
+            <div class="summary-card-value">${insuranceCount} Selected</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-card-icon">👤</div>
+            <div class="summary-card-label">Admin User</div>
+            <div class="summary-card-value" style="word-break: break-all;">${escapeHtml(data.email)}</div>
+          </div>
+        </div>
+      </div>
     `;
   },
 
