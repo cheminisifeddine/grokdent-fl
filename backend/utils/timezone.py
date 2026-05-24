@@ -5,11 +5,10 @@ All date/time helpers use US/Eastern for Florida.
 
 from datetime import datetime, timezone, timedelta
 from typing import Dict, Optional, Tuple
-
-import pytz
+from zoneinfo import ZoneInfo
 
 # Florida uses Eastern Time
-FL_TZ = pytz.timezone("US/Eastern")
+FL_TZ = ZoneInfo("US/Eastern")
 
 
 def get_florida_now() -> datetime:
@@ -24,24 +23,31 @@ def to_florida_time(utc_dt: datetime) -> datetime:
     return utc_dt.astimezone(FL_TZ)
 
 
+def _format_time(dt: datetime) -> str:
+    """Cross-platform hour:min AM/PM formatting."""
+    hour = dt.hour
+    minute = dt.minute
+    ampm = "AM" if hour < 12 else "PM"
+    hour12 = hour % 12
+    if hour12 == 0:
+        hour12 = 12
+    return f"{hour12}:{minute:02d} {ampm}"
+
+
 def format_appointment_time(dt: datetime) -> str:
-    """
-    Format a datetime for patient-friendly display.
-    Example: ``'Monday, January 15 at 2:30 PM'``
-    """
     if dt.tzinfo is None or str(dt.tzinfo) != "US/Eastern":
         dt = to_florida_time(dt)
-    return dt.strftime("%A, %B %-d at %-I:%M %p").replace(" 0", " ")
+    day = dt.day
+    month = dt.strftime("%B")
+    weekday = dt.strftime("%A")
+    time_str = _format_time(dt)
+    return f"{weekday}, {month} {day} at {time_str}"
 
 
 def format_time_short(dt: datetime) -> str:
-    """
-    Format a datetime as a short time string.
-    Example: ``'2:30 PM'``
-    """
     if dt.tzinfo is None or str(dt.tzinfo) != "US/Eastern":
         dt = to_florida_time(dt)
-    return dt.strftime("%-I:%M %p").replace(" 0", " ")
+    return _format_time(dt)
 
 
 def get_business_hours_status(hours_dict: Optional[Dict]) -> Tuple[bool, str]:

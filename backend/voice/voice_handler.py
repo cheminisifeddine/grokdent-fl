@@ -165,7 +165,15 @@ class VoiceHandler:
             )
 
         # Process through conversation manager
-        response_text, actions = await conversation.process_utterance(speech_text)
+        try:
+            response_text, actions = await conversation.process_utterance(speech_text)
+        except Exception as exc:
+            logger.error("Conversation processing failed for SID=%s: %s", call_sid, exc)
+            return _twiml_say(
+                "I apologize, I'm having trouble processing that. "
+                "Please hold while I transfer you to our team.",
+                conversation.language,
+            )
 
         # Check if any action requires a transfer
         for action in actions:
@@ -206,14 +214,25 @@ class VoiceHandler:
     # ------------------------------------------------------------------
     @staticmethod
     def end_call(call_sid: str, db: Session) -> Optional[CallLog]:
-        """
-        Finalize a call: save the encrypted transcript and create a CallLog.
-        Returns the created ``CallLog`` object or ``None``.
-        """
         conversation = ConversationManager.end_conversation(call_sid)
         if not conversation:
             logger.warning("end_call for unknown SID=%s", call_sid)
             return None
+
+        # Clean up GrokVoiceClient resources
+        try:
+            if hasattr(conversation, 'grok_client') and conversation.grok_client:
+                import asyncio
+                try:
+                    loop = asyncio.get_event_loop()
+                    if loop.is_running():
+                        loop.create_task(conversation.grok_client.close())
+                    else:
+                        loop.run_until_complete(conversation.grok_client.close())
+                except Exception:
+                    pass
+        except Exception:
+            pass
 
         transcript = conversation.get_transcript()
         transcript_text = "\n".join(

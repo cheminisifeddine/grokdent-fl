@@ -8,7 +8,8 @@ import os
 import json
 import asyncio
 import logging
-from typing import Set
+from concurrent.futures import ThreadPoolExecutor
+from typing import Dict, Set
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -18,6 +19,8 @@ from sqlalchemy.orm import Session
 from backend.config import settings
 from backend.database import engine, Base, SessionLocal
 from backend.middleware.hipaa_audit import HIPAAAuditMiddleware
+
+_thread_pool = ThreadPoolExecutor(max_workers=2)
 
 # Import routers
 from backend.api.auth import router as auth_router
@@ -63,7 +66,8 @@ app.add_middleware(HIPAAAuditMiddleware)
 @app.on_event("startup")
 async def on_startup():
     logger.info("Initializing GrokDent FL database tables...")
-    Base.metadata.create_all(bind=engine)
+    loop = asyncio.get_event_loop()
+    await loop.run_in_executor(_thread_pool, lambda: Base.metadata.create_all(bind=engine))
     
     # Seed initial insurance providers if none exist
     db = SessionLocal()

@@ -4,7 +4,7 @@ Stripe checkout sessions, webhooks, plan info, and cancellations.
 """
 
 import logging
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from pydantic import BaseModel

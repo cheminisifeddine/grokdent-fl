@@ -6,6 +6,7 @@ before they are written to the database.
 """
 
 import base64
+import hashlib
 import logging
 from cryptography.fernet import Fernet, InvalidToken
 from backend.config import settings
@@ -26,21 +27,20 @@ class EncryptionService:
     def __init__(self) -> None:
         key = settings.ENCRYPTION_KEY
         if not key:
-            # Generate a key for development convenience — log a loud warning
-            key = Fernet.generate_key().decode()
-            logger.warning(
-                "ENCRYPTION_KEY not set — generated a temporary key. "
+            logger.error(
+                "ENCRYPTION_KEY not set — encryption unavailable. "
                 "Set ENCRYPTION_KEY in .env for production!"
             )
-        else:
-            # Ensure the key is properly padded / encoded
-            try:
-                base64.urlsafe_b64decode(key)
-            except Exception:
-                # Treat the raw string as a passphrase and derive a key
-                key = base64.urlsafe_b64encode(key.ljust(32)[:32].encode()).decode()
+            self._fernet = None
+            return
 
-        self._fernet = Fernet(key.encode() if isinstance(key, str) else key)
+        try:
+            base64.urlsafe_b64decode(key)
+            self._fernet = Fernet(key.encode() if isinstance(key, str) else key)
+        except Exception:
+            derived = hashlib.sha256(key.encode("utf-8")).digest()
+            encoded_key = base64.urlsafe_b64encode(derived).decode()
+            self._fernet = Fernet(encoded_key)
 
     # ------------------------------------------------------------------
     # Singleton accessor — avoids re-reading the key on every call
@@ -55,9 +55,11 @@ class EncryptionService:
     # Public API
     # ------------------------------------------------------------------
     def encrypt(self, plaintext: str) -> str:
-        """Encrypt a plaintext string and return a URL-safe base64 ciphertext."""
         if not plaintext:
             return ""
+        if self._fernet is None:
+            logger.error("Encryption unavailable: ENCRYPTION_KEY not set")
+            return "[ENCRYPTION_UNAVAILABLE]"
         try:
             token = self._fernet.encrypt(plaintext.encode("utf-8"))
             return token.decode("utf-8")
@@ -66,17 +68,16 @@ class EncryptionService:
             raise
 
     def decrypt(self, ciphertext: str) -> str:
-        """Decrypt a Fernet ciphertext string back to plaintext."""
         if not ciphertext:
             return ""
+        if self._fernet is None:
+            logger.error("Decryption unavailable: ENCRYPTION_KEY not set")
+            return "[DECRYPTION_ERROR]"
         try:
             plaintext = self._fernet.decrypt(ciphertext.encode("utf-8"))
             return plaintext.decode("utf-8")
         except InvalidToken:
-            logger.error(
-                "Decryption failed — invalid token. "
-                "Was the ENCRYPTION_KEY rotated without re-encrypting data?"
-            )
+            logger.error("Decryption failed — invalid token. Key may have been rotated.")
             return "[DECRYPTION_ERROR]"
         except Exception as exc:
             logger.error("Decryption failed: %s", exc)

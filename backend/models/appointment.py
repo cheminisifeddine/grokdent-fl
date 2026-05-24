@@ -46,6 +46,8 @@ class Appointment(Base):
 
     notes = Column(Text, nullable=True)
     google_calendar_event_id = Column(String(200), nullable=True)
+    calcom_booking_id = Column(String(200), nullable=True)
+    calendly_event_uri = Column(String(200), nullable=True)
 
     created_via = Column(
         String(20),

@@ -60,6 +60,34 @@ class Settings(BaseSettings):
         description="Google Calendar ID to sync with",
     )
 
+    # --- Cal.com Scheduling ---
+    CALCOM_API_KEY: Optional[str] = Field(
+        default=None,
+        description="Cal.com API Key",
+    )
+    CALCOM_EVENT_TYPE_ID: Optional[int] = Field(
+        default=None,
+        description="Cal.com Event Type ID to check slots and book",
+    )
+    CALCOM_API_URL: str = Field(
+        default="https://api.cal.com/v1",
+        description="Cal.com API base URL",
+    )
+
+    # --- Calendly Scheduling ---
+    CALENDLY_PAT: Optional[str] = Field(
+        default=None,
+        description="Calendly Personal Access Token (PAT)",
+    )
+    CALENDLY_EVENT_TYPE_URI: Optional[str] = Field(
+        default=None,
+        description="Calendly Event Type URI to check slots and book",
+    )
+    CALENDLY_API_URL: str = Field(
+        default="https://api.calendly.com",
+        description="Calendly API base URL",
+    )
+
     # --- JWT ---
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(
         default=480,

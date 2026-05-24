@@ -340,7 +340,9 @@ function openAppointmentModal() {
 
       try {
         await API.createAppointment({ patient_name: patient, service_type: service, appointment_datetime: `${date} ${time}` });
-      } catch (err) { /* demo mode */ }
+      } catch (err) {
+        console.warn('Appointment booking API failed, using local fallback:', err.message);
+      }
 
       overlay.remove();
       showToast(`✅ Appointment booked for ${patient} on ${date} at ${time}`, 'success');
@@ -369,7 +371,9 @@ function initKnowledgeBasePage() {
   if (seedBtn) {
     seedBtn.addEventListener('click', async () => {
       seedBtn.textContent = 'Loading...';
-      try { await API.seedKnowledge(); } catch {}
+      try { await API.seedKnowledge(); } catch (err) {
+        console.warn('Seed knowledge API failed:', err.message);
+      }
       showToast('Knowledge base loaded with 8 default entries! ✅', 'success');
       seedBtn.textContent = 'Seed Defaults';
     });
@@ -409,7 +413,9 @@ function initKnowledgeBasePage() {
         active: true
       };
       if (!data.question || !data.answer) { showToast('Question and answer are required', 'error'); return; }
-      try { await API.createKnowledge(data); } catch {}
+      try { await API.createKnowledge(data); } catch (err) {
+        console.warn('Create knowledge API failed:', err.message);
+      }
       showToast('Knowledge entry saved! ✅', 'success');
       if (kbPanel) kbPanel.classList.remove('open');
       kbForm.reset();
@@ -569,7 +575,9 @@ function initSettingsPage() {
     e.preventDefault();
     const btn = e.target.querySelector('[type="submit"]');
     if (btn) { btn.textContent = 'Saving...'; btn.disabled = true; }
-    try { await API.updateClinic({ clinic_name: document.getElementById('setting-clinic-name')?.value }); } catch {}
+    try { await API.updateClinic({ clinic_name: document.getElementById('setting-clinic-name')?.value }); } catch (err) {
+      console.warn('Update clinic API failed:', err.message);
+    }
     showToast('Profile saved successfully! ✅', 'success');
     if (btn) { btn.textContent = 'Save Changes'; btn.disabled = false; }
   });
@@ -588,7 +596,9 @@ function initSettingsPage() {
     e.preventDefault();
     const btn = e.target.querySelector('[type="submit"]');
     if (btn) { btn.textContent = 'Saving...'; btn.disabled = true; }
-    try { await API.updateVoiceSettings({ voice: document.getElementById('setting-voice')?.value }); } catch {}
+    try { await API.updateVoiceSettings({ voice: document.getElementById('setting-voice')?.value }); } catch (err) {
+      console.warn('Update voice settings API failed:', err.message);
+    }
     showToast('Voice settings saved! ✅', 'success');
     if (btn) { btn.textContent = 'Save Voice Settings'; btn.disabled = false; }
   });
@@ -620,7 +630,9 @@ function initBillingPage() {
       btn.textContent = 'Processing...';
       btn.disabled = true;
 
-      try { await API.createCheckout(plan); } catch {}
+      try { await API.createCheckout(plan); } catch (err) {
+        console.warn('Create checkout API failed:', err.message);
+      }
 
       // Update UI
       document.querySelectorAll('.select-plan-btn').forEach(b => {
@@ -646,6 +658,9 @@ function initBillingPage() {
 
 // Global modal view helpers for the dashboard feed clicks
 window.viewCallTranscript = function(caller, time, lang) {
+  caller = escapeHtml(caller);
+  time = escapeHtml(time);
+  lang = escapeHtml(lang);
   const modal = document.getElementById('transcript-modal');
   if (modal) modal.remove();
   
@@ -706,6 +721,10 @@ window.viewCallTranscript = function(caller, time, lang) {
 };
 
 window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
+  name = escapeHtml(name);
+  time = escapeHtml(time);
+  service = escapeHtml(service);
+  status = escapeHtml(status);
   const existing = document.getElementById('appt-details-modal');
   if (existing) existing.remove();
   

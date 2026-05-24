@@ -83,6 +83,7 @@ class Clinic(Base):
     call_logs = relationship("CallLog", back_populates="clinic", cascade="all, delete-orphan")
     knowledge_entries = relationship("KnowledgeBase", back_populates="clinic", cascade="all, delete-orphan")
     audit_logs = relationship("AuditLog", back_populates="clinic", cascade="all, delete-orphan")
+    intake_profiles = relationship("PatientIntakeProfile", back_populates="clinic", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Clinic {self.name} ({self.slug})>"

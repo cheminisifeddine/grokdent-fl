@@ -23,3 +23,12 @@ database_id = "d615d9f9-add9-4f82-985d-30adc6da13dd" # Will be provisioned durin
 binding = "BUCKET"
 bucket_name = "grokdent-r2"
 preview_bucket_name = "grokdent-r2-preview"
+
+# Durable Object for real-time dashboard WebSocket streaming
+[[durable_objects.bindings]]
+name = "REALTIME_DO"
+class_name = "RealtimeDashboardDO"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["RealtimeDashboardDO"]

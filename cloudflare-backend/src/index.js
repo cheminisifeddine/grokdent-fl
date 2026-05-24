@@ -73,12 +73,35 @@ async function decryptData(encryptedStr, secretStr) {
   }
 }
 
-// Simple fast SHA-256 for passwords
+// PBKDF2-based password hashing (HIPAA-aligned)
 async function hashPassword(password) {
-  const msgUint8 = new TextEncoder().encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const encoder = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']
+  );
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
+    keyMaterial, 256
+  );
+  const saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
+  const hashHex = Array.from(new Uint8Array(derivedBits)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return `${saltHex}:${hashHex}`;
+}
+
+async function verifyPassword(password, stored) {
+  const [saltHex, hashHex] = stored.split(':');
+  const salt = new Uint8Array(saltHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+  const encoder = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']
+  );
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
+    keyMaterial, 256
+  );
+  const verifyHex = Array.from(new Uint8Array(derivedBits)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return verifyHex === hashHex;
 }
 
 // -------------------------------------------------------------------------
@@ -91,7 +114,10 @@ async function authMiddleware(c, next) {
   }
   
   const token = authHeader.split(' ')[1];
-  const jwtSecret = c.env.JWT_SECRET || 'fallback-secret-development';
+  const jwtSecret = c.env.JWT_SECRET;
+  if (!jwtSecret) {
+    return c.json({ error: 'JWT_SECRET not configured on server' }, 500);
+  }
   
   try {
     const encSecret = new TextEncoder().encode(jwtSecret);
@@ -133,7 +159,10 @@ app.post('/api/v1/auth/signup', async (c) => {
   ]);
   
   // Issue JWT Token
-  const jwtSecret = c.env.JWT_SECRET || 'fallback-secret-development';
+  const jwtSecret = c.env.JWT_SECRET;
+  if (!jwtSecret) {
+    return c.json({ error: 'JWT_SECRET not configured on server' }, 500);
+  }
   const encSecret = new TextEncoder().encode(jwtSecret);
   const token = await new SignJWT({ sub: userId, clinic_id: clinicId, role: 'admin' })
     .setProtectedHeader({ alg: 'HS256' })
@@ -154,12 +183,15 @@ app.post('/api/v1/auth/login', async (c) => {
   const user = await db.prepare('SELECT * FROM users WHERE email = ?').bind(body.email).first();
   if (!user) return c.json({ error: 'Invalid credentials' }, 401);
   
-  const checkHash = await hashPassword(body.password);
-  if (checkHash !== user.hashed_password) {
+  const valid = await verifyPassword(body.password, user.hashed_password);
+  if (!valid) {
     return c.json({ error: 'Invalid credentials' }, 401);
   }
   
-  const jwtSecret = c.env.JWT_SECRET || 'fallback-secret-development';
+  const jwtSecret = c.env.JWT_SECRET;
+  if (!jwtSecret) {
+    return c.json({ error: 'JWT_SECRET not configured on server' }, 500);
+  }
   const encSecret = new TextEncoder().encode(jwtSecret);
   const token = await new SignJWT({ sub: user.id, clinic_id: user.clinic_id, role: user.role })
     .setProtectedHeader({ alg: 'HS256' })
@@ -200,7 +232,10 @@ app.put('/api/v1/clinics', authMiddleware, async (c) => {
 // -------------------------------------------------------------------------
 app.get('/api/v1/patients', authMiddleware, async (c) => {
   const user = c.get('user');
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   
   const patients = await c.env.DB.prepare('SELECT * FROM patients WHERE clinic_id = ?').bind(user.clinic_id).all();
   
@@ -223,7 +258,10 @@ app.get('/api/v1/patients', authMiddleware, async (c) => {
 app.post('/api/v1/patients', authMiddleware, async (c) => {
   const user = c.get('user');
   const body = await c.req.json();
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   
   const patientId = crypto.randomUUID();
   
@@ -267,7 +305,10 @@ app.post('/api/v1/appointments', authMiddleware, async (c) => {
 // -------------------------------------------------------------------------
 app.get('/api/v1/calls', authMiddleware, async (c) => {
   const user = c.get('user');
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   
   const calls = await c.env.DB.prepare('SELECT * FROM call_logs WHERE clinic_id = ? ORDER BY created_at DESC')
     .bind(user.clinic_id).all();
@@ -406,7 +447,10 @@ app.get('/api/v1/calls/stats', authMiddleware, async (c) => {
 app.get('/api/v1/calls/:id', authMiddleware, async (c) => {
   const user = c.get('user');
   const id = c.req.param('id');
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   const call = await c.env.DB.prepare('SELECT * FROM call_logs WHERE id = ? AND clinic_id = ?').bind(id, user.clinic_id).first();
   if (!call) return c.json({ error: 'Call not found' }, 404);
   call.transcript = call.transcript_encrypted ? await decryptData(call.transcript_encrypted, encKey) : null;
@@ -602,7 +646,10 @@ app.post('/api/v1/billing/cancel', authMiddleware, async (c) => {
 app.get('/api/v1/patients/search', authMiddleware, async (c) => {
   const user = c.get('user');
   const q = c.req.query('q') || '';
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   const patients = await c.env.DB.prepare(
     "SELECT * FROM patients WHERE clinic_id = ? AND (first_name LIKE ? OR last_name LIKE ?)"
   ).bind(user.clinic_id, `%${q}%`, `%${q}%`).all();
@@ -618,7 +665,10 @@ app.get('/api/v1/patients/search', authMiddleware, async (c) => {
 app.get('/api/v1/patients/:id', authMiddleware, async (c) => {
   const user = c.get('user');
   const id = c.req.param('id');
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   const p = await c.env.DB.prepare('SELECT * FROM patients WHERE id = ? AND clinic_id = ?').bind(id, user.clinic_id).first();
   if (!p) return c.json({ error: 'Patient not found' }, 404);
   return c.json({
@@ -637,7 +687,10 @@ app.put('/api/v1/patients/:id', authMiddleware, async (c) => {
   const user = c.get('user');
   const id = c.req.param('id');
   const body = await c.req.json();
-  const encKey = c.env.ENCRYPTION_KEY || 'fallback-encryption-key-for-grok';
+  const encKey = c.env.ENCRYPTION_KEY;
+  if (!encKey) {
+    return c.json({ error: 'ENCRYPTION_KEY not configured on server' }, 500);
+  }
   const phoneEnc = body.phone ? await encryptData(body.phone, encKey) : '';
   const emailEnc = body.email ? await encryptData(body.email, encKey) : '';
   const notesEnc = body.notes ? await encryptData(body.notes, encKey) : '';
@@ -650,13 +703,15 @@ app.put('/api/v1/patients/:id', authMiddleware, async (c) => {
 // -------------------------------------------------------------------------
 // 📞 Real xAI Grok Voice Agent Simulator Proxy (Bypasses Browser CORS)
 // -------------------------------------------------------------------------
-app.post('/api/v1/voice/simulate', async (c) => {
+app.post('/api/v1/voice/simulate', authMiddleware, async (c) => {
   try {
     const body = await c.req.json();
     const { messages, scenario, clinicName, settings, kbEntries } = body;
     
-    // Default to the provided live xAI API Key
-    const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+    const xaiKey = c.env.XAI_API_KEY;
+    if (!xaiKey) {
+      return c.json({ error: 'XAI_API_KEY not configured on server' }, 500);
+    }
     
     // Construct dynamic system prompt based on active dentist setup
     const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Ash';
@@ -741,8 +796,11 @@ SCENARIO INSTRUCTIONS:
 // -------------------------------------------------------------------------
 // 🔑 xAI Realtime API Session Token Endpoint (For Browser Voice Agents)
 // -------------------------------------------------------------------------
-app.post('/api/v1/voice/session-token', async (c) => {
-  const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
+  const xaiKey = c.env.XAI_API_KEY;
+  if (!xaiKey) {
+    return c.json({ error: 'XAI_API_KEY not configured on server' }, 500);
+  }
   
   try {
     console.log('Fetching session token from xAI...');
@@ -780,12 +838,15 @@ app.post('/api/v1/voice/session-token', async (c) => {
 // -------------------------------------------------------------------------
 // 🔊 Real xAI Text-to-Speech Proxy (CORS-Safe Dynamic Voice Synthesis)
 // -------------------------------------------------------------------------
-app.post('/api/v1/voice/tts', async (c) => {
+app.post('/api/v1/voice/tts', authMiddleware, async (c) => {
   try {
     const body = await c.req.json();
     const { text, voice_id, speed, language } = body;
     
-    const xaiKey = c.env.XAI_API_KEY || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+    const xaiKey = c.env.XAI_API_KEY;
+    if (!xaiKey) {
+      return c.json({ error: 'XAI_API_KEY not configured on server' }, 500);
+    }
     
     // Map UI voice agent selection to real xAI voices (eve, ara, leo, rex, sal)
     const voiceMap = {
@@ -828,6 +889,31 @@ app.post('/api/v1/voice/tts', async (c) => {
     return c.json({ error: 'TTS proxy error', message: err.message }, 500);
   }
 });
+
+// -------------------------------------------------------------------------
+// 🔄 Real-time WebSocket Dashboard (via Durable Object)
+// -------------------------------------------------------------------------
+app.get('/ws/:clinic_id', async (c) => {
+  const clinicId = c.req.param('clinic_id');
+  const doId = c.env.REALTIME_DO.idFromName(`clinic-${clinicId}`);
+  const doStub = c.env.REALTIME_DO.get(doId);
+
+  const url = new URL(c.req.url);
+  url.searchParams.set('clinic_id', clinicId);
+
+  const doResponse = await doStub.fetch(url.toString(), c.req.raw);
+  return doResponse;
+});
+
+// Broadcast helper used by other endpoints
+async function broadcastToClinic(env, clinicId, eventType, data) {
+  const doId = env.REALTIME_DO.idFromName(`clinic-${clinicId}`);
+  const doStub = env.REALTIME_DO.get(doId);
+  await doStub.fetch('http://broadcast/', {
+    method: 'POST',
+    body: JSON.stringify({ event: eventType, data, timestamp: Date.now() }),
+  });
+}
 
 // -------------------------------------------------------------------------
 // 🏥 Health Check

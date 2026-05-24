@@ -12,10 +12,12 @@ class WebSocketClient {
       statusChange: []
     };
     this.reconnectAttempts = 0;
-    this.maxReconnectAttempts = 2;
+    this.maxReconnectAttempts = 10;
     this.reconnectDelay = 1000;
     this.clinicId = null;
     this.isConnected = false;
+    this._heartbeatTimer = null;
+    this._intentionalClose = false;
   }
 
   /**
@@ -23,30 +25,28 @@ class WebSocketClient {
    */
   connect(clinicId) {
     this.clinicId = clinicId;
+    this._intentionalClose = false;
 
-    // Graceful degradation: Skip WebSocket if not supported by backend
-    // Cloudflare Workers don't support WebSockets without Durable Objects
     const token = localStorage.getItem('renia_token');
     if (!token || token.startsWith('demo_token_')) {
-      console.info('WebSocket: Running in demo mode, skipping connection');
       this.updateStatus(false);
       return;
     }
 
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = window.location.host;
-    const wsUrl = `${protocol}//${host}/ws?clinic_id=${clinicId}&token=${token}`;
+    const wsUrl = `${protocol}//${host}/ws/${clinicId}?token=${token}`;
 
     try {
       this.socket = new WebSocket(wsUrl);
 
       this.socket.onopen = () => {
-        console.log('WebSocket connected');
         this.isConnected = true;
         this.reconnectAttempts = 0;
         this.reconnectDelay = 1000;
         this.updateStatus(true);
         this.callbacks.statusChange.forEach(cb => cb(true));
+        this._startHeartbeat();
       };
 
       this.socket.onmessage = (event) => {
@@ -59,21 +59,23 @@ class WebSocketClient {
       };
 
       this.socket.onclose = (event) => {
-        console.log('WebSocket closed:', event.code, event.reason);
+        this._stopHeartbeat();
         this.isConnected = false;
         this.updateStatus(false);
         this.callbacks.statusChange.forEach(cb => cb(false));
 
-        // Auto-reconnect if not intentionally closed
-        if (event.code !== 1000) {
+        if (!this._intentionalClose && event.code !== 1000) {
           this.reconnect();
         }
       };
 
       this.socket.onerror = (error) => {
-        console.warn('WebSocket error:', error);
+        this._stopHeartbeat();
         this.isConnected = false;
         this.updateStatus(false);
+        if (!this._intentionalClose) {
+          this.reconnect();
+        }
       };
     } catch (error) {
       console.warn('WebSocket connection failed:', error);
@@ -145,19 +147,33 @@ class WebSocketClient {
     }
   }
 
+  _startHeartbeat() {
+    this._stopHeartbeat();
+    this._heartbeatTimer = setInterval(() => {
+      if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+        this.socket.send(JSON.stringify({ type: 'ping' }));
+      }
+    }, 30000);
+  }
+
+  _stopHeartbeat() {
+    if (this._heartbeatTimer) {
+      clearInterval(this._heartbeatTimer);
+      this._heartbeatTimer = null;
+    }
+  }
+
   /**
    * Auto-reconnect with exponential backoff
    */
   reconnect() {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-      console.warn('Max reconnect attempts reached');
+      this.reconnectAttempts = 0;
       return;
     }
 
     this.reconnectAttempts++;
-    const delay = Math.min(this.reconnectDelay * Math.pow(1.5, this.reconnectAttempts - 1), 30000);
-
-    console.log(`Reconnecting in ${Math.round(delay / 1000)}s (attempt ${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+    const delay = Math.min(this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1), 30000);
 
     setTimeout(() => {
       if (this.clinicId) {
@@ -189,6 +205,8 @@ class WebSocketClient {
    * Disconnect the WebSocket
    */
   disconnect() {
+    this._intentionalClose = true;
+    this._stopHeartbeat();
     if (this.socket) {
       this.socket.close(1000, 'User disconnected');
       this.socket = null;

@@ -85,8 +85,11 @@ const Dashboard = {
       const textStatus = call.status === 'missed' ? 'Missed' : (call.status === 'completed' ? 'Resolved' : 'Booked');
       const badgeColor = call.status === 'missed' ? 'text-rose-700 bg-rose-50 border-rose-100' : 'text-emerald-700 bg-emerald-50 border-emerald-100';
 
+      const callerName = escapeHtml(call.caller_name || call.caller_phone || 'Unknown');
+      const callTime = escapeHtml(call.time || '2 min ago');
+      const callLang = isSpanish ? 'Spanish' : 'English';
       return `
-        <div onclick="window.viewCallTranscript('${call.caller_name || call.caller_phone || 'Unknown'}', '${call.time || '2 min ago'}', '${isSpanish ? 'Spanish' : 'English'}')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
+        <div data-caller="${callerName}" data-time="${callTime}" data-lang="${callLang}" class="call-row p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200" onclick="Dashboard.openCallTranscript(this)">
           <div class="flex items-center gap-4">
             <div class="w-10 h-10 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-lg shadow-sm">${sentiment}</div>
             <div>
@@ -126,8 +129,12 @@ const Dashboard = {
       const badgeColor = isEmergency ? 'text-rose-700 bg-rose-100 border-rose-200' : 'text-brand-700 bg-brand-50 border-brand-100';
       const label = isEmergency ? 'Urgent' : 'Confirmed';
 
+      const apptName = escapeHtml(appt.patient_name || appt.name || 'Patient');
+      const apptTime = escapeHtml(appt.time);
+      const apptService = escapeHtml(appt.service);
+      const apptStatus = escapeHtml(appt.status || 'confirmed');
       return `
-        <div onclick="window.viewAppointmentDetailsDashboard('${appt.patient_name || appt.name || 'Patient'}', '${appt.time}', '${appt.service}', '${appt.status || 'confirmed'}')" class="flex items-center gap-4 p-4 rounded-xl border ${borderClass} shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
+        <div data-name="${apptName}" data-time="${apptTime}" data-service="${apptService}" data-status="${apptStatus}" class="appointment-row flex items-center gap-4 p-4 rounded-xl border ${borderClass} shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden" onclick="Dashboard.openAppointmentDetails(this)">
           <div class="absolute left-0 top-0 bottom-0 w-1 ${barColor}"></div>
           <div class="text-center min-w-[70px]">
             <div class="font-bold text-brand-900 text-lg">${hour}</div>
@@ -279,8 +286,23 @@ const Dashboard = {
   }
 };
 
+Dashboard.openCallTranscript = function(el) {
+  const name = el.getAttribute('data-caller') || 'Unknown';
+  const time = el.getAttribute('data-time') || '';
+  const lang = el.getAttribute('data-lang') || 'English';
+  window.viewCallTranscript(name, time, lang);
+};
+
+Dashboard.openAppointmentDetails = function(el) {
+  const name = el.getAttribute('data-name') || 'Patient';
+  const time = el.getAttribute('data-time') || '';
+  const service = el.getAttribute('data-service') || '';
+  const status = el.getAttribute('data-status') || 'confirmed';
+  window.viewAppointmentDetailsDashboard(name, time, service, status);
+};
+
 window.viewCallTranscript = function(name, time, lang) {
-  const modalHtml = \`
+  const modalHtml = `
     <div id="call-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
       <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
         <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
@@ -318,7 +340,7 @@ window.viewCallTranscript = function(name, time, lang) {
         </div>
       </div>
     </div>
-  \`;
+  `;
   const div = document.createElement('div');
   div.innerHTML = modalHtml;
   document.body.appendChild(div.firstElementChild);
@@ -327,7 +349,7 @@ window.viewCallTranscript = function(name, time, lang) {
 window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
   const isEmergency = service.toLowerCase().includes('emergency');
   const badgeClass = isEmergency ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700';
-  const modalHtml = \`
+  const modalHtml = `
     <div id="appt-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
       <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden flex flex-col">
         <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
@@ -362,7 +384,7 @@ window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
         </div>
       </div>
     </div>
-  \`;
+  `;
   const div = document.createElement('div');
   div.innerHTML = modalHtml;
   document.body.appendChild(div.firstElementChild);

@@ -32,6 +32,8 @@ class GrokVoiceAgent {
 
     this.state = 'disconnected';
     this.currentAssistantMessage = '';
+    this._pcmChunkBuffer = [];
+    this._pcmFlushTimer = null;
   }
 
   getDefaultInstructions() {
@@ -312,8 +314,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
         }
       }
     } catch (e) {}
-    
-    return 'xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0';
+    return '';
   }
 
   handleMicData(int16Data) {
@@ -451,6 +452,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
     if (!this.audioContext) return;
 
     try {
+      // Decode base64 PCM chunk
       const raw = atob(base64);
       const bytes = new Uint8Array(raw.length);
       for (let i = 0; i < raw.length; i++) {
@@ -463,8 +465,34 @@ Keep responses short and conversational — this is a voice call, not an email.`
         float32[i] = int16[i] / 32768;
       }
 
-      const buf = this.audioContext.createBuffer(1, float32.length, 24000);
-      buf.getChannelData(0).set(float32);
+      // Buffer small chunks to avoid glitching on rapid-fire deltas
+      this._pcmChunkBuffer.push(float32);
+
+      // Debounce flush: schedule playback after a brief coalesce period
+      if (this._pcmFlushTimer) clearTimeout(this._pcmFlushTimer);
+      this._pcmFlushTimer = setTimeout(() => this._flushPcmBuffer(), 50);
+    } catch (e) {
+      console.warn('Audio playback error:', e);
+    }
+  }
+
+  _flushPcmBuffer() {
+    if (this._pcmChunkBuffer.length === 0) return;
+    this._pcmFlushTimer = null;
+
+    try {
+      // Calculate total length
+      const totalLen = this._pcmChunkBuffer.reduce((sum, arr) => sum + arr.length, 0);
+      const combined = new Float32Array(totalLen);
+      let offset = 0;
+      for (const arr of this._pcmChunkBuffer) {
+        combined.set(arr, offset);
+        offset += arr.length;
+      }
+      this._pcmChunkBuffer = [];
+
+      const buf = this.audioContext.createBuffer(1, combined.length, 24000);
+      buf.getChannelData(0).set(combined);
 
       const src = this.audioContext.createBufferSource();
       src.buffer = buf;
@@ -481,16 +509,24 @@ Keep responses short and conversational — this is a voice call, not an email.`
         if (idx !== -1) this.queuedSources.splice(idx, 1);
       };
     } catch (e) {
-      console.warn('Audio playback error:', e);
+      console.warn('Flush PCM buffer error:', e);
     }
   }
 
   interruptPlayback() {
     for (const src of this.queuedSources) {
-      try { src.stop(); } catch {}
+      try {
+        src.stop();
+      } catch (e) {
+        // Source may already have stopped — safe to ignore
+      }
     }
     this.queuedSources.length = 0;
     this.nextPlayTime = 0;
+    // Flush any pending audio in the buffer
+    if (this.audioContext && this.audioContext.state !== 'closed') {
+      this.audioContext.suspend().then(() => this.audioContext.resume()).catch(() => {});
+    }
   }
 
   async handleToolCall(name, argsJson, callId) {

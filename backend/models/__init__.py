@@ -11,6 +11,7 @@ from backend.models.user import User
 from backend.models.knowledge_base import KnowledgeBase
 from backend.models.insurance import Insurance
 from backend.models.audit_log import AuditLog
+from backend.models.patient_intake import PatientIntakeProfile
 
 __all__ = [
     "Clinic",
@@ -21,4 +22,5 @@ __all__ = [
     "KnowledgeBase",
     "Insurance",
     "AuditLog",
+    "PatientIntakeProfile",
 ]

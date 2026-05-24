@@ -913,7 +913,7 @@
       if (!isGrok) {
         try {
           // Key split to prevent Github secret scanning from blocking the push
-          const xaiKey = (settings && settings.voice && settings.voice.xai_key) || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+          const xaiKey = (settings && settings.voice && settings.voice.xai_key) || '';
           const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Ash';
           
           let systemPrompt = `You are the Elite AI Voice Receptionist named ${activeVoice} for "${settings.profile.name || 'Sunshine Smiles Dental'}". 
@@ -1059,7 +1059,7 @@ SCENARIO INSTRUCTIONS:
       if (!playSuccess) {
         try {
           // Key split to prevent Github secret scanning from blocking the push
-          const xaiKey = settings.voice?.xai_key || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+          const xaiKey = settings.voice?.xai_key || '';
           const voiceMap = {
             'Ash': 'rex',
             'Ballad': 'ara',

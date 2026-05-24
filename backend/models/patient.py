@@ -54,6 +54,7 @@ class Patient(Base):
     clinic = relationship("Clinic", back_populates="patients")
     appointments = relationship("Appointment", back_populates="patient", cascade="all, delete-orphan")
     call_logs = relationship("CallLog", back_populates="patient")
+    intake_profile = relationship("PatientIntakeProfile", back_populates="patient", uselist=False, cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Patient {self.first_name} {self.last_name}>"

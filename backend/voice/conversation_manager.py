@@ -4,8 +4,9 @@ Maintains per-call conversation state and orchestrates the AI receptionist
 flow through greeting → identification → intent → action → farewell.
 """
 
+import asyncio
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -64,6 +65,22 @@ class ConversationManager:
 
     # Class-level store of active conversations
     conversations: Dict[str, "ConversationManager"] = {}
+    _last_cleanup: Optional[datetime] = None
+
+    @classmethod
+    def _cleanup_stale_conversations(cls) -> None:
+        """Remove conversations older than 2 hours to prevent memory leaks."""
+        now = datetime.now(timezone.utc)
+        if cls._last_cleanup and (now - cls._last_cleanup) < timedelta(minutes=15):
+            return
+        cls._last_cleanup = now
+        stale = [
+            sid for sid, conv in cls.conversations.items()
+            if conv._created_at and (now - conv._created_at) > timedelta(hours=2)
+        ]
+        for sid in stale:
+            logger.info("Cleaning up stale conversation SID=%s", sid)
+            cls.conversations.pop(sid, None)
 
     def __init__(
         self,
@@ -83,8 +100,10 @@ class ConversationManager:
         self.system_prompt: str = ""
         self._clinic = None
         self._kb_entries: List = []
+        self._created_at = datetime.now(timezone.utc)
 
         # Register this conversation
+        ConversationManager._cleanup_stale_conversations()
         ConversationManager.conversations[call_sid] = self
         logger.info("Conversation started — SID=%s clinic=%s", call_sid, clinic_id)
 
@@ -166,6 +185,8 @@ class ConversationManager:
             "content": text,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         })
+
+        ConversationManager._cleanup_stale_conversations()
 
         # --- Emergency check (overrides all other flows) ---
         is_emergency, severity, keywords = emergency_service.detect_emergency(text)
@@ -272,11 +293,18 @@ class ConversationManager:
         # Build conversation messages for Grok
         messages = [{"role": m["role"], "content": m["content"]} for m in self.history[:-1]]
 
-        response = await self.grok_client.dental_response(
-            system_prompt=self.system_prompt,
-            conversation_history=messages,
-            patient_input=text,
-        )
+        try:
+            response = await self.grok_client.dental_response(
+                system_prompt=self.system_prompt,
+                conversation_history=messages,
+                patient_input=text,
+            )
+        except Exception as exc:
+            logger.error("Grok API booking handler failed: %s", exc)
+            response = (
+                "I apologize, but I'm having trouble processing the booking request. "
+                "Let me transfer you to our team to assist further."
+            )
 
         # If we have enough info, flag a booking action
         if (
@@ -291,24 +319,28 @@ class ConversationManager:
 
         return response
 
-    async def handle_faq(self, text: str) -> str:
-        """Handle FAQ / general question flow."""
+    async def _safe_dental_response(self, text: str) -> str:
+        """Call Grok with exception handling for safety."""
         messages = [{"role": m["role"], "content": m["content"]} for m in self.history[:-1]]
-        return await self.grok_client.dental_response(
-            system_prompt=self.system_prompt,
-            conversation_history=messages,
-            patient_input=text,
-        )
+        try:
+            return await self.grok_client.dental_response(
+                system_prompt=self.system_prompt,
+                conversation_history=messages,
+                patient_input=text,
+            )
+        except Exception as exc:
+            logger.error("Grok API handler failed: %s", exc)
+            return (
+                "I apologize, but I am experiencing a temporary system issue. "
+                "Please try again or call back shortly."
+            )
+
+    async def handle_faq(self, text: str) -> str:
+        return await self._safe_dental_response(text)
 
     async def handle_insurance(self, text: str) -> str:
-        """Handle insurance inquiry flow."""
         self.state = ConversationState.INSURANCE
-        messages = [{"role": m["role"], "content": m["content"]} for m in self.history[:-1]]
-        return await self.grok_client.dental_response(
-            system_prompt=self.system_prompt,
-            conversation_history=messages,
-            patient_input=text,
-        )
+        return await self._safe_dental_response(text)
 
     async def handle_emergency(self, text: str) -> str:
         """Handle emergency triage flow."""
@@ -335,12 +367,7 @@ class ConversationManager:
             return emergency_response["instructions"]
 
         # For moderate, use Grok for a more natural response
-        messages = [{"role": m["role"], "content": m["content"]} for m in self.history[:-1]]
-        return await self.grok_client.dental_response(
-            system_prompt=self.system_prompt,
-            conversation_history=messages,
-            patient_input=text,
-        )
+        return await self._safe_dental_response(text)
 
     # ------------------------------------------------------------------
     # Transcript

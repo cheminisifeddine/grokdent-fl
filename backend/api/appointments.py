@@ -3,8 +3,10 @@ GrokDent FL — Appointments Router
 CRUD + availability lookup + voice-initiated booking for appointments.
 """
 
+import asyncio
 import logging
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional
 
@@ -22,6 +24,14 @@ from backend.services.calendar_service import calendar_service
 from backend.services.notification_service import notification_service
 from backend.services.encryption_service import encryption_service
 from backend.utils.timezone import get_florida_now, format_appointment_time
+
+_thread_pool = ThreadPoolExecutor(max_workers=4)
+
+
+async def _run_sync(fn, *args, **kwargs):
+    """Run a synchronous blocking function in a thread pool."""
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(_thread_pool, lambda: fn(*args, **kwargs))
 
 logger = logging.getLogger(__name__)
 router = APIRouter(tags=["Appointments"])
@@ -146,6 +156,15 @@ async def create_appointment(
     """Create a new appointment."""
     clinic = db.query(Clinic).filter(Clinic.id == current_user.clinic_id).first()
 
+    # Validate patient belongs to same clinic if specified
+    if body.patient_id:
+        patient = db.query(Patient).filter(
+            Patient.id == body.patient_id,
+            Patient.clinic_id == current_user.clinic_id,
+        ).first()
+        if not patient:
+            raise HTTPException(status_code=404, detail="Patient not found in this clinic")
+
     appointment = Appointment(
         clinic_id=current_user.clinic_id,
         patient_id=body.patient_id,
@@ -158,9 +177,10 @@ async def create_appointment(
     db.add(appointment)
     db.flush()
 
-    # Sync to Google Calendar
+    # Sync to Google Calendar (run in thread pool to avoid blocking)
     if clinic:
-        event_id = calendar_service.create_event(
+        event_id = await _run_sync(
+            calendar_service.create_event,
             clinic_name=clinic.name,
             patient_name="Patient",
             service=body.service_type,
@@ -223,9 +243,12 @@ async def cancel_appointment(
 
     appointment.status = "cancelled"
 
-    # Remove from Google Calendar
+    # Remove from Google Calendar (run in thread pool)
     if appointment.google_calendar_event_id:
-        calendar_service.delete_event(appointment.google_calendar_event_id)
+        await _run_sync(
+            calendar_service.delete_event,
+            appointment.google_calendar_event_id,
+        )
         appointment.google_calendar_event_id = None
 
     db.commit()
@@ -294,9 +317,9 @@ async def book_from_call(
         raise HTTPException(status_code=500, detail="No active clinic found")
 
     # Try to find existing patient by name
-    name_parts = body.patient_name.strip().split(" ", 1)
-    first_name = name_parts[0]
-    last_name = name_parts[1] if len(name_parts) > 1 else ""
+    name_parts = body.patient_name.strip().rsplit(" ", 1)
+    first_name = name_parts[0] if len(name_parts) > 1 else body.patient_name.strip()
+    last_name = name_parts[-1] if len(name_parts) > 1 else ""
 
     patient = (
         db.query(Patient)
@@ -330,8 +353,9 @@ async def book_from_call(
     )
     db.add(appointment)
 
-    # Sync to Google Calendar
-    event_id = calendar_service.create_event(
+    # Sync to Google Calendar (run in thread pool)
+    event_id = await _run_sync(
+        calendar_service.create_event,
         clinic_name=clinic.name,
         patient_name=body.patient_name,
         service=body.service,
@@ -344,9 +368,10 @@ async def book_from_call(
     db.commit()
     db.refresh(appointment)
 
-    # Send confirmation SMS
+    # Send confirmation SMS (run in thread pool)
     formatted_time = format_appointment_time(body.preferred_time)
-    notification_service.send_appointment_confirmation_sms(
+    await _run_sync(
+        notification_service.send_appointment_confirmation_sms,
         phone=body.phone,
         clinic_name=clinic.name,
         patient_name=body.patient_name,

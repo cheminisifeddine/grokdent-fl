@@ -607,7 +607,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
       document.getElementById('voice-instructions').value = instructions;
       
       // Key split to prevent Github secret scanning from blocking the push
-      document.getElementById('xai-key').value = voice.xai_key || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+      document.getElementById('xai-key').value = voice.xai_key || '';
     }
 
     // Populate Emergency Form
@@ -898,7 +898,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
           try {
             const keyInput = document.getElementById('xai-key').value.trim();
             // Key split to prevent Github secret scanning from blocking the push
-            const xaiKey = keyInput || ('xai-0wIMv3ESxh7sXPwrhAauG' + 'URSIkCzoh4mbSMS1iNLbYW3qLroO1tqnAiFiuQcd0w0LQ7fGQG6IDfv6Tn0');
+            const xaiKey = keyInput || '';
             
             // Map selected voice to real xAI voice ID
             const voiceMap = {

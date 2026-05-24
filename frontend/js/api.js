@@ -96,6 +96,10 @@ const API = {
   },
 
   async updateClinic(data) {
+    // Map clinic_name -> name for backend compatibility
+    if (data.clinic_name && !data.name) {
+      data = { ...data, name: data.clinic_name };
+    }
     return this.request('PUT', '/clinics/', data);
   },
 
@@ -126,7 +130,24 @@ const API = {
   },
 
   async createAppointment(data) {
-    return this.request('POST', '/appointments/', data);
+    // Normalize data for backend compatibility
+    const normalized = { ...data };
+    if (data.patient_name && !data.patient_id) {
+      normalized.patient_name = data.patient_name;
+    }
+    if (data.service && !data.service_type) {
+      normalized.service_type = data.service;
+    }
+    if (data.date && data.time && !data.appointment_datetime) {
+      normalized.appointment_datetime = `${data.date} ${data.time}`;
+    }
+    if (data.name && !data.patient_name && !data.patient_id) {
+      normalized.patient_name = data.name;
+    }
+    if (data.phone_number && !data.phone) {
+      normalized.phone = data.phone_number;
+    }
+    return this.request('POST', '/appointments/', normalized);
   },
 
   async updateAppointment(id, data) {
@@ -232,7 +253,7 @@ const API = {
   /* ---- Billing Endpoints ---- */
 
   async createCheckout(plan) {
-    return this.request('POST', '/billing/checkout', { plan });
+    return this.request('POST', '/billing/checkout', { plan_name: typeof plan === 'string' ? plan : plan.plan_name });
   },
 
   async getSubscription() {
