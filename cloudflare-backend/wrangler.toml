@@ -1,12 +1,12 @@
-# wrangler.toml — GrokDent FL Cloudflare Workers Config
+# wrangler.toml — Renia AI Cloudflare Workers Config
 
-name = "grokdent-fl-backend"
+name = "renia-ai-backend"
 main = "src/index.js"
 compatibility_date = "2026-05-23"
 
 # Environment Variables
 [vars]
-APP_NAME = "GrokDent FL"
+APP_NAME = "Renia AI"
 XAI_BASE_URL = "https://api.x.ai/v1"
 # JWT_SECRET and ENCRYPTION_KEY should be set securely via:
 # wrangler secret put JWT_SECRET

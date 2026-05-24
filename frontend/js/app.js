@@ -1,5 +1,5 @@
 /* ============================================
-   GrokDent FL — Main App Initialization
+   Renia AI — Main App Initialization
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {

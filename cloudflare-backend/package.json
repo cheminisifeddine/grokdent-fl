@@ -1,7 +1,7 @@
 {
-  "name": "grokdent-fl-backend",
+  "name": "renia-ai-backend",
   "version": "1.0.0",
-  "description": "Cloudflare-native Serverless Backend for GrokDent FL using D1 and R2",
+  "description": "Cloudflare-native Serverless Backend for Renia AI using D1 and R2",
   "main": "src/index.js",
   "scripts": {
     "dev": "wrangler dev",

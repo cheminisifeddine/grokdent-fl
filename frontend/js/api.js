@@ -1,5 +1,5 @@
 /* ============================================
-   GrokDent FL — API Client Module
+   Renia AI — API Client Module
    ============================================ */
 
 const API = {
@@ -25,7 +25,7 @@ const API = {
     };
 
     // Add auth token if available
-    const token = localStorage.getItem('grokdent_token');
+    const token = localStorage.getItem('renia_token');
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
@@ -44,8 +44,8 @@ const API = {
 
       // Handle 401 Unauthorized
       if (response.status === 401) {
-        localStorage.removeItem('grokdent_token');
-        localStorage.removeItem('grokdent_user');
+        localStorage.removeItem('renia_token');
+        localStorage.removeItem('renia_user');
         window.location.href = 'index.html';
         throw new Error('Session expired. Please log in again.');
       }

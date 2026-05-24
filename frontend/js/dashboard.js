@@ -1,5 +1,5 @@
 /* ============================================
-   GrokDent FL — Dashboard Page Logic
+   Renia AI — Dashboard Page Logic
    ============================================ */
 
 const Dashboard = {

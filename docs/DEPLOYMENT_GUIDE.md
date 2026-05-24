@@ -1,6 +1,6 @@
-# Production Deployment Guide for GrokDent FL
+# Production Deployment Guide for Renia AI
 
-This guide outlines the production deployment lifecycle for the GrokDent FL voice SaaS platform. It covers containerized local operations, AWS cloud infrastructure deployment, environment keys setup, third-party webhook routing, and scaling best practices.
+This guide outlines the production deployment lifecycle for the Renia AI voice SaaS platform. It covers containerized local operations, AWS cloud infrastructure deployment, environment keys setup, third-party webhook routing, and scaling best practices.
 
 ---
 
@@ -10,7 +10,7 @@ Create a production `.env` file containing the following variables. Ensure all k
 
 ```ini
 # App Basics
-APP_NAME="GrokDent FL"
+APP_NAME="Renia AI"
 DEBUG=False
 SECRET_KEY="production-super-secret-jwt-key"
 ENCRYPTION_KEY="production-aes-256-fernet-key-32-bytes"
@@ -48,8 +48,8 @@ For quick, reliable, and isolated production scaling, utilize the multi-containe
 ### Build and Launch Instructions:
 1. Clone the repository to your production server:
    ```bash
-   git clone https://github.com/yourorg/grokdent-fl.git
-   cd grokdent-fl
+   git clone https://github.com/yourorg/renia-ai.git
+   cd renia-ai
    ```
 2. Create the production environment configurations:
    ```bash
@@ -70,7 +70,7 @@ For quick, reliable, and isolated production scaling, utilize the multi-containe
 
 ## 3. AWS Infrastructure Setup (EC2 + RDS + ALB)
 
-To scale GrokDent FL with high availability, database replication, and automated SSL termination, deploy to Amazon Web Services (AWS).
+To scale Renia AI with high availability, database replication, and automated SSL termination, deploy to Amazon Web Services (AWS).
 
 ```
                [ HTTPS / WSS Calls ]
@@ -103,7 +103,7 @@ To scale GrokDent FL with high availability, database replication, and automated
    - Restrict the security group to accept incoming traffic *only* from the EC2 application instances (Port 5432).
 2. **Compute Layer (EC2 Autoscaling Group)**:
    - Provision EC2 instances using the Amazon Linux 2 AMI with Docker and Git installed.
-   - Run the GrokDent FL container listening on port 8000.
+   - Run the Renia AI container listening on port 8000.
 3. **Routing Layer (Application Load Balancer - ALB)**:
    - Route traffic through an ALB with listener rules for HTTP (Port 80 redirect to 443) and HTTPS (Port 443).
    - Provision an SSL certificate using **AWS Certificate Manager (ACM)** for your custom domain (e.g., `dashboard.grokdent.fl`).

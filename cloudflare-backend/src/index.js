@@ -1,5 +1,5 @@
 /**
- * GrokDent FL — Cloudflare Serverless Worker Backend
+ * Renia AI — Cloudflare Serverless Worker Backend
  * Powered by Hono, D1 Database, R2 Object Storage, and xAI Grok API.
  * Secure, bilingual, serverless, and HIPAA-compliant.
  */

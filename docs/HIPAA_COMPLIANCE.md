@@ -1,12 +1,12 @@
-# HIPAA Compliance & Security Framework for GrokDent FL
+# HIPAA Compliance & Security Framework for Renia AI
 
-This document details the HIPAA (Health Insurance Portability and Accountability Act) security, privacy, and compliance safeguards implemented within the GrokDent FL voice receptionist and dashboard SaaS platform. It serves as an audit-ready guide for practice administrators and technical compliance officers.
+This document details the HIPAA (Health Insurance Portability and Accountability Act) security, privacy, and compliance safeguards implemented within the Renia AI voice receptionist and dashboard SaaS platform. It serves as an audit-ready guide for practice administrators and technical compliance officers.
 
 ---
 
 ## 1. Compliance Architecture Overview
 
-GrokDent FL processes, transmits, and stores Protected Health Information (PHI) and electronic PHI (ePHI) on behalf of covered entities (dental clinics in Florida). To comply with the HIPAA Security Rule (45 CFR Part 160 and Part 164, Subparts A and C), we implement a multi-layered security framework spanning **Technical, Administrative, and Physical Safeguards**.
+Renia AI processes, transmits, and stores Protected Health Information (PHI) and electronic PHI (ePHI) on behalf of covered entities (dental clinics in Florida). To comply with the HIPAA Security Rule (45 CFR Part 160 and Part 164, Subparts A and C), we implement a multi-layered security framework spanning **Technical, Administrative, and Physical Safeguards**.
 
 ```
                          +-----------------------------------+
@@ -15,7 +15,7 @@ GrokDent FL processes, transmits, and stores Protected Health Information (PHI) 
                                            |  Signed BAA
                                            v
                          +-----------------+-----------------+
-                         |      GrokDent FL SaaS Engine      |
+                         |      Renia AI SaaS Engine      |
                          +--------+-----------------+--------+
                                   |                 |
          +------------------------+                 +------------------------+
@@ -36,7 +36,7 @@ GrokDent FL processes, transmits, and stores Protected Health Information (PHI) 
 - **Secure WebSockets (WSS)**: Real-time dashboard communications use encrypted WebSockets (`wss://`) to prevent eavesdropping on live call events.
 
 ### B. Application-Layer Field Encryption (164.312(a)(2)(iv))
-To protect patient identities and clinical information even in the event of an underlying database breach, GrokDent FL implements **AES-256 field-level encryption** using the standard Fernet symmetric key formulation.
+To protect patient identities and clinical information even in the event of an underlying database breach, Renia AI implements **AES-256 field-level encryption** using the standard Fernet symmetric key formulation.
 - **Symmetric Keys**: Encryption keys are derived from a high-entropy `ENCRYPTION_KEY` environment variable that must be set in production.
 - **Encrypted Patient Columns**:
   - `phone_encrypted`
@@ -70,8 +70,8 @@ The `HIPAAAuditMiddleware` intercepts all incoming API requests (excluding basic
 ### Florida Wiretap Law & Two-Party Consent (§ 934.03, Fla. Stat.)
 Florida is a **two-party consent state** (often referred to as all-party consent). It is a third-degree felony to record a wire, oral, or electronic communication unless all parties involved have consented to the recording beforehand.
 
-#### GrokDent FL Compliance Protocol
-To satisfy § 934.03, GrokDent FL embeds a mandatory audio disclosure at the very beginning of every inbound and outbound telephone call. The voice agent must play the following greeting prior to recording or parsing speech gather commands:
+#### Renia AI Compliance Protocol
+To satisfy § 934.03, Renia AI embeds a mandatory audio disclosure at the very beginning of every inbound and outbound telephone call. The voice agent must play the following greeting prior to recording or parsing speech gather commands:
 
 > "Thank you for calling Sunshine Smiles Dental. Just so you know, I am an AI dental assistant and this call may be recorded for quality purposes. How can I help you today?"
 
@@ -92,7 +92,7 @@ Under HIPAA, any vendor that touches, stores, or processes ePHI is a **Business 
 
 ## 5. Security & Administrative Checklist
 
-| Category | Requirement | Implementation Status | GrokDent FL Control |
+| Category | Requirement | Implementation Status | Renia AI Control |
 |---|---|---|---|
 | **Technical** | Access Authorization | `[ COMPLETED ]` | JWT validation & RBAC roles |
 | **Technical** | Audit Controls | `[ COMPLETED ]` | `HIPAAAuditMiddleware` logs |

@@ -1,5 +1,5 @@
 /* ============================================
-   GrokDent FL — WebSocket Client
+   Renia AI — WebSocket Client
    ============================================ */
 
 class WebSocketClient {
@@ -26,7 +26,7 @@ class WebSocketClient {
 
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = window.location.host;
-    const token = localStorage.getItem('grokdent_token');
+    const token = localStorage.getItem('renia_token');
     const wsUrl = `${protocol}//${host}/ws?clinic_id=${clinicId}&token=${token}`;
 
     try {

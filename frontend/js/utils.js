@@ -1,5 +1,5 @@
 /* ============================================
-   GrokDent FL — Utility Functions
+   Renia AI — Utility Functions
    ============================================ */
 
 /**

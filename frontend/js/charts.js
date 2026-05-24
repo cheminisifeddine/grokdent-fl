@@ -1,5 +1,5 @@
 /* ============================================
-   GrokDent FL — Chart Module (Chart.js)
+   Renia AI — Chart Module (Chart.js)
    ============================================ */
 
 // Chart.js global defaults for dark theme

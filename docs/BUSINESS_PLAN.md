@@ -1,8 +1,8 @@
-# 📋 GrokDent FL — Business Plan
+# 📋 Renia AI — Business Plan
 
 **Confidential — For Investor Review**
 **Version 2.0 | May 2026**
-**Prepared by: GrokDent FL Founding Team**
+**Prepared by: Renia AI Founding Team**
 
 ---
 
@@ -29,13 +29,13 @@
 
 ## 1. Executive Summary
 
-GrokDent FL is a purpose-built AI voice receptionist SaaS platform designed exclusively for dental clinics across the State of Florida. The platform leverages xAI's Grok large language model and Twilio's programmable voice infrastructure to deliver an AI-powered receptionist that answers every incoming call 24/7, books appointments in real-time, verifies insurance coverage, triages dental emergencies, and communicates fluently in both English and Spanish.
+Renia AI is a purpose-built AI voice receptionist SaaS platform designed exclusively for dental clinics across the State of Florida. The platform leverages xAI's Grok large language model and Twilio's programmable voice infrastructure to deliver an AI-powered receptionist that answers every incoming call 24/7, books appointments in real-time, verifies insurance coverage, triages dental emergencies, and communicates fluently in both English and Spanish.
 
 Florida's dental industry presents a uniquely attractive market opportunity. The state is home to more than 12,000 active dental practices, many of which are independently owned and operated. These practices face chronic front-desk staffing challenges — an industry-wide average receptionist turnover rate of 40% per year — compounded by Florida's large Spanish-speaking population (approximately 5.7 million residents, or 27% of the state population) that demands bilingual phone support most practices cannot consistently provide.
 
 The financial impact of these challenges is staggering. Industry research indicates that the average dental practice misses approximately 30% of all incoming phone calls due to hold times, staff unavailability, lunch breaks, and after-hours closure. Each missed call represents a potential patient acquisition or retention event worth an estimated $200–$500 in immediate procedure revenue, and significantly more in lifetime patient value. For a mid-size Florida dental practice receiving 80 calls per day, this translates to roughly $6,000–$12,000 in weekly lost revenue from missed calls alone.
 
-GrokDent FL eliminates this problem entirely. By replacing or augmenting the human receptionist with a tireless, consistently excellent AI agent, dental clinics can answer 100% of calls, convert more callers into booked appointments, provide genuine bilingual service, and do so at a fraction of the cost of hiring additional front-desk staff.
+Renia AI eliminates this problem entirely. By replacing or augmenting the human receptionist with a tireless, consistently excellent AI agent, dental clinics can answer 100% of calls, convert more callers into booked appointments, provide genuine bilingual service, and do so at a fraction of the cost of hiring additional front-desk staff.
 
 We are seeking **$250,000 in seed funding** to finalize the product for general availability, execute a targeted go-to-market strategy beginning in the Orlando metropolitan area, and scale to 150 paying clinics within the first 18 months. With a blended average revenue per clinic of $500/month, we project reaching $1.08M in annual recurring revenue (ARR) by the end of Year 2 and $2.7M ARR by the end of Year 3.
 
@@ -87,7 +87,7 @@ Most dental practices operate Monday–Friday, 8:00 AM to 5:00 PM, yet patient c
 
 ## 3. Solution
 
-GrokDent FL provides a comprehensive AI voice receptionist that integrates directly into a dental clinic's existing phone system via Twilio. When a patient calls, the AI agent answers immediately — no hold time, no voicemail — and engages in a natural, conversational interaction that handles the full scope of receptionist duties.
+Renia AI provides a comprehensive AI voice receptionist that integrates directly into a dental clinic's existing phone system via Twilio. When a patient calls, the AI agent answers immediately — no hold time, no voicemail — and engages in a natural, conversational interaction that handles the full scope of receptionist duties.
 
 ### 3.1 Core Capabilities
 
@@ -100,7 +100,7 @@ GrokDent FL provides a comprehensive AI voice receptionist that integrates direc
 - **FAQ answering**: Responds to common questions about office hours, location, services offered, accepted insurance plans, pricing, and parking using a clinic-specific knowledge base
 - **Bilingual communication**: Detects the caller's preferred language and switches seamlessly between English and Spanish
 
-**Seamless Integration**: GrokDent FL is designed to work with a dental clinic's existing workflow, not replace it:
+**Seamless Integration**: Renia AI is designed to work with a dental clinic's existing workflow, not replace it:
 
 - **Google Calendar sync** ensures the AI never double-books a provider
 - **SMS and email confirmations** are sent automatically after every booking
@@ -167,7 +167,7 @@ Our realistic 3-year target captures approximately 5% of our SAM:
 
 ### 5.1 Competitive Landscape
 
-| Feature | **GrokDent FL** | **Arini AI** | **Weave** | **TrueLark** | **Dentina AI** | **Savvy Agents** |
+| Feature | **Renia AI** | **Arini AI** | **Weave** | **TrueLark** | **Dentina AI** | **Savvy Agents** |
 |---------|:-----------:|:--------:|:------:|:----------:|:-----------:|:-------------:|
 | Dental-specific AI | ✅ FL-focused | ✅ General | ❌ Multi-vertical | ✅ General | ✅ General | ❌ Generic |
 | Voice AI (inbound calls) | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
@@ -198,7 +198,7 @@ Our realistic 3-year target captures approximately 5% of our SAM:
 
 ### 6.1 Technology Architecture
 
-GrokDent FL is built on a modern, scalable technology stack:
+Renia AI is built on a modern, scalable technology stack:
 
 - **AI Engine**: xAI Grok (latest model) with dental-specific system prompts, few-shot examples, and retrieval-augmented generation (RAG) from each clinic's knowledge base
 - **Voice Platform**: Twilio Programmable Voice with real-time speech-to-text (Gather) and text-to-speech
@@ -269,7 +269,7 @@ The web dashboard provides clinic staff with complete visibility and control:
 | Call recording add-on (Starter) | $50/mo | Add recording & transcripts to Starter |
 | Additional locations | $199/mo each | For multi-location practices on lower tiers |
 | Custom integrations | $2,000 setup + $100/mo | PMS integrations (Dentrix, Eaglesoft, Open Dental) |
-| White-label solution | $500/mo | Remove GrokDent branding for DSO use |
+| White-label solution | $500/mo | Remove Renia AI branding for DSO use |
 
 ### 7.3 Unit Economics
 
@@ -307,7 +307,7 @@ The web dashboard provides clinic staff with complete visibility and control:
 
 **Tactics**:
 - Direct outreach to 500 Orlando-area dental practices via personalized email sequences and LinkedIn campaigns
-- Free 14-day pilot program: install GrokDent FL on one phone line as a demonstration
+- Free 14-day pilot program: install Renia AI on one phone line as a demonstration
 - Local dental study club presentations (2–3 per month)
 - Partnership with 2–3 dental supply distributors who serve the Orlando market
 - Google Ads targeting "dental receptionist Orlando," "dental answering service Florida," and related keywords
@@ -668,7 +668,7 @@ Upon reaching 150 active clinics and demonstrating strong unit economics, we wil
 | **Daily lost revenue** | **$6,300** |
 | **Monthly lost revenue (22 business days)** | **$138,600** |
 | | |
-| **With GrokDent FL** | |
+| **With Renia AI** | |
 | Missed call rate | < 1% |
 | Additional calls answered per day | 17.4 |
 | Conservative booking conversion (30%) | 5.2 additional bookings/day |
@@ -676,7 +676,7 @@ Upon reaching 150 active clinics and demonstrating strong unit economics, we wil
 | **Additional daily revenue** | **$1,820** |
 | **Additional monthly revenue** | **$40,040** |
 | | |
-| GrokDent FL cost (Professional tier) | $599/month |
+| Renia AI cost (Professional tier) | $599/month |
 | **ROI** | **6,585%** |
 | **Payback period** | **< 1 day** |
 
@@ -697,7 +697,7 @@ Upon reaching 150 active clinics and demonstrating strong unit economics, we wil
 
 ### Appendix C: Sample Customer Testimonial (from Beta Program)
 
-> *"We were losing at least 15 calls a day during our busiest hours. Within the first week of using GrokDent FL, we booked 23 additional appointments that we would have missed. The Spanish-speaking capability alone has been a game-changer for our Kissimmee office — we've seen a 40% increase in Hispanic patient bookings. The system paid for itself on day one."*
+> *"We were losing at least 15 calls a day during our busiest hours. Within the first week of using Renia AI, we booked 23 additional appointments that we would have missed. The Spanish-speaking capability alone has been a game-changer for our Kissimmee office — we've seen a 40% increase in Hispanic patient bookings. The system paid for itself on day one."*
 >
 > — **Dr. Maria Rodriguez, DDS**, Sunshine Smiles Family Dentistry, Kissimmee, FL (Beta participant)
 
@@ -705,7 +705,7 @@ Upon reaching 150 active clinics and demonstrating strong unit economics, we wil
 
 | Detail | Value |
 |--------|-------|
-| Legal Entity | GrokDent FL, LLC |
+| Legal Entity | Renia AI, LLC |
 | State of Formation | Florida |
 | Formation Date | Q1 2026 |
 | Registered Agent | [TBD — Florida-based registered agent service] |
@@ -714,4 +714,4 @@ Upon reaching 150 active clinics and demonstrating strong unit economics, we wil
 
 ---
 
-*This business plan is confidential and intended for the sole use of prospective investors and strategic partners. All projections are forward-looking estimates based on current market data and reasonable assumptions. Actual results may vary. © 2026 GrokDent FL, LLC. All rights reserved.*
+*This business plan is confidential and intended for the sole use of prospective investors and strategic partners. All projections are forward-looking estimates based on current market data and reasonable assumptions. Actual results may vary. © 2026 Renia AI, LLC. All rights reserved.*

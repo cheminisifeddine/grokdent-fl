@@ -1,4 +1,4 @@
-# 🦷 GrokDent FL — AI Voice Receptionist for Florida Dental Clinics
+# 🦷 Renia AI — AI Voice Receptionist for Florida Dental Clinics
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-green.svg)](https://python.org)
@@ -9,9 +9,9 @@
 
 ## Overview
 
-**GrokDent FL** is a full-stack SaaS platform providing AI-powered voice receptionist services exclusively for dental clinics in Florida. Built on xAI's Grok large language model and integrated with Twilio's programmable voice platform, GrokDent FL answers every incoming call 24/7 with a natural, conversational AI agent that can book appointments, verify insurance, route emergencies, and answer patient questions — in both English and Spanish.
+**Renia AI** is a full-stack SaaS platform providing AI-powered voice receptionist services exclusively for dental clinics in Florida. Built on xAI's Grok large language model and integrated with Twilio's programmable voice platform, Renia AI answers every incoming call 24/7 with a natural, conversational AI agent that can book appointments, verify insurance, route emergencies, and answer patient questions — in both English and Spanish.
 
-Florida's 12,000+ dental practices lose an estimated 30% of incoming calls to hold times, voicemail, and after-hours unavailability. Each missed call represents $200–$500 in lost revenue. GrokDent FL eliminates this problem entirely by ensuring every call is answered instantly, every patient is heard, and every appointment opportunity is captured.
+Florida's 12,000+ dental practices lose an estimated 30% of incoming calls to hold times, voicemail, and after-hours unavailability. Each missed call represents $200–$500 in lost revenue. Renia AI eliminates this problem entirely by ensuring every call is answered instantly, every patient is heard, and every appointment opportunity is captured.
 
 The platform is **HIPAA-compliant by design**, with AES-256 encryption at rest, TLS 1.3 in transit, comprehensive audit trails, role-based access control, and Business Associate Agreements with all third-party vendors. Florida's two-party consent recording law (§934.03) is handled automatically with configurable disclosure scripts.
 
@@ -61,8 +61,8 @@ The platform is **HIPAA-compliant by design**, with AES-256 encryption at rest, 
 ### Clone & Configure
 
 ```bash
-git clone https://github.com/yourusername/grokdent-fl.git
-cd grokdent-fl
+git clone https://github.com/yourusername/renia-ai.git
+cd renia-ai
 cp .env.example .env
 # Edit .env with your API keys (see Environment Variables section below)
 ```
@@ -142,7 +142,7 @@ Create a `.env` file in the project root with the following variables:
 
 | Variable | Description | Required | Default | Where to Get It |
 |----------|-------------|----------|---------|-----------------|
-| `APP_NAME` | Application name | No | `GrokDent FL` | — |
+| `APP_NAME` | Application name | No | `Renia AI` | — |
 | `APP_ENV` | Environment (`development`, `staging`, `production`) | Yes | `development` | — |
 | `APP_DEBUG` | Enable debug mode | No | `true` | — |
 | `APP_SECRET_KEY` | Secret key for JWT signing (min 32 chars) | Yes | — | Generate: `openssl rand -hex 32` |
@@ -202,7 +202,7 @@ Create a `.env` file in the project root with the following variables:
 |----------|-------------|----------|---------|-----------------|
 | `SENDGRID_API_KEY` | SendGrid API key | Yes | — | [app.sendgrid.com/settings/api_keys](https://app.sendgrid.com/settings/api_keys) |
 | `SENDGRID_FROM_EMAIL` | Verified sender email | Yes | — | Must be verified in SendGrid |
-| `SENDGRID_FROM_NAME` | Sender display name | No | `GrokDent FL` | — |
+| `SENDGRID_FROM_NAME` | Sender display name | No | `Renia AI` | — |
 
 ### Security & Encryption
 
@@ -231,13 +231,13 @@ Create a `.env` file in the project root with the following variables:
 2. Create an account or sign in with your X (Twitter) account
 3. Navigate to **API Keys** in the left sidebar
 4. Click **"Create API Key"**
-5. Name it `grokdent-fl-production` (or `grokdent-fl-dev` for development)
+5. Name it `renia-ai-production` (or `renia-ai-dev` for development)
 6. Copy the generated key immediately (it won't be shown again)
 7. Add to your `.env` file:
    ```
    XAI_API_KEY=xai-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
    ```
-8. **Billing**: Ensure you have a payment method on file. GrokDent FL uses approximately:
+8. **Billing**: Ensure you have a payment method on file. Renia AI uses approximately:
    - ~$0.002 per call (Grok API usage)
    - ~500–1,000 tokens per call interaction
 
@@ -272,7 +272,7 @@ Create a `.env` file in the project root with the following variables:
 ### Google Calendar
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project named `grokdent-fl`
+2. Create a new project named `renia-ai`
 3. Enable the **Google Calendar API**:
    - Navigate to **APIs & Services** → **Library**
    - Search for "Google Calendar API"
@@ -281,7 +281,7 @@ Create a `.env` file in the project root with the following variables:
    - Navigate to **APIs & Services** → **Credentials**
    - Click **"Create Credentials"** → **"OAuth client ID"**
    - Application type: **Web application**
-   - Name: `GrokDent FL`
+   - Name: `Renia AI`
    - Authorized redirect URIs: `http://localhost:8000/api/v1/auth/google/callback`
    - For production, add: `https://yourdomain.com/api/v1/auth/google/callback`
 5. Copy the **Client ID** and **Client Secret**
@@ -308,9 +308,9 @@ Create a `.env` file in the project root with the following variables:
    - Create three products:
      | Product | Price | Interval |
      |---------|-------|----------|
-     | GrokDent Starter | $299.00 | Monthly |
-     | GrokDent Professional | $599.00 | Monthly |
-     | GrokDent Enterprise | $999.00 | Monthly |
+     | Renia AI Starter | $299.00 | Monthly |
+     | Renia AI Professional | $599.00 | Monthly |
+     | Renia AI Enterprise | $999.00 | Monthly |
    - Copy each **Price ID** (`price_...`)
 6. Set up Webhooks:
    - Navigate to **Developers** → **Webhooks**
@@ -339,7 +339,7 @@ Create a `.env` file in the project root with the following variables:
 2. Verify your email address
 3. Navigate to **Settings** → **API Keys**
 4. Click **"Create API Key"**
-   - Name: `grokdent-fl`
+   - Name: `renia-ai`
    - Permissions: **Full Access** (or **Restricted Access** with Mail Send enabled)
 5. Copy the generated API key (shown only once)
 6. Set up Sender Verification:
@@ -350,7 +350,7 @@ Create a `.env` file in the project root with the following variables:
    ```
    SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
    SENDGRID_FROM_EMAIL=noreply@grokdentfl.com
-   SENDGRID_FROM_NAME=GrokDent FL
+   SENDGRID_FROM_NAME=Renia AI
    ```
 
 ---
@@ -358,7 +358,7 @@ Create a `.env` file in the project root with the following variables:
 ## Project Structure
 
 ```
-grokdent-fl/
+renia-ai/
 ├── README.md                          # This file
 ├── LICENSE                            # MIT License
 ├── .env.example                       # Environment variable template
@@ -741,11 +741,11 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 - **Website**: [https://grokdentfl.com](https://grokdentfl.com)
 - **Email**: hello@grokdentfl.com
 - **Support**: support@grokdentfl.com
-- **Twitter/X**: [@GrokDentFL](https://x.com/GrokDentFL)
+- **Twitter/X**: [@Renia AIFL](https://x.com/Renia AIFL)
 
 ---
 
 <p align="center">
   Made with 🦷 in Florida<br>
-  © 2026 GrokDent FL. All rights reserved.
+  © 2026 Renia AI. All rights reserved.
 </p>

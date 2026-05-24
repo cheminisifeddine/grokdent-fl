@@ -1,6 +1,6 @@
-# GrokDent FL — API Reference Documentation
+# Renia AI — API Reference Documentation
 
-This document provides a comprehensive API reference for the GrokDent FL backend services. All REST requests must be sent over HTTPS. Standard API payloads utilize the JSON specification.
+This document provides a comprehensive API reference for the Renia AI backend services. All REST requests must be sent over HTTPS. Standard API payloads utilize the JSON specification.
 
 ---
 

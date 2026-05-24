@@ -1,10 +1,10 @@
 /* ============================================
-   GrokDent FL — Authentication Module
+   Renia AI — Authentication Module
    ============================================ */
 
 const Auth = {
-  TOKEN_KEY: 'grokdent_token',
-  USER_KEY: 'grokdent_user',
+  TOKEN_KEY: 'renia_token',
+  USER_KEY: 'renia_user',
 
   /**
    * Check if user is authenticated. Redirect if not.
@@ -252,7 +252,7 @@ const Auth = {
           const result = await Auth.signup(data);
 
           if (result.success) {
-            showToast('Welcome to GrokDent FL! 🎉', 'success');
+            showToast('Welcome to Renia AI! 🎉', 'success');
             setTimeout(() => {
               window.location.href = 'dashboard.html';
             }, 1500);
