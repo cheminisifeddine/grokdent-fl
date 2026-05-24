@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries?v=2"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -315,6 +315,18 @@
         // Submit logic
         btnNext.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Processing...';
         btnNext.disabled = true;
+        
+        // Generate mock token so dashboard doesn't redirect us back
+        const mockToken = 'demo_token_' + Date.now();
+        const mockUser = {
+          id: 'usr_' + Date.now(),
+          email: document.querySelector('input[type="email"]')?.value || 'admin@clinic.com',
+          name: document.querySelector('input[placeholder="Dr. Sarah Mitchell"]')?.value || 'Admin',
+          role: 'admin'
+        };
+        localStorage.setItem('renia_token', mockToken);
+        localStorage.setItem('renia_user', JSON.stringify(mockUser));
+        
         setTimeout(() => {
           window.location.href = 'dashboard.html';
         }, 1500);

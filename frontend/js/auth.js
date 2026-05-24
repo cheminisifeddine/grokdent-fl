@@ -336,7 +336,7 @@ const Auth = {
       policies: document.getElementById('signup-policies')?.value || '',
       email: document.getElementById('signup-admin-email')?.value || '',
       password: document.getElementById('signup-admin-password')?.value || '',
-      admin_name: document.getElementById('signup-admin-name')?.value || ''
+      full_name: document.getElementById('signup-admin-name')?.value || ''
     };
   },
 
