@@ -473,7 +473,8 @@
          voice: 'Ash',
          greeting: 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I help you today?',
          spanish: true,
-         instructions: ''
+         instructions: '',
+         xai_key: ''
        },
       emergency: {
         name: 'Dr. Sarah Martinez',
@@ -494,12 +495,32 @@
             voice: { ...DEFAULT_SETTINGS.voice, ...(parsed.voice || {}) },
             emergency: { ...DEFAULT_SETTINGS.emergency, ...(parsed.emergency || {}) }
           };
+          // If no xai_key stored, try fetching the default from backend
+          if (!state.settings.voice.xai_key) {
+            fetchDefaultXaiKey();
+          }
         } catch (e) {
           state.settings = { ...DEFAULT_SETTINGS };
+          fetchDefaultXaiKey();
         }
       } else {
         state.settings = { ...DEFAULT_SETTINGS };
         saveSettingsToStorage();
+        fetchDefaultXaiKey();
+      }
+    }
+
+    async function fetchDefaultXaiKey() {
+      try {
+        const resp = await API.request('GET', '/voice/xai-key');
+        if (resp && resp.xai_key) {
+          state.settings.voice.xai_key = resp.xai_key;
+          saveSettingsToStorage();
+          const xkEl = $('xai-key');
+          if (xkEl) xkEl.value = resp.xai_key;
+        }
+      } catch (e) {
+        console.warn('Could not fetch default xAI key from backend:', e.message);
       }
     }
 
@@ -867,7 +888,7 @@
           };
 
           saveSettingsToStorage();
-          try { await API.updateVoiceSettings({ voice: state.settings.voice.voice }); } catch {}
+          try { await API.updateVoiceSettings({ grok_voice_id: state.settings.voice.voice, welcome_message: state.settings.voice.greeting, spanish_enabled: state.settings.voice.spanish, xai_key: state.settings.voice.xai_key }); } catch {}
 
           setTimeout(() => {
             submitBtn.disabled = false;

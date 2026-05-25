@@ -46,6 +46,7 @@ class Clinic(Base):
 
     # Voice AI
     grok_voice_id = Column(String(50), default="Ash", doc="TTS voice selection")
+    xai_key = Column(String(200), nullable=True, doc="Per-clinic xAI API key")
 
     # Twilio
     twilio_phone_number = Column(String(20), nullable=True)

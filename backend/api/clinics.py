@@ -41,6 +41,7 @@ class ClinicResponse(BaseModel):
     grok_voice_id: Optional[str] = None
     welcome_message: Optional[str] = None
     spanish_enabled: Optional[bool] = None
+    xai_key: Optional[str] = None
     subscription_plan: Optional[str] = None
     subscription_status: Optional[str] = None
     is_active: bool = True
@@ -77,6 +78,7 @@ class VoiceSettingsUpdate(BaseModel):
     grok_voice_id: Optional[str] = None
     welcome_message: Optional[str] = None
     spanish_enabled: Optional[bool] = None
+    xai_key: Optional[str] = None
 
 
 # ---------------------------------------------------------------------------

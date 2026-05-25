@@ -55,7 +55,10 @@ async def get_session_token(current_user: User = Depends(get_current_user)):
     Mints a secure, temporary 5-minute xAI Realtime API session token.
     Enables frontend browser voice clients to establish secure WebSocket streams directly to xAI.
     """
-    xai_key = settings.XAI_API_KEY
+    # Use clinic-level key first, then fall back to server env
+    xai_key = getattr(current_user.clinic, 'xai_key', None) if current_user.clinic else None
+    if not xai_key:
+        xai_key = settings.XAI_API_KEY
     if not xai_key or xai_key == "placeholder":
         logger.error("XAI_API_KEY not configured on backend server")
         raise HTTPException(
@@ -107,7 +110,10 @@ async def text_to_speech(body: TTSRequest, current_user: User = Depends(get_curr
     Secure Text-to-Speech proxy. Calls the xAI TTS API to synthesize text and streams
     the resulting audio/mpeg (MP3) back to the client, avoiding CORS issues and leaking API keys.
     """
-    xai_key = settings.XAI_API_KEY
+    # Use clinic-level key first, then fall back to server env
+    xai_key = getattr(current_user.clinic, 'xai_key', None) if current_user.clinic else None
+    if not xai_key:
+        xai_key = settings.XAI_API_KEY
     if not xai_key or xai_key == "placeholder":
         logger.error("XAI_API_KEY not configured on backend server")
         raise HTTPException(
@@ -168,6 +174,18 @@ async def text_to_speech(body: TTSRequest, current_user: User = Depends(get_curr
     except Exception as exc:
         logger.error("Unexpected error in TTS synthesis proxy: %s", exc)
         raise HTTPException(status_code=500, detail="Internal server error during speech synthesis.")
+
+
+@router.get("/xai-key")
+async def get_default_xai_key(current_user: User = Depends(get_current_user)):
+    """
+    Returns the default xAI API key for the frontend to use.
+    Checks clinic-level key first, then falls back to server environment.
+    """
+    xai_key = getattr(current_user.clinic, 'xai_key', None) if current_user.clinic else None
+    if not xai_key:
+        xai_key = settings.XAI_API_KEY
+    return {"xai_key": xai_key or ""}
 
 
 @router.post("/simulate")
