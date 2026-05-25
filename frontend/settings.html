@@ -406,6 +406,7 @@
   <script src="js/utils.js?v=4"></script>
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
 
   <script>
     const state = {
@@ -477,17 +478,19 @@
       localStorage.setItem('renia_settings', JSON.stringify(state.settings));
     }
 
+    const $ = (id) => document.getElementById(id);
+
     function populateProfile() {
       const prof = state.settings.profile;
-      document.getElementById('prof-name').value = prof.name || '';
-      document.getElementById('prof-email').value = prof.email || '';
-      document.getElementById('prof-phone').value = prof.phone || '';
-      document.getElementById('prof-city').value = prof.city || '';
-      document.getElementById('prof-zip').value = prof.zip || '';
+      const nameEl = $('prof-name'); if (nameEl) nameEl.value = prof.name || '';
+      const emailEl = $('prof-email'); if (emailEl) emailEl.value = prof.email || '';
+      const phoneEl = $('prof-phone'); if (phoneEl) phoneEl.value = prof.phone || '';
+      const cityEl = $('prof-city'); if (cityEl) cityEl.value = prof.city || '';
+      const zipEl = $('prof-zip'); if (zipEl) zipEl.value = prof.zip || '';
     }
 
     function renderHours() {
-      const container = document.getElementById('hours-days-container');
+      const container = $('hours-days-container');
       if (!container) return;
       
       const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -537,8 +540,8 @@
     }
 
     function renderServices() {
-      const container = document.getElementById('services-list-container');
-      const countLabel = document.getElementById('services-count');
+      const container = $('services-list-container');
+      const countLabel = $('services-count');
       if (!container) return;
 
       const list = state.settings.services || [];
@@ -588,17 +591,17 @@
 
     function populateVoice() {
       const voice = state.settings.voice;
-      document.getElementById('voice-select').value = voice.voice || 'Ash';
-      document.getElementById('voice-greeting').value = voice.greeting || '';
-      document.getElementById('voice-spanish-toggle').checked = voice.spanish;
-      document.getElementById('voice-instructions').value = voice.instructions || getDefaultInstructions();
-      document.getElementById('xai-key').value = voice.xai_key || '';
+      const vsEl = $('voice-select'); if (vsEl) vsEl.value = voice.voice || 'Ash';
+      const vgEl = $('voice-greeting'); if (vgEl) vgEl.value = voice.greeting || '';
+      const vstEl = $('voice-spanish-toggle'); if (vstEl) vstEl.checked = voice.spanish;
+      const viEl = $('voice-instructions'); if (viEl) viEl.value = voice.instructions || getDefaultInstructions();
+      const xkEl = $('xai-key'); if (xkEl) xkEl.value = voice.xai_key || '';
       updateSpeechSampleText();
     }
 
     function updateSpeechSampleText() {
-      const gEl = document.getElementById('voice-greeting');
-      const sampleEl = document.getElementById('live-speech-sample');
+      const gEl = $('voice-greeting');
+      const sampleEl = $('live-speech-sample');
       if (gEl && sampleEl) {
         sampleEl.textContent = `"${gEl.value}"`;
       }
@@ -606,16 +609,16 @@
 
     function populateEmergency() {
       const emerg = state.settings.emergency;
-      document.getElementById('emerg-name').value = emerg.name || '';
-      document.getElementById('emerg-phone').value = emerg.phone || '';
-      document.getElementById('emerg-protocol').value = emerg.protocol || '';
+      const enEl = $('emerg-name'); if (enEl) enEl.value = emerg.name || '';
+      const epEl = $('emerg-phone'); if (epEl) epEl.value = emerg.phone || '';
+      const eprEl = $('emerg-protocol'); if (eprEl) eprEl.value = emerg.protocol || '';
     }
 
     // Soundwave visualizer canvas
     let canvas, ctx, animationId = null, isPlayingPreview = false;
     
     function initVisualizer() {
-      canvas = document.getElementById('soundwave-canvas');
+      canvas = $('soundwave-canvas');
       if (!canvas) return;
       ctx = canvas.getContext('2d');
       canvas.width = canvas.offsetWidth;
@@ -704,38 +707,39 @@
     });
 
     // Robust init: check readyState in case DOMContentLoaded already fired
-    function initSettingsPage() {
-      try {
-      loadSettings();
-      
-      populateProfile();
-      renderHours();
-      renderServices();
-      populateVoice();
-      populateEmergency();
-      initVisualizer();
+    function settingsInit() {
+      // Phase 1: Load data (safe — errors here won't block Phase 2)
+      try { loadSettings(); } catch (err) { console.warn('settings: loadSettings failed', err); }
+      try { populateProfile(); } catch (err) { console.warn('settings: populateProfile failed', err); }
+      try { renderHours(); } catch (err) { console.warn('settings: renderHours failed', err); }
+      try { renderServices(); } catch (err) { console.warn('settings: renderServices failed', err); }
+      try { populateVoice(); } catch (err) { console.warn('settings: populateVoice failed', err); }
+      try { populateEmergency(); } catch (err) { console.warn('settings: populateEmergency failed', err); }
+      try { initVisualizer(); } catch (err) { console.warn('settings: initVisualizer failed', err); }
 
-      document.getElementById('voice-greeting')?.addEventListener('input', updateSpeechSampleText);
+      // Phase 2: Register event listeners (ALWAYS runs, even if Phase 1 had errors)
+      const vgEl = $('voice-greeting');
+      if (vgEl) vgEl.addEventListener('input', updateSpeechSampleText);
 
       // Tabs switcher
-      const tabs = document.querySelectorAll('.settings-tab');
-      tabs.forEach(tab => {
+      document.querySelectorAll('.settings-tab').forEach(tab => {
         tab.addEventListener('click', () => {
-          tabs.forEach(t => {
+          document.querySelectorAll('.settings-tab').forEach(t => {
             t.className = 'settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all';
           });
           tab.className = 'settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all';
           
           const target = tab.getAttribute('data-target');
           document.querySelectorAll('.settings-form').forEach(form => {
-            if (form.id === `${target}-form`) form.classList.remove('hidden');
+            if (form.id === target + '-form') form.classList.remove('hidden');
             else form.classList.add('hidden');
           });
         });
       });
 
       // Submit Profile
-      document.getElementById('profile-form')?.addEventListener('submit', async (e) => {
+      const profileForm = $('profile-form');
+      if (profileForm) profileForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
         submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
@@ -759,7 +763,8 @@
       });
 
       // Submit Hours
-      document.getElementById('hours-form')?.addEventListener('submit', async (e) => {
+      const hoursForm = $('hours-form');
+      if (hoursForm) hoursForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
         submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
@@ -784,7 +789,8 @@
       });
 
       // Add Custom Service
-      document.getElementById('add-service-form')?.addEventListener('submit', (e) => {
+      const addSvcForm = $('add-service-form');
+      if (addSvcForm) addSvcForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('new-service-name').value.trim();
         const price = parseInt(document.getElementById('new-service-price').value.trim());
@@ -801,7 +807,8 @@
       });
 
       // Submit Voice
-      document.getElementById('voice-form')?.addEventListener('submit', async (e) => {
+      const voiceForm = $('voice-form');
+      if (voiceForm) voiceForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
         submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
@@ -827,7 +834,8 @@
       let activePreviewAudio = null;
 
       // Preview Voice Trigger
-      document.getElementById('preview-voice-btn')?.addEventListener('click', async () => {
+      const previewBtn = $('preview-voice-btn');
+      if (previewBtn) previewBtn.addEventListener('click', async () => {
         const selectedVoice = document.getElementById('voice-select').value;
         const greetingText = document.getElementById('voice-greeting').value.trim();
 
@@ -941,7 +949,8 @@
       });
 
       // Deploy Provision Trigger
-      document.getElementById('sync-deploy-btn')?.addEventListener('click', () => {
+      const syncBtn = $('sync-deploy-btn');
+      if (syncBtn) syncBtn.addEventListener('click', () => {
         const btn = document.getElementById('sync-deploy-btn');
         const key = document.getElementById('xai-key').value.trim();
         const voice = document.getElementById('voice-select').value;
@@ -975,7 +984,8 @@
       });
 
       // Submit Emergency Form
-      document.getElementById('emergency-form')?.addEventListener('submit', async (e) => {
+      const emergForm = $('emergency-form');
+      if (emergForm) emergForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
         submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
@@ -995,16 +1005,13 @@
         }, 200);
       });
 
-      } catch (err) {
-        console.error('Settings page initialization error:', err);
-      }
     }
 
     // Run initialization: check if DOMContentLoaded already fired
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initSettingsPage);
+      document.addEventListener('DOMContentLoaded', settingsInit);
     } else {
-      initSettingsPage();
+      settingsInit();
     }
   </script>
 </body>
