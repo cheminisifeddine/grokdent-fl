@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#FAFAFC] antialiased selection:bg-indigo-500 selection:text-white">
+<html lang="en" class="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Renia AI | Create Your Account</title>
+  <title>Renia AI | Onboard Clinic Partner</title>
   
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   
-    <script src="js/utils.js?v=3"></script>
-  <script src="js/api.js?v=3"></script>
-  <script src="js/auth.js?v=3"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
             display: ['Outfit', 'sans-serif'],
           },
           colors: {
@@ -36,611 +37,570 @@
             accent: {
               teal: '#0FD8B6',
               cyan: '#06b6d4',
-            }
-          },
-          animation: {
-            'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'mesh-rotate': 'mesh-rotate 20s linear infinite',
-          },
-          keyframes: {
-            'slide-up': {
-              '0%': { opacity: 0, transform: 'translateY(40px)' },
-              '100%': { opacity: 1, transform: 'translateY(0)' },
-            },
-            'mesh-rotate': {
-              '0%': { transform: 'rotate(0deg)' },
-              '100%': { transform: 'rotate(360deg)' },
+              coral: '#f43f5e',
             }
           }
         }
       }
     }
   </script>
-
+  
   <style>
-    /* Ultra Premium Light Glassmorphism */
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 1);
-      box-shadow: 0 40px 80px -20px rgba(99, 102, 241, 0.08), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* Premium transitions */
+    .theme-transition {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .glass-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-    .glass-card:hover {
-      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.06);
-      transform: translateY(-2px);
-      border-color: #cbd5e1;
-    }
-    .glass-card.selected {
-      border-color: #6366f1;
-      background-color: #f8fafc;
-      box-shadow: 0 0 0 1px #6366f1, 0 10px 20px -5px rgba(99, 102, 241, 0.15);
-    }
-
-    /* Abstract Background Mesh for Light Mode */
-    .hero-mesh {
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: 
-        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 30% 70%, rgba(15, 216, 182, 0.06) 0%, transparent 40%);
-      z-index: 0;
-      pointer-events: none;
-      filter: blur(40px);
-      mix-blend-mode: multiply;
+    .floating-shape { animation: float 18s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+      50% { transform: translateY(-20px) scale(1.05) rotate(10deg); }
     }
     
     .grid-bg {
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
       background-size: 40px 40px;
       mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
       -webkit-mask-image: -webkit-radial-gradient(circle at center, black 40%, transparent 80%);
-      pointer-events: none;
-      z-index: 0;
     }
 
-    /* Clean Input Styling */
-    .premium-input {
-      transition: all 0.2s ease;
-    }
-    .premium-input:focus {
-      outline: none;
-      border-color: #6366F1;
-      background-color: #ffffff;
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 2px 4px rgba(0,0,0,0.02);
+    .dark .grid-bg {
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
     }
 
-    /* Step Transitions */
-    .step-content { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .step-hidden { opacity: 0; transform: translateX(20px); pointer-events: none; position: absolute; width: 100%; }
-    .step-active { opacity: 1; transform: translateX(0); position: relative; width: 100%; }
+    /* Selection Card Glows */
+    .toggle-card {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
     
-    /* UI Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+    /* Step transition styles */
+    .step-section {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    /* Toggle switch styles */
+    .switch-checkbox:checked + .switch-label {
+      background-color: #6366f1;
+    }
+    .switch-checkbox:checked + .switch-label .switch-dot {
+      transform: translateX(100%);
+    }
   </style>
 </head>
-<body class="relative min-h-screen text-slate-800 flex flex-col items-center justify-center overflow-x-hidden">
+<body id="signup-viewport" class="relative min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFC] text-slate-800 dark:text-slate-100 theme-transition overflow-x-hidden selection:bg-indigo-100 selection:text-indigo-900">
 
-  <!-- Background Layer -->
-  <div class="fixed inset-0 z-0 bg-[#FAFAFC] overflow-hidden">
-    <div class="hero-mesh animate-mesh-rotate"></div>
-    <div class="absolute inset-0 grid-bg"></div>
+  <!-- ============================================
+       BACKGROUND LAYERS (DYNAMIC)
+       ============================================ -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div id="stripe-radial-glow-1" class="absolute w-[600px] h-[600px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-[140px] top-[-10%] left-[-10%] floating-shape z-0 hidden"></div>
+    <div id="stripe-radial-glow-2" class="absolute w-[600px] h-[600px] bg-cyan-400/10 dark:bg-cyan-400/15 rounded-full blur-[140px] bottom-[-10%] right-[-10%] floating-shape z-0 hidden" style="animation-delay: 3s"></div>
+    <div id="grid-pattern" class="absolute inset-0 grid-bg opacity-100"></div>
   </div>
 
-  <!-- Top Navigation (Matched exactly to index.html) -->
-  <nav class="fixed top-0 w-full z-50 py-4 pointer-events-none">
-    <div class="max-w-[1200px] mx-auto px-6 pointer-events-auto">
-      <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-3 group">
-          <div class="w-9 h-9 rounded-full bg-brand-900 flex items-center justify-center shadow-lg shadow-brand-900/20 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-accent-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span class="relative text-white text-[14px]">🦷</span>
-          </div>
-          <span class="font-display font-bold text-xl tracking-tight text-brand-900">Renia AI</span>
-        </a>
-        
-        <div class="flex items-center gap-4">
-          <span class="text-sm font-semibold text-slate-500 hidden sm:block">Already a partner?</span>
-          <a href="login.html" class="text-sm font-bold text-brand-900 hover:text-brand-600 transition-colors bg-white px-5 py-2 rounded-full border border-slate-200 shadow-sm hover:shadow-md">Sign in</a>
+  <!-- ============================================
+       FLOATING DESIGN SWITCHER PILL
+       ============================================ -->
+  <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2 py-1.5 rounded-full border border-slate-200/80 dark:border-slate-800/80 shadow-2xl flex items-center gap-1.5 text-xs font-semibold select-none">
+    <span class="text-slate-400 dark:text-slate-500 pl-2 pr-1 hidden sm:inline">Design Style:</span>
+    <button onclick="setSignupTheme('minimalist')" id="btn-minimalist" class="px-3.5 py-1.5 rounded-full transition-all duration-300 bg-slate-900 text-white dark:bg-slate-800 dark:text-slate-100 shadow-sm">
+      Stitch Clinical
+    </button>
+    <button onclick="setSignupTheme('glassmorphic')" id="btn-glassmorphic" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+      Stripe Glass
+    </button>
+    <button onclick="setSignupTheme('dark')" id="btn-dark" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+      Apple Luxury
+    </button>
+  </div>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <nav class="fixed top-0 w-full z-40 py-4 pointer-events-none">
+    <div class="max-w-[1200px] mx-auto px-6 pointer-events-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2.5 font-display font-black text-xl tracking-tight text-slate-900 dark:text-white group">
+        <div id="nav-logo-box" class="w-8 h-8 rounded bg-slate-950 flex items-center justify-center text-white text-xs shadow-md transition-all duration-300">
+          🦷
         </div>
+        <span class="theme-transition" id="nav-brand-text">Renia AI</span>
+      </a>
+      
+      <div class="flex items-center gap-4">
+        <span class="text-xs font-bold text-slate-500 hidden sm:block">Already registered?</span>
+        <a href="login.html" id="nav-login-btn" class="text-xs font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-900 px-4 py-2 rounded border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow transition-all duration-300">
+          Sign In
+        </a>
       </div>
     </div>
   </nav>
 
-  <!-- Main Centered Onboarding Card -->
-  <main class="relative z-10 w-full max-w-[600px] px-4 pt-28 pb-12 mx-auto">
+  <!-- ============================================
+       MAIN ONBOARDING CARD CONTAINER
+       ============================================ -->
+  <main class="relative z-10 w-full max-w-[620px] px-4 pt-24 pb-16 mx-auto">
     
-    <div class="glass-panel rounded-[2.5rem] p-8 sm:p-12 animate-slide-up relative overflow-hidden">
+    <!-- Central Card Wrapper (Styles swapped in real-time) -->
+    <div id="signup-card" class="bg-white border border-slate-200/80 rounded-none p-8 sm:p-12 shadow-xl theme-transition relative">
       
-      <!-- Stepper Header -->
-      <div class="flex items-center justify-between mb-10">
-        <div class="flex items-center gap-2 bg-slate-100/80 rounded-full p-1.5 border border-slate-200/60 shadow-inner">
-          <div id="ind-1" class="w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shadow-sm transition-colors">1</div>
-          <div id="line-1" class="w-6 h-0.5 bg-slate-200 rounded-full transition-colors"></div>
-          <div id="ind-2" class="w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors">2</div>
-          <div id="line-2" class="w-6 h-0.5 bg-slate-200 rounded-full transition-colors"></div>
-          <div id="ind-3" class="w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors">3</div>
-          <div id="line-3" class="w-6 h-0.5 bg-slate-200 rounded-full transition-colors"></div>
-          <div id="ind-4" class="w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors">4</div>
+      <!-- Stepper Progress Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
+        <!-- Progress Circles -->
+        <div class="flex items-center gap-1.5 p-1 rounded-full bg-slate-100/60 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 w-fit">
+          <div class="signup-step w-7 h-7 rounded-full bg-slate-950 text-white flex items-center justify-center text-xs font-bold shadow-sm transition-all duration-300">1</div>
+          <div class="step-connector w-5 h-0.5 bg-slate-200 dark:bg-slate-800 transition-colors"></div>
+          <div class="signup-step w-7 h-7 rounded-full bg-white dark:bg-slate-900 text-slate-400 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-bold shadow-sm transition-all duration-300">2</div>
+          <div class="step-connector w-5 h-0.5 bg-slate-200 dark:bg-slate-800 transition-colors"></div>
+          <div class="signup-step w-7 h-7 rounded-full bg-white dark:bg-slate-900 text-slate-400 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-bold shadow-sm transition-all duration-300">3</div>
+          <div class="step-connector w-5 h-0.5 bg-slate-200 dark:bg-slate-800 transition-colors"></div>
+          <div class="signup-step w-7 h-7 rounded-full bg-white dark:bg-slate-900 text-slate-400 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-bold shadow-sm transition-all duration-300">4</div>
         </div>
-        <span class="text-xs font-bold text-brand-500 uppercase tracking-widest bg-brand-50 border border-brand-100 px-3 py-1 rounded-full" id="step-label">Step 1 of 4</span>
+
+        <div class="flex items-center gap-3">
+          <!-- Live Progress Percentage -->
+          <div class="signup-progress w-24 h-1.5 bg-slate-150 dark:bg-slate-800 rounded-full overflow-hidden hidden sm:block">
+            <div class="progress-fill h-full bg-slate-950 dark:bg-white transition-all duration-300" style="width: 25%;"></div>
+          </div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-3 py-1 rounded theme-transition" id="step-label">Step 1 of 4</span>
+        </div>
       </div>
 
-      <!-- Forms Container -->
-      <form id="signup-form" class="relative min-h-[380px] flex items-stretch" onsubmit="event.preventDefault()">
+      <!-- Core Onboarding Form Wizard -->
+      <form id="signup-form" class="relative" onsubmit="event.preventDefault()">
         
-        <!-- STEP 1: Practice Profile -->
-        <div class="step-content step-active" id="step-1">
+        <!-- ============================================
+             STEP 1: CLINIC PROFILE
+             ============================================ -->
+        <div class="step-section" id="step-1">
           <div class="mb-8">
-            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Create your practice profile</h2>
-            <p class="text-slate-500 font-medium leading-relaxed">Tell us about your dental practice to customize your AI assistant's knowledge base and greetings.</p>
-          </div>
-          
-          <div class="space-y-5">
-            <div>
-              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Clinic Name</label>
-              <input type="text" id="input-clinic-name" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="e.g. Oceanview Dental Care" required>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">City (Florida)</label>
-                <div class="relative">
-                  <select id="select-city" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm appearance-none cursor-pointer" required>
-                    <option value="" disabled selected>Select a city</option>
-                    <option value="Miami">Miami</option>
-                    <option value="Orlando">Orlando</option>
-                    <option value="Tampa">Tampa</option>
-                    <option value="Jacksonville">Jacksonville</option>
-                    <option value="Fort Lauderdale">Fort Lauderdale</option>
-                    <option value="St. Petersburg">St. Petersburg</option>
-                    <option value="Tallahassee">Tallahassee</option>
-                  </select>
-                  <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
-                </div>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">ZIP Code</label>
-                <input type="text" id="input-zip" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="e.g. 33101" maxlength="5">
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Public Phone</label>
-                <input type="tel" id="input-phone" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="(305) 555-0100" required>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Public Email</label>
-                <input type="email" id="input-email" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="hello@oceanview.com" required>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 2: Clinical Services -->
-        <div class="step-content step-hidden" id="step-2">
-          <div class="mb-8">
-            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Select your clinical services</h2>
-            <p class="text-slate-500 font-medium leading-relaxed">This automatically configures how your AI receptionist answers frequently asked questions.</p>
-          </div>
-          
-          <div class="grid grid-cols-2 gap-4">
-            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
-              <div class="flex justify-between items-start">
-                <span class="text-2xl group-hover:scale-110 transition-transform">🦷</span>
-                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-sm font-extrabold text-brand-900">General Dentistry</h4>
-                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Cleanings, exams & fillings</p>
-              </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
-              <div class="flex justify-between items-start">
-                <span class="text-2xl group-hover:scale-110 transition-transform">✨</span>
-                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-sm font-extrabold text-brand-900">Cosmetic Surgery</h4>
-                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Veneers & whitening</p>
-              </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
-              <div class="flex justify-between items-start">
-                <span class="text-2xl group-hover:scale-110 transition-transform">🔩</span>
-                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-sm font-extrabold text-brand-900">Dental Implants</h4>
-                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Crowns & replacement</p>
-              </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-[110px] relative overflow-hidden group" onclick="toggleSelection(this)">
-              <div class="flex justify-between items-start">
-                <span class="text-2xl group-hover:scale-110 transition-transform">🪥</span>
-                <span class="w-5 h-5 rounded-full border border-slate-200 bg-white flex items-center justify-center text-xs text-white font-black checkbox-circle transition-all"></span>
-              </div>
-              <div class="mt-2">
-                <h4 class="text-sm font-extrabold text-brand-900">Orthodontics</h4>
-                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Braces & alignment</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 3: Connect PMS -->
-        <div class="step-content step-hidden" id="step-3">
-          <div class="mb-8">
-            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Connect your software</h2>
-            <p class="text-slate-500 font-medium leading-relaxed">Select your Practice Management System (PMS) to enable real-time booking and schedule sync.</p>
+            <h2 class="font-display text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight mb-2 leading-none">Register Clinic</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Establish your public practice credentials to align custom voice models.</p>
           </div>
           
           <div class="space-y-4">
-            <div class="glass-card rounded-2xl p-5 flex items-center justify-between" onclick="selectRadioCard(this, 'pms-cards')">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-brand-600 flex items-center justify-center font-black text-lg">DX</div>
-                <div>
-                  <h4 class="text-base font-extrabold text-brand-900">Dentrix</h4>
-                  <p class="text-xs text-slate-500 font-medium">Native API integration</p>
-                </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinic Name</label>
+              <input type="text" id="signup-clinic-name" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="e.g. Sunshine Dental Care" required>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinic Email</label>
+                <input type="email" id="signup-clinic-email" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="office@sunshinedental.com" required>
               </div>
-              <span class="w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-sm text-white font-bold checkbox-circle transition-all"></span>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinic Phone</label>
+                <input type="tel" id="signup-phone" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="(305) 555-0199" required>
+              </div>
             </div>
 
-            <div class="glass-card rounded-2xl p-5 flex items-center justify-between" onclick="selectRadioCard(this, 'pms-cards')">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-black text-lg">OD</div>
-                <div>
-                  <h4 class="text-base font-extrabold text-brand-900">Open Dental</h4>
-                  <p class="text-xs text-slate-500 font-medium">Live sync supported</p>
-                </div>
-              </div>
-              <span class="w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-sm text-white font-bold checkbox-circle transition-all"></span>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Practice Address</label>
+              <input type="text" id="signup-address" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="100 Biscayne Blvd, Suite 400" required>
             </div>
 
-            <div class="glass-card rounded-2xl p-5 flex items-center justify-between" onclick="selectRadioCard(this, 'pms-cards')">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center font-black text-lg">ES</div>
-                <div>
-                  <h4 class="text-base font-extrabold text-brand-900">Eaglesoft</h4>
-                  <p class="text-xs text-slate-500 font-medium">Secure bridge connection</p>
-                </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">City</label>
+                <input type="text" id="signup-city" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="Miami" required>
               </div>
-              <span class="w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-sm text-white font-bold checkbox-circle transition-all"></span>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">ZIP Code</label>
+                <input type="text" id="signup-zip" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="33131" required>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- STEP 4: Administrator Account -->
-        <div class="step-content step-hidden" id="step-4">
+        <!-- ============================================
+             STEP 2: EHR / SOFTWARE INTEGRATION
+             ============================================ -->
+        <div class="step-section hidden" id="step-2">
           <div class="mb-8">
-            <h2 class="font-display text-3xl sm:text-4xl font-black text-brand-900 tracking-tight leading-none mb-3">Set up administrator access</h2>
-            <p class="text-slate-500 font-medium leading-relaxed">Create your primary account to manage your AI receptionist and view analytics.</p>
+            <h2 class="font-display text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight mb-2 leading-none">Database &amp; EHR Integration</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Select your clinic's patient record software. Renia AI synchronizes real-time appointments and records.</p>
           </div>
           
-          <div class="space-y-5">
-            <div>
-              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Full Name</label>
-              <input type="text" id="input-admin-name" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="e.g. Dr. Sarah Mitchell" required>
+          <div class="grid grid-cols-2 gap-3" id="ehr-container">
+            <!-- EHR Card 1 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="eaglesoft">
+              <span class="font-bold text-sm tracking-tight">Patterson Eaglesoft</span>
+              <div class="flex justify-between items-center w-full">
+                <span class="text-[10px] font-mono text-slate-400">SYNC READY</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+              </div>
             </div>
-            
-            <div>
-              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Work Email</label>
-              <input type="email" id="input-admin-email" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="sarah@oceanview.com" required>
+            <!-- EHR Card 2 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="dentrix">
+              <span class="font-bold text-sm tracking-tight">Henry Schein Dentrix</span>
+              <div class="flex justify-between items-center w-full">
+                <span class="text-[10px] font-mono text-slate-400">SYNC READY</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+              </div>
             </div>
-
-            <div>
-              <label class="block text-[11px] font-bold text-brand-900 uppercase tracking-wider mb-2">Password</label>
-              <input type="password" id="input-admin-password" class="premium-input w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-brand-900 font-medium shadow-sm text-sm" placeholder="••••••••" required>
+            <!-- EHR Card 3 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="opendental">
+              <span class="font-bold text-sm tracking-tight">Open Dental</span>
+              <div class="flex justify-between items-center w-full">
+                <span class="text-[10px] font-mono text-indigo-500">API ACTIVE</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+              </div>
             </div>
-            
-            <div class="mt-4 p-4 rounded-2xl bg-brand-50 border border-brand-100/50 flex gap-3 items-start">
-              <span class="material-symbols-outlined text-brand-500 text-[20px] shrink-0 mt-0.5">verified_user</span>
-              <div class="min-w-0">
-                <h4 class="text-xs font-extrabold text-brand-900 leading-tight">Enterprise-Grade Security</h4>
-                <p class="text-[11px] text-slate-500 font-medium leading-relaxed mt-1">Your data is stored securely and is fully HIPAA compliant. We use AES-256 encryption for all sensitive practice records.</p>
+            <!-- EHR Card 4 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="carestream">
+              <span class="font-bold text-sm tracking-tight">Carestream Dental</span>
+              <div class="flex justify-between items-center w-full">
+                <span class="text-[10px] font-mono text-slate-400">CLOUD INTEGRATION</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
               </div>
             </div>
           </div>
+          
+          <div class="mt-6">
+            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Special Scheduling Directives (Optional)</label>
+            <textarea id="signup-policies" rows="2" class="theme-input w-full px-3.5 py-2 rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none text-xs" placeholder="e.g. Leave a 15-minute gap between cleanings; do not schedule emergency extractions past 3:00 PM."></textarea>
+          </div>
+        </div>
+
+        <!-- ============================================
+             STEP 3: DEPLOYMENT PLAN SELECTION
+             ============================================ -->
+        <div class="step-section hidden" id="step-3">
+          <div class="mb-8">
+            <h2 class="font-display text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight mb-2 leading-none">Deploy Dental Intelligence</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Choose a practice-tier receptionist plan. Risk-free 30-day setup guarantee.</p>
+          </div>
+
+          <!-- Elite Price Toggle Selector -->
+          <div class="flex justify-center items-center gap-3 mb-6 bg-slate-100/50 dark:bg-slate-950/50 border border-slate-200/60 dark:border-slate-800/60 p-2.5 rounded-xl w-fit mx-auto">
+            <span id="label-monthly" class="text-xs font-bold text-slate-900 dark:text-white transition-colors duration-200">Monthly Billing</span>
+            <div class="relative inline-block w-12 mr-2 align-middle select-none">
+              <input type="checkbox" id="pricing-toggle" class="switch-checkbox absolute block w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-4 border-transparent appearance-none cursor-pointer outline-none transition-all duration-300" onchange="togglePricing()">
+              <label for="pricing-toggle" class="switch-label block overflow-hidden h-6 rounded-full bg-slate-350 dark:bg-slate-800 cursor-pointer transition-colors duration-300">
+                <span class="switch-dot block w-6 h-6 rounded-full bg-white shadow transform transition-transform duration-300"></span>
+              </label>
+            </div>
+            <span id="label-yearly" class="text-xs font-bold text-slate-400 transition-colors duration-200 flex items-center gap-1.5">
+              Yearly Plans
+              <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded text-[10px] font-black uppercase tracking-wider">Save 30%</span>
+            </span>
+          </div>
+
+          <!-- Grid of Plans -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="plans-container">
+            <!-- Plan 1 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="basic">
+              <div>
+                <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Starter</span>
+                <span class="font-bold text-sm tracking-tight block mt-1">Single Chair Reception</span>
+              </div>
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="font-display font-black text-2xl tracking-tight pr-price" data-monthly="399" data-yearly="279">$399</span>
+                  <span class="text-[10px] text-slate-400">/mo</span>
+                </div>
+                <span class="text-[9px] text-slate-400 block mt-1 font-mono bill-desc">Billed monthly</span>
+              </div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-44 relative overflow-hidden active" data-value="advanced">
+              <!-- Elite Glow Indicator -->
+              <div class="absolute top-0 right-0 left-0 h-1 bg-gradient-to-r from-indigo-500 to-cyan-400"></div>
+              <div>
+                <div class="flex justify-between items-start">
+                  <span class="font-mono text-[9px] text-indigo-500 dark:text-indigo-400 font-bold uppercase tracking-wider">Growth</span>
+                  <span class="px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 font-mono text-[8px] font-black uppercase tracking-wider">Popular</span>
+                </div>
+                <span class="font-bold text-sm tracking-tight block mt-1">Advanced Dental AI</span>
+              </div>
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="font-display font-black text-2xl tracking-tight pr-price" data-monthly="699" data-yearly="489">$699</span>
+                  <span class="text-[10px] text-slate-400">/mo</span>
+                </div>
+                <span class="text-[9px] text-slate-400 block mt-1 font-mono bill-desc">Billed monthly</span>
+              </div>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="toggle-card border rounded p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="enterprise">
+              <div>
+                <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Enterprise</span>
+                <span class="font-bold text-sm tracking-tight block mt-1">Multi-Clinic Network</span>
+              </div>
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="font-display font-black text-2xl tracking-tight pr-price" data-monthly="999" data-yearly="699">$999</span>
+                  <span class="text-[10px] text-slate-400">/mo</span>
+                </div>
+                <span class="text-[9px] text-slate-400 block mt-1 font-mono bill-desc">Billed monthly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================
+             STEP 4: ACCOUNT CREDENTIALS & FINALIZE
+             ============================================ -->
+        <div class="step-section hidden" id="step-4">
+          <div class="mb-6">
+            <h2 class="font-display text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight mb-2 leading-none">Create Admin Profile</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Establish credentials to secure access and review generated transcripts.</p>
+          </div>
+          
+          <!-- Summary card loaded dynamically by auth.js -->
+          <div id="signup-summary" class="mb-6"></div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Lead Practitioner Name</label>
+              <input type="text" id="signup-admin-name" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="Dr. Sarah Mitchell" required>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Admin Email</label>
+                <input type="email" id="signup-admin-email" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="dr.mitchell@sunshinedental.com" required>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Admin Password</label>
+                <input type="password" id="signup-admin-password" class="theme-input w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-950 dark:text-white outline-none" placeholder="••••••••" required>
+              </div>
+            </div>
+            
+            <p class="font-mono text-[9px] text-slate-400 leading-normal max-w-sm pt-2">
+              Florida consent statute § 934.03 applies. Renia AI automatically discloses voice transcription recording protocols at the start of call streams.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stepper Buttons Bar -->
+        <div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 mt-10 pt-6 gap-4">
+          <button id="signup-back" class="px-6 py-2.5 border border-slate-200 dark:border-slate-800 rounded font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-950 text-xs uppercase tracking-wider transition-colors duration-200" style="visibility: hidden;">
+            ← Back
+          </button>
+          
+          <button id="signup-next" class="px-8 py-3 bg-slate-950 dark:bg-white text-white dark:text-black hover:bg-slate-900 dark:hover:bg-slate-100 rounded text-xs font-bold uppercase tracking-widest shadow-lg transition-all duration-300">
+            Next →
+          </button>
         </div>
 
       </form>
-
-      <!-- Bottom Controls -->
-      <div class="mt-10 flex items-center justify-between border-t border-slate-100 pt-8">
-        <button id="btn-back" class="px-5 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-brand-900 hover:bg-slate-50 transition-all flex items-center gap-1.5 opacity-0 pointer-events-none" onclick="prevStep()">
-          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Back
-        </button>
-        <button id="btn-next" class="flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm bg-brand-900 text-white hover:bg-brand-800 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-brand-900/10" onclick="nextStep()">
-          Continue <span class="material-symbols-outlined text-[18px] transition-transform" id="btn-next-arrow">arrow_forward</span>
-        </button>
-      </div>
-
     </div>
   </main>
 
-  <!-- ==========================================
-       PROVISIONING OVERLAY (Clean & Professional)
-       ========================================== -->
-  <div id="loading-overlay" class="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-700">
-    
-    <!-- Spinner -->
-    <div class="relative w-24 h-24 flex items-center justify-center mb-8">
-      <div class="absolute inset-0 rounded-full border-4 border-slate-100 border-t-brand-500 animate-spin"></div>
-      <div class="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center shadow-sm">
-        <span class="material-symbols-outlined text-brand-600 text-[28px]">support_agent</span>
-      </div>
-    </div>
+  <!-- App Scripts -->
+  <script src="js/utils.js?v=3"></script>
+  <script src="js/api.js?v=3"></script>
+  <script src="js/auth.js?v=3"></script>
 
-    <h2 class="font-display font-black text-3xl sm:text-4xl text-brand-900 text-center tracking-tight mb-3">Deploying your AI Voice Receptionist</h2>
-    <p class="text-base font-medium text-slate-500 text-center max-w-md mb-10 leading-relaxed" id="loading-status-text">
-      Please wait while we provision your dedicated voice nodes and secure your practice account.
-    </p>
-
-    <div class="w-full max-w-[320px] bg-slate-100 rounded-full h-2 overflow-hidden relative shadow-inner">
-      <div id="loading-progress-bar" class="h-full bg-brand-500 rounded-full transition-all duration-300" style="width: 0%"></div>
-    </div>
-
-  </div>
-
+  <!-- Stepper, Theme Switcher and Pricing Logic -->
   <script>
-    let currentStep = 1;
-    const totalSteps = 4;
+    let activeTheme = 'minimalist';
     
-    // Toggle Selection for Service Cards
-    function toggleSelection(el) {
-      el.classList.toggle('selected');
-      const checkbox = el.querySelector('.checkbox-circle');
-      if (el.classList.contains('selected')) {
-        checkbox.innerHTML = '✓';
-        checkbox.classList.add('bg-brand-500', 'border-brand-500');
-        checkbox.classList.remove('bg-white', 'border-slate-200');
-      } else {
-        checkbox.innerHTML = '';
-        checkbox.classList.remove('bg-brand-500', 'border-brand-500');
-        checkbox.classList.add('bg-white', 'border-slate-200');
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize original auth signup flows
+      if (typeof Auth !== 'undefined') {
+        Auth.initSignupForm();
       }
-    }
 
-    // Radio Selection for PMS Cards
-    function selectRadioCard(el, groupClass) {
-      const parent = el.parentElement;
-      const allCards = parent.querySelectorAll('.glass-card');
-      
-      allCards.forEach(card => {
-        card.classList.remove('selected');
-        const cb = card.querySelector('.checkbox-circle');
-        cb.innerHTML = '';
-        cb.classList.remove('bg-brand-500', 'border-brand-500');
-        cb.classList.add('bg-white', 'border-slate-200');
+      // 2. EHR multiple select handling
+      const ehrCards = document.querySelectorAll('#ehr-container .toggle-card');
+      ehrCards.forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('active');
+        });
       });
 
-      el.classList.add('selected');
-      const cb = el.querySelector('.checkbox-circle');
-      cb.innerHTML = '✓';
-      cb.classList.add('bg-brand-500', 'border-brand-500');
-      cb.classList.remove('bg-white', 'border-slate-200');
+      // 3. Plan single select handling
+      const planCards = document.querySelectorAll('#plans-container .toggle-card');
+      planCards.forEach(card => {
+        card.addEventListener('click', () => {
+          planCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+        });
+      });
+
+      // 4. Load cached theme
+      const savedTheme = localStorage.getItem('renia_signup_theme') || 'minimalist';
+      setSignupTheme(savedTheme);
+    });
+
+    // Toggle Prices dynamically Monthly/Yearly (30% discount applied)
+    function togglePricing() {
+      const checkbox = document.getElementById('pricing-toggle');
+      const labelMonthly = document.getElementById('label-monthly');
+      const labelYearly = document.getElementById('label-yearly');
+      const prices = document.querySelectorAll('.pr-price');
+      const billDescs = document.querySelectorAll('.bill-desc');
+      
+      const isYearly = checkbox.checked;
+      
+      // Update label highlight colors
+      if (isYearly) {
+        labelMonthly.className = "text-xs font-semibold text-slate-400 transition-colors duration-200";
+        labelYearly.className = "text-xs font-bold text-slate-900 dark:text-white transition-colors duration-200 flex items-center gap-1.5";
+      } else {
+        labelMonthly.className = "text-xs font-bold text-slate-900 dark:text-white transition-colors duration-200";
+        labelYearly.className = "text-xs font-semibold text-slate-400 transition-colors duration-200 flex items-center gap-1.5";
+      }
+
+      // Transition the pricing numbers
+      prices.forEach(price => {
+        const val = isYearly ? price.dataset.yearly : price.dataset.monthly;
+        price.style.transform = 'scale(0.9)';
+        price.style.opacity = '0';
+        setTimeout(() => {
+          price.textContent = `$${val}`;
+          price.style.transform = 'scale(1)';
+          price.style.opacity = '1';
+        }, 150);
+      });
+
+      // Update descriptions
+      billDescs.forEach(desc => {
+        desc.textContent = isYearly ? "Billed yearly" : "Billed monthly";
+      });
     }
 
-    // UI Updates
-    function updateUI() {
-      // Step Contents
-      for(let i = 1; i <= totalSteps; i++) {
-        const el = document.getElementById('step-' + i);
-        if(i === currentStep) {
-          el.classList.remove('step-hidden');
-          el.classList.add('step-active');
-        } else {
-          el.classList.add('step-hidden');
-          el.classList.remove('step-active');
-        }
-      }
+    // Set Active Theme: minimalist, glassmorphic, or dark
+    function setSignupTheme(theme) {
+      activeTheme = theme;
+      localStorage.setItem('renia_signup_theme', theme);
+
+      const viewport = document.getElementById('signup-viewport');
+      const card = document.getElementById('signup-card');
+      const radialGlow1 = document.getElementById('stripe-radial-glow-1');
+      const radialGlow2 = document.getElementById('stripe-radial-glow-2');
+      const navLogoBox = document.getElementById('nav-logo-box');
+      const navBrand = document.getElementById('nav-brand-text');
+      const navLoginBtn = document.getElementById('nav-login-btn');
       
-      // Update Stepper visually
-      for(let i = 1; i <= totalSteps; i++) {
-        const ind = document.getElementById('ind-' + i);
-        const line = document.getElementById('line-' + i);
-        
-        if (i < currentStep) {
-          ind.className = "w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-[16px] font-bold shadow-sm transition-colors";
-          ind.innerHTML = "<span class='material-symbols-outlined text-[14px]'>check</span>";
-          if (line) line.className = "w-6 h-0.5 bg-brand-500 rounded-full transition-colors";
-        } else if (i === currentStep) {
-          ind.className = "w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shadow-sm transition-colors";
-          ind.innerHTML = i;
-          if (line) line.className = "w-6 h-0.5 bg-slate-200 rounded-full transition-colors";
-        } else {
-          ind.className = "w-7 h-7 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center text-xs font-bold shadow-sm transition-colors";
-          ind.innerHTML = i;
-          if (line) line.className = "w-6 h-0.5 bg-slate-200 rounded-full transition-colors";
-        }
-      }
-      
-      document.getElementById('step-label').innerText = `Step ${currentStep} of ${totalSteps}`;
-      
-      // Buttons
-      const btnBack = document.getElementById('btn-back');
-      const btnNext = document.getElementById('btn-next');
-      
-      if(currentStep === 1) {
-        btnBack.classList.add('opacity-0', 'pointer-events-none');
-      } else {
-        btnBack.classList.remove('opacity-0', 'pointer-events-none');
-      }
-      
-      if(currentStep === totalSteps) {
-        btnNext.innerHTML = 'Create Account <span class="material-symbols-outlined text-[18px]">verified</span>';
-      } else {
-        btnNext.innerHTML = 'Continue <span class="material-symbols-outlined text-[18px] transition-transform" id="btn-next-arrow">arrow_forward</span>';
-      }
-    }
-    
-    function nextStep() {
-      // Very basic validation visual check
-      const activeContainer = document.getElementById('step-' + currentStep);
-      const inputs = activeContainer.querySelectorAll('input[required], select[required]');
-      let valid = true;
-      inputs.forEach(input => {
-        if(!input.value.trim()) {
-          valid = false;
-          input.classList.add('border-rose-400', 'bg-rose-50');
-          setTimeout(() => input.classList.remove('border-rose-400', 'bg-rose-50'), 2500);
+      // Reset button switcher classes
+      const btns = ['minimalist', 'glassmorphic', 'dark'];
+      btns.forEach(b => {
+        const el = document.getElementById(`btn-${b}`);
+        if (el) {
+          el.className = "px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800";
         }
       });
-      if(!valid) return;
 
-      if(currentStep < totalSteps) {
-        currentStep++;
-        updateUI();
+      // Set switcher active highlights
+      const activeBtn = document.getElementById(`btn-${theme}`);
+      if (activeBtn) {
+        if (theme === 'dark') {
+          activeBtn.className = "px-3.5 py-1.5 rounded-full transition-all duration-300 bg-white text-black font-bold shadow-sm";
+        } else {
+          activeBtn.className = "px-3.5 py-1.5 rounded-full transition-all duration-300 bg-slate-900 text-white dark:bg-slate-800 dark:text-slate-100 shadow-sm";
+        }
+      }
+
+      // Reset DOM structures
+      viewport.className = "relative min-h-screen flex flex-col items-center justify-center p-6 text-slate-800 dark:text-slate-100 theme-transition overflow-x-hidden selection:bg-indigo-100 selection:text-indigo-900";
+      
+      // Toggle body dark state
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
       } else {
-        triggerLoadingOverlay();
+        document.documentElement.classList.remove('dark');
+      }
+
+      // Remove specific theme classes from elements
+      card.className = "theme-transition relative";
+      navLogoBox.className = "w-8 h-8 rounded flex items-center justify-center text-white text-xs shadow-md transition-all duration-300";
+      navLoginBtn.className = "text-xs font-bold transition-all duration-300 py-2 px-4 border rounded shadow-sm";
+
+      // Style 1: Stitch Clinical (Fidelity Minimalist)
+      if (theme === 'minimalist') {
+        viewport.classList.add('bg-[#FAFAFC]');
+        card.classList.add('bg-white', 'border', 'border-slate-200/80', 'rounded-none', 'p-8', 'sm:p-12', 'shadow-xl');
+        radialGlow1.classList.add('hidden');
+        radialGlow2.classList.add('hidden');
+        
+        navLogoBox.classList.add('bg-slate-950');
+        navLoginBtn.classList.add('bg-white', 'text-slate-900', 'border-slate-200', 'hover:bg-slate-50');
+
+        // Target Form Styling
+        updateInputStyles("border-slate-200 bg-white focus:border-slate-950 focus:ring-slate-950 rounded");
+        updateCardStyles("border-slate-200 bg-white rounded-none", "border-indigo-600 bg-slate-50/50");
+        updateBtnStyles("bg-slate-950 hover:bg-slate-900 text-white rounded");
+      } 
+      
+      // Style 2: Stripe Fusion (Vibrant Glassmorphic)
+      else if (theme === 'glassmorphic') {
+        viewport.classList.add('bg-slate-50/30', 'dark:bg-slate-950/30');
+        card.classList.add('bg-white/70', 'dark:bg-slate-900/70', 'backdrop-blur-2xl', 'border', 'border-white/60', 'dark:border-slate-800/60', 'rounded-[2.5rem]', 'p-8', 'sm:p-12', 'shadow-2xl');
+        radialGlow1.classList.remove('hidden');
+        radialGlow2.classList.remove('hidden');
+
+        navLogoBox.className = "w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center text-white text-xs shadow-lg shadow-indigo-600/30 transition-all";
+        navLoginBtn.classList.add('bg-white/80', 'dark:bg-slate-900/80', 'backdrop-blur-sm', 'text-indigo-600', 'dark:text-indigo-400', 'border-white/80', 'dark:border-slate-800/80', 'hover:bg-white');
+
+        updateInputStyles("border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl");
+        updateCardStyles("border-slate-200 dark:border-slate-800 bg-white/40 dark:bg-slate-900/40 rounded-xl", "border-indigo-500 bg-indigo-500/5 dark:bg-indigo-500/10 shadow-lg shadow-indigo-500/5");
+        updateBtnStyles("bg-gradient-to-r from-indigo-600 to-indigo-800 text-white rounded-xl hover:shadow-lg hover:shadow-indigo-500/20");
+      } 
+      
+      // Style 3: Apple Luxury (Cinematic Dark Mode)
+      else if (theme === 'dark') {
+        viewport.classList.add('bg-[#020205]');
+        card.classList.add('bg-black/40', 'border', 'border-slate-800/80', 'rounded-2xl', 'p-8', 'sm:p-12', 'shadow-[0_30px_60px_rgba(0,0,0,0.8)]');
+        radialGlow1.classList.add('hidden');
+        radialGlow2.classList.add('hidden');
+
+        navLogoBox.className = "w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 shadow-xl";
+        navLoginBtn.classList.add('bg-slate-900', 'text-white', 'border-slate-800', 'hover:bg-slate-800');
+
+        updateInputStyles("border-slate-800 bg-slate-900/60 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 rounded-lg text-white placeholder:text-slate-600");
+        updateCardStyles("border-slate-800 bg-slate-950/40 rounded-lg", "border-emerald-500 bg-emerald-500/5 shadow-inner");
+        updateBtnStyles("bg-white text-black rounded-lg hover:bg-slate-200 border-t border-white/40");
       }
     }
-    
-    function prevStep() {
-      if(currentStep > 1) {
-        currentStep--;
-        updateUI();
-      }
+
+    // Helper functions for dynamic theme applications
+    function updateInputStyles(classes) {
+      document.querySelectorAll('.theme-input').forEach(input => {
+        input.className = `theme-input w-full px-3.5 py-2.5 text-sm transition-all duration-300 outline-none ` + classes;
+      });
     }
 
-    function triggerLoadingOverlay() {
-      const overlay = document.getElementById('loading-overlay');
-      const progressBar = document.getElementById('loading-progress-bar');
-      const statusText = document.getElementById('loading-status-text');
-      
-      overlay.classList.remove('pointer-events-none', 'opacity-0');
-      overlay.classList.add('opacity-100');
-      
-      const statuses = [
-        "Provisioning dedicated AI voice nodes...",
-        "Establishing secure connection to Practice Management System...",
-        "Applying HIPAA compliant encryption schemas...",
-        "Finalizing administrator access and routing to dashboard..."
-      ];
-      
-      let progress = 0;
-      let statusIndex = 0;
-      
-      const interval = setInterval(() => {
-        progress += 2;
-        progressBar.style.width = progress + '%';
+    function updateCardStyles(baseClasses, activeClasses) {
+      document.querySelectorAll('.toggle-card').forEach(card => {
+        const isActive = card.classList.contains('active');
+        card.className = `toggle-card p-4 flex flex-col justify-between transition-all duration-300 cursor-pointer h-28 relative overflow-hidden ` + 
+                         (isActive ? activeClasses : baseClasses);
         
-        if (progress === 25) statusText.innerText = statuses[1];
-        if (progress === 50) statusText.innerText = statuses[2];
-        if (progress === 75) statusText.innerText = statuses[3];
-        
-        if (progress >= 100) {
-          clearInterval(interval);
-          
-          // Generate mock token to bypass dashboard auth loop
-          const adminEmail = document.getElementById('input-admin-email').value || 'admin@clinic.com';
-          const adminName = document.getElementById('input-admin-name').value || 'Admin';
-          
-          const clinicName = document.getElementById('input-clinic-name').value.trim() || 'Oceanview Dental Care';
-          const clinicCity = document.getElementById('select-city').value || 'Tampa';
-          const clinicZip = document.getElementById('input-zip').value.trim() || '33602';
-          const clinicPhone = document.getElementById('input-phone').value.trim() || '(813) 555-0100';
-          const clinicEmail = document.getElementById('input-email').value.trim() || 'hello@oceanview.com';
+        // Custom styling specifically for step-3 (pricing) cards
+        if (card.dataset.value === 'basic' || card.dataset.value === 'advanced' || card.dataset.value === 'enterprise') {
+          card.classList.remove('h-28');
+          card.classList.add('h-44');
+        }
 
-          // Extract selected services
-          const selectedCards = document.querySelectorAll('#step-2 .glass-card.selected');
-          const services = [];
-          const defaultServices = [
-            { name: 'General Dentistry Checkup', price: 99 },
-            { name: 'Dental Cleaning & Exam', price: 120 },
-            { name: 'Cosmetic Whitening', price: 299 },
-            { name: 'Orthodontics Consultation', price: 150 },
-            { name: 'Dental Implants Consultation', price: 199 }
-          ];
-
-          if (selectedCards.length > 0) {
-            selectedCards.forEach(card => {
-              const name = card.querySelector('h4').textContent.trim();
-              let price = 150; // default consultation/treatment price
-              if (name.includes('General')) price = 99;
-              else if (name.includes('Cosmetic')) price = 299;
-              else if (name.includes('Implants')) price = 199;
-              else if (name.includes('Orthodontics')) price = 3500;
-              services.push({ name, price });
-            });
+        // Apply style specifically for icons inside active cards
+        const checkIcon = card.querySelector('.check-icon');
+        if (checkIcon) {
+          if (isActive) {
+            checkIcon.className = "material-symbols-outlined text-[16px] text-indigo-500 dark:text-cyan-400 check-icon";
+            if (activeTheme === 'dark') checkIcon.className = "material-symbols-outlined text-[16px] text-emerald-400 check-icon";
           } else {
-            services.push(...defaultServices);
+            checkIcon.className = "material-symbols-outlined text-[16px] text-slate-300 dark:text-slate-700 check-icon";
           }
-
-          // Generate randomized Voice ID
-          const voiceOptions = ['Eve', 'Leo', 'Coral', 'Ash', 'Ani', 'Sage'];
-          const randomVoice = voiceOptions[Math.floor(Math.random() * voiceOptions.length)];
-          const greeting = `Thank you for calling ${clinicName} in ${clinicCity}. This is your dynamic AI receptionist ${randomVoice}. How can I help you today?`;
-
-          // Construct dynamic settings matching dentist account
-          const initialSettings = {
-            profile: {
-              name: clinicName,
-              email: clinicEmail,
-              phone: clinicPhone,
-              city: clinicCity,
-              zip: clinicZip
-            },
-            hours: {
-              monday: { active: true, open: '8:00 AM', close: '5:00 PM' },
-              tuesday: { active: true, open: '8:00 AM', close: '5:00 PM' },
-              wednesday: { active: true, open: '8:00 AM', close: '5:00 PM' },
-              thursday: { active: true, open: '8:00 AM', close: '5:00 PM' },
-              friday: { active: true, open: '8:00 AM', close: '5:00 PM' },
-              saturday: { active: true, open: '9:00 AM', close: '1:00 PM' },
-              sunday: { active: false, open: '9:00 AM', close: '1:00 PM' }
-            },
-            services: services,
-            voice: {
-              voice: randomVoice,
-              greeting: greeting,
-              spanish: true,
-              grok_agent_status: 'active',
-              grok_agent_id: 'grok_agent_' + Math.random().toString(36).substr(2, 9),
-              xai_key: ''
-            },
-            emergency: {
-              name: adminName,
-              phone: clinicPhone,
-              protocol: 'If the patient reports severe bleeding, swelling affecting breathing, a completely knocked-out adult tooth, or extreme unmanageable pain, offer a same-day urgent booking immediately or transfer the caller directly to the on-call contact phone number.'
-            }
-          };
-
-          // Save customized credentials
-          localStorage.setItem('renia_settings', JSON.stringify(initialSettings));
-          localStorage.setItem('renia_token', 'demo_token_' + Date.now());
-          localStorage.setItem('renia_user', JSON.stringify({
-            id: 'usr_' + Date.now(),
-            email: adminEmail,
-            name: adminName,
-            role: 'admin'
-          }));
-          
-          window.location.href = 'dashboard.html';
         }
-      }, 60);
+      });
+    }
+
+    function updateBtnStyles(classes) {
+      const nextBtn = document.getElementById('signup-next');
+      if (nextBtn) {
+        // preserve basic sizing classes, override dynamic themes
+        nextBtn.className = `px-8 py-3 text-xs font-bold uppercase tracking-widest shadow-lg transition-all duration-300 ` + classes;
+      }
     }
   </script>
 </body>

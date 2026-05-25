@@ -86,6 +86,22 @@
 </head>
 <body class="text-slate-800 antialiased h-screen overflow-hidden flex selection:bg-brand-500 selection:text-white">
 
+  <!-- ============================================
+       FLOATING DESIGN SWITCHER PILL
+       ============================================ -->
+  <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md px-2 py-1.5 rounded-full border border-slate-200 shadow-xl flex items-center gap-1.5 text-xs font-semibold select-none">
+    <span class="text-slate-400 pl-2 pr-1 hidden sm:inline">Design Style:</span>
+    <button onclick="setDashboardVariant('stitch')" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 hover:bg-slate-100">
+      Stitch Clinical
+    </button>
+    <button onclick="setDashboardVariant('stripe')" class="px-3.5 py-1.5 rounded-full transition-all duration-300 bg-slate-900 text-white shadow-sm">
+      Stripe Glass
+    </button>
+    <button onclick="setDashboardVariant('apple')" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 hover:bg-slate-100">
+      Apple Luxury
+    </button>
+  </div>
+
   <!-- Sidebar -->
   <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col justify-between h-full z-30 relative shadow-sm">
     <div>
@@ -1681,6 +1697,25 @@ Be concise — this is a voice call.`;
       div.textContent = text;
       return div.innerHTML;
     }
+
+    // Design switching and auto-redirection logic
+    function setDashboardVariant(variant) {
+      localStorage.setItem('renia_dashboard_variant', variant);
+      if (variant === 'stripe') window.location.href = 'dashboard.html';
+      if (variant === 'stitch') window.location.href = 'dashboard-v2.html';
+      if (variant === 'apple') window.location.href = 'dashboard-v3.html';
+    }
+
+    // Auto-redirection checking on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('renia_dashboard_variant') || 'stripe';
+      const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+      if (saved === 'stitch' && currentPage === 'dashboard.html') {
+        window.location.href = 'dashboard-v2.html';
+      } else if (saved === 'apple' && currentPage === 'dashboard.html') {
+        window.location.href = 'dashboard-v3.html';
+      }
+    });
   </script>
 </body>
 </html>
