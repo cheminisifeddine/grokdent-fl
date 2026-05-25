@@ -888,13 +888,25 @@
           };
 
           saveSettingsToStorage();
-          try { await API.updateVoiceSettings({ grok_voice_id: state.settings.voice.voice, welcome_message: state.settings.voice.greeting, spanish_enabled: state.settings.voice.spanish, xai_key: state.settings.voice.xai_key }); } catch {}
+          // Persist to backend — show real success/error instead of silently swallowing
+          try {
+            const resp = await API.updateVoiceSettings({
+              grok_voice_id: state.settings.voice.voice,
+              welcome_message: state.settings.voice.greeting,
+              spanish_enabled: state.settings.voice.spanish,
+              xai_key: state.settings.voice.xai_key
+            });
+            console.debug('Voice settings persisted to backend:', resp);
+            if (typeof showToast === 'function') showToast('Voice config saved & synced to server!', 'success');
+          } catch (err) {
+            console.error('Backend voice save failed:', err);
+            if (typeof showToast === 'function') showToast('Saved locally but server sync failed: ' + (err.message || 'network error'), 'error');
+          }
 
           setTimeout(() => {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Save Settings';
-            if (typeof showToast === 'function') showToast('Voice config saved!', 'success');
-          }, 200);
+          }, 300);
         });
       } catch (err) { console.warn('settings: voice form listener failed', err); }
 

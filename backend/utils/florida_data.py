@@ -170,6 +170,7 @@ SAMPLE_CLINIC_DATA: Dict = {
         "check insurance information, and more. How can I help you today?"
     ),
     "spanish_enabled": True,
+    "xai_key": "",  # Set via .env XAI_API_KEY — actual key is gitignored
     "is_active": True,
 }
 

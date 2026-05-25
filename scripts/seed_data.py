@@ -9,7 +9,7 @@ import sys
 import os
 import uuid
 from datetime import datetime, timedelta, timezone
-from passlib.context import CryptContext
+import bcrypt
 
 # Adjust python path to include project root
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -30,7 +30,7 @@ from backend.utils.florida_data import (
     FL_DENTAL_SERVICES
 )
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Use bcrypt directly (compatible with bcrypt >= 5.0)
 
 def seed_database():
     logger = SessionLocal()
@@ -70,6 +70,7 @@ def seed_database():
             policies=SAMPLE_CLINIC_DATA["policies"],
             welcome_message=SAMPLE_CLINIC_DATA["welcome_message"],
             spanish_enabled=SAMPLE_CLINIC_DATA["spanish_enabled"],
+            xai_key=SAMPLE_CLINIC_DATA.get("xai_key", ""),
             is_active=True
         )
         logger.add(clinic)
@@ -80,7 +81,7 @@ def seed_database():
         admin_user = User(
             clinic_id=clinic.id,
             email="admin@sunshinesmiles.com",
-            hashed_password=pwd_context.hash("password123"),
+            hashed_password=bcrypt.hashpw(b"password123", bcrypt.gensalt()).decode(),
             full_name="Dr. Priya Patel",
             role="admin",
             is_active=True

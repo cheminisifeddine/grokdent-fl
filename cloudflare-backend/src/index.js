@@ -215,6 +215,14 @@ app.get('/api/v1/clinics', authMiddleware, async (c) => {
   return c.json(clinic);
 });
 
+app.get('/api/v1/voice/xai-key', authMiddleware, async (c) => {
+  const user = c.get('user');
+  const clinic = await c.env.DB.prepare('SELECT xai_key FROM clinics WHERE id = ?').bind(user.clinic_id).first();
+  const clinicKey = clinic?.xai_key || '';
+  const envKey = c.env.XAI_API_KEY || '';
+  return c.json({ xai_key: clinicKey || envKey });
+});
+
 app.put('/api/v1/clinics', authMiddleware, async (c) => {
   const user = c.get('user');
   const body = await c.req.json();
@@ -553,8 +561,8 @@ app.put('/api/v1/clinics/insurance', authMiddleware, async (c) => {
 app.put('/api/v1/clinics/voice-settings', authMiddleware, async (c) => {
   const user = c.get('user');
   const body = await c.req.json();
-  await c.env.DB.prepare('UPDATE clinics SET grok_voice_id = ?, welcome_message = ?, spanish_enabled = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
-    .bind(body.voice || 'Ash', body.welcome_message || '', body.spanish_enabled ? 1 : 0, user.clinic_id).run();
+  await c.env.DB.prepare('UPDATE clinics SET grok_voice_id = ?, welcome_message = ?, spanish_enabled = ?, xai_key = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+    .bind(body.grok_voice_id || body.voice || 'Ash', body.welcome_message || '', body.spanish_enabled ? 1 : 0, body.xai_key || '', user.clinic_id).run();
   return c.json({ message: 'Voice settings updated' });
 });
 
@@ -707,8 +715,11 @@ app.post('/api/v1/voice/simulate', authMiddleware, async (c) => {
   try {
     const body = await c.req.json();
     const { messages, scenario, clinicName, settings, kbEntries } = body;
+    const user = c.get('user');
     
-    const xaiKey = c.env.XAI_API_KEY;
+    // Use clinic-level key first, then fall back to server env
+    const clinic = await c.env.DB.prepare('SELECT xai_key FROM clinics WHERE id = ?').bind(user.clinic_id).first();
+    const xaiKey = clinic?.xai_key || c.env.XAI_API_KEY;
     if (!xaiKey) {
       return c.json({ error: 'XAI_API_KEY not configured on server' }, 500);
     }
@@ -797,7 +808,10 @@ SCENARIO INSTRUCTIONS:
 // 🔑 xAI Realtime API Session Token Endpoint (For Browser Voice Agents)
 // -------------------------------------------------------------------------
 app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
-  const xaiKey = c.env.XAI_API_KEY;
+  const user = c.get('user');
+  // Use clinic-level key first, then fall back to server env
+  const clinic = await c.env.DB.prepare('SELECT xai_key FROM clinics WHERE id = ?').bind(user.clinic_id).first();
+  const xaiKey = clinic?.xai_key || c.env.XAI_API_KEY;
   if (!xaiKey) {
     return c.json({ error: 'XAI_API_KEY not configured on server' }, 500);
   }
@@ -843,7 +857,10 @@ app.post('/api/v1/voice/tts', authMiddleware, async (c) => {
     const body = await c.req.json();
     const { text, voice_id, speed, language } = body;
     
-    const xaiKey = c.env.XAI_API_KEY;
+    const user = c.get('user');
+    // Use clinic-level key first, then fall back to server env
+    const clinic = await c.env.DB.prepare('SELECT xai_key FROM clinics WHERE id = ?').bind(user.clinic_id).first();
+    const xaiKey = clinic?.xai_key || c.env.XAI_API_KEY;
     if (!xaiKey) {
       return c.json({ error: 'XAI_API_KEY not configured on server' }, 500);
     }

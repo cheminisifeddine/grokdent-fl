@@ -9,9 +9,9 @@ from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr, Field
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
+import bcrypt
 from jose import jwt, JWTError
-from passlib.context import CryptContext
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from backend.config import settings
@@ -22,8 +22,12 @@ from backend.models.user import User
 logger = logging.getLogger(__name__)
 router = APIRouter(tags=["Authentication"])
 
-# Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Use bcrypt directly (compatible with bcrypt >= 5.0; passlib is broken on 5.0)
+def _hash_password(password: str) -> str:
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+def _verify_password(password: str, hashed: str) -> bool:
+    return bcrypt.checkpw(password.encode(), hashed.encode())
 
 # HTTP Bearer scheme for extracting tokens
 bearer_scheme = HTTPBearer(auto_error=False)
@@ -109,7 +113,7 @@ async def get_current_user(
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token payload")
 
-    user = db.query(User).filter(User.id == user_id, User.is_active == True).first()
+    user = db.query(User).filter(User.id == user_id, User.is_active == True).options(joinedload(User.clinic)).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found or inactive")
 
@@ -141,6 +145,7 @@ def signup(body: SignupRequest, db: Session = Depends(get_db)):
         slug=slug,
         state="FL",
         timezone="US/Eastern",
+        xai_key=settings.XAI_API_KEY,  # default xAI key for new accounts
     )
     db.add(clinic)
     db.flush()  # get clinic.id
@@ -149,7 +154,7 @@ def signup(body: SignupRequest, db: Session = Depends(get_db)):
     user = User(
         clinic_id=clinic.id,
         email=body.email,
-        hashed_password=pwd_context.hash(body.password),
+        hashed_password=_hash_password(body.password),
         full_name=body.full_name,
         role="admin",
     )
@@ -172,7 +177,7 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
     """Authenticate with email/password and return a JWT."""
 
     user = db.query(User).filter(User.email == body.email).first()
-    if not user or not pwd_context.verify(body.password, user.hashed_password):
+    if not user or not _verify_password(body.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     if not user.is_active:
         raise HTTPException(status_code=403, detail="Account is deactivated")
