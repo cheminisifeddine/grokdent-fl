@@ -1069,7 +1069,7 @@
       // Deploy Provision Trigger
       try {
         const syncBtn = $('sync-deploy-btn');
-        if (syncBtn) syncBtn.addEventListener('click', () => {
+        if (syncBtn) syncBtn.addEventListener('click', async () => {
           const btn = document.getElementById('sync-deploy-btn');
           const xkEl = document.getElementById('xai-key');
           const vsEl = document.getElementById('voice-select');
@@ -1085,20 +1085,41 @@
           btn.disabled = true;
           btn.innerHTML = '<span class="material-symbols-outlined text-[15px] animate-spin">sync</span> Syncing Grok real-time voice trunks...';
 
+          // Persist settings changes to local state
+          state.settings.voice.voice = voice;
+          const vgEl = document.getElementById('voice-greeting');
+          const vstEl = document.getElementById('voice-spanish-toggle');
+          if (vgEl) state.settings.voice.greeting = vgEl.value.trim();
+          if (vstEl) state.settings.voice.spanish = vstEl.checked;
+          state.settings.voice.xai_key = key;
+          
+          saveSettingsToStorage();
+
+          // Sync changes directly to backend server database
+          let syncSuccess = true;
+          try {
+            await API.updateVoiceSettings({
+              grok_voice_id: state.settings.voice.voice,
+              welcome_message: state.settings.voice.greeting,
+              spanish_enabled: state.settings.voice.spanish,
+              xai_key: state.settings.voice.xai_key
+            });
+          } catch (err) {
+            console.error('Database sync failed during deploy:', err);
+            syncSuccess = false;
+          }
+
           setTimeout(() => {
             btn.disabled = false;
-            btn.innerHTML = '<span class="material-symbols-outlined text-[15px]">verified</span> provisioned &amp; deployed!';
-            btn.className = 'w-full bg-emerald-600 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-sm select-none';
-
-            if (typeof showToast === 'function') showToast('Grok live trunk agent successfully active!', 'success');
-
-            state.settings.voice.voice = voice;
-            const vgEl = document.getElementById('voice-greeting');
-            const vstEl = document.getElementById('voice-spanish-toggle');
-            if (vgEl) state.settings.voice.greeting = vgEl.value.trim();
-            if (vstEl) state.settings.voice.spanish = vstEl.checked;
-            state.settings.voice.xai_key = key;
-            saveSettingsToStorage();
+            if (syncSuccess) {
+              btn.innerHTML = '<span class="material-symbols-outlined text-[15px]">verified</span> provisioned &amp; deployed!';
+              btn.className = 'w-full bg-emerald-600 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-sm select-none';
+              if (typeof showToast === 'function') showToast('Grok live trunk agent successfully active!', 'success');
+            } else {
+              btn.innerHTML = '<span class="material-symbols-outlined text-[15px]">error</span> Saved locally only!';
+              btn.className = 'w-full bg-rose-600 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-sm select-none';
+              if (typeof showToast === 'function') showToast('Saved locally, but failed to sync to server database.', 'error');
+            }
 
             setTimeout(() => {
               btn.innerHTML = '<span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes';

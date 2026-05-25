@@ -24,9 +24,9 @@ const Auth = {
       return;
     }
 
-    // Protected pages: if no token, inject demo token instead of redirecting
+    // Protected pages: if no token, redirect to login page instead of silently injecting demo token
     if (!this.getToken()) {
-      this._injectDemoSession();
+      window.location.href = 'login.html';
     }
   },
 
@@ -57,24 +57,10 @@ const Auth = {
         this.setUser(response.user);
         return { success: true, user: response.user };
       }
-      return { success: false, error: 'Invalid credentials' };
+      return { success: false, error: 'Invalid email or password.' };
     } catch (error) {
-      console.warn('API login failed, using demo mode:', error.message);
-      // Demo fallback — always allow login
-      if (email && password) {
-        const mockUser = {
-          id: 'usr_demo',
-          email: email,
-          name: 'Dr. Sarah Mitchell',
-          clinic_name: 'Sunshine Dental Care',
-          role: 'admin'
-        };
-        const mockToken = 'demo_token_' + Date.now();
-        this.setToken(mockToken);
-        this.setUser(mockUser);
-        return { success: true, user: mockUser };
-      }
-      return { success: false, error: 'Please enter your email and password.' };
+      console.warn('API login failed:', error.message);
+      return { success: false, error: error.message || 'Connection failed. Please check if backend is running.' };
     }
   },
 
@@ -89,24 +75,10 @@ const Auth = {
         this.setUser(response.user);
         return { success: true, user: response.user };
       }
-      return { success: false, error: 'Signup failed' };
+      return { success: false, error: 'Signup failed. Please check inputs.' };
     } catch (error) {
-      console.warn('API signup failed, using demo mode:', error.message);
-      // Demo fallback
-      if (data.email && data.password) {
-        const mockUser = {
-          id: 'usr_' + Date.now(),
-          email: data.email,
-          name: data.full_name || data.admin_name || 'Admin',
-          clinic_name: data.clinic_name || 'New Clinic',
-          role: 'admin'
-        };
-        const mockToken = 'demo_token_' + Date.now();
-        this.setToken(mockToken);
-        this.setUser(mockUser);
-        return { success: true, user: mockUser };
-      }
-      return { success: false, error: 'Please fill in all required fields.' };
+      console.warn('API signup failed:', error.message);
+      return { success: false, error: error.message || 'Connection failed. Please try again.' };
     }
   },
 
@@ -171,7 +143,6 @@ const Auth = {
 
       const email = emailInput.value.trim();
       const password = passwordInput.value;
-      const errorMsg = document.getElementById('login-error');
 
       if (!email || !password) {
         if (errorEl) errorEl.textContent = 'Please enter your email and password.';
@@ -193,10 +164,25 @@ const Auth = {
         if (errorEl) errorEl.textContent = result.error;
         if (btn) {
           btn.disabled = false;
-          btn.textContent = 'Sign in';
+          btn.textContent = 'Authenticate';
         }
       }
     });
+
+    // Wire up explicit Demo Sandbox Explore Button
+    const demoBtn = document.getElementById('demo-btn');
+    if (demoBtn) {
+      demoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this._injectDemoSession();
+        if (typeof showToast === 'function') {
+          showToast('Initializing Demo Sandbox Environment...', 'info');
+        }
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 600);
+      });
+    }
   },
 
   /**
@@ -355,17 +341,44 @@ const Auth = {
 
     // Update any user name displays in the page
     const nameEls = document.querySelectorAll('#user-name-display, .sidebar-user-name');
-    nameEls.forEach(el => { if (el) el.textContent = user.name || user.email; });
+    nameEls.forEach(el => { if (el) el.textContent = user.full_name || user.name || user.email; });
 
     const roleEls = document.querySelectorAll('.sidebar-user-role');
     roleEls.forEach(el => { if (el) el.textContent = user.role || 'Admin'; });
 
     const avatarEls = document.querySelectorAll('.sidebar-user-avatar');
     avatarEls.forEach(el => {
-      if (el && user.name) {
-        const parts = user.name.split(' ');
+      const displayName = user.full_name || user.name;
+      if (el && displayName) {
+        const parts = displayName.split(' ');
         el.textContent = (parts[0]?.[0] || '') + (parts[1]?.[0] || '');
       }
     });
+
+    // Inject warning banner if we are in a demo sandbox session
+    try { this.injectDemoBanner(); } catch (e) { console.warn(e); }
+  },
+
+  injectDemoBanner() {
+    const token = this.getToken();
+    if (token && token.startsWith('demo_token_')) {
+      if (document.getElementById('demo-sandbox-banner')) return;
+
+      const banner = document.createElement('div');
+      banner.id = 'demo-sandbox-banner';
+      banner.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-amber-500 text-white px-5 py-3 rounded-xl flex items-center gap-3 text-xs font-semibold shadow-2xl border border-amber-400 z-[99999] backdrop-blur-md animate-bounce max-w-[90%] sm:max-w-xl';
+      banner.style.animationIterationCount = '3';
+      banner.innerHTML = `
+        <span class="material-symbols-outlined text-[18px] animate-pulse">warning</span>
+        <div class="flex-1">
+          <span class="block text-[10px] font-bold uppercase tracking-wider text-amber-100 leading-none mb-0.5">Demo Sandbox Mode Active</span>
+          <span class="text-zinc-50 text-[10px] font-normal leading-normal">Your settings are saved locally only. Click below to sign in to your real clinic.</span>
+        </div>
+        <a href="login.html" onclick="Auth.logout();" class="bg-slate-950 text-white hover:bg-slate-900 px-3 py-1.5 rounded-lg font-bold text-[9px] uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm shrink-0">
+          Sign In <span class="material-symbols-outlined text-[11px]">arrow_forward</span>
+        </a>
+      `;
+      document.body.appendChild(banner);
+    }
   }
 };
