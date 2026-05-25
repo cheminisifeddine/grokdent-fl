@@ -1,300 +1,244 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#FAFAFC]">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renia AI - Settings</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
-  
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Renia AI - Platform Configuration</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
   
-  <script>
+  <script id="tailwind-config">
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
           colors: {
-            brand: {
-              950: '#020205',
-              900: '#0f172a',
-              800: '#1e293b',
-              500: '#6366f1',
-              400: '#818cf8',
-              100: '#e0e7ff',
-              50:  '#f8fafc',
-            },
-            accent: {
-              teal: '#0FD8B6',
-              cyan: '#06b6d4',
-              coral: '#f43f5e',
-            }
+            "border-subtle": "#E7E7E4",
+            "neural-purple": "#9333EA",
+            "background": "#F7F7F5",
+            "surface-panel": "#F3F2EF",
+            "surface-bright": "#f9f9f9",
+            "surface-card": "#FCFCFB",
+            "primary-container": "#1b1b1b",
+            "neural-indigo": "#4F46E5",
+            "accent-emerald": "#10B981"
           }
         }
       }
     }
   </script>
-  
+
   <style>
-    body { background-color: #FAFAFC; }
-    
-    .glass-card {
-      background: #FFFFFF;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    body {
+      font-family: 'Geist', 'Inter', sans-serif;
+      background-color: #F7F7F5;
+      color: #1b1b1b;
     }
-    .glass-card:hover {
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
-      border-color: #cbd5e1;
+    .glass-panel {
+      background: rgba(252, 252, 251, 0.85);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
     }
-    
-    .nav-item {
-      transition: all 0.2s;
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
     }
-    .nav-item:hover, .nav-item.active {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #e2e8f0;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
     }
-    .nav-item.active {
-      font-weight: 700;
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e2e2e2;
+      border-radius: 10px;
     }
-    
-    .metric-gradient-text {
-      background: linear-gradient(135deg, #0f172a 0%, #6366f1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
-<body class="text-slate-800 antialiased h-screen overflow-hidden flex selection:bg-brand-500 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
 
-  <!-- Sidebar -->
-  <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col justify-between h-full z-30 relative shadow-sm">
-    <div>
-      <div class="px-6 py-8 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-brand-900 flex items-center justify-center text-white text-[14px] shadow-lg shadow-brand-900/20">🦷</div>
-        <span class="font-display font-black text-xl tracking-tight text-brand-900">Renia AI</span>
-      </div>
-
-      <nav class="px-4 space-y-1">
-        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
-        </a>
-        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">call</span> Calls
-        </a>
-        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
-        </a>
-        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
-        </a>
-        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
-        </a>
-      </nav>
+  <!-- Asymmetrical Rail System (Sidebar) -->
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-40 flex-shrink-0 items-center py-6">
+    <!-- Brand Icon -->
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+      <span class="text-white text-[15px]">🦷</span>
     </div>
-
-    <div class="px-4 pb-8">
-      <div class="mb-4">
-        <a href="settings.html" class="nav-item active flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-        </a>
-        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
-        </a>
-      </div>
-      
-      <div onclick="if(typeof Auth !== 'undefined') Auth.logout();" class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xs border border-brand-200">SM</div>
-          <div>
-            <div class="text-sm font-bold text-brand-900" id="user-name-display">Dr. Sarah M.</div>
-            <div class="text-xs font-semibold text-slate-500">Admin</div>
-          </div>
+    <!-- Nav Icons -->
+    <nav class="flex flex-col gap-6 items-center flex-1 w-full">
+      <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
-        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
+      </a>
+      <a class="w-full flex justify-center group" href="calls.html" title="Calls">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">call</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">calendar_month</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">menu_book</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">insights</span>
+        </div>
+      </a>
+    </nav>
+    <!-- Bottom Rail Items -->
+    <div class="mt-auto flex flex-col gap-4 items-center w-full">
+      <a class="relative w-full flex justify-center group" href="settings.html" title="Settings">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
+        <div class="p-2 rounded bg-slate-100 text-slate-950">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">settings</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="billing.html" title="Billing">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">credit_card</span>
+        </div>
+      </a>
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+        SM
       </div>
     </div>
   </aside>
 
   <!-- Main Content Area -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+  <main class="flex-1 flex h-full overflow-hidden relative">
     
-    <!-- Topbar -->
-    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
-      <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Settings</h1>
-      
-      <div class="flex items-center gap-5">
-        <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
-        </div>
-        
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
-          <span class="material-symbols-outlined text-[20px]">notifications</span>
-          <span class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Scrollable Page Content -->
-    <div class="flex-1 overflow-y-auto p-8">
-      <div class="max-w-[1000px] mx-auto flex flex-col md:flex-row gap-8">
-        
-        <!-- Tabs Menu -->
-        <div class="w-full md:w-[220px] shrink-0 space-y-1">
-          <button data-target="profile" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-100 transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">domain</span> Clinic Profile
-          </button>
-          <button data-target="hours" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">schedule</span> Office Hours
-          </button>
-          <button data-target="services" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">medical_services</span> Services & Prices
-          </button>
-          <button data-target="voice" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">settings_voice</span> AI Voice settings
-          </button>
-          <button data-target="emergency" class="settings-tab w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">emergency</span> Emergency Protocol
-          </button>
+    <!-- Left Column: Form Configuration Canvas -->
+    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-[#F7F7F5]">
+      <div>
+        <div class="flex flex-col sm:flex-row justify-between sm:items-end mb-8 gap-4">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-950 mb-1 leading-none">Configuration Panel</h2>
+            <p class="text-slate-500 text-xs font-medium">Fine-tune clinic particulars, voice responses, and scheduling hours.</p>
+          </div>
+          <div class="text-xs font-mono font-bold text-slate-400">
+            SECURED TELEPHONY HUB
+          </div>
         </div>
 
-        <!-- Settings Content -->
-        <div class="flex-1">
+        <!-- Custom Tab bar switcher (Stitch clinical) -->
+        <div class="flex items-center gap-6 border-b border-slate-200 mb-8 overflow-x-auto pb-px">
+          <button data-target="profile" class="settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Profile</button>
+          <button data-target="hours" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Office Hours</button>
+          <button data-target="services" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Services &amp; Prices</button>
+          <button data-target="voice" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">AI Voice Settings</button>
+          <button data-target="emergency" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Emergency Protocol</button>
+        </div>
+
+        <!-- Active settings forms container -->
+        <div class="space-y-6">
           
           <!-- Clinic Profile Form -->
-          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200" id="profile-form">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="font-display text-xl font-bold text-slate-900">Clinic Profile</h2>
-              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[16px]">save</span> Save Changes
-              </button>
+          <form class="settings-form bg-white rounded-lg p-6 border border-slate-200 shadow-sm space-y-5" id="profile-form">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider font-mono">Clinic Particulars</h3>
+              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-sm">Save Changes</button>
             </div>
             
-            <div class="space-y-5">
-              <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Clinic Name</label>
-                <input type="text" id="prof-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="Sunshine Dental Care">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Clinic Name</label>
+                <input type="text" id="prof-name" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none transition-colors">
               </div>
-              
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Public Email</label>
-                <input type="email" id="prof-email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="hello@sunshinedental.com">
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Clinic Email</label>
+                <input type="email" id="prof-email" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none transition-colors">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Phone Number</label>
-                <input type="tel" id="prof-phone" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="(305) 555-0100">
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Clinic Phone Number</label>
+                <input type="tel" id="prof-phone" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none transition-colors">
               </div>
-              
-              <div class="grid grid-cols-2 gap-5">
-                <div>
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">City (Florida)</label>
-                  <input type="text" id="prof-city" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="Miami">
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">ZIP Code</label>
-                  <input type="text" id="prof-zip" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="33101">
-                </div>
+              <div>
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Florida Triage City</label>
+                <input type="text" id="prof-city" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none transition-colors">
+              </div>
+              <div>
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">ZIP Code</label>
+                <input type="text" id="prof-zip" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none transition-colors">
               </div>
             </div>
           </form>
 
           <!-- Office Hours Form -->
-          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="hours-form">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="font-display text-xl font-bold text-slate-900">Office Hours</h2>
-              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[16px]">save</span> Save Hours
-              </button>
+          <form class="settings-form bg-white rounded-lg p-6 border border-slate-200 shadow-sm space-y-4 hidden" id="hours-form">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider font-mono">Office Hours</h3>
+              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-sm">Save Hours</button>
             </div>
             
-            <div class="space-y-4" id="hours-days-container">
+            <div class="space-y-2.5" id="hours-days-container">
               <!-- Rendered dynamically -->
             </div>
           </form>
 
           <!-- Services & Prices Form -->
-          <div class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="services-form">
-            <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
-              <h2 class="font-display text-xl font-bold text-slate-900">Services & Pricing</h2>
-              <span class="text-xs text-slate-400 font-semibold" id="services-count">8 services active</span>
+          <div class="settings-form bg-white rounded-lg p-6 border border-slate-200 shadow-sm space-y-6 hidden" id="services-form">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider font-mono">Services Database</h3>
+              <span class="text-slate-400 text-[10px] font-semibold" id="services-count">8 services active</span>
             </div>
             
-            <!-- List Container -->
-            <div class="space-y-3 mb-8" id="services-list-container">
+            <div class="space-y-2" id="services-list-container">
               <!-- Rendered dynamically -->
             </div>
 
             <!-- Add Service Subform -->
-            <form id="add-service-form" class="border-t border-slate-100 pt-6">
-              <h3 class="font-bold text-slate-800 text-sm mb-4">Add Custom Service</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
-                <div class="sm:col-span-8">
-                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Service Name</label>
-                  <input type="text" id="new-service-name" placeholder="e.g. Tooth Extraction" required class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm">
+            <form id="add-service-form" class="border-t border-slate-100 pt-5 space-y-4">
+              <h4 class="font-bold text-slate-800 text-[10px] uppercase tracking-wider font-mono">Provision New Service</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="sm:col-span-2">
+                  <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Service Name</label>
+                  <input type="text" id="new-service-name" placeholder="e.g. Veneers consultation" required class="w-full px-3 py-1.5 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none">
                 </div>
-                <div class="sm:col-span-4">
-                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Price ($)</label>
-                  <input type="number" id="new-service-price" placeholder="e.g. 199" required min="1" class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm">
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Unit Price ($)</label>
+                  <input type="number" id="new-service-price" placeholder="e.g. 150" required min="1" class="w-full px-3 py-1.5 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none">
                 </div>
               </div>
-              <div class="mt-4 flex justify-end">
-                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold text-xs transition-all shadow-sm flex items-center gap-1">
-                  <span class="material-symbols-outlined text-[14px]">add</span> Add Service
+              <div class="flex justify-end">
+                <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[13px]">add</span> Add Service
                 </button>
               </div>
             </form>
           </div>
 
           <!-- AI Voice Settings Form -->
-          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="voice-form">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="font-display text-xl font-bold text-slate-900">AI Voice settings</h2>
-              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[16px]">save</span> Save settings
-              </button>
+          <form class="settings-form bg-white rounded-lg p-6 border border-slate-200 shadow-sm space-y-5 hidden" id="voice-form">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider font-mono">Grok Voice Configurations</h3>
+              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-sm">Save settings</button>
             </div>
             
-            <div class="space-y-6">
-              <!-- Grok Connection Status Badge & Key -->
-              <div class="p-4 rounded-2xl bg-indigo-50/40 border border-indigo-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-inner">
+            <div class="space-y-4">
+              <!-- API Key block -->
+              <div class="p-4 rounded bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-inner">
                 <div>
-                  <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <h4 class="font-bold text-brand-900 text-sm">xAI Grok Agent Connection</h4>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <h4 class="font-bold text-slate-800 text-xs font-mono uppercase tracking-wider">xAI Telephony Endpoint</h4>
                   </div>
-                  <p class="text-[10px] text-slate-500 font-semibold mt-1">Telephony Gateway State: Synced (Active wss://api.x.ai/v1/realtime)</p>
+                  <p class="text-[9px] text-slate-400 font-semibold mt-0.5">Route wss://api.x.ai/v1/realtime</p>
                 </div>
                 <div class="w-full sm:w-auto">
-                  <input type="password" id="xai-key" class="w-full sm:w-[280px] px-3 py-1.5 rounded-xl border border-slate-200 text-xs outline-none bg-white font-mono font-medium focus:border-indigo-500 transition-colors" placeholder="xai-api-key..." value="">
+                  <input type="password" id="xai-key" class="w-full sm:w-[240px] px-3 py-1.5 rounded border border-slate-200 text-xs outline-none bg-white font-mono" placeholder="xai-api-key...">
                 </div>
               </div>
 
+              <!-- Base Voice select -->
               <div class="flex flex-col sm:flex-row gap-4 items-center">
                 <div class="w-full">
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Select Voice Agent</label>
-                  <select id="voice-select" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm">
+                  <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Persona</label>
+                  <select id="voice-select" class="w-full px-3 py-2 rounded border border-slate-200 text-xs bg-white outline-none">
                     <option value="Ash">Ash (US Friendly Male)</option>
                     <option value="Ballad">Ballad (US Professional Female)</option>
                     <option value="Coral">Coral (US Warm Female)</option>
@@ -305,88 +249,163 @@
                     <option value="Leo">Leo (US Deep Male)</option>
                   </select>
                 </div>
-                <button type="button" id="preview-voice-btn" class="w-full sm:w-auto shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs border border-slate-200 transition-colors flex items-center justify-center gap-1.5 mt-5 sm:mt-0">
-                  <span class="material-symbols-outlined text-[18px]">volume_up</span> Preview Voice
+                <button type="button" id="preview-voice-btn" class="w-full sm:w-auto shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded border border-slate-200 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 mt-4">
+                  <span class="material-symbols-outlined text-[16px]">volume_up</span> Preview Voice
                 </button>
               </div>
 
+              <!-- AI Greeting Message -->
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">AI Greeting Welcome Message</label>
-                <textarea id="voice-greeting" rows="2" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed">Thank you for calling Sunshine Dental Care. This is your AI receptionist Ash. How can I help you today?</textarea>
-                <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">The first sentence the AI receptionist says when greeting incoming callers.</p>
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Greeting Welcome Message</label>
+                <textarea id="voice-greeting" rows="2" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs leading-relaxed outline-none"></textarea>
+                <p class="text-[9px] text-slate-400 mt-1 leading-normal font-semibold">Elena / Ash's opening phrase when incoming dentist calls connect.</p>
               </div>
 
+              <!-- Persona Prompt Instructions -->
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">AI Receptionist Instructions & Persona</label>
-                <textarea id="voice-instructions" rows="12" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed font-mono"></textarea>
-                <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">Full system prompt that defines the AI receptionist's personality, knowledge, and behavior. Edit to customize for your clinic.</p>
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Grok System instructions Prompt</label>
+                <textarea id="voice-instructions" rows="8" class="w-full px-3 py-2 rounded border border-slate-200 text-[11px] leading-relaxed outline-none font-mono custom-scrollbar"></textarea>
+                <p class="text-[9px] text-slate-400 mt-1 leading-normal font-semibold">Core behavioral prompt dictating guidelines and allowed procedures.</p>
               </div>
 
-              <!-- Glow waveform visualizer -->
-              <div class="relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 p-4 shadow-lg">
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[9px] text-indigo-400 font-mono tracking-widest font-bold uppercase">Grok Voice Waveform Visualizer</span>
-                  <span id="visualizer-status" class="text-[9px] text-slate-500 font-mono">IDLE</span>
-                </div>
-                <canvas id="soundwave-canvas" class="w-full h-12 bg-slate-950/40 rounded-xl"></canvas>
-              </div>
-
-              <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner">
+              <!-- Bilingual Checkbox toggle -->
+              <div class="flex items-center justify-between p-4 bg-slate-50 rounded border border-slate-200 shadow-inner">
                 <div>
-                  <h4 class="font-bold text-slate-800 text-sm">Spanish Bilingual Support</h4>
-                  <p class="text-xs text-slate-400 mt-0.5 font-medium">Auto-detects Spanish speech and responds conversationally in Spanish.</p>
+                  <h4 class="font-bold text-slate-800 text-xs leading-none">Spanish Auto-Triage Routing</h4>
+                  <p class="text-[10px] text-slate-400 mt-1">Detects Spanish queries and shifts LLM model weights.</p>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer select-none">
                   <input type="checkbox" id="voice-spanish-toggle" class="sr-only peer" checked>
-                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                  <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-slate-950"></div>
                 </label>
               </div>
 
-              <button type="button" id="sync-deploy-btn" class="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white py-3 rounded-xl font-bold text-xs transition-all shadow-md flex items-center justify-center gap-2 select-none">
-                <span class="material-symbols-outlined text-[16px] animate-pulse">sync_alt</span> Sync & Activate Dentist Grok Voice Agent
+              <!-- Sync Telephony deploy button -->
+              <button type="button" id="sync-deploy-btn" class="w-full bg-slate-950 hover:bg-slate-900 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider">
+                <span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes
               </button>
             </div>
           </form>
 
           <!-- Emergency Protocol Form -->
-          <form class="settings-form glass-card rounded-2xl p-8 bg-white border border-slate-200 hidden" id="emergency-form">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="font-display text-xl font-bold text-slate-900">Emergency Protocol</h2>
-              <button type="submit" class="bg-brand-900 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[16px]">save</span> Save Protocol
-              </button>
+          <form class="settings-form bg-white rounded-lg p-6 border border-slate-200 shadow-sm space-y-5 hidden" id="emergency-form">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider font-mono">Emergency Protocol</h3>
+              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-sm">Save Protocol</button>
             </div>
             
-            <div class="space-y-5">
+            <div class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">On-Call Emergency Contact Name</label>
-                <input type="text" id="emerg-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="Dr. Sarah Martinez">
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">On-Call Surgeon / Doctor Name</label>
+                <input type="text" id="emerg-name" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none">
               </div>
               
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">On-Call Emergency Contact Phone</label>
-                <input type="tel" id="emerg-phone" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm" value="(305) 555-0199">
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">On-Call Emergency Contact Pager</label>
+                <input type="tel" id="emerg-phone" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs focus:ring-0 focus:border-slate-400 outline-none">
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Emergency Triage Protocol</label>
-                <textarea id="emerg-protocol" rows="5" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors text-sm leading-relaxed">If the patient reports severe bleeding, swelling affecting breathing, a completely knocked-out adult tooth, or extreme unmanageable pain, offer a same-day urgent booking immediately or transfer the caller directly to the on-call contact phone number.</textarea>
-                <p class="text-[10px] text-slate-400 mt-1.5 font-semibold">Triage instructions guiding the AI receptionist on identifying and handling dental emergencies.</p>
+                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">AI Emergency Triage Instructions</label>
+                <textarea id="emerg-protocol" rows="4" required class="w-full px-3 py-2 rounded border border-slate-200 text-xs leading-relaxed outline-none"></textarea>
+                <p class="text-[9px] text-slate-400 mt-1 leading-normal font-semibold">Triage filters instructing the AI when to invoke instant page forwardings.</p>
               </div>
             </div>
           </form>
 
         </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Interactive console, Wave visualizer, and Integrations -->
+    <aside class="w-[380px] h-full bg-white border-l border-slate-200/80 flex flex-col shadow-sm flex-shrink-0">
+      <div class="p-6 border-b border-slate-200 bg-slate-50/50">
+        <h3 class="font-bold text-sm text-slate-900 leading-none">Console &amp; Integrations</h3>
+        <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Live visualizer and hooks</p>
+      </div>
+
+      <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
+        
+        <!-- Live Waveform Preview console -->
+        <div class="bg-slate-950 text-white rounded-lg p-5 shadow-lg relative overflow-hidden flex flex-col justify-between h-[230px] border border-slate-900">
+          <div class="flex items-center justify-between">
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase font-bold">Vocalizer preview</span>
+            <span id="visualizer-status" class="text-[9px] font-mono text-zinc-500 uppercase">IDLE</span>
+          </div>
+          
+          <div class="my-4">
+            <p class="text-sm font-semibold italic leading-relaxed text-zinc-200" id="live-speech-sample">
+              "Hello! Thank you for calling Sunshine Smiles Dental. How can I assist you?"
+            </p>
+          </div>
+
+          <div class="relative w-full h-10 rounded overflow-hidden">
+            <canvas id="soundwave-canvas" class="w-full h-full bg-slate-900/50"></canvas>
+          </div>
+        </div>
+
+        <!-- Integrations Workbench list -->
+        <div class="space-y-4">
+          <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider font-mono">Third-party integrations</h4>
+
+          <!-- Google Calendar Integration -->
+          <div class="p-4 rounded border border-slate-200 bg-slate-50/30 flex items-center justify-between hover:border-slate-300 transition-all shadow-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded bg-white border border-slate-100 flex items-center justify-center shadow-inner text-sm">📅</div>
+              <div>
+                <h5 class="text-xs font-bold text-slate-800">Google Calendar</h5>
+                <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5 leading-none mt-1">
+                  <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Active
+                </span>
+              </div>
+            </div>
+            <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-700"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+          </div>
+
+          <!-- Twilio integration -->
+          <div class="p-4 rounded border border-slate-200 bg-slate-50/30 flex items-center justify-between hover:border-slate-300 transition-all shadow-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded bg-white border border-slate-100 flex items-center justify-center shadow-inner text-sm">📞</div>
+              <div>
+                <h5 class="text-xs font-bold text-slate-800">Twilio Telephony</h5>
+                <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5 leading-none mt-1">
+                  <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Live Line
+                </span>
+              </div>
+            </div>
+            <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-700"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+          </div>
+
+          <!-- Stripe -->
+          <div class="p-4 rounded border border-slate-200 bg-slate-50/30 flex items-center justify-between hover:border-slate-300 transition-all shadow-sm">
+            <div class="flex items-center gap-3 opacity-60">
+              <div class="w-9 h-9 rounded bg-white border border-slate-100 flex items-center justify-center shadow-inner text-sm">💳</div>
+              <div>
+                <h5 class="text-xs font-bold text-slate-800">Stripe Payments</h5>
+                <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 block">Configured</span>
+              </div>
+            </div>
+            <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-700"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+          </div>
+        </div>
 
       </div>
-    </div>
+
+      <div class="p-6 border-t border-slate-200 bg-slate-50 flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-[10px] font-bold hover:bg-slate-50 transition-colors uppercase tracking-wider">
+          Sign Out
+        </button>
+        <button onclick="showToast('Configurations synchronized.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
+          Sync Node
+        </button>
+      </div>
+    </aside>
   </main>
 
   <!-- App Scripts -->
   <script src="js/utils.js?v=4"></script>
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
 
   <script>
     const state = {
@@ -452,24 +471,12 @@
         state.settings = { ...DEFAULT_SETTINGS };
         saveSettingsToStorage();
       }
-      
-      // Update sidebar username display if loaded
-      const sidebarName = document.getElementById('user-name-display');
-      if (sidebarName && state.settings.profile && state.settings.profile.name) {
-        sidebarName.textContent = state.settings.profile.name.length > 18 ? 'Admin Staff' : state.settings.profile.name;
-      }
     }
 
     function saveSettingsToStorage() {
       localStorage.setItem('renia_settings', JSON.stringify(state.settings));
-      
-      const sidebarName = document.getElementById('user-name-display');
-      if (sidebarName && state.settings.profile.name) {
-        sidebarName.textContent = state.settings.profile.name.length > 18 ? 'Admin Staff' : state.settings.profile.name;
-      }
     }
 
-    // Populate Clinic Profile Form
     function populateProfile() {
       const prof = state.settings.profile;
       document.getElementById('prof-name').value = prof.name || '';
@@ -479,13 +486,11 @@
       document.getElementById('prof-zip').value = prof.zip || '';
     }
 
-    // Populate and Render Office Hours
     function renderHours() {
       const container = document.getElementById('hours-days-container');
       if (!container) return;
       
       const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-      
       const timeOptions = [
         '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '11:00 AM',
         '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM'
@@ -497,18 +502,18 @@
         const closeOptions = timeOptions.map(t => `<option value="${t}" ${config.close === t ? 'selected' : ''}>${t}</option>`).join('');
 
         return `
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-            <div class="w-full sm:w-28 flex items-center gap-2.5">
-              <input type="checkbox" id="hour_active_${day}" ${config.active ? 'checked' : ''} class="w-4 h-4 rounded text-indigo-600 border-slate-300 focus:ring-indigo-500">
-              <label for="hour_active_${day}" class="text-sm font-bold text-slate-800 capitalize select-none">${day}</label>
+          <div class="flex items-center justify-between gap-4 p-3 rounded border border-slate-100 bg-[#F7F7F5]/50">
+            <div class="w-24 flex items-center gap-2">
+              <input type="checkbox" id="hour_active_${day}" ${config.active ? 'checked' : ''} class="w-4 h-4 rounded text-slate-950 border-slate-300 focus:ring-0">
+              <label for="hour_active_${day}" class="text-xs font-bold text-slate-800 capitalize select-none">${day}</label>
             </div>
             
-            <div class="flex items-center gap-3 w-full sm:w-auto" id="time_selects_${day}" style="${config.active ? '' : 'opacity: 0.4; pointer-events: none;'}">
-              <select id="hour_open_${day}" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white outline-none">
+            <div class="flex items-center gap-2" id="time_selects_${day}" style="${config.active ? '' : 'opacity: 0.4; pointer-events: none;'}">
+              <select id="hour_open_${day}" class="px-2.5 py-1 rounded border border-slate-200 text-xs bg-white outline-none">
                 ${openOptions}
               </select>
-              <span class="text-xs text-slate-400 font-bold font-mono">to</span>
-              <select id="hour_close_${day}" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white outline-none">
+              <span class="text-[10px] text-slate-400 font-mono">to</span>
+              <select id="hour_close_${day}" class="px-2.5 py-1 rounded border border-slate-200 text-xs bg-white outline-none">
                 ${closeOptions}
               </select>
             </div>
@@ -516,7 +521,6 @@
         `;
       }).join('');
 
-      // Wire checkboxes to toggle time select opacity
       days.forEach(day => {
         const chk = document.getElementById(`hour_active_${day}`);
         const selects = document.getElementById(`time_selects_${day}`);
@@ -532,7 +536,6 @@
       });
     }
 
-    // Populate and Render Services
     function renderServices() {
       const container = document.getElementById('services-list-container');
       const countLabel = document.getElementById('services-count');
@@ -551,15 +554,15 @@
       }
 
       container.innerHTML = list.map((srv, idx) => `
-        <div class="flex items-center justify-between p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors shadow-sm">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500 text-xs font-black">🦷</div>
-            <div class="font-bold text-slate-800 text-sm">${escapeHtml(srv.name)}</div>
+        <div class="flex items-center justify-between p-3 rounded border border-slate-100 bg-[#F7F7F5]/50 hover:bg-[#F7F7F5] transition-colors shadow-sm">
+          <div class="flex items-center gap-2.5 truncate">
+            <div class="w-7 h-7 rounded bg-white border border-slate-100 flex items-center justify-center text-slate-500 text-xs font-black">🦷</div>
+            <div class="font-bold text-slate-800 text-xs truncate">${escapeHtml(srv.name)}</div>
           </div>
-          <div class="flex items-center gap-4">
-            <span class="font-black text-slate-900 text-sm">$${srv.price}</span>
-            <button onclick="removeService(${idx})" class="w-8 h-8 rounded-lg hover:bg-rose-50 hover:text-rose-600 text-slate-400 border border-transparent hover:border-rose-100 flex items-center justify-center transition-all select-none">
-              <span class="material-symbols-outlined text-[18px]">delete</span>
+          <div class="flex items-center gap-3">
+            <span class="font-bold text-slate-900 text-xs font-mono">$${srv.price}</span>
+            <button onclick="removeService(${idx})" class="w-7 h-7 rounded hover:bg-rose-50 hover:text-rose-600 text-slate-400 border border-transparent hover:border-rose-100 flex items-center justify-center transition-all select-none">
+              <span class="material-symbols-outlined text-[16px]">delete</span>
             </button>
           </div>
         </div>
@@ -569,55 +572,38 @@
     window.removeService = function(idx) {
       const list = state.settings.services || [];
       const srvName = list[idx]?.name || 'service';
-      if (confirm(`Remove the service "${srvName}" from pricing database?`)) {
+      if (confirm(`Remove "${srvName}"?`)) {
         list.splice(idx, 1);
         saveSettingsToStorage();
         renderServices();
-        showToast('Service removed successfully 🟥', 'info');
+        showToast('Service removed successfully', 'info');
       }
     };
 
     function getDefaultInstructions() {
       const clinicName = state.settings.profile?.name || 'Sunshine Smiles Dental';
       return `You are Ash, the elite AI voice receptionist for ${clinicName} in Florida. 
-
-WHO YOU ARE
-You are highly professional, warm, and speak with a friendly, patient, and empathetic tone. You represent a high-end dental practice. You are NOT an AI assistant, you are the digital receptionist. Never mention that you are an AI or language model. 
-
-CLINIC KNOWLEDGE
-- Name: ${clinicName}
-- Location: Florida
-- Hours: Mon-Fri 9:00 AM to 5:00 PM. Closed weekends.
-- Accepted Insurance: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
-- Services: General checkups, teeth whitening, orthodontics, emergency extractions, dental implants.
-
-YOUR MISSION
-Answer patient questions, check appointment availability, schedule new appointments, and process cancellations. Be concise, audio-friendly, and conversational. Do not output long lists or bullet points. Speak naturally. Use the provided tools when a patient wants to book, check, or cancel an appointment.
-
-BEHAVIORAL RULES
-1. If a patient asks for availability, use the 'check_availability' tool.
-2. If a patient wants to book, collect their name, phone, date/time, and reason, then use the 'schedule_appointment' tool.
-3. If a patient has a dental emergency (severe pain, bleeding), advise them to seek immediate care and offer the earliest possible slot.
-4. If asked about insurance, confirm only from the accepted list.
-
-Keep responses short and conversational — this is a voice call, not an email.`;
+      Speak concisely, empathetically, and keep responses audio-friendly. Ensure HIPAA safety limits.`;
     }
 
-    // Populate Voice Form
     function populateVoice() {
       const voice = state.settings.voice;
       document.getElementById('voice-select').value = voice.voice || 'Ash';
       document.getElementById('voice-greeting').value = voice.greeting || '';
       document.getElementById('voice-spanish-toggle').checked = voice.spanish;
-      
-      const instructions = voice.instructions || getDefaultInstructions();
-      document.getElementById('voice-instructions').value = instructions;
-      
-      // Key split to prevent Github secret scanning from blocking the push
+      document.getElementById('voice-instructions').value = voice.instructions || getDefaultInstructions();
       document.getElementById('xai-key').value = voice.xai_key || '';
+      updateSpeechSampleText();
     }
 
-    // Populate Emergency Form
+    function updateSpeechSampleText() {
+      const gEl = document.getElementById('voice-greeting');
+      const sampleEl = document.getElementById('live-speech-sample');
+      if (gEl && sampleEl) {
+        sampleEl.textContent = `"${gEl.value}"`;
+      }
+    }
+
     function populateEmergency() {
       const emerg = state.settings.emergency;
       document.getElementById('emerg-name').value = emerg.name || '';
@@ -625,7 +611,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
       document.getElementById('emerg-protocol').value = emerg.protocol || '';
     }
 
-    // High-Fidelity Canvas Soundwave Visualizer Setup
+    // Soundwave visualizer canvas
     let canvas, ctx, animationId = null, isPlayingPreview = false;
     
     function initVisualizer() {
@@ -643,8 +629,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
       
       if (!isPlayingPreview) {
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(15, 216, 182, 0.25)';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.lineWidth = 1.5;
         ctx.moveTo(0, canvas.height / 2);
         ctx.lineTo(canvas.width, canvas.height / 2);
         ctx.stroke();
@@ -653,27 +639,27 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
       const now = Date.now() * 0.008;
       
-      // Draw neon cyan active sine wave
+      // Dynamic white wave
       ctx.beginPath();
-      ctx.strokeStyle = '#0FD8B6';
-      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2;
       for (let x = 0; x < canvas.width; x++) {
-        const amplitude = 12 + Math.sin(now * 1.5) * 5;
-        const frequency = 0.025;
+        const amplitude = 10 + Math.sin(now * 1.5) * 4;
+        const frequency = 0.035;
         const y = (canvas.height / 2) + Math.sin(x * frequency + now) * amplitude * Math.sin(x / canvas.width * Math.PI);
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
       ctx.stroke();
 
-      // Draw indigo ambient shadow wave
+      // Ambient indigo shadow
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(99, 102, 241, 0.55)';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(79, 70, 229, 0.5)';
+      ctx.lineWidth = 1.2;
       for (let x = 0; x < canvas.width; x++) {
-        const amplitude = 7 + Math.cos(now * 2.2) * 3;
-        const frequency = 0.018;
-        const y = (canvas.height / 2) + Math.cos(x * frequency - now * 1.3) * amplitude * Math.sin(x / canvas.width * Math.PI);
+        const amplitude = 6 + Math.cos(now * 2.2) * 3;
+        const frequency = 0.025;
+        const y = (canvas.height / 2) + Math.cos(x * frequency - now * 1.2) * amplitude * Math.sin(x / canvas.width * Math.PI);
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
@@ -688,8 +674,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
       if (statusEl) {
         statusEl.textContent = statusText;
         statusEl.className = playing 
-          ? 'text-[9px] text-teal-400 font-mono tracking-wider animate-pulse font-bold' 
-          : 'text-[9px] text-slate-500 font-mono';
+          ? 'text-[9px] text-white font-mono tracking-wider animate-pulse font-bold' 
+          : 'text-[9px] text-zinc-500 font-mono';
       }
       if (playing) {
         if (!animationId) drawSoundwave();
@@ -702,8 +688,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
           if (!isPlayingPreview && ctx && canvas) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(15, 216, 182, 0.25)';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1.5;
             ctx.moveTo(0, canvas.height / 2);
             ctx.lineTo(canvas.width, canvas.height / 2);
             ctx.stroke();
@@ -712,33 +698,33 @@ Keep responses short and conversational — this is a voice call, not an email.`
       }
     }
 
-    // Safety escapeHtml fallback in case utils.js is not loaded
     const escapeHtml = window.escapeHtml || ((str) => {
       if (typeof str !== 'string') return '';
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      try { loadSettings(); } catch(e) { console.error("Error loading settings:", e); }
+    // Robust init: check readyState in case DOMContentLoaded already fired
+    function initSettingsPage() {
+      try {
+      loadSettings();
       
-      // Initial tab layout population with safety try-catch blocks
-      try { populateProfile(); } catch(e) { console.error("Error populating profile:", e); }
-      try { renderHours(); } catch(e) { console.error("Error rendering hours:", e); }
-      try { renderServices(); } catch(e) { console.error("Error rendering services:", e); }
-      try { populateVoice(); } catch(e) { console.error("Error populating voice settings:", e); }
-      try { populateEmergency(); } catch(e) { console.error("Error populating emergency:", e); }
-      try { initVisualizer(); } catch(e) { console.error("Error initializing visualizer:", e); }
+      populateProfile();
+      renderHours();
+      renderServices();
+      populateVoice();
+      populateEmergency();
+      initVisualizer();
 
-      // Tab Switcher
+      document.getElementById('voice-greeting')?.addEventListener('input', updateSpeechSampleText);
+
+      // Tabs switcher
       const tabs = document.querySelectorAll('.settings-tab');
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
           tabs.forEach(t => {
-            t.classList.remove('bg-indigo-50', 'text-indigo-600', 'shadow-sm', 'border-indigo-100', 'font-bold');
-            t.classList.add('text-slate-600', 'border-transparent');
+            t.className = 'settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all';
           });
-          tab.classList.add('bg-indigo-50', 'text-indigo-600', 'shadow-sm', 'border-indigo-100', 'font-bold');
-          tab.classList.remove('text-slate-600', 'border-transparent');
+          tab.className = 'settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all';
           
           const target = tab.getAttribute('data-target');
           document.querySelectorAll('.settings-form').forEach(form => {
@@ -748,7 +734,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
         });
       });
 
-      // Submit Profile Form
+      // Submit Profile
       document.getElementById('profile-form')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
@@ -767,12 +753,12 @@ Keep responses short and conversational — this is a voice call, not an email.`
         
         setTimeout(() => {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save Changes';
-          showToast('Clinic profile updated successfully! ✅', 'success');
-        }, 300);
+          submitBtn.textContent = 'Save Changes';
+          showToast('Clinic particulars updated!', 'success');
+        }, 200);
       });
 
-      // Submit Hours Form
+      // Submit Hours
       document.getElementById('hours-form')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
@@ -792,12 +778,12 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
         setTimeout(() => {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save Hours';
-          showToast('Office hours updated! ✅', 'success');
-        }, 300);
+          submitBtn.textContent = 'Save Hours';
+          showToast('Office hours updated successfully!', 'success');
+        }, 200);
       });
 
-      // Add Custom Service Form
+      // Add Custom Service
       document.getElementById('add-service-form')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('new-service-name').value.trim();
@@ -807,16 +793,14 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
         state.settings.services.push({ name, price });
         saveSettingsToStorage();
-        
-        try { API.updateServices(state.settings.services); } catch {}
+        API.updateServices(state.settings.services).catch(() => {});
 
-        // Reset subform & update list
         e.target.reset();
         renderServices();
-        showToast(`Service "${name}" added to pricing list! ✅`, 'success');
+        showToast(`Service "${name}" added to list!`, 'success');
       });
 
-      // Submit Voice Form
+      // Submit Voice
       document.getElementById('voice-form')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = e.target.querySelector('[type="submit"]');
@@ -827,9 +811,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
           greeting: document.getElementById('voice-greeting').value.trim(),
           spanish: document.getElementById('voice-spanish-toggle').checked,
           xai_key: document.getElementById('xai-key').value.trim(),
-          instructions: document.getElementById('voice-instructions').value.trim(),
-          grok_agent_status: 'active',
-          grok_agent_id: state.settings.voice.grok_agent_id || 'grok_agent_' + Math.random().toString(36).substr(2, 9)
+          instructions: document.getElementById('voice-instructions').value.trim()
         };
 
         saveSettingsToStorage();
@@ -837,15 +819,14 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
         setTimeout(() => {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save settings';
-          showToast('AI Voice agent settings updated! ✅', 'success');
-        }, 300);
+          submitBtn.textContent = 'Save Settings';
+          showToast('Voice config saved!', 'success');
+        }, 200);
       });
 
-      // Keep track of active audio preview element
       let activePreviewAudio = null;
 
-      // Preview Voice synthesis mapping
+      // Preview Voice Trigger
       document.getElementById('preview-voice-btn')?.addEventListener('click', async () => {
         const selectedVoice = document.getElementById('voice-select').value;
         const greetingText = document.getElementById('voice-greeting').value.trim();
@@ -855,7 +836,6 @@ Keep responses short and conversational — this is a voice call, not an email.`
           return;
         }
 
-        // Cancel any existing browser SpeechSynthesis & custom audio
         if (window.speechSynthesis) window.speechSynthesis.cancel();
         if (activePreviewAudio) {
           activePreviewAudio.pause();
@@ -863,12 +843,11 @@ Keep responses short and conversational — this is a voice call, not an email.`
         }
         setVisualizerState(false, 'IDLE');
 
-        showToast(`Requesting high-fidelity xAI Grok voice preview... 🎙️`, 'info');
-        setVisualizerState(true, 'SYNTHESIZING - ' + selectedVoice.toUpperCase());
+        showToast(`Synthesizing xAI Grok voice... 🎙️`, 'info');
+        setVisualizerState(true, 'SYNTHESIZING');
 
         let playSuccess = false;
 
-        // Path A: Hit the Cloudflare Worker serverless proxy first (Secure CORS-friendly option)
         try {
           const res = await fetch('/api/v1/voice/tts', {
             method: 'POST',
@@ -900,30 +879,13 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
             await audio.play();
             playSuccess = true;
-            showToast(`Streaming real xAI Grok voice: "${selectedVoice}" 🔊`, 'success');
           }
-        } catch (err) {
-          console.warn('Hono TTS proxy unavailable, trying client direct xAI fetch:', err);
-        }
+        } catch (err) {}
 
-        // Path B: Direct browser fetch to xAI (Fallback)
         if (!playSuccess) {
           try {
-            const keyInput = document.getElementById('xai-key').value.trim();
-            // Key split to prevent Github secret scanning from blocking the push
-            const xaiKey = keyInput || '';
-            
-            // Map selected voice to real xAI voice ID
-            const voiceMap = {
-              'Ash': 'rex',
-              'Ballad': 'ara',
-              'Coral': 'eve',
-              'Sage': 'eve',
-              'Verse': 'sal',
-              'Ani': 'ara',
-              'Eve': 'eve',
-              'Leo': 'leo'
-            };
+            const xaiKey = document.getElementById('xai-key').value.trim() || '';
+            const voiceMap = { 'Ash': 'rex', 'Ballad': 'ara', 'Coral': 'eve', 'Sage': 'eve', 'Verse': 'sal', 'Ani': 'ara', 'Eve': 'eve', 'Leo': 'leo' };
             const realVoiceId = voiceMap[selectedVoice] || 'eve';
 
             const res = await fetch('https://api.x.ai/v1/audio/speech', {
@@ -960,56 +922,56 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
               await audio.play();
               playSuccess = true;
-              showToast(`Direct stream from xAI Grok: "${selectedVoice}" 🔊`, 'success');
-            } else {
-              throw new Error('xAI TTS Request Failed: ' + res.status);
             }
           } catch (err) {
-            console.warn('Direct xAI fetch failed:', err);
+            console.warn(err);
             setVisualizerState(false, 'ERROR');
-            showToast('Failed to connect to xAI Voice API. Ensure your key is valid.', 'error');
+            showToast('xAI Connection failed. Direct browser audio fallback initiated.', 'error');
+            
+            // Standard Web Speech API Fallback
+            if (window.speechSynthesis) {
+              const utterance = new SpeechSynthesisUtterance(greetingText);
+              utterance.onstart = () => setVisualizerState(true, 'SYNTHETIC FALLBACK');
+              utterance.onend = () => setVisualizerState(false, 'IDLE');
+              utterance.onerror = () => setVisualizerState(false, 'IDLE');
+              window.speechSynthesis.speak(utterance);
+            }
           }
-        }
         }
       });
 
-      // Sync & Deploy Grok Agent force activator
+      // Deploy Provision Trigger
       document.getElementById('sync-deploy-btn')?.addEventListener('click', () => {
         const btn = document.getElementById('sync-deploy-btn');
         const key = document.getElementById('xai-key').value.trim();
         const voice = document.getElementById('voice-select').value;
 
         if (!key) {
-          showToast('Please provide a valid xAI API Key.', 'error');
+          showToast('Please specify a valid xAI API Key.', 'error');
           return;
         }
 
         btn.disabled = true;
-        btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">sync</span> Syncing & Provisioning Grok Nodes...`;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[15px] animate-spin">sync</span> Syncing Grok real-time voice trunks...`;
 
         setTimeout(() => {
           btn.disabled = false;
-          btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">verified</span> Grok Agent Active & Deployed!`;
-          btn.classList.remove('from-teal-500', 'to-indigo-600');
-          btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+          btn.innerHTML = `<span class="material-symbols-outlined text-[15px]">verified</span> provisioned &amp; deployed!`;
+          btn.className = 'w-full bg-emerald-600 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-sm select-none';
 
-          showToast(`🟢 Custom Grok Voice Agent ("${voice}") successfully synced and activated on wss://api.x.ai/v1/realtime`, 'success');
+          showToast(`Grok live trunk agent successfully active!`, 'success');
 
-          // Save force update
           state.settings.voice.voice = voice;
           state.settings.voice.greeting = document.getElementById('voice-greeting').value.trim();
           state.settings.voice.spanish = document.getElementById('voice-spanish-toggle').checked;
           state.settings.voice.xai_key = key;
-          state.settings.voice.grok_agent_status = 'active';
-          
           saveSettingsToStorage();
 
           setTimeout(() => {
-            btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-pulse">sync_alt</span> Sync & Activate Dentist Grok Voice Agent`;
-            btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
-            btn.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-indigo-600');
+            btn.innerHTML = `<span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes`;
+            btn.className = 'w-full bg-slate-950 hover:bg-slate-900 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider';
           }, 3000);
-        }, 1500);
+        }, 1200);
       });
 
       // Submit Emergency Form
@@ -1028,12 +990,22 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
         setTimeout(() => {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save Protocol';
-          showToast('Emergency triage protocol saved! ✅', 'success');
-        }, 300);
+          submitBtn.textContent = 'Save Protocol';
+          showToast('Emergency triage protocol saved!', 'success');
+        }, 200);
       });
 
-    });
+      } catch (err) {
+        console.error('Settings page initialization error:', err);
+      }
+    }
+
+    // Run initialization: check if DOMContentLoaded already fired
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSettingsPage);
+    } else {
+      initSettingsPage();
+    }
   </script>
 </body>
 </html>

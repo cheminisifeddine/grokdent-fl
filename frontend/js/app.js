@@ -318,66 +318,9 @@ function initAnalyticsPage() {
    Settings Page
    ============================================ */
 function initSettingsPage() {
-  // Tab switching
-  document.querySelectorAll('[data-tab-target]').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-tab-target');
-      document.querySelectorAll('[data-tab-target]').forEach(t => t.classList.remove('active', 'border-indigo-600', 'text-indigo-600'));
-      document.querySelectorAll('[data-tab-content]').forEach(c => c.classList.add('hidden'));
-      tab.classList.add('active', 'border-indigo-600', 'text-indigo-600');
-      document.querySelector(`[data-tab-content="${target}"]`)?.classList.remove('hidden');
-    });
-  });
-
-  // Activate first tab by default
-  document.querySelector('[data-tab-target]')?.click();
-
-  // Profile form
-  document.getElementById('profile-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('[type="submit"]');
-    if (btn) { btn.textContent = 'Saving...'; btn.disabled = true; }
-    try { await API.updateClinic({ clinic_name: document.getElementById('setting-clinic-name')?.value }); } catch (err) {
-      console.warn('Update clinic API failed:', err.message);
-    }
-    showToast('Profile saved successfully! ✅', 'success');
-    if (btn) { btn.textContent = 'Save Changes'; btn.disabled = false; }
-  });
-
-  // Hours form
-  document.getElementById('hours-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('[type="submit"]');
-    if (btn) { btn.textContent = 'Saving...'; btn.disabled = true; }
-    showToast('Office hours updated! ✅', 'success');
-    if (btn) { btn.textContent = 'Save Hours'; btn.disabled = false; }
-  });
-
-  // Voice settings form
-  document.getElementById('voice-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('[type="submit"]');
-    if (btn) { btn.textContent = 'Saving...'; btn.disabled = true; }
-    try { await API.updateVoiceSettings({ voice: document.getElementById('setting-voice')?.value }); } catch (err) {
-      console.warn('Update voice settings API failed:', err.message);
-    }
-    showToast('Voice settings saved! ✅', 'success');
-    if (btn) { btn.textContent = 'Save Voice Settings'; btn.disabled = false; }
-  });
-
-  // Emergency form
-  document.getElementById('emergency-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    showToast('Emergency settings saved! ✅', 'success');
-  });
-
-  // Voice preview buttons
-  document.querySelectorAll('.preview-voice-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const voice = btn.getAttribute('data-voice') || 'Ash';
-      showToast(`Playing ${voice} voice preview... 🔊`, 'info');
-    });
-  });
+  // Settings page has its own robust inline init script.
+  // This function is a no-op to avoid conflicts.
+  // The inline script in settings.html handles tab switching, form submissions, etc.
 }
 
 /* ============================================
