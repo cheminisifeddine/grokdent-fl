@@ -483,45 +483,79 @@
       }
     };
 
-    function loadSettings() {
-      const stored = localStorage.getItem('renia_settings');
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored) || {};
+    async function loadSettings() {
+      let storedParsed = null;
+      try {
+        const stored = localStorage.getItem('renia_settings');
+        if (stored) storedParsed = JSON.parse(stored);
+      } catch (e) {}
+
+      try {
+        const clinic = await API.getClinic();
+        if (clinic) {
           state.settings = {
-            profile: { ...DEFAULT_SETTINGS.profile, ...(parsed.profile || {}) },
-            hours: { ...DEFAULT_SETTINGS.hours, ...(parsed.hours || {}) },
-            services: parsed.services || [ ...DEFAULT_SETTINGS.services ],
-            voice: { ...DEFAULT_SETTINGS.voice, ...(parsed.voice || {}) },
-            emergency: { ...DEFAULT_SETTINGS.emergency, ...(parsed.emergency || {}) }
+            profile: {
+              name: clinic.name || DEFAULT_SETTINGS.profile.name,
+              email: clinic.email || DEFAULT_SETTINGS.profile.email,
+              phone: clinic.phone || DEFAULT_SETTINGS.profile.phone,
+              city: clinic.city || DEFAULT_SETTINGS.profile.city,
+              zip: clinic.zip_code || DEFAULT_SETTINGS.profile.zip
+            },
+            hours: clinic.hours || { ...DEFAULT_SETTINGS.hours },
+            services: Array.isArray(clinic.services) ? clinic.services : [ ...DEFAULT_SETTINGS.services ],
+            voice: {
+              voice: clinic.grok_voice_id || DEFAULT_SETTINGS.voice.voice,
+              greeting: clinic.welcome_message || DEFAULT_SETTINGS.voice.greeting,
+              spanish: clinic.spanish_enabled !== undefined ? clinic.spanish_enabled : DEFAULT_SETTINGS.voice.spanish,
+              xai_key: clinic.xai_key || '',
+              instructions: (storedParsed && storedParsed.voice && storedParsed.voice.instructions) || DEFAULT_SETTINGS.voice.instructions || ''
+            },
+            emergency: {
+              name: clinic.emergency_contact_name || DEFAULT_SETTINGS.emergency.name,
+              phone: clinic.emergency_contact_phone || DEFAULT_SETTINGS.emergency.phone,
+              protocol: clinic.policies || DEFAULT_SETTINGS.emergency.protocol
+            }
           };
-          // If no xai_key stored, try fetching the default from backend
+
           if (!state.settings.voice.xai_key) {
-            fetchDefaultXaiKey();
+            try {
+              const resp = await API.request('GET', '/voice/xai-key');
+              if (resp && resp.xai_key) {
+                state.settings.voice.xai_key = resp.xai_key;
+              }
+            } catch (e) {
+              console.warn('Could not fetch default xAI key from backend:', e.message);
+            }
           }
-        } catch (e) {
-          state.settings = { ...DEFAULT_SETTINGS };
-          fetchDefaultXaiKey();
+
+          saveSettingsToStorage();
+          return;
         }
+      } catch (err) {
+        console.warn('Failed to load clinic settings from backend, using local storage fallback:', err);
+      }
+
+      if (storedParsed) {
+        state.settings = {
+          profile: { ...DEFAULT_SETTINGS.profile, ...(storedParsed.profile || {}) },
+          hours: { ...DEFAULT_SETTINGS.hours, ...(storedParsed.hours || {}) },
+          services: storedParsed.services || [ ...DEFAULT_SETTINGS.services ],
+          voice: { ...DEFAULT_SETTINGS.voice, ...(storedParsed.voice || {}) },
+          emergency: { ...DEFAULT_SETTINGS.emergency, ...(storedParsed.emergency || {}) }
+        };
       } else {
         state.settings = { ...DEFAULT_SETTINGS };
-        saveSettingsToStorage();
-        fetchDefaultXaiKey();
       }
-    }
 
-    async function fetchDefaultXaiKey() {
-      try {
-        const resp = await API.request('GET', '/voice/xai-key');
-        if (resp && resp.xai_key) {
-          state.settings.voice.xai_key = resp.xai_key;
-          saveSettingsToStorage();
-          const xkEl = $('xai-key');
-          if (xkEl) xkEl.value = resp.xai_key;
-        }
-      } catch (e) {
-        console.warn('Could not fetch default xAI key from backend:', e.message);
+      if (!state.settings.voice.xai_key) {
+        try {
+          const resp = await API.request('GET', '/voice/xai-key');
+          if (resp && resp.xai_key) {
+            state.settings.voice.xai_key = resp.xai_key;
+          }
+        } catch (e) {}
       }
+      saveSettingsToStorage();
     }
 
     function saveSettingsToStorage() {
@@ -757,9 +791,9 @@
     });
 
     // Robust init: check readyState in case DOMContentLoaded already fired
-    function settingsInit() {
+    async function settingsInit() {
       // Phase 1: Load data (safe — errors here won't block Phase 2)
-      try { loadSettings(); } catch (err) { console.warn('settings: loadSettings failed', err); }
+      try { await loadSettings(); } catch (err) { console.warn('settings: loadSettings failed', err); }
       try { populateProfile(); } catch (err) { console.warn('settings: populateProfile failed', err); }
       try { renderHours(); } catch (err) { console.warn('settings: renderHours failed', err); }
       try { renderServices(); } catch (err) { console.warn('settings: renderServices failed', err); }

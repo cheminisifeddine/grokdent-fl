@@ -33,7 +33,7 @@ class ClinicResponse(BaseModel):
     state: Optional[str] = None
     zip_code: Optional[str] = None
     timezone: Optional[str] = None
-    services: Optional[List[str]] = None
+    services: Optional[List[Any]] = None
     hours: Optional[Dict[str, Any]] = None
     insurance_accepted: Optional[List[str]] = None
     emergency_contact_name: Optional[str] = None
@@ -67,7 +67,7 @@ class HoursUpdate(BaseModel):
 
 
 class ServicesUpdate(BaseModel):
-    services: List[str]
+    services: List[Any]
 
 
 class InsuranceUpdate(BaseModel):
