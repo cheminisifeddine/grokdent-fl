@@ -53,6 +53,36 @@
     }
     .mono { font-family: 'JetBrains Mono', monospace; }
   </style>
+  <!-- Tab switcher defined early so inline onclick handlers always work -->
+  <script>
+    window.switchSettingsTab = function(target) {
+      if (!target) return;
+      try {
+        // 1. Reset all tabs to inactive
+        var tabs = document.querySelectorAll('.settings-tab');
+        for (var i = 0; i < tabs.length; i++) {
+          tabs[i].className = 'settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
+        }
+        // 2. Highlight the clicked tab
+        var activeTab = document.querySelector('.settings-tab[data-target="' + target + '"]');
+        if (activeTab) {
+          activeTab.className = 'settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
+        }
+        // 3. Show matching form, hide all others
+        var forms = document.querySelectorAll('.settings-form');
+        var targetFormId = target + '-form';
+        for (var j = 0; j < forms.length; j++) {
+          if (forms[j].id === targetFormId) {
+            forms[j].classList.remove('hidden');
+          } else {
+            forms[j].classList.add('hidden');
+          }
+        }
+      } catch (e) {
+        console.error('switchSettingsTab error:', e);
+      }
+    };
+  </script>
 </head>
 <body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
 
@@ -127,11 +157,11 @@
 
         <!-- Custom Tab bar switcher (Stitch clinical) -->
         <div class="flex items-center gap-6 border-b border-slate-200 mb-8 overflow-x-auto pb-px">
-          <button data-target="profile" class="settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Profile</button>
-          <button data-target="hours" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Office Hours</button>
-          <button data-target="services" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Services &amp; Prices</button>
-          <button data-target="voice" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">AI Voice Settings</button>
-          <button data-target="emergency" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Emergency Protocol</button>
+          <button data-target="profile" onclick="switchSettingsTab('profile')" class="settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Profile</button>
+          <button data-target="hours" onclick="switchSettingsTab('hours')" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Office Hours</button>
+          <button data-target="services" onclick="switchSettingsTab('services')" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Services &amp; Prices</button>
+          <button data-target="voice" onclick="switchSettingsTab('voice')" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">AI Voice Settings</button>
+          <button data-target="emergency" onclick="switchSettingsTab('emergency')" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Emergency Protocol</button>
         </div>
 
         <!-- Active settings forms container -->
@@ -721,26 +751,6 @@
         const vgEl = $('voice-greeting');
         if (vgEl) vgEl.addEventListener('input', updateSpeechSampleText);
       } catch (err) { console.warn('settings: voice-greeting listener failed', err); }
-
-      // Tabs switcher
-      try {
-        document.querySelectorAll('.settings-tab').forEach(tab => {
-          tab.addEventListener('click', () => {
-            document.querySelectorAll('.settings-tab').forEach(t => {
-              t.className = 'settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
-            });
-            tab.className = 'settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
-            
-            const target = tab.getAttribute('data-target');
-            if (target) {
-              document.querySelectorAll('.settings-form').forEach(form => {
-                if (form.id === target + '-form') form.classList.remove('hidden');
-                else form.classList.add('hidden');
-              });
-            }
-          });
-        });
-      } catch (err) { console.warn('settings: tab switcher failed', err); }
 
       // Submit Profile
       try {
