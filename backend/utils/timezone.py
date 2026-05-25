@@ -7,8 +7,8 @@ from datetime import datetime, timezone, timedelta
 from typing import Dict, Optional, Tuple
 from zoneinfo import ZoneInfo
 
-# Florida uses Eastern Time
-FL_TZ = ZoneInfo("US/Eastern")
+# Florida uses Eastern Time (canonical IANA: America/New_York)
+FL_TZ = ZoneInfo("America/New_York")
 
 
 def get_florida_now() -> datetime:
@@ -35,7 +35,7 @@ def _format_time(dt: datetime) -> str:
 
 
 def format_appointment_time(dt: datetime) -> str:
-    if dt.tzinfo is None or str(dt.tzinfo) != "US/Eastern":
+    if dt.tzinfo is None or getattr(dt.tzinfo, 'key', str(dt.tzinfo)) != "America/New_York":
         dt = to_florida_time(dt)
     day = dt.day
     month = dt.strftime("%B")
@@ -45,7 +45,7 @@ def format_appointment_time(dt: datetime) -> str:
 
 
 def format_time_short(dt: datetime) -> str:
-    if dt.tzinfo is None or str(dt.tzinfo) != "US/Eastern":
+    if dt.tzinfo is None or getattr(dt.tzinfo, 'key', str(dt.tzinfo)) != "America/New_York":
         dt = to_florida_time(dt)
     return _format_time(dt)
 

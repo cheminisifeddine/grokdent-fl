@@ -437,7 +437,14 @@
       const stored = localStorage.getItem('renia_settings');
       if (stored) {
         try {
-          state.settings = JSON.parse(stored);
+          const parsed = JSON.parse(stored) || {};
+          state.settings = {
+            profile: { ...DEFAULT_SETTINGS.profile, ...(parsed.profile || {}) },
+            hours: { ...DEFAULT_SETTINGS.hours, ...(parsed.hours || {}) },
+            services: parsed.services || [ ...DEFAULT_SETTINGS.services ],
+            voice: { ...DEFAULT_SETTINGS.voice, ...(parsed.voice || {}) },
+            emergency: { ...DEFAULT_SETTINGS.emergency, ...(parsed.emergency || {}) }
+          };
         } catch (e) {
           state.settings = { ...DEFAULT_SETTINGS };
         }
@@ -448,7 +455,7 @@
       
       // Update sidebar username display if loaded
       const sidebarName = document.getElementById('user-name-display');
-      if (sidebarName && state.settings.profile.name) {
+      if (sidebarName && state.settings.profile && state.settings.profile.name) {
         sidebarName.textContent = state.settings.profile.name.length > 18 ? 'Admin Staff' : state.settings.profile.name;
       }
     }
@@ -705,16 +712,22 @@ Keep responses short and conversational — this is a voice call, not an email.`
       }
     }
 
+    // Safety escapeHtml fallback in case utils.js is not loaded
+    const escapeHtml = window.escapeHtml || ((str) => {
+      if (typeof str !== 'string') return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
-      loadSettings();
+      try { loadSettings(); } catch(e) { console.error("Error loading settings:", e); }
       
-      // Initial tab layout population
-      populateProfile();
-      renderHours();
-      renderServices();
-      populateVoice();
-      populateEmergency();
-      initVisualizer();
+      // Initial tab layout population with safety try-catch blocks
+      try { populateProfile(); } catch(e) { console.error("Error populating profile:", e); }
+      try { renderHours(); } catch(e) { console.error("Error rendering hours:", e); }
+      try { renderServices(); } catch(e) { console.error("Error rendering services:", e); }
+      try { populateVoice(); } catch(e) { console.error("Error populating voice settings:", e); }
+      try { populateEmergency(); } catch(e) { console.error("Error populating emergency:", e); }
+      try { initVisualizer(); } catch(e) { console.error("Error initializing visualizer:", e); }
 
       // Tab Switcher
       const tabs = document.querySelectorAll('.settings-tab');

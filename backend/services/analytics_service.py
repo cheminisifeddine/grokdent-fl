@@ -8,7 +8,7 @@ import logging
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List
 
-from sqlalchemy import func, cast, Date
+from sqlalchemy import func, Date
 from sqlalchemy.orm import Session
 
 from backend.models.call_log import CallLog
@@ -135,12 +135,12 @@ class AnalyticsService:
 
         rows = (
             db.query(
-                cast(CallLog.created_at, Date).label("date"),
+                func.date(CallLog.created_at).label("date"),
                 func.count(CallLog.id).label("count"),
             )
             .filter(CallLog.clinic_id == clinic_id, CallLog.created_at >= since)
-            .group_by(cast(CallLog.created_at, Date))
-            .order_by(cast(CallLog.created_at, Date))
+            .group_by(func.date(CallLog.created_at))
+            .order_by(func.date(CallLog.created_at))
             .all()
         )
 
@@ -148,7 +148,7 @@ class AnalyticsService:
         result = []
         current = since.date()
         today = datetime.now(timezone.utc).date()
-        row_map = {str(r.date): r.count for r in rows}
+        row_map = {r.date if isinstance(r.date, str) else str(r.date): r.count for r in rows}
 
         while current <= today:
             date_str = str(current)
@@ -167,7 +167,7 @@ class AnalyticsService:
 
         rows = (
             db.query(
-                cast(Appointment.created_at, Date).label("date"),
+                func.date(Appointment.created_at).label("date"),
                 func.count(Appointment.id).label("count"),
             )
             .filter(
@@ -175,15 +175,15 @@ class AnalyticsService:
                 Appointment.created_at >= since,
                 Appointment.status != "cancelled",
             )
-            .group_by(cast(Appointment.created_at, Date))
-            .order_by(cast(Appointment.created_at, Date))
+            .group_by(func.date(Appointment.created_at))
+            .order_by(func.date(Appointment.created_at))
             .all()
         )
 
         result = []
         current = since.date()
         today = datetime.now(timezone.utc).date()
-        row_map = {str(r.date): r.count for r in rows}
+        row_map = {r.date if isinstance(r.date, str) else str(r.date): r.count for r in rows}
 
         while current <= today:
             date_str = str(current)

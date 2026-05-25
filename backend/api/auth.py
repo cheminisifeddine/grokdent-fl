@@ -44,13 +44,6 @@ class LoginRequest(BaseModel):
     password: str
 
 
-class TokenResponse(BaseModel):
-    access_token: str
-    token_type: str = "bearer"
-    expires_in: int
-    user: "UserResponse"
-
-
 class UserResponse(BaseModel):
     id: str
     clinic_id: str
@@ -61,6 +54,13 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    expires_in: int
+    user: UserResponse
 
 
 # ---------------------------------------------------------------------------

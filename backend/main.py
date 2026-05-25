@@ -32,6 +32,7 @@ from backend.api.knowledge import router as knowledge_router
 from backend.api.billing import router as billing_router
 from backend.api.webhooks import router as webhooks_router
 from backend.api.analytics import router as analytics_router
+from backend.api.voice import router as voice_router
 
 # Configure logging
 logging.basicConfig(
@@ -78,13 +79,13 @@ async def on_startup():
         count = db.query(Insurance).count()
         if count == 0:
             logger.info("Seeding Florida dental insurance providers...")
-            for name, details in FL_INSURANCE_PROVIDERS.items():
+            for provider in FL_INSURANCE_PROVIDERS:
                 ins = Insurance(
-                    name=name,
-                    type=details.get("type", "PPO"),
-                    florida_specific=details.get("florida_specific", False),
-                    phone=details.get("phone", "800-555-0199"),
-                    website=details.get("website", "https://insurance.com"),
+                    name=provider.get("name"),
+                    type=provider.get("type", "PPO"),
+                    florida_specific=provider.get("florida_specific", False),
+                    phone=provider.get("phone", "800-555-0199"),
+                    website=provider.get("website", "https://insurance.com"),
                     is_active=True
                 )
                 db.add(ins)
@@ -109,6 +110,7 @@ app.include_router(knowledge_router, prefix=f"{api_prefix}/knowledge")
 app.include_router(billing_router, prefix=f"{api_prefix}/billing")
 app.include_router(webhooks_router, prefix=f"{api_prefix}/webhooks")
 app.include_router(analytics_router, prefix=f"{api_prefix}/analytics")
+app.include_router(voice_router, prefix=f"{api_prefix}/voice")
 
 # 5. Live Feed Real-time Dashboard WebSockets Connection Manager
 class DashboardConnectionManager:
