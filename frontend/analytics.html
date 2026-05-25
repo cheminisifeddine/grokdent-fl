@@ -1,264 +1,221 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#FAFAFC]">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Renia AI - Analytics</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
-  
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
   
-  <script>
+  <script id="tailwind-config">
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
           colors: {
-            brand: {
-              950: '#020205',
-              900: '#0f172a',
-              800: '#1e293b',
-              500: '#6366f1',
-              400: '#818cf8',
-              100: '#e0e7ff',
-              50:  '#f8fafc',
-            },
-            accent: {
-              teal: '#0FD8B6',
-              cyan: '#06b6d4',
-              coral: '#f43f5e',
-            }
+            "border-subtle": "#E7E7E4",
+            "neural-purple": "#9333EA",
+            "background": "#F7F7F5",
+            "surface-panel": "#F3F2EF",
+            "surface-bright": "#f9f9f9",
+            "primary-container": "#1b1b1b",
+            "neural-indigo": "#4F46E5",
+            "accent-emerald": "#10B981"
           }
         }
       }
     }
   </script>
-  
+
   <style>
-    body { background-color: #FAFAFC; }
-    
-    .glass-card {
-      background: #FFFFFF;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    body {
+      font-family: 'Geist', 'Inter', sans-serif;
+      background-color: #F7F7F5;
+      color: #1b1b1b;
     }
-    .glass-card:hover {
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
-      border-color: #cbd5e1;
+    .glass-panel {
+      background: rgba(252, 252, 251, 0.85);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
-    .nav-item {
-      transition: all 0.2s;
+    .glass-panel:hover {
+      border-color: #d1d5db;
+      box-shadow: 0 12px 36px -12px rgba(0,0,0,0.06);
     }
-    .nav-item:hover, .nav-item.active {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #e2e8f0;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-    }
-    .nav-item.active {
-      font-weight: 700;
-    }
-    
-    .metric-gradient-text {
-      background: linear-gradient(135deg, #0f172a 0%, #6366f1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e2e2; border-radius: 10px; }
   </style>
 </head>
-<body class="text-slate-800 antialiased h-screen overflow-hidden flex selection:bg-brand-500 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
 
-  <!-- Sidebar -->
-  <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col justify-between h-full z-30 relative shadow-sm">
-    <div>
-      <div class="px-6 py-8 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-brand-900 flex items-center justify-center text-white text-[14px] shadow-lg shadow-brand-900/20">🦷</div>
-        <span class="font-display font-black text-xl tracking-tight text-brand-900">Renia AI</span>
-      </div>
-
-      <nav class="px-4 space-y-1">
-        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
-        </a>
-        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">call</span> Calls
-        </a>
-        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
-        </a>
-        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
-        </a>
-        <a href="analytics.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
-        </a>
-      </nav>
+  <!-- Asymmetrical Rail System (Sidebar) -->
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-45 flex-shrink-0 items-center py-6">
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+      <span class="text-white text-[15px]">🦷</span>
     </div>
-
-    <div class="px-4 pb-8">
-      <div class="mb-4">
-        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-        </a>
-        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
-        </a>
-      </div>
-      
-      <div onclick="if(typeof Auth !== 'undefined') Auth.logout();" class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xs border border-brand-200">SM</div>
-          <div>
-            <div class="text-sm font-bold text-brand-900" id="user-name-display">Dr. Sarah M.</div>
-            <div class="text-xs font-semibold text-slate-500">Admin</div>
-          </div>
+    <nav class="flex flex-col gap-6 items-center flex-1 w-full">
+      <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
-        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
+      </a>
+      <a class="w-full flex justify-center group" href="calls.html" title="Calls">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">call</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">calendar_month</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">menu_book</span>
+        </div>
+      </a>
+      <a class="relative w-full flex justify-center group" href="analytics.html" title="Analytics">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
+        <div class="p-2 rounded bg-slate-100 text-slate-950">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+        </div>
+      </a>
+    </nav>
+    <div class="mt-auto flex flex-col gap-4 items-center w-full">
+      <a class="w-full flex justify-center group" href="settings.html" title="Settings">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">settings</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="billing.html" title="Billing">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">credit_card</span>
+        </div>
+      </a>
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+        SM
       </div>
     </div>
   </aside>
 
   <!-- Main Content Area -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden relative">      <!-- Topbar -->
-    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
-      <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Analytics</h1>
-      
+  <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <header class="h-16 px-8 flex items-center justify-between border-b border-slate-200 bg-white shrink-0">
+      <h1 class="text-lg font-bold tracking-tight text-slate-950">Analytics</h1>
       <div class="flex items-center gap-4">
-        <button onclick="Analytics.exportCSV()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm">
+        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
           <span class="material-symbols-outlined text-[16px]">download</span> Export CSV
         </button>
-        <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
+        <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">AI Receptionist Active</span>
         </div>
-        
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
-          <span class="material-symbols-outlined text-[20px]">notifications</span>
-          <span class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>
+        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-[18px]">notifications</span>
+          <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
         </button>
       </div>
     </header>
 
-    <!-- Scrollable Page Content -->
-    <div class="flex-1 overflow-y-auto p-8">
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-8">
       <div class="max-w-[1200px] mx-auto">
         
-        <!-- Date Range Selector -->
         <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-1.5 bg-white rounded-xl border border-slate-200 p-1 shadow-sm">
-            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-2 rounded-lg text-xs font-bold text-slate-900 bg-brand-50 border border-brand-200 transition-all">7 Days</button>
-            <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all">30 Days</button>
-            <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all">90 Days</button>
+          <div class="flex items-center gap-1.5 bg-white rounded-full border border-slate-200 p-1 shadow-sm">
+            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-950 bg-white border border-slate-200 transition-all">7 Days</button>
+            <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-500 hover:bg-slate-50 transition-all">30 Days</button>
+            <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-500 hover:bg-slate-50 transition-all">90 Days</button>
           </div>
           <span class="text-xs font-semibold text-slate-400" id="analytics-date-range-label">Last 7 days</span>
         </div>
 
-        <!-- KPI Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-total-calls">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined">call</span></div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[12px]">trending_up</span> 18%</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-total-calls">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">call</span></div>
+              <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 18%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="number">304</div>
-            <div class="text-sm font-medium text-slate-500">Total Calls</div>
+            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="number">304</div>
+            <div class="text-[11px] font-medium text-slate-500">Total Calls</div>
           </div>
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-total-booked">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600"><span class="material-symbols-outlined">event</span></div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[12px]">trending_up</span> 12%</span>
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-total-booked">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined text-[18px]">event</span></div>
+              <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 12%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="number">82</div>
-            <div class="text-sm font-medium text-slate-500">Appointments Booked</div>
+            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="number">82</div>
+            <div class="text-[11px] font-medium text-slate-500">Appointments Booked</div>
           </div>
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-avg-duration">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600"><span class="material-symbols-outlined">timer</span></div>
-              <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[12px]">trending_flat</span> 0%</span>
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-avg-duration">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600"><span class="material-symbols-outlined text-[18px]">timer</span></div>
+              <span class="text-[9px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[10px]">trending_flat</span> 0%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="duration">3:18</div>
-            <div class="text-sm font-medium text-slate-500">Avg Call Duration</div>
+            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="duration">3:18</div>
+            <div class="text-[11px] font-medium text-slate-500">Avg Call Duration</div>
           </div>
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group" id="kpi-resolution-rate">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined">done_all</span></div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[12px]">trending_up</span> 3%</span>
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-resolution-rate">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">done_all</span></div>
+              <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 3%</span>
             </div>
-            <div class="font-display text-4xl font-bold text-slate-900 mb-1 kpi-value" data-format="percent">94%</div>
-            <div class="text-sm font-medium text-slate-500">Resolution Rate</div>
+            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="percent">94%</div>
+            <div class="text-[11px] font-medium text-slate-500">Resolution Rate</div>
           </div>
         </div>
 
-        <!-- Charts Grid Row 1 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div class="glass-card rounded-2xl p-6">
-            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Calls Over Time</h3>
-            <div class="h-[280px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div class="glass-panel bg-white rounded-lg p-6">
+            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Calls Over Time</h3>
+            <div class="h-[260px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
               <canvas id="analytics-calls-chart" class="w-full h-full"></canvas>
             </div>
           </div>
-          <div class="glass-card rounded-2xl p-6">
-            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Bookings Over Time</h3>
-            <div class="h-[280px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+          <div class="glass-panel bg-white rounded-lg p-6">
+            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Bookings Over Time</h3>
+            <div class="h-[260px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
               <canvas id="analytics-bookings-chart" class="w-full h-full"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- Charts Grid Row 2: Services & Language -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div class="glass-card rounded-2xl p-6">
-            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Top Services by Volume</h3>
-            <div class="h-[300px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div class="glass-panel bg-white rounded-lg p-6">
+            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Top Services by Volume</h3>
+            <div class="h-[280px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
               <canvas id="analytics-services-chart" class="w-full h-full"></canvas>
             </div>
           </div>
-          <div class="glass-card rounded-2xl p-6">
-            <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Language Distribution</h3>
-            <div class="h-[300px] w-full bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+          <div class="glass-panel bg-white rounded-lg p-6">
+            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Language Distribution</h3>
+            <div class="h-[280px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
               <canvas id="analytics-language-chart" class="w-full h-full"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- Revenue Attribution -->
-        <div class="glass-card rounded-2xl p-6 mb-8">
-          <h3 class="font-display text-lg font-bold text-slate-900 mb-6">Revenue Attribution</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-100 flex flex-col items-center text-center">
+        <div class="glass-panel bg-white rounded-lg p-6 mb-8">
+          <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Revenue Attribution</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="bg-emerald-50/50 rounded-lg p-5 border border-emerald-100 flex flex-col items-center text-center">
               <span class="material-symbols-outlined text-2xl text-emerald-600 mb-2">payments</span>
-              <div class="font-display text-3xl font-black text-slate-900" id="rev-captured">$12,450</div>
-              <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mt-1">Revenue Captured</div>
+              <div class="text-2xl font-bold text-slate-950 font-mono" id="rev-captured">$12,450</div>
+              <div class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider mt-1">Revenue Captured</div>
               <div class="text-[10px] text-slate-400 mt-1">From booked appointments</div>
             </div>
-            <div class="bg-rose-50 rounded-xl p-5 border border-rose-100 flex flex-col items-center text-center">
+            <div class="bg-rose-50/50 rounded-lg p-5 border border-rose-100 flex flex-col items-center text-center">
               <span class="material-symbols-outlined text-2xl text-rose-600 mb-2">money_off</span>
-              <div class="font-display text-3xl font-black text-slate-900" id="rev-missed">$4,280</div>
-              <div class="text-xs font-bold text-rose-600 uppercase tracking-wider mt-1">Revenue Missed</div>
+              <div class="text-2xl font-bold text-slate-950 font-mono" id="rev-missed">$4,280</div>
+              <div class="text-[9px] font-bold text-rose-600 uppercase tracking-wider mt-1">Revenue Missed</div>
               <div class="text-[10px] text-slate-400 mt-1">From unanswered calls</div>
             </div>
-            <div class="bg-brand-50 rounded-xl p-5 border border-brand-100 flex flex-col items-center text-center">
-              <span class="material-symbols-outlined text-2xl text-brand-600 mb-2">trending_up</span>
-              <div class="font-display text-3xl font-black text-slate-900" id="rev-capture-rate">74.4%</div>
-              <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-1">Capture Rate</div>
+            <div class="bg-indigo-50/50 rounded-lg p-5 border border-indigo-100 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-indigo-600 mb-2">trending_up</span>
+              <div class="text-2xl font-bold text-slate-950 font-mono" id="rev-capture-rate">74.4%</div>
+              <div class="text-[9px] font-bold text-indigo-600 uppercase tracking-wider mt-1">Capture Rate</div>
               <div class="text-[10px] text-slate-400 mt-1">Revenue capture efficiency</div>
             </div>
           </div>
@@ -266,7 +223,7 @@
 
       </div>
     </div>
-    </main>
+  </main>
 
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -433,10 +390,10 @@
       setDateRange(days, btn) {
         if (!btn) return;
         document.querySelectorAll('.date-range-btn').forEach(b => {
-          b.classList.remove('active', 'bg-brand-50', 'border-brand-200', 'text-slate-900');
+          b.classList.remove('bg-white', 'border-slate-200', 'text-slate-950');
           b.classList.add('text-slate-500');
         });
-        btn.classList.add('active', 'bg-brand-50', 'border-brand-200', 'text-slate-900');
+        btn.classList.add('bg-white', 'border-slate-200', 'text-slate-950');
         btn.classList.remove('text-slate-500');
         this.load(days);
       },
