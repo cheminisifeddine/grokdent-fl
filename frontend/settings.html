@@ -127,11 +127,11 @@
 
         <!-- Custom Tab bar switcher (Stitch clinical) -->
         <div class="flex items-center gap-6 border-b border-slate-200 mb-8 overflow-x-auto pb-px">
-          <button data-target="profile" class="settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Profile</button>
-          <button data-target="hours" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Office Hours</button>
-          <button data-target="services" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Services &amp; Prices</button>
-          <button data-target="voice" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">AI Voice Settings</button>
-          <button data-target="emergency" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all">Emergency Protocol</button>
+          <button data-target="profile" class="settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Profile</button>
+          <button data-target="hours" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Office Hours</button>
+          <button data-target="services" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Services &amp; Prices</button>
+          <button data-target="voice" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">AI Voice Settings</button>
+          <button data-target="emergency" class="settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Emergency Protocol</button>
         </div>
 
         <!-- Active settings forms container -->
@@ -359,7 +359,7 @@
                 </span>
               </div>
             </div>
-            <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-700"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+            <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
           </div>
 
           <!-- Twilio integration -->
@@ -373,7 +373,7 @@
                 </span>
               </div>
             </div>
-            <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-700"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+            <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
           </div>
 
           <!-- Stripe -->
@@ -385,7 +385,7 @@
                 <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 block">Configured</span>
               </div>
             </div>
-            <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-700"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+            <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
           </div>
         </div>
 
@@ -395,18 +395,17 @@
         <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-[10px] font-bold hover:bg-slate-50 transition-colors uppercase tracking-wider">
           Sign Out
         </button>
-        <button onclick="showToast('Configurations synchronized.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
+        <button onclick="if(typeof showToast==='function')showToast('Configurations synchronized.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider cursor-pointer">
           Sync Node
         </button>
       </div>
     </aside>
   </main>
 
-  <!-- App Scripts -->
+  <!-- App Scripts (settings.html is self-contained; does not load app.js to avoid init conflicts) -->
   <script src="js/utils.js?v=4"></script>
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
 
   <script>
     const state = {
@@ -717,195 +716,193 @@
       try { populateEmergency(); } catch (err) { console.warn('settings: populateEmergency failed', err); }
       try { initVisualizer(); } catch (err) { console.warn('settings: initVisualizer failed', err); }
 
-      // Phase 2: Register event listeners (ALWAYS runs, even if Phase 1 had errors)
-      const vgEl = $('voice-greeting');
-      if (vgEl) vgEl.addEventListener('input', updateSpeechSampleText);
+      // Phase 2: Register event listeners — each wrapped individually so one failure won't break the rest
+      try {
+        const vgEl = $('voice-greeting');
+        if (vgEl) vgEl.addEventListener('input', updateSpeechSampleText);
+      } catch (err) { console.warn('settings: voice-greeting listener failed', err); }
 
       // Tabs switcher
-      document.querySelectorAll('.settings-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.settings-tab').forEach(t => {
-            t.className = 'settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all';
-          });
-          tab.className = 'settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all';
-          
-          const target = tab.getAttribute('data-target');
-          document.querySelectorAll('.settings-form').forEach(form => {
-            if (form.id === target + '-form') form.classList.remove('hidden');
-            else form.classList.add('hidden');
+      try {
+        document.querySelectorAll('.settings-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            document.querySelectorAll('.settings-tab').forEach(t => {
+              t.className = 'settings-tab pb-3 text-slate-400 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
+            });
+            tab.className = 'settings-tab pb-3 text-slate-950 font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
+            
+            const target = tab.getAttribute('data-target');
+            if (target) {
+              document.querySelectorAll('.settings-form').forEach(form => {
+                if (form.id === target + '-form') form.classList.remove('hidden');
+                else form.classList.add('hidden');
+              });
+            }
           });
         });
-      });
+      } catch (err) { console.warn('settings: tab switcher failed', err); }
 
       // Submit Profile
-      const profileForm = $('profile-form');
-      if (profileForm) profileForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = e.target.querySelector('[type="submit"]');
-        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+      try {
+        const profileForm = $('profile-form');
+        if (profileForm) profileForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = e.target.querySelector('[type="submit"]');
+          if (!submitBtn) return;
+          submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
 
-        state.settings.profile = {
-          name: document.getElementById('prof-name').value.trim(),
-          email: document.getElementById('prof-email').value.trim(),
-          phone: document.getElementById('prof-phone').value.trim(),
-          city: document.getElementById('prof-city').value.trim(),
-          zip: document.getElementById('prof-zip').value.trim()
-        };
+          const nameEl = document.getElementById('prof-name');
+          const emailEl = document.getElementById('prof-email');
+          const phoneEl = document.getElementById('prof-phone');
+          const cityEl = document.getElementById('prof-city');
+          const zipEl = document.getElementById('prof-zip');
 
-        saveSettingsToStorage();
-        try { await API.updateClinic({ clinic_name: state.settings.profile.name }); } catch {}
-        
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Save Changes';
-          showToast('Clinic particulars updated!', 'success');
-        }, 200);
-      });
+          state.settings.profile = {
+            name: nameEl ? nameEl.value.trim() : '',
+            email: emailEl ? emailEl.value.trim() : '',
+            phone: phoneEl ? phoneEl.value.trim() : '',
+            city: cityEl ? cityEl.value.trim() : '',
+            zip: zipEl ? zipEl.value.trim() : ''
+          };
+
+          saveSettingsToStorage();
+          try { await API.updateClinic({ clinic_name: state.settings.profile.name }); } catch {}
+          
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Changes';
+            if (typeof showToast === 'function') showToast('Clinic particulars updated!', 'success');
+          }, 200);
+        });
+      } catch (err) { console.warn('settings: profile form listener failed', err); }
 
       // Submit Hours
-      const hoursForm = $('hours-form');
-      if (hoursForm) hoursForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = e.target.querySelector('[type="submit"]');
-        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+      try {
+        const hoursForm = $('hours-form');
+        if (hoursForm) hoursForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = e.target.querySelector('[type="submit"]');
+          if (!submitBtn) return;
+          submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
 
-        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-        days.forEach(day => {
-          state.settings.hours[day] = {
-            active: document.getElementById(`hour_active_${day}`).checked,
-            open: document.getElementById(`hour_open_${day}`).value,
-            close: document.getElementById(`hour_close_${day}`).value
-          };
+          const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+          days.forEach(day => {
+            const activeEl = document.getElementById(`hour_active_${day}`);
+            const openEl = document.getElementById(`hour_open_${day}`);
+            const closeEl = document.getElementById(`hour_close_${day}`);
+            if (activeEl && openEl && closeEl) {
+              state.settings.hours[day] = {
+                active: activeEl.checked,
+                open: openEl.value,
+                close: closeEl.value
+              };
+            }
+          });
+
+          saveSettingsToStorage();
+          try { await API.updateHours(state.settings.hours); } catch {}
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Hours';
+            if (typeof showToast === 'function') showToast('Office hours updated successfully!', 'success');
+          }, 200);
         });
-
-        saveSettingsToStorage();
-        try { await API.updateHours(state.settings.hours); } catch {}
-
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Save Hours';
-          showToast('Office hours updated successfully!', 'success');
-        }, 200);
-      });
+      } catch (err) { console.warn('settings: hours form listener failed', err); }
 
       // Add Custom Service
-      const addSvcForm = $('add-service-form');
-      if (addSvcForm) addSvcForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('new-service-name').value.trim();
-        const price = parseInt(document.getElementById('new-service-price').value.trim());
+      try {
+        const addSvcForm = $('add-service-form');
+        if (addSvcForm) addSvcForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nameEl = document.getElementById('new-service-name');
+          const priceEl = document.getElementById('new-service-price');
+          if (!nameEl || !priceEl) return;
+          const name = nameEl.value.trim();
+          const price = parseInt(priceEl.value.trim());
 
-        if (!name || isNaN(price)) return;
+          if (!name || isNaN(price)) return;
 
-        state.settings.services.push({ name, price });
-        saveSettingsToStorage();
-        API.updateServices(state.settings.services).catch(() => {});
+          state.settings.services.push({ name, price });
+          saveSettingsToStorage();
+          API.updateServices(state.settings.services).catch(() => {});
 
-        e.target.reset();
-        renderServices();
-        showToast(`Service "${name}" added to list!`, 'success');
-      });
+          e.target.reset();
+          renderServices();
+          if (typeof showToast === 'function') showToast(`Service "${name}" added to list!`, 'success');
+        });
+      } catch (err) { console.warn('settings: add service form listener failed', err); }
 
       // Submit Voice
-      const voiceForm = $('voice-form');
-      if (voiceForm) voiceForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = e.target.querySelector('[type="submit"]');
-        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+      try {
+        const voiceForm = $('voice-form');
+        if (voiceForm) voiceForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = e.target.querySelector('[type="submit"]');
+          if (!submitBtn) return;
+          submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
 
-        state.settings.voice = {
-          voice: document.getElementById('voice-select').value,
-          greeting: document.getElementById('voice-greeting').value.trim(),
-          spanish: document.getElementById('voice-spanish-toggle').checked,
-          xai_key: document.getElementById('xai-key').value.trim(),
-          instructions: document.getElementById('voice-instructions').value.trim()
-        };
+          const vsEl = document.getElementById('voice-select');
+          const vgEl = document.getElementById('voice-greeting');
+          const vstEl = document.getElementById('voice-spanish-toggle');
+          const xkEl = document.getElementById('xai-key');
+          const viEl = document.getElementById('voice-instructions');
 
-        saveSettingsToStorage();
-        try { await API.updateVoiceSettings({ voice: state.settings.voice.voice }); } catch {}
+          state.settings.voice = {
+            voice: vsEl ? vsEl.value : 'Ash',
+            greeting: vgEl ? vgEl.value.trim() : '',
+            spanish: vstEl ? vstEl.checked : false,
+            xai_key: xkEl ? xkEl.value.trim() : '',
+            instructions: viEl ? viEl.value.trim() : ''
+          };
 
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Save Settings';
-          showToast('Voice config saved!', 'success');
-        }, 200);
-      });
+          saveSettingsToStorage();
+          try { await API.updateVoiceSettings({ voice: state.settings.voice.voice }); } catch {}
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Settings';
+            if (typeof showToast === 'function') showToast('Voice config saved!', 'success');
+          }, 200);
+        });
+      } catch (err) { console.warn('settings: voice form listener failed', err); }
 
       let activePreviewAudio = null;
 
       // Preview Voice Trigger
-      const previewBtn = $('preview-voice-btn');
-      if (previewBtn) previewBtn.addEventListener('click', async () => {
-        const selectedVoice = document.getElementById('voice-select').value;
-        const greetingText = document.getElementById('voice-greeting').value.trim();
+      try {
+        const previewBtn = $('preview-voice-btn');
+        if (previewBtn) previewBtn.addEventListener('click', async () => {
+          const vsEl = document.getElementById('voice-select');
+          const vgEl = document.getElementById('voice-greeting');
+          if (!vsEl || !vgEl) return;
+          const selectedVoice = vsEl.value;
+          const greetingText = vgEl.value.trim();
 
-        if (!greetingText) {
-          showToast('Greeting message cannot be empty!', 'error');
-          return;
-        }
-
-        if (window.speechSynthesis) window.speechSynthesis.cancel();
-        if (activePreviewAudio) {
-          activePreviewAudio.pause();
-          activePreviewAudio = null;
-        }
-        setVisualizerState(false, 'IDLE');
-
-        showToast(`Synthesizing xAI Grok voice... 🎙️`, 'info');
-        setVisualizerState(true, 'SYNTHESIZING');
-
-        let playSuccess = false;
-
-        try {
-          const res = await fetch('/api/v1/voice/tts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              text: greetingText,
-              voice_id: selectedVoice,
-              speed: 1.0
-            })
-          });
-
-          if (res.ok) {
-            const blob = await res.blob();
-            const audioUrl = URL.createObjectURL(blob);
-            const audio = new Audio(audioUrl);
-            activePreviewAudio = audio;
-            
-            audio.onplay = () => {
-              setVisualizerState(true, 'GROK ACTIVE - ' + selectedVoice.toUpperCase());
-            };
-            audio.onended = () => {
-              setVisualizerState(false, 'IDLE');
-              activePreviewAudio = null;
-            };
-            audio.onerror = () => {
-              setVisualizerState(false, 'IDLE');
-              activePreviewAudio = null;
-            };
-
-            await audio.play();
-            playSuccess = true;
+          if (!greetingText) {
+            if (typeof showToast === 'function') showToast('Greeting message cannot be empty!', 'error');
+            return;
           }
-        } catch (err) {}
 
-        if (!playSuccess) {
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+          if (activePreviewAudio) {
+            activePreviewAudio.pause();
+            activePreviewAudio = null;
+          }
+          setVisualizerState(false, 'IDLE');
+
+          if (typeof showToast === 'function') showToast('Synthesizing xAI Grok voice...', 'info');
+          setVisualizerState(true, 'SYNTHESIZING');
+
+          let playSuccess = false;
+
           try {
-            const xaiKey = document.getElementById('xai-key').value.trim() || '';
-            const voiceMap = { 'Ash': 'rex', 'Ballad': 'ara', 'Coral': 'eve', 'Sage': 'eve', 'Verse': 'sal', 'Ani': 'ara', 'Eve': 'eve', 'Leo': 'leo' };
-            const realVoiceId = voiceMap[selectedVoice] || 'eve';
-
-            const res = await fetch('https://api.x.ai/v1/audio/speech', {
+            const res = await fetch('/api/v1/voice/tts', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${xaiKey}`
-              },
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                input: greetingText,
-                voice: realVoiceId,
-                model: 'tts-1',
+                text: greetingText,
+                voice_id: selectedVoice,
                 speed: 1.0
               })
             });
@@ -915,7 +912,7 @@
               const audioUrl = URL.createObjectURL(blob);
               const audio = new Audio(audioUrl);
               activePreviewAudio = audio;
-
+              
               audio.onplay = () => {
                 setVisualizerState(true, 'GROK ACTIVE - ' + selectedVoice.toUpperCase());
               };
@@ -931,87 +928,173 @@
               await audio.play();
               playSuccess = true;
             }
-          } catch (err) {
-            console.warn(err);
-            setVisualizerState(false, 'ERROR');
-            showToast('xAI Connection failed. Direct browser audio fallback initiated.', 'error');
-            
-            // Standard Web Speech API Fallback
-            if (window.speechSynthesis) {
-              const utterance = new SpeechSynthesisUtterance(greetingText);
-              utterance.onstart = () => setVisualizerState(true, 'SYNTHETIC FALLBACK');
-              utterance.onend = () => setVisualizerState(false, 'IDLE');
-              utterance.onerror = () => setVisualizerState(false, 'IDLE');
-              window.speechSynthesis.speak(utterance);
+          } catch (err) {}
+
+          if (!playSuccess) {
+            try {
+              const xkEl = document.getElementById('xai-key');
+              const xaiKey = xkEl ? xkEl.value.trim() : '';
+              const voiceMap = { 'Ash': 'rex', 'Ballad': 'ara', 'Coral': 'eve', 'Sage': 'eve', 'Verse': 'sal', 'Ani': 'ara', 'Eve': 'eve', 'Leo': 'leo' };
+              const realVoiceId = voiceMap[selectedVoice] || 'eve';
+
+              const res = await fetch('https://api.x.ai/v1/audio/speech', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${xaiKey}`
+                },
+                body: JSON.stringify({
+                  input: greetingText,
+                  voice: realVoiceId,
+                  model: 'tts-1',
+                  speed: 1.0
+                })
+              });
+
+              if (res.ok) {
+                const blob = await res.blob();
+                const audioUrl = URL.createObjectURL(blob);
+                const audio = new Audio(audioUrl);
+                activePreviewAudio = audio;
+
+                audio.onplay = () => {
+                  setVisualizerState(true, 'GROK ACTIVE - ' + selectedVoice.toUpperCase());
+                };
+                audio.onended = () => {
+                  setVisualizerState(false, 'IDLE');
+                  activePreviewAudio = null;
+                };
+                audio.onerror = () => {
+                  setVisualizerState(false, 'IDLE');
+                  activePreviewAudio = null;
+                };
+
+                await audio.play();
+                playSuccess = true;
+              }
+            } catch (err) {
+              console.warn(err);
+              setVisualizerState(false, 'ERROR');
+              if (typeof showToast === 'function') showToast('xAI Connection failed. Direct browser audio fallback initiated.', 'error');
+              
+              if (window.speechSynthesis) {
+                const utterance = new SpeechSynthesisUtterance(greetingText);
+                utterance.onstart = () => setVisualizerState(true, 'SYNTHETIC FALLBACK');
+                utterance.onend = () => setVisualizerState(false, 'IDLE');
+                utterance.onerror = () => setVisualizerState(false, 'IDLE');
+                window.speechSynthesis.speak(utterance);
+              }
             }
           }
-        }
-      });
+        });
+      } catch (err) { console.warn('settings: preview voice listener failed', err); }
 
       // Deploy Provision Trigger
-      const syncBtn = $('sync-deploy-btn');
-      if (syncBtn) syncBtn.addEventListener('click', () => {
-        const btn = document.getElementById('sync-deploy-btn');
-        const key = document.getElementById('xai-key').value.trim();
-        const voice = document.getElementById('voice-select').value;
+      try {
+        const syncBtn = $('sync-deploy-btn');
+        if (syncBtn) syncBtn.addEventListener('click', () => {
+          const btn = document.getElementById('sync-deploy-btn');
+          const xkEl = document.getElementById('xai-key');
+          const vsEl = document.getElementById('voice-select');
+          if (!btn || !xkEl || !vsEl) return;
+          const key = xkEl.value.trim();
+          const voice = vsEl.value;
 
-        if (!key) {
-          showToast('Please specify a valid xAI API Key.', 'error');
-          return;
-        }
+          if (!key) {
+            if (typeof showToast === 'function') showToast('Please specify a valid xAI API Key.', 'error');
+            return;
+          }
 
-        btn.disabled = true;
-        btn.innerHTML = `<span class="material-symbols-outlined text-[15px] animate-spin">sync</span> Syncing Grok real-time voice trunks...`;
+          btn.disabled = true;
+          btn.innerHTML = '<span class="material-symbols-outlined text-[15px] animate-spin">sync</span> Syncing Grok real-time voice trunks...';
 
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.innerHTML = `<span class="material-symbols-outlined text-[15px]">verified</span> provisioned &amp; deployed!`;
-          btn.className = 'w-full bg-emerald-600 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-sm select-none';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<span class="material-symbols-outlined text-[15px]">verified</span> provisioned &amp; deployed!';
+            btn.className = 'w-full bg-emerald-600 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-sm select-none';
 
-          showToast(`Grok live trunk agent successfully active!`, 'success');
+            if (typeof showToast === 'function') showToast('Grok live trunk agent successfully active!', 'success');
 
-          state.settings.voice.voice = voice;
-          state.settings.voice.greeting = document.getElementById('voice-greeting').value.trim();
-          state.settings.voice.spanish = document.getElementById('voice-spanish-toggle').checked;
-          state.settings.voice.xai_key = key;
+            state.settings.voice.voice = voice;
+            const vgEl = document.getElementById('voice-greeting');
+            const vstEl = document.getElementById('voice-spanish-toggle');
+            if (vgEl) state.settings.voice.greeting = vgEl.value.trim();
+            if (vstEl) state.settings.voice.spanish = vstEl.checked;
+            state.settings.voice.xai_key = key;
+            saveSettingsToStorage();
+
+            setTimeout(() => {
+              btn.innerHTML = '<span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes';
+              btn.className = 'w-full bg-slate-950 hover:bg-slate-900 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider';
+            }, 3000);
+          }, 1200);
+        });
+      } catch (err) { console.warn('settings: sync deploy listener failed', err); }
+
+      // Submit Emergency Form
+      try {
+        const emergForm = $('emergency-form');
+        if (emergForm) emergForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = e.target.querySelector('[type="submit"]');
+          if (!submitBtn) return;
+          submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
+
+          const enEl = document.getElementById('emerg-name');
+          const epEl = document.getElementById('emerg-phone');
+          const eprEl = document.getElementById('emerg-protocol');
+
+          state.settings.emergency = {
+            name: enEl ? enEl.value.trim() : '',
+            phone: epEl ? epEl.value.trim() : '',
+            protocol: eprEl ? eprEl.value.trim() : ''
+          };
+
           saveSettingsToStorage();
 
           setTimeout(() => {
-            btn.innerHTML = `<span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes`;
-            btn.className = 'w-full bg-slate-950 hover:bg-slate-900 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider';
-          }, 3000);
-        }, 1200);
-      });
-
-      // Submit Emergency Form
-      const emergForm = $('emergency-form');
-      if (emergForm) emergForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = e.target.querySelector('[type="submit"]');
-        submitBtn.disabled = true; submitBtn.textContent = 'Saving...';
-
-        state.settings.emergency = {
-          name: document.getElementById('emerg-name').value.trim(),
-          phone: document.getElementById('emerg-phone').value.trim(),
-          protocol: document.getElementById('emerg-protocol').value.trim()
-        };
-
-        saveSettingsToStorage();
-
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Save Protocol';
-          showToast('Emergency triage protocol saved!', 'success');
-        }, 200);
-      });
-
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Protocol';
+            if (typeof showToast === 'function') showToast('Emergency triage protocol saved!', 'success');
+          }, 200);
+        });
+      } catch (err) { console.warn('settings: emergency form listener failed', err); }
     }
 
-    // Run initialization: check if DOMContentLoaded already fired
+    // ── Bulletproof Initialization ──
+    // 1. Inject demo auth session so the sidebar is populated
+    if (typeof Auth !== 'undefined') {
+      try { Auth.checkAuth(); } catch (e) { console.warn('Auth.checkAuth failed', e); }
+      try { Auth.populateSidebarUser(); } catch (e) { console.warn('Auth.populateSidebarUser failed', e); }
+    }
+
+    // 2. Run settingsInit safely — with a setTimeout fallback in case DOMContentLoaded
+    //    has already fired and our handler gets lost
+    let settingsReady = false;
+    function safeInit() {
+      if (settingsReady) return;
+      // Set ready=true immediately so the setTimeout(2000) safety net
+      // won't fire. The 100ms retry calls settingsInit() directly.
+      settingsReady = true;
+      try {
+        settingsInit();
+        console.debug('✅ settingsInit completed successfully');
+      } catch (err) {
+        console.error('❌ settingsInit crashed:', err);
+        // Last-resort retry with a clean stack
+        setTimeout(() => {
+          try { settingsInit(); console.debug('✅ settingsInit retry succeeded'); }
+          catch (e) { console.error('❌ settingsInit retry also failed:', e); }
+        }, 100);
+      }
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', settingsInit);
+      document.addEventListener('DOMContentLoaded', safeInit);
+      // Safety net: if DOMContentLoaded somehow never fires, run after a timeout
+      setTimeout(safeInit, 2000);
     } else {
-      settingsInit();
+      safeInit();
     }
   </script>
 </body>
