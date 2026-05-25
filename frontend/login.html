@@ -1,309 +1,124 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Renia AI - Sign In</title>
-  
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
             display: ['Outfit', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              950: '#020205',
-              900: '#0f172a',
-              800: '#1e293b',
-              500: '#6366f1',
-              400: '#818cf8',
-              100: '#e0e7ff',
-              50:  '#f8fafc',
-            },
-            accent: {
-              teal: '#0FD8B6',
-              cyan: '#06b6d4',
-              coral: '#f43f5e',
-            }
           }
         }
       }
     }
   </script>
-  
   <style>
-    /* Custom Micro-animations & Transitions */
-    .variant-container {
-      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .floating-shape { animation: float 18s ease-in-out infinite; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
-      50% { transform: translateY(-20px) scale(1.05) rotate(10deg); }
-    }
-    
-    .mesh-gradient-bg {
-      background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                  radial-gradient(circle at 10% 80%, rgba(15, 216, 182, 0.1) 0%, transparent 50%),
-                  #FAFAFC;
-    }
-    
-    .dark .mesh-gradient-bg {
-      background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.2) 0%, transparent 40%),
-                  radial-gradient(circle at 10% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                  #020205;
-    }
+    body { background-color: #FAFAFC; }
+    .input-field { transition: all 0.2s; }
+    .input-field:focus { box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.15); border-color: #111111; }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 dark:text-slate-100 antialiased selection:bg-indigo-100 selection:text-indigo-900 transition-colors duration-300">
+<body class="min-h-screen text-slate-800 antialiased selection:bg-slate-900 selection:text-white flex">
 
-  <!-- ============================================
-       FLOATING DESIGN SWITCHER PILL
-       ============================================ -->
-  <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2 py-1.5 rounded-full border border-slate-200/80 dark:border-slate-800/80 shadow-2xl flex items-center gap-1.5 text-xs font-semibold select-none">
-    <span class="text-slate-400 dark:text-slate-500 pl-2 pr-1 hidden sm:inline">Design Style:</span>
-    <button onclick="setVariant('minimalist')" id="btn-minimalist" class="px-3.5 py-1.5 rounded-full transition-all duration-300 bg-slate-900 text-white dark:bg-slate-800 dark:text-slate-100 shadow-sm">
-      Stitch Clinical
-    </button>
-    <button onclick="setVariant('glassmorphic')" id="btn-glassmorphic" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-      Stripe Glass
-    </button>
-    <button onclick="setVariant('dark')" id="btn-dark" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-      Apple Luxury
-    </button>
-  </div>
+  <!-- Left Sidebar (Branding & Specifications) -->
+  <div class="hidden lg:flex w-[40%] relative bg-white border-r border-slate-200 flex-col justify-between p-12 text-slate-800 shrink-0">
+    <div>
+      <a href="index.html" class="flex items-center gap-2 mb-16 font-display font-black text-xl tracking-tight text-slate-900">
+        <div class="w-8 h-8 rounded bg-slate-950 flex items-center justify-center text-white text-xs">🦷</div>
+        <span>Renia AI</span>
+      </a>
+      
+      <div class="space-y-12">
+        <div>
+          <span class="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Infrastructure Specification</span>
+          <h1 class="font-display text-4xl font-extrabold text-slate-900 tracking-tight leading-none">Renia Core v1.4</h1>
+          <p class="text-slate-500 text-sm mt-3 leading-relaxed">System-wide clinical receptionist routing layer running native sub-100ms Speech-to-Speech architecture.</p>
+        </div>
 
-
-  <!-- ============================================
-       VARIANT 1: STITCH CLINICAL (FIDELITY MINIMALIST)
-       ============================================ -->
-  <div id="variant-minimalist" class="variant-container min-h-screen flex flex-col md:flex-row bg-[#FAFAFC] w-full">
-    <!-- Left Column (Clinical Metrics Board) -->
-    <div class="hidden md:flex flex-col justify-between w-[40%] p-12 bg-white border-r border-slate-200/80">
-      <div>
-        <a href="index.html" class="flex items-center gap-2 mb-16 font-display font-black text-xl tracking-tight text-slate-900">
-          <div class="w-8 h-8 rounded bg-slate-950 flex items-center justify-center text-white text-xs">🦷</div>
-          <span>Renia AI</span>
-        </a>
-        
-        <div class="space-y-12">
-          <div>
-            <span class="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Infrastructure Specification</span>
-            <h1 class="font-display text-4xl font-extrabold text-slate-900 tracking-tight leading-none">Renia Core v1.4</h1>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">System-wide clinical receptionist routing layer running native sub-100ms Speech-to-Speech architecture.</p>
+        <div class="border-t border-slate-100 pt-6 space-y-4 font-mono text-xs">
+          <div class="flex justify-between py-1 border-b border-slate-50">
+            <span class="text-slate-400">ENGINE MODEL:</span>
+            <span class="text-slate-800 font-bold">Grok Voice Think Fast 1.0</span>
           </div>
-
-          <div class="border-t border-slate-100 pt-6 space-y-4 font-mono text-xs">
-            <div class="flex justify-between py-1 border-b border-slate-50">
-              <span class="text-slate-400">ENGINE MODEL:</span>
-              <span class="text-slate-800 font-bold">Grok Voice Think Fast 1.0</span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-slate-50">
-              <span class="text-slate-400">PCM LATENCY:</span>
-              <span class="text-slate-800 font-bold">85ms Native Audio Stream</span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-slate-50">
-              <span class="text-slate-400">COMPLIANCE STATUTE:</span>
-              <span class="text-slate-800 font-bold">FL § 934.03 Two-Party Consent</span>
-            </div>
-            <div class="flex justify-between py-1">
-              <span class="text-slate-400">SECURITY PROTOCOL:</span>
-              <span class="text-indigo-600 font-bold">HIPAA Compliant Shield</span>
-            </div>
+          <div class="flex justify-between py-1 border-b border-slate-50">
+            <span class="text-slate-400">PCM LATENCY:</span>
+            <span class="text-slate-800 font-bold">85ms Native Audio Stream</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-50">
+            <span class="text-slate-400">COMPLIANCE STATUTE:</span>
+            <span class="text-slate-800 font-bold">FL § 934.03 Two-Party Consent</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span class="text-slate-400">SECURITY PROTOCOL:</span>
+            <span class="text-slate-900 font-bold">HIPAA Compliant Shield</span>
           </div>
         </div>
-      </div>
-
-      <div class="text-xs text-slate-400 font-medium">
-        &copy; 2026 Renia AI Technologies Inc. All rights reserved.
       </div>
     </div>
 
-    <!-- Right Column (Centered Login Panel) -->
-    <div class="flex-1 flex flex-col items-center justify-center p-8 sm:p-16 bg-[#FAFAFC]">
-      <div class="w-full max-w-sm">
-        <div class="mb-8 text-center md:text-left">
-          <a href="index.html" class="md:hidden inline-flex items-center gap-2 mb-6 font-display font-black text-xl tracking-tight text-slate-900">
-            <div class="w-8 h-8 rounded bg-slate-950 flex items-center justify-center text-white text-xs">🦷</div>
-            <span>Renia AI</span>
-          </a>
-          <h2 class="text-2xl font-bold font-display text-slate-950 tracking-tight">Sign in to Practice</h2>
-          <p class="text-slate-500 text-xs mt-1">Enter clinic credentials to view active call transcripts.</p>
+    <div class="text-xs text-slate-400 font-medium">
+      &copy; 2026 Renia AI Technologies Inc. All rights reserved.
+    </div>
+  </div>
+
+  <!-- Right Side (Form) -->
+  <div class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative bg-[#FAFAFC]">
+    <div class="w-full max-w-sm">
+      
+      <!-- Mobile Logo (Hidden on Desktop) -->
+      <a href="index.html" class="lg:hidden flex items-center gap-3 mb-10 justify-center">
+        <div class="w-8 h-8 rounded bg-slate-950 flex items-center justify-center text-white text-xs">🦷</div>
+        <span class="font-display font-bold text-xl tracking-tight text-slate-900">Renia AI</span>
+      </a>
+
+      <div class="mb-10 text-center lg:text-left">
+        <h2 class="text-2xl font-display font-bold text-slate-950 tracking-tight">Sign in to Practice</h2>
+        <p class="text-slate-500 text-xs mt-1">Enter clinic credentials to view active call transcripts.</p>
+      </div>
+
+      <!-- Form Container -->
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Work Email</label>
+          <input type="email" id="login-email" class="input-field w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 bg-white text-slate-900 font-medium outline-none placeholder:text-slate-350" placeholder="dr.smith@clinic.com" required>
         </div>
 
-        <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-          <div>
-            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Work Email</label>
-            <input type="email" class="email-sync w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 bg-white text-slate-900 font-medium outline-none focus:border-slate-950 focus:ring-1 focus:ring-slate-950 transition-all placeholder:text-slate-300" placeholder="dr.smith@clinic.com" required>
+        <div>
+          <div class="flex justify-between items-center mb-1.5">
+            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
+            <a href="#" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-850 uppercase tracking-wider">Forgot?</a>
           </div>
+          <input type="password" id="login-password" class="input-field w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 bg-white text-slate-900 font-medium outline-none placeholder:text-slate-350" placeholder="••••••••" required>
+        </div>
 
-          <div>
-            <div class="flex justify-between items-center mb-1.5">
-              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
-              <a href="#" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 uppercase tracking-wider">Forgot?</a>
-            </div>
-            <input type="password" class="password-sync w-full px-3.5 py-2.5 text-sm rounded border border-slate-200 bg-white text-slate-900 font-medium outline-none focus:border-slate-950 focus:ring-1 focus:ring-slate-950 transition-all placeholder:text-slate-300" placeholder="••••••••" required>
-          </div>
+        <div class="flex items-center gap-2 py-1">
+          <input type="checkbox" id="remember" class="w-4 h-4 text-slate-950 border-slate-200 rounded focus:ring-slate-950 cursor-pointer">
+          <label for="remember" class="text-xs text-slate-500 cursor-pointer">Keep me signed in for 30 days</label>
+        </div>
 
-          <div class="flex items-center gap-2 py-1">
-            <input type="checkbox" id="remember-minimalist" class="w-4 h-4 text-slate-950 border-slate-200 rounded focus:ring-slate-950 cursor-pointer">
-            <label for="remember-minimalist" class="text-xs text-slate-500 cursor-pointer">Keep me signed in for 30 days</label>
-          </div>
+        <div id="login-error" class="text-xs text-red-600 font-semibold pt-1"></div>
 
-          <div class="error-sync text-xs text-red-600 font-semibold pt-1"></div>
-
-          <button type="submit" class="btn-sync w-full py-3 rounded text-xs font-bold uppercase tracking-wider bg-slate-950 text-white hover:bg-slate-900 transition-all active:scale-[0.98] border-t border-white/10 mt-2">
-            Authenticate
-          </button>
-        </form>
-
-        <p class="text-xs text-slate-500 mt-6 text-center md:text-left">
+        <button type="submit" id="login-btn" class="w-full py-3 rounded text-xs font-bold uppercase tracking-wider bg-slate-950 text-white hover:bg-slate-900 transition-all active:scale-[0.98] border-t border-white/10 mt-2">
+          Authenticate
+        </button>
+      </form>
+      
+      <div class="mt-8 text-center lg:text-left">
+        <p class="text-xs text-slate-500">
           New clinic partner? <a href="signup.html" class="font-bold text-indigo-600 hover:text-indigo-700">Register Practice</a>
         </p>
       </div>
-    </div>
-  </div>
 
-
-  <!-- ============================================
-       VARIANT 2: STRIPE FUSION (VIBRANT GLASSMORPHIC)
-       ============================================ -->
-  <div id="variant-glassmorphic" class="variant-container min-h-screen flex items-center justify-center p-6 mesh-gradient-bg hidden relative overflow-hidden">
-    <!-- Dynamic Glowing Ambient Circles -->
-    <div class="absolute w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] top-[-10%] left-[-10%] floating-shape z-0"></div>
-    <div class="absolute w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px] bottom-[-10%] right-[-10%] floating-shape z-0" style="animation-delay: 3s"></div>
-    
-    <div class="relative z-10 w-full max-w-md">
-      <!-- Logo Branding -->
-      <div class="flex flex-col items-center mb-8">
-        <a href="index.html" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center text-white text-lg shadow-lg shadow-indigo-600/30 group-hover:scale-105 transition-all duration-300">
-            🦷
-          </div>
-          <span class="font-display font-black text-2xl tracking-tight text-slate-900 dark:text-white">Renia AI</span>
-        </a>
-      </div>
-
-      <!-- Main Glassmorphic Card -->
-      <div class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl border border-white/60 dark:border-slate-800/60 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
-        <div class="mb-6 text-center">
-          <h2 class="text-2xl font-black font-display text-slate-900 dark:text-white tracking-tight">Practice Portal</h2>
-          <p class="text-slate-500 dark:text-slate-400 text-xs mt-1 font-medium">Log in to view live conversational intelligence dashboard.</p>
-        </div>
-
-        <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Work Email</label>
-            <input type="email" class="email-sync w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-slate-900 dark:text-white font-medium outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:text-slate-300 dark:placeholder:text-slate-700" placeholder="dr.smith@clinic.com" required>
-          </div>
-
-          <div>
-            <div class="flex justify-between items-center mb-1.5">
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">Password</label>
-              <a href="#" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Forgot?</a>
-            </div>
-            <input type="password" class="password-sync w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-slate-900 dark:text-white font-medium outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:text-slate-300 dark:placeholder:text-slate-700" placeholder="••••••••" required>
-          </div>
-
-          <div class="flex items-center gap-2 py-1">
-            <input type="checkbox" id="remember-glass" class="w-4 h-4 text-indigo-600 border-slate-300 dark:border-slate-800 rounded focus:ring-indigo-500 cursor-pointer">
-            <label for="remember-glass" class="text-xs text-slate-500 dark:text-slate-400 cursor-pointer">Remember clinic for 30 days</label>
-          </div>
-
-          <div class="error-sync text-xs text-red-600 dark:text-red-400 font-semibold pt-1 text-center"></div>
-
-          <button type="submit" class="btn-sync w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-500 hover:to-indigo-700 text-white hover:shadow-lg hover:shadow-indigo-500/20 transition-all active:scale-[0.98] mt-2 border-t border-white/20">
-            Sign In
-          </button>
-        </form>
-
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-6 text-center">
-          First time? <a href="signup.html" class="font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Register Clinic Account</a>
-        </p>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ============================================
-       VARIANT 3: APPLE LUXURY (CINEMATIC DARK MODE)
-       ============================================ -->
-  <div id="variant-dark" class="variant-container min-h-screen flex items-center justify-center p-6 bg-[#020205] w-full hidden relative overflow-hidden">
-    <!-- Deep Cinematic Mesh Gradients -->
-    <div class="absolute w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px] top-[-20%] left-[-10%] floating-shape z-0"></div>
-    <div class="absolute w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[140px] bottom-[-20%] right-[-10%] floating-shape z-0" style="animation-delay: 4s"></div>
-    
-    <div class="relative z-10 w-full max-w-sm">
-      <!-- Apple Clean Logo Header -->
-      <div class="flex flex-col items-center mb-12">
-        <a href="index.html" class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 shadow-xl relative">
-            <!-- Pulsing Halo -->
-            <div class="absolute inset-0 rounded-full border border-emerald-400/30 animate-ping"></div>
-            🦷
-          </div>
-          <span class="font-display font-black text-xl tracking-tight text-white">Renia AI</span>
-        </a>
-      </div>
-
-      <!-- Sleek Obsidian Dark Card -->
-      <div class="bg-black/40 border border-slate-800/80 rounded-2xl p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8)] relative">
-        <!-- Consent Shield Info Badge -->
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-[10px] font-semibold text-emerald-400 uppercase tracking-wider mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          Secure Two-Party Consent Portal
-        </div>
-
-        <div class="mb-6">
-          <h2 class="text-2xl font-bold font-display text-white tracking-tight leading-none mb-2">Welcome Back</h2>
-          <p class="text-slate-400 text-xs font-medium">Log in to operate clinic voice receptionists.</p>
-        </div>
-
-        <form onsubmit="handleFormSubmit(event)" class="space-y-5">
-          <div class="space-y-1">
-            <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Work Email</label>
-            <input type="email" class="email-sync w-full px-4 py-3 rounded-lg border border-slate-800 bg-slate-900/60 text-white font-medium outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder:text-slate-600" placeholder="dr.smith@clinic.com" required>
-          </div>
-
-          <div class="space-y-1">
-            <div class="flex justify-between items-center">
-              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Password</label>
-              <a href="#" class="text-[10px] font-semibold text-slate-500 hover:text-white transition-colors uppercase tracking-widest">Forgot?</a>
-            </div>
-            <input type="password" class="password-sync w-full px-4 py-3 rounded-lg border border-slate-800 bg-slate-900/60 text-white font-medium outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder:text-slate-600" placeholder="••••••••" required>
-          </div>
-
-          <div class="flex items-center gap-2 py-1">
-            <input type="checkbox" id="remember-dark" class="w-4 h-4 text-cyan-500 border-slate-800 rounded bg-slate-900 focus:ring-cyan-500 cursor-pointer">
-            <label for="remember-dark" class="text-xs text-slate-400 cursor-pointer select-none">Remember practice</label>
-          </div>
-
-          <div class="error-sync text-xs text-red-400 font-semibold pt-1 text-center"></div>
-
-          <button type="submit" class="btn-sync w-full py-3 rounded-lg font-bold bg-white text-black hover:bg-slate-200 transition-all active:scale-[0.98] mt-2 border-t border-white/40 shadow-xl">
-            Authenticate
-          </button>
-        </form>
-      </div>
-
-      <p class="text-xs text-slate-500 mt-8 text-center tracking-wide">
-        New to Renia AI? <a href="signup.html" class="font-bold text-emerald-400 hover:underline">Create Practice Account</a>
-      </p>
     </div>
   </div>
 
@@ -311,138 +126,6 @@
   <script src="js/utils.js?v=3"></script>
   <script src="js/api.js?v=3"></script>
   <script src="js/auth.js?v=3"></script>
-
-  <!-- Multi-Variant Switcher and Core Sync Script -->
-  <script>
-    // State of active design style
-    let currentVariant = 'minimalist';
-
-    // Synchronize inputs across variants in real time
-    document.addEventListener('DOMContentLoaded', () => {
-      const emailFields = document.querySelectorAll('.email-sync');
-      const passwordFields = document.querySelectorAll('.password-sync');
-
-      emailFields.forEach(input => {
-        input.addEventListener('input', (e) => {
-          emailFields.forEach(f => { f.value = e.target.value; });
-        });
-      });
-
-      passwordFields.forEach(input => {
-        input.addEventListener('input', (e) => {
-          passwordFields.forEach(f => { f.value = e.target.value; });
-        });
-      });
-      
-      // Load saved variant if any, or default to minimalist
-      const saved = localStorage.getItem('renia_login_variant') || 'minimalist';
-      setVariant(saved);
-    });
-
-    // Set active design variation
-    function setVariant(variant) {
-      currentVariant = variant;
-      localStorage.setItem('renia_login_variant', variant);
-
-      // Hide all variants
-      document.getElementById('variant-minimalist').classList.add('hidden');
-      document.getElementById('variant-glassmorphic').classList.add('hidden');
-      document.getElementById('variant-dark').classList.add('hidden');
-
-      // Reset button classes
-      const btns = ['minimalist', 'glassmorphic', 'dark'];
-      btns.forEach(b => {
-        const el = document.getElementById(`btn-${b}`);
-        if (el) {
-          el.className = "px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800";
-        }
-      });
-
-      // Highlight active switcher button
-      const activeBtn = document.getElementById(`btn-${variant}`);
-      if (activeBtn) {
-        if (variant === 'dark') {
-          activeBtn.className = "px-3.5 py-1.5 rounded-full transition-all duration-300 bg-white text-black font-semibold shadow-sm";
-        } else {
-          activeBtn.className = "px-3.5 py-1.5 rounded-full transition-all duration-300 bg-slate-900 text-white dark:bg-slate-800 dark:text-slate-100 shadow-sm";
-        }
-      }
-
-      // Show active container with subtle fade in
-      const container = document.getElementById(`variant-${variant}`);
-      if (container) {
-        container.classList.remove('hidden');
-        container.style.opacity = 0;
-        container.style.transform = 'scale(0.99)';
-        setTimeout(() => {
-          container.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-          container.style.opacity = 1;
-          container.style.transform = 'scale(1)';
-        }, 30);
-      }
-
-      // Trigger dark mode logic specifically for variant-dark
-      if (variant === 'dark') {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('bg-[#020205]');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.body.classList.remove('bg-[#020205]');
-      }
-    }
-
-    // Form submission route to API auth wrapper
-    async function handleFormSubmit(e) {
-      e.preventDefault();
-
-      const email = document.querySelector(`.variant-container:not(.hidden) .email-sync`).value.trim();
-      const password = document.querySelector(`.variant-container:not(.hidden) .password-sync`).value;
-      const errorDivs = document.querySelectorAll('.error-sync');
-      const submitButtons = document.querySelectorAll('.btn-sync');
-
-      // Clear all errors
-      errorDivs.forEach(div => div.textContent = '');
-
-      if (!email || !password) {
-        errorDivs.forEach(div => div.textContent = 'Please enter both your email and password.');
-        return;
-      }
-
-      // Set loading state for all submit buttons
-      submitButtons.forEach(btn => {
-        btn.disabled = true;
-        if (currentVariant === 'dark') {
-          btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-slate-600 border-t-black rounded-full animate-spin mr-2 align-middle"></span>Authenticating...';
-        } else {
-          btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-slate-300 border-t-white rounded-full animate-spin mr-2 align-middle"></span>Authenticating...';
-        }
-      });
-
-      try {
-        const result = await Auth.login(email, password);
-        if (result.success) {
-          window.location.href = 'dashboard.html';
-        } else {
-          errorDivs.forEach(div => div.textContent = result.error);
-          resetButtons();
-        }
-      } catch (err) {
-        console.error('Login process encountered an error:', err);
-        errorDivs.forEach(div => div.textContent = 'Authentication failed. Please try again.');
-        resetButtons();
-      }
-
-      function resetButtons() {
-        submitButtons.forEach(btn => {
-          btn.disabled = false;
-          if (currentVariant === 'dark' || currentVariant === 'minimalist') {
-            btn.textContent = 'Authenticate';
-          } else {
-            btn.textContent = 'Sign In';
-          }
-        });
-      }
-    }
-  </script>
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>

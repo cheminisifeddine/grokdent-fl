@@ -1,1721 +1,441 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#FAFAFC]">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renia AI - Dashboard</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
-  
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Renia AI - Dentist Dashboard</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              950: '#020205',
-              900: '#0f172a',
-              800: '#1e293b',
-              500: '#6366f1',
-              400: '#818cf8',
-              100: '#e0e7ff',
-              50:  '#f8fafc',
-            },
-            accent: {
-              teal: '#0FD8B6',
-              cyan: '#06b6d4',
-              coral: '#f43f5e',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   
   <style>
-    body { background-color: #FAFAFC; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
-    .glass-card {
-      background: #FFFFFF;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .glass-card:hover {
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
-      border-color: #cbd5e1;
+    body {
+      font-family: 'Geist', 'Inter', sans-serif;
+      background-color: #F6F9FC;
+      color: #181c1e;
     }
     
-    .nav-item {
-      transition: all 0.2s;
-    }
-    .nav-item:hover, .nav-item.active {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #e2e8f0;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-    }
-    .nav-item.active {
-      font-weight: 700;
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(10, 37, 64, 0.06);
     }
     
-    .metric-gradient-text {
-      background: linear-gradient(135deg, #0f172a 0%, #6366f1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .clinical-shadow {
+      box-shadow: 0 1px 2px rgba(10, 37, 64, 0.02);
     }
     
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(10, 37, 64, 0.1);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(10, 37, 64, 0.2);
+    }
   </style>
 </head>
-<body class="text-slate-800 antialiased h-screen overflow-hidden flex selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-50 text-slate-900 h-screen flex overflow-hidden">
 
-  <!-- ============================================
-       FLOATING DESIGN SWITCHER PILL
-       ============================================ -->
-  <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md px-2 py-1.5 rounded-full border border-slate-200 shadow-xl flex items-center gap-1.5 text-xs font-semibold select-none">
-    <span class="text-slate-400 pl-2 pr-1 hidden sm:inline">Design Style:</span>
-    <button onclick="setDashboardVariant('stitch')" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 hover:bg-slate-100">
-      Stitch Clinical
-    </button>
-    <button onclick="setDashboardVariant('stripe')" class="px-3.5 py-1.5 rounded-full transition-all duration-300 bg-slate-900 text-white shadow-sm">
-      Stripe Glass
-    </button>
-    <button onclick="setDashboardVariant('apple')" class="px-3.5 py-1.5 rounded-full transition-all duration-300 text-slate-600 hover:bg-slate-100">
-      Apple Luxury
-    </button>
-  </div>
-
-  <!-- Sidebar -->
-  <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col justify-between h-full z-30 relative shadow-sm">
-    <div>
-      <div class="px-6 py-8 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-brand-900 flex items-center justify-center text-white text-[14px] shadow-lg shadow-brand-900/20">🦷</div>
-        <span class="font-display font-black text-xl tracking-tight text-brand-900">Renia AI</span>
-      </div>
-
-      <nav class="px-4 space-y-1">
-        <a href="dashboard.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
-        </a>
-        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">call</span> Calls
-        </a>
-        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
-        </a>
-        <a href="knowledge-base.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
-        </a>
-        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
-        </a>
-      </nav>
+  <!-- Asymmetrical Rail System (Sidebar) -->
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-40 flex-shrink-0 items-center py-6">
+    <!-- Brand Icon -->
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+      <span class="text-white text-[15px]">🦷</span>
     </div>
-
-    <div class="px-4 pb-8">
-      <div class="mb-4">
-        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-        </a>
-        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
-        </a>
-      </div>
-      
-      <div onclick="if(typeof Auth !== 'undefined') Auth.logout();" class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xs border border-brand-200">SM</div>
-          <div>
-            <div class="text-sm font-bold text-brand-900" id="user-name-display">Dr. Sarah M.</div>
-            <div class="text-xs font-semibold text-slate-500">Admin</div>
-          </div>
+    <!-- Nav Icons -->
+    <nav class="flex flex-col gap-6 items-center flex-1 w-full">
+      <a class="relative w-full flex justify-center group" href="dashboard.html" title="Dashboard">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
+        <div class="p-2 rounded bg-slate-100 text-slate-950">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
         </div>
-        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
+      </a>
+      <a class="w-full flex justify-center group" href="calls.html" title="Calls">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">call</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">calendar_month</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">menu_book</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">insights</span>
+        </div>
+      </a>
+    </nav>
+    <!-- Bottom Rail Items -->
+    <div class="mt-auto flex flex-col gap-4 items-center w-full">
+      <a class="w-full flex justify-center group" href="settings.html" title="Settings">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">settings</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="billing.html" title="Billing">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">credit_card</span>
+        </div>
+      </a>
+      
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+        SM
       </div>
     </div>
   </aside>
 
-  <!-- Main Content Area -->
+  <!-- Main Content Canvas -->
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
     
-    
-    <!-- Topbar -->
-    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
-      <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Overview</h1>
-      
-       <div class="flex items-center gap-5">
-         <!-- Live Call Simulator Trigger -->
-         <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-           <span class="material-symbols-outlined text-[16px] animate-pulse">phone_in_talk</span>
-           <span>Inbound Call Simulator</span>
-         </button>
-
-         <!-- Voice Agent Live Test -->
-         <button onclick="openVoiceAgentWidget()" class="flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg shadow-teal-500/20 hover:shadow-teal-500/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-           <span class="material-symbols-outlined text-[16px]">mic</span>
-           <span>Voice Agent Test</span>
-         </button>
-
-        <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
+    <!-- Top App Bar -->
+    <header class="h-20 bg-white border-b border-slate-250/60 flex justify-between items-center w-full px-8 z-30">
+      <div class="flex items-center gap-4">
+        <h1 class="font-display font-bold text-lg text-slate-950 tracking-tight">Renia Dental Admin</h1>
+        <span class="hidden md:inline-block px-2.5 py-0.5 rounded bg-slate-50 border border-slate-200 font-mono text-[10px] text-slate-400 font-bold tracking-widest">CORE v1.4</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Status Indicator -->
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-50 border border-slate-200">
+          <div class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></div>
+          <span class="font-mono text-[10px] font-bold text-slate-800 uppercase tracking-widest">AI Receptionist Active</span>
         </div>
         
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
-          <span class="material-symbols-outlined text-[20px]">notifications</span>
-          <span class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>
+        <!-- Live Call Simulator Trigger -->
+        <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-slate-950 hover:bg-slate-900 px-4 py-2 rounded text-white text-xs font-bold tracking-wider uppercase border-t border-white/10 active:scale-[0.98] transition-all">
+          <span class="material-symbols-outlined text-[16px] animate-pulse">phone_in_talk</span>
+          Simulate Call
         </button>
       </div>
     </header>
 
-    <!-- Scrollable Page Content -->
-    <div class="flex-1 overflow-y-auto p-8 relative z-10">
-      <div class="max-w-[1200px] mx-auto">
+    <!-- Fluid Content Canvas -->
+    <div class="flex-1 overflow-y-auto p-8 max-w-[1200px] mx-auto w-full">
+      
+      <!-- Page Header -->
+      <div class="mb-8">
+        <h2 class="font-display text-2xl font-bold tracking-tight text-slate-950 leading-none mb-1.5">Intake Operations</h2>
+        <p class="text-slate-500 text-xs font-medium">Real-time bilingual caller processing, schedules, and active opportunities.</p>
+      </div>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
         
-        <!-- Metrics Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="absolute top-0 left-0 w-full h-1 bg-brand-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><span class="material-symbols-outlined">call_received</span></div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 12%</span>
+        <!-- LIVE INTELLIGENCE FEED (Spans 8 cols) -->
+        <div class="col-span-1 md:col-span-8 bg-white border border-slate-200/80 rounded p-6 shadow-sm flex flex-col justify-between h-[360px]">
+          <div>
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Live Feed</span>
+                <h3 class="font-display font-bold text-md text-slate-950 leading-none">Active Caller Status</h3>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-600 font-mono text-[9px] font-bold tracking-wider">SECURE TWO-PARTY CHANNEL</span>
             </div>
-            <div class="font-display text-4xl font-black text-brand-900 mb-1 metric-gradient-text" data-format="number">47</div>
-            <div class="text-sm font-semibold text-slate-500">Calls Handled Today</div>
+
+            <!-- Call List High Density -->
+            <div class="flex flex-col gap-3 overflow-y-auto max-h-[220px] pr-1">
+              <!-- Call Item 1 -->
+              <div class="flex items-center justify-between p-3 rounded border border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                <div class="flex items-center gap-4">
+                  <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-600">
+                    <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-slate-900">Sarah Jenkins</p>
+                    <p class="font-mono text-[10px] text-slate-400">Intent: Emergency Root Canal</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="font-mono text-xs text-slate-900 font-semibold">04:22</p>
+                    <p class="font-mono text-[9px] text-slate-400 uppercase">DURATION</p>
+                  </div>
+                  <div class="flex items-center gap-2 bg-indigo-50 px-2 py-1 rounded">
+                    <div class="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></div>
+                    <span class="font-mono text-[9px] text-indigo-700 font-bold">ANALYZING</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Call Item 2 -->
+              <div class="flex items-center justify-between p-3 rounded border border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                <div class="flex items-center gap-4">
+                  <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-600">
+                    <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-slate-900">Michael Chen</p>
+                    <p class="font-mono text-[10px] text-slate-400">Intent: Teeth Whitening Package</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="font-mono text-xs text-slate-900 font-semibold">01:15</p>
+                    <p class="font-mono text-[9px] text-slate-400 uppercase">DURATION</p>
+                  </div>
+                  <div class="flex items-center gap-2 bg-slate-100 px-2 py-1 rounded">
+                    <div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+                    <span class="font-mono text-[9px] text-slate-500 font-bold">WAITING</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="absolute top-0 left-0 w-full h-1 bg-accent-teal transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600"><span class="material-symbols-outlined">event_available</span></div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 8%</span>
-            </div>
-            <div class="font-display text-4xl font-black text-brand-900 mb-1 metric-gradient-text" data-format="number">12</div>
-            <div class="text-sm font-semibold text-slate-500">Appointments Booked</div>
-          </div>
-
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="absolute top-0 left-0 w-full h-1 bg-emerald-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined">attach_money</span></div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 15%</span>
-            </div>
-            <div class="font-display text-4xl font-black text-brand-900 mb-1 metric-gradient-text" data-format="currency">$3,240</div>
-            <div class="text-sm font-semibold text-slate-500">Revenue Protected</div>
-          </div>
-
-          <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
-            <div class="absolute top-0 left-0 w-full h-1 bg-rose-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500"><span class="material-symbols-outlined">sentiment_satisfied</span></div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 2%</span>
-            </div>
-            <div class="font-display text-4xl font-black text-brand-900 mb-1 metric-gradient-text" data-format="percent">96%</div>
-            <div class="text-sm font-semibold text-slate-500">Patient Satisfaction</div>
+          <div class="border-t border-slate-100 pt-4 flex justify-between items-center text-xs">
+            <span class="text-slate-400">Real-time PCM stream connects active caller pipelines.</span>
+            <a href="calls.html" class="font-bold text-indigo-600 hover:text-indigo-700 uppercase tracking-wider flex items-center gap-1">
+              View Log <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
           </div>
         </div>
 
-        <!-- Main Dashboard Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          
-          <!-- Recent Calls Panel -->
-          <div class="glass-card rounded-2xl flex flex-col h-[450px]">
-            <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 rounded-t-2xl">
-              <h3 class="font-display text-lg font-bold text-brand-900">Live Call Feed</h3>
-              <a href="calls.html" class="text-sm font-bold text-brand-600 hover:text-brand-700">View All</a>
-            </div>
-            <div class="flex-1 overflow-y-auto p-2" id="recent-calls-list">
+        <!-- OPPORTUNITY METRIC (Spans 4 cols) -->
+        <div class="col-span-1 md:col-span-4 bg-white border border-slate-200/80 rounded p-6 shadow-sm flex flex-col justify-between h-[360px]">
+          <div>
+            <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Financial Impact</span>
+            <h3 class="font-display font-bold text-md text-slate-950 leading-none mb-6">AI Performance &amp; ROI</h3>
+            
+            <div class="space-y-6">
+              <div>
+                <span class="text-slate-400 text-xs block mb-1">Clinic Conversion Rate</span>
+                <div class="flex items-baseline gap-2">
+                  <span class="font-display font-black text-5xl text-slate-950 tracking-tight">78%</span>
+                  <span class="font-mono text-xs text-emerald-600 font-bold flex items-center">
+                    <span class="material-symbols-outlined text-[14px]">trending_up</span> +4.2%
+                  </span>
+                </div>
+              </div>
               
-              <!-- Call Item -->
-              <div onclick="window.viewCallTranscript('Maria Rodriguez', '2 min ago', 'Spanish')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
-                <div class="flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-lg shadow-sm">😊</div>
-                  <div>
-                    <div class="text-sm font-bold text-brand-900">Maria Rodriguez</div>
-                    <div class="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> 2 min ago • <span class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm text-[10px] uppercase font-bold text-slate-600">Spanish</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <div class="text-sm font-bold text-brand-900">4:05</div>
-                  <div class="text-[10px] font-bold uppercase text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full mt-1">Resolved</div>
-                </div>
+              <div>
+                <span class="text-slate-400 text-xs block mb-1">Estimated Value Captured</span>
+                <span class="font-display font-black text-3xl text-indigo-600 tracking-tight">$14,280<span class="text-xs text-slate-400 font-normal"> this mo.</span></span>
               </div>
-
-              <!-- Call Item -->
-              <div onclick="window.viewCallTranscript('James Wilson', '15 min ago', 'English')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
-                <div class="flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-full bg-teal-50 border border-teal-100 text-teal-600 flex items-center justify-center text-lg shadow-sm">😊</div>
-                  <div>
-                    <div class="text-sm font-bold text-brand-900">James Wilson</div>
-                    <div class="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> 15 min ago • <span class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm text-[10px] uppercase font-bold text-slate-600">English</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <div class="text-sm font-bold text-brand-900">3:02</div>
-                  <div class="text-[10px] font-bold uppercase text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full mt-1">Booked</div>
-                </div>
-              </div>
-
-              <!-- Call Item Missed -->
-              <div onclick="window.viewCallTranscript('(305) 555-0147', '2h ago', 'English')" class="p-4 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between border border-transparent hover:border-slate-200">
-                <div class="flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center text-lg shadow-sm">😟</div>
-                  <div>
-                    <div class="text-sm font-bold text-brand-900">(305) 555-0147</div>
-                    <div class="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> 2h ago • <span class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm text-[10px] uppercase font-bold text-slate-600">English</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <div class="text-sm font-bold text-brand-900">0:00</div>
-                  <div class="text-[10px] font-bold uppercase text-rose-700 bg-rose-50 border border-rose-100 px-2 py-0.5 rounded-full mt-1">Missed</div>
-                </div>
-              </div>
-
             </div>
           </div>
 
-          <!-- Appointments Panel -->
-          <div class="glass-card rounded-2xl flex flex-col h-[450px]">
-            <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 rounded-t-2xl">
-              <h3 class="font-display text-lg font-bold text-brand-900">Upcoming Appointments</h3>
-              <a href="appointments.html" class="text-sm font-bold text-brand-600 hover:text-brand-700">View Calendar</a>
+          <!-- Mini Scaffolding Chart -->
+          <div class="h-16 w-full flex items-end gap-1.5 border-b border-slate-100 pb-1">
+            <div class="w-full bg-slate-100 rounded-t-sm h-[40%]"></div>
+            <div class="w-full bg-slate-100 rounded-t-sm h-[50%]"></div>
+            <div class="w-full bg-slate-100 rounded-t-sm h-[45%]"></div>
+            <div class="w-full bg-slate-100 rounded-t-sm h-[65%]"></div>
+            <div class="w-full bg-slate-950 rounded-t-sm h-[80%] relative">
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 font-mono text-[8px] text-slate-950 font-bold uppercase">Today</div>
             </div>
-            <div class="flex-1 overflow-y-auto p-4 space-y-3" id="today-appointments-list">
-              
-              <!-- Appt Item -->
-              <div onclick="window.viewAppointmentDetailsDashboard('Emily Johnson', '9:00 AM', 'General Checkup', 'Confirmed')" class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
-                <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand-500"></div>
-                <div class="text-center min-w-[70px]">
-                  <div class="font-bold text-brand-900 text-lg">9:00</div>
-                  <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">AM</div>
-                </div>
-                <div class="flex-1">
-                  <div class="font-bold text-brand-900">Emily Johnson</div>
-                  <div class="text-sm font-medium text-slate-500">General Checkup</div>
-                </div>
-                <div class="text-[10px] font-bold uppercase text-brand-700 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full">Confirmed</div>
-              </div>
+          </div>
+        </div>
 
-              <!-- Appt Item -->
-              <div onclick="window.viewAppointmentDetailsDashboard('Carlos Hernandez', '9:30 AM', 'Dental Implant Consult', 'Confirmed')" class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
-                <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand-500"></div>
-                <div class="text-center min-w-[70px]">
-                  <div class="font-bold text-brand-900 text-lg">9:30</div>
-                  <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">AM</div>
-                </div>
-                <div class="flex-1">
-                  <div class="font-bold text-brand-900">Carlos Hernandez</div>
-                  <div class="text-sm font-medium text-slate-500">Dental Implant Consult</div>
-                </div>
-                <div class="text-[10px] font-bold uppercase text-brand-700 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full">Confirmed</div>
-              </div>
-
-              <!-- Appt Item (Emergency) -->
-              <div onclick="window.viewAppointmentDetailsDashboard('Ana Garcia', '1:30 PM', 'Emergency - Toothache', 'Urgent')" class="flex items-center gap-4 p-4 rounded-xl border border-rose-200 bg-rose-50/30 shadow-sm hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
-                <div class="absolute left-0 top-0 bottom-0 w-1 bg-rose-500"></div>
-                <div class="text-center min-w-[70px]">
-                  <div class="font-bold text-brand-900 text-lg">1:30</div>
-                  <div class="text-xs font-bold text-rose-500 uppercase tracking-widest">PM</div>
-                </div>
-                <div class="flex-1">
-                  <div class="font-bold text-brand-900">Ana Garcia</div>
-                  <div class="text-sm text-rose-600 font-bold">🚨 Emergency - Toothache</div>
-                </div>
-                <div class="text-[10px] font-bold uppercase text-rose-700 bg-rose-100 border border-rose-200 px-2.5 py-1 rounded-full">Urgent</div>
-              </div>
-
+        <!-- RECENT INTAKES TABLE (Spans full 12 cols) -->
+        <div class="col-span-1 md:col-span-12 bg-white border border-slate-200/80 rounded shadow-sm overflow-hidden mt-2">
+          <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+            <div>
+              <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Intake Records</span>
+              <h3 class="font-display font-bold text-md text-slate-950 leading-none">Recent Inquiries</h3>
             </div>
+            <!-- Search bar -->
+            <div class="relative w-64">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+              <input class="w-full bg-slate-50 border border-slate-200 rounded pl-9 pr-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-slate-950 focus:ring-1 focus:ring-slate-950 transition-all placeholder:text-slate-300" placeholder="Search patients..." type="text"/>
+            </div>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200/60 text-slate-400 font-mono text-[10px]">
+                  <th class="py-3 px-6 font-bold uppercase tracking-wider">Patient Name</th>
+                  <th class="py-3 px-6 font-bold uppercase tracking-wider">Intake Date</th>
+                  <th class="py-3 px-6 font-bold uppercase tracking-wider">Procedure Intent</th>
+                  <th class="py-3 px-6 font-bold uppercase tracking-wider">AI Intake Summary</th>
+                  <th class="py-3 px-6 font-bold uppercase tracking-wider text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-xs text-slate-900 divide-y divide-slate-100 font-medium">
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-6 font-bold">Emma Roberts</td>
+                  <td class="py-4 px-6 font-mono text-[10px]">Oct 24, 09:15 AM</td>
+                  <td class="py-4 px-6">Invisalign Consult</td>
+                  <td class="py-4 px-6 text-slate-500 max-w-xs truncate text-[11px]">Patient inquired about timeline and insurance coverage for...</td>
+                  <td class="py-4 px-6 text-right">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 font-mono text-[9px] font-bold uppercase">Booked</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-6 font-bold">James Wilson</td>
+                  <td class="py-4 px-6 font-mono text-[10px]">Oct 24, 08:30 AM</td>
+                  <td class="py-4 px-6">General Cleaning</td>
+                  <td class="py-4 px-6 text-slate-500 max-w-xs truncate text-[11px]">Routine 6-month checkup. Requested early morning slot.</td>
+                  <td class="py-4 px-6 text-right">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-slate-500 font-mono text-[9px] font-bold uppercase">Pending</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-6 font-bold">Elena Rodriguez</td>
+                  <td class="py-4 px-6 font-mono text-[10px]">Oct 23, 16:45 PM</td>
+                  <td class="py-4 px-6 text-red-600 font-bold">Emergency Molars</td>
+                  <td class="py-4 px-6 text-slate-500 max-w-xs truncate text-[11px]">Severe pain lower right molar. Expedited scheduling protocol applied.</td>
+                  <td class="py-4 px-6 text-right">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 font-mono text-[9px] font-bold uppercase">Booked</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
       </div>
+
     </div>
   </main>
 
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- ============================================
+       FLOATING CALL SIMULATOR WIDGET DIALOG
+       ============================================ -->
+  <div id="call-simulator-widget" class="fixed inset-y-0 right-0 z-50 w-full max-w-[420px] bg-white border-l border-slate-250 shadow-2xl flex flex-col justify-between translate-x-[420px] opacity-0 transition-all duration-400 ease-in-out">
+    <!-- Header -->
+    <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-slate-950 flex items-center justify-center text-white text-xs">
+          📞
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-900 leading-none">Interactive Call Simulator</h4>
+          <span class="text-[9px] font-mono text-slate-400 uppercase block mt-1">Uvicorn pipeline hook</span>
+        </div>
+      </div>
+      <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
+        <span class="material-symbols-outlined text-[16px] text-slate-500">close</span>
+      </button>
+    </div>
 
-  <!-- App Scripts (order matters: utils first, then api, auth, then features) -->
-  <script src="js/utils.js?v=4"></script>
-  <script src="js/api.js?v=4"></script>
-  <script src="js/auth.js?v=4"></script>
-  <script src="js/charts.js?v=4"></script>
-  <script src="js/websocket.js?v=4"></script>
-  <script src="js/voice-agent.js?v=1"></script>
-  <script src="js/dashboard.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
+    <!-- Transcript / Live Screen Area -->
+    <div class="flex-1 p-6 overflow-y-auto space-y-4" id="sim-transcript-container">
+      <div class="text-center py-12 text-slate-400">
+        <span class="material-symbols-outlined text-[48px] block mb-2 text-slate-200">contact_phone</span>
+        <p class="text-xs font-semibold">Ready to launch simulation pipelines.</p>
+        <p class="text-[10px] text-slate-400 mt-1 max-w-[200px] mx-auto">Click simulate below to run full bilingual scheduling call logs.</p>
+      </div>
+    </div>
+
+    <!-- Action Bar / Buttons -->
+    <div class="p-6 border-t border-slate-200 bg-slate-50 space-y-4">
+      
+      <!-- Pulsing Waveform Accent -->
+      <div class="flex items-center justify-center gap-1.5 h-10 w-full bg-white border border-slate-200 rounded-xl px-4 hidden" id="waveform-panel">
+        <span class="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest mr-2">Audio Waves:</span>
+        <div class="flex items-end gap-1 h-5 select-none" id="waves-animation">
+          <div class="w-1 bg-indigo-500 rounded-t h-[40%] animate-pulse"></div>
+          <div class="w-1 bg-indigo-500 rounded-t h-[80%] animate-pulse" style="animation-delay: 0.1s"></div>
+          <div class="w-1 bg-indigo-500 rounded-t h-[60%] animate-pulse" style="animation-delay: 0.2s"></div>
+          <div class="w-1 bg-indigo-500 rounded-t h-[95%] animate-pulse" style="animation-delay: 0.3s"></div>
+          <div class="w-1 bg-indigo-500 rounded-t h-[30%] animate-pulse" style="animation-delay: 0.4s"></div>
+          <div class="w-1 bg-indigo-500 rounded-t h-[50%] animate-pulse" style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
+
+      <button id="sim-start-btn" onclick="startCallSimulation()" class="w-full py-3.5 bg-slate-950 hover:bg-slate-900 text-white rounded font-bold uppercase tracking-wider text-xs border-t border-white/10 active:scale-[0.98] transition-all">
+        🚀 Start Call Simulation
+      </button>
+    </div>
+  </div>
+
+  <!-- App Scripts -->
+  <script src="js/utils.js?v=3"></script>
+  <script src="js/api.js?v=3"></script>
+  <script src="js/auth.js?v=3"></script>
+
+  <!-- Simulator Core Script -->
   <script>
-    // Pure synthesized sound effects via Web Audio API
-    const AudioSynth = {
-      ctx: null,
-      init() {
-        if (!this.ctx) {
-          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-      },
-      playRing() {
-        this.init();
-        if (!this.ctx) return;
-        const osc1 = this.ctx.createOscillator();
-        const osc2 = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        
-        osc1.frequency.value = 440;
-        osc2.frequency.value = 480;
-        gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        
-        osc1.connect(gain);
-        osc2.connect(gain);
-        gain.connect(this.ctx.destination);
-        
-        osc1.start();
-        osc2.start();
-        
-        setTimeout(() => {
-          osc1.stop();
-          osc2.stop();
-        }, 800);
-      },
-      playHangup() {
-        this.init();
-        if (!this.ctx) return;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.frequency.setValueAtTime(350, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.3);
-        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.3);
-      },
-      playClick() {
-        this.init();
-        if (!this.ctx) return;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-        gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.05);
-      }
-    };
-
-    // Live Simulator Conversation State Engine
-    const simState = {
-      scenario: '', // 'carlos' | 'emily' | 'james'
-      step: 0,
-      active: false,
-      transcript: [],
-      patientDetails: { name: '', phone: '', time: '', date: '2026-05-23', service: '' }
-    };
-
-    // Create the simulator markup inside the DOM dynamically on page load
-    function injectSimulatorWidget() {
-      if (document.getElementById('sim-phone-widget')) return;
-
-      const widget = document.createElement('div');
-      widget.id = 'sim-phone-widget';
-      widget.className = 'fixed bottom-6 right-6 z-[9999] w-[380px] h-[580px] bg-white border border-slate-200 rounded-[35px] shadow-[0_20px_50px_rgba(15,23,42,0.15)] flex flex-col overflow-hidden transition-all duration-500 transform translate-y-[650px] opacity-0 select-none';
-      widget.style.fontFamily = "'Inter', sans-serif";
-
-      widget.innerHTML = `
-        <!-- Header Bar -->
-        <div class="px-6 py-4 bg-slate-50 border-b border-slate-100 flex items-center justify-between shrink-0">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
-            <span class="text-xs font-black text-slate-800 font-display uppercase tracking-wider">AI Receptionist Simulator</span>
-          </div>
-          <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer flex items-center justify-center font-bold text-slate-500 transition-colors shadow-sm text-sm">×</button>
-        </div>
-
-        <!-- Dynamic Views -->
-        <div class="flex-1 flex flex-col overflow-hidden relative" id="sim-views-container">
-          
-          <!-- View 1: Onboarding / Scenario Selection -->
-          <div id="sim-view-onboarding" class="flex-1 flex flex-col justify-between p-6 overflow-y-auto">
-            <div>
-              <h4 class="font-display text-md font-extrabold text-slate-900 mb-1">Pick a Caller Scenario</h4>
-              <p class="text-[11px] text-slate-500 mb-4 font-semibold leading-relaxed">Choose a dental patient scenario to test the conversational intelligence of the AI Voice Receptionist.</p>
-              
-              <div class="space-y-3">
-                <!-- Scenario A -->
-                <div onclick="selectSimScenario('carlos')" id="scen-card-carlos" class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3">
-                  <span class="text-2xl mt-0.5">🚨</span>
-                  <div>
-                    <div class="text-xs font-black text-slate-800">Carlos Hernandez (Emergency)</div>
-                    <div class="text-[10px] text-slate-500 font-semibold mt-0.5 leading-relaxed">Experiencing severe tooth swelling & bleeding. Prefers Spanish. Needs a quick extraction booking today.</div>
-                  </div>
-                </div>
-
-                <!-- Scenario B -->
-                <div onclick="selectSimScenario('emily')" id="scen-card-emily" class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3">
-                  <span class="text-2xl mt-0.5">🦷</span>
-                  <div>
-                    <div class="text-xs font-black text-slate-800">Emily Johnson (New Whitening)</div>
-                    <div class="text-[10px] text-slate-500 font-semibold mt-0.5 leading-relaxed">Wants cosmetic whitening. Asks if Delta Dental PPO insurance is accepted and checks available times.</div>
-                  </div>
-                </div>
-
-                <!-- Scenario C -->
-                <div onclick="selectSimScenario('james')" id="scen-card-james" class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3">
-                  <span class="text-2xl mt-0.5">📅</span>
-                  <div>
-                    <div class="text-xs font-black text-slate-800">James Wilson (Reschedule)</div>
-                    <div class="text-[10px] text-slate-500 font-semibold mt-0.5 leading-relaxed">Routine cleaner. Needs to shift his dental checkup slot from next Wednesday to tomorrow afternoon.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button type="button" onclick="initiateSimulatedCall()" id="sim-start-call-btn" class="w-full py-3 bg-brand-900 hover:bg-indigo-600 text-white rounded-2xl font-bold text-xs border border-transparent shadow-md transition-all flex items-center justify-center gap-1 opacity-50 pointer-events-none select-none">
-              <span class="material-symbols-outlined text-[16px] animate-pulse">phone_forwarded</span> Initiate Call Integration
-            </button>
-          </div>
-
-          <!-- View 2: Call In Progress -->
-          <div id="sim-view-active" class="hidden flex-1 flex flex-col justify-between overflow-hidden bg-slate-900 text-white">
-            
-            <!-- Upper Caller Stats Banner -->
-            <div class="p-4 bg-slate-950/60 border-b border-slate-850 flex flex-col items-center shrink-0">
-              <div class="w-12 h-12 rounded-full bg-indigo-600/30 border border-indigo-500/40 text-indigo-400 flex items-center justify-center text-lg shadow-inner mb-1.5" id="sim-caller-avatar">👤</div>
-              <div class="text-xs font-black font-display text-white tracking-wide" id="sim-caller-name-title">Carlos Hernandez</div>
-              <div class="text-[9px] font-bold text-teal-400 uppercase tracking-widest mt-0.5 flex items-center gap-1" id="sim-caller-status">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span> AI Call in Progress
-              </div>
-              
-              <!-- soundwave animations -->
-              <div class="flex items-center gap-1 justify-center py-2 mt-1 h-[25px]" id="soundwave-bar-container">
-                <span class="w-[3px] h-3 bg-indigo-500 rounded-full transition-all duration-150 animate-pulse"></span>
-                <span class="w-[3px] h-4 bg-indigo-400 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.15s"></span>
-                <span class="w-[3px] h-2 bg-teal-400 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.3s"></span>
-                <span class="w-[3px] h-5 bg-indigo-300 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.05s"></span>
-                <span class="w-[3px] h-2 bg-teal-500 rounded-full transition-all duration-150 animate-pulse" style="animation-delay: 0.25s"></span>
-              </div>
-            </div>
-
-            <!-- Middle Conversation bubble log -->
-            <div class="flex-1 overflow-y-auto p-4 space-y-3.5" id="sim-chat-box">
-              <!-- bubble list -->
-            </div>
-
-            <!-- Bottom Panel: Pre-written contextual inputs & manual fields -->
-            <div class="p-4 bg-slate-950/60 border-t border-slate-850 shrink-0">
-              <div class="mb-3">
-                <div class="text-[9px] font-bold text-indigo-300 uppercase tracking-wider mb-2">Suggested Patient Answers</div>
-                <div class="flex flex-wrap gap-2" id="sim-quick-replies-list">
-                  <!-- quick replies -->
-                </div>
-              </div>
-
-              <!-- Manual Keyboard input row -->
-              <div class="flex items-center gap-2">
-                <button id="sim-mic-btn" onclick="toggleSimMic()" class="w-8 h-8 rounded-xl bg-slate-700 hover:bg-slate-600 text-white flex items-center justify-center shadow-md transition-colors" title="Hold to Talk"><span class="material-symbols-outlined text-[16px]">mic</span></button>
-                <input type="text" id="sim-input-box" placeholder="Or type customized patient reply..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition-colors">
-                <button onclick="handleSimManualSend()" class="w-8 h-8 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-md transition-colors"><span class="material-symbols-outlined text-[16px]">send</span></button>
-              </div>
-
-              <!-- Glowing Hang Up phone button -->
-              <div class="flex justify-center mt-3 pt-2 border-t border-slate-850/50">
-                <button onclick="hangupSimulatedCall(true)" class="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-[10px] uppercase rounded-full flex items-center gap-1.5 shadow-lg shadow-rose-600/30 transition-all select-none">
-                  <span class="material-symbols-outlined text-[14px]">phone_disabled</span> Hang Up Call
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- View 3: Complete Success Summary -->
-          <div id="sim-view-complete" class="hidden flex-1 flex flex-col justify-between p-6 text-center">
-            <div class="my-auto space-y-4">
-              <div class="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-3xl mx-auto shadow-md animate-bounce">✓</div>
-              <h4 class="font-display text-lg font-black text-slate-800">Voice call simulation resolved!</h4>
-              <p class="text-xs text-slate-500 leading-relaxed font-semibold">The AI receptionist successfully managed and completed the booking request. Practice protection saved!</p>
-              
-              <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100/50 text-left space-y-2 max-w-[280px] mx-auto shadow-inner">
-                <div class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Simulation Stats</div>
-                <div class="text-xs font-bold text-slate-700">👤 Patient: <span id="sum-pat-name">Carlos Hernandez</span></div>
-                <div class="text-xs font-bold text-slate-700">🦷 Service: <span id="sum-pat-svc">Emergency extraction</span></div>
-                <div class="text-xs font-bold text-slate-700">🕒 Appointment: <span id="sum-pat-time">Today, 1:30 PM</span></div>
-                <div class="text-xs font-bold text-emerald-700 flex items-center gap-0.5">💰 Revenue protected: <strong>+$350.00</strong></div>
-              </div>
-            </div>
-
-            <button onclick="finishSimAndRefreshDashboard()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold text-xs shadow-md transition-all">
-              Save & Sync Dashboard Feeds 🚀
-            </button>
-          </div>
-
-        </div>
-      `;
-
-      document.body.appendChild(widget);
-      
-      // Wire input enter key trigger
-      document.getElementById('sim-input-box').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') handleSimManualSend();
-      });
-    }
-
+    // Call Simulator Panel toggles
     function openCallSimulatorWidget() {
-      injectSimulatorWidget();
-      AudioSynth.playClick();
-      
-      const widget = document.getElementById('sim-phone-widget');
+      const widget = document.getElementById('call-simulator-widget');
       if (widget) {
-        widget.classList.remove('translate-y-[650px]', 'opacity-0');
-        widget.classList.add('translate-y-0', 'opacity-100');
-        
-        // Reset to initial screen
-        document.getElementById('sim-view-onboarding').classList.remove('hidden');
-        document.getElementById('sim-view-active').classList.add('hidden');
-        document.getElementById('sim-view-complete').classList.add('hidden');
-        
-        // Unselect scenario
-        document.querySelectorAll("[id^='scen-card-']").forEach(c => {
-          c.className = 'p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3';
-        });
-        simState.scenario = '';
-        const startBtn = document.getElementById('sim-start-call-btn');
-        startBtn.classList.add('opacity-50', 'pointer-events-none');
+        widget.classList.remove('translate-x-[420px]', 'opacity-0');
+        widget.classList.add('translate-x-0', 'opacity-100');
       }
     }
 
     function closeCallSimulatorWidget() {
-      AudioSynth.playClick();
-      const widget = document.getElementById('sim-phone-widget');
+      const widget = document.getElementById('call-simulator-widget');
       if (widget) {
-        widget.classList.add('translate-y-[650px]', 'opacity-0');
-        widget.classList.remove('translate-y-0', 'opacity-100');
+        widget.classList.add('translate-x-[420px]', 'opacity-0');
+        widget.classList.remove('translate-x-0', 'opacity-100');
       }
     }
 
-    function selectSimScenario(scen) {
-      AudioSynth.playClick();
-      simState.scenario = scen;
-      
-      document.querySelectorAll("[id^='scen-card-']").forEach(c => {
-        c.className = 'p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-500 cursor-pointer transition-all bg-slate-50/50 flex items-start gap-3';
-      });
+    // Simulation Flow scripts
+    async function startCallSimulation() {
+      const btn = document.getElementById('sim-start-btn');
+      const container = document.getElementById('sim-transcript-container');
+      const wavePanel = document.getElementById('waveform-panel');
 
-      const selectedEl = document.getElementById(`scen-card-${scen}`);
-      if (selectedEl) {
-        selectedEl.className = 'p-3.5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/20 cursor-pointer transition-all flex items-start gap-3 shadow-sm';
-      }
+      if (btn) btn.disabled = true;
+      if (wavePanel) wavePanel.classList.remove('hidden');
 
-      const startBtn = document.getElementById('sim-start-call-btn');
-      startBtn.classList.remove('opacity-50', 'pointer-events-none');
-    }
+      // Clear layout
+      container.innerHTML = '';
 
-    // Trigger ringtone sound effect, then start caller interface
-    function initiateSimulatedCall() {
-      AudioSynth.playClick();
-      
-      const startBtn = document.getElementById('sim-start-call-btn');
-      startBtn.textContent = 'Dials forwarders... 📞';
-      startBtn.disabled = true;
+      const script = [
+        { role: 'system', text: '☎️ Pipeline connected. Ringing connected phone...' },
+        { role: 'user', text: 'Hola, buenas tardes. Quisiera programar una cita de emergencia, por favor. Tengo mucho dolor de muela.' },
+        { role: 'assistant', text: 'Buenas tardes. Lamento escuchar que tiene dolor. Con gusto le ayudo. ¿Es usted un paciente existente o es su primera vez con nosotros?' },
+        { role: 'user', text: 'Es mi primera vez. Me llamo Sarah Jenkins y vivo aquí en Miami.' },
+        { role: 'system', text: '⚡ EHR SYNC: Querying Eaglesoft Database...' },
+        { role: 'system', text: '✅ PATIENT SEARCH: No existing record found. Triggering Onboarding Protocol...' },
+        { role: 'assistant', text: 'Welcome, Sarah. We will register you as a new patient right away. I see that you need an emergency slot. I have an opening today at 2:30 PM, or tomorrow at 9:00 AM. Which one works best for you?' },
+        { role: 'user', text: 'El de hoy a las dos y media está perfecto, por favor. Muchas gracias.' },
+        { role: 'assistant', text: 'Perfect. I have booked you for today at 2:30 PM. You are scheduled with Dr. Mitchell for an emergency exam. I am sending a confirmation text to this number. Please arrive 10 minutes early to fill out form details.' },
+        { role: 'system', text: '💾 EHR WRITE-BACK: Creating New Patient File for "Sarah Jenkins"...' },
+        { role: 'system', text: '📅 APPOINTMENT WRITE-BACK: Created slot in Eaglesoft: May 25, 2:30 PM' },
+        { role: 'user', text: 'Muchas gracias por su ayuda. ¡Adiós!' },
+        { role: 'assistant', text: 'You are welcome, Sarah. We will see you at 2:30 PM. Goodbye!' },
+        { role: 'system', text: '🔒 Call ended. Total opportunity saved: $350.00. 100% HIPAA compliant.' }
+      ];
 
-      // Play 2 ringtone signals
-      AudioSynth.playRing();
-      setTimeout(() => {
-        AudioSynth.playRing();
-      }, 1500);
+      for (let i = 0; i < script.length; i++) {
+        await new Promise(r => setTimeout(r, 1200));
+        const line = script[i];
 
-      setTimeout(() => {
-        startBtn.textContent = 'Initiate Call Integration';
-        startBtn.disabled = false;
-        
-        // Open Calling screen
-        document.getElementById('sim-view-onboarding').classList.add('hidden');
-        document.getElementById('sim-view-active').classList.remove('hidden');
-        
-        // Populate metadata
-        const callerNameEl = document.getElementById('sim-caller-name-title');
-        const callerAvatar = document.getElementById('sim-caller-avatar');
-        
-        if (simState.scenario === 'carlos') {
-          callerNameEl.textContent = 'Carlos Hernandez';
-          callerAvatar.textContent = '🇲🇽';
-          simState.patientDetails = { name: 'Carlos Hernandez', phone: '(305) 555-9876', time: '1:30 PM', date: '2026-05-23', service: 'Emergency - Extraction' };
-        } else if (simState.scenario === 'emily') {
-          callerNameEl.textContent = 'Emily Johnson';
-          callerAvatar.textContent = '👩';
-          simState.patientDetails = { name: 'Emily Johnson', phone: '(407) 555-1234', time: '10:00 AM', date: '2026-05-24', service: 'Teeth Whitening Consultation' };
+        const div = document.createElement('div');
+        div.className = `flex ${line.role === 'user' ? 'justify-end' : line.role === 'assistant' ? 'justify-start' : 'justify-center'}`;
+
+        let styling = '';
+        if (line.role === 'user') {
+          styling = 'bg-slate-100 text-slate-800 rounded-tl-xl rounded-tr-xl rounded-bl-xl border border-slate-200';
+        } else if (line.role === 'assistant') {
+          styling = 'bg-indigo-600 text-white rounded-tl-xl rounded-tr-xl rounded-br-xl';
         } else {
-          callerNameEl.textContent = 'James Wilson';
-          callerAvatar.textContent = '👨';
-          simState.patientDetails = { name: 'James Wilson', phone: '(954) 555-7788', time: '2:00 PM', date: '2026-05-24', service: 'Routine Cleaning Reschedule' };
+          styling = 'bg-slate-50 text-slate-400 font-mono text-[9px] rounded uppercase border border-slate-150 px-3 py-1.5 text-center w-full max-w-[90%]';
         }
 
-        // Initialize Chat Box
-        const chatBox = document.getElementById('sim-chat-box');
-        chatBox.innerHTML = '';
-        simState.step = 0;
-        simState.transcript = [];
-        simState.active = true;
-
-        // Play initial AI Receptionist Voice Greeting
-        setTimeout(() => {
-          triggerAISayGreeting();
-        }, 800);
-      }, 3000);
-    }
-
-    function triggerAISayGreeting() {
-      let msg = '';
-      if (simState.scenario === 'carlos') {
-        msg = 'Gracias por llamar a Sunshine Smiles Dental. Soy la asistente de voz virtual inteligente Ash. ¿Cómo puedo ayudarle hoy?';
-      } else {
-        msg = 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I assist you today?';
-      }
-      appendSimBubble('ai', msg);
-      updateSimQuickReplies();
-    }
-
-    function appendSimBubble(sender, text) {
-      const chatBox = document.getElementById('sim-chat-box');
-      if (!chatBox) return;
-
-      const bubble = document.createElement('div');
-      bubble.className = `flex ${sender === 'ai' ? 'justify-start' : 'justify-end'} animate-pulse`;
-      
-      const avatarHtml = sender === 'ai' ? `<span class="text-sm">🦷</span>` : ``;
-      const bg = sender === 'ai' ? 'bg-slate-800 text-slate-100 border border-slate-700/50' : 'bg-indigo-600 text-white';
-      const borderRounding = sender === 'ai' ? 'rounded-tr-2xl rounded-br-2xl rounded-bl-2xl' : 'rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl';
-
-      bubble.innerHTML = `
-        <div class="flex gap-2 items-end max-w-[80%]">
-          ${sender === 'ai' ? `<div class="w-6 h-6 rounded-full bg-slate-950 flex items-center justify-center border border-slate-750 text-[10px] shrink-0">${avatarHtml}</div>` : ''}
-          <div class="p-3 ${borderRounding} ${bg} text-xs font-semibold leading-relaxed shadow-sm">
-            ${text}
+        div.innerHTML = `
+          <div class="max-w-[85%] p-3 text-xs font-semibold leading-relaxed shadow-sm ${styling}">
+            ${line.text}
           </div>
-        </div>
-      `;
-
-      chatBox.appendChild(bubble);
-      chatBox.scrollTop = chatBox.scrollHeight;
-      bubble.classList.remove('animate-pulse');
-
-      AudioSynth.playClick();
-      simState.transcript.push(`${sender === 'ai' ? 'AI Voice' : 'Patient'}: ${text}`);
-    }
-
-    function updateSimQuickReplies() {
-      const listEl = document.getElementById('sim-quick-replies-list');
-      if (!listEl) return;
-
-      let replies = [];
-      const step = simState.step;
-
-      if (simState.scenario === 'carlos') {
-        if (step === 0) {
-          replies = [
-            'Hola, tengo mucho dolor de muela y sangrado',
-            'Buenas tardes, ¿hablan español? Tengo una emergencia'
-          ];
-        } else if (step === 1) {
-          replies = [
-            'Sí, hoy a la 1:30 PM está excelente, por favor',
-            '¿Tiene alguna opción para mañana por la mañana?'
-          ];
-        } else if (step === 2) {
-          replies = [
-            'Mi nombre es Carlos Hernandez, (305) 555-9876',
-            'Carlos Hernandez, móvil (305) 555-9876'
-          ];
-        } else {
-          replies = [
-            'Muchas gracias por la ayuda, nos vemos hoy',
-            'Excelente servicio virtual, ¡gracias!'
-          ];
-        }
-      } else if (simState.scenario === 'emily') {
-        if (step === 0) {
-          replies = [
-            "Hi, I want to book teeth whitening. Do you accept Delta Dental PPO?",
-            "Hello, does your clinic accept Delta Dental insurance for PPO?"
-          ];
-        } else if (step === 1) {
-          replies = [
-            "Tomorrow at 10:00 AM works perfectly!",
-            "Do you have any slots available on Friday afternoon?"
-          ];
-        } else if (step === 2) {
-          replies = [
-            "Emily Johnson, cell is (407) 555-1234",
-            "My name is Emily Johnson, phone (407) 555-1234"
-          ];
-        } else {
-          replies = [
-            "Great, thank you so much! See you tomorrow.",
-            "Thanks for verifying my benefits, bye!"
-          ];
-        }
-      } else { // james
-        if (step === 0) {
-          replies = [
-            "Hi, I need to reschedule my cleaning appointment tomorrow.",
-            "Hello, can I move my cleaning appointment next week to tomorrow?"
-          ];
-        } else if (step === 1) {
-          replies = [
-            "Tomorrow at 2:00 PM is perfect, thank you!",
-            "Do you have an opening at 3:30 PM instead?"
-          ];
-        } else if (step === 2) {
-          replies = [
-            "James Wilson, phone number is (954) 555-7788",
-            "James Wilson, cell (954) 555-7788"
-          ];
-        } else {
-          replies = [
-            "Awesome, see you tomorrow at 2:00 PM!",
-            "Perfect, thank you so much!"
-          ];
-        }
+        `;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
       }
 
-      listEl.innerHTML = replies.map(r => `
-        <button onclick="handleSimReplySelect('${r.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-slate-800 hover:bg-indigo-600 border border-slate-700 text-white rounded-lg text-[10px] font-bold transition-all text-left max-w-full">${r}</button>
-      `).join('');
-    }
-
-    function handleSimReplySelect(text) {
-      appendSimBubble('patient', text);
-      document.getElementById('sim-quick-replies-list').innerHTML = ''; // Clear options during thinking
-      
-      // Typing indicators ripple effect
-      const chatBox = document.getElementById('sim-chat-box');
-      const loader = document.createElement('div');
-      loader.id = 'sim-thinking-bubble';
-      loader.className = 'flex justify-start animate-pulse';
-      loader.innerHTML = `
-        <div class="flex gap-2 items-center">
-          <div class="w-6 h-6 rounded-full bg-slate-950 flex items-center justify-center border border-slate-750 text-[10px] shrink-0"><span>🦷</span></div>
-          <div class="px-3 py-2 rounded-xl bg-slate-850 text-indigo-300 font-mono text-[9px] font-bold">AI voice agent is speaking... 🔊</div>
-        </div>
-      `;
-      chatBox.appendChild(loader);
-      chatBox.scrollTop = chatBox.scrollHeight;
-
-      // Ripple active wave amplitude heights
-      const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
-      soundwaveSpanElements.forEach(s => {
-        s.style.height = `${Math.floor(Math.random() * 20) + 10}px`;
-        s.style.backgroundColor = '#0FD8B6'; // Highlight waves green!
-      });
-
-      setTimeout(() => {
-        loader.remove();
-        soundwaveSpanElements.forEach(s => {
-          s.style.height = '';
-          s.style.backgroundColor = '';
-        });
-        
-        processAISimulatorUtterance(text);
-      }, 1500);
-    }
-
-    function handleSimManualSend() {
-      const input = document.getElementById('sim-input-box');
-      if (!input || !input.value.trim() || !simState.active) return;
-      const txt = input.value.trim();
-      input.value = '';
-      handleSimReplySelect(txt);
-    }
-
-    // Dynamic rule parsing matching dental context with real xAI Grok API!
-    async function processAISimulatorUtterance(text) {
-      simState.step += 1;
-      
-      // Get clinic profile and settings
-      const settings = localStorage.getItem('renia_settings') 
-        ? JSON.parse(localStorage.getItem('renia_settings')) 
-        : { profile: { name: 'Sunshine Smiles Dental' }, voice: { voice: 'Ash', greeting: '' }, hours: {} };
-      
-      const kbEntries = localStorage.getItem('renia_knowledge_base')
-        ? JSON.parse(localStorage.getItem('renia_knowledge_base'))
-        : [];
-
-      // Map conversation history
-      const history = [];
-      const bubbles = document.querySelectorAll('#sim-chat-box div div div');
-      bubbles.forEach(b => {
-        const isAI = b.closest('.justify-start'); // Helper to check if it is AI bubble
-        history.push({
-          role: isAI ? 'assistant' : 'user',
-          content: b.textContent.trim()
-        });
-      });
-
-      // Show thinking bubble loader
-      const chatBox = document.getElementById('sim-chat-box');
-      const loader = document.createElement('div');
-      loader.id = 'sim-thinking-bubble';
-      loader.className = 'flex justify-start animate-pulse';
-      loader.innerHTML = `
-        <div class="flex gap-2 items-center">
-          <div class="w-6 h-6 rounded-full bg-slate-950 flex items-center justify-center border border-slate-750 text-[10px] shrink-0"><span>🦷</span></div>
-          <div class="px-3 py-2 rounded-xl bg-slate-850 text-indigo-300 font-mono text-[9px] font-bold">AI voice agent is speaking... 🔊</div>
-        </div>
-      `;
-      chatBox.appendChild(loader);
-      chatBox.scrollTop = chatBox.scrollHeight;
-
-      // Ripple active soundwave heights
-      const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
-      soundwaveSpanElements.forEach(s => {
-        s.style.height = `${Math.floor(Math.random() * 20) + 12}px`;
-        s.style.backgroundColor = '#0FD8B6'; 
-      });
-
-      let reply = '';
-      let isGrok = false;
-
-      // Path A: Hit the Cloudflare Worker serverless proxy first (Secure CORS-friendly option)
-      try {
-        const token = localStorage.getItem('renia_token');
-        const headers = { 'Content-Type': 'application/json' };
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-
-        const res = await fetch('/api/v1/voice/simulate', {
-          method: 'POST',
-          headers,
-          body: JSON.stringify({
-            messages: history,
-            scenario: simState.scenario,
-            clinicName: settings.profile.name,
-            settings: settings,
-            kbEntries: kbEntries
-          })
-        });
-        
-        if (res.ok) {
-          const data = await res.json();
-          reply = data.response;
-          isGrok = true;
-        }
-      } catch (err) {
-        console.warn('Hono backend proxy unavailable, attempting browser direct xAI Grok call:', err);
-      }
-
-      // Path B: Fallback to direct client-side fetch using user provided xAI key (if proxy failed)
-      if (!isGrok) {
-        try {
-          // Key split to prevent Github secret scanning from blocking the push
-          const xaiKey = (settings && settings.voice && settings.voice.xai_key) || '';
-          const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Ash';
-          
-          let systemPrompt = `You are the Elite AI Voice Receptionist named ${activeVoice} for "${settings.profile.name || 'Sunshine Smiles Dental'}". 
-Your tone is warm, professional, and Florida-friendly. You represent a real dental clinic.
-Accepted Insurances: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
-Knowledge Base: ${JSON.stringify(kbEntries)}
-Hours: ${JSON.stringify(settings.hours)}
-
-SCENARIO INSTRUCTIONS:
-`;
-          if (simState.scenario === 'carlos') {
-            systemPrompt += `- Speaking with Carlos Hernandez (Spanish emergency). Speak Spanish. Offer extraction slot "today at 1:30 PM". Once booked, append exactly "[BOOKING: Emergency Extraction | 2026-05-23 | 1:30 PM]" to your reply.`;
-          } else if (simState.scenario === 'emily') {
-            systemPrompt += `- Speaking with Emily Johnson (Teeth whitening Delta Dental check). Confirm Delta PPO is accepted. Offer "tomorrow at 10:00 AM". Once booked, append exactly "[BOOKING: Teeth Whitening Consultation | 2026-05-24 | 10:00 AM]" to your reply.`;
-          } else {
-            systemPrompt += `- Speaking with James Wilson (Rescheduling cleaning). Move Cleaning from next Wednesday to tomorrow at 2:00 PM. Once booked, append exactly "[BOOKING: Routine Cleaning Reschedule | 2026-05-24 | 2:00 PM]" to your reply.`;
-          }
-
-          systemPrompt += `\nKeep sentences short, audio-friendly, and concise. Do not speak in long paragraphs. Never mention you are an LLM.`;
-
-          const res = await fetch('https://api.x.ai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${xaiKey}`
-            },
-            body: JSON.stringify({
-              model: 'grok-beta',
-              messages: [
-                { role: 'system', content: systemPrompt },
-                ...history
-              ],
-              temperature: 0.7,
-              max_tokens: 200
-            })
-          });
-
-          if (res.ok) {
-            const data = await res.json();
-            reply = data.choices[0].message.content;
-            isGrok = true;
-          }
-        } catch (err) {
-          console.warn('Direct xAI fetch blocked (CORS). Falling back to client-side rule engine:', err);
-        }
-      }
-
-      // Path C: Perfect client-side local conversational sandbox fallback
-      if (!isGrok) {
-        reply = getLocalFallbackReply(text);
-      }
-
-      // Remove loader and reset wave styles
-      loader.remove();
-      soundwaveSpanElements.forEach(s => {
-        s.style.height = '';
-        s.style.backgroundColor = '';
-      });
-
-      // Parse structured booking details
-      let bookingDetected = false;
-      let service = 'General Checkup';
-      let date = '2026-05-23';
-      let time = '10:00 AM';
-
-      if (reply.includes('[BOOKING:')) {
-        const match = reply.match(/\[BOOKING:\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^\]]+)\]/);
-        if (match) {
-          bookingDetected = true;
-          service = match[1].trim();
-          date = match[2].trim();
-          time = match[3].trim();
-          
-          // Clean the structured tag from dentist-facing text
-          reply = reply.replace(/\[BOOKING:[^\]]+\]/, '').trim();
-        }
-      } else {
-        // Fallback detection logic
-        if (reply.includes('confirmada') || reply.includes('confirmed') || reply.includes('rescheduled')) {
-          bookingDetected = true;
-          service = simState.patientDetails.service;
-          date = simState.patientDetails.date;
-          time = simState.patientDetails.time;
-        }
-      }
-
-      // Keep track of dialer active audio to allow interrupt/pause
-      if (window.dialerActiveAudio) {
-        window.dialerActiveAudio.pause();
-        window.dialerActiveAudio = null;
-      }
-
-      // Clean speech text
-      const speechText = reply.replace(/🚨/g, '').replace(/👤/g, '').replace(/\[BOOKING:[^\]]+\]/g, '').trim();
-
-      let playSuccess = false;
-      const selectedVoice = settings.voice?.voice || 'Ash';
-
-      // Path A: Hit the Cloudflare Worker serverless proxy first (Secure CORS-friendly option)
-      try {
-        const ttsRes = await fetch('/api/v1/voice/tts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            text: speechText,
-            voice_id: selectedVoice,
-            speed: 1.0
-          })
-        });
-
-        if (ttsRes.ok) {
-          const blob = await ttsRes.blob();
-          const audioUrl = URL.createObjectURL(blob);
-          const audio = new Audio(audioUrl);
-          window.dialerActiveAudio = audio;
-
-          // Sync soundwaves during active call
-          audio.onplay = () => {
-            const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
-            soundwaveSpanElements.forEach(s => {
-              s.style.height = `${Math.floor(Math.random() * 22) + 12}px`;
-              s.style.backgroundColor = '#0FD8B6';
-            });
-          };
-
-          audio.onended = () => {
-            const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
-            soundwaveSpanElements.forEach(s => {
-              s.style.height = '';
-              s.style.backgroundColor = '';
-            });
-            window.dialerActiveAudio = null;
-          };
-
-          await audio.play();
-          playSuccess = true;
-        }
-      } catch (err) {
-        console.warn('Hono dialer TTS proxy unavailable:', err);
-      }
-
-      // Path B: Fallback direct browser fetch to xAI using the settings key
-      if (!playSuccess) {
-        try {
-          // Key split to prevent Github secret scanning from blocking the push
-          const xaiKey = settings.voice?.xai_key || '';
-          const voiceMap = {
-            'Ash': 'rex',
-            'Ballad': 'ara',
-            'Coral': 'eve',
-            'Sage': 'eve',
-            'Verse': 'sal',
-            'Ani': 'ara',
-            'Eve': 'eve',
-            'Leo': 'leo'
-          };
-          const realVoiceId = voiceMap[selectedVoice] || 'eve';
-
-          const ttsRes = await fetch('https://api.x.ai/v1/audio/speech', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${xaiKey}`
-            },
-            body: JSON.stringify({
-              input: speechText,
-              voice: realVoiceId,
-              model: 'tts-1',
-              speed: 1.0
-            })
-          });
-
-          if (ttsRes.ok) {
-            const blob = await ttsRes.blob();
-            const audioUrl = URL.createObjectURL(blob);
-            const audio = new Audio(audioUrl);
-            window.dialerActiveAudio = audio;
-
-            audio.onplay = () => {
-              const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
-              soundwaveSpanElements.forEach(s => {
-                s.style.height = `${Math.floor(Math.random() * 22) + 12}px`;
-                s.style.backgroundColor = '#0FD8B6';
-              });
-            };
-
-            audio.onended = () => {
-              const soundwaveSpanElements = document.querySelectorAll('#soundwave-bar-container span');
-              soundwaveSpanElements.forEach(s => {
-                s.style.height = '';
-                s.style.backgroundColor = '';
-              });
-              window.dialerActiveAudio = null;
-            };
-
-            await audio.play();
-            playSuccess = true;
-          }
-        } catch (err) {
-          console.warn('Direct xAI fetch dialer failed:', err);
-        }
-      }
-
-      // We removed the robot voice fallback! If it fails, they just get text.
-      // User strictly wanted ONLY grok voice fast 1.
-
-      appendSimBubble('ai', reply);
-
-      if (bookingDetected) {
-        simState.patientDetails.service = service;
-        simState.patientDetails.date = date;
-        simState.patientDetails.time = time;
-        
-        setTimeout(() => {
-          hangupSimulatedCall(false);
-        }, 3000);
-      } else {
-        updateSimQuickReplies();
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = '🚀 Restart Call Simulation';
       }
     }
-
-    function getLocalFallbackReply(text) {
-      const step = simState.step;
-      const lower = text.toLowerCase();
-      
-      if (simState.scenario === 'carlos') {
-        if (step === 1) {
-          return '¡Oh, no! Lamento muchísimo escuchar que tiene tanto dolor. Sí, tomamos los dolores agudos y sangrados de emergencia muy en serio. Tengo un espacio disponible de emergencia hoy a la 1:30 PM o mañana a las 9:00 AM. ¿Cuál le queda mejor?';
-        } else if (step === 2) {
-          return 'Entendido, reservamos el espacio para hoy mismo a las 1:30 PM. ¿Podría proporcionarme su nombre completo y su número celular para registrar su expediente de urgencia, por favor?';
-        } else if (step === 3) {
-          return `¡Muchas gracias, señor Hernandez! Su cita de extracción de emergencia ha quedado confirmada para hoy a las 1:30 PM. He enviado una confirmación por SMS al celular registrado. ¿Hay algo más en lo que pueda ayudarle?`;
-        } else {
-          return 'De nada. Nos vemos pronto. ¡Que tenga un excelente día y cuídese mucho!';
-        }
-      } else if (simState.scenario === 'emily') {
-        if (step === 1) {
-          return 'Yes, absolutely! Sunshine Smiles Dental proudly accepts Delta Dental PPO, along with Humana, Guardian, and MCNA. Your dental cosmetic cleaning consult is fully eligible! I have availability tomorrow at 10:00 AM or Friday at 3:00 PM. Which works best?';
-        } else if (step === 2) {
-          return `Wonderful! I have locked in that appointment slot for you on tomorrow at 10:00 AM. May I please have your full name and mobile phone number to secure the record?`;
-        } else if (step === 3) {
-          return `Perfect, Emily! Your whitening consult is confirmed for tomorrow at 10:00 AM. The SMS verification receipt is dispatched to your cell phone. Is there anything else I can help you with today?`;
-        } else {
-          return 'You are very welcome! Have a fantastic day, and we look forward to seeing you!';
-        }
-      } else { // james
-        if (step === 1) {
-          return 'Certainly, James! Let me look up your account details... Ah, yes! I see your scheduled routine cleaning for next Wednesday. I can release that and move it to tomorrow afternoon. I have availability at 2:00 PM or 3:30 PM. Which is better?';
-        } else if (step === 2) {
-          return `Great choice! I can secure tomorrow afternoon at 2:00 PM. Could you please confirm your full name and mobile number to authenticate the transfer?`;
-        } else if (step === 3) {
-          return `Got it, James Wilson! I have successfully rescheduled your appointment to tomorrow at 2:00 PM and released your next week slot. You will receive the updated SMS calendar link shortly. Anything else I can do for you?`;
-        } else {
-          return 'Fantastic. Glad I could assist! Have a great day, and we will see you tomorrow!';
-        }
-      }
-    }
-
-    // Voice recognition logic for microphone button
-    let simSpeechRecog = null;
-    let isSimMicActive = false;
-
-    function toggleSimMic() {
-      const micBtn = document.getElementById('sim-mic-btn');
-      const micIcon = micBtn.querySelector('span');
-
-      if (isSimMicActive) {
-        if (simSpeechRecog) simSpeechRecog.stop();
-        return;
-      }
-
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        showToast('Voice recognition is not supported in your browser.', 'error');
-        return;
-      }
-
-      simSpeechRecog = new SpeechRecognition();
-      simSpeechRecog.lang = simState.scenario === 'carlos' ? 'es-US' : 'en-US';
-      simSpeechRecog.interimResults = false;
-      simSpeechRecog.maxAlternatives = 1;
-
-      simSpeechRecog.onstart = function() {
-        isSimMicActive = true;
-        micBtn.classList.remove('bg-slate-700', 'hover:bg-slate-600');
-        micBtn.classList.add('bg-rose-500', 'hover:bg-rose-600', 'animate-pulse');
-        micIcon.innerText = 'mic_none';
-      };
-
-      simSpeechRecog.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById('sim-input-box').value = transcript;
-        handleSimManualSend();
-      };
-
-      simSpeechRecog.onerror = function(event) {
-        console.warn('Speech recog error', event.error);
-        if(event.error !== 'aborted') {
-            showToast('Microphone error: ' + event.error, 'warning');
-        }
-        resetMicUI();
-      };
-
-      simSpeechRecog.onend = function() {
-        resetMicUI();
-      };
-
-      simSpeechRecog.start();
-    }
-
-    function resetMicUI() {
-      isSimMicActive = false;
-      const micBtn = document.getElementById('sim-mic-btn');
-      const micIcon = micBtn.querySelector('span');
-      micBtn.classList.remove('bg-rose-500', 'hover:bg-rose-600', 'animate-pulse');
-      micBtn.classList.add('bg-slate-700', 'hover:bg-slate-600');
-      micIcon.innerText = 'mic';
-    }
-
-    function hangupSimulatedCall(manual = false) {
-      AudioSynth.playHangup();
-      simState.active = false;
-      
-      if (manual && simState.step < 2) {
-        // Just close and do nothing if hung up early
-        closeCallSimulatorWidget();
-        showToast('Call simulation ended early.', 'info');
-        return;
-      }
-
-      // Save success result!
-      document.getElementById('sim-view-active').classList.add('hidden');
-      document.getElementById('sim-view-complete').classList.remove('hidden');
-
-      // Populate summary view
-      document.getElementById('sum-pat-name').textContent = simState.patientDetails.name;
-      document.getElementById('sum-pat-svc').textContent = simState.patientDetails.service;
-      document.getElementById('sum-pat-time').textContent = `${simState.patientDetails.date}, ${simState.patientDetails.time}`;
-    }
-
-    function finishSimAndRefreshDashboard() {
-      // 1. Inject Call Log
-      const storedCalls = localStorage.getItem('renia_calls');
-      let callsList = [];
-      if (storedCalls) {
-        try { callsList = JSON.parse(storedCalls); } catch(e){}
-      }
-      
-      const newCall = {
-        id: generateId(),
-        caller_name: simState.patientDetails.name,
-        caller_phone: simState.patientDetails.phone,
-        time: 'Just now',
-        duration: 134,
-        language: simState.scenario === 'carlos' ? 'es' : 'en',
-        sentiment_emoji: '😊',
-        status: 'completed',
-        transcript: simState.transcript
-      };
-      callsList.unshift(newCall);
-      localStorage.setItem('renia_calls', JSON.stringify(callsList));
-
-      // 2. Inject Appointment
-      const storedAppts = localStorage.getItem('renia_appointments');
-      let apptsList = [];
-      if (storedAppts) {
-        try { apptsList = JSON.parse(storedAppts); } catch(e){}
-      }
-
-      const newAppt = {
-        id: generateId(),
-        name: simState.patientDetails.name,
-        date: simState.patientDetails.date,
-        time: simState.patientDetails.time,
-        service: simState.patientDetails.service,
-        status: 'Confirmed'
-      };
-      apptsList.unshift(newAppt);
-      localStorage.setItem('renia_appointments', JSON.stringify(apptsList));
-
-      // 3. Increment Metrics
-      const storedMetrics = localStorage.getItem('renia_metrics');
-      let metrics = {
-        calls_today: 47,
-        calls_trend: '+12%',
-        booked_today: 12,
-        booked_trend: '+8%',
-        revenue_today: 3240,
-        revenue_trend: '+15%',
-        satisfaction: 96,
-        satisfaction_trend: '+2%'
-      };
-      if (storedMetrics) {
-        try { metrics = JSON.parse(storedMetrics); } catch(e){}
-      }
-      
-      metrics.calls_today += 1;
-      metrics.booked_today += 1;
-      metrics.revenue_today += 350;
-      localStorage.setItem('renia_metrics', JSON.stringify(metrics));
-
-      // Close Widget
-      closeCallSimulatorWidget();
-      showToast(`🎉 Simulation saved! Appointment booked for ${simState.patientDetails.name}!`, 'success');
-
-      // 4. Force Hot Dashboard Data reload!
-      if (typeof Dashboard !== 'undefined' && typeof Dashboard.loadDashboard === 'function') {
-        Dashboard.loadDashboard();
-      }
-    }
-
-     document.addEventListener('DOMContentLoaded', () => {
-       // Wire logout button
-       const lBtn = document.querySelector('[onclick*="Auth.logout"]') || document.getElementById('logout-btn');
-       if (lBtn && !lBtn.hasAttribute('data-logout-wired')) {
-         lBtn.setAttribute('data-logout-wired','1');
-         lBtn.addEventListener('click', () => {
-           if (typeof Auth !== 'undefined') Auth.logout();
-           else window.location.href = 'index.html';
-         });
-       }
-       
-       // Auto inject simulator panel overlay
-       injectSimulatorWidget();
-       injectVoiceAgentWidget();
-     });
-
-    let voiceAgentWidgetInjected = false;
-    let voiceAgent = null;
-    let voiceAgentTranscript = [];
-
-    function injectVoiceAgentWidget() {
-      if (voiceAgentWidgetInjected) return;
-      voiceAgentWidgetInjected = true;
-
-      const widget = document.createElement('div');
-      widget.id = 'voice-agent-widget';
-      widget.className = 'fixed bottom-6 right-6 z-[9999] w-[400px] h-[520px] bg-white border border-slate-200 rounded-[28px] shadow-[0_25px_60px_rgba(15,23,42,0.15)] flex flex-col overflow-hidden transition-all duration-500 transform translate-y-[600px] opacity-0 select-none';
-      widget.style.fontFamily = "'Inter', sans-serif";
-
-      widget.innerHTML = `
-        <div class="px-5 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 flex items-center justify-between shrink-0">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-white text-[20px]">mic</span>
-            <span class="text-sm font-black text-white tracking-wide">Grok Voice Agent</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span id="va-status-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
-            <span id="va-status-text" class="text-[10px] font-bold text-teal-200 uppercase">Disconnected</span>
-            <button onclick="closeVoiceAgentWidget()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-colors text-sm">×</button>
-          </div>
-        </div>
-
-        <div id="va-transcript-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50">
-          <div class="text-center py-8">
-            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
-              <span class="material-symbols-outlined text-[32px]">settings_voice</span>
-            </div>
-            <p class="text-xs text-slate-500 font-semibold leading-relaxed">Click "Start Voice Session" below<br>to begin a real-time voice conversation<br>with your AI receptionist.</p>
-          </div>
-        </div>
-
-        <div id="va-controls" class="p-4 bg-white border-t border-slate-200 shrink-0">
-          <div class="flex flex-col items-center gap-3">
-            <button id="va-toggle-btn" onclick="toggleVoiceAgentSession()" class="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group">
-              <span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>
-            </button>
-            <span id="va-btn-label" class="text-xs font-bold text-slate-600">Start Voice Session</span>
-          </div>
-
-          <div class="mt-3 flex items-center gap-2">
-            <input type="text" id="va-text-input" placeholder="Or type a message..." class="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs outline-none focus:border-teal-500 transition-colors" disabled>
-            <button id="va-send-text-btn" onclick="sendVoiceAgentText()" class="px-3 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-xl text-xs font-bold cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-              Send
-            </button>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(widget);
-
-      document.getElementById('va-text-input')?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') sendVoiceAgentText();
-      });
-    }
-
-    function openVoiceAgentWidget() {
-      const widget = document.getElementById('voice-agent-widget');
-      if (!widget) return;
-      
-      widget.classList.remove('translate-y-[600px]', 'opacity-0');
-      widget.classList.add('translate-y-0', 'opacity-100');
-    }
-
-    function closeVoiceAgentWidget() {
-      const widget = document.getElementById('voice-agent-widget');
-      if (!widget) return;
-      
-      if (voiceAgent && voiceAgent.isConnected) {
-        voiceAgent.disconnect();
-      }
-      
-      widget.classList.add('translate-y-[600px]', 'opacity-0');
-      widget.classList.remove('translate-y-0', 'opacity-100');
-    }
-
-    function updateVoiceAgentStatus(status, text) {
-      const dot = document.getElementById('va-status-dot');
-      const statusText = document.getElementById('va-status-text');
-      
-      if (dot && statusText) {
-        switch (status) {
-          case 'connected':
-            dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
-            statusText.textContent = 'Connected';
-            statusText.className = 'text-[10px] font-bold text-emerald-300 uppercase';
-            break;
-          case 'connecting':
-            dot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
-            statusText.textContent = 'Connecting...';
-            statusText.className = 'text-[10px] font-bold text-amber-300 uppercase';
-            break;
-          case 'speaking':
-            dot.className = 'w-2 h-2 rounded-full bg-teal-400 animate-pulse';
-            statusText.textContent = 'AI Speaking';
-            statusText.className = 'text-[10px] font-bold text-teal-300 uppercase';
-            break;
-          case 'listening':
-            dot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse';
-            statusText.textContent = 'Listening';
-            statusText.className = 'text-[10px] font-bold text-cyan-300 uppercase';
-            break;
-          default:
-            dot.className = 'w-2 h-2 rounded-full bg-slate-400';
-            statusText.textContent = 'Disconnected';
-            statusText.className = 'text-[10px] font-bold text-slate-400 uppercase';
-        }
-      }
-    }
-
-    function addVoiceAgentMessage(text, role) {
-      const container = document.getElementById('va-transcript-container');
-      if (!container) return;
-
-      const welcome = container.querySelector('.text-center.py-8');
-      if (welcome) welcome.remove();
-
-      const bubble = document.createElement('div');
-      bubble.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
-      
-      const bg = role === 'user' ? 'bg-teal-500 text-white' : 'bg-white border border-slate-200 text-slate-800';
-      const rounding = role === 'user' 
-        ? 'rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl' 
-        : 'rounded-tl-2xl rounded-tr-2xl rounded-br-2xl';
-
-      bubble.innerHTML = `
-        <div class="max-w-[85%] p-3 ${bg} ${rounding} text-xs font-semibold leading-relaxed shadow-sm">
-          ${escapeHtml(text)}
-        </div>
-      `;
-
-      container.appendChild(bubble);
-      container.scrollTop = container.scrollHeight;
-
-      voiceAgentTranscript.push({ role, text, timestamp: Date.now() });
-    }
-
-    async function toggleVoiceAgentSession() {
-      const btn = document.getElementById('va-toggle-btn');
-      const btnLabel = document.getElementById('va-btn-label');
-      const textInput = document.getElementById('va-text-input');
-      const sendBtn = document.getElementById('va-send-text-btn');
-
-      if (voiceAgent && voiceAgent.isConnected) {
-        await voiceAgent.disconnect();
-        voiceAgent = null;
-        
-        if (btn) {
-          btn.className = 'w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group';
-          btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>';
-        }
-        if (btnLabel) btnLabel.textContent = 'Start Voice Session';
-        if (textInput) textInput.disabled = true;
-        if (sendBtn) sendBtn.disabled = true;
-        
-        updateVoiceAgentStatus('disconnected');
-        addVoiceAgentMessage('Session ended.', 'assistant');
-        
-      } else {
-        const settings = localStorage.getItem('renia_settings') 
-          ? JSON.parse(localStorage.getItem('renia_settings')) 
-          : { 
-              profile: { name: 'Sunshine Smiles Dental' }, 
-              voice: { voice: 'Eve', instructions: '' } 
-            };
-
-        const voiceMap = {
-          'Ash': 'rex',
-          'Ballad': 'ara',
-          'Coral': 'eve',
-          'Sage': 'eve',
-          'Verse': 'sal',
-          'Ani': 'ara',
-          'Eve': 'eve',
-          'Leo': 'leo'
-        };
-
-        const selectedVoice = settings.voice?.voice || 'Eve';
-        const realVoiceId = voiceMap[selectedVoice] || 'eve';
-        
-        const defaultInstructions = `You are ${selectedVoice}, the elite AI voice receptionist for ${settings.profile?.name || 'Sunshine Smiles Dental'} in Florida. 
-You are highly professional, warm, and friendly. Never mention you are an AI.
-Accepted Insurance: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
-Services: General checkups, teeth whitening, orthodontics, emergency extractions, dental implants.
-Be concise — this is a voice call.`;
-
-        voiceAgent = new GrokVoiceAgent({
-          voice: realVoiceId,
-          instructions: settings.voice?.instructions || defaultInstructions,
-          clinicName: settings.profile?.name || 'Sunshine Smiles Dental'
-        });
-
-        voiceAgent.on('onConnect', () => {
-          updateVoiceAgentStatus('connected');
-          if (btn) {
-            btn.className = 'w-16 h-16 rounded-full bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-rose-500/30 group';
-            btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">call_end</span>';
-          }
-          if (btnLabel) btnLabel.textContent = 'End Session';
-          if (textInput) textInput.disabled = false;
-          if (sendBtn) sendBtn.disabled = false;
-          
-          addVoiceAgentMessage('Voice session connected. Start speaking!', 'assistant');
-        });
-
-        voiceAgent.on('onDisconnect', () => {
-          updateVoiceAgentStatus('disconnected');
-        });
-
-         voiceAgent.on('onError', (err) => {
-           let errMsg = 'Unknown error';
-           
-           if (err instanceof Error) {
-             errMsg = err.message;
-           } else if (err && typeof err === 'object') {
-             if (err.type) {
-               errMsg = `Connection error (${err.type})`;
-             } else if (err.message) {
-               errMsg = err.message;
-             } else {
-               try {
-                 errMsg = JSON.stringify(err).substring(0, 150);
-               } catch (e) {
-                 errMsg = 'Connection failed';
-               }
-             }
-           } else {
-             errMsg = String(err);
-           }
-           
-           console.error('Voice agent error:', err, '->', errMsg);
-           
-           if (errMsg.includes('UserMedia') || errMsg.includes('Permission') || errMsg.includes('microphone') || errMsg.includes('denied')) {
-             addVoiceAgentMessage('⚠️ Microphone access denied. Please allow microphone access in your browser settings to use the voice agent.', 'assistant');
-           } else if (errMsg.includes('401') || errMsg.includes('Unauthorized') || errMsg.includes('auth') || errMsg.includes('token')) {
-             addVoiceAgentMessage('⚠️ Authentication failed. Please check your xAI API key in Settings > AI Voice Configuration.', 'assistant');
-           } else if (errMsg.includes('1006') || errMsg.includes('network') || errMsg.includes('internet') || errMsg.includes('failed')) {
-             addVoiceAgentMessage('⚠️ Connection failed. Please check your internet connection and try again.', 'assistant');
-           } else {
-             addVoiceAgentMessage('⚠️ Error: ' + errMsg.substring(0, 100), 'assistant');
-           }
-           
-           updateVoiceAgentStatus('disconnected');
-           
-           const btn = document.getElementById('va-toggle-btn');
-           const btnLabel = document.getElementById('va-btn-label');
-           const textInput = document.getElementById('va-text-input');
-           const sendBtn = document.getElementById('va-send-text-btn');
-           
-           if (btn) {
-             btn.className = 'w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group';
-             btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>';
-           }
-           if (btnLabel) btnLabel.textContent = 'Start Voice Session';
-           if (textInput) textInput.disabled = true;
-           if (sendBtn) sendBtn.disabled = true;
-         });
-
-        voiceAgent.on('onTranscript', (text, role) => {
-          if (role === 'user' && text && text.trim()) {
-            updateVoiceAgentStatus('listening');
-            addVoiceAgentMessage(text, 'user');
-          }
-        });
-
-        voiceAgent.on('onAssistantTranscript', (text, role) => {
-          updateVoiceAgentStatus('speaking');
-        });
-
-        voiceAgent.on('onStateChange', (state) => {
-          console.log('Voice agent state:', state);
-        });
-
-        updateVoiceAgentStatus('connecting');
-        addVoiceAgentMessage('Connecting to Grok Voice API...', 'assistant');
-        
-        try {
-          await voiceAgent.connect();
-        } catch (err) {
-          console.error('Failed to connect voice agent (initial):', err);
-          
-          let errMsg = 'Unknown error';
-          if (err instanceof Error) {
-            errMsg = err.message;
-          } else if (err && typeof err === 'object') {
-            try {
-              errMsg = JSON.stringify(err).substring(0, 100);
-            } catch (e) {
-              errMsg = 'Connection failed';
-            }
-          } else {
-            errMsg = String(err);
-          }
-          
-          if (errMsg.includes('UserMedia') || errMsg.includes('Permission') || errMsg.includes('microphone') || errMsg.includes('denied')) {
-            addVoiceAgentMessage('⚠️ Microphone access denied. Please allow microphone access in your browser settings to use the voice agent.', 'assistant');
-          } else if (errMsg.includes('401') || errMsg.includes('Unauthorized') || errMsg.includes('auth') || errMsg.includes('token')) {
-            addVoiceAgentMessage('⚠️ Authentication failed. Please check your xAI API key in Settings > AI Voice Configuration.', 'assistant');
-          } else {
-            addVoiceAgentMessage('⚠️ Connection failed: ' + errMsg.substring(0, 80), 'assistant');
-          }
-          
-          updateVoiceAgentStatus('disconnected');
-          
-          const btn = document.getElementById('va-toggle-btn');
-          const btnLabel = document.getElementById('va-btn-label');
-          const textInput = document.getElementById('va-text-input');
-          const sendBtn = document.getElementById('va-send-text-btn');
-          
-          if (btn) {
-            btn.className = 'w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white flex items-center justify-center cursor-pointer transition-all shadow-lg shadow-teal-500/30 group';
-            btn.innerHTML = '<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>';
-          }
-          if (btnLabel) btnLabel.textContent = 'Start Voice Session';
-          if (textInput) textInput.disabled = true;
-          if (sendBtn) sendBtn.disabled = true;
-        }
-      }
-    }
-
-    function sendVoiceAgentText() {
-      const input = document.getElementById('va-text-input');
-      if (!input || !input.value.trim() || !voiceAgent) return;
-      
-      const text = input.value.trim();
-      input.value = '';
-      
-      addVoiceAgentMessage(text, 'user');
-      voiceAgent.sendText(text);
-    }
-
-    function escapeHtml(text) {
-      if (!text) return '';
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // Design switching and auto-redirection logic
-    function setDashboardVariant(variant) {
-      localStorage.setItem('renia_dashboard_variant', variant);
-      if (variant === 'stripe') window.location.href = 'dashboard.html';
-      if (variant === 'stitch') window.location.href = 'dashboard-v2.html';
-      if (variant === 'apple') window.location.href = 'dashboard-v3.html';
-    }
-
-    // Auto-redirection checking on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('renia_dashboard_variant') || 'stripe';
-      const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
-      if (saved === 'stitch' && currentPage === 'dashboard.html') {
-        window.location.href = 'dashboard-v2.html';
-      } else if (saved === 'apple' && currentPage === 'dashboard.html') {
-        window.location.href = 'dashboard-v3.html';
-      }
-    });
   </script>
 </body>
 </html>

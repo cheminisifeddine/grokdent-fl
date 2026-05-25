@@ -1,281 +1,275 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#FAFAFC]">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renia AI - Knowledge Base</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
-  
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Renia AI - Knowledge Engine Training</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
   
-  <script>
+  <script id="tailwind-config">
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
           colors: {
-            brand: {
-              950: '#020205',
-              900: '#0f172a',
-              800: '#1e293b',
-              500: '#6366f1',
-              400: '#818cf8',
-              100: '#e0e7ff',
-              50:  '#f8fafc',
-            },
-            accent: {
-              teal: '#0FD8B6',
-              cyan: '#06b6d4',
-              coral: '#f43f5e',
-            }
+            "border-subtle": "#E7E7E4",
+            "neural-purple": "#9333EA",
+            "background": "#F7F7F5",
+            "surface-panel": "#F3F2EF",
+            "surface-bright": "#f9f9f9",
+            "surface-card": "#FCFCFB",
+            "primary-container": "#1b1b1b",
+            "neural-indigo": "#4F46E5",
+            "accent-emerald": "#10B981"
           }
         }
       }
     }
   </script>
-  
+
   <style>
-    body { background-color: #FAFAFC; }
-    
-    .glass-card {
-      background: #FFFFFF;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    body {
+      font-family: 'Geist', 'Inter', sans-serif;
+      background-color: #F7F7F5;
+      color: #1b1b1b;
     }
-    .glass-card:hover {
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
-      border-color: #cbd5e1;
+    .glass-panel {
+      background: rgba(252, 252, 251, 0.85);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
     }
-    
-    .nav-item {
-      transition: all 0.2s;
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
     }
-    .nav-item:hover, .nav-item.active {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #e2e8f0;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
     }
-    .nav-item.active {
-      font-weight: 700;
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e2e2e2;
+      border-radius: 10px;
     }
-    
-    .metric-gradient-text {
-      background: linear-gradient(135deg, #0f172a 0%, #6366f1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
-<body class="text-slate-800 antialiased h-screen overflow-hidden flex selection:bg-brand-500 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
 
-  <!-- Sidebar -->
-  <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col justify-between h-full z-30 relative shadow-sm">
-    <div>
-      <div class="px-6 py-8 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-brand-900 flex items-center justify-center text-white text-[14px] shadow-lg shadow-brand-900/20">🦷</div>
-        <span class="font-display font-black text-xl tracking-tight text-brand-900">Renia AI</span>
-      </div>
-
-      <nav class="px-4 space-y-1">
-        <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
-        </a>
-        <a href="calls.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">call</span> Calls
-        </a>
-        <a href="appointments.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">calendar_month</span> Appointments
-        </a>
-        <a href="knowledge-base.html" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">menu_book</span> Knowledge Base
-        </a>
-        <a href="analytics.html" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[20px]">insights</span> Analytics
-        </a>
-      </nav>
+  <!-- Asymmetrical Rail System (Sidebar) -->
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-45 flex-shrink-0 items-center py-6">
+    <!-- Brand Icon -->
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+      <span class="text-white text-[15px]">🦷</span>
     </div>
-
-    <div class="px-4 pb-8">
-      <div class="mb-4">
-        <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-        </a>
-        <a href="billing.html" class="nav-item flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 border border-transparent">
-          <span class="material-symbols-outlined text-[18px]">credit_card</span> Billing
-        </a>
-      </div>
-      
-      <div onclick="if(typeof Auth !== 'undefined') Auth.logout();" class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xs border border-brand-200">SM</div>
-          <div>
-            <div class="text-sm font-bold text-brand-900" id="user-name-display">Dr. Sarah M.</div>
-            <div class="text-xs font-semibold text-slate-500">Admin</div>
-          </div>
+    <!-- Nav Icons -->
+    <nav class="flex flex-col gap-6 items-center flex-1 w-full">
+      <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
-        <span class="material-symbols-outlined text-[18px] text-slate-400">logout</span>
+      </a>
+      <a class="w-full flex justify-center group" href="calls.html" title="Calls">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">call</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">calendar_month</span>
+        </div>
+      </a>
+      <a class="relative w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
+        <div class="p-2 rounded bg-slate-100 text-slate-950">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">insights</span>
+        </div>
+      </a>
+    </nav>
+    <!-- Bottom Rail Items -->
+    <div class="mt-auto flex flex-col gap-4 items-center w-full">
+      <a class="w-full flex justify-center group" href="settings.html" title="Settings">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">settings</span>
+        </div>
+      </a>
+      <a class="w-full flex justify-center group" href="billing.html" title="Billing">
+        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          <span class="material-symbols-outlined text-[22px]">credit_card</span>
+        </div>
+      </a>
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+        SM
       </div>
     </div>
   </aside>
 
   <!-- Main Content Area -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+  <main class="flex-1 flex h-full overflow-hidden relative">
     
-    <!-- Topbar -->
-    <header class="h-[80px] px-8 flex items-center justify-between border-b border-slate-200 bg-white/70 backdrop-blur-md z-20 relative shrink-0">
-      <h1 class="font-display text-2xl font-black text-brand-900 tracking-tight">Knowledge Base</h1>
-      
-      <div class="flex items-center gap-5">
-        <button id="add-kb-btn" class="flex items-center gap-2 bg-brand-900 text-white px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-600 transition-colors shadow-md">
-          <span class="material-symbols-outlined text-[18px]">add</span> Add Entry
-        </button>
-        <button id="seed-defaults-btn" class="flex items-center gap-2 bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors shadow-sm">
-          <span class="material-symbols-outlined text-[18px]">download</span> Seed Defaults
-        </button>
-        <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">AI Online</span>
+    <!-- Column 1: Document Index & Protocol Directory -->
+    <section class="w-80 bg-[#F7F7F5] border-r border-slate-200 flex flex-col flex-shrink-0 h-full overflow-hidden">
+      <!-- Search Protocols & Actions -->
+      <div class="p-6 border-b border-slate-200 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold text-sm text-slate-900 uppercase tracking-wider font-mono">Protocols</h2>
+          <button id="seed-defaults-btn" title="Seed Default FAQs" class="p-1 rounded hover:bg-slate-200 text-slate-500 transition-colors">
+            <span class="material-symbols-outlined text-[16px]">download</span>
+          </button>
         </div>
         
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
-          <span class="material-symbols-outlined text-[20px]">notifications</span>
-          <span class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Scrollable Page Content -->
-    <div class="flex-1 overflow-y-auto p-8">
-      <div class="max-w-[1400px] mx-auto">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          <!-- Left Column: KB Management (7 cols) -->
-          <div class="lg:col-span-7 space-y-6">
-            <!-- Search & Filters -->
-            <div class="glass-card rounded-2xl p-4 bg-white flex flex-col sm:flex-row gap-3 items-center justify-between shadow-sm">
-              <div class="relative w-full">
-                <span class="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-slate-400">search</span>
-                <input type="text" id="kb-search-input" placeholder="Search questions or answers..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
-              </div>
-            </div>
-            
-            <!-- Category Tabs -->
-            <div class="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 inline-flex shadow-inner">
-              <button data-category="all" class="kb-tab active px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition-all">All</button>
-              <button data-category="general" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">General</button>
-              <button data-category="hours" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Hours</button>
-              <button data-category="services" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Services</button>
-              <button data-category="insurance" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Insurance</button>
-              <button data-category="emergency" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Emergency</button>
-              <button data-category="policies" class="kb-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all">Policies</button>
-            </div>
-            
-            <!-- Q&A List -->
-            <div id="kb-entries-container" class="space-y-4">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
-          
-          <!-- Right Column: AI Agent Simulator (5 cols) -->
-          <div class="lg:col-span-5">
-            <div class="glass-card rounded-3xl p-6 bg-gradient-to-br from-slate-900 to-indigo-950 text-white border-none shadow-xl sticky top-8">
-              <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-xl">🤖</div>
-                <div>
-                  <h3 class="font-display font-bold text-base tracking-tight text-white">AI Agent Simulator</h3>
-                  <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-0.5">Real-time Response Tester</p>
-                </div>
-              </div>
-              
-              <div class="space-y-4 mb-6 min-h-[280px] bg-slate-950/50 rounded-2xl p-4 border border-slate-800/80 flex flex-col justify-between">
-                <div id="simulator-chat-history" class="space-y-4 overflow-y-auto max-h-[250px] text-left pr-1">
-                  <div class="flex gap-2">
-                    <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-                    <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
-                      Hello! This is your clinic's AI voice receptionist. You can ask me any question about our services, hours, accepted insurance, or clinic policies, and I will generate an answer dynamically from your customized knowledge base! Try typing below.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <form id="simulator-form" class="space-y-3">
-                <div class="relative">
-                  <input type="text" id="simulator-input" placeholder="Type a patient question (e.g. Do you accept Cigna?)..." required class="w-full bg-slate-950/80 border border-slate-800 rounded-xl py-3 pl-4 pr-10 text-xs text-white placeholder-slate-500 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
-                  <button type="submit" class="absolute right-2 top-2.5 w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center hover:bg-brand-400 transition-all">
-                    <span class="material-symbols-outlined text-[15px] text-white">send</span>
-                  </button>
-                </div>
-                <p class="text-[9px] text-slate-500 text-center font-bold uppercase tracking-wider">Simulates what the voice caller hears instantly</p>
-              </form>
-            </div>
-          </div>
-          
+        <div class="relative flex items-center bg-white rounded-full px-4 py-1.5 border border-slate-200 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+          <span class="material-symbols-outlined text-slate-400 text-[16px]">search</span>
+          <input id="kb-search-input" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 focus:outline-none" placeholder="Search protocols..." type="text"/>
         </div>
 
+        <button onclick="createNewProtocol()" class="w-full bg-slate-950 hover:bg-slate-900 text-white py-2 rounded-full flex items-center justify-center gap-2 font-bold text-xs shadow-sm transition-all">
+          <span class="material-symbols-outlined text-[15px]">add</span>
+          <span>New Document</span>
+        </button>
       </div>
-    </div>
+
+      <!-- Categories Directory List -->
+      <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4" id="kb-entries-container">
+        <!-- Rendered Dynamically -->
+      </div>
+    </section>
+
+    <!-- Column 2: Document Editor Workstation -->
+    <section class="flex-1 bg-white overflow-y-auto custom-scrollbar relative h-full flex flex-col justify-between">
+      <div class="max-w-2xl mx-auto py-12 px-6 w-full flex-1">
+        <!-- Top Meta header -->
+        <div class="flex items-center justify-between mb-8">
+          <div class="flex items-center gap-3">
+            <select id="editor-category" class="text-[9px] font-bold tracking-wider uppercase bg-slate-100 border-none rounded-full px-3 py-1 text-slate-700 outline-none focus:ring-1 focus:ring-slate-950">
+              <option value="general">General</option>
+              <option value="hours">Hours</option>
+              <option value="services">Services</option>
+              <option value="insurance">Insurance</option>
+              <option value="emergency">Emergency</option>
+              <option value="policies">Policies</option>
+            </select>
+            <span class="text-slate-400 text-[10px]" id="editor-last-saved">Synced with Renia Engine</span>
+          </div>
+          <button onclick="deleteActiveProtocol()" class="text-xs text-rose-600 font-bold hover:bg-rose-50 px-3 py-1 rounded transition-colors flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+          </button>
+        </div>
+
+        <!-- Question Input (Editable display header) -->
+        <h2 id="editor-question" class="font-display text-2xl font-bold tracking-tight text-slate-900 mb-6 border-none focus:outline-none focus:ring-0 w-full resize-none min-h-[36px]" contenteditable="true" placeholder="Enter protocol statement or question..."></h2>
+
+        <!-- Answer / Instruction Body (Contenteditable) -->
+        <div class="space-y-6 text-sm text-slate-600 leading-relaxed font-medium">
+          <p id="editor-answer" class="focus:outline-none focus:ring-0 min-h-[120px]" contenteditable="true" placeholder="Type clinical directions or answer details..."></p>
+
+          <!-- System AI Logic block -->
+          <div class="p-5 bg-slate-50 rounded-lg border border-slate-200/80">
+            <h4 class="font-bold text-slate-800 text-[10px] uppercase tracking-wider mb-3 flex items-center gap-2 font-mono">
+              <span class="material-symbols-outlined text-[14px] text-indigo-600">terminal</span>
+              AI Decision Rule Engine
+            </h4>
+            <div class="mono text-[11px] text-slate-500 space-y-2">
+              <p><span class="text-indigo-600">IF</span> category == "<span id="rule-category" class="text-slate-800 font-bold">general</span>" <span class="text-indigo-600">THEN</span> apply_tone("empathetic")</p>
+              <p><span class="text-indigo-600">SET</span> response_delay = "instant_0.3s"</p>
+              <p><span class="text-indigo-600">INCLUDE</span> scheduling_availability = "EHR_calendar_slots"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Action Save bar at bottom of editor -->
+      <div class="sticky bottom-0 bg-gradient-to-t from-white via-white to-transparent py-6 px-8 flex justify-center">
+        <div class="glass-panel rounded-full px-6 py-2.5 flex items-center gap-4 shadow-lg border border-slate-200/60">
+          <button onclick="document.execCommand('bold', false, null)" title="Bold" class="p-1 rounded text-slate-500 hover:text-slate-900 transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+          <button onclick="document.execCommand('italic', false, null)" title="Italic" class="p-1 rounded text-slate-500 hover:text-slate-900 transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+          <div class="w-px h-4 bg-slate-200"></div>
+          <button onclick="saveActiveProtocol()" class="flex items-center gap-2 bg-slate-950 text-white px-5 py-1.5 rounded-full text-xs font-bold hover:bg-slate-900 active:scale-[0.98] transition-all uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px]">cloud_done</span>
+            <span>Save Directive</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Column 3: AI Preview Simulator (Real-time Tester) -->
+    <section class="w-96 border-l border-slate-200 bg-slate-50 flex flex-col flex-shrink-0 h-full overflow-hidden">
+      <!-- Preview Header -->
+      <div class="p-6 border-b border-slate-200 bg-slate-100/40">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-bold text-xs tracking-wider uppercase font-mono flex items-center gap-2">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+            </span>
+            Renia Voice Engine
+          </h3>
+          <button onclick="resetPreviewChat()" class="text-[10px] font-bold text-slate-400 hover:text-slate-900 uppercase">Clear</button>
+        </div>
+        <p class="text-slate-500 text-[10px] font-medium leading-normal">Test guidelines instantly. Renia reads documents live during voice caller simulation.</p>
+      </div>
+
+      <!-- Preview Chat stream -->
+      <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4" id="simulator-chat-history">
+        <!-- Rendered Dynamically -->
+      </div>
+
+      <!-- Chat input -->
+      <div class="p-6 border-t border-slate-200 bg-slate-100/30">
+        <form id="simulator-form" class="relative">
+          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-white border border-slate-200 rounded-full py-2.5 pl-4 pr-10 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-950/10 focus:border-slate-300 transition-all"/>
+          <button type="submit" class="absolute right-1.5 top-1.5 w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center text-white hover:bg-slate-900 transition-all">
+            <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+          </button>
+        </form>
+        <div class="flex items-center justify-center gap-3 mt-3 text-[9px] font-mono text-slate-400">
+          <span>Active Context: Document Canvas</span>
+          <span>•</span>
+          <span>Model: Grok-Think-1.0</span>
+        </div>
+      </div>
+    </section>
   </main>
-
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
   <!-- App Scripts -->
   <script src="js/utils.js?v=4"></script>
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
-  <script src="js/charts.js?v=4"></script>
-  <script src="js/websocket.js?v=4"></script>
-  <script src="js/dashboard.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
-  
+
   <script>
     const state = {
       knowledgeBase: [],
       searchQuery: '',
-      selectedCategory: 'all'
+      activeId: null
     };
 
     const DEFAULT_KB = [
-      { id: '1', category: 'general', question: 'What services does your dental clinic offer?', answer: 'We offer a full range of dental services including general dentistry, cosmetic dentistry, dental implants, orthodontics, pediatric dentistry, emergency dental care, periodontics, endodontics, oral surgery, and teeth whitening. We are committed to providing comprehensive dental care for the whole family.', active: true },
-      { id: '2', category: 'hours', question: 'What are your office hours?', answer: 'We are open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. For dental emergencies outside of business hours, please call our emergency line at (305) 555-0199.', active: true },
-      { id: '3', category: 'insurance', question: 'What insurance plans do you accept?', answer: 'We accept most major dental insurance plans including Delta Dental FL, Humana, MCNA Dental (Medicaid), Guardian, Cigna, MetLife, Aetna, and Florida Blue. We also offer flexible payment plans for patients without insurance. Please call us for specific coverage questions.', active: true },
-      { id: '4', category: 'emergency', question: 'What should I do if I have a dental emergency?', answer: 'If you are experiencing a dental emergency such as severe tooth pain, a knocked-out tooth, or significant swelling, please call us immediately at (305) 555-0100. During office hours, we accommodate same-day emergency appointments. After hours, call our emergency line at (305) 555-0199. If you have life-threatening symptoms, please call 911.', active: true },
-      { id: '5', category: 'policies', question: 'What is your appointment cancellation policy?', answer: 'We value your time and request that you provide us with at least 24 hours notice if you need to cancel or reschedule your appointment. Cancellations made with less than 24 hours notice may be subject to a fee of $50.', active: true },
-      { id: '6', category: 'services', question: 'Do you offer cosmetic dentistry or teeth whitening?', answer: 'Yes! We offer premium cosmetic services including porcelain veneers, composite bonding, full mouth reconstruction, and both in-office and take-home professional teeth whitening treatments using advanced whitening technology.', active: true },
-      { id: '7', category: 'general', question: 'Where is your dental clinic located?', answer: 'Our clinic is conveniently located at 1200 Brickell Avenue, Suite 450, Miami, FL 33131. Parking validation is available for all patients in the building garage.', active: true }
+      { id: '1', category: 'services', question: 'What services does your dental clinic offer?', answer: 'We offer a full range of dental services including general checkups, teeth whitening, clinical cleanings, dental implants, root canals, oral surgery, and orthodontics.', active: true },
+      { id: '2', category: 'hours', question: 'What are your office hours?', answer: 'Our office is open Monday through Friday from 8:00 AM to 5:00 PM, and Saturday from 9:00 AM to 1:00 PM. We are closed on Sundays. Emergency pager calls are supported 24/7.', active: true },
+      { id: '3', category: 'insurance', question: 'What insurance plans do you accept?', answer: 'We accept most PPO dental plans including Delta Dental, Humana, Guardian, Cigna, MetLife, Blue Cross Blue Shield, and Aetna. Flexible custom dental coverage financing is available.', active: true },
+      { id: '4', category: 'emergency', question: 'What should I do if I have a dental emergency?', answer: 'If you are experiencing severe dental swelling, localized intense bleeding, or high trauma, call us immediately at (305) 555-0100 for a same-day slots override. After hours, dial 555-0199.', active: true },
+      { id: '5', category: 'policies', question: 'What is your appointment cancellation policy?', answer: 'We value your schedule. We kindly request at least 24 hours notice for any rescheduling or cancellations. Late notice changes may result in a standard $50 clinical slot fee.', active: true }
     ];
 
     function loadKnowledgeBase() {
       const stored = localStorage.getItem('renia_knowledge_base');
       if (stored) {
-        try {
-          state.knowledgeBase = JSON.parse(stored);
-        } catch (e) {
-          state.knowledgeBase = [...DEFAULT_KB];
-        }
+        try { state.knowledgeBase = JSON.parse(stored); } catch (e) { state.knowledgeBase = [...DEFAULT_KB]; }
       } else {
         state.knowledgeBase = [...DEFAULT_KB];
         saveKBToStorage();
       }
+      
+      if (state.knowledgeBase.length > 0 && !state.activeId) {
+        state.activeId = state.knowledgeBase[0].id;
+      }
+      renderKnowledgeBase();
+      loadActiveDocument();
     }
 
     function saveKBToStorage() {
@@ -287,178 +281,179 @@
       if (!container) return;
 
       const q = state.searchQuery.trim().toLowerCase();
-      const cat = state.selectedCategory;
 
+      // Group protocols by category
+      const categories = ['services', 'hours', 'insurance', 'emergency', 'policies', 'general'];
+      
       const filtered = state.knowledgeBase.filter(entry => {
-        const matchesQ = !q || entry.question.toLowerCase().includes(q) || entry.answer.toLowerCase().includes(q);
-        const matchesCat = cat === 'all' || entry.category === cat;
-        return matchesQ && matchesCat;
+        return !q || entry.question.toLowerCase().includes(q) || entry.answer.toLowerCase().includes(q);
+      });
+
+      let html = '';
+
+      categories.forEach(cat => {
+        const catEntries = filtered.filter(e => e.category === cat);
+        if (catEntries.length === 0) return;
+
+        const catIcons = {
+          services: 'medical_services',
+          hours: 'schedule',
+          insurance: 'payments',
+          emergency: 'health_and_safety',
+          policies: 'gavel',
+          general: 'menu_book'
+        };
+
+        html += `
+          <div class="mb-4">
+            <p class="px-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 font-mono">${cat}</p>
+            <div class="space-y-1">
+        `;
+
+        catEntries.forEach(entry => {
+          const isActive = entry.id === state.activeId;
+          const bgClass = isActive ? 'bg-white shadow-sm border-slate-200 text-slate-950 font-bold' : 'hover:bg-slate-100 text-slate-600 hover:text-slate-900 border-transparent';
+          
+          html += `
+            <button onclick="setActiveDocument('${entry.id}')" class="w-full flex items-center justify-between px-3 py-2 border rounded-lg text-xs text-left transition-all ${bgClass}">
+              <span class="flex items-center gap-2 truncate">
+                <span class="material-symbols-outlined text-[16px] text-slate-400">${catIcons[cat] || 'description'}</span>
+                <span class="truncate">${escapeHtml(entry.question)}</span>
+              </span>
+              ${isActive ? '<span class="w-1.5 h-1.5 rounded-full bg-indigo-600 shrink-0 ml-1"></span>' : ''}
+            </button>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `
-          <div class="glass-card rounded-2xl p-8 text-center bg-white border border-slate-200">
-            <span class="material-symbols-outlined text-[48px] text-slate-300 mb-2">find_in_page</span>
-            <h3 class="font-bold text-slate-700 text-base">No entries found</h3>
-            <p class="text-xs text-slate-400 mt-1">Try expanding your search query or select another category filter.</p>
+        html = `
+          <div class="p-6 text-center text-slate-400 text-xs">
+            <span class="material-symbols-outlined text-[32px] text-slate-300 mb-1">search_off</span>
+            <p>No protocols found</p>
           </div>
         `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function setActiveDocument(id) {
+      state.activeId = id;
+      renderKnowledgeBase();
+      loadActiveDocument();
+    }
+
+    function loadActiveDocument() {
+      const entry = state.knowledgeBase.find(e => e.id === state.activeId);
+      const qEl = document.getElementById('editor-question');
+      const aEl = document.getElementById('editor-answer');
+      const catEl = document.getElementById('editor-category');
+      const ruleCatEl = document.getElementById('rule-category');
+
+      if (!entry) {
+        if (qEl) qEl.innerHTML = '';
+        if (aEl) aEl.innerHTML = 'Select or create a protocol from the directory to begin training.';
         return;
       }
 
-      container.innerHTML = filtered.map(entry => {
-        let badgeColor = 'bg-blue-50 text-blue-600 border-blue-100';
-        if (entry.category === 'hours') badgeColor = 'bg-indigo-50 text-indigo-600 border-indigo-100';
-        if (entry.category === 'insurance') badgeColor = 'bg-teal-50 text-teal-600 border-teal-100';
-        if (entry.category === 'emergency') badgeColor = 'bg-rose-50 text-rose-600 border-rose-100';
-        if (entry.category === 'policies') badgeColor = 'bg-amber-50 text-amber-600 border-amber-100';
-        if (entry.category === 'services') badgeColor = 'bg-purple-50 text-purple-600 border-purple-100';
-
-        return `
-          <div class="kb-item glass-card rounded-2xl p-6 relative overflow-hidden group bg-white border border-slate-200 transition-all duration-300" id="kb_card_${entry.id}">
-            <div class="flex items-center justify-between mb-4">
-              <span class="${badgeColor} border px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">${entry.category}</span>
-              <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Active</span>
-            </div>
-            <h3 class="kb-question font-display text-lg font-bold text-slate-900 mb-2.5 leading-snug">${escapeHtml(entry.question)}</h3>
-            <p class="kb-answer text-slate-600 leading-relaxed text-sm mb-5">${escapeHtml(entry.answer)}</p>
-            <div class="flex items-center gap-2">
-              <button onclick="openKBModal('${entry.id}')" class="kb-edit-btn text-xs font-bold text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/50 transition-all bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[15px]">edit</span> Edit Entry
-              </button>
-              <button onclick="deleteKBEntry('${entry.id}')" class="kb-delete-btn text-xs font-bold text-slate-600 hover:text-rose-600 hover:bg-rose-50/50 transition-all bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[15px]">delete</span> Delete
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
+      if (qEl) qEl.innerHTML = entry.question;
+      if (aEl) aEl.innerHTML = entry.answer;
+      if (catEl) catEl.value = entry.category;
+      if (ruleCatEl) ruleCatEl.textContent = entry.category;
     }
 
-    // Modal Add / Edit
-    function openKBModal(entryId = null) {
-      const entry = entryId ? state.knowledgeBase.find(e => e.id === entryId) : null;
+    function saveActiveProtocol() {
+      const entry = state.knowledgeBase.find(e => e.id === state.activeId);
+      if (!entry) return;
+
+      const qEl = document.getElementById('editor-question');
+      const aEl = document.getElementById('editor-answer');
+      const catEl = document.getElementById('editor-category');
+
+      const question = qEl ? qEl.innerText.trim() : '';
+      const answer = aEl ? aEl.innerText.trim() : '';
+      const category = catEl ? catEl.value : 'general';
+
+      if (!question) {
+        showToast('Protocol name cannot be empty', 'error');
+        return;
+      }
+
+      entry.question = question;
+      entry.answer = answer;
+      entry.category = category;
+
+      saveKBToStorage();
+      renderKnowledgeBase();
       
-      const overlay = document.createElement('div');
-      overlay.id = 'kb-modal';
-      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;';
-      
-      const title = entry ? 'Edit Knowledge Entry' : 'Add Knowledge Entry';
-      const submitText = entry ? 'Save Changes' : 'Create Entry';
-      
-      const qVal = entry ? entry.question : '';
-      const aVal = entry ? entry.answer : '';
-      const catVal = entry ? entry.category : 'general';
+      const lastSavedEl = document.getElementById('editor-last-saved');
+      if (lastSavedEl) {
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        lastSavedEl.textContent = `Saved at ${time}`;
+      }
 
-      overlay.innerHTML = `
-        <div style="background:white;border-radius:20px;width:100%;max-width:560px;box-shadow:0 25px 50px rgba(0,0,0,0.15);overflow:hidden;">
-          <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;">
-            <h2 style="font-size:18px;font-weight:850;color:#0f172a;margin:0;font-family:'Outfit',sans-serif;">${title}</h2>
-            <button onclick="document.getElementById('kb-modal').remove()" style="width:36px;height:36px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:18px;color:#64748b;display:flex;align-items:center;justify-content:center;">×</button>
-          </div>
-          <form id="kb-modal-form" style="padding:24px 28px;">
-            <div style="display:grid;gap:16px;">
-              <div>
-                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Category</label>
-                <select id="modal-kb-category" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;background:white;">
-                  <option value="general" ${catVal === 'general' ? 'selected' : ''}>General</option>
-                  <option value="hours" ${catVal === 'hours' ? 'selected' : ''}>Hours</option>
-                  <option value="services" ${catVal === 'services' ? 'selected' : ''}>Services</option>
-                  <option value="insurance" ${catVal === 'insurance' ? 'selected' : ''}>Insurance</option>
-                  <option value="emergency" ${catVal === 'emergency' ? 'selected' : ''}>Emergency</option>
-                  <option value="policies" ${catVal === 'policies' ? 'selected' : ''}>Policies</option>
-                </select>
-              </div>
-              <div>
-                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Question (English)</label>
-                <input type="text" id="modal-kb-question" placeholder="e.g. Do you accept Humana?" required value="${qVal.replace(/"/g, '&quot;')}" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box;">
-              </div>
-              <div>
-                <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">Answer (English)</label>
-                <textarea id="modal-kb-answer" rows="4" placeholder="Clear, friendly answer..." required style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.5;">${aVal}</textarea>
-              </div>
-            </div>
-            <div style="margin-top:24px;display:flex;gap:12px;">
-              <button type="button" onclick="document.getElementById('kb-modal').remove()" style="flex:1;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-weight:700;color:#64748b;background:white;cursor:pointer;font-size:14px;">Cancel</button>
-              <button type="submit" style="flex:2;padding:12px;background:#0f172a;color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:14px;">${submitText}</button>
-            </div>
-          </form>
-        </div>
-      `;
-
-      document.body.appendChild(overlay);
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-
-      document.getElementById('kb-modal-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const category = document.getElementById('modal-kb-category').value;
-        const question = document.getElementById('modal-kb-question').value;
-        const answer = document.getElementById('modal-kb-answer').value;
-
-        if (entry) {
-          // Edit mode
-          const idx = state.knowledgeBase.findIndex(ek => ek.id === entry.id);
-          if (idx !== -1) {
-            state.knowledgeBase[idx] = { ...entry, category, question, answer };
-            saveKBToStorage();
-            try { await API.updateKnowledge(entry.id, state.knowledgeBase[idx]); } catch {}
-            showToast('Knowledge entry updated successfully! ✅', 'success');
-          }
-        } else {
-          // Create mode
-          const newEntry = {
-            id: 'kb_' + Date.now(),
-            category,
-            question,
-            answer,
-            active: true
-          };
-          state.knowledgeBase.push(newEntry);
-          saveKBToStorage();
-          try { await API.createKnowledge(newEntry); } catch {}
-          showToast('Knowledge entry created! ✅', 'success');
-        }
-
-        overlay.remove();
-        renderKnowledgeBase();
-      });
+      showToast('Directive protocol successfully synchronized. ✅', 'success');
+      try { API.updateKnowledge(entry.id, entry); } catch {}
     }
 
-    window.openKBModal = openKBModal;
+    function createNewProtocol() {
+      const newEntry = {
+        id: 'kb_' + Date.now(),
+        category: 'general',
+        question: 'Untitled Directive FAQ',
+        answer: 'Provide dental guidance directions here...',
+        active: true
+      };
+      state.knowledgeBase.unshift(newEntry);
+      state.activeId = newEntry.id;
+      saveKBToStorage();
+      renderKnowledgeBase();
+      loadActiveDocument();
+      showToast('New directive drafted. Edit details now.', 'info');
+      try { API.createKnowledge(newEntry); } catch {}
+    }
 
-    window.deleteKBEntry = function(id) {
-      if (confirm('Are you sure you want to delete this knowledge entry?')) {
-        const idx = state.knowledgeBase.findIndex(e => e.id === id);
+    function deleteActiveProtocol() {
+      if (!state.activeId) return;
+      if (confirm('Delete active protocol?')) {
+        const idToDelete = state.activeId;
+        const idx = state.knowledgeBase.findIndex(e => e.id === idToDelete);
         if (idx !== -1) {
           state.knowledgeBase.splice(idx, 1);
+          state.activeId = state.knowledgeBase[0]?.id || null;
           saveKBToStorage();
-          try { API.deleteKnowledge(id); } catch {}
-          
-          const card = document.getElementById(`kb_card_${id}`);
-          if (card) {
-            card.style.transform = 'translateX(-20px) scale(0.95)';
-            card.style.opacity = '0';
-            setTimeout(() => {
-              renderKnowledgeBase();
-              showToast('Entry deleted successfully 🟥', 'info');
-            }, 250);
-          } else {
-            renderKnowledgeBase();
-            showToast('Entry deleted', 'info');
-          }
+          loadKnowledgeBase();
+          showToast('Directive deleted.', 'info');
+          try { API.deleteKnowledge(idToDelete); } catch {}
         }
       }
-    };
+    }
 
-    // AI Response Tester logic
+    function resetPreviewChat() {
+      const history = document.getElementById('simulator-chat-history');
+      if (!history) return;
+      history.innerHTML = `
+        <div class="flex gap-2">
+          <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
+          <div class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-700 shadow-sm">
+            Hi! Ask me any question related to clinic directives, accepted insurances, or cleaning policies. I am syncing with your updates in real time!
+          </div>
+        </div>
+      `;
+    }
+
     function getSimulatedAIResponse(query) {
       const normQuery = query.toLowerCase();
       let bestMatch = null;
       let highestScore = 0;
       
       state.knowledgeBase.forEach(entry => {
-        if (!entry.active) return;
-        
         const qWords = entry.question.toLowerCase().split(/\W+/).filter(w => w.length > 3);
         const queryWords = normQuery.split(/\W+/).filter(w => w.length > 3);
         
@@ -471,8 +466,7 @@
           matchCount += 8;
         }
 
-        const exactCategoryKeywordMatch = normQuery.includes(entry.category);
-        if (exactCategoryKeywordMatch) {
+        if (normQuery.includes(entry.category)) {
           matchCount += 2;
         }
         
@@ -486,112 +480,89 @@
         return bestMatch.answer;
       }
       
-      // Dynamic helpful fallback responses
-      if (normQuery.includes('book') || normQuery.includes('appointment') || normQuery.includes('schedule') || normQuery.includes('checkup') || normQuery.includes('cleaning')) {
-        return "I would be delighted to assist you with booking! I have open time slots this week on Wednesday at 10:00 AM and Friday at 1:30 PM. Would you like me to book one of those for you?";
-      }
-      if (normQuery.includes('hello') || normQuery.includes('hi') || normQuery.includes('hey')) {
-        return "Hello! I am your clinic's AI voice receptionist. I'm here to assist with booking appointments, accepting insurance, explaining services, and answering general clinic FAQs. How can I help you today?";
-      }
-      if (normQuery.includes('price') || normQuery.includes('cost') || normQuery.includes('charge')) {
-        return "For general checkups, our standard price is $99 and cleanings are $120. We accept most major insurance plans which often cover these 100%! What service were you inquiring about?";
+      if (normQuery.includes('book') || normQuery.includes('appointment') || normQuery.includes('schedule')) {
+        return "I would be happy to book that! We have open dental slots this Wednesday at 10:00 AM and Thursday at 2:00 PM. Should I reserve one for you?";
       }
       
-      return "That is a great question! I couldn't find a direct match for that in my custom knowledge base. However, I can let you know that our general clinic number is (305) 555-0100 and we would be happy to discuss details with you! (Try adding a custom Q&A to my Knowledge Base settings to see me answer this instantly!)";
+      return "That is an excellent inquiry! I couldn't locate a precise match in our clinical protocols guidelines. You can reach the clinic desk at (305) 555-0100 to discuss this, or save a new directive in the panel to teach me immediately!";
     }
 
-    // Init on load (runs after all scripts loaded; app.js initKnowledgeBasePage is no-op)
-    loadKnowledgeBase();
-    renderKnowledgeBase();
+    document.addEventListener('DOMContentLoaded', () => {
+      loadKnowledgeBase();
+      resetPreviewChat();
 
-    // Top Add button
-    document.getElementById('add-kb-btn')?.addEventListener('click', () => openKBModal());
-
-    // Seed Defaults
-    document.getElementById('seed-defaults-btn')?.addEventListener('click', async () => {
-      if (confirm('Reset knowledge base to default Florida dental FAQs?')) {
-        localStorage.removeItem('renia_knowledge_base');
-        try { await API.seedKnowledge(); } catch {}
-        loadKnowledgeBase();
-        renderKnowledgeBase();
-        showToast('Knowledge Base loaded with default FAQ seed data! 🦷✅', 'success');
-      }
-    });
-
-    // Search bar
-    document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
-      state.searchQuery = e.target.value;
-      renderKnowledgeBase();
-    });
-
-    // Tabs switcher
-    const tabs = document.querySelectorAll('.kb-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => {
-          t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-          t.classList.add('text-slate-500');
-        });
-        tab.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-        tab.classList.remove('text-slate-500');
-        
-        state.selectedCategory = tab.getAttribute('data-category') || 'all';
+      document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
         renderKnowledgeBase();
       });
-    });
 
-    // AI Simulator Form
-    const simForm = document.getElementById('simulator-form');
-    const simInput = document.getElementById('simulator-input');
-    const simHistory = document.getElementById('simulator-chat-history');
+      document.getElementById('editor-category')?.addEventListener('change', (e) => {
+        const ruleCatEl = document.getElementById('rule-category');
+        if (ruleCatEl) ruleCatEl.textContent = e.target.value;
+      });
 
-    if (simForm && simInput && simHistory) {
-      simForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const query = simInput.value.trim();
-        if (!query) return;
+      // AI Simulator Trigger
+      const simForm = document.getElementById('simulator-form');
+      const simInput = document.getElementById('simulator-input');
+      const simHistory = document.getElementById('simulator-chat-history');
 
-        // Append User query
-        simHistory.innerHTML += `
-          <div class="flex gap-2 justify-end">
-            <div class="bg-indigo-600 text-white px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-right">
-              ${escapeHtml(query)}
-            </div>
-            <div class="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center text-xs text-indigo-900 font-bold shrink-0 select-none">👤</div>
-          </div>
-        `;
-        
-        simInput.value = '';
-        simHistory.scrollTop = simHistory.scrollHeight;
+      if (simForm && simInput && simHistory) {
+        simForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const query = simInput.value.trim();
+          if (!query) return;
 
-        // Simulating typing
-        const typingId = 'typing_' + Date.now();
-        simHistory.innerHTML += `
-          <div class="flex gap-2" id="${typingId}">
-            <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-            <div class="bg-indigo-950/20 border border-indigo-800/20 px-3 py-1.5 rounded-2xl text-xs text-slate-400 italic">
-              AI Agent is thinking...
-            </div>
-          </div>
-        `;
-        simHistory.scrollTop = simHistory.scrollHeight;
-
-        setTimeout(() => {
-          document.getElementById(typingId)?.remove();
-          
-          const response = getSimulatedAIResponse(query);
           simHistory.innerHTML += `
-            <div class="flex gap-2">
-              <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-              <div class="bg-indigo-950/40 border border-indigo-800/30 px-3 py-2 rounded-2xl text-xs max-w-[85%] leading-relaxed text-indigo-100">
-                ${escapeHtml(response)}
+            <div class="flex gap-2 justify-end">
+              <div class="bg-slate-950 text-white px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-right">
+                ${escapeHtml(query)}
+              </div>
+              <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] text-slate-800 font-bold shrink-0 select-none">👤</div>
+            </div>
+          `;
+          
+          simInput.value = '';
+          simHistory.scrollTop = simHistory.scrollHeight;
+
+          const typingId = 'typing_' + Date.now();
+          simHistory.innerHTML += `
+            <div class="flex gap-2" id="${typingId}">
+              <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
+              <div class="bg-white border border-slate-150 px-3 py-1.5 rounded-xl text-xs text-slate-400 italic">
+                Thinking...
               </div>
             </div>
           `;
           simHistory.scrollTop = simHistory.scrollHeight;
-        }, 600);
+
+          setTimeout(() => {
+            document.getElementById(typingId)?.remove();
+            
+            const response = getSimulatedAIResponse(query);
+            simHistory.innerHTML += `
+              <div class="flex gap-2">
+                <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
+                <div class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-700 shadow-sm text-left">
+                  ${escapeHtml(response)}
+                </div>
+              </div>
+            `;
+            simHistory.scrollTop = simHistory.scrollHeight;
+          }, 500);
+        });
+      }
+
+      // Seed Defaults Trigger
+      document.getElementById('seed-defaults-btn')?.addEventListener('click', async () => {
+        if (confirm('Re-seed knowledge base FAQs?')) {
+          localStorage.removeItem('renia_knowledge_base');
+          try { await API.seedKnowledge(); } catch {}
+          state.activeId = null;
+          loadKnowledgeBase();
+          showToast('Default training seed loaded! 🦷✅', 'success');
+        }
       });
-    }
+    });
   </script>
 </body>
 </html>
