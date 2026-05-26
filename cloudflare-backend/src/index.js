@@ -938,4 +938,4 @@ async function broadcastToClinic(env, clinicId, eventType, data) {
 app.get('/health', (c) => c.json({ status: 'ok', service: 'Renia AI Backend', version: '1.0.0' }));
 
 export default app;
-
+export { RealtimeDashboardDO } from './durable-objects.js';

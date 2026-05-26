@@ -67,7 +67,7 @@ class GrokVoiceClient:
     async def chat_completion(
         self,
         messages: List[Dict[str, str]],
-        model: str = "grok-3",
+        model: str = "grok-4.20-reasoning",
         temperature: float = 0.7,
         max_tokens: int = 500,
     ) -> str:
@@ -140,7 +140,7 @@ class GrokVoiceClient:
     async def stream_chat(
         self,
         messages: List[Dict[str, str]],
-        model: str = "grok-3",
+        model: str = "grok-4.20-reasoning",
         temperature: float = 0.7,
     ) -> AsyncGenerator[str, None]:
         """
@@ -209,7 +209,7 @@ class GrokVoiceClient:
 
         return await self.chat_completion(
             messages=messages,
-            model="grok-3",
+            model="grok-4.20-reasoning",
             temperature=0.7,
             max_tokens=500,
         )

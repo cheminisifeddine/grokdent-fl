@@ -31,4 +31,4 @@ class_name = "RealtimeDashboardDO"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["RealtimeDashboardDO"]
+new_sqlite_classes = ["RealtimeDashboardDO"]
