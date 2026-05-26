@@ -62,124 +62,144 @@
     
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #FCFCFD !important;
-      color: #374151 !important;
+      background-color: #FFFFFF !important;
+      color: #2D2D2D !important;
       letter-spacing: -0.01em;
     }
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Plus Jakarta Sans', sans-serif !important;
-      color: #0F172A !important;
+      color: #000000 !important;
       letter-spacing: -0.025em !important;
     }
     .text-white {
-      color: #0F172A !important;
+      color: #000000 !important;
     }
     .text-slate-100, .text-slate-200 {
-      color: #1E293B !important;
+      color: #1A1A1A !important;
     }
     .text-slate-300 {
-      color: #334155 !important;
+      color: #2D2D2D !important;
     }
     .text-slate-400 {
-      color: #475569 !important;
+      color: #555555 !important;
     }
-    .text-slate-505, .text-slate-500 {
-      color: #64748B !important;
+    .text-slate-500, .text-slate-505 {
+      color: #676767 !important;
     }
-    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10 {
-      border-color: rgba(0, 0, 0, 0.05) !important;
+    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10, .border-slate-800\/80, .border-slate-800\/60 {
+      border-color: rgba(0, 0, 0, 0.08) !important;
     }
     
-    /* 10x Layering: Premium Cards & Panels */
+    /* Stark Layering: Premium Cards & Panels */
     .glass-card, .glass-panel, .toggle-card {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.055) !important;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02), 0 4px 12px 0 rgba(0, 0, 0, 0.03) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.01), 0 4px 12px 0 rgba(0, 0, 0, 0.015) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) scale(1.005) !important;
-      border-color: rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.02), 0 8px 24px 0 rgba(0,0,0,0.05) !important;
+      transform: translateY(-1px) !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.01), 0 8px 24px 0 rgba(0,0,0,0.03) !important;
     }
     .text-gradient {
-      background: linear-gradient(135deg, #0F172A 0%, #475569 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      background-clip: text !important;
+      color: #000000 !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
     }
     .glass-card-dark {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.05) !important;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.01) !important;
     }
     .grid-bg {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px) !important;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px) !important;
       background-size: 50px 50px !important;
     }
     
     /* Asymmetrical Sidebar & Topbar */
     aside, .sidebar {
-      background: #F9FAFB !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.055) !important;
+      background: #F9F9F9 !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
       transition: all 0.2s ease !important;
     }
     aside a {
-      color: #64748B !important;
+      color: #676767 !important;
       transition: all 0.2s ease !important;
       border-radius: 8px !important;
     }
     aside a:hover {
       background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #0F172A !important;
+      color: #000000 !important;
     }
     aside .text-white {
-      color: #0F172A !important;
+      color: #000000 !important;
     }
     aside .bg-slate-900 {
-      background-color: rgba(79, 70, 229, 0.07) !important;
-      color: #4F46E5 !important;
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
     }
     header, nav.fixed {
-      background: rgba(255, 255, 255, 0.8) !important;
+      background: rgba(255, 255, 255, 0.9) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     }
     header h1 {
-      color: #0F172A !important;
+      color: #000000 !important;
     }
     
-    /* Signature Buttons: OpenAI/Google CTAs */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950 {
-      background-color: #0F172A !important;
+    /* Stark Signature Buttons: OpenAI-grade Black CTAs */
+    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, .bg-slate-900 {
+      background-color: #000000 !important;
       color: #FFFFFF !important;
       border: 1px solid transparent !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover {
-      background-color: #1E293B !important;
+    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, .bg-slate-900:hover {
+      background-color: #2D2D2D !important;
       color: #FFFFFF !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
     }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active {
+    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, .bg-slate-900:active {
       transform: translateY(0px) !important;
+    }
+    
+    /* Layout & Section backgrounds */
+    body, section, main {
+      background-color: #FFFFFF !important;
+      color: #2D2D2D !important;
+    }
+    aside {
+      background-color: #F9F9F9 !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+    .bg-clinical-white\/10 {
+      background-color: #F9F9F9 !important;
+    }
+    .bg-slate-950 {
+      background-color: #FFFFFF !important;
+      color: #2D2D2D !important;
+    }
+    button.bg-slate-950, a.bg-slate-950, div.bg-slate-950 {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
     }
     
     /* Clean inputs & focus rings */
     .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #0F172A !important;
+      color: #000000 !important;
       border-radius: 8px !important;
       transition: all 0.2s ease !important;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
     }
     .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
       outline: none !important;
-      border-color: #4F46E5 !important;
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.08) !important;
+      border-color: #000000 !important;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
     }
     
     /* Scrollbars */
@@ -455,10 +475,10 @@
       container.innerHTML = pageCalls.map(call => {
         let statusBadgeClass = '';
         switch(call.statusClass || call.status.toLowerCase()) {
-          case 'completed': statusBadgeClass = 'bg-emerald-500/10 text-emerald-400 border border-emerald-200'; break;
-          case 'transferred': statusBadgeClass = 'bg-amber-500/10 text-amber-400 border border-amber-200'; break;
-          case 'missed': statusBadgeClass = 'bg-rose-500/10 text-rose-400 border border-rose-200'; break;
-          default: statusBadgeClass = 'bg-deep-navy text-slate-400 border border-slate-800'; break;
+          case 'completed': statusBadgeClass = 'bg-black text-white border border-black'; break;
+          case 'transferred': statusBadgeClass = 'bg-neutral-100 text-neutral-800 border border-neutral-300'; break;
+          case 'missed': statusBadgeClass = 'bg-neutral-50 text-neutral-500 border border-neutral-200 border-dashed'; break;
+          default: statusBadgeClass = 'bg-transparent text-neutral-400 border border-neutral-200'; break;
         }
 
         const callJSON = JSON.stringify(call).replace(/'/g, "\\'").replace(/"/g, '&quot;');

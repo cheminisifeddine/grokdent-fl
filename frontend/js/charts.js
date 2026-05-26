@@ -1,40 +1,31 @@
 /* ============================================
    Renia AI — Chart Module (Chart.js)
+   Stark Monochrome Black & White Aesthetic
    ============================================ */
 
-// Chart.js global defaults for LIGHT theme
+// Chart.js global defaults for LIGHT monochrome theme
 function initChartDefaults() {
   if (typeof Chart === 'undefined') {
     console.warn('Chart.js not loaded');
     return;
   }
 
-  Chart.defaults.color = '#64748b';
-  Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.06)';
+  Chart.defaults.color = '#555555';
+  Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.08)';
   Chart.defaults.font.family = "'Inter', sans-serif";
   Chart.defaults.font.size = 12;
   Chart.defaults.plugins.legend.labels.usePointStyle = true;
   Chart.defaults.plugins.legend.labels.padding = 16;
-  Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15, 23, 42, 0.9)';
-  Chart.defaults.plugins.tooltip.titleColor = '#f8fafc';
-  Chart.defaults.plugins.tooltip.bodyColor = '#cbd5e1';
-  Chart.defaults.plugins.tooltip.borderColor = 'rgba(0, 0, 0, 0.1)';
+  Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+  Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
+  Chart.defaults.plugins.tooltip.bodyColor = '#e5e5e5';
+  Chart.defaults.plugins.tooltip.borderColor = 'rgba(255, 255, 255, 0.1)';
   Chart.defaults.plugins.tooltip.borderWidth = 1;
-  Chart.defaults.plugins.tooltip.cornerRadius = 10;
+  Chart.defaults.plugins.tooltip.cornerRadius = 8;
   Chart.defaults.plugins.tooltip.padding = 12;
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.scale.grid = Chart.defaults.scale.grid || {};
-  Chart.defaults.scale.grid.color = 'rgba(0, 0, 0, 0.04)';
-}
-
-/**
- * Create a gradient fill for charts
- */
-function createGradient(ctx, color1, color2, height = 300) {
-  const gradient = ctx.createLinearGradient(0, 0, 0, height);
-  gradient.addColorStop(0, color1);
-  gradient.addColorStop(1, color2);
-  return gradient;
+  Chart.defaults.scale.grid.color = 'rgba(0, 0, 0, 0.05)';
 }
 
 /**
@@ -45,7 +36,6 @@ function initCallsBarChart(canvasId, labels, data) {
   if (!canvas) return null;
 
   const ctx = canvas.getContext('2d');
-  const gradient = createGradient(ctx, 'rgba(13, 148, 136, 0.8)', 'rgba(13, 148, 136, 0.1)');
 
   return new Chart(ctx, {
     type: 'bar',
@@ -54,12 +44,12 @@ function initCallsBarChart(canvasId, labels, data) {
       datasets: [{
         label: 'Calls',
         data: data,
-        backgroundColor: gradient,
-        borderColor: 'rgba(13, 148, 136, 0.9)',
+        backgroundColor: '#000000',
+        borderColor: '#000000',
         borderWidth: 1,
-        borderRadius: 6,
+        borderRadius: 4,
         borderSkipped: false,
-        maxBarThickness: 40
+        maxBarThickness: 32
       }]
     },
     options: {
@@ -76,13 +66,13 @@ function initCallsBarChart(canvasId, labels, data) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#64748b' }
+          ticks: { color: '#555555' }
         },
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.04)' },
+          grid: { color: 'rgba(0,0,0,0.05)' },
           ticks: {
-            color: '#64748b',
+            color: '#555555',
             stepSize: 10
           }
         }
@@ -99,7 +89,6 @@ function initCallsLineChart(canvasId, labels, data) {
   if (!canvas) return null;
 
   const ctx = canvas.getContext('2d');
-  const gradient = createGradient(ctx, 'rgba(13, 148, 136, 0.3)', 'rgba(13, 148, 136, 0.01)');
 
   return new Chart(ctx, {
     type: 'line',
@@ -108,12 +97,12 @@ function initCallsLineChart(canvasId, labels, data) {
       datasets: [{
         label: 'Calls',
         data: data,
-        borderColor: '#0d9488',
-        backgroundColor: gradient,
-        borderWidth: 2.5,
+        borderColor: '#000000',
+        backgroundColor: 'rgba(0, 0, 0, 0.02)',
+        borderWidth: 2,
         fill: true,
-        tension: 0.4,
-        pointBackgroundColor: '#0d9488',
+        tension: 0.35,
+        pointBackgroundColor: '#000000',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2,
         pointRadius: 4,
@@ -134,12 +123,12 @@ function initCallsLineChart(canvasId, labels, data) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#64748b' }
+          ticks: { color: '#555555' }
         },
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.04)' },
-          ticks: { color: '#64748b' }
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { color: '#555555' }
         }
       }
     }
@@ -154,7 +143,6 @@ function initBookingsLineChart(canvasId, labels, data) {
   if (!canvas) return null;
 
   const ctx = canvas.getContext('2d');
-  const gradient = createGradient(ctx, 'rgba(249, 115, 22, 0.3)', 'rgba(249, 115, 22, 0.01)');
 
   return new Chart(ctx, {
     type: 'line',
@@ -163,12 +151,12 @@ function initBookingsLineChart(canvasId, labels, data) {
       datasets: [{
         label: 'Bookings',
         data: data,
-        borderColor: '#f97316',
-        backgroundColor: gradient,
-        borderWidth: 2.5,
+        borderColor: '#676767',
+        backgroundColor: 'rgba(0, 0, 0, 0.01)',
+        borderWidth: 2,
         fill: true,
-        tension: 0.4,
-        pointBackgroundColor: '#f97316',
+        tension: 0.35,
+        pointBackgroundColor: '#676767',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2,
         pointRadius: 4,
@@ -189,12 +177,12 @@ function initBookingsLineChart(canvasId, labels, data) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#64748b' }
+          ticks: { color: '#555555' }
         },
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.04)' },
-          ticks: { color: '#64748b' }
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { color: '#555555' }
         }
       }
     }
@@ -212,40 +200,37 @@ function initLanguageDoughnutChart(canvasId, data) {
   const labels = data.map(d => d.label || d.language);
   const values = data.map(d => d.value || d.count);
 
+  const colors = [
+    '#000000',
+    '#676767',
+    '#A3A3A3',
+    '#E5E5E5'
+  ];
+
   return new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: labels,
       datasets: [{
         data: values,
-        backgroundColor: [
-          'rgba(13, 148, 136, 0.8)',
-          'rgba(249, 115, 22, 0.8)',
-          'rgba(139, 92, 246, 0.8)',
-          'rgba(59, 130, 246, 0.8)'
-        ],
-        borderColor: [
-          'rgba(13, 148, 136, 1)',
-          'rgba(249, 115, 22, 1)',
-          'rgba(139, 92, 246, 1)',
-          'rgba(59, 130, 246, 1)'
-        ],
-        borderWidth: 1,
-        hoverOffset: 8
+        backgroundColor: colors.slice(0, labels.length),
+        borderColor: '#ffffff',
+        borderWidth: 2,
+        hoverOffset: 6
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: '65%',
+      cutout: '70%',
       plugins: {
         legend: {
           position: 'bottom',
           labels: {
-            padding: 20,
+            padding: 16,
             usePointStyle: true,
-            pointStyleWidth: 10,
-            color: '#64748b'
+            pointStyleWidth: 8,
+            color: '#555555'
           }
         },
         tooltip: {
@@ -272,14 +257,14 @@ function initServicesHorizontalBarChart(canvasId, labels, data) {
   const ctx = canvas.getContext('2d');
 
   const colors = [
-    'rgba(13, 148, 136, 0.8)',
-    'rgba(249, 115, 22, 0.7)',
-    'rgba(139, 92, 246, 0.7)',
-    'rgba(59, 130, 246, 0.7)',
-    'rgba(16, 185, 129, 0.7)',
-    'rgba(245, 158, 11, 0.7)',
-    'rgba(236, 72, 153, 0.7)',
-    'rgba(99, 102, 241, 0.7)'
+    '#000000',
+    '#2D2D2D',
+    '#555555',
+    '#676767',
+    '#808080',
+    '#A3A3A3',
+    '#CCCCCC',
+    '#E5E5E5'
   ];
 
   return new Chart(ctx, {
@@ -290,7 +275,7 @@ function initServicesHorizontalBarChart(canvasId, labels, data) {
         label: 'Bookings',
         data: data,
         backgroundColor: colors.slice(0, labels.length),
-        borderColor: colors.slice(0, labels.length).map(c => c.replace('0.7', '1').replace('0.8', '1')),
+        borderColor: '#ffffff',
         borderWidth: 1,
         borderRadius: 4,
         borderSkipped: false
@@ -311,12 +296,12 @@ function initServicesHorizontalBarChart(canvasId, labels, data) {
       scales: {
         x: {
           beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.04)' },
-          ticks: { color: '#64748b' }
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { color: '#555555' }
         },
         y: {
           grid: { display: false },
-          ticks: { color: '#334155', font: { size: 12 } }
+          ticks: { color: '#2D2D2D', font: { size: 12 } }
         }
       }
     }

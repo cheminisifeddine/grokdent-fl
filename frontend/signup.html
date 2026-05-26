@@ -64,46 +64,46 @@
     
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #FCFCFD !important;
-      color: #374151 !important;
+      background-color: #FFFFFF !important;
+      color: #2D2D2D !important;
       letter-spacing: -0.01em;
     }
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Plus Jakarta Sans', sans-serif !important;
-      color: #0F172A !important;
+      color: #000000 !important;
       letter-spacing: -0.025em !important;
     }
     .text-white {
-      color: #0F172A !important;
+      color: #000000 !important;
     }
     .text-slate-100, .text-slate-200 {
-      color: #1E293B !important;
+      color: #1A1A1A !important;
     }
     .text-slate-300 {
-      color: #334155 !important;
+      color: #2D2D2D !important;
     }
     .text-slate-400 {
-      color: #475569 !important;
+      color: #555555 !important;
     }
     .text-slate-500 {
-      color: #64748B !important;
+      color: #676767 !important;
     }
     .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10 {
-      border-color: rgba(0, 0, 0, 0.05) !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
     }
     
     .grid-bg {
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px) !important;
+        linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px) !important;
       background-size: 50px 50px;
     }
     
     /* Main card container override */
     main > div {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.055) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.02) !important;
       border-radius: 16px !important;
     }
     
@@ -117,18 +117,18 @@
     }
     .toggle-card:hover {
       border-color: rgba(0, 0, 0, 0.12) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
     }
     
     /* Class-override for active EHR & Plan cards (targeting dynamic JS changes) */
     .toggle-card.border-slate-950, .toggle-card.active {
-      border-color: #4F46E5 !important;
-      background-color: rgba(99, 102, 241, 0.04) !important;
-      color: #0F172A !important;
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1) !important;
+      border-color: #000000 !important;
+      background-color: #F9F9F9 !important;
+      color: #000000 !important;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
     }
     .toggle-card.border-slate-950 .check-icon {
-      color: #4F46E5 !important;
+      color: #000000 !important;
     }
     .toggle-card.border-white\/5 {
       background-color: #FFFFFF !important;
@@ -140,14 +140,14 @@
     .theme-input, input[type="text"], input[type="email"], input[type="tel"], textarea, select {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #0F172A !important;
+      color: #000000 !important;
       border-radius: 8px !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .theme-input:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
       outline: none !important;
-      border-color: #4F46E5 !important;
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.08) !important;
+      border-color: #000000 !important;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
     }
     
     /* Onboarding steps progress dots */
@@ -157,19 +157,19 @@
       color: #6B7280 !important;
     }
     .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #4F46E5 !important;
+      background-color: #000000 !important;
       color: #FFFFFF !important;
       border-color: transparent !important;
     }
     
     /* Stepper connectors */
     .step-connector {
-      background-color: rgba(0, 0, 0, 0.08) !important;
+      background-color: rgba(0, 0, 0, 0.15) !important;
     }
     
     /* Toggle Switch rules */
     .switch-checkbox:checked + .switch-label {
-      background-color: #10B981 !important;
+      background-color: #000000 !important;
     }
     .switch-checkbox:checked + .switch-label .switch-dot {
       transform: translateX(100%);
@@ -177,35 +177,35 @@
     
     /* Pricing toggle labels */
     #label-monthly.text-white, #label-yearly.text-white {
-      color: #0F172A !important;
+      color: #000000 !important;
       font-weight: 700 !important;
     }
     #label-monthly.text-slate-400, #label-yearly.text-slate-400 {
-      color: #64748B !important;
+      color: #676767 !important;
       font-weight: 500 !important;
     }
     
     /* Back and Next buttons */
     #signup-back {
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #4B5563 !important;
+      color: #2D2D2D !important;
       background-color: #FFFFFF !important;
     }
     #signup-back:hover {
-      background-color: #F9FAFB !important;
-      color: #0F172A !important;
+      background-color: #F9F9F9 !important;
+      color: #000000 !important;
     }
     #signup-next {
-      background-color: #0F172A !important;
+      background-color: #000000 !important;
       color: #FFFFFF !important;
       border: 1px solid transparent !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     #signup-next:hover {
-      background-color: #1E293B !important;
+      background-color: #2D2D2D !important;
       color: #FFFFFF !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
     }
   </style>
 </head>
