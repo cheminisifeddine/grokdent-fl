@@ -58,55 +58,101 @@
     };
   </script>
 
-  <style>
+    <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
     
+    /* Ultimate Light Mode Canvas Overrides */
     body {
-      font-family: 'Geist', 'Inter', sans-serif;
-      letter-spacing: -0.015em;
+      font-family: 'Geist', 'Inter', sans-serif !important;
+      letter-spacing: -0.015em !important;
       background-color: #FFFFFF !important;
       color: #1F2937 !important;
-      letter-spacing: -0.015em;
     }
+    
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Outfit', sans-serif !important;
       letter-spacing: -0.035em !important;
       color: #000000 !important;
-      letter-spacing: -0.035em !important;
     }
+    
+    /* Global Text Visibility & High Contrast Overrides */
     .text-white {
       color: #000000 !important;
     }
     .text-slate-100, .text-slate-200 {
-      color: #1A1A1A !important;
+      color: #111827 !important;
     }
     .text-slate-300 {
       color: #1F2937 !important;
     }
     .text-slate-400 {
-      color: #555555 !important;
+      color: #4B5563 !important;
     }
-    .text-slate-500 {
-      color: #676767 !important;
-    }
-    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10 {
-      border-color: rgba(0, 0, 0, 0.08) !important;
+    .text-slate-500, .text-slate-505, .text-slate-550 {
+      color: #6B7280 !important;
     }
     
-    .glass-panel {
+    /* White Text Preservation inside Dark Elements */
+    .bg-black, .bg-black *, 
+    .bg-slate-950, .bg-slate-950 *, 
+    .bg-slate-900, .bg-slate-900 *, 
+    .bg-deep-navy, .bg-deep-navy *, 
+    .hover\:bg-black:hover, .hover\:bg-black:hover *,
+    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
+    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
+    #sim-action-btn, #sim-action-btn *,
+    #signup-next, #signup-next *,
+    #login-btn, #login-btn *,
+    #sim-start-btn, #sim-start-btn *,
+    .signup-step.active, .signup-step.active * {
+      color: #FFFFFF !important;
+    }
+    
+    /* Fine-tune Active States and Hover Contrast */
+    .hover\:text-white:hover {
+      color: #000000 !important;
+    }
+    
+    /* Borders & Grid Systems */
+    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
+      border-color: rgba(0, 0, 0, 0.06) !important;
+    }
+    
+    /* Cards and Glassmorphic Panels */
+    .glass-card, .glass-panel, .toggle-card {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.015) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .glass-card:hover, .toggle-card:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
+    }
+    .text-gradient {
+      color: #000000 !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+    }
+    .glass-card-dark {
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+    }
+    .grid-bg {
+      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
     }
     
     /* Navigation Sidebar & Header Overrides */
     aside, .sidebar {
       background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
-      transition: all 0.2s ease !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+      transition: all 0.25s ease !important;
     }
     aside a {
-      color: #676767 !important;
+      color: #6B7280 !important;
       transition: all 0.2s ease !important;
       border-radius: 8px !important;
     }
@@ -114,37 +160,64 @@
       background-color: rgba(0, 0, 0, 0.03) !important;
       color: #000000 !important;
     }
-    aside .text-white {
-      color: #000000 !important;
-    }
     aside .bg-slate-900 {
-      background-color: rgba(0, 0, 0, 0.06) !important;
+      background-color: #FFFFFF !important;
       color: #000000 !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
     }
-    header {
-      background-color: rgba(255, 255, 255, 0.9) !important;
+    header, nav.fixed {
+      background: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
     }
     header h1 {
       color: #000000 !important;
     }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
+    
+    /* Stark Monochrome Buttons (OpenAI Style) */
+    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
+      border: 1px solid transparent !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: transparent;
+    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
+      background-color: #1F2937 !important;
+      color: #FFFFFF !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
     }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.1);
+    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
+      transform: translateY(0px) !important;
+    }
+    
+    /* Interactive Sliders (Monochrome Stark) */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: #E5E7EB !important;
+      height: 4px !important;
       border-radius: 10px;
     }
-    .mono { font-family: 'JetBrains Mono', monospace; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50%;
+      background: #000000 !important;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+      border: 2px solid #FFFFFF;
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
     
-    /* Form input styling overrides */
-    input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+    /* Theme Inputs & Focus Rings */
+    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
       color: #000000 !important;
@@ -152,56 +225,42 @@
       transition: all 0.2s ease !important;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
     }
-    input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
+    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
       outline: none !important;
       border-color: #000000 !important;
       box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
     }
     
-    /* Signature Buttons: OpenAI/Google CTAs */
-    .bg-slate-950, .bg-slate-900, #sync-deploy-btn {
+    /* Switch Checkbox Fixes */
+    .switch-dot {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    }
+    .switch-checkbox:checked + .switch-label {
+      background-color: #000000 !important;
+    }
+    
+    /* Layout & Section Backgrounds (Absolute white) */
+    body, section, main, .bg-slate-950, .bg-slate-900 {
+      background-color: #FFFFFF !important;
+    }
+    
+    /* Stepper connectors */
+    .step-connector {
+      background-color: rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    /* Onboarding steps progress dots */
+    .signup-step {
+      background-color: #F3F4F6 !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #6B7280 !important;
+    }
+    .signup-step.bg-slate-950, .signup-step.active {
       background-color: #000000 !important;
       color: #FFFFFF !important;
-      border: 1px solid transparent !important;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .bg-slate-950:hover, .bg-slate-900:hover, #sync-deploy-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-    }
-    .bg-slate-950:active, .bg-slate-900:active, #sync-deploy-btn:active {
-      transform: translateY(0px) !important;
-    }
-    
-    #preview-voice-btn {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #1F2937 !important;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.01) !important;
-      transition: all 0.2s ease !important;
-    }
-    #preview-voice-btn:hover {
-      background-color: #F9F9F9 !important;
-      color: #000000 !important;
-      border-color: rgba(0, 0, 0, 0.12) !important;
-    }
-    
-    /* Tab Switcher styling */
-    .settings-tab {
-      color: #676767 !important;
-      border-bottom: 2px solid transparent !important;
-      transition: all 0.2s ease !important;
-    }
-    .settings-tab:hover {
-      color: #000000 !important;
-    }
-    /* Dynamic active class injected by JavaScript */
-    .settings-tab.text-white, .settings-tab.font-bold, .settings-tab.border-slate-950 {
-      color: #000000 !important;
-      border-bottom-color: #000000 !important;
-      font-weight: 700 !important;
+      border-color: transparent !important;
     }
   </style>
   <!-- Tab switcher defined early so inline onclick handlers always work -->
