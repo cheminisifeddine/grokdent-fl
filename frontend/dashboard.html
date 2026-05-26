@@ -13,26 +13,29 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#EDEDED",
-            "surface-tint": "#0070F3",
-            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
-            "medical-blue": "#0070F3",
-            "deep-navy": "#000000",
-            "slate-slate": "#111111",
-            "clinical-white": "#1A1A1A",
-            "sterile-gray": "#0A0A0A",
-            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
-            "error": "#E00",
-            "outline": "rgba(255, 255, 255, 0.1)"
+            "slate-350": "#CBD5E1",
+            "slate-550": "#94A3B8",
+            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
+            "on-background": "#F8FAFC",
+            "surface-tint": "#6366F1",
+            "medical-cyan": "#F8FAFC",
+            "medical-blue": "#6366F1",
+            "deep-navy": "#08090C",
+            "slate-slate": "#0F111A",
+            "clinical-white": "rgba(255, 255, 255, 0.03)",
+            "sterile-gray": "#08090C",
+            "success": "#10B981",
+            "error": "#F43F5E",
+            "outline": "rgba(255, 255, 255, 0.05)"
           },
           fontFamily: {
-            "sans": ["Inter", "sans-serif"],
-            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
+            "sans": ["Geist", "Inter", "sans-serif"],
+            "display": ["Geist", "Inter", "sans-serif"],
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
-            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
+            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }
         }
       }
@@ -43,16 +46,16 @@
     
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #0A0A0F;
+      background-color: #08090C;
       color: #FFFFFF;
     }
     
     .glass-panel {
-      background: rgba(20, 20, 30, 0.6);
+      background: rgba(15, 17, 26, 0.7);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
     
     .clinical-shadow {
@@ -82,39 +85,39 @@
     }
   </style>
 </head>
-<body class="bg-black text-white h-screen flex overflow-hidden">
+<body class="bg-slate-950 text-white h-screen flex overflow-hidden">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-200/80 h-full z-40 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-white/5 h-full z-40 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
       <span class="text-white text-[15px]">🦷</span>
     </div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="relative w-full flex justify-center group" href="dashboard.html" title="Dashboard">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-slate text-slate-950">
+        <div class="p-2 rounded bg-slate-900 text-white">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -122,17 +125,17 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
       
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -142,16 +145,16 @@
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
     
     <!-- Top App Bar -->
-    <header class="h-20 bg-clinical-white/10 backdrop-blur-md border-b border-slate-250/60 flex justify-between items-center w-full px-8 z-30">
+    <header class="h-20 bg-clinical-white/10 backdrop-blur-md border-b border-white/5 flex justify-between items-center w-full px-8 z-30">
       <div class="flex items-center gap-4">
-        <h1 class="font-display font-bold text-lg text-slate-950 tracking-tight">Renia Dental Admin</h1>
-        <span class="hidden md:inline-block px-2.5 py-0.5 rounded bg-slate-50 border border-slate-200 font-mono text-[10px] text-slate-400 font-bold tracking-widest">CORE v1.4</span>
+        <h1 class="font-display font-bold text-lg text-white tracking-tight">Renia Dental Admin</h1>
+        <span class="hidden md:inline-block px-2.5 py-0.5 rounded bg-slate-900/40 border border-white/5 font-mono text-[10px] text-slate-400 font-bold tracking-widest">CORE v1.4</span>
       </div>
       <div class="flex items-center gap-4">
         <!-- Status Indicator -->
-        <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-50 border border-slate-200">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-900/40 border border-white/5">
           <div class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></div>
-          <span class="font-mono text-[10px] font-bold text-slate-800 uppercase tracking-widest">AI Receptionist Active</span>
+          <span class="font-mono text-[10px] font-bold text-slate-200 uppercase tracking-widest">AI Receptionist Active</span>
         </div>
         
         <!-- Live Call Simulator Trigger -->
@@ -167,93 +170,93 @@
       
       <!-- Page Header -->
       <div class="mb-8">
-        <h2 class="font-display text-2xl font-bold tracking-tight text-slate-950 leading-none mb-1.5">Intake Operations</h2>
-        <p class="text-slate-500 text-xs font-medium">Real-time bilingual caller processing, schedules, and active opportunities.</p>
+        <h2 class="font-display text-2xl font-bold tracking-tight text-white leading-none mb-1.5">Intake Operations</h2>
+        <p class="text-slate-400 text-xs font-medium">Real-time bilingual caller processing, schedules, and active opportunities.</p>
       </div>
 
       <!-- Bento Grid Layout -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
         
         <!-- LIVE INTELLIGENCE FEED (Spans 8 cols) -->
-        <div class="col-span-1 md:col-span-8 bg-clinical-white/10 backdrop-blur-md border border-slate-200/80 rounded p-6 shadow-sm flex flex-col justify-between h-[360px]">
+        <div class="col-span-1 md:col-span-8 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded p-6 shadow-none flex flex-col justify-between h-[360px]">
           <div>
             <div class="flex justify-between items-start mb-6">
               <div>
                 <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Live Feed</span>
-                <h3 class="font-display font-bold text-md text-slate-950 leading-none">Active Caller Status</h3>
+                <h3 class="font-display font-bold text-md text-white leading-none">Active Caller Status</h3>
               </div>
-              <span class="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-600 font-mono text-[9px] font-bold tracking-wider">SECURE TWO-PARTY CHANNEL</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-[9px] font-bold tracking-wider">SECURE TWO-PARTY CHANNEL</span>
             </div>
 
             <!-- Call List High Density -->
             <div class="flex flex-col gap-3 overflow-y-auto max-h-[220px] pr-1">
               <!-- Call Item 1 -->
-              <div class="flex items-center justify-between p-3 rounded border border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+              <div class="flex items-center justify-between p-3 rounded border border-white/5 bg-slate-900/40 hover:bg-white/10 transition-colors">
                 <div class="flex items-center gap-4">
-                  <div class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center text-slate-300">
+                  <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center text-slate-300">
                     <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
                   </div>
                   <div>
-                    <p class="text-xs font-bold text-slate-900">Sarah Jenkins</p>
+                    <p class="text-xs font-bold text-slate-100">Sarah Jenkins</p>
                     <p class="font-mono text-[10px] text-slate-400">Intent: Emergency Root Canal</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-6">
                   <div class="text-right">
-                    <p class="font-mono text-xs text-slate-900 font-semibold">04:22</p>
+                    <p class="font-mono text-xs text-slate-100 font-semibold">04:22</p>
                     <p class="font-mono text-[9px] text-slate-400 uppercase">DURATION</p>
                   </div>
-                  <div class="flex items-center gap-2 bg-indigo-50 px-2 py-1 rounded">
+                  <div class="flex items-center gap-2 bg-indigo-500/10 px-2 py-1 rounded">
                     <div class="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></div>
-                    <span class="font-mono text-[9px] text-indigo-700 font-bold">ANALYZING</span>
+                    <span class="font-mono text-[9px] text-indigo-400 font-bold">ANALYZING</span>
                   </div>
                 </div>
               </div>
               <!-- Call Item 2 -->
-              <div class="flex items-center justify-between p-3 rounded border border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+              <div class="flex items-center justify-between p-3 rounded border border-white/5 bg-slate-900/40 hover:bg-white/10 transition-colors">
                 <div class="flex items-center gap-4">
-                  <div class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center text-slate-300">
+                  <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center text-slate-300">
                     <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
                   </div>
                   <div>
-                    <p class="text-xs font-bold text-slate-900">Michael Chen</p>
+                    <p class="text-xs font-bold text-slate-100">Michael Chen</p>
                     <p class="font-mono text-[10px] text-slate-400">Intent: Teeth Whitening Package</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-6">
                   <div class="text-right">
-                    <p class="font-mono text-xs text-slate-900 font-semibold">01:15</p>
+                    <p class="font-mono text-xs text-slate-100 font-semibold">01:15</p>
                     <p class="font-mono text-[9px] text-slate-400 uppercase">DURATION</p>
                   </div>
-                  <div class="flex items-center gap-2 bg-slate-slate px-2 py-1 rounded">
+                  <div class="flex items-center gap-2 bg-slate-900 px-2 py-1 rounded">
                     <div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
-                    <span class="font-mono text-[9px] text-slate-500 font-bold">WAITING</span>
+                    <span class="font-mono text-[9px] text-slate-400 font-bold">WAITING</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           
-          <div class="border-t border-slate-100 pt-4 flex justify-between items-center text-xs">
+          <div class="border-t border-white/5 pt-4 flex justify-between items-center text-xs">
             <span class="text-slate-400">Real-time PCM stream connects active caller pipelines.</span>
-            <a href="calls.html" class="font-bold text-indigo-600 hover:text-indigo-700 uppercase tracking-wider flex items-center gap-1">
+            <a href="calls.html" class="font-bold text-indigo-400 hover:text-indigo-400 uppercase tracking-wider flex items-center gap-1">
               View Log <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
           </div>
         </div>
 
         <!-- OPPORTUNITY METRIC (Spans 4 cols) -->
-        <div class="col-span-1 md:col-span-4 bg-clinical-white/10 backdrop-blur-md border border-slate-200/80 rounded p-6 shadow-sm flex flex-col justify-between h-[360px]">
+        <div class="col-span-1 md:col-span-4 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded p-6 shadow-none flex flex-col justify-between h-[360px]">
           <div>
             <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Financial Impact</span>
-            <h3 class="font-display font-bold text-md text-slate-950 leading-none mb-6">AI Performance &amp; ROI</h3>
+            <h3 class="font-display font-bold text-md text-white leading-none mb-6">AI Performance &amp; ROI</h3>
             
             <div class="space-y-6">
               <div>
                 <span class="text-slate-400 text-xs block mb-1">Clinic Conversion Rate</span>
                 <div class="flex items-baseline gap-2">
-                  <span class="font-display font-black text-5xl text-slate-950 tracking-tight">78%</span>
-                  <span class="font-mono text-xs text-emerald-600 font-bold flex items-center">
+                  <span class="font-display font-black text-5xl text-white tracking-tight">78%</span>
+                  <span class="font-mono text-xs text-emerald-400 font-bold flex items-center">
                     <span class="material-symbols-outlined text-[14px]">trending_up</span> +4.2%
                   </span>
                 </div>
@@ -261,41 +264,41 @@
               
               <div>
                 <span class="text-slate-400 text-xs block mb-1">Estimated Value Captured</span>
-                <span class="font-display font-black text-3xl text-indigo-600 tracking-tight">$14,280<span class="text-xs text-slate-400 font-normal"> this mo.</span></span>
+                <span class="font-display font-black text-3xl text-indigo-400 tracking-tight">$14,280<span class="text-xs text-slate-400 font-normal"> this mo.</span></span>
               </div>
             </div>
           </div>
 
           <!-- Mini Scaffolding Chart -->
-          <div class="h-16 w-full flex items-end gap-1.5 border-b border-slate-100 pb-1">
-            <div class="w-full bg-slate-slate rounded-t-sm h-[40%]"></div>
-            <div class="w-full bg-slate-slate rounded-t-sm h-[50%]"></div>
-            <div class="w-full bg-slate-slate rounded-t-sm h-[45%]"></div>
-            <div class="w-full bg-slate-slate rounded-t-sm h-[65%]"></div>
+          <div class="h-16 w-full flex items-end gap-1.5 border-b border-white/5 pb-1">
+            <div class="w-full bg-slate-900 rounded-t-sm h-[40%]"></div>
+            <div class="w-full bg-slate-900 rounded-t-sm h-[50%]"></div>
+            <div class="w-full bg-slate-900 rounded-t-sm h-[45%]"></div>
+            <div class="w-full bg-slate-900 rounded-t-sm h-[65%]"></div>
             <div class="w-full bg-slate-950 rounded-t-sm h-[80%] relative">
-              <div class="absolute -top-5 left-1/2 -translate-x-1/2 font-mono text-[8px] text-slate-950 font-bold uppercase">Today</div>
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 font-mono text-[8px] text-white font-bold uppercase">Today</div>
             </div>
           </div>
         </div>
 
         <!-- RECENT INTAKES TABLE (Spans full 12 cols) -->
-        <div class="col-span-1 md:col-span-12 bg-clinical-white/10 backdrop-blur-md border border-slate-200/80 rounded shadow-sm overflow-hidden mt-2">
-          <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div class="col-span-1 md:col-span-12 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded shadow-none overflow-hidden mt-2">
+          <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
             <div>
               <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Intake Records</span>
-              <h3 class="font-display font-bold text-md text-slate-950 leading-none">Recent Inquiries</h3>
+              <h3 class="font-display font-bold text-md text-white leading-none">Recent Inquiries</h3>
             </div>
             <!-- Search bar -->
             <div class="relative w-64">
               <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
-              <input class="w-full bg-slate-50 border border-slate-200 rounded pl-9 pr-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-slate-950 focus:ring-1 focus:ring-slate-950 transition-all placeholder:text-slate-300" placeholder="Search patients..." type="text"/>
+              <input class="w-full bg-slate-900/40 border border-white/5 rounded pl-9 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-slate-950 focus:ring-1 focus:ring-slate-950 transition-all placeholder:text-slate-300" placeholder="Search patients..." type="text"/>
             </div>
           </div>
           
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-slate-50 border-b border-slate-200/60 text-slate-400 font-mono text-[10px]">
+                <tr class="bg-slate-900/40 border-b border-white/5 text-slate-400 font-mono text-[10px]">
                   <th class="py-3 px-6 font-bold uppercase tracking-wider">Patient Name</th>
                   <th class="py-3 px-6 font-bold uppercase tracking-wider">Intake Date</th>
                   <th class="py-3 px-6 font-bold uppercase tracking-wider">Procedure Intent</th>
@@ -303,32 +306,32 @@
                   <th class="py-3 px-6 font-bold uppercase tracking-wider text-right">Status</th>
                 </tr>
               </thead>
-              <tbody class="text-xs text-slate-900 divide-y divide-slate-100 font-medium">
-                <tr class="hover:bg-slate-50/50 transition-colors">
+              <tbody class="text-xs text-slate-100 divide-y divide-slate-100 font-medium">
+                <tr class="hover:bg-slate-900/40 transition-colors">
                   <td class="py-4 px-6 font-bold">Emma Roberts</td>
                   <td class="py-4 px-6 font-mono text-[10px]">Oct 24, 09:15 AM</td>
                   <td class="py-4 px-6">Invisalign Consult</td>
-                  <td class="py-4 px-6 text-slate-500 max-w-xs truncate text-[11px]">Patient inquired about timeline and insurance coverage for...</td>
+                  <td class="py-4 px-6 text-slate-400 max-w-xs truncate text-[11px]">Patient inquired about timeline and insurance coverage for...</td>
                   <td class="py-4 px-6 text-right">
-                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 font-mono text-[9px] font-bold uppercase">Booked</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-[9px] font-bold uppercase">Booked</span>
                   </td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors">
+                <tr class="hover:bg-slate-900/40 transition-colors">
                   <td class="py-4 px-6 font-bold">James Wilson</td>
                   <td class="py-4 px-6 font-mono text-[10px]">Oct 24, 08:30 AM</td>
                   <td class="py-4 px-6">General Cleaning</td>
-                  <td class="py-4 px-6 text-slate-500 max-w-xs truncate text-[11px]">Routine 6-month checkup. Requested early morning slot.</td>
+                  <td class="py-4 px-6 text-slate-400 max-w-xs truncate text-[11px]">Routine 6-month checkup. Requested early morning slot.</td>
                   <td class="py-4 px-6 text-right">
-                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-slate-500 font-mono text-[9px] font-bold uppercase">Pending</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-900/40 border border-white/5 text-slate-400 font-mono text-[9px] font-bold uppercase">Pending</span>
                   </td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors">
+                <tr class="hover:bg-slate-900/40 transition-colors">
                   <td class="py-4 px-6 font-bold">Elena Rodriguez</td>
                   <td class="py-4 px-6 font-mono text-[10px]">Oct 23, 16:45 PM</td>
                   <td class="py-4 px-6 text-red-600 font-bold">Emergency Molars</td>
-                  <td class="py-4 px-6 text-slate-500 max-w-xs truncate text-[11px]">Severe pain lower right molar. Expedited scheduling protocol applied.</td>
+                  <td class="py-4 px-6 text-slate-400 max-w-xs truncate text-[11px]">Severe pain lower right molar. Expedited scheduling protocol applied.</td>
                   <td class="py-4 px-6 text-right">
-                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 font-mono text-[9px] font-bold uppercase">Booked</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-[9px] font-bold uppercase">Booked</span>
                   </td>
                 </tr>
               </tbody>
@@ -346,18 +349,18 @@
        ============================================ -->
   <div id="call-simulator-widget" class="fixed inset-y-0 right-0 z-50 w-full max-w-[420px] bg-clinical-white/10 backdrop-blur-md border-l border-slate-250 shadow-2xl flex flex-col justify-between translate-x-[420px] opacity-0 transition-all duration-400 ease-in-out">
     <!-- Header -->
-    <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+    <div class="p-6 border-b border-white/5 flex justify-between items-center bg-slate-900/40">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-full bg-slate-950 flex items-center justify-center text-white text-xs">
           📞
         </div>
         <div>
-          <h4 class="font-bold text-sm text-slate-900 leading-none">Interactive Call Simulator</h4>
+          <h4 class="font-bold text-sm text-slate-100 leading-none">Interactive Call Simulator</h4>
           <span class="text-[9px] font-mono text-slate-400 uppercase block mt-1">Uvicorn pipeline hook</span>
         </div>
       </div>
-      <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full bg-clinical-white/10 backdrop-blur-md border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
-        <span class="material-symbols-outlined text-[16px] text-slate-500">close</span>
+      <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full bg-clinical-white/10 backdrop-blur-md border border-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+        <span class="material-symbols-outlined text-[16px] text-slate-400">close</span>
       </button>
     </div>
 
@@ -371,10 +374,10 @@
     </div>
 
     <!-- Action Bar / Buttons -->
-    <div class="p-6 border-t border-slate-200 bg-slate-50 space-y-4">
+    <div class="p-6 border-t border-white/5 bg-slate-900/40 space-y-4">
       
       <!-- Pulsing Waveform Accent -->
-      <div class="flex items-center justify-center gap-1.5 h-10 w-full bg-clinical-white/10 backdrop-blur-md border border-slate-200 rounded-xl px-4 hidden" id="waveform-panel">
+      <div class="flex items-center justify-center gap-1.5 h-10 w-full bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-xl px-4 hidden" id="waveform-panel">
         <span class="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest mr-2">Audio Waves:</span>
         <div class="flex items-end gap-1 h-5 select-none" id="waves-animation">
           <div class="w-1 bg-indigo-500 rounded-t h-[40%] animate-pulse"></div>
@@ -455,15 +458,15 @@
 
         let styling = '';
         if (line.role === 'user') {
-          styling = 'bg-slate-slate text-slate-800 rounded-tl-xl rounded-tr-xl rounded-bl-xl border border-slate-200';
+          styling = 'bg-slate-slate text-slate-200 rounded-tl-xl rounded-tr-xl rounded-bl-xl border border-white/5';
         } else if (line.role === 'assistant') {
           styling = 'bg-indigo-600 text-white rounded-tl-xl rounded-tr-xl rounded-br-xl';
         } else {
-          styling = 'bg-slate-50 text-slate-400 font-mono text-[9px] rounded uppercase border border-slate-150 px-3 py-1.5 text-center w-full max-w-[90%]';
+          styling = 'bg-slate-900/40 text-slate-400 font-mono text-[9px] rounded uppercase border border-slate-150 px-3 py-1.5 text-center w-full max-w-[90%]';
         }
 
         div.innerHTML = `
-          <div class="max-w-[85%] p-3 text-xs font-semibold leading-relaxed shadow-sm ${styling}">
+          <div class="max-w-[85%] p-3 text-xs font-semibold leading-relaxed shadow-none ${styling}">
             ${line.text}
           </div>
         `;

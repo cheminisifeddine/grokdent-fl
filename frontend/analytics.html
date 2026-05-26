@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="dark scroll-smooth" lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -14,26 +14,29 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#EDEDED",
-            "surface-tint": "#0070F3",
-            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
-            "medical-blue": "#0070F3",
-            "deep-navy": "#000000",
-            "slate-slate": "#111111",
-            "clinical-white": "#1A1A1A",
-            "sterile-gray": "#0A0A0A",
-            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
-            "error": "#E00",
-            "outline": "rgba(255, 255, 255, 0.1)"
+            "slate-350": "#CBD5E1",
+            "slate-550": "#94A3B8",
+            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
+            "on-background": "#F8FAFC",
+            "surface-tint": "#6366F1",
+            "medical-cyan": "#F8FAFC",
+            "medical-blue": "#6366F1",
+            "deep-navy": "#08090C",
+            "slate-slate": "#0F111A",
+            "clinical-white": "rgba(255, 255, 255, 0.03)",
+            "sterile-gray": "#08090C",
+            "success": "#10B981",
+            "error": "#F43F5E",
+            "outline": "rgba(255, 255, 255, 0.05)"
           },
           fontFamily: {
-            "sans": ["Inter", "sans-serif"],
-            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
+            "sans": ["Geist", "Inter", "sans-serif"],
+            "display": ["Geist", "Inter", "sans-serif"],
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
-            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
+            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }
         }
       }
@@ -43,26 +46,26 @@
   <style>
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #F7F7F5;
-      color: #1b1b1b;
+      background-color: #08090C;
+      color: #D1D5DB;
     }
     .glass-panel {
-      background: rgba(252, 252, 251, 0.85);
+      background: rgba(15, 17, 26, 0.7);
       backdrop-filter: blur(32px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-panel:hover {
-      border-color: #d1d5db;
+      border-color: rgba(255, 255, 255, 0.1);
       box-shadow: 0 12px 36px -12px rgba(0,0,0,0.06);
     }
     .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e2e2; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
@@ -92,7 +95,7 @@
       </a>
       <a class="relative w-full flex justify-center group" href="analytics.html" title="Analytics">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-slate text-slate-950">
+        <div class="p-2 rounded bg-slate-900 text-white">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">insights</span>
         </div>
       </a>
@@ -108,7 +111,7 @@
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -116,17 +119,17 @@
 
   <!-- Main Content Area -->
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-    <header class="h-16 px-8 flex items-center justify-between border-b border-slate-800 bg-clinical-white/10 backdrop-blur-md shrink-0">
-      <h1 class="text-lg font-bold tracking-tight text-slate-950">Analytics</h1>
+    <header class="h-16 px-8 flex items-center justify-between border-b border-white/5 bg-clinical-white/10 backdrop-blur-md shrink-0">
+      <h1 class="text-lg font-bold tracking-tight text-white">Analytics</h1>
       <div class="flex items-center gap-4">
-        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-clinical-white/10 backdrop-blur-md border border-slate-800 px-4 py-2 rounded-full text-xs font-bold text-slate-300 hover:bg-deep-navy transition-all shadow-none">
+        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-clinical-white/10 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full text-xs font-bold text-slate-300 hover:bg-deep-navy transition-all shadow-none">
           <span class="material-symbols-outlined text-[16px]">download</span> Export CSV
         </button>
-        <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-none">
+        <div class="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full shadow-none">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">AI Receptionist Active</span>
+          <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">AI Receptionist Active</span>
         </div>
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-clinical-white/10 backdrop-blur-md border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-deep-navy transition-colors shadow-none">
+        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-clinical-white/10 backdrop-blur-md border border-white/5 flex items-center justify-center text-slate-400 hover:bg-deep-navy transition-colors shadow-none">
           <span class="material-symbols-outlined text-[18px]">notifications</span>
           <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
         </button>
@@ -137,8 +140,8 @@
       <div class="max-w-[1200px] mx-auto">
         
         <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-1.5 bg-clinical-white/10 backdrop-blur-md rounded-full border border-slate-800 p-1 shadow-none">
-            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-950 bg-clinical-white/10 backdrop-blur-md border border-slate-800 transition-all">7 Days</button>
+          <div class="flex items-center gap-1.5 bg-clinical-white/10 backdrop-blur-md rounded-full border border-white/5 p-1 shadow-none">
+            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-white bg-clinical-white/10 backdrop-blur-md border border-white/5 transition-all">7 Days</button>
             <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 hover:bg-deep-navy transition-all">30 Days</button>
             <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 hover:bg-deep-navy transition-all">90 Days</button>
           </div>
@@ -148,34 +151,34 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-total-calls">
             <div class="flex items-center justify-between mb-3">
-              <div class="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">call</span></div>
-              <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 18%</span>
+              <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">call</span></div>
+              <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 18%</span>
             </div>
-            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="number">304</div>
+            <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="number">304</div>
             <div class="text-[11px] font-medium text-slate-400">Total Calls</div>
           </div>
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-total-booked">
             <div class="flex items-center justify-between mb-3">
-              <div class="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined text-[18px]">event</span></div>
-              <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 12%</span>
+              <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400"><span class="material-symbols-outlined text-[18px]">event</span></div>
+              <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 12%</span>
             </div>
-            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="number">82</div>
+            <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="number">82</div>
             <div class="text-[11px] font-medium text-slate-400">Appointments Booked</div>
           </div>
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-avg-duration">
             <div class="flex items-center justify-between mb-3">
-              <div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600"><span class="material-symbols-outlined text-[18px]">timer</span></div>
-              <span class="text-[9px] font-bold text-slate-400 bg-slate-slate px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[10px]">trending_flat</span> 0%</span>
+              <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400"><span class="material-symbols-outlined text-[18px]">timer</span></div>
+              <span class="text-[9px] font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[10px]">trending_flat</span> 0%</span>
             </div>
-            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="duration">3:18</div>
+            <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="duration">3:18</div>
             <div class="text-[11px] font-medium text-slate-400">Avg Call Duration</div>
           </div>
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-resolution-rate">
             <div class="flex items-center justify-between mb-3">
-              <div class="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">done_all</span></div>
-              <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 3%</span>
+              <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">done_all</span></div>
+              <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 3%</span>
             </div>
-            <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="percent">94%</div>
+            <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="percent">94%</div>
             <div class="text-[11px] font-medium text-slate-400">Resolution Rate</div>
           </div>
         </div>
@@ -183,13 +186,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Calls Over Time</h3>
-            <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
+            <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-calls-chart" class="w-full h-full"></canvas>
             </div>
           </div>
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Bookings Over Time</h3>
-            <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
+            <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-bookings-chart" class="w-full h-full"></canvas>
             </div>
           </div>
@@ -198,13 +201,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Top Services by Volume</h3>
-            <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
+            <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-services-chart" class="w-full h-full"></canvas>
             </div>
           </div>
           <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Language Distribution</h3>
-            <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
+            <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-language-chart" class="w-full h-full"></canvas>
             </div>
           </div>
@@ -213,22 +216,22 @@
         <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 mb-8">
           <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Revenue Attribution</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="bg-emerald-50/50 rounded-lg p-5 border border-emerald-100 flex flex-col items-center text-center">
-              <span class="material-symbols-outlined text-2xl text-emerald-600 mb-2">payments</span>
-              <div class="text-2xl font-bold text-slate-950 font-mono" id="rev-captured">$12,450</div>
-              <div class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider mt-1">Revenue Captured</div>
+            <div class="bg-emerald-500/10 rounded-lg p-5 border border-emerald-500/20 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-emerald-400 mb-2">payments</span>
+              <div class="text-2xl font-bold text-white font-mono" id="rev-captured">$12,450</div>
+              <div class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider mt-1">Revenue Captured</div>
               <div class="text-[10px] text-slate-400 mt-1">From booked appointments</div>
             </div>
-            <div class="bg-rose-50/50 rounded-lg p-5 border border-rose-100 flex flex-col items-center text-center">
-              <span class="material-symbols-outlined text-2xl text-rose-600 mb-2">money_off</span>
-              <div class="text-2xl font-bold text-slate-950 font-mono" id="rev-missed">$4,280</div>
-              <div class="text-[9px] font-bold text-rose-600 uppercase tracking-wider mt-1">Revenue Missed</div>
+            <div class="bg-rose-500/10 rounded-lg p-5 border border-rose-500/20 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-rose-400 mb-2">money_off</span>
+              <div class="text-2xl font-bold text-white font-mono" id="rev-missed">$4,280</div>
+              <div class="text-[9px] font-bold text-rose-400 uppercase tracking-wider mt-1">Revenue Missed</div>
               <div class="text-[10px] text-slate-400 mt-1">From unanswered calls</div>
             </div>
-            <div class="bg-indigo-50/50 rounded-lg p-5 border border-indigo-100 flex flex-col items-center text-center">
-              <span class="material-symbols-outlined text-2xl text-indigo-600 mb-2">trending_up</span>
-              <div class="text-2xl font-bold text-slate-950 font-mono" id="rev-capture-rate">74.4%</div>
-              <div class="text-[9px] font-bold text-indigo-600 uppercase tracking-wider mt-1">Capture Rate</div>
+            <div class="bg-indigo-500/10 rounded-lg p-5 border border-indigo-500/20 flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-2xl text-indigo-400 mb-2">trending_up</span>
+              <div class="text-2xl font-bold text-white font-mono" id="rev-capture-rate">74.4%</div>
+              <div class="text-[9px] font-bold text-indigo-400 uppercase tracking-wider mt-1">Capture Rate</div>
               <div class="text-[10px] text-slate-400 mt-1">Revenue capture efficiency</div>
             </div>
           </div>
@@ -403,10 +406,10 @@
       setDateRange(days, btn) {
         if (!btn) return;
         document.querySelectorAll('.date-range-btn').forEach(b => {
-          b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-slate-950');
+          b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-white');
           b.classList.add('text-slate-400');
         });
-        btn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-slate-950');
+        btn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-white');
         btn.classList.remove('text-slate-400');
         this.load(days);
       },

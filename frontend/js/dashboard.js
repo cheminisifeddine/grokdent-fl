@@ -303,39 +303,39 @@ Dashboard.openAppointmentDetails = function(el) {
 
 window.viewCallTranscript = function(name, time, lang) {
   const modalHtml = `
-    <div id="call-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
-        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+    <div id="call-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
+      <div class="bg-slate-900 border border-white/10 rounded-2xl shadow-glow w-full max-w-md overflow-hidden flex flex-col">
+        <div class="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-slate-950/40">
           <div>
-            <h3 class="font-bold text-slate-800">Call Details</h3>
-            <div class="text-xs text-slate-500">\${time} • \${lang}</div>
+            <h3 class="font-bold text-white">Call Details</h3>
+            <div class="text-xs text-slate-400">\${time} • \${lang}</div>
           </div>
-          <button onclick="document.getElementById('call-modal').remove()" class="text-slate-400 hover:text-slate-600">
+          <button onclick="document.getElementById('call-modal').remove()" class="text-slate-400 hover:text-white transition-colors">
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
-        <div class="p-6 overflow-y-auto max-h-[60vh]">
+        <div class="p-6 overflow-y-auto max-h-[60vh] custom-scrollbar">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-xl">👤</div>
+            <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl">👤</div>
             <div>
-              <div class="font-bold text-lg text-slate-900">\${escapeHtml(name)}</div>
-              <div class="text-sm text-emerald-600 font-semibold">Resolved Successfully</div>
+              <div class="font-bold text-lg text-white">\${escapeHtml(name)}</div>
+              <div class="text-sm text-emerald-400 font-semibold">Resolved Successfully</div>
             </div>
           </div>
           <div class="space-y-4">
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
-              <span class="font-bold text-indigo-700">AI Receptionist:</span> Thank you for calling Sunshine Smiles Dental. How can I help you?
+            <div class="bg-white/5 p-4 rounded-xl border border-white/5 text-sm text-slate-200">
+              <span class="font-bold text-indigo-400">AI Receptionist:</span> Thank you for calling Sunshine Smiles Dental. How can I help you?
             </div>
-            <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50 text-sm">
-              <span class="font-bold text-slate-700">Patient:</span> I'd like to book an appointment.
+            <div class="bg-indigo-500/10 p-4 rounded-xl border border-indigo-500/20 text-sm text-slate-200">
+              <span class="font-bold text-slate-350">Patient:</span> I'd like to book an appointment.
             </div>
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
-              <span class="font-bold text-indigo-700">AI Receptionist:</span> I can help with that. Are you an existing patient?
+            <div class="bg-white/5 p-4 rounded-xl border border-white/5 text-sm text-slate-200">
+              <span class="font-bold text-indigo-400">AI Receptionist:</span> I can help with that. Are you an existing patient?
             </div>
-            <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50 text-sm">
-              <span class="font-bold text-slate-700">Patient:</span> Yes, my name is \${escapeHtml(name)}.
+            <div class="bg-indigo-500/10 p-4 rounded-xl border border-indigo-500/20 text-sm text-slate-200">
+              <span class="font-bold text-slate-350">Patient:</span> Yes, my name is \${escapeHtml(name)}.
             </div>
-            <div class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mt-4">End of Transcript</div>
+            <div class="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mt-4">End of Transcript</div>
           </div>
         </div>
       </div>
@@ -348,37 +348,37 @@ window.viewCallTranscript = function(name, time, lang) {
 
 window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
   const isEmergency = service.toLowerCase().includes('emergency');
-  const badgeClass = isEmergency ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700';
+  const badgeClass = isEmergency ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
   const modalHtml = `
-    <div id="appt-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden flex flex-col">
-        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-          <h3 class="font-bold text-slate-800">Appointment Details</h3>
-          <button onclick="document.getElementById('appt-modal').remove()" class="text-slate-400 hover:text-slate-600">
+    <div id="appt-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200">
+      <div class="bg-slate-900 border border-white/10 rounded-2xl shadow-glow w-full max-w-sm overflow-hidden flex flex-col">
+        <div class="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-slate-950/40">
+          <h3 class="font-bold text-white">Appointment Details</h3>
+          <button onclick="document.getElementById('appt-modal').remove()" class="text-slate-400 hover:text-white transition-colors">
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
         <div class="p-6">
           <div class="flex flex-col items-center text-center mb-6">
-            <div class="w-16 h-16 rounded-full bg-slate-100 border-4 border-white shadow-sm flex items-center justify-center text-2xl mb-3">📅</div>
-            <h2 class="font-bold text-xl text-slate-900">\${escapeHtml(name)}</h2>
+            <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 shadow-sm flex items-center justify-center text-2xl mb-3">📅</div>
+            <h2 class="font-bold text-xl text-white">\${escapeHtml(name)}</h2>
             <div class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase mt-2 \${badgeClass}">\${status}</div>
           </div>
           <div class="space-y-3">
-            <div class="flex justify-between items-center py-2 border-b border-slate-100">
-              <span class="text-sm text-slate-500 font-medium">Service</span>
-              <span class="text-sm font-bold text-slate-800">\${escapeHtml(service)}</span>
+            <div class="flex justify-between items-center py-2 border-b border-white/5">
+              <span class="text-sm text-slate-400 font-medium">Service</span>
+              <span class="text-sm font-bold text-slate-200">\${escapeHtml(service)}</span>
             </div>
-            <div class="flex justify-between items-center py-2 border-b border-slate-100">
-              <span class="text-sm text-slate-500 font-medium">Time</span>
-              <span class="text-sm font-bold text-slate-800">\${time}</span>
+            <div class="flex justify-between items-center py-2 border-b border-white/5">
+              <span class="text-sm text-slate-400 font-medium">Time</span>
+              <span class="text-sm font-bold text-slate-200">\${time}</span>
             </div>
-            <div class="flex justify-between items-center py-2 border-b border-slate-100">
-              <span class="text-sm text-slate-500 font-medium">Provider</span>
-              <span class="text-sm font-bold text-slate-800">Dr. Sarah M.</span>
+            <div class="flex justify-between items-center py-2 border-b border-white/5">
+              <span class="text-sm text-slate-400 font-medium">Provider</span>
+              <span class="text-sm font-bold text-slate-200">Dr. Sarah M.</span>
             </div>
           </div>
-          <button onclick="document.getElementById('appt-modal').remove()" class="w-full mt-6 bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-3 font-bold text-sm transition-colors">
+          <button onclick="document.getElementById('appt-modal').remove()" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl py-3 font-bold text-sm transition-all active:scale-[0.98]">
             Close Details
           </button>
         </div>

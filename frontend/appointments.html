@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="dark scroll-smooth" lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -14,26 +14,29 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#EDEDED",
-            "surface-tint": "#0070F3",
-            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
-            "medical-blue": "#0070F3",
-            "deep-navy": "#000000",
-            "slate-slate": "#111111",
-            "clinical-white": "#1A1A1A",
-            "sterile-gray": "#0A0A0A",
-            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
-            "error": "#E00",
-            "outline": "rgba(255, 255, 255, 0.1)"
+            "slate-350": "#CBD5E1",
+            "slate-550": "#94A3B8",
+            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
+            "on-background": "#F8FAFC",
+            "surface-tint": "#6366F1",
+            "medical-cyan": "#F8FAFC",
+            "medical-blue": "#6366F1",
+            "deep-navy": "#08090C",
+            "slate-slate": "#0F111A",
+            "clinical-white": "rgba(255, 255, 255, 0.03)",
+            "sterile-gray": "#08090C",
+            "success": "#10B981",
+            "error": "#F43F5E",
+            "outline": "rgba(255, 255, 255, 0.05)"
           },
           fontFamily: {
-            "sans": ["Inter", "sans-serif"],
-            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
+            "sans": ["Geist", "Inter", "sans-serif"],
+            "display": ["Geist", "Inter", "sans-serif"],
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
-            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
+            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }
         }
       }
@@ -43,14 +46,14 @@
   <style>
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #F7F7F5;
-      color: #1b1b1b;
+      background-color: #08090C;
+      color: #D1D5DB;
     }
     .glass-panel {
-      background: rgba(252, 252, 251, 0.85);
+      background: rgba(15, 17, 26, 0.7);
       backdrop-filter: blur(32px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 4px;
@@ -60,19 +63,19 @@
       background: transparent;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #e2e2e2;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
     }
     .calendar-grid {
       display: grid;
       grid-template-columns: 80px repeat(7, minmax(110px, 1fr));
-      background: #ffffff;
+      background: rgba(15, 17, 26, 0.7);
     }
     .calendar-cell {
       min-height: 95px;
       padding: 6px;
-      border-right: 1px solid #E7E7E4;
-      border-bottom: 1px solid #E7E7E4;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       position: relative;
       transition: background-color 0.2s ease;
       display: flex;
@@ -89,9 +92,9 @@
       justify-content: center;
       font-size: 11px;
       font-weight: 800;
-      color: #5e5e5e;
-      background: #f9f9f9;
-      border-bottom: 2px solid #E7E7E4;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.08);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -101,12 +104,12 @@
       justify-content: center;
       font-size: 10px;
       font-weight: 800;
-      color: #5e5e5e;
-      background: #f9f9f9;
-      border-right: 2px solid #E7E7E4;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.02);
+      border-right: 2px solid rgba(255, 255, 255, 0.08);
     }
     .calendar-cell:not(.calendar-header):not(.time-label):hover {
-      background-color: #f7f7f5;
+      background-color: rgba(255, 255, 255, 0.04);
       cursor: pointer;
     }
     .appt-block {
@@ -131,22 +134,22 @@
       z-index: 10;
     }
     .appt-general {
-      background: rgba(79, 70, 229, 0.08);
-      color: #4F46E5;
-      border-left-color: #4F46E5;
+      background: rgba(99, 102, 241, 0.15);
+      color: #818CF8;
+      border-left-color: #818CF8;
     }
     .appt-cosmetic {
-      background: rgba(147, 51, 234, 0.08);
-      color: #9333EA;
-      border-left-color: #9333EA;
+      background: rgba(139, 92, 246, 0.15);
+      color: #A78BFA;
+      border-left-color: #A78BFA;
     }
     .appt-emergency {
-      background: rgba(244, 63, 94, 0.08);
-      color: #F43F5E;
-      border-left-color: #F43F5E;
+      background: rgba(244, 63, 94, 0.15);
+      color: #FB7185;
+      border-left-color: #FB7185;
     }
     .day-view-container {
-      background: #ffffff;
+      background: rgba(15, 17, 26, 0.7);
       border: 1px solid #E7E7E4;
       border-radius: 8px;
       overflow: hidden;
@@ -163,9 +166,9 @@
       justify-content: center;
       font-size: 11px;
       font-weight: 700;
-      color: #5e5e5e;
-      background: #f9f9f9;
-      border-right: 1px solid #E7E7E4;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.02);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
     }
     .day-slot {
       padding: 6px 12px;
@@ -175,21 +178,21 @@
       position: relative;
     }
     .day-slot:hover {
-      background-color: #f9f9f9;
+      background-color: rgba(255, 255, 255, 0.04);
       cursor: pointer;
     }
     .month-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      border-top: 1px solid #E7E7E4;
-      border-left: 1px solid #E7E7E4;
-      background: #ffffff;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(15, 17, 26, 0.7);
     }
     .month-cell {
       min-height: 110px;
       padding: 6px;
-      border-right: 1px solid #E7E7E4;
-      border-bottom: 1px solid #E7E7E4;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -197,7 +200,7 @@
       transition: background-color 0.2s ease;
     }
     .month-cell:hover {
-      background-color: #f9f9f9;
+      background-color: rgba(255, 255, 255, 0.04);
       cursor: pointer;
     }
     .month-cell-header {
@@ -206,7 +209,7 @@
       align-items: center;
       font-size: 11px;
       font-weight: 700;
-      color: #5e5e5e;
+      color: #94A3B8;
     }
     .month-cell.today {
       background: rgba(79, 70, 229, 0.05);
@@ -255,7 +258,7 @@
     .status-cancelled { background: #fee2e2; color: #b91c1c; }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
@@ -277,7 +280,7 @@
       </a>
       <a class="relative w-full flex justify-center group" href="appointments.html" title="Appointments">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-slate text-slate-950">
+        <div class="p-2 rounded bg-slate-900 text-white">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
         </div>
       </a>
@@ -304,7 +307,7 @@
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -314,20 +317,20 @@
   <main class="flex-1 flex h-full overflow-hidden relative">
     
     <!-- Left Column: Calendar Workstation -->
-    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-[#F7F7F5]">
+    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-slate-950">
       <div>
         <div class="flex flex-col lg:flex-row justify-between lg:items-end mb-8 gap-4">
           <div>
-            <h2 class="font-display text-2xl font-bold tracking-tight text-slate-950 mb-1 leading-none">Smart Scheduler</h2>
+            <h2 class="font-display text-2xl font-bold tracking-tight text-white mb-1 leading-none">Smart Scheduler</h2>
             <p class="text-slate-400 text-xs font-medium">Coordinate visits and monitor automated bookings.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <button id="new-appointment-btn" class="flex items-center gap-2 bg-slate-950 border border-t border-white/10 text-white px-4 py-2 rounded-full font-bold text-xs hover:bg-slate-900 transition-all shadow-none">
               <span class="material-symbols-outlined text-[16px]">add</span> Book Appointment
             </button>
-            <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-none">
+            <div class="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full shadow-none">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span class="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">AI Receptionist Active</span>
+              <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">AI Receptionist Active</span>
             </div>
           </div>
         </div>
@@ -335,19 +338,19 @@
         <!-- Filter Controls -->
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div class="flex flex-wrap items-center gap-3">
-            <div class="relative flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-slate-800 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+            <div class="relative flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-white/5 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
               <span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
               <input id="appt-search" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-44 ml-2 focus:outline-none" placeholder="Search patient..." type="text"/>
             </div>
             
-            <select id="filter-category" class="px-4 py-1.5 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
+            <select id="filter-category" class="px-4 py-1.5 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
               <option value="all">All Categories</option>
               <option value="general">🟦 General & Cleaning</option>
               <option value="cosmetic">🟪 Cosmetic & Whitening</option>
               <option value="emergency">🟥 Emergency Care</option>
             </select>
             
-            <select id="filter-status" class="px-4 py-1.5 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
+            <select id="filter-status" class="px-4 py-1.5 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
               <option value="all">All Statuses</option>
               <option value="Scheduled">Scheduled</option>
               <option value="Confirmed">Confirmed</option>
@@ -357,10 +360,10 @@
           </div>
 
           <!-- View Toggles & Prev/Next -->
-          <div class="flex items-center gap-4 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full p-1 shadow-none">
-            <div class="flex items-center gap-0.5 bg-slate-slate p-0.5 rounded-full">
+          <div class="flex items-center gap-4 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full p-1 shadow-none">
+            <div class="flex items-center gap-0.5 bg-slate-900 p-0.5 rounded-full">
               <button id="view-day-btn" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-colors">Day</button>
-              <button id="view-week-btn" class="px-4 py-1 rounded-full text-[10px] font-bold bg-clinical-white/10 backdrop-blur-md text-slate-950 shadow-none">Week</button>
+              <button id="view-week-btn" class="px-4 py-1 rounded-full text-[10px] font-bold bg-clinical-white/10 backdrop-blur-md text-white shadow-none">Week</button>
               <button id="view-month-btn" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-colors">Month</button>
             </div>
             <div class="h-4 w-px bg-slate-200"></div>
@@ -378,7 +381,7 @@
         </div>
 
         <!-- Dynamic Calendar Canvas -->
-        <div class="bg-clinical-white/10 backdrop-blur-md rounded-lg shadow-none border border-slate-800 overflow-hidden">
+        <div class="bg-clinical-white/10 backdrop-blur-md rounded-lg shadow-none border border-white/5 overflow-hidden">
           <div id="calendar-view-container">
             <!-- Rendered by JS -->
           </div>
@@ -388,7 +391,7 @@
 
     <!-- Right Sidebar: AI Intake Panel & Diagnostics -->
     <aside class="w-[380px] h-full bg-clinical-white/10 backdrop-blur-md border-l border-slate-800/80 flex flex-col shadow-none flex-shrink-0">
-      <div class="p-6 border-b border-slate-800 bg-deep-navy/50 flex justify-between items-center">
+      <div class="p-6 border-b border-white/5 bg-deep-navy/50 flex justify-between items-center">
         <div>
           <h3 class="font-bold text-sm text-white leading-none">AI Intake Engine</h3>
           <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Automated Requests queue</p>
@@ -400,44 +403,44 @@
         <!-- Request Card 1 -->
         <div class="glass-panel p-4 rounded border border-slate-800/50 flex flex-col gap-3">
           <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-              <span class="material-symbols-outlined text-indigo-600 text-sm">smart_toy</span>
+            <div class="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+              <span class="material-symbols-outlined text-indigo-400 text-sm">smart_toy</span>
             </div>
             <div>
               <p class="font-bold text-xs text-white">New Patient Inquiry</p>
               <p class="text-slate-400 text-[9px] font-mono">AUDIO AGENT • 1m ago</p>
             </div>
           </div>
-          <div class="bg-[#F7F7F5] p-3 rounded border border-slate-800/50">
+          <div class="bg-slate-950 p-3 rounded border border-slate-800/50">
             <p class="text-[9px] font-bold text-slate-400 mb-1 uppercase tracking-wider">Proposed Slot</p>
-            <p class="font-bold text-xs text-slate-200">Fri, Oct 16 • 09:30 AM <span class="text-indigo-600 ml-1 text-[10px]">45 MIN</span></p>
+            <p class="font-bold text-xs text-slate-200">Fri, Oct 16 • 09:30 AM <span class="text-indigo-400 ml-1 text-[10px]">45 MIN</span></p>
             <p class="text-xs text-slate-400 mt-2 italic leading-relaxed">"Patient reports mild molar pain, seeking emergency consultation."</p>
           </div>
           <div class="flex gap-2">
             <button onclick="if(typeof showToast === 'function') showToast('Appointment slot approved and synchronized with EHR.','success')" class="flex-1 py-1.5 bg-slate-950 text-white rounded text-[10px] font-bold hover:bg-slate-900 transition-colors uppercase tracking-wider">Approve</button>
-            <button onclick="if(typeof showToast === 'function') showToast('Auto-reschedule sequence triggered.','info')" class="flex-1 py-1.5 border border-slate-800 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Reschedule</button>
+            <button onclick="if(typeof showToast === 'function') showToast('Auto-reschedule sequence triggered.','info')" class="flex-1 py-1.5 border border-white/5 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Reschedule</button>
           </div>
         </div>
 
         <!-- Request Card 2 -->
         <div class="glass-panel p-4 rounded border border-slate-800/50 flex flex-col gap-3">
           <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-              <span class="material-symbols-outlined text-indigo-600 text-sm">smart_toy</span>
+            <div class="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+              <span class="material-symbols-outlined text-indigo-400 text-sm">smart_toy</span>
             </div>
             <div>
               <p class="font-bold text-xs text-white">Reschedule Request</p>
               <p class="text-slate-400 text-[9px] font-mono">SMS AGENT • 10m ago</p>
             </div>
           </div>
-          <div class="bg-[#F7F7F5] p-3 rounded border border-slate-800/50">
+          <div class="bg-slate-950 p-3 rounded border border-slate-800/50">
             <p class="text-[9px] font-bold text-slate-400 mb-1 uppercase tracking-wider">Change To</p>
-            <p class="font-bold text-xs text-slate-200">Thu, Oct 15 • 02:00 PM <span class="text-emerald-600 ml-1 text-[10px]">CLEANING</span></p>
+            <p class="font-bold text-xs text-slate-200">Thu, Oct 15 • 02:00 PM <span class="text-emerald-400 ml-1 text-[10px]">CLEANING</span></p>
             <p class="text-xs text-slate-400 mt-1">Marcus Aurelius (Existing Patient)</p>
           </div>
           <div class="flex gap-2">
             <button onclick="if(typeof showToast === 'function') showToast('Reschedule request approved.','success')" class="flex-1 py-1.5 bg-slate-950 text-white rounded text-[10px] font-bold hover:bg-slate-900 transition-colors uppercase tracking-wider">Approve</button>
-            <button onclick="if(typeof showToast === 'function') showToast('Reschedule denied. Patient notified.','info')" class="flex-1 py-1.5 border border-slate-800 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Deny</button>
+            <button onclick="if(typeof showToast === 'function') showToast('Reschedule denied. Patient notified.','info')" class="flex-1 py-1.5 border border-white/5 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Deny</button>
           </div>
         </div>
 
@@ -448,15 +451,15 @@
             <span class="text-2xl font-black text-white leading-none">84%</span>
             <span class="text-[10px] font-bold text-slate-400 pb-0.5">Optimized by AI</span>
           </div>
-          <div class="w-full bg-slate-slate h-2 rounded-full">
+          <div class="w-full bg-slate-900 h-2 rounded-full">
             <div class="bg-slate-900 h-full rounded-full transition-all duration-500" style="width: 84%;"></div>
           </div>
           <p class="text-[9px] text-slate-400 font-mono">+12% booking efficiency this month</p>
         </div>
       </div>
 
-      <div class="p-6 border-t border-slate-800 bg-deep-navy flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-slate-800 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
+      <div class="p-6 border-t border-white/5 bg-deep-navy flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-white/5 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
           Sign Out
         </button>
         <button onclick="openAppointmentModal()" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
@@ -601,7 +604,7 @@
         
         let headerClass = "calendar-cell calendar-header";
         if (isToday) {
-          headerClass += " text-indigo-600 font-black bg-indigo-50/50";
+          headerClass += " text-indigo-400 font-black bg-indigo-500/10";
         }
         
         html += `<div class="${headerClass}"><span>${dayName}</span><span class="text-[10px] text-slate-400 font-bold mt-0.5">${dayNum}</span></div>`;
@@ -672,9 +675,9 @@
       
       let html = `
         <div class="day-view-container">
-          <div class="px-6 py-4 bg-deep-navy border-b border-slate-800 flex items-center justify-between">
+          <div class="px-6 py-4 bg-deep-navy border-b border-white/5 flex items-center justify-between">
             <h3 class="font-bold text-slate-200 text-xs font-mono uppercase tracking-wider">${friendlyDate}</h3>
-            <span class="status-badge bg-indigo-50 border border-indigo-100 text-indigo-700">Timeline</span>
+            <span class="status-badge bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">Timeline</span>
           </div>
       `;
       
@@ -770,7 +773,7 @@
         
         let apptsHtml = '<div class="month-appts-dots">';
         filteredAppts.forEach(appt => {
-          const dotColor = appt.category === 'emergency' ? 'bg-rose-50 text-rose-700 border border-rose-100' : (appt.category === 'cosmetic' ? 'bg-purple-50 text-purple-700 border border-purple-100' : 'bg-indigo-50 text-indigo-700 border border-indigo-100');
+          const dotColor = appt.category === 'emergency' ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : (appt.category === 'cosmetic' ? 'bg-purple-50 text-purple-700 border border-purple-100' : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20');
           apptsHtml += `
             <div class="month-appt-dot ${dotColor} truncate text-left" title="${appt.time} - ${appt.name}: ${appt.service}">
               ${appt.time.split(' ')[0]} ${appt.name}
@@ -783,7 +786,7 @@
           <div class="${cellClass}" onclick="handleCellClick('${dateStr}', '9:00 AM')">
             <div class="month-cell-header">
               <span>${dayDate.getDate()}</span>
-              ${filteredAppts.length > 0 ? `<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-slate font-black">${filteredAppts.length}</span>` : ''}
+              ${filteredAppts.length > 0 ? `<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-900 font-black">${filteredAppts.length}</span>` : ''}
             </div>
             ${apptsHtml}
           </div>
@@ -1060,13 +1063,13 @@
         state.currentView = view;
         [dayBtn, weekBtn, monthBtn].forEach(b => {
           if (b) {
-            b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'text-slate-950', 'shadow-none');
+            b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'text-white', 'shadow-none');
             b.classList.add('text-slate-400');
           }
         });
         const activeBtn = view === 'day' ? dayBtn : (view === 'week' ? weekBtn : monthBtn);
         if (activeBtn) {
-          activeBtn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'text-slate-950', 'shadow-none');
+          activeBtn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'text-white', 'shadow-none');
           activeBtn.classList.remove('text-slate-400');
         }
         renderCalendar();

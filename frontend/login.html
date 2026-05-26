@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="dark scroll-smooth" lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -14,26 +14,29 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#EDEDED",
-            "surface-tint": "#0070F3",
-            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
-            "medical-blue": "#0070F3",
-            "deep-navy": "#000000",
-            "slate-slate": "#111111",
-            "clinical-white": "#1A1A1A",
-            "sterile-gray": "#0A0A0A",
-            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
-            "error": "#E00",
-            "outline": "rgba(255, 255, 255, 0.1)"
+            "slate-350": "#CBD5E1",
+            "slate-550": "#94A3B8",
+            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
+            "on-background": "#F8FAFC",
+            "surface-tint": "#6366F1",
+            "medical-cyan": "#F8FAFC",
+            "medical-blue": "#6366F1",
+            "deep-navy": "#08090C",
+            "slate-slate": "#0F111A",
+            "clinical-white": "rgba(255, 255, 255, 0.03)",
+            "sterile-gray": "#08090C",
+            "success": "#10B981",
+            "error": "#F43F5E",
+            "outline": "rgba(255, 255, 255, 0.05)"
           },
           fontFamily: {
-            "sans": ["Inter", "sans-serif"],
-            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
+            "sans": ["Geist", "Inter", "sans-serif"],
+            "display": ["Geist", "Inter", "sans-serif"],
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
-            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
+            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }
         }
       }
@@ -43,30 +46,30 @@
   <style>
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #F7F7F5;
-      color: #1b1b1b;
+      background-color: #08090C;
+      color: #D1D5DB;
     }
     .input-field {
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .input-field:focus {
       box-shadow: 0 0 0 2px rgba(27, 27, 27, 0.08);
-      border-color: #1b1b1b;
+      border-color: #D1D5DB;
     }
     .glass-panel {
-      background: rgba(252, 252, 251, 0.85);
+      background: rgba(15, 17, 26, 0.7);
       backdrop-filter: blur(32px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-200 antialiased selection:bg-slate-900 selection:text-white flex">
+<body class="min-h-screen text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white flex">
 
   <!-- Left Panel: Branding & System Specification -->
   <div class="hidden lg:flex w-[40%] relative bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 flex-col justify-between p-12 text-slate-200 shrink-0">
     <div>
-      <a href="index.html" class="flex items-center gap-2 mb-16 font-black text-xl tracking-tight text-slate-950">
+      <a href="index.html" class="flex items-center gap-2 mb-16 font-black text-xl tracking-tight text-white">
         <div class="w-10 h-10 rounded bg-slate-950 flex items-center justify-center text-white text-[15px] shadow-none">🦷</div>
         <span>Renia AI</span>
       </a>
@@ -74,7 +77,7 @@
       <div class="space-y-12">
         <div>
           <span class="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Infrastructure Specification</span>
-          <h1 class="text-4xl font-extrabold text-slate-950 tracking-tight leading-none">Renia Core v1.4</h1>
+          <h1 class="text-4xl font-extrabold text-white tracking-tight leading-none">Renia Core v1.4</h1>
           <p class="text-slate-400 text-sm mt-3 leading-relaxed max-w-md">System-wide clinical receptionist routing layer running native sub-100ms Speech-to-Speech architecture.</p>
         </div>
 
@@ -93,7 +96,7 @@
           </div>
           <div class="flex justify-between py-1">
             <span class="text-slate-400">SECURITY PROTOCOL:</span>
-            <span class="text-slate-950 font-bold">HIPAA Compliant Shield</span>
+            <span class="text-white font-bold">HIPAA Compliant Shield</span>
           </div>
         </div>
       </div>
@@ -105,59 +108,59 @@
   </div>
 
   <!-- Right Side: Login Form -->
-  <div class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative bg-[#F7F7F5]">
+  <div class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative bg-slate-950">
     <div class="w-full max-w-sm">
       
       <!-- Mobile Logo -->
       <a href="index.html" class="lg:hidden flex items-center gap-3 mb-10 justify-center">
         <div class="w-10 h-10 rounded bg-slate-950 flex items-center justify-center text-white text-[15px] shadow-none">🦷</div>
-        <span class="font-bold text-xl tracking-tight text-slate-950">Renia AI</span>
+        <span class="font-bold text-xl tracking-tight text-white">Renia AI</span>
       </a>
 
       <div class="mb-10 text-center lg:text-left">
-        <h2 class="text-2xl font-bold text-slate-950 tracking-tight">Sign in to Practice</h2>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Sign in to Practice</h2>
         <p class="text-slate-400 text-xs mt-1 font-medium">Enter clinic credentials to view active call transcripts.</p>
       </div>
 
       <form id="login-form" class="space-y-4">
         <div>
           <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Work Email</label>
-          <input type="email" id="login-email" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-800 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="dr.smith@clinic.com" required>
+          <input type="email" id="login-email" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="dr.smith@clinic.com" required>
         </div>
 
         <div>
           <div class="flex justify-between items-center mb-1.5">
             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
-            <a href="#" class="text-[10px] font-bold text-slate-300 hover:text-slate-950 uppercase tracking-wider transition-colors">Forgot?</a>
+            <a href="#" class="text-[10px] font-bold text-slate-300 hover:text-white uppercase tracking-wider transition-colors">Forgot?</a>
           </div>
-          <input type="password" id="login-password" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-800 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
+          <input type="password" id="login-password" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
         </div>
 
         <div class="flex items-center gap-2 py-1">
-          <input type="checkbox" id="remember" class="w-4 h-4 text-slate-950 border-slate-300 rounded focus:ring-0 cursor-pointer">
+          <input type="checkbox" id="remember" class="w-4 h-4 text-white border-white/10 rounded focus:ring-0 cursor-pointer">
           <label for="remember" class="text-xs text-slate-400 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
         </div>
 
-        <div id="login-error" class="text-xs text-rose-600 font-bold pt-1"></div>
+        <div id="login-error" class="text-xs text-rose-400 font-bold pt-1"></div>
 
         <button type="submit" id="login-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-slate-950 text-white hover:bg-slate-900 transition-all active:scale-[0.98] border-t border-white/10 mt-2 shadow-none">
           Authenticate
         </button>
 
         <div class="relative flex py-2 items-center">
-          <div class="flex-grow border-t border-slate-800"></div>
+          <div class="flex-grow border-t border-white/5"></div>
           <span class="flex-shrink mx-4 text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">or</span>
-          <div class="flex-grow border-t border-slate-800"></div>
+          <div class="flex-grow border-t border-white/5"></div>
         </div>
 
-        <button type="button" id="demo-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-clinical-white/10 backdrop-blur-md border border-slate-800 text-slate-200 hover:bg-deep-navy transition-all active:scale-[0.98] shadow-none flex items-center justify-center gap-1.5">
+        <button type="button" id="demo-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-clinical-white/10 backdrop-blur-md border border-white/5 text-slate-200 hover:bg-deep-navy transition-all active:scale-[0.98] shadow-none flex items-center justify-center gap-1.5">
           <span class="material-symbols-outlined text-[15px] text-amber-500 animate-pulse">sports_esports</span> Explore Demo Sandbox
         </button>
       </form>
       
       <div class="mt-8 text-center lg:text-left">
         <p class="text-xs text-slate-400 font-medium">
-          New clinic partner? <a href="signup.html" class="font-bold text-slate-950 hover:text-slate-200 transition-colors">Register Practice</a>
+          New clinic partner? <a href="signup.html" class="font-bold text-white hover:text-slate-200 transition-colors">Register Practice</a>
         </p>
       </div>
 

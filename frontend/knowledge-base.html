@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="dark scroll-smooth" lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -14,26 +14,29 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#EDEDED",
-            "surface-tint": "#0070F3",
-            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
-            "medical-blue": "#0070F3",
-            "deep-navy": "#000000",
-            "slate-slate": "#111111",
-            "clinical-white": "#1A1A1A",
-            "sterile-gray": "#0A0A0A",
-            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
-            "error": "#E00",
-            "outline": "rgba(255, 255, 255, 0.1)"
+            "slate-350": "#CBD5E1",
+            "slate-550": "#94A3B8",
+            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
+            "on-background": "#F8FAFC",
+            "surface-tint": "#6366F1",
+            "medical-cyan": "#F8FAFC",
+            "medical-blue": "#6366F1",
+            "deep-navy": "#08090C",
+            "slate-slate": "#0F111A",
+            "clinical-white": "rgba(255, 255, 255, 0.03)",
+            "sterile-gray": "#08090C",
+            "success": "#10B981",
+            "error": "#F43F5E",
+            "outline": "rgba(255, 255, 255, 0.05)"
           },
           fontFamily: {
-            "sans": ["Inter", "sans-serif"],
-            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
+            "sans": ["Geist", "Inter", "sans-serif"],
+            "display": ["Geist", "Inter", "sans-serif"],
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
-            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
+            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }
         }
       }
@@ -43,14 +46,14 @@
   <style>
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #F7F7F5;
-      color: #1b1b1b;
+      background-color: #08090C;
+      color: #D1D5DB;
     }
     .glass-panel {
-      background: rgba(252, 252, 251, 0.85);
+      background: rgba(15, 17, 26, 0.7);
       backdrop-filter: blur(32px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 4px;
@@ -60,13 +63,13 @@
       background: transparent;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #e2e2e2;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
     }
     .mono { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
@@ -93,7 +96,7 @@
       </a>
       <a class="relative w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-slate text-slate-950">
+        <div class="p-2 rounded bg-slate-900 text-white">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">menu_book</span>
         </div>
       </a>
@@ -115,7 +118,7 @@
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -125,17 +128,17 @@
   <main class="flex-1 flex h-full overflow-hidden relative">
     
     <!-- Column 1: Document Index & Protocol Directory -->
-    <section class="w-80 bg-[#F7F7F5] border-r border-slate-800 flex flex-col flex-shrink-0 h-full overflow-hidden">
+    <section class="w-80 bg-slate-950 border-r border-white/5 flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Search Protocols & Actions -->
-      <div class="p-6 border-b border-slate-800 space-y-4">
+      <div class="p-6 border-b border-white/5 space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="font-bold text-sm text-white uppercase tracking-wider font-mono">Protocols</h2>
-          <button id="seed-defaults-btn" title="Seed Default FAQs" class="p-1 rounded hover:bg-slate-200 text-slate-400 transition-colors">
+          <button id="seed-defaults-btn" title="Seed Default FAQs" class="p-1 rounded hover:bg-white/10 text-slate-400 transition-colors">
             <span class="material-symbols-outlined text-[16px]">download</span>
           </button>
         </div>
         
-        <div class="relative flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-slate-800 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+        <div class="relative flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-white/5 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
           <span class="material-symbols-outlined text-slate-400 text-[16px]">search</span>
           <input id="kb-search-input" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 focus:outline-none" placeholder="Search protocols..." type="text"/>
         </div>
@@ -158,7 +161,7 @@
         <!-- Top Meta header -->
         <div class="flex items-center justify-between mb-8">
           <div class="flex items-center gap-3">
-            <select id="editor-category" class="text-[9px] font-bold tracking-wider uppercase bg-slate-slate border-none rounded-full px-3 py-1 text-slate-200 outline-none focus:ring-1 focus:ring-slate-950">
+            <select id="editor-category" class="text-[9px] font-bold tracking-wider uppercase bg-slate-900 border-none rounded-full px-3 py-1 text-slate-200 outline-none focus:ring-1 focus:ring-slate-950">
               <option value="general">General</option>
               <option value="hours">Hours</option>
               <option value="services">Services</option>
@@ -168,7 +171,7 @@
             </select>
             <span class="text-slate-400 text-[10px]" id="editor-last-saved">Synced with Renia Engine</span>
           </div>
-          <button onclick="deleteActiveProtocol()" class="text-xs text-rose-600 font-bold hover:bg-rose-50 px-3 py-1 rounded transition-colors flex items-center gap-1">
+          <button onclick="deleteActiveProtocol()" class="text-xs text-rose-400 font-bold hover:bg-rose-500/10 px-3 py-1 rounded transition-colors flex items-center gap-1">
             <span class="material-symbols-outlined text-[14px]">delete</span> Delete
           </button>
         </div>
@@ -183,13 +186,13 @@
           <!-- System AI Logic block -->
           <div class="p-5 bg-deep-navy rounded-lg border border-slate-800/80">
             <h4 class="font-bold text-slate-200 text-[10px] uppercase tracking-wider mb-3 flex items-center gap-2 font-mono">
-              <span class="material-symbols-outlined text-[14px] text-indigo-600">terminal</span>
+              <span class="material-symbols-outlined text-[14px] text-indigo-400">terminal</span>
               AI Decision Rule Engine
             </h4>
             <div class="mono text-[11px] text-slate-400 space-y-2">
-              <p><span class="text-indigo-600">IF</span> category == "<span id="rule-category" class="text-slate-200 font-bold">general</span>" <span class="text-indigo-600">THEN</span> apply_tone("empathetic")</p>
-              <p><span class="text-indigo-600">SET</span> response_delay = "instant_0.3s"</p>
-              <p><span class="text-indigo-600">INCLUDE</span> scheduling_availability = "EHR_calendar_slots"</p>
+              <p><span class="text-indigo-400">IF</span> category == "<span id="rule-category" class="text-slate-200 font-bold">general</span>" <span class="text-indigo-400">THEN</span> apply_tone("empathetic")</p>
+              <p><span class="text-indigo-400">SET</span> response_delay = "instant_0.3s"</p>
+              <p><span class="text-indigo-400">INCLUDE</span> scheduling_availability = "EHR_calendar_slots"</p>
             </div>
           </div>
         </div>
@@ -210,9 +213,9 @@
     </section>
 
     <!-- Column 3: AI Preview Simulator (Real-time Tester) -->
-    <section class="w-96 border-l border-slate-800 bg-deep-navy flex flex-col flex-shrink-0 h-full overflow-hidden">
+    <section class="w-96 border-l border-white/5 bg-deep-navy flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Preview Header -->
-      <div class="p-6 border-b border-slate-800 bg-slate-slate/40">
+      <div class="p-6 border-b border-white/5 bg-slate-slate/40">
         <div class="flex items-center justify-between mb-2">
           <h3 class="font-bold text-xs tracking-wider uppercase font-mono flex items-center gap-2">
             <span class="relative flex h-2 w-2">
@@ -232,9 +235,9 @@
       </div>
 
       <!-- Chat input -->
-      <div class="p-6 border-t border-slate-800 bg-slate-slate/30">
+      <div class="p-6 border-t border-white/5 bg-slate-slate/30">
         <form id="simulator-form" class="relative">
-          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full py-2.5 pl-4 pr-10 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-950/10 focus:border-slate-300 transition-all"/>
+          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full py-2.5 pl-4 pr-10 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-950/10 focus:border-white/5 transition-all"/>
           <button type="submit" class="absolute right-1.5 top-1.5 w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center text-white hover:bg-slate-900 transition-all">
             <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
           </button>
@@ -325,7 +328,7 @@
 
         catEntries.forEach(entry => {
           const isActive = entry.id === state.activeId;
-          const bgClass = isActive ? 'bg-clinical-white/10 backdrop-blur-md shadow-none border-slate-800 text-slate-950 font-bold' : 'hover:bg-slate-slate text-slate-300 hover:text-white border-transparent';
+          const bgClass = isActive ? 'bg-clinical-white/10 backdrop-blur-md shadow-none border-white/5 text-white font-bold' : 'hover:bg-slate-slate text-slate-300 hover:text-white border-transparent';
           
           html += `
             <button onclick="setActiveDocument('${entry.id}')" class="w-full flex items-center justify-between px-3 py-2 border rounded-lg text-xs text-left transition-all ${bgClass}">
@@ -453,8 +456,8 @@
       if (!history) return;
       history.innerHTML = `
         <div class="flex gap-2">
-          <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-          <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-800 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-200 shadow-none">
+          <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
+          <div class="bg-clinical-white/10 backdrop-blur-md border border-white/5 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-200 shadow-none">
             Hi! Ask me any question related to clinic directives, accepted insurances, or cleaning policies. I am syncing with your updates in real time!
           </div>
         </div>
@@ -530,7 +533,7 @@
               <div class="bg-slate-950 text-white px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-right">
                 ${escapeHtml(query)}
               </div>
-              <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] text-slate-200 font-bold shrink-0 select-none">👤</div>
+              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] text-slate-200 font-bold shrink-0 select-none">👤</div>
             </div>
           `;
           
@@ -540,7 +543,7 @@
           const typingId = 'typing_' + Date.now();
           simHistory.innerHTML += `
             <div class="flex gap-2" id="${typingId}">
-              <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
+              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
               <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-150 px-3 py-1.5 rounded-xl text-xs text-slate-400 italic">
                 Thinking...
               </div>
@@ -554,8 +557,8 @@
             const response = getSimulatedAIResponse(query);
             simHistory.innerHTML += `
               <div class="flex gap-2">
-                <div class="w-6 h-6 rounded bg-slate-200 border border-slate-300 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-                <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-800 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-200 shadow-none text-left">
+                <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
+                <div class="bg-clinical-white/10 backdrop-blur-md border border-white/5 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-200 shadow-none text-left">
                   ${escapeHtml(response)}
                 </div>
               </div>
