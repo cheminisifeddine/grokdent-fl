@@ -152,7 +152,7 @@
     .text-white {
       color: #000000 !important;
     }
-    #technology .text-white, .bg-deep-navy .text-white, #sim-action-btn .text-white, .bg-slate-950 .text-white, #chat-stream > div.ml-auto * {
+    .bg-deep-navy .text-white, #sim-action-btn .text-white, #chat-stream > div.ml-auto * {
       color: #FFFFFF !important;
     }
     
@@ -231,7 +231,7 @@
     
     /* Interactive Simulator Interface Refinements */
     .lg\:col-span-5.bg-slate-900 {
-      background-color: #F9FAFB !important;
+      background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.06) !important;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
     }
@@ -376,22 +376,23 @@
     
     /* Technology Section Grayscale Overrides */
     #technology {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
+      background-color: #FFFFFF !important;
+      color: #1F2937 !important;
     }
     #technology .grid > div {
-      background-color: #0C0C0E !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.8) !important;
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.015) !important;
       border-radius: 24px !important;
+      color: #1F2937 !important;
     }
     #technology .grid > div:last-child {
-      border: 2px solid #FFFFFF !important;
-      box-shadow: 0 0 16px rgba(255, 255, 255, 0.08) !important;
+      border: 2px solid #000000 !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02), 0 16px 48px rgba(0, 0, 0, 0.04) !important;
     }
     #technology .data-packet-green {
-      background-color: #FFFFFF !important;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
+      background-color: #000000 !important;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25) !important;
     }
     
     /* Financial ROI Ledger Controls & Outputs */
@@ -416,7 +417,7 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02), 0 16px 48px rgba(0, 0, 0, 0.04) !important;
     }
     #roi .lg\:col-span-7 > div:last-child .bg-deep-navy {
-      background-color: #F9FAFB !important;
+      background-color: #FFFFFF !important;
       border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     #label-missed-calls, #label-patient-val {
@@ -443,7 +444,7 @@
       border-radius: 24px !important;
     }
     #compliance .italic.text-slate-300 {
-      background-color: #F9FAFB !important;
+      background-color: #FFFFFF !important;
       border-left: 4px solid #000000 !important;
       color: #1F2937 !important;
       font-weight: 500 !important;
@@ -474,7 +475,7 @@
     
     /* Testimonial Cards Layout Override */
     section.bg-deep-navy\/50 {
-      background-color: #F9FAFB !important;
+      background-color: #FFFFFF !important;
       border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
@@ -519,31 +520,60 @@
       color: #FFFFFF !important;
     }
     
-    /* Compliance Section High Contrast overrides */
+    /* Compliance Section Clean Light Overrides */
+    #compliance {
+      background-color: #FFFFFF !important;
+    }
     #compliance * {
-      color: #FFFFFF !important;
+      color: #1F2937 !important;
+    }
+    #compliance h2 {
+      color: #000000 !important;
     }
     #compliance p, #compliance .text-slate-400 {
-      color: #9CA3AF !important;
+      color: #4B5563 !important;
     }
     #compliance .w-12.h-12 {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      background-color: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     #compliance .material-symbols-outlined {
-      color: #FFFFFF !important;
+      color: #000000 !important;
     }
     #compliance .bg-deep-navy {
-      background-color: rgba(255, 255, 255, 0.05) !important;
-      border-left: 4px solid #FFFFFF !important;
-      border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      background-color: #FFFFFF !important;
+      border-left: 4px solid #000000 !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     
     /* Toggle Dot White contrast override */
     #pricing-toggle-dot {
       background-color: #FFFFFF !important;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+
+    /* Footer Clean Light Overrides */
+    footer {
+      background-color: #FFFFFF !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    footer * {
+      color: #1F2937 !important;
+    }
+    footer a.text-white {
+      color: #000000 !important;
+    }
+    footer .text-slate-400 {
+      color: #4B5563 !important;
+    }
+    footer .bg-white\/5 {
+      background-color: rgba(0, 0, 0, 0.04) !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+    footer svg {
+      color: #000000 !important;
     }
   </style>
 </head>
