@@ -15,20 +15,35 @@
       theme: {
         extend: {
           colors: {
-            "slate-350": "#CBD5E1",
-            "slate-550": "#94A3B8",
-            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
-            "on-background": "#F8FAFC",
-            "surface-tint": "#6366F1",
-            "medical-cyan": "#F8FAFC",
-            "medical-blue": "#6366F1",
-            "deep-navy": "#08090C",
-            "slate-slate": "#0F111A",
-            "clinical-white": "rgba(255, 255, 255, 0.03)",
-            "sterile-gray": "#08090C",
+            "slate-350": "#374151",
+            "slate-550": "#6B7280",
+            "indigo-500/30": "rgba(99, 102, 241, 0.15)",
+            "on-background": "#111827",
+            "surface-tint": "#4F46E5",
+            "medical-cyan": "#10B981",
+            "medical-blue": "#2563EB",
+            "deep-navy": "#FFFFFF",
+            "slate-slate": "#FCFCFD",
+            "clinical-white": "rgba(0, 0, 0, 0.02)",
+            "sterile-gray": "#F3F4F6",
             "success": "#10B981",
-            "error": "#F43F5E",
-            "outline": "rgba(255, 255, 255, 0.05)"
+            "error": "#EF4444",
+            "outline": "rgba(0, 0, 0, 0.06)",
+            slate: {
+              50: "#111827",
+              100: "#1F2937",
+              200: "#374151",
+              300: "#4B5563",
+              400: "#6B7280",
+              500: "#9CA3AF",
+              600: "#D1D5DB",
+              700: "#E5E7EB",
+              800: "#F3F4F6",
+              850: "#F9FAFB",
+              900: "#FFFFFF",
+              950: "#FCFCFD",
+            },
+            white: "#111827",
           },
           fontFamily: {
             "sans": ["Geist", "Inter", "sans-serif"],
@@ -36,8 +51,8 @@
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
-            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            'glow-violet': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
           }
         }
       }
@@ -47,37 +62,105 @@
   <style>
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #08090C;
-      color: #D1D5DB;
+      background-color: #FCFCFD !important;
+      color: #374151 !important;
     }
+    h1, h2, h3, h4, h5, h6, .text-white {
+      color: #111827 !important;
+    }
+    .text-slate-100, .text-slate-200 {
+      color: #1F2937 !important;
+    }
+    .text-slate-300 {
+      color: #374151 !important;
+    }
+    .text-slate-400 {
+      color: #4B5563 !important;
+    }
+    .text-slate-500 {
+      color: #6B7280 !important;
+    }
+    
     .grid-bg {
       background-image: 
         linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px) !important;
       background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-      -webkit-mask-image: -webkit-radial-gradient(circle at center, black 40%, transparent 80%);
     }
+    
+    /* Onboarding cards styling */
     .toggle-card {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #374151 !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
     }
     .toggle-card:hover {
-      border-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
     }
-    .theme-input {
+    .toggle-card.active, .toggle-card.active-step, .toggle-card:active {
+      border-color: #4F46E5 !important;
+      background-color: rgba(99, 102, 241, 0.04) !important;
+      color: #111827 !important;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1) !important;
+    }
+    
+    /* Form inputs */
+    .theme-input, input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      color: #111827 !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .theme-input:focus {
-      outline: none;
-      border-color: #D1D5DB;
-      box-shadow: 0 0 0 2px rgba(27, 27, 27, 0.08);
+    .theme-input:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
+      outline: none !important;
+      border-color: #4F46E5 !important;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1) !important;
     }
+    
+    /* Onboarding steps progress dots */
+    .signup-step {
+      background-color: #F3F4F6 !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #6B7280 !important;
+    }
+    .signup-step.bg-slate-950, .signup-step.active {
+      background-color: #4F46E5 !important;
+      color: #FFFFFF !important;
+      border-color: transparent !important;
+    }
+    
+    /* Stepper connectors */
+    .step-connector {
+      background-color: rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    /* Toggle Switch rules */
     .switch-checkbox:checked + .switch-label {
-      background-color: #D1D5DB;
+      background-color: #10B981 !important;
     }
     .switch-checkbox:checked + .switch-label .switch-dot {
       transform: translateX(100%);
+    }
+    
+    /* Back and Next buttons */
+    #signup-back {
+      border-color: rgba(0, 0, 0, 0.12) !important;
+      color: #4B5563 !important;
+    }
+    #signup-back:hover {
+      background-color: #F3F4F6 !important;
+      color: #111827 !important;
+    }
+    #signup-next {
+      background-color: #111827 !important;
+      color: #FFFFFF !important;
+    }
+    #signup-next:hover {
+      background-color: #1F2937 !important;
+      color: #FFFFFF !important;
     }
   </style>
 </head>

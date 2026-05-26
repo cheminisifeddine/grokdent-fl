@@ -13,20 +13,35 @@
       theme: {
         extend: {
           colors: {
-            "slate-350": "#CBD5E1",
-            "slate-550": "#94A3B8",
-            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
-            "on-background": "#F8FAFC",
-            "surface-tint": "#6366F1",
-            "medical-cyan": "#F8FAFC",
-            "medical-blue": "#6366F1",
-            "deep-navy": "#08090C",
-            "slate-slate": "#0F111A",
-            "clinical-white": "rgba(255, 255, 255, 0.03)",
-            "sterile-gray": "#08090C",
+            "slate-350": "#374151",
+            "slate-550": "#6B7280",
+            "indigo-500/30": "rgba(99, 102, 241, 0.15)",
+            "on-background": "#111827",
+            "surface-tint": "#4F46E5",
+            "medical-cyan": "#10B981",
+            "medical-blue": "#2563EB",
+            "deep-navy": "#FFFFFF",
+            "slate-slate": "#FCFCFD",
+            "clinical-white": "rgba(0, 0, 0, 0.02)",
+            "sterile-gray": "#F3F4F6",
             "success": "#10B981",
-            "error": "#F43F5E",
-            "outline": "rgba(255, 255, 255, 0.05)"
+            "error": "#EF4444",
+            "outline": "rgba(0, 0, 0, 0.06)",
+            slate: {
+              50: "#111827",
+              100: "#1F2937",
+              200: "#374151",
+              300: "#4B5563",
+              400: "#6B7280",
+              500: "#9CA3AF",
+              600: "#D1D5DB",
+              700: "#E5E7EB",
+              800: "#F3F4F6",
+              850: "#F9FAFB",
+              900: "#FFFFFF",
+              950: "#FCFCFD",
+            },
+            white: "#111827",
           },
           fontFamily: {
             "sans": ["Geist", "Inter", "sans-serif"],
@@ -34,8 +49,8 @@
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
-            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            'glow-violet': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
           }
         }
       }
@@ -46,20 +61,61 @@
     
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background-color: #08090C;
-      color: #FFFFFF;
+      background-color: #FCFCFD !important;
+      color: #374151 !important;
+    }
+    h1, h2, h3, h4, h5, h6, .text-white {
+      color: #111827 !important;
+    }
+    .text-slate-100, .text-slate-200 {
+      color: #1F2937 !important;
+    }
+    .text-slate-300 {
+      color: #374151 !important;
+    }
+    .text-slate-400 {
+      color: #4B5563 !important;
+    }
+    .text-slate-500 {
+      color: #6B7280 !important;
     }
     
     .glass-panel {
-      background: rgba(15, 17, 26, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
     }
     
     .clinical-shadow {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+    
+    /* Navigation Sidebar & Header Overrides */
+    aside, .sidebar {
+      background: #F9FAFB !important;
+      background-color: #F9FAFB !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    aside a {
+      color: #4B5563 !important;
+    }
+    aside a:hover {
+      background-color: rgba(0, 0, 0, 0.04) !important;
+      color: #111827 !important;
+    }
+    aside .text-white {
+      color: #111827 !important;
+    }
+    aside .bg-slate-900 {
+      background-color: rgba(79, 70, 229, 0.08) !important;
+      color: #4F46E5 !important;
+    }
+    header {
+      background-color: #FFFFFF !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    header h1 {
+      color: #111827 !important;
     }
     
     ::-webkit-scrollbar {
@@ -70,11 +126,11 @@
       background: transparent;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(0, 240, 255, 0.3);
+      background: rgba(0, 0, 0, 0.1) !important;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 240, 255, 0.6);
+      background: rgba(0, 0, 0, 0.2) !important;
     }
     .animate-fade-in {
       animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;

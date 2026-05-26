@@ -18,20 +18,35 @@
       theme: {
         extend: {
           colors: {
-            "slate-350": "#CBD5E1",
-            "slate-550": "#94A3B8",
-            "indigo-500/30": "rgba(99, 102, 241, 0.3)",
-            "on-background": "#F8FAFC",
-            "surface-tint": "#6366F1",
-            "medical-cyan": "#F8FAFC",
-            "medical-blue": "#6366F1",
-            "deep-navy": "#08090C",
-            "slate-slate": "#0F111A",
-            "clinical-white": "rgba(255, 255, 255, 0.03)",
-            "sterile-gray": "#08090C",
+            "slate-350": "#374151",
+            "slate-550": "#6B7280",
+            "indigo-500/30": "rgba(99, 102, 241, 0.15)",
+            "on-background": "#111827",
+            "surface-tint": "#4F46E5",
+            "medical-cyan": "#10B981",
+            "medical-blue": "#2563EB",
+            "deep-navy": "#FFFFFF",
+            "slate-slate": "#FCFCFD",
+            "clinical-white": "rgba(0, 0, 0, 0.02)",
+            "sterile-gray": "#F3F4F6",
             "success": "#10B981",
-            "error": "#F43F5E",
-            "outline": "rgba(255, 255, 255, 0.05)"
+            "error": "#EF4444",
+            "outline": "rgba(0, 0, 0, 0.06)",
+            slate: {
+              50: "#111827",
+              100: "#1F2937",
+              200: "#374151",
+              300: "#4B5563",
+              400: "#6B7280",
+              500: "#9CA3AF",
+              600: "#D1D5DB",
+              700: "#E5E7EB",
+              800: "#F3F4F6",
+              850: "#F9FAFB",
+              900: "#FFFFFF",
+              950: "#FCFCFD",
+            },
+            white: "#111827",
           },
           fontFamily: {
             "sans": ["Geist", "Inter", "sans-serif"],
@@ -39,8 +54,8 @@
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 50px -10px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
-            'glow-violet': '0 0 50px -10px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            'glow': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            'glow-violet': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
           }
         }
       }
@@ -48,56 +63,64 @@
   </script>
   <style>
     body {
-      background-color: #08090C;
-      color: #FFFFFF;
+      background-color: #FCFCFD !important;
+      color: #374151 !important;
+    }
+    h1, h2, h3, h4, h5, h6, .text-white {
+      color: #111827 !important;
+    }
+    .text-slate-100, .text-slate-200 {
+      color: #1F2937 !important;
+    }
+    .text-slate-300 {
+      color: #374151 !important;
+    }
+    .text-slate-400 {
+      color: #4B5563 !important;
+    }
+    .text-slate-500 {
+      color: #6B7280 !important;
+    }
+    a.bg-deep-navy, button.bg-deep-navy, #sim-action-btn {
+      background-color: #111827 !important;
+      color: #FFFFFF !important;
+    }
+    a.bg-deep-navy:hover, button.bg-deep-navy:hover, #sim-action-btn:hover {
+      background-color: #1F2937 !important;
+      color: #FFFFFF !important;
     }
     .glass-card {
-      background: rgba(15, 17, 26, 0.7);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-      transition: all 0.4s ease;
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+      transition: all 0.3s ease;
     }
     .glass-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      transform: translateY(-2px);
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
     }
     .text-gradient {
-      background: linear-gradient(135deg, #FFF 0%, #AAA 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    . {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.03) 0px, transparent 50%),
-                        radial-gradient(at 100% 0%, rgba(255, 255, 255, 0.02) 0px, transparent 50%);
-      z-index: -1;
+      background: linear-gradient(135deg, #111827 0%, #4B5563 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
     }
     .glass-card-dark {
-      background: rgba(9, 15, 28, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     .grid-bg {
-      background-image: linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-    . {
-      background: radial-gradient(circle at 10% 20%, rgba(0, 206, 209, 0.08) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 40%);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px) !important;
+      background-size: 50px 50px !important;
     }
     
     /* Custom range input styling */
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
-      background: #E2E8F0;
+      background: #E5E7EB;
       border-radius: 10px;
     }
     input[type="range"]::-webkit-slider-thumb {
@@ -106,9 +129,9 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #00CED1;
+      background: #10B981;
       cursor: pointer;
-      box-shadow: 0 0 12px rgba(0, 206, 209, 0.5);
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
       border: 2px solid #FFFFFF;
       transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -124,6 +147,20 @@
     }
     .material-symbols-outlined.fill-1 {
       font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Dialog wave bars */
+    .wave-bar {
+      background-color: #4F46E5 !important;
+    }
+    
+    /* Dial Orb and UI refinements */
+    #sim-orb-center {
+      background-color: #F3F4F6 !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+    #sim-orb-icon {
+      color: #374151 !important;
     }
   </style>
 </head>
