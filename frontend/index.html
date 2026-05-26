@@ -123,27 +123,12 @@
       background-size: 50px 50px !important;
     }
     
-    /* Asymmetrical Sidebar & Topbar */
-    aside, .sidebar {
-      background: #F9FAFB !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.055) !important;
-      transition: all 0.2s ease !important;
-    }
-    aside a {
+    /* Top Header Link Polish */
+    nav .text-slate-400 {
       color: #64748B !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
     }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
+    nav .text-slate-400:hover {
       color: #0F172A !important;
-    }
-    aside .text-white {
-      color: #0F172A !important;
-    }
-    aside .bg-slate-900 {
-      background-color: rgba(79, 70, 229, 0.07) !important;
-      color: #4F46E5 !important;
     }
     header, nav.fixed {
       background: rgba(255, 255, 255, 0.8) !important;
@@ -165,10 +150,48 @@
       background-color: #1E293B !important;
       color: #FFFFFF !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12) !important;
     }
     .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active {
       transform: translateY(0px) !important;
+    }
+    
+    /* Interactive Simulator Interface Refinements (Light Mode Screen) */
+    .lg\:col-span-5.bg-slate-900 {
+      background-color: #F9FAFB !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.03) !important;
+    }
+    .lg\:col-span-5.bg-slate-900 button {
+      color: #475569 !important;
+      transition: all 0.2s ease !important;
+    }
+    .lg\:col-span-5.bg-slate-900 button:hover {
+      color: #0F172A !important;
+      background-color: rgba(0, 0, 0, 0.03) !important;
+    }
+    
+    /* Dialogue & EHR Sync Cards */
+    .lg\:col-span-7 .bg-slate-900 {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.01), 0 8px 24px rgba(0,0,0,0.03) !important;
+    }
+    
+    /* Active Dialogue Chat Bubbles Overrides */
+    #chat-stream > div {
+      background-color: #F3F4F6 !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+      color: #374151 !important;
+    }
+    #chat-stream > div.ml-auto {
+      background-color: rgba(79, 70, 229, 0.04) !important;
+      border: 1px solid rgba(79, 70, 229, 0.15) !important;
+      color: #0F172A !important;
+    }
+    #ehr-patient, #ehr-triage, #ehr-insurance, #ehr-status {
+      color: #0F172A !important;
+      font-weight: 700 !important;
     }
     
     /* 10x Soundwave Dynamic Animation */
@@ -191,22 +214,29 @@
     .wave-bar:nth-child(9) { animation-delay: 0.45s !important; }
     .wave-bar:nth-child(10) { animation-delay: 0.6s !important; }
     
-    /* Polished range input */
+    /* Visual green-state live indicators */
+    .animate-pulse.bg-slate-900\/60 {
+      background-color: #10B981 !important;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.4) !important;
+    }
+    
+    /* Polished range input track & thumbs */
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
-      background: #E2E8F0;
+      background: #E2E8F0 !important;
+      height: 6px !important;
       border-radius: 10px;
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 18px !important;
+      height: 18px !important;
       border-radius: 50%;
-      background: #10B981;
+      background: #4F46E5 !important;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3) !important;
       border: 2px solid #FFFFFF;
       transition: transform 0.15s ease;
     }
@@ -214,48 +244,138 @@
       transform: scale(1.15);
     }
     
-    /* Dialer Orb and System Ready state */
+    /* Dialer Mic Node */
     #sim-orb-center {
-      background-color: #F1F5F9 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-    }
-    #sim-orb-icon {
-      color: #334155 !important;
-    }
-    
-    /* Clean inputs & focus rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #0F172A !important;
-      border-radius: 8px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+      width: 56px !important;
+      height: 56px !important;
+      border-radius: 50% !important;
     }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-      outline: none !important;
-      border-color: #4F46E5 !important;
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.08) !important;
+    #sim-orb-icon {
+      color: #4F46E5 !important;
+      font-size: 24px !important;
     }
     
-    /* Stepper & progress tracking */
-    .signup-step {
-      background-color: #F1F5F9 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      color: #64748B !important;
+    /* Latency Paradigm Pipeline Cards */
+    #technology .grid > div {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(0, 0, 0, 0.04) !important;
+      border-radius: 24px !important;
+    }
+    #technology .grid > div:last-child {
+      border: 2px solid #4F46E5 !important;
+      box-shadow: 0 1px 4px rgba(79, 70, 229, 0.02), 0 16px 48px rgba(79, 70, 229, 0.06) !important;
+    }
+    
+    /* Traditional Red vs. Renia Green Pipeline packet animations */
+    .data-packet-red {
+      background-color: #EF4444 !important;
+    }
+    .data-packet-green {
+      background-color: #10B981 !important;
+    }
+    
+    /* Financial ROI Ledger Controls & Outputs */
+    section#roi {
+      background-color: #F9FAFB !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.055) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.055) !important;
+    }
+    #roi .lg\:col-span-5 {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(0, 0, 0, 0.04) !important;
+    }
+    #roi .lg\:col-span-7 > div {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(0, 0, 0, 0.04) !important;
+      border-radius: 24px !important;
+    }
+    #roi .lg\:col-span-7 > div:last-child {
+      border: 2px solid #10B981 !important;
+      box-shadow: 0 1px 4px rgba(16, 185, 129, 0.02), 0 16px 48px rgba(16, 185, 129, 0.06) !important;
+    }
+    #roi .lg\:col-span-7 > div:last-child .bg-deep-navy {
+      background-color: rgba(16, 185, 129, 0.04) !important;
+      border-top: 1px solid rgba(16, 185, 129, 0.1) !important;
+    }
+    #label-missed-calls, #label-patient-val {
+      background-color: #0F172A !important;
+      color: #FFFFFF !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 4px 8px !important;
       border-radius: 6px !important;
     }
-    .signup-step.bg-slate-950, .signup-step.active {
+    
+    /* Interactive Floating Image Widgets */
+    .absolute.glass-card {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+    }
+    .absolute.glass-card .text-white {
+      color: #0F172A !important;
+    }
+    
+    /* Compliance Section Disclosures Warn Box */
+    #compliance .md\:col-span-7 {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(0, 0, 0, 0.04) !important;
+      border-radius: 24px !important;
+    }
+    #compliance .italic.text-slate-300 {
+      background-color: #F9FAFB !important;
+      border-left: 4px solid #10B981 !important;
+      color: #374151 !important;
+      font-weight: 500 !important;
+    }
+    
+    /* Stripe-Level Pricing Tiers Grid */
+    #pricing .grid > div {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+      border-radius: 24px !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    #pricing .grid > div:hover {
+      transform: translateY(-2px) scale(1.005) !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 12px 36px rgba(0,0,0,0.05) !important;
+    }
+    #pricing .grid > div.border-2 {
+      border: 2px solid #4F46E5 !important;
+      box-shadow: 0 1px 4px rgba(79, 70, 229, 0.02), 0 16px 48px rgba(79, 70, 229, 0.06) !important;
+    }
+    #pricing .grid > div.border-2 .absolute {
       background-color: #4F46E5 !important;
       color: #FFFFFF !important;
-      border-color: transparent !important;
+      font-weight: 700 !important;
     }
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.06) !important;
+    
+    /* Testimonial Cards Layout Override */
+    section.bg-deep-navy\/50 {
+      background-color: #F9FAFB !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
     }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #10B981 !important;
+    .border-slate-250 {
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+      border-radius: 24px !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .border-slate-250:hover {
+      transform: translateY(-2px) scale(1.005) !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 8px 24px rgba(0,0,0,0.05) !important;
     }
     
     /* Scrollbars */
@@ -349,7 +469,7 @@
         
         <!-- Main Title -->
         <h1 class="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white max-w-5xl leading-[1.04] tracking-tighter">
-          The front office receptionist, <span class="bg-gradient-to-r from-deep-navy via-violet-500 to-indigo-400 bg-clip-text text-transparent">engineered as light-speed voice AI.</span>
+          The front office receptionist, <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent">engineered as light-speed voice AI.</span>
         </h1>
         
         <!-- Subheading -->
