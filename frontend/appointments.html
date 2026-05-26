@@ -59,59 +59,144 @@
   </script>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
     body {
-      font-family: 'Geist', 'Inter', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: #FCFCFD !important;
       color: #374151 !important;
+      letter-spacing: -0.01em;
     }
-    h1, h2, h3, h4, h5, h6, .text-white {
-      color: #111827 !important;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      color: #0F172A !important;
+      letter-spacing: -0.025em !important;
+    }
+    .text-white {
+      color: #0F172A !important;
     }
     .text-slate-100, .text-slate-200 {
-      color: #1F2937 !important;
+      color: #1E293B !important;
     }
     .text-slate-300 {
-      color: #374151 !important;
+      color: #334155 !important;
     }
     .text-slate-400 {
-      color: #4B5563 !important;
+      color: #475569 !important;
     }
-    .text-slate-500 {
-      color: #6B7280 !important;
+    .text-slate-505, .text-slate-500 {
+      color: #64748B !important;
+    }
+    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10 {
+      border-color: rgba(0, 0, 0, 0.05) !important;
     }
     
-    .glass-panel {
+    /* 10x Layering: Premium Cards & Panels */
+    .glass-card, .glass-panel, .toggle-card {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02), 0 4px 12px 0 rgba(0, 0, 0, 0.03) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .glass-card:hover, .toggle-card:hover {
+      transform: translateY(-2px) scale(1.005) !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.02), 0 8px 24px 0 rgba(0,0,0,0.05) !important;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #0F172A 0%, #475569 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+    }
+    .glass-card-dark {
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+    }
+    .grid-bg {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px) !important;
+      background-size: 50px 50px !important;
     }
     
-    /* Navigation Sidebar & Header Overrides */
+    /* Asymmetrical Sidebar & Topbar */
     aside, .sidebar {
       background: #F9FAFB !important;
-      background-color: #F9FAFB !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.055) !important;
+      transition: all 0.2s ease !important;
     }
     aside a {
-      color: #4B5563 !important;
+      color: #64748B !important;
+      transition: all 0.2s ease !important;
+      border-radius: 8px !important;
     }
     aside a:hover {
-      background-color: rgba(0, 0, 0, 0.04) !important;
-      color: #111827 !important;
+      background-color: rgba(0, 0, 0, 0.03) !important;
+      color: #0F172A !important;
     }
     aside .text-white {
-      color: #111827 !important;
+      color: #0F172A !important;
     }
     aside .bg-slate-900 {
-      background-color: rgba(79, 70, 229, 0.08) !important;
+      background-color: rgba(79, 70, 229, 0.07) !important;
       color: #4F46E5 !important;
     }
-    header {
-      background-color: #FFFFFF !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    header, nav.fixed {
+      background: rgba(255, 255, 255, 0.8) !important;
+      backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
     }
     header h1 {
-      color: #111827 !important;
+      color: #0F172A !important;
+    }
+    
+    /* Signature Buttons: OpenAI/Google CTAs */
+    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950 {
+      background-color: #0F172A !important;
+      color: #FFFFFF !important;
+      border: 1px solid transparent !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover {
+      background-color: #1E293B !important;
+      color: #FFFFFF !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+    }
+    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active {
+      transform: translateY(0px) !important;
+    }
+    
+    /* Clean inputs & focus rings */
+    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #0F172A !important;
+      border-radius: 8px !important;
+      transition: all 0.2s ease !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+    }
+    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+      outline: none !important;
+      border-color: #4F46E5 !important;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.08) !important;
+    }
+    
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.08) !important;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.16) !important;
     }
 
     .custom-scrollbar::-webkit-scrollbar {
@@ -122,20 +207,20 @@
       background: transparent;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.08);
       border-radius: 10px;
     }
     .calendar-grid {
       display: grid;
       grid-template-columns: 80px repeat(7, minmax(110px, 1fr));
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
     }
     .calendar-cell {
       min-height: 95px;
       padding: 6px;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
       position: relative;
       transition: background-color 0.2s ease;
       display: flex;
@@ -152,9 +237,9 @@
       justify-content: center;
       font-size: 11px;
       font-weight: 800;
-      color: #4B5563 !important;
+      color: #475569 !important;
       background: #F9FAFB !important;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.08) !important;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.06) !important;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -164,9 +249,9 @@
       justify-content: center;
       font-size: 10px;
       font-weight: 800;
-      color: #4B5563 !important;
+      color: #475569 !important;
       background: #F9FAFB !important;
-      border-right: 2px solid rgba(0, 0, 0, 0.08) !important;
+      border-right: 2px solid rgba(0, 0, 0, 0.06) !important;
     }
     .calendar-cell:not(.calendar-header):not(.time-label):hover {
       background-color: #F9FAFB !important;
@@ -183,41 +268,41 @@
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
       border-left: 3px solid transparent;
       cursor: pointer;
       box-sizing: border-box;
     }
     .appt-block:hover {
       transform: translateY(-1px) scale(1.01);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       z-index: 10;
     }
     .appt-general {
-      background: rgba(79, 70, 229, 0.08) !important;
+      background: rgba(79, 70, 229, 0.07) !important;
       color: #4F46E5 !important;
       border-left-color: #4F46E5 !important;
     }
     .appt-cosmetic {
-      background: rgba(139, 92, 246, 0.08) !important;
+      background: rgba(139, 92, 246, 0.07) !important;
       color: #7C3AED !important;
       border-left-color: #7C3AED !important;
     }
     .appt-emergency {
-      background: rgba(239, 68, 68, 0.08) !important;
+      background: rgba(239, 68, 68, 0.07) !important;
       color: #DC2626 !important;
       border-left-color: #DC2626 !important;
     }
     .day-view-container {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
       border-radius: 8px;
       overflow: hidden;
     }
     .day-row {
       display: grid;
       grid-template-columns: 100px 1fr;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
       min-height: 70px;
     }
     .day-time {
@@ -226,9 +311,9 @@
       justify-content: center;
       font-size: 11px;
       font-weight: 700;
-      color: #4B5563 !important;
+      color: #475569 !important;
       background: #F9FAFB !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
     }
     .day-slot {
       padding: 6px 12px;
@@ -244,15 +329,15 @@
     .month-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
-      border-left: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-left: 1px solid rgba(0, 0, 0, 0.05) !important;
       background: #FFFFFF !important;
     }
     .month-cell {
       min-height: 110px;
       padding: 6px;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -269,10 +354,10 @@
       align-items: center;
       font-size: 11px;
       font-weight: 700;
-      color: #4B5563 !important;
+      color: #475569 !important;
     }
     .month-cell.today {
-      background: rgba(79, 70, 229, 0.04) !important;
+      background: rgba(79, 70, 229, 0.03) !important;
     }
     .month-cell.today .month-cell-header span:first-child {
       background: #4F46E5;
@@ -311,14 +396,14 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .status-scheduled { background: #F3F4F6; color: #374151 !important; }
+    .status-scheduled { background: #F1F5F9; color: #475569 !important; }
     .status-confirmed { background: #D1FAE5; color: #065F46 !important; }
     .status-checked-in { background: #CCFBF1; color: #0F766E !important; }
-    .status-completed { background: #E5E7EB; color: #6B7280 !important; text-decoration: line-through; }
+    .status-completed { background: #E2E8F0; color: #64748B !important; text-decoration: line-through; }
     .status-cancelled { background: #FEE2E2; color: #991B1B !important; }
   </style>
 </head>
-<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
+<body class="bg-slate-50 min-h-screen overflow-hidden flex text-slate-600 antialiased selection:bg-indigo-500/10 selection:text-indigo-900">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">

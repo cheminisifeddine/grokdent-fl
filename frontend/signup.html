@@ -60,32 +60,51 @@
   </script>
   
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
     body {
-      font-family: 'Geist', 'Inter', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: #FCFCFD !important;
       color: #374151 !important;
+      letter-spacing: -0.01em;
     }
-    h1, h2, h3, h4, h5, h6, .text-white {
-      color: #111827 !important;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      color: #0F172A !important;
+      letter-spacing: -0.025em !important;
+    }
+    .text-white {
+      color: #0F172A !important;
     }
     .text-slate-100, .text-slate-200 {
-      color: #1F2937 !important;
+      color: #1E293B !important;
     }
     .text-slate-300 {
-      color: #374151 !important;
+      color: #334155 !important;
     }
     .text-slate-400 {
-      color: #4B5563 !important;
+      color: #475569 !important;
     }
     .text-slate-500 {
-      color: #6B7280 !important;
+      color: #64748B !important;
+    }
+    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10 {
+      border-color: rgba(0, 0, 0, 0.05) !important;
     }
     
     .grid-bg {
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px) !important;
-      background-size: 40px 40px;
+        linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px) !important;
+      background-size: 50px 50px;
+    }
+    
+    /* Main card container override */
+    main > div {
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.055) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(0, 0, 0, 0.04) !important;
+      border-radius: 16px !important;
     }
     
     /* Onboarding cards styling */
@@ -93,31 +112,42 @@
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
       color: #374151 !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
       cursor: pointer;
     }
     .toggle-card:hover {
       border-color: rgba(0, 0, 0, 0.12) !important;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
     }
-    .toggle-card.active, .toggle-card.active-step, .toggle-card:active {
+    
+    /* Class-override for active EHR & Plan cards (targeting dynamic JS changes) */
+    .toggle-card.border-slate-950, .toggle-card.active {
       border-color: #4F46E5 !important;
       background-color: rgba(99, 102, 241, 0.04) !important;
-      color: #111827 !important;
+      color: #0F172A !important;
       box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1) !important;
+    }
+    .toggle-card.border-slate-950 .check-icon {
+      color: #4F46E5 !important;
+    }
+    .toggle-card.border-white\/5 {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #374151 !important;
     }
     
     /* Form inputs */
     .theme-input, input[type="text"], input[type="email"], input[type="tel"], textarea, select {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.12) !important;
-      color: #111827 !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #0F172A !important;
+      border-radius: 8px !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .theme-input:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
       outline: none !important;
       border-color: #4F46E5 !important;
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1) !important;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.08) !important;
     }
     
     /* Onboarding steps progress dots */
@@ -145,22 +175,37 @@
       transform: translateX(100%);
     }
     
+    /* Pricing toggle labels */
+    #label-monthly.text-white, #label-yearly.text-white {
+      color: #0F172A !important;
+      font-weight: 700 !important;
+    }
+    #label-monthly.text-slate-400, #label-yearly.text-slate-400 {
+      color: #64748B !important;
+      font-weight: 500 !important;
+    }
+    
     /* Back and Next buttons */
     #signup-back {
-      border-color: rgba(0, 0, 0, 0.12) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
       color: #4B5563 !important;
+      background-color: #FFFFFF !important;
     }
     #signup-back:hover {
-      background-color: #F3F4F6 !important;
-      color: #111827 !important;
+      background-color: #F9FAFB !important;
+      color: #0F172A !important;
     }
     #signup-next {
-      background-color: #111827 !important;
+      background-color: #0F172A !important;
       color: #FFFFFF !important;
+      border: 1px solid transparent !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     #signup-next:hover {
-      background-color: #1F2937 !important;
+      background-color: #1E293B !important;
       color: #FFFFFF !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1) !important;
     }
   </style>
 </head>
