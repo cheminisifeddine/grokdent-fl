@@ -52,9 +52,11 @@ app = FastAPI(
 )
 
 # 1. CORS Middleware Configuration
+cors_origins = ["*"] if settings.DEBUG else settings.cors_origins_list
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify frontend domain e.g., ["https://grokdent.fl"]
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

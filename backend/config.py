@@ -115,3 +115,29 @@ class Settings(BaseSettings):
 
 # Singleton settings instance
 settings = Settings()
+
+# Validation checks on settings load
+import logging
+logger = logging.getLogger("backend.config")
+
+def validate_production_settings():
+    """Validate critical environment configurations, especially for production."""
+    if not settings.SECRET_KEY or settings.SECRET_KEY == "dev-secret-key-change-in-production-min-32-chars":
+        if not settings.DEBUG:
+            raise ValueError("SECRET_KEY must be changed to a secure key in production!")
+        else:
+            logger.warning("⚠️ SECRET_KEY is set to default developer key. Change in production!")
+            
+    if not settings.ENCRYPTION_KEY:
+        logger.warning("⚠️ ENCRYPTION_KEY is not set. HIPAA-compliant payload encryption will be disabled!")
+
+    if not settings.XAI_API_KEY:
+        logger.warning("⚠️ XAI_API_KEY is not set. AI voice features will fall back to demo mode!")
+
+    if not settings.TWILIO_AUTH_TOKEN or not settings.TWILIO_ACCOUNT_SID:
+        logger.warning("⚠️ Twilio credentials (TWILIO_AUTH_TOKEN or TWILIO_ACCOUNT_SID) are missing. Voice calling is disabled!")
+
+    if not settings.STRIPE_SECRET_KEY:
+        logger.warning("⚠️ STRIPE_SECRET_KEY is missing. Billing checkout flows are disabled!")
+
+validate_production_settings()
