@@ -15,24 +15,26 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#FFFFFF",
-            "surface-tint": "#00F0FF",
-            "medical-cyan": "#00F0FF",
-            "medical-blue": "#00F0FF",
-            "deep-navy": "#0A0A0F",
-            "slate-slate": "#12121A",
-            "clinical-white": "#1A1A24",
-            "sterile-gray": "#0A0A0F",
-            "success": "#10B981",
-            "error": "#FF3366"
+            "on-background": "#EDEDED",
+            "surface-tint": "#0070F3",
+            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
+            "medical-blue": "#0070F3",
+            "deep-navy": "#000000",
+            "slate-slate": "#111111",
+            "clinical-white": "#1A1A1A",
+            "sterile-gray": "#0A0A0A",
+            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
+            "error": "#E00",
+            "outline": "rgba(255, 255, 255, 0.1)"
           },
           fontFamily: {
             "sans": ["Inter", "sans-serif"],
-            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
+            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
+            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
           }
         }
       }
@@ -181,28 +183,28 @@
               <span class="font-bold text-sm tracking-tight">Patterson Eaglesoft</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">SYNC READY</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-350 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
               </div>
             </div>
             <div class="toggle-card border border-slate-800 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="dentrix">
               <span class="font-bold text-sm tracking-tight">Henry Schein Dentrix</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">SYNC READY</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-350 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
               </div>
             </div>
             <div class="toggle-card border border-slate-800 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="opendental">
               <span class="font-bold text-sm tracking-tight">Open Dental</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">API ACTIVE</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-350 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
               </div>
             </div>
             <div class="toggle-card border border-slate-800 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="carestream">
               <span class="font-bold text-sm tracking-tight">Carestream Dental</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">CLOUD INTEGRATION</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-350 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
               </div>
             </div>
           </div>

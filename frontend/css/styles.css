@@ -596,22 +596,23 @@ p {
 }
 
 .btn-primary {
-  background: var(--accent-gradient);
-  color: #12121A;
-  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
+  background: #EDEDED;
+  color: #000000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
   font-weight: var(--fw-bold);
-  border: 1px solid rgba(0, 240, 255, 0.6);
+  border: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.6), 0 0 20px rgba(255, 51, 102, 0.4);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  color: #000000;
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .btn-secondary {

@@ -13,24 +13,26 @@
       theme: {
         extend: {
           colors: {
-            "on-background": "#FFFFFF",
-            "surface-tint": "#00F0FF",
-            "medical-cyan": "#00F0FF",
-            "medical-blue": "#00F0FF",
-            "deep-navy": "#0A0A0F",
-            "slate-slate": "#12121A",
-            "clinical-white": "#1A1A24",
-            "sterile-gray": "#0A0A0F",
-            "success": "#10B981",
-            "error": "#FF3366"
+            "on-background": "#EDEDED",
+            "surface-tint": "#0070F3",
+            "medical-cyan": "#EDEDED", /* Neutralizing cyan to white/off-white */
+            "medical-blue": "#0070F3",
+            "deep-navy": "#000000",
+            "slate-slate": "#111111",
+            "clinical-white": "#1A1A1A",
+            "sterile-gray": "#0A0A0A",
+            "success": "#0070F3", /* Use subtle blue instead of green for tech feel */
+            "error": "#E00",
+            "outline": "rgba(255, 255, 255, 0.1)"
           },
           fontFamily: {
             "sans": ["Inter", "sans-serif"],
-            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "display": ["Inter", "sans-serif"], /* Removing Plus Jakarta for a cleaner look */
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
+            'glow': '0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5)',
+            'glow-coral': '0 0 0 1px rgba(255,255,255,0.1)',
           }
         }
       }
@@ -50,7 +52,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
     
     .clinical-shadow {
@@ -80,7 +82,7 @@
     }
   </style>
 </head>
-<body class="bg-[#0A0A0F] text-white h-screen flex overflow-hidden">
+<body class="bg-black text-white h-screen flex overflow-hidden">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-200/80 h-full z-40 flex-shrink-0 items-center py-6">
