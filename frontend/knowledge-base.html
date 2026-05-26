@@ -74,9 +74,7 @@
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
-      <span class="text-white text-[15px]">🦷</span>
-    </div>
+    <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
@@ -414,7 +412,7 @@
         lastSavedEl.textContent = `Saved at ${time}`;
       }
 
-      showToast('Directive protocol successfully synchronized. ✅', 'success');
+      showToast('Directive protocol successfully synchronized. <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>', 'success');
       try { API.updateKnowledge(entry.id, entry); } catch {}
     }
 
@@ -533,7 +531,7 @@
               <div class="bg-slate-950 text-white px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-right">
                 ${escapeHtml(query)}
               </div>
-              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] text-slate-200 font-bold shrink-0 select-none">👤</div>
+              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] text-slate-200 font-bold shrink-0 select-none"><span class="material-symbols-outlined text-slate-400 text-lg">person</span></div>
             </div>
           `;
           
@@ -575,7 +573,7 @@
           try { await API.seedKnowledge(); } catch {}
           state.activeId = null;
           loadKnowledgeBase();
-          showToast('Default training seed loaded! 🦷✅', 'success');
+          showToast('Default training seed loaded! <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>', 'success');
         }
       });
     });

@@ -263,9 +263,7 @@
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
-      <span class="text-white text-[15px]">🦷</span>
-    </div>
+    <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
@@ -973,12 +971,12 @@
             <div style="display:grid;gap:14px;margin-bottom:20px;">
               <div>
                 <label style="display:block;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;margin-bottom:2px;">Patient Name</label>
-                <div style="font-size:14px;font-weight:800;color:#111;">👤 ${appt.name}</div>
+                <div style="font-size:14px;font-weight:800;color:#111;"><span class="material-symbols-outlined text-slate-400 text-lg">person</span> ${appt.name}</div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div>
                   <label style="display:block;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;margin-bottom:2px;">Date</label>
-                  <div style="font-size:13px;font-weight:700;color:#334155;">📅 ${appt.date}</div>
+                  <div style="font-size:13px;font-weight:700;color:#334155;"><span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span> ${appt.date}</div>
                 </div>
                 <div>
                   <label style="display:block;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;margin-bottom:2px;">Time</label>
@@ -987,7 +985,7 @@
               </div>
               <div>
                 <label style="display:block;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;margin-bottom:2px;">Service Type</label>
-                <div style="font-size:13px;font-weight:700;color:#334155;">🦷 ${appt.service}</div>
+                <div style="font-size:13px;font-weight:700;color:#334155;"> ${appt.service}</div>
               </div>
               <div>
                 <label style="display:block;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;margin-bottom:2px;">Clinical Notes</label>

@@ -142,7 +142,7 @@ const Dashboard = {
           </div>
           <div class="flex-1">
             <div class="font-bold text-brand-900">${escapeHtml(appt.patient_name || appt.name || 'Patient')}</div>
-            <div class="text-sm font-semibold text-slate-500">${isEmergency ? '🚨 ' : ''}${escapeHtml(appt.service || 'General Checkup')}</div>
+            <div class="text-sm font-semibold text-slate-500">${isEmergency ? '<span class="material-symbols-outlined text-rose-400 text-[18px]">error</span> ' : ''}${escapeHtml(appt.service || 'General Checkup')}</div>
           </div>
           <div class="text-[10px] font-bold uppercase ${badgeColor} border px-2.5 py-1 rounded-full">${label}</div>
         </div>
@@ -185,7 +185,7 @@ const Dashboard = {
 
     wsClient.onAppointmentUpdate((data) => {
       console.log('Appointment update:', data);
-      showToast(`📅 Appointment ${data.type.replace('appointment_', '')}: ${data.patient_name || 'Patient'}`, 'info');
+      showToast(`<span class="material-symbols-outlined text-slate-400 text-[18px]">calendar_today</span> Appointment ${data.type.replace('appointment_', '')}: ${data.patient_name || 'Patient'}`, 'info');
       // Refresh appointments
       this.loadTodayAppointments();
     });
@@ -316,7 +316,7 @@ window.viewCallTranscript = function(name, time, lang) {
         </div>
         <div class="p-6 overflow-y-auto max-h-[60vh] custom-scrollbar">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl">👤</div>
+            <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl"><span class="material-symbols-outlined text-slate-400 text-[18px]">person</span></div>
             <div>
               <div class="font-bold text-lg text-white">\${escapeHtml(name)}</div>
               <div class="text-sm text-emerald-400 font-semibold">Resolved Successfully</div>
@@ -360,7 +360,7 @@ window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
         </div>
         <div class="p-6">
           <div class="flex flex-col items-center text-center mb-6">
-            <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 shadow-sm flex items-center justify-center text-2xl mb-3">📅</div>
+            <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 shadow-sm flex items-center justify-center text-2xl mb-3"><span class="material-symbols-outlined text-slate-400 text-[18px]">calendar_today</span></div>
             <h2 class="font-bold text-xl text-white">\${escapeHtml(name)}</h2>
             <div class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase mt-2 \${badgeClass}">\${status}</div>
           </div>

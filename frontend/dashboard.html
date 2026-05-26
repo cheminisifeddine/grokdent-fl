@@ -90,9 +90,7 @@
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-white/5 h-full z-40 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
-      <span class="text-white text-[15px]">🦷</span>
-    </div>
+    <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="relative w-full flex justify-center group" href="dashboard.html" title="Dashboard">
@@ -390,7 +388,7 @@
       </div>
 
       <button id="sim-start-btn" onclick="startCallSimulation()" class="w-full py-3.5 bg-slate-950 hover:bg-slate-900 text-white rounded font-bold uppercase tracking-wider text-xs border-t border-white/10 active:scale-[0.98] transition-all">
-        🚀 Start Call Simulation
+         Start Call Simulation
       </button>
     </div>
   </div>
@@ -437,13 +435,13 @@
         { role: 'user', text: 'Hola, buenas tardes. Quisiera programar una cita de emergencia, por favor. Tengo mucho dolor de muela.' },
         { role: 'assistant', text: 'Buenas tardes. Lamento escuchar que tiene dolor. Con gusto le ayudo. ¿Es usted un paciente existente o es su primera vez con nosotros?' },
         { role: 'user', text: 'Es mi primera vez. Me llamo Sarah Jenkins y vivo aquí en Miami.' },
-        { role: 'system', text: '⚡ EHR SYNC: Querying Eaglesoft Database...' },
-        { role: 'system', text: '✅ PATIENT SEARCH: No existing record found. Triggering Onboarding Protocol...' },
+        { role: 'system', text: ' EHR SYNC: Querying Eaglesoft Database...' },
+        { role: 'system', text: '<span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span> PATIENT SEARCH: No existing record found. Triggering Onboarding Protocol...' },
         { role: 'assistant', text: 'Welcome, Sarah. We will register you as a new patient right away. I see that you need an emergency slot. I have an opening today at 2:30 PM, or tomorrow at 9:00 AM. Which one works best for you?' },
         { role: 'user', text: 'El de hoy a las dos y media está perfecto, por favor. Muchas gracias.' },
         { role: 'assistant', text: 'Perfect. I have booked you for today at 2:30 PM. You are scheduled with Dr. Mitchell for an emergency exam. I am sending a confirmation text to this number. Please arrive 10 minutes early to fill out form details.' },
         { role: 'system', text: '💾 EHR WRITE-BACK: Creating New Patient File for "Sarah Jenkins"...' },
-        { role: 'system', text: '📅 APPOINTMENT WRITE-BACK: Created slot in Eaglesoft: May 25, 2:30 PM' },
+        { role: 'system', text: '<span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span> APPOINTMENT WRITE-BACK: Created slot in Eaglesoft: May 25, 2:30 PM' },
         { role: 'user', text: 'Muchas gracias por su ayuda. ¡Adiós!' },
         { role: 'assistant', text: 'You are welcome, Sarah. We will see you at 2:30 PM. Goodbye!' },
         { role: 'system', text: '🔒 Call ended. Total opportunity saved: $350.00. 100% HIPAA compliant.' }
@@ -476,7 +474,7 @@
 
       if (btn) {
         btn.disabled = false;
-        btn.textContent = '🚀 Restart Call Simulation';
+        btn.textContent = ' Restart Call Simulation';
       }
     }
   </script>

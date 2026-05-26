@@ -249,7 +249,7 @@ function openAppointmentModal() {
       }
 
       overlay.remove();
-      showToast(`✅ Appointment booked for ${patient} on ${date} at ${time}`, 'success');
+      showToast(`<span class="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span> Appointment booked for ${patient} on ${date} at ${time}`, 'success');
     });
 
     return;
@@ -458,12 +458,12 @@ window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
         <div style="display:grid;gap:18px;margin-bottom:24px;">
           <div>
             <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Patient Name</label>
-            <div style="font-size:16px;font-weight:800;color:#0f172a;">👤 ${name}</div>
+            <div style="font-size:16px;font-weight:800;color:#0f172a;"><span class="material-symbols-outlined text-slate-400 text-[18px]">person</span> ${name}</div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div>
               <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Date</label>
-              <div style="font-size:14px;font-weight:700;color:#334155;">📅 2026-05-23</div>
+              <div style="font-size:14px;font-weight:700;color:#334155;"><span class="material-symbols-outlined text-slate-400 text-[18px]">calendar_today</span> 2026-05-23</div>
             </div>
             <div>
               <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Time</label>
@@ -472,7 +472,7 @@ window.viewAppointmentDetailsDashboard = function(name, time, service, status) {
           </div>
           <div>
             <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Service Type</label>
-            <div style="font-size:14px;font-weight:700;color:#334155;">🦷 ${service}</div>
+            <div style="font-size:14px;font-weight:700;color:#334155;"> ${service}</div>
           </div>
           <div>
             <label style="display:block;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:4px;">Triage Notes</label>

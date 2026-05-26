@@ -87,7 +87,7 @@ function showToast(message, type = 'success') {
   document.querySelectorAll('.renia-toast').forEach(t => t.remove());
 
   const colors = {
-    success: { bg: '#f0fdf4', border: '#bbf7d0', text: '#166534', icon: '✅' },
+    success: { bg: '#f0fdf4', border: '#bbf7d0', text: '#166534', icon: '<span class="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span>' },
     error:   { bg: '#fef2f2', border: '#fecaca', text: '#991b1b', icon: '❌' },
     warning: { bg: '#fffbeb', border: '#fde68a', text: '#92400e', icon: '⚠️' },
     info:    { bg: '#eff6ff', border: '#bfdbfe', text: '#1e40af', icon: 'ℹ️' }

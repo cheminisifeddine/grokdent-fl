@@ -104,9 +104,7 @@
   <!-- Asymmetrical Rail System (Sidebar) -->
   <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-40 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
-      <span class="text-white text-[15px]">🦷</span>
-    </div>
+    <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
@@ -396,7 +394,7 @@
           <!-- Google Calendar Integration -->
           <div class="p-4 rounded border border-white/5 bg-deep-navy/30 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center shadow-none text-sm">📅</div>
+              <div class="w-9 h-9 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center shadow-none text-sm"><span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span></div>
               <div>
                 <h5 class="text-xs font-bold text-slate-200">Google Calendar</h5>
                 <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
@@ -658,7 +656,7 @@
       container.innerHTML = list.map((srv, idx) => `
         <div class="flex items-center justify-between p-3 rounded border border-slate-800/50 bg-slate-950/50 hover:bg-slate-950 transition-colors shadow-none">
           <div class="flex items-center gap-2.5 truncate">
-            <div class="w-7 h-7 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center text-slate-400 text-xs font-black">🦷</div>
+            <div class="w-7 h-7 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center text-slate-400 text-xs font-black"></div>
             <div class="font-bold text-slate-200 text-xs truncate">${escapeHtml(srv.name)}</div>
           </div>
           <div class="flex items-center gap-3">
@@ -1191,12 +1189,12 @@
       settingsReady = true;
       try {
         settingsInit();
-        console.debug('✅ settingsInit completed successfully');
+        console.debug('<span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span> settingsInit completed successfully');
       } catch (err) {
         console.error('❌ settingsInit crashed:', err);
         // Last-resort retry with a clean stack
         setTimeout(() => {
-          try { settingsInit(); console.debug('✅ settingsInit retry succeeded'); }
+          try { settingsInit(); console.debug('<span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span> settingsInit retry succeeded'); }
           catch (e) { console.error('❌ settingsInit retry also failed:', e); }
         }, 100);
       }
