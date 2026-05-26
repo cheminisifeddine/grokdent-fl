@@ -33,39 +33,39 @@
     }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-45 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
       <span class="text-white text-[15px]">🦷</span>
     </div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="calls.html" title="Calls">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-100 text-slate-950">
+        <div class="p-2 rounded bg-slate-slate text-slate-950">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -73,16 +73,16 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -97,7 +97,7 @@
         <div class="flex flex-col sm:flex-row justify-between sm:items-end mb-8 gap-4">
           <div>
             <h2 class="font-display text-2xl font-bold tracking-tight text-slate-950 mb-1 leading-none">Call Activity</h2>
-            <p class="text-slate-500 text-xs font-medium">Manage and review your AI receptionist interactions.</p>
+            <p class="text-slate-400 text-xs font-medium">Manage and review your AI receptionist interactions.</p>
           </div>
           <div class="text-xs font-mono font-bold text-slate-400">
             TOTAL CALLS: <span id="total-calls-count" class="text-slate-950">15</span>
@@ -106,12 +106,12 @@
 
         <!-- Filter Controls -->
         <div class="flex flex-wrap gap-3 mb-6">
-          <div class="relative flex-1 min-w-[200px] flex items-center bg-white rounded-full px-4 py-2 border border-slate-200 group focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+          <div class="relative flex-1 min-w-[200px] flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-slate-800 group focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
             <span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
             <input id="call-search" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 focus:outline-none" placeholder="Search callers or summaries..." type="text"/>
           </div>
           
-          <select id="call-status-filter" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600 focus:outline-none focus:ring-1 focus:ring-slate-950">
+          <select id="call-status-filter" class="px-4 py-2 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
             <option value="">All Statuses</option>
             <option value="completed">Completed</option>
             <option value="transferred">Transferred</option>
@@ -119,7 +119,7 @@
             <option value="voicemail">Voicemail</option>
           </select>
           
-          <select id="call-language-filter" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600 focus:outline-none focus:ring-1 focus:ring-slate-950">
+          <select id="call-language-filter" class="px-4 py-2 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
             <option value="">All Languages</option>
             <option value="english">🇺🇸 English</option>
             <option value="spanish">🇪🇸 Spanish</option>
@@ -133,19 +133,19 @@
       </div>
 
       <!-- Pagination Footer -->
-      <div class="border-t border-slate-200/60 pt-4 flex justify-between items-center text-xs mt-8">
+      <div class="border-t border-slate-800/60 pt-4 flex justify-between items-center text-xs mt-8">
         <span class="text-slate-400 font-medium" id="pagination-info">Showing 1-15 of 15 calls</span>
         <div class="flex gap-1.5" id="pagination-controls">
-          <button class="page-btn px-3 py-1.5 rounded border border-slate-200 bg-white hover:bg-slate-50 text-slate-500 font-bold transition-all">&larr;</button>
+          <button class="page-btn px-3 py-1.5 rounded border border-slate-800 bg-clinical-white/10 backdrop-blur-md hover:bg-deep-navy text-slate-400 font-bold transition-all">&larr;</button>
           <button class="page-btn px-3 py-1.5 rounded bg-slate-950 text-white font-bold transition-all">1</button>
-          <button class="page-btn px-3 py-1.5 rounded border border-slate-200 bg-white hover:bg-slate-50 text-slate-500 font-bold transition-all">&rarr;</button>
+          <button class="page-btn px-3 py-1.5 rounded border border-slate-800 bg-clinical-white/10 backdrop-blur-md hover:bg-deep-navy text-slate-400 font-bold transition-all">&rarr;</button>
         </div>
       </div>
     </section>
 
     <!-- Right Column: Detail Panel -->
-    <aside class="w-[440px] h-full bg-white border-l border-slate-200/80 flex flex-col shadow-sm">
-      <div id="detail-header" class="p-6 flex items-center justify-between border-b border-slate-200 bg-slate-50/50">
+    <aside class="w-[440px] h-full bg-clinical-white/10 backdrop-blur-md border-l border-slate-800/80 flex flex-col shadow-none">
+      <div id="detail-header" class="p-6 flex items-center justify-between border-b border-slate-800 bg-deep-navy/50">
         <!-- Dynamic Patient Header -->
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded bg-slate-950 flex items-center justify-center text-white text-md font-bold" id="detail-avatar">
@@ -161,28 +161,28 @@
       <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6" id="detail-body-container">
         <!-- AI Analytical Dashboard -->
         <div class="grid grid-cols-2 gap-3">
-          <div class="glass-panel p-4 rounded border border-slate-100">
+          <div class="glass-panel p-4 rounded border border-slate-800/50">
             <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-2">Caller Info</p>
             <p class="font-bold text-xs" id="detail-phone">(305) 555-0123</p>
-            <p class="text-slate-500 text-[10px] mt-1 font-mono uppercase" id="detail-lang">Bilingual English</p>
+            <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase" id="detail-lang">Bilingual English</p>
           </div>
-          <div class="glass-panel p-4 rounded border border-slate-100">
+          <div class="glass-panel p-4 rounded border border-slate-800/50">
             <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-2">Service Intent</p>
             <p class="font-bold text-xs" id="detail-service">Dental Cleaning</p>
-            <p class="text-slate-500 text-[10px] mt-1 font-mono uppercase">CLASSIFIED BY AI</p>
+            <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">CLASSIFIED BY AI</p>
           </div>
         </div>
 
         <!-- Real-time Summary Card -->
-        <div class="glass-panel p-4 rounded border border-slate-100 space-y-2">
+        <div class="glass-panel p-4 rounded border border-slate-800/50 space-y-2">
           <h5 class="font-bold text-[10px] text-slate-400 uppercase tracking-wider">AI Conversation Summary</h5>
-          <p class="text-xs text-slate-600 leading-relaxed font-medium" id="detail-summary">
+          <p class="text-xs text-slate-300 leading-relaxed font-medium" id="detail-summary">
             Click on any call in the list to review the detailed conversation log, transcripts, and status tracking.
           </p>
         </div>
 
         <!-- Static Wave Accent Visual -->
-        <div class="glass-panel p-4 rounded border border-slate-100 flex items-center justify-between">
+        <div class="glass-panel p-4 rounded border border-slate-800/50 flex items-center justify-between">
           <div>
             <h5 class="font-bold text-[10px] text-slate-400 uppercase tracking-wider">Voice Recording</h5>
             <span class="text-[9px] font-mono text-slate-400 uppercase mt-0.5 block">FL § 934.03 COMPLIANT RECORD</span>
@@ -201,8 +201,8 @@
       </div>
 
       <!-- Detail Footer Actions -->
-      <div class="p-6 border-t border-slate-200 bg-slate-50 flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-xs font-bold hover:bg-slate-50 transition-colors uppercase tracking-wider">
+      <div class="p-6 border-t border-slate-800 bg-deep-navy flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-slate-800 py-3 rounded text-xs font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
           Sign Out
         </button>
         <button onclick="if(typeof showToast === 'function') showToast('Live take-over session routed to front desk.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-xs font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
@@ -279,19 +279,19 @@
           case 'completed': statusBadgeClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200'; break;
           case 'transferred': statusBadgeClass = 'bg-amber-50 text-amber-700 border border-amber-200'; break;
           case 'missed': statusBadgeClass = 'bg-rose-50 text-rose-700 border border-rose-200'; break;
-          default: statusBadgeClass = 'bg-slate-50 text-slate-500 border border-slate-200'; break;
+          default: statusBadgeClass = 'bg-deep-navy text-slate-400 border border-slate-800'; break;
         }
 
         const callJSON = JSON.stringify(call).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
         return `
-          <div onclick="selectCallRecord(${callJSON})" class="bg-white hover:bg-slate-50/50 p-4 rounded border border-slate-250/60 flex items-center gap-4 cursor-pointer transition-all duration-200">
-            <div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+          <div onclick="selectCallRecord(${callJSON})" class="bg-clinical-white/10 backdrop-blur-md hover:bg-deep-navy/50 p-4 rounded border border-slate-250/60 flex items-center gap-4 cursor-pointer transition-all duration-200">
+            <div class="w-10 h-10 rounded bg-slate-slate flex items-center justify-center text-slate-300 shrink-0">
               <span class="material-symbols-outlined text-[20px]">person</span>
             </div>
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-0.5">
-                <h3 class="font-bold text-sm text-slate-900 truncate">${call.caller}</h3>
+                <h3 class="font-bold text-sm text-white truncate">${call.caller}</h3>
                 <span class="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider shrink-0 ${statusBadgeClass}">${call.status}</span>
               </div>
               <div class="flex items-center gap-3 text-slate-400 text-[11px] font-mono">
@@ -301,7 +301,7 @@
               </div>
             </div>
             <div class="flex gap-2 shrink-0">
-              <span class="bg-slate-100 px-2.5 py-0.5 rounded text-[10px] font-bold text-slate-600">${call.language === 'Spanish' ? '🇪🇸 SP' : '🇺🇸 EN'}</span>
+              <span class="bg-slate-slate px-2.5 py-0.5 rounded text-[10px] font-bold text-slate-300">${call.language === 'Spanish' ? '🇪🇸 SP' : '🇺🇸 EN'}</span>
             </div>
           </div>
         `;
@@ -362,5 +362,5 @@
       document.getElementById('call-language-filter')?.addEventListener('change', applyFilters);
     });
   </script>
-</body>
+<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
 </html>

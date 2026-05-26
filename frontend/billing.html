@@ -10,23 +10,32 @@
   
   <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "border-subtle": "#E7E7E4",
-            "neural-purple": "#9333EA",
-            "background": "#F7F7F5",
-            "surface-panel": "#F3F2EF",
-            "surface-bright": "#f9f9f9",
-            "surface-card": "#FCFCFB",
-            "primary-container": "#1b1b1b",
-            "neural-indigo": "#4F46E5",
-            "accent-emerald": "#10B981",
-            "neural-rose": "#F43F5E"
+            "on-background": "#FFFFFF",
+            "surface-tint": "#00F0FF",
+            "medical-cyan": "#00F0FF",
+            "medical-blue": "#00F0FF",
+            "deep-navy": "#0A0A0F",
+            "slate-slate": "#12121A",
+            "clinical-white": "#1A1A24",
+            "sterile-gray": "#0A0A0F",
+            "success": "#10B981",
+            "error": "#FF3366"
+          },
+          fontFamily: {
+            "sans": ["Inter", "sans-serif"],
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          boxShadow: {
+            'glow': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
           }
         }
       }
-    }
+    };
   </script>
 
   <style>
@@ -69,38 +78,38 @@
     }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-45 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
       <span class="text-white text-[15px]">🦷</span>
     </div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -108,17 +117,17 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="billing.html" title="Billing">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-100 text-slate-950">
+        <div class="p-2 rounded bg-slate-slate text-slate-950">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -134,7 +143,7 @@
         <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-4">
           <div>
             <h2 class="font-display text-2xl font-bold tracking-tight text-slate-950 mb-1 leading-none">Billing &amp; Subscription</h2>
-            <p class="text-slate-500 text-xs font-medium">Control plans, addons, and calculate your practice ROI.</p>
+            <p class="text-slate-400 text-xs font-medium">Control plans, addons, and calculate your practice ROI.</p>
           </div>
           <div class="text-xs font-mono font-bold text-slate-400">
             PCI-DSS COMPLIANT SECURED
@@ -145,7 +154,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           <!-- Current Plan Card (5 cols) -->
-          <div class="lg:col-span-5 bg-white p-6 rounded-lg border border-slate-200 flex flex-col justify-between shadow-sm relative overflow-hidden">
+          <div class="lg:col-span-5 bg-clinical-white/10 backdrop-blur-md p-6 rounded-lg border border-slate-800 flex flex-col justify-between shadow-none relative overflow-hidden">
             <div>
               <div class="flex justify-between items-start mb-4">
                 <span class="bg-slate-950 text-white text-[9px] px-2.5 py-1 rounded-full font-bold tracking-wider uppercase" id="sub-status-badge">Active Plan</span>
@@ -155,33 +164,33 @@
                 </div>
               </div>
               <h3 class="text-slate-950 font-bold text-lg mb-1" id="sub-plan-name">Professional Tier</h3>
-              <p class="text-slate-500 text-xs leading-relaxed mb-6 font-medium">Automated clinical scheduling, HIPAA secure transcript databases, and bilingual Spanish support routing.</p>
+              <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">Automated clinical scheduling, HIPAA secure transcript databases, and bilingual Spanish support routing.</p>
             </div>
             
-            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="pt-4 border-t border-slate-800/50 flex items-center justify-between">
               <div>
                 <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Next Renewal</p>
-                <p class="text-xs font-bold text-slate-800 mt-0.5" id="sub-renew-date">June 1, 2026</p>
+                <p class="text-xs font-bold text-slate-200 mt-0.5" id="sub-renew-date">June 1, 2026</p>
               </div>
               <button id="cancel-sub-btn" class="text-xs font-bold text-rose-600 hover:underline">Cancel Subscription</button>
             </div>
           </div>
 
           <!-- Usage Statistics Card (7 cols) -->
-          <div class="lg:col-span-7 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="lg:col-span-7 bg-clinical-white/10 backdrop-blur-md p-6 rounded-lg border border-slate-800 shadow-none flex flex-col justify-between">
             <div>
               <div class="flex justify-between items-center mb-6">
-                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono">Usage This Period</h4>
+                <h4 class="text-xs font-bold text-white uppercase tracking-widest font-mono">Usage This Period</h4>
                 <span class="text-slate-400 text-[10px] font-semibold">May 12 - June 11</span>
               </div>
               
               <div class="space-y-5">
                 <div>
-                  <div class="flex justify-between text-xs font-bold text-slate-600 mb-2">
+                  <div class="flex justify-between text-xs font-bold text-slate-300 mb-2">
                     <span>Voice Minutes Allowance</span>
                     <span class="font-mono text-slate-950" id="sub-allowance-text">347 / 500 calls</span>
                   </div>
-                  <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-2 w-full bg-slate-slate rounded-full overflow-hidden">
                     <div id="sub-progress-bar" class="h-full bg-slate-950 rounded-full transition-all duration-700" style="width: 69.4%"></div>
                   </div>
                   <div class="flex justify-between mt-2 text-[9px] text-slate-400 font-mono">
@@ -193,17 +202,17 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-6 pt-4 border-t border-slate-100 mt-4">
+            <div class="grid grid-cols-2 gap-6 pt-4 border-t border-slate-800/50 mt-4">
               <div>
                 <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Calls Processed</p>
-                <p class="text-lg font-bold text-slate-900 leading-none">1,204</p>
+                <p class="text-lg font-bold text-white leading-none">1,204</p>
                 <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5 mt-1">
                   <span class="material-symbols-outlined text-[12px]">trending_up</span> +12% this month
                 </span>
               </div>
               <div>
                 <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">SaaS Addons Active</p>
-                <p class="text-lg font-bold text-slate-900 leading-none" id="addons-count">0 Addons</p>
+                <p class="text-lg font-bold text-white leading-none" id="addons-count">0 Addons</p>
                 <span class="text-[9px] text-slate-400 font-semibold mt-1 block">Configured instantly</span>
               </div>
             </div>
@@ -214,76 +223,76 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           <!-- Practice ROI Calculator (7 cols) -->
-          <div class="lg:col-span-7 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="lg:col-span-7 bg-clinical-white/10 backdrop-blur-md p-6 rounded-lg border border-slate-800 shadow-none flex flex-col justify-between">
             <div>
               <h3 class="text-slate-950 font-bold text-sm mb-1 uppercase tracking-wider font-mono flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[18px] text-slate-900">calculate</span> ROI &amp; Practice Value
+                <span class="material-symbols-outlined text-[18px] text-white">calculate</span> ROI &amp; Practice Value
               </h3>
-              <p class="text-slate-500 text-xs mb-6 font-medium">Verify protected revenue gained by capturing after-hour calls.</p>
+              <p class="text-slate-400 text-xs mb-6 font-medium">Verify protected revenue gained by capturing after-hour calls.</p>
               
               <div class="space-y-5">
                 <div>
-                  <div class="flex justify-between text-xs font-bold text-slate-700 mb-2">
+                  <div class="flex justify-between text-xs font-bold text-slate-200 mb-2">
                     <span>Practice size (Dental Chairs)</span>
                     <span class="text-slate-950 font-mono font-bold" id="roi-chairs-val">5 Chairs</span>
                   </div>
-                  <input type="range" id="roi-chairs" min="1" max="15" value="5" class="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-950">
+                  <input type="range" id="roi-chairs" min="1" max="15" value="5" class="w-full h-1 bg-slate-slate rounded-lg appearance-none cursor-pointer accent-slate-950">
                 </div>
                 
                 <div>
-                  <div class="flex justify-between text-xs font-bold text-slate-700 mb-2">
+                  <div class="flex justify-between text-xs font-bold text-slate-200 mb-2">
                     <span>Estimated Missed Inbound Calls / Week</span>
                     <span class="text-slate-950 font-mono font-bold" id="roi-calls-val">20 Calls</span>
                   </div>
-                  <input type="range" id="roi-calls" min="5" max="100" value="20" class="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-950">
+                  <input type="range" id="roi-calls" min="5" max="100" value="20" class="w-full h-1 bg-slate-slate rounded-lg appearance-none cursor-pointer accent-slate-950">
                 </div>
 
                 <div>
-                  <div class="flex justify-between text-xs font-bold text-slate-700 mb-2">
+                  <div class="flex justify-between text-xs font-bold text-slate-200 mb-2">
                     <span>Average Dental Procedure Value</span>
                     <span class="text-slate-950 font-mono font-bold" id="roi-value-val">$350</span>
                   </div>
-                  <input type="range" id="roi-value" min="100" max="1000" step="50" value="350" class="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-950">
+                  <input type="range" id="roi-value" min="100" max="1000" step="50" value="350" class="w-full h-1 bg-slate-slate rounded-lg appearance-none cursor-pointer accent-slate-950">
                 </div>
               </div>
             </div>
             
-            <div class="mt-8 space-y-3 pt-6 border-t border-slate-100">
+            <div class="mt-8 space-y-3 pt-6 border-t border-slate-800/50">
               <div class="grid grid-cols-2 gap-3">
-                <div class="p-3 bg-slate-50 rounded border border-slate-150 shadow-sm">
+                <div class="p-3 bg-deep-navy rounded border border-slate-150 shadow-none">
                   <div class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Weekly Leakage</div>
                   <div class="text-base font-black text-rose-600 font-mono mt-1" id="roi-leakage">$7,000.00</div>
                 </div>
-                <div class="p-3 bg-slate-950 text-white rounded border border-slate-900 shadow-sm">
+                <div class="p-3 bg-slate-950 text-white rounded border border-slate-900 shadow-none">
                   <div class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Protected Monthly Gained</div>
                   <div class="text-base font-black text-white font-mono mt-1" id="roi-protected">$23,800.00</div>
                 </div>
               </div>
               
-              <div class="p-3 bg-[#F7F7F5] rounded border border-slate-200 flex items-center justify-between shadow-sm">
+              <div class="p-3 bg-[#F7F7F5] rounded border border-slate-800 flex items-center justify-between shadow-none">
                 <div>
-                  <div class="text-[9px] font-bold text-slate-500 uppercase tracking-wide">Net Monthly Practice ROI</div>
-                  <div class="text-xs font-bold text-slate-800 mt-0.5">Saves <span id="roi-net" class="font-mono">$23,201.00</span> / month</div>
+                  <div class="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Net Monthly Practice ROI</div>
+                  <div class="text-xs font-bold text-slate-200 mt-0.5">Saves <span id="roi-net" class="font-mono">$23,201.00</span> / month</div>
                 </div>
-                <span class="bg-white border border-slate-200 text-slate-900 font-bold text-[9px] px-2.5 py-1 rounded shadow-sm font-mono" id="roi-multiple">39x Value</span>
+                <span class="bg-clinical-white/10 backdrop-blur-md border border-slate-800 text-white font-bold text-[9px] px-2.5 py-1 rounded shadow-none font-mono" id="roi-multiple">39x Value</span>
               </div>
             </div>
           </div>
 
           <!-- Addons Checklist (5 cols) -->
-          <div class="lg:col-span-5 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="lg:col-span-5 bg-clinical-white/10 backdrop-blur-md p-6 rounded-lg border border-slate-800 shadow-none flex flex-col justify-between">
             <div>
               <h3 class="text-slate-950 font-bold text-sm mb-1 uppercase tracking-wider font-mono flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[18px] text-slate-900">extension</span> Specialized Skillsets
+                <span class="material-symbols-outlined text-[18px] text-white">extension</span> Specialized Skillsets
               </h3>
-              <p class="text-slate-500 text-xs mb-6 font-medium">Equip your receptionist AI with modular clinical skills.</p>
+              <p class="text-slate-400 text-xs mb-6 font-medium">Equip your receptionist AI with modular clinical skills.</p>
               
               <div class="space-y-3">
                 <!-- Addon 1 -->
-                <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 hover:border-slate-300 transition-all cursor-pointer select-none bg-slate-50/20">
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-300 transition-all cursor-pointer select-none bg-deep-navy/20">
                   <input type="checkbox" id="addon-bilingual" class="w-4 h-4 rounded border-slate-300 text-slate-950 focus:ring-slate-950 mt-0.5 cursor-pointer">
                   <div>
-                    <div class="text-xs font-bold text-slate-800 flex items-center gap-1.5 flex-wrap leading-none">
+                    <div class="text-xs font-bold text-slate-200 flex items-center gap-1.5 flex-wrap leading-none">
                       <span>Bilingual Spanish</span>
                       <span class="text-[9px] font-bold text-slate-400">+$49/mo</span>
                     </div>
@@ -292,10 +301,10 @@
                 </label>
 
                 <!-- Addon 2 -->
-                <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 hover:border-slate-300 transition-all cursor-pointer select-none bg-slate-50/20">
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-300 transition-all cursor-pointer select-none bg-deep-navy/20">
                   <input type="checkbox" id="addon-pmssync" class="w-4 h-4 rounded border-slate-300 text-slate-950 focus:ring-slate-950 mt-0.5 cursor-pointer">
                   <div>
-                    <div class="text-xs font-bold text-slate-800 flex items-center gap-1.5 flex-wrap leading-none">
+                    <div class="text-xs font-bold text-slate-200 flex items-center gap-1.5 flex-wrap leading-none">
                       <span>EHR Calendar Sync</span>
                       <span class="text-[9px] font-bold text-slate-400">+$29/mo</span>
                     </div>
@@ -304,10 +313,10 @@
                 </label>
 
                 <!-- Addon 3 -->
-                <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 hover:border-slate-300 transition-all cursor-pointer select-none bg-slate-50/20">
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-slate-800 hover:border-slate-300 transition-all cursor-pointer select-none bg-deep-navy/20">
                   <input type="checkbox" id="addon-voiceclone" class="w-4 h-4 rounded border-slate-300 text-slate-950 focus:ring-slate-950 mt-0.5 cursor-pointer">
                   <div>
-                    <div class="text-xs font-bold text-slate-800 flex items-center gap-1.5 flex-wrap leading-none">
+                    <div class="text-xs font-bold text-slate-200 flex items-center gap-1.5 flex-wrap leading-none">
                       <span>Custom Cloned Voice</span>
                       <span class="text-[9px] font-bold text-slate-400">+$199/mo</span>
                     </div>
@@ -317,23 +326,23 @@
               </div>
             </div>
             
-            <div class="mt-4 pt-3 border-t border-slate-100 p-2 text-[9px] font-mono text-slate-400 flex items-center gap-1.5">
+            <div class="mt-4 pt-3 border-t border-slate-800/50 p-2 text-[9px] font-mono text-slate-400 flex items-center gap-1.5">
               <span class="material-symbols-outlined text-[14px]">info</span> Skills configure instantly upon checkout.
             </div>
           </div>
         </div>
 
         <!-- PRICING TIERS COMPARISON -->
-        <div class="pt-8 border-t border-slate-200">
+        <div class="pt-8 border-t border-slate-800">
           <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6">
             <div>
               <h3 class="text-slate-950 font-bold text-sm uppercase tracking-wider font-mono">Select Plan Level</h3>
               <p class="text-slate-400 text-xs mt-0.5 font-semibold">Tiers scales monthly. Unused call volume allowance expires.</p>
             </div>
             <!-- Monthly/Yearly switch (Request #7) -->
-            <div class="flex items-center gap-2 bg-white border border-slate-200 p-1 rounded-full shadow-sm">
-              <button id="toggle-monthly" class="px-4 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-white shadow-sm transition-all uppercase">Monthly</button>
-              <button id="toggle-yearly" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-500 hover:text-slate-900 transition-all uppercase flex items-center gap-1">
+            <div class="flex items-center gap-2 bg-clinical-white/10 backdrop-blur-md border border-slate-800 p-1 rounded-full shadow-none">
+              <button id="toggle-monthly" class="px-4 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-white shadow-none transition-all uppercase">Monthly</button>
+              <button id="toggle-yearly" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-all uppercase flex items-center gap-1">
                 <span>Yearly</span>
                 <span class="bg-indigo-50 border border-indigo-100 text-indigo-700 text-[8px] font-bold px-1 py-0.2 rounded-full uppercase shrink-0">-30%</span>
               </button>
@@ -342,65 +351,65 @@
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Starter -->
-            <div class="bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between transition-all hover:shadow-sm" id="plan-card-starter">
+            <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-800 p-6 rounded-lg flex flex-col justify-between transition-all hover:shadow-none" id="plan-card-starter">
               <div>
                 <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-mono block mb-2">Starter Tier</span>
                 <h4 class="text-slate-950 font-bold text-2xl font-mono leading-none" id="price-starter">$399<span class="text-xs text-slate-400 font-semibold font-sans">/mo</span></h4>
-                <p class="text-slate-500 text-[11px] mt-2 font-medium">Perfect for solo dental clinics looking to secure after-hours calls.</p>
-                <ul class="mt-4 border-t border-slate-100 pt-4 space-y-2 text-[10px] font-semibold text-slate-600">
+                <p class="text-slate-400 text-[11px] mt-2 font-medium">Perfect for solo dental clinics looking to secure after-hours calls.</p>
+                <ul class="mt-4 border-t border-slate-800/50 pt-4 space-y-2 text-[10px] font-semibold text-slate-300">
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> 200 Inbound Calls / mo</li>
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> 1 Practice Location Sync</li>
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> Real-time Calendar Sync</li>
                 </ul>
               </div>
-              <button id="select-plan-starter" class="w-full mt-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-bold text-xs border border-slate-200 transition-colors uppercase tracking-wider">Select Starter</button>
+              <button id="select-plan-starter" class="w-full mt-6 py-2 bg-slate-slate hover:bg-slate-200 text-slate-200 rounded-full font-bold text-xs border border-slate-800 transition-colors uppercase tracking-wider">Select Starter</button>
             </div>
 
             <!-- Professional -->
-            <div class="bg-white border-2 border-slate-950 p-6 rounded-lg flex flex-col justify-between transition-all relative" id="plan-card-professional">
-              <span class="absolute top-0 right-6 -translate-y-1/2 bg-slate-950 text-white text-[8px] font-bold uppercase tracking-wider px-3.5 py-0.5 rounded shadow-sm">Popular</span>
+            <div class="bg-clinical-white/10 backdrop-blur-md border-2 border-slate-950 p-6 rounded-lg flex flex-col justify-between transition-all relative" id="plan-card-professional">
+              <span class="absolute top-0 right-6 -translate-y-1/2 bg-slate-950 text-white text-[8px] font-bold uppercase tracking-wider px-3.5 py-0.5 rounded shadow-none">Popular</span>
               <div>
                 <span class="text-[9px] font-bold uppercase tracking-widest text-slate-950 font-mono block mb-2">Professional Tier</span>
                 <h4 class="text-slate-950 font-bold text-2xl font-mono leading-none" id="price-professional">$699<span class="text-xs text-slate-400 font-semibold font-sans">/mo</span></h4>
-                <p class="text-slate-500 text-[11px] mt-2 font-medium">Best for busy practice groups seeking comprehensive voice automation.</p>
-                <ul class="mt-4 border-t border-slate-100 pt-4 space-y-2 text-[10px] font-semibold text-slate-600">
+                <p class="text-slate-400 text-[11px] mt-2 font-medium">Best for busy practice groups seeking comprehensive voice automation.</p>
+                <ul class="mt-4 border-t border-slate-800/50 pt-4 space-y-2 text-[10px] font-semibold text-slate-300">
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> 500 Inbound Calls / mo</li>
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> 3 Practice Locations Sync</li>
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> Custom Voice clone skills</li>
                 </ul>
               </div>
-              <button id="select-plan-professional" class="w-full mt-6 py-2 bg-slate-950 text-white hover:bg-slate-900 rounded-full font-bold text-xs transition-colors uppercase tracking-wider shadow-sm">Active Plan</button>
+              <button id="select-plan-professional" class="w-full mt-6 py-2 bg-slate-950 text-white hover:bg-slate-900 rounded-full font-bold text-xs transition-colors uppercase tracking-wider shadow-none">Active Plan</button>
             </div>
 
             <!-- Enterprise -->
-            <div class="bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between transition-all hover:shadow-sm" id="plan-card-enterprise">
+            <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-800 p-6 rounded-lg flex flex-col justify-between transition-all hover:shadow-none" id="plan-card-enterprise">
               <div>
                 <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-mono block mb-2">Enterprise Tier</span>
                 <h4 class="text-slate-950 font-bold text-2xl font-mono leading-none" id="price-enterprise">$999<span class="text-xs text-slate-400 font-semibold font-sans">/mo</span></h4>
-                <p class="text-slate-500 text-[11px] mt-2 font-medium">Built for large-scale multi-location DSO dental groups with high call volumes.</p>
-                <ul class="mt-4 border-t border-slate-100 pt-4 space-y-2 text-[10px] font-semibold text-slate-600">
+                <p class="text-slate-400 text-[11px] mt-2 font-medium">Built for large-scale multi-location DSO dental groups with high call volumes.</p>
+                <ul class="mt-4 border-t border-slate-800/50 pt-4 space-y-2 text-[10px] font-semibold text-slate-300">
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> Unlimited Inbound Calls / mo</li>
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> Unlimited Practice Locations</li>
                   <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[13px] text-slate-950 font-bold">check_circle</span> 24/7 dedicated support SLA</li>
                 </ul>
               </div>
-              <button id="select-plan-enterprise" class="w-full mt-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-bold text-xs border border-slate-200 transition-colors uppercase tracking-wider">Select Enterprise</button>
+              <button id="select-plan-enterprise" class="w-full mt-6 py-2 bg-slate-slate hover:bg-slate-200 text-slate-200 rounded-full font-bold text-xs border border-slate-800 transition-colors uppercase tracking-wider">Select Enterprise</button>
             </div>
           </div>
         </div>
 
         <!-- RECENT INVOICES LEDGER -->
-        <div class="pt-8 border-t border-slate-200">
+        <div class="pt-8 border-t border-slate-800">
           <div class="flex justify-between items-center mb-6">
             <h3 class="text-slate-950 font-bold text-sm uppercase tracking-wider font-mono">Invoice Ledger</h3>
             <span class="text-slate-400 text-xs font-semibold">Updates immediately after charges</span>
           </div>
 
-          <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-clinical-white/10 backdrop-blur-md rounded-lg border border-slate-800 overflow-hidden shadow-none">
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider font-bold">
+                  <tr class="bg-deep-navy border-b border-slate-800 text-slate-400 uppercase tracking-wider font-bold">
                     <th class="px-6 py-3 font-mono text-[10px]">Invoice ID</th>
                     <th class="px-6 py-3">Paid Date</th>
                     <th class="px-6 py-3">Total Amount</th>
@@ -408,7 +417,7 @@
                     <th class="px-6 py-3 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100 text-slate-700 font-semibold" id="invoices-list">
+                <tbody class="divide-y divide-slate-100 text-slate-200 font-semibold" id="invoices-list">
                   <!-- Rendered Dynamically -->
                 </tbody>
               </table>
@@ -420,9 +429,9 @@
     </section>
 
     <!-- Right Column: Card Graphic & secure locks -->
-    <aside class="w-[380px] h-full bg-white border-l border-slate-200/80 flex flex-col shadow-sm flex-shrink-0">
-      <div class="p-6 border-b border-slate-200 bg-slate-50/50">
-        <h3 class="font-bold text-sm text-slate-900 leading-none">Security Workbench</h3>
+    <aside class="w-[380px] h-full bg-clinical-white/10 backdrop-blur-md border-l border-slate-800/80 flex flex-col shadow-none flex-shrink-0">
+      <div class="p-6 border-b border-slate-800 bg-deep-navy/50">
+        <h3 class="font-bold text-sm text-white leading-none">Security Workbench</h3>
         <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Manage payment methods</p>
       </div>
 
@@ -439,11 +448,11 @@
             
             <div class="flex items-center justify-between">
               <div>
-                <div class="text-[9px] text-slate-500 font-bold uppercase tracking-wider leading-none mb-1">Cardholder</div>
+                <div class="text-[9px] text-slate-400 font-bold uppercase tracking-wider leading-none mb-1">Cardholder</div>
                 <div class="text-xs font-bold tracking-wide" id="card-display-name">Dr. Sarah Martinez</div>
               </div>
               <div class="text-right">
-                <div class="text-[9px] text-slate-500 font-bold uppercase tracking-wider leading-none mb-1">Expires</div>
+                <div class="text-[9px] text-slate-400 font-bold uppercase tracking-wider leading-none mb-1">Expires</div>
                 <div class="text-xs font-bold tracking-wide font-mono" id="card-display-expiry">12/28</div>
               </div>
             </div>
@@ -451,17 +460,17 @@
         </div>
 
         <!-- Security and Action details -->
-        <div class="glass-panel p-4 rounded border border-slate-100 space-y-5">
+        <div class="glass-panel p-4 rounded border border-slate-800/50 space-y-5">
           <div>
-            <h4 class="text-xs font-bold text-slate-900 mb-1">Visa Processing Details</h4>
-            <p class="text-[11px] text-slate-500 leading-relaxed font-semibold">Charges occur monthly on your subscription anniversary. All receipts are sent to billing admins instantly.</p>
+            <h4 class="text-xs font-bold text-white mb-1">Visa Processing Details</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed font-semibold">Charges occur monthly on your subscription anniversary. All receipts are sent to billing admins instantly.</p>
           </div>
 
-          <div class="flex items-center justify-between p-3 bg-[#F7F7F5] rounded border border-slate-200 shadow-inner">
+          <div class="flex items-center justify-between p-3 bg-[#F7F7F5] rounded border border-slate-800 shadow-inner">
             <div class="flex items-center gap-2">
-              <span class="text-[10px] font-black text-slate-900 bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm">VISA</span>
+              <span class="text-[10px] font-black text-white bg-clinical-white/10 backdrop-blur-md border border-slate-800 px-1.5 py-0.5 rounded shadow-none">VISA</span>
               <div>
-                <div class="text-[11px] font-bold text-slate-800">Ending in <span id="card-suffix">4242</span></div>
+                <div class="text-[11px] font-bold text-slate-200">Ending in <span id="card-suffix">4242</span></div>
                 <div class="text-[9px] text-slate-400 font-bold" id="card-expiry-label">Expires 12/2028</div>
               </div>
             </div>
@@ -475,8 +484,8 @@
         </div>
       </div>
 
-      <div class="p-6 border-t border-slate-200 bg-slate-50 flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-[10px] font-bold hover:bg-slate-50 transition-colors uppercase tracking-wider">
+      <div class="p-6 border-t border-slate-800 bg-deep-navy flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-slate-800 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
           Sign Out
         </button>
         <button onclick="showToast('Invoice histories successfully synchronized.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
@@ -636,9 +645,9 @@
           const serializedAddons = encodeURIComponent(JSON.stringify(inv.addons || []));
           return `
             <tr class="border-b border-slate-50 last:border-none">
-              <td class="px-6 py-4 font-mono text-slate-500 text-xs">${inv.id}</td>
-              <td class="px-6 py-4 font-bold text-slate-800">${inv.date}</td>
-              <td class="px-6 py-4 font-black text-slate-900 font-mono">$${inv.amount.toFixed(2)}</td>
+              <td class="px-6 py-4 font-mono text-slate-400 text-xs">${inv.id}</td>
+              <td class="px-6 py-4 font-bold text-slate-200">${inv.date}</td>
+              <td class="px-6 py-4 font-black text-white font-mono">$${inv.amount.toFixed(2)}</td>
               <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-600 border border-emerald-100 px-2 py-0.5 rounded text-[9px] font-bold uppercase">${inv.status}</span></td>
               <td class="px-6 py-4 text-right">
                 <button onclick="viewMockInvoice('${inv.id}', '${inv.date}', ${inv.amount}, '${serializedAddons}')" class="text-slate-950 hover:underline text-xs font-bold transition-colors">Receipt</button>
@@ -683,12 +692,12 @@
         if (!item.btn) return;
         if (state.plan === item.key) {
           item.btn.textContent = 'Active Plan';
-          item.btn.className = 'w-full mt-6 py-2 bg-slate-950 text-white rounded-full font-bold text-xs transition-colors uppercase tracking-wider shadow-sm select-none pointer-events-none';
-          if (item.card) item.card.className = 'bg-white border-2 border-slate-950 p-6 rounded-lg flex flex-col justify-between transition-all relative';
+          item.btn.className = 'w-full mt-6 py-2 bg-slate-950 text-white rounded-full font-bold text-xs transition-colors uppercase tracking-wider shadow-none select-none pointer-events-none';
+          if (item.card) item.card.className = 'bg-clinical-white/10 backdrop-blur-md border-2 border-slate-950 p-6 rounded-lg flex flex-col justify-between transition-all relative';
         } else {
           item.btn.textContent = `Checkout ($${item.cost + activeAddonsPrice}/mo)`;
-          item.btn.className = 'w-full mt-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-bold text-xs border border-slate-200 transition-colors uppercase tracking-wider cursor-pointer';
-          if (item.card) item.card.className = 'bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between transition-all hover:shadow-sm';
+          item.btn.className = 'w-full mt-6 py-2 bg-slate-slate hover:bg-slate-200 text-slate-200 rounded-full font-bold text-xs border border-slate-800 transition-colors uppercase tracking-wider cursor-pointer';
+          if (item.card) item.card.className = 'bg-clinical-white/10 backdrop-blur-md border border-slate-800 p-6 rounded-lg flex flex-col justify-between transition-all hover:shadow-none';
         }
       });
 
@@ -697,11 +706,11 @@
       const toggleYr = document.getElementById('toggle-yearly');
       if (toggleMon && toggleYr) {
         if (state.billingCycle === 'monthly') {
-          toggleMon.className = 'px-4 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-white shadow-sm transition-all uppercase';
-          toggleYr.className = 'px-4 py-1 rounded-full text-[10px] font-bold text-slate-500 hover:text-slate-900 transition-all uppercase flex items-center gap-1';
+          toggleMon.className = 'px-4 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-white shadow-none transition-all uppercase';
+          toggleYr.className = 'px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-all uppercase flex items-center gap-1';
         } else {
-          toggleMon.className = 'px-4 py-1 rounded-full text-[10px] font-bold text-slate-500 hover:text-slate-900 transition-all uppercase';
-          toggleYr.className = 'px-4 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-white shadow-sm transition-all uppercase flex items-center gap-1';
+          toggleMon.className = 'px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-all uppercase';
+          toggleYr.className = 'px-4 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-white shadow-none transition-all uppercase flex items-center gap-1';
         }
       }
     }
@@ -1004,5 +1013,5 @@
       });
     });
   </script>
-</body>
+<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
 </html>

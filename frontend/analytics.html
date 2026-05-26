@@ -10,21 +10,32 @@
   
   <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "border-subtle": "#E7E7E4",
-            "neural-purple": "#9333EA",
-            "background": "#F7F7F5",
-            "surface-panel": "#F3F2EF",
-            "surface-bright": "#f9f9f9",
-            "primary-container": "#1b1b1b",
-            "neural-indigo": "#4F46E5",
-            "accent-emerald": "#10B981"
+            "on-background": "#FFFFFF",
+            "surface-tint": "#00F0FF",
+            "medical-cyan": "#00F0FF",
+            "medical-blue": "#00F0FF",
+            "deep-navy": "#0A0A0F",
+            "slate-slate": "#12121A",
+            "clinical-white": "#1A1A24",
+            "sterile-gray": "#0A0A0F",
+            "success": "#10B981",
+            "error": "#FF3366"
+          },
+          fontFamily: {
+            "sans": ["Inter", "sans-serif"],
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          boxShadow: {
+            'glow': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
           }
         }
       }
-    }
+    };
   </script>
 
   <style>
@@ -49,53 +60,53 @@
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e2e2; border-radius: 10px; }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-45 flex-shrink-0 items-center py-6">
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
       <span class="text-white text-[15px]">🦷</span>
     </div>
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="analytics.html" title="Analytics">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-100 text-slate-950">
+        <div class="p-2 rounded bg-slate-slate text-slate-950">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">insights</span>
         </div>
       </a>
     </nav>
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -103,17 +114,17 @@
 
   <!-- Main Content Area -->
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-    <header class="h-16 px-8 flex items-center justify-between border-b border-slate-200 bg-white shrink-0">
+    <header class="h-16 px-8 flex items-center justify-between border-b border-slate-800 bg-clinical-white/10 backdrop-blur-md shrink-0">
       <h1 class="text-lg font-bold tracking-tight text-slate-950">Analytics</h1>
       <div class="flex items-center gap-4">
-        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
+        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-clinical-white/10 backdrop-blur-md border border-slate-800 px-4 py-2 rounded-full text-xs font-bold text-slate-300 hover:bg-deep-navy transition-all shadow-none">
           <span class="material-symbols-outlined text-[16px]">download</span> Export CSV
         </button>
-        <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-sm">
+        <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-none">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">AI Receptionist Active</span>
         </div>
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors shadow-sm">
+        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-clinical-white/10 backdrop-blur-md border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-deep-navy transition-colors shadow-none">
           <span class="material-symbols-outlined text-[18px]">notifications</span>
           <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
         </button>
@@ -124,81 +135,81 @@
       <div class="max-w-[1200px] mx-auto">
         
         <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-1.5 bg-white rounded-full border border-slate-200 p-1 shadow-sm">
-            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-950 bg-white border border-slate-200 transition-all">7 Days</button>
-            <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-500 hover:bg-slate-50 transition-all">30 Days</button>
-            <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-500 hover:bg-slate-50 transition-all">90 Days</button>
+          <div class="flex items-center gap-1.5 bg-clinical-white/10 backdrop-blur-md rounded-full border border-slate-800 p-1 shadow-none">
+            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-950 bg-clinical-white/10 backdrop-blur-md border border-slate-800 transition-all">7 Days</button>
+            <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 hover:bg-deep-navy transition-all">30 Days</button>
+            <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 hover:bg-deep-navy transition-all">90 Days</button>
           </div>
           <span class="text-xs font-semibold text-slate-400" id="analytics-date-range-label">Last 7 days</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-total-calls">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-total-calls">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">call</span></div>
               <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 18%</span>
             </div>
             <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="number">304</div>
-            <div class="text-[11px] font-medium text-slate-500">Total Calls</div>
+            <div class="text-[11px] font-medium text-slate-400">Total Calls</div>
           </div>
-          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-total-booked">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-total-booked">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600"><span class="material-symbols-outlined text-[18px]">event</span></div>
               <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 12%</span>
             </div>
             <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="number">82</div>
-            <div class="text-[11px] font-medium text-slate-500">Appointments Booked</div>
+            <div class="text-[11px] font-medium text-slate-400">Appointments Booked</div>
           </div>
-          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-avg-duration">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-avg-duration">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600"><span class="material-symbols-outlined text-[18px]">timer</span></div>
-              <span class="text-[9px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[10px]">trending_flat</span> 0%</span>
+              <span class="text-[9px] font-bold text-slate-400 bg-slate-slate px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[10px]">trending_flat</span> 0%</span>
             </div>
             <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="duration">3:18</div>
-            <div class="text-[11px] font-medium text-slate-500">Avg Call Duration</div>
+            <div class="text-[11px] font-medium text-slate-400">Avg Call Duration</div>
           </div>
-          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-resolution-rate">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-resolution-rate">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">done_all</span></div>
               <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 3%</span>
             </div>
             <div class="text-3xl font-bold text-slate-950 mb-0.5 font-mono kpi-value" data-format="percent">94%</div>
-            <div class="text-[11px] font-medium text-slate-500">Resolution Rate</div>
+            <div class="text-[11px] font-medium text-slate-400">Resolution Rate</div>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div class="glass-panel bg-white rounded-lg p-6">
-            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Calls Over Time</h3>
-            <div class="h-[260px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+            <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Calls Over Time</h3>
+            <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
               <canvas id="analytics-calls-chart" class="w-full h-full"></canvas>
             </div>
           </div>
-          <div class="glass-panel bg-white rounded-lg p-6">
-            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Bookings Over Time</h3>
-            <div class="h-[260px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+            <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Bookings Over Time</h3>
+            <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
               <canvas id="analytics-bookings-chart" class="w-full h-full"></canvas>
             </div>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div class="glass-panel bg-white rounded-lg p-6">
-            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Top Services by Volume</h3>
-            <div class="h-[280px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+            <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Top Services by Volume</h3>
+            <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
               <canvas id="analytics-services-chart" class="w-full h-full"></canvas>
             </div>
           </div>
-          <div class="glass-panel bg-white rounded-lg p-6">
-            <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Language Distribution</h3>
-            <div class="h-[280px] w-full bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center">
+          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+            <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Language Distribution</h3>
+            <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-slate-800 flex items-center justify-center">
               <canvas id="analytics-language-chart" class="w-full h-full"></canvas>
             </div>
           </div>
         </div>
 
-        <div class="glass-panel bg-white rounded-lg p-6 mb-8">
-          <h3 class="text-xs font-bold text-slate-900 mb-5 uppercase tracking-widest font-mono">Revenue Attribution</h3>
+        <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 mb-8">
+          <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Revenue Attribution</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div class="bg-emerald-50/50 rounded-lg p-5 border border-emerald-100 flex flex-col items-center text-center">
               <span class="material-symbols-outlined text-2xl text-emerald-600 mb-2">payments</span>
@@ -390,11 +401,11 @@
       setDateRange(days, btn) {
         if (!btn) return;
         document.querySelectorAll('.date-range-btn').forEach(b => {
-          b.classList.remove('bg-white', 'border-slate-200', 'text-slate-950');
-          b.classList.add('text-slate-500');
+          b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-slate-950');
+          b.classList.add('text-slate-400');
         });
-        btn.classList.add('bg-white', 'border-slate-200', 'text-slate-950');
-        btn.classList.remove('text-slate-500');
+        btn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-slate-950');
+        btn.classList.remove('text-slate-400');
         this.load(days);
       },
 
@@ -471,5 +482,5 @@
       }, 600);
     });
   </script>
-</body>
+<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
 </html>

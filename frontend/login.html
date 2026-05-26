@@ -10,22 +10,32 @@
   
   <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "border-subtle": "#E7E7E4",
-            "neural-purple": "#9333EA",
-            "background": "#F7F7F5",
-            "surface-panel": "#F3F2EF",
-            "surface-bright": "#f9f9f9",
-            "surface-card": "#FCFCFB",
-            "primary-container": "#1b1b1b",
-            "neural-indigo": "#4F46E5",
-            "accent-emerald": "#10B981"
+            "on-background": "#FFFFFF",
+            "surface-tint": "#00F0FF",
+            "medical-cyan": "#00F0FF",
+            "medical-blue": "#00F0FF",
+            "deep-navy": "#0A0A0F",
+            "slate-slate": "#12121A",
+            "clinical-white": "#1A1A24",
+            "sterile-gray": "#0A0A0F",
+            "success": "#10B981",
+            "error": "#FF3366"
+          },
+          fontFamily: {
+            "sans": ["Inter", "sans-serif"],
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          boxShadow: {
+            'glow': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
           }
         }
       }
-    }
+    };
   </script>
 
   <style>
@@ -49,13 +59,13 @@
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 antialiased selection:bg-slate-900 selection:text-white flex">
+<body class="min-h-screen text-slate-200 antialiased selection:bg-slate-900 selection:text-white flex">
 
   <!-- Left Panel: Branding & System Specification -->
-  <div class="hidden lg:flex w-[40%] relative bg-white border-r border-slate-200/80 flex-col justify-between p-12 text-slate-800 shrink-0">
+  <div class="hidden lg:flex w-[40%] relative bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 flex-col justify-between p-12 text-slate-200 shrink-0">
     <div>
       <a href="index.html" class="flex items-center gap-2 mb-16 font-black text-xl tracking-tight text-slate-950">
-        <div class="w-10 h-10 rounded bg-slate-950 flex items-center justify-center text-white text-[15px] shadow-sm">🦷</div>
+        <div class="w-10 h-10 rounded bg-slate-950 flex items-center justify-center text-white text-[15px] shadow-none">🦷</div>
         <span>Renia AI</span>
       </a>
       
@@ -63,21 +73,21 @@
         <div>
           <span class="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Infrastructure Specification</span>
           <h1 class="text-4xl font-extrabold text-slate-950 tracking-tight leading-none">Renia Core v1.4</h1>
-          <p class="text-slate-500 text-sm mt-3 leading-relaxed max-w-md">System-wide clinical receptionist routing layer running native sub-100ms Speech-to-Speech architecture.</p>
+          <p class="text-slate-400 text-sm mt-3 leading-relaxed max-w-md">System-wide clinical receptionist routing layer running native sub-100ms Speech-to-Speech architecture.</p>
         </div>
 
-        <div class="border-t border-slate-100 pt-6 space-y-4 font-mono text-xs">
+        <div class="border-t border-slate-800/50 pt-6 space-y-4 font-mono text-xs">
           <div class="flex justify-between py-1 border-b border-slate-50">
             <span class="text-slate-400">ENGINE MODEL:</span>
-            <span class="text-slate-800 font-bold">Grok Voice Think Fast 1.0</span>
+            <span class="text-slate-200 font-bold">Grok Voice Think Fast 1.0</span>
           </div>
           <div class="flex justify-between py-1 border-b border-slate-50">
             <span class="text-slate-400">PCM LATENCY:</span>
-            <span class="text-slate-800 font-bold">85ms Native Audio Stream</span>
+            <span class="text-slate-200 font-bold">85ms Native Audio Stream</span>
           </div>
           <div class="flex justify-between py-1 border-b border-slate-50">
             <span class="text-slate-400">COMPLIANCE STATUTE:</span>
-            <span class="text-slate-800 font-bold">FL § 934.03 Two-Party Consent</span>
+            <span class="text-slate-200 font-bold">FL § 934.03 Two-Party Consent</span>
           </div>
           <div class="flex justify-between py-1">
             <span class="text-slate-400">SECURITY PROTOCOL:</span>
@@ -98,54 +108,54 @@
       
       <!-- Mobile Logo -->
       <a href="index.html" class="lg:hidden flex items-center gap-3 mb-10 justify-center">
-        <div class="w-10 h-10 rounded bg-slate-950 flex items-center justify-center text-white text-[15px] shadow-sm">🦷</div>
+        <div class="w-10 h-10 rounded bg-slate-950 flex items-center justify-center text-white text-[15px] shadow-none">🦷</div>
         <span class="font-bold text-xl tracking-tight text-slate-950">Renia AI</span>
       </a>
 
       <div class="mb-10 text-center lg:text-left">
         <h2 class="text-2xl font-bold text-slate-950 tracking-tight">Sign in to Practice</h2>
-        <p class="text-slate-500 text-xs mt-1 font-medium">Enter clinic credentials to view active call transcripts.</p>
+        <p class="text-slate-400 text-xs mt-1 font-medium">Enter clinic credentials to view active call transcripts.</p>
       </div>
 
       <form id="login-form" class="space-y-4">
         <div>
           <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Work Email</label>
-          <input type="email" id="login-email" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-900 font-medium outline-none placeholder:text-slate-400" placeholder="dr.smith@clinic.com" required>
+          <input type="email" id="login-email" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-800 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="dr.smith@clinic.com" required>
         </div>
 
         <div>
           <div class="flex justify-between items-center mb-1.5">
             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
-            <a href="#" class="text-[10px] font-bold text-slate-600 hover:text-slate-950 uppercase tracking-wider transition-colors">Forgot?</a>
+            <a href="#" class="text-[10px] font-bold text-slate-300 hover:text-slate-950 uppercase tracking-wider transition-colors">Forgot?</a>
           </div>
-          <input type="password" id="login-password" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-900 font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
+          <input type="password" id="login-password" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-800 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
         </div>
 
         <div class="flex items-center gap-2 py-1">
           <input type="checkbox" id="remember" class="w-4 h-4 text-slate-950 border-slate-300 rounded focus:ring-0 cursor-pointer">
-          <label for="remember" class="text-xs text-slate-500 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
+          <label for="remember" class="text-xs text-slate-400 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
         </div>
 
         <div id="login-error" class="text-xs text-rose-600 font-bold pt-1"></div>
 
-        <button type="submit" id="login-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-slate-950 text-white hover:bg-slate-900 transition-all active:scale-[0.98] border-t border-white/10 mt-2 shadow-sm">
+        <button type="submit" id="login-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-slate-950 text-white hover:bg-slate-900 transition-all active:scale-[0.98] border-t border-white/10 mt-2 shadow-none">
           Authenticate
         </button>
 
         <div class="relative flex py-2 items-center">
-          <div class="flex-grow border-t border-slate-200"></div>
+          <div class="flex-grow border-t border-slate-800"></div>
           <span class="flex-shrink mx-4 text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">or</span>
-          <div class="flex-grow border-t border-slate-200"></div>
+          <div class="flex-grow border-t border-slate-800"></div>
         </div>
 
-        <button type="button" id="demo-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-1.5">
+        <button type="button" id="demo-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-clinical-white/10 backdrop-blur-md border border-slate-800 text-slate-200 hover:bg-deep-navy transition-all active:scale-[0.98] shadow-none flex items-center justify-center gap-1.5">
           <span class="material-symbols-outlined text-[15px] text-amber-500 animate-pulse">sports_esports</span> Explore Demo Sandbox
         </button>
       </form>
       
       <div class="mt-8 text-center lg:text-left">
-        <p class="text-xs text-slate-500 font-medium">
-          New clinic partner? <a href="signup.html" class="font-bold text-slate-950 hover:text-slate-700 transition-colors">Register Practice</a>
+        <p class="text-xs text-slate-400 font-medium">
+          New clinic partner? <a href="signup.html" class="font-bold text-slate-950 hover:text-slate-200 transition-colors">Register Practice</a>
         </p>
       </div>
 
@@ -157,5 +167,5 @@
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
-</body>
+<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
 </html>

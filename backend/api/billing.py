@@ -29,19 +29,19 @@ PLANS = {
         "name": "Starter Plan",
         "price_monthly": 299.00,
         "call_limit": 200,
-        "stripe_price_id": "price_starter_mock_123"
+        "stripe_price_id": settings.STRIPE_PRICE_STARTER
     },
     "professional": {
         "name": "Professional Plan",
         "price_monthly": 599.00,
         "call_limit": 500,
-        "stripe_price_id": "price_professional_mock_456"
+        "stripe_price_id": settings.STRIPE_PRICE_PROFESSIONAL
     },
     "enterprise": {
         "name": "Enterprise Plan",
         "price_monthly": 999.00,
         "call_limit": 999999,  # Unlimited
-        "stripe_price_id": "price_enterprise_mock_789"
+        "stripe_price_id": settings.STRIPE_PRICE_ENTERPRISE
     }
 }
 

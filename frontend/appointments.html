@@ -10,22 +10,32 @@
   
   <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "border-subtle": "#E7E7E4",
-            "neural-purple": "#9333EA",
-            "background": "#F7F7F5",
-            "surface-panel": "#F3F2EF",
-            "surface-bright": "#f9f9f9",
-            "primary-container": "#1b1b1b",
-            "neural-indigo": "#4F46E5",
-            "accent-emerald": "#10B981",
-            "neural-rose": "#F43F5E"
+            "on-background": "#FFFFFF",
+            "surface-tint": "#00F0FF",
+            "medical-cyan": "#00F0FF",
+            "medical-blue": "#00F0FF",
+            "deep-navy": "#0A0A0F",
+            "slate-slate": "#12121A",
+            "clinical-white": "#1A1A24",
+            "sterile-gray": "#0A0A0F",
+            "success": "#10B981",
+            "error": "#FF3366"
+          },
+          fontFamily: {
+            "sans": ["Inter", "sans-serif"],
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          boxShadow: {
+            'glow': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
           }
         }
       }
-    }
+    };
   </script>
 
   <style>
@@ -243,39 +253,39 @@
     .status-cancelled { background: #fee2e2; color: #b91c1c; }
   </style>
 </head>
-<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-[#F7F7F5] min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-slate-900 selection:text-white">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200/80 h-full z-45 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-sm">
+    <div class="mb-8 w-10 h-10 rounded bg-slate-950 flex items-center justify-center shadow-none">
       <span class="text-white text-[15px]">🦷</span>
     </div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="appointments.html" title="Appointments">
         <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-100 text-slate-950">
+        <div class="p-2 rounded bg-slate-slate text-slate-950">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -283,16 +293,16 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-200 text-xs font-bold font-mono text-slate-700" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-slate flex items-center justify-center cursor-pointer hover:bg-slate-200 border border-slate-800 text-xs font-bold font-mono text-slate-200" title="Sign Out">
         SM
       </div>
     </div>
@@ -307,13 +317,13 @@
         <div class="flex flex-col lg:flex-row justify-between lg:items-end mb-8 gap-4">
           <div>
             <h2 class="font-display text-2xl font-bold tracking-tight text-slate-950 mb-1 leading-none">Smart Scheduler</h2>
-            <p class="text-slate-500 text-xs font-medium">Coordinate visits and monitor automated bookings.</p>
+            <p class="text-slate-400 text-xs font-medium">Coordinate visits and monitor automated bookings.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
-            <button id="new-appointment-btn" class="flex items-center gap-2 bg-slate-950 border border-t border-white/10 text-white px-4 py-2 rounded-full font-bold text-xs hover:bg-slate-900 transition-all shadow-sm">
+            <button id="new-appointment-btn" class="flex items-center gap-2 bg-slate-950 border border-t border-white/10 text-white px-4 py-2 rounded-full font-bold text-xs hover:bg-slate-900 transition-all shadow-none">
               <span class="material-symbols-outlined text-[16px]">add</span> Book Appointment
             </button>
-            <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-sm">
+            <div class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full shadow-none">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span class="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">AI Receptionist Active</span>
             </div>
@@ -323,19 +333,19 @@
         <!-- Filter Controls -->
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div class="flex flex-wrap items-center gap-3">
-            <div class="relative flex items-center bg-white rounded-full px-4 py-1.5 border border-slate-200 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+            <div class="relative flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-slate-800 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
               <span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
               <input id="appt-search" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-44 ml-2 focus:outline-none" placeholder="Search patient..." type="text"/>
             </div>
             
-            <select id="filter-category" class="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600 focus:outline-none focus:ring-1 focus:ring-slate-950">
+            <select id="filter-category" class="px-4 py-1.5 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
               <option value="all">All Categories</option>
               <option value="general">🟦 General & Cleaning</option>
               <option value="cosmetic">🟪 Cosmetic & Whitening</option>
               <option value="emergency">🟥 Emergency Care</option>
             </select>
             
-            <select id="filter-status" class="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600 focus:outline-none focus:ring-1 focus:ring-slate-950">
+            <select id="filter-status" class="px-4 py-1.5 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
               <option value="all">All Statuses</option>
               <option value="Scheduled">Scheduled</option>
               <option value="Confirmed">Confirmed</option>
@@ -345,28 +355,28 @@
           </div>
 
           <!-- View Toggles & Prev/Next -->
-          <div class="flex items-center gap-4 bg-white border border-slate-200 rounded-full p-1 shadow-sm">
-            <div class="flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-full">
-              <button id="view-day-btn" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-500 hover:text-slate-900 transition-colors">Day</button>
-              <button id="view-week-btn" class="px-4 py-1 rounded-full text-[10px] font-bold bg-white text-slate-950 shadow-sm">Week</button>
-              <button id="view-month-btn" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-500 hover:text-slate-900 transition-colors">Month</button>
+          <div class="flex items-center gap-4 bg-clinical-white/10 backdrop-blur-md border border-slate-800 rounded-full p-1 shadow-none">
+            <div class="flex items-center gap-0.5 bg-slate-slate p-0.5 rounded-full">
+              <button id="view-day-btn" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-colors">Day</button>
+              <button id="view-week-btn" class="px-4 py-1 rounded-full text-[10px] font-bold bg-clinical-white/10 backdrop-blur-md text-slate-950 shadow-none">Week</button>
+              <button id="view-month-btn" class="px-4 py-1 rounded-full text-[10px] font-bold text-slate-400 hover:text-white transition-colors">Month</button>
             </div>
             <div class="h-4 w-px bg-slate-200"></div>
             <div class="flex items-center gap-1 pr-2">
-              <button id="prev-btn" class="w-6 h-6 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors font-bold text-xs">&larr;</button>
-              <button id="today-btn" class="px-3 py-1 rounded-full text-[10px] font-bold text-slate-700 hover:bg-slate-100 transition-colors">Today</button>
-              <button id="next-btn" class="w-6 h-6 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors font-bold text-xs">&rarr;</button>
+              <button id="prev-btn" class="w-6 h-6 rounded-full hover:bg-slate-slate flex items-center justify-center text-slate-300 transition-colors font-bold text-xs">&larr;</button>
+              <button id="today-btn" class="px-3 py-1 rounded-full text-[10px] font-bold text-slate-200 hover:bg-slate-slate transition-colors">Today</button>
+              <button id="next-btn" class="w-6 h-6 rounded-full hover:bg-slate-slate flex items-center justify-center text-slate-300 transition-colors font-bold text-xs">&rarr;</button>
             </div>
           </div>
         </div>
 
         <!-- Weekly Title -->
         <div class="mb-4">
-          <h3 id="calendar-title" class="text-sm font-bold text-slate-900 uppercase tracking-widest font-mono">Week of May 19 - May 25, 2026</h3>
+          <h3 id="calendar-title" class="text-sm font-bold text-white uppercase tracking-widest font-mono">Week of May 19 - May 25, 2026</h3>
         </div>
 
         <!-- Dynamic Calendar Canvas -->
-        <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div class="bg-clinical-white/10 backdrop-blur-md rounded-lg shadow-none border border-slate-800 overflow-hidden">
           <div id="calendar-view-container">
             <!-- Rendered by JS -->
           </div>
@@ -375,10 +385,10 @@
     </section>
 
     <!-- Right Sidebar: AI Intake Panel & Diagnostics -->
-    <aside class="w-[380px] h-full bg-white border-l border-slate-200/80 flex flex-col shadow-sm flex-shrink-0">
-      <div class="p-6 border-b border-slate-200 bg-slate-50/50 flex justify-between items-center">
+    <aside class="w-[380px] h-full bg-clinical-white/10 backdrop-blur-md border-l border-slate-800/80 flex flex-col shadow-none flex-shrink-0">
+      <div class="p-6 border-b border-slate-800 bg-deep-navy/50 flex justify-between items-center">
         <div>
-          <h3 class="font-bold text-sm text-slate-900 leading-none">AI Intake Engine</h3>
+          <h3 class="font-bold text-sm text-white leading-none">AI Intake Engine</h3>
           <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Automated Requests queue</p>
         </div>
         <span class="bg-slate-950 text-white px-2 py-0.5 rounded text-[9px] font-bold tracking-widest uppercase">4 Pending</span>
@@ -386,65 +396,65 @@
 
       <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
         <!-- Request Card 1 -->
-        <div class="glass-panel p-4 rounded border border-slate-100 flex flex-col gap-3">
+        <div class="glass-panel p-4 rounded border border-slate-800/50 flex flex-col gap-3">
           <div class="flex items-start gap-3">
             <div class="w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center">
               <span class="material-symbols-outlined text-indigo-600 text-sm">smart_toy</span>
             </div>
             <div>
-              <p class="font-bold text-xs text-slate-900">New Patient Inquiry</p>
+              <p class="font-bold text-xs text-white">New Patient Inquiry</p>
               <p class="text-slate-400 text-[9px] font-mono">AUDIO AGENT • 1m ago</p>
             </div>
           </div>
-          <div class="bg-[#F7F7F5] p-3 rounded border border-slate-100">
+          <div class="bg-[#F7F7F5] p-3 rounded border border-slate-800/50">
             <p class="text-[9px] font-bold text-slate-400 mb-1 uppercase tracking-wider">Proposed Slot</p>
-            <p class="font-bold text-xs text-slate-800">Fri, Oct 16 • 09:30 AM <span class="text-indigo-600 ml-1 text-[10px]">45 MIN</span></p>
-            <p class="text-xs text-slate-500 mt-2 italic leading-relaxed">"Patient reports mild molar pain, seeking emergency consultation."</p>
+            <p class="font-bold text-xs text-slate-200">Fri, Oct 16 • 09:30 AM <span class="text-indigo-600 ml-1 text-[10px]">45 MIN</span></p>
+            <p class="text-xs text-slate-400 mt-2 italic leading-relaxed">"Patient reports mild molar pain, seeking emergency consultation."</p>
           </div>
           <div class="flex gap-2">
             <button onclick="if(typeof showToast === 'function') showToast('Appointment slot approved and synchronized with EHR.','success')" class="flex-1 py-1.5 bg-slate-950 text-white rounded text-[10px] font-bold hover:bg-slate-900 transition-colors uppercase tracking-wider">Approve</button>
-            <button onclick="if(typeof showToast === 'function') showToast('Auto-reschedule sequence triggered.','info')" class="flex-1 py-1.5 border border-slate-200 text-slate-600 hover:bg-slate-50 rounded text-[10px] font-bold transition-all uppercase tracking-wider">Reschedule</button>
+            <button onclick="if(typeof showToast === 'function') showToast('Auto-reschedule sequence triggered.','info')" class="flex-1 py-1.5 border border-slate-800 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Reschedule</button>
           </div>
         </div>
 
         <!-- Request Card 2 -->
-        <div class="glass-panel p-4 rounded border border-slate-100 flex flex-col gap-3">
+        <div class="glass-panel p-4 rounded border border-slate-800/50 flex flex-col gap-3">
           <div class="flex items-start gap-3">
             <div class="w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center">
               <span class="material-symbols-outlined text-indigo-600 text-sm">smart_toy</span>
             </div>
             <div>
-              <p class="font-bold text-xs text-slate-900">Reschedule Request</p>
+              <p class="font-bold text-xs text-white">Reschedule Request</p>
               <p class="text-slate-400 text-[9px] font-mono">SMS AGENT • 10m ago</p>
             </div>
           </div>
-          <div class="bg-[#F7F7F5] p-3 rounded border border-slate-100">
+          <div class="bg-[#F7F7F5] p-3 rounded border border-slate-800/50">
             <p class="text-[9px] font-bold text-slate-400 mb-1 uppercase tracking-wider">Change To</p>
-            <p class="font-bold text-xs text-slate-800">Thu, Oct 15 • 02:00 PM <span class="text-emerald-600 ml-1 text-[10px]">CLEANING</span></p>
-            <p class="text-xs text-slate-500 mt-1">Marcus Aurelius (Existing Patient)</p>
+            <p class="font-bold text-xs text-slate-200">Thu, Oct 15 • 02:00 PM <span class="text-emerald-600 ml-1 text-[10px]">CLEANING</span></p>
+            <p class="text-xs text-slate-400 mt-1">Marcus Aurelius (Existing Patient)</p>
           </div>
           <div class="flex gap-2">
             <button onclick="if(typeof showToast === 'function') showToast('Reschedule request approved.','success')" class="flex-1 py-1.5 bg-slate-950 text-white rounded text-[10px] font-bold hover:bg-slate-900 transition-colors uppercase tracking-wider">Approve</button>
-            <button onclick="if(typeof showToast === 'function') showToast('Reschedule denied. Patient notified.','info')" class="flex-1 py-1.5 border border-slate-200 text-slate-600 hover:bg-slate-50 rounded text-[10px] font-bold transition-all uppercase tracking-wider">Deny</button>
+            <button onclick="if(typeof showToast === 'function') showToast('Reschedule denied. Patient notified.','info')" class="flex-1 py-1.5 border border-slate-800 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Deny</button>
           </div>
         </div>
 
         <!-- Capacity Diagnostic Card -->
-        <div class="glass-panel p-4 rounded border border-slate-100 space-y-3 relative overflow-hidden">
+        <div class="glass-panel p-4 rounded border border-slate-800/50 space-y-3 relative overflow-hidden">
           <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Clinic Capacity Meter</p>
           <div class="flex items-end gap-2">
-            <span class="text-2xl font-black text-slate-900 leading-none">84%</span>
+            <span class="text-2xl font-black text-white leading-none">84%</span>
             <span class="text-[10px] font-bold text-slate-400 pb-0.5">Optimized by AI</span>
           </div>
-          <div class="w-full bg-slate-100 h-2 rounded-full">
+          <div class="w-full bg-slate-slate h-2 rounded-full">
             <div class="bg-slate-900 h-full rounded-full transition-all duration-500" style="width: 84%;"></div>
           </div>
           <p class="text-[9px] text-slate-400 font-mono">+12% booking efficiency this month</p>
         </div>
       </div>
 
-      <div class="p-6 border-t border-slate-200 bg-slate-50 flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-[10px] font-bold hover:bg-slate-50 transition-colors uppercase tracking-wider">
+      <div class="p-6 border-t border-slate-800 bg-deep-navy flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-slate-800 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
           Sign Out
         </button>
         <button onclick="openAppointmentModal()" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
@@ -605,7 +615,7 @@
           const dateStr = formatDateStr(dayDate);
           
           if (time === '12:00 PM') {
-            html += `<div class="calendar-cell bg-slate-50/50 ${borderClass} flex items-center justify-center text-[9px] font-extrabold text-slate-400 uppercase tracking-wider select-none">Lunch</div>`;
+            html += `<div class="calendar-cell bg-deep-navy/50 ${borderClass} flex items-center justify-center text-[9px] font-extrabold text-slate-400 uppercase tracking-wider select-none">Lunch</div>`;
             return;
           }
           
@@ -632,15 +642,15 @@
               <div class="appt-block ${categoryClass}" onclick="event.stopPropagation(); openAppointmentDetails('${appt.id}')">
                 <div class="flex items-center justify-between gap-1 mb-1">
                   <strong class="font-extrabold text-[9px]">${appt.time}</strong>
-                  <span class="text-[8px] font-extrabold uppercase px-1 rounded bg-white/60 shrink-0">${appt.status}</span>
+                  <span class="text-[8px] font-extrabold uppercase px-1 rounded bg-clinical-white/10 backdrop-blur-md/60 shrink-0">${appt.status}</span>
                 </div>
-                <div class="font-bold text-slate-900 truncate leading-tight text-left text-xs">${appt.name}</div>
+                <div class="font-bold text-white truncate leading-tight text-left text-xs">${appt.name}</div>
                 <div class="text-[9px] opacity-85 truncate text-left mt-0.5">${appt.service}</div>
               </div>
             `;
           }
           
-          const cellBg = (dayIdx === 5 || dayIdx === 6) ? 'bg-slate-50/30' : '';
+          const cellBg = (dayIdx === 5 || dayIdx === 6) ? 'bg-deep-navy/30' : '';
           
           html += `
             <div class="calendar-cell ${cellBg} ${borderClass}" onclick="handleCellClick('${dateStr}', '${time}')">
@@ -660,8 +670,8 @@
       
       let html = `
         <div class="day-view-container">
-          <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-            <h3 class="font-bold text-slate-800 text-xs font-mono uppercase tracking-wider">${friendlyDate}</h3>
+          <div class="px-6 py-4 bg-deep-navy border-b border-slate-800 flex items-center justify-between">
+            <h3 class="font-bold text-slate-200 text-xs font-mono uppercase tracking-wider">${friendlyDate}</h3>
             <span class="status-badge bg-indigo-50 border border-indigo-100 text-indigo-700">Timeline</span>
           </div>
       `;
@@ -675,7 +685,7 @@
       timeSlots.forEach(time => {
         if (time === '12:00 PM' || time === '12:30 PM') {
           html += `
-            <div class="day-row bg-slate-50/40">
+            <div class="day-row bg-deep-navy/40">
               <div class="day-time">${time}</div>
               <div class="day-slot select-none flex items-center justify-center text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Lunch Break</div>
             </div>
@@ -698,8 +708,8 @@
               <div class="flex items-center gap-3">
                 <span class="font-extrabold text-xs">${appt.time}</span>
                 <div class="w-px h-4 bg-slate-300"></div>
-                <strong class="font-bold text-slate-900 text-sm">${appt.name}</strong>
-                <span class="text-xs text-slate-500 font-medium">(${appt.service})</span>
+                <strong class="font-bold text-white text-sm">${appt.name}</strong>
+                <span class="text-xs text-slate-400 font-medium">(${appt.service})</span>
               </div>
               <div class="flex items-center gap-3">
                 ${badgeHtml}
@@ -754,7 +764,7 @@
         
         let cellClass = "month-cell";
         if (isToday) cellClass += " today";
-        if (!isCurrentMonth) cellClass += " bg-slate-50/40 opacity-40";
+        if (!isCurrentMonth) cellClass += " bg-deep-navy/40 opacity-40";
         
         let apptsHtml = '<div class="month-appts-dots">';
         filteredAppts.forEach(appt => {
@@ -771,7 +781,7 @@
           <div class="${cellClass}" onclick="handleCellClick('${dateStr}', '9:00 AM')">
             <div class="month-cell-header">
               <span>${dayDate.getDate()}</span>
-              ${filteredAppts.length > 0 ? `<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 font-black">${filteredAppts.length}</span>` : ''}
+              ${filteredAppts.length > 0 ? `<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-slate font-black">${filteredAppts.length}</span>` : ''}
             </div>
             ${apptsHtml}
           </div>
@@ -1048,14 +1058,14 @@
         state.currentView = view;
         [dayBtn, weekBtn, monthBtn].forEach(b => {
           if (b) {
-            b.classList.remove('bg-white', 'text-slate-950', 'shadow-sm');
-            b.classList.add('text-slate-500');
+            b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'text-slate-950', 'shadow-none');
+            b.classList.add('text-slate-400');
           }
         });
         const activeBtn = view === 'day' ? dayBtn : (view === 'week' ? weekBtn : monthBtn);
         if (activeBtn) {
-          activeBtn.classList.add('bg-white', 'text-slate-950', 'shadow-sm');
-          activeBtn.classList.remove('text-slate-500');
+          activeBtn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'text-slate-950', 'shadow-none');
+          activeBtn.classList.remove('text-slate-400');
         }
         renderCalendar();
       };
@@ -1099,5 +1109,5 @@
 
     window.openAppointmentModal = openAppointmentModal;
   </script>
-</body>
+<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
 </html>

@@ -46,6 +46,9 @@ class Settings(BaseSettings):
     # --- Stripe ---
     STRIPE_SECRET_KEY: str = Field(default="", description="Stripe secret key")
     STRIPE_WEBHOOK_SECRET: str = Field(default="", description="Stripe webhook secret")
+    STRIPE_PRICE_STARTER: str = Field(default="price_starter_mock_123", description="Stripe Price ID for Starter Plan")
+    STRIPE_PRICE_PROFESSIONAL: str = Field(default="price_professional_mock_456", description="Stripe Price ID for Professional Plan")
+    STRIPE_PRICE_ENTERPRISE: str = Field(default="price_enterprise_mock_789", description="Stripe Price ID for Enterprise Plan")
 
     # --- SendGrid ---
     SENDGRID_API_KEY: str = Field(default="", description="SendGrid API key")
@@ -58,6 +61,16 @@ class Settings(BaseSettings):
     GOOGLE_CALENDAR_ID: str = Field(
         default="primary",
         description="Google Calendar ID to sync with",
+    )
+
+    # --- PMS Integration (NexHealth / Middleware) ---
+    NEXHEALTH_API_KEY: Optional[str] = Field(
+        default=None,
+        description="NexHealth API Key for live PMS integration",
+    )
+    NEXHEALTH_API_URL: str = Field(
+        default="https://nexhealth.info",
+        description="NexHealth API base URL",
     )
 
     # --- Cal.com Scheduling ---
@@ -139,5 +152,8 @@ def validate_production_settings():
 
     if not settings.STRIPE_SECRET_KEY:
         logger.warning("⚠️ STRIPE_SECRET_KEY is missing. Billing checkout flows are disabled!")
+
+    if not settings.NEXHEALTH_API_KEY:
+        logger.warning("⚠️ NEXHEALTH_API_KEY is missing. PMS integration will fall back to mock data!")
 
 validate_production_settings()
