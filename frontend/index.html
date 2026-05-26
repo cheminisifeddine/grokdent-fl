@@ -18,44 +18,109 @@
       theme: {
         extend: {
           colors: {
-            "slate-350": "#374151",
-            "slate-550": "#6B7280",
-            "indigo-500/30": "rgba(99, 102, 241, 0.15)",
-            "on-background": "#111827",
-            "surface-tint": "#4F46E5",
-            "medical-cyan": "#10B981",
-            "medical-blue": "#2563EB",
-            "deep-navy": "#FFFFFF",
-            "slate-slate": "#FCFCFD",
-            "clinical-white": "rgba(0, 0, 0, 0.02)",
-            "sterile-gray": "#F3F4F6",
-            "success": "#10B981",
-            "error": "#EF4444",
+            "slate-350": "#D1D5DB",
+            "slate-550": "#4B5563",
+            "indigo-500/30": "rgba(0, 0, 0, 0.05)",
+            "on-background": "#000000",
+            "surface-tint": "#000000",
+            "medical-cyan": "#000000",
+            "medical-blue": "#4B5563",
+            "deep-navy": "#000000",
+            "slate-slate": "#F9FAFB",
+            "clinical-white": "#FFFFFF",
+            "sterile-gray": "#F9FAFB",
+            "success": "#000000",
+            "error": "#111827",
             "outline": "rgba(0, 0, 0, 0.06)",
-            slate: {
-              50: "#111827",
-              100: "#1F2937",
-              200: "#374151",
-              300: "#4B5563",
-              400: "#6B7280",
-              500: "#9CA3AF",
-              600: "#D1D5DB",
-              700: "#E5E7EB",
-              800: "#F3F4F6",
-              850: "#F9FAFB",
-              900: "#FFFFFF",
-              950: "#FCFCFD",
+            indigo: {
+              50: "#F9FAFB",
+              100: "#F3F4F6",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#000000",
+              600: "#000000",
+              700: "#000000",
+              800: "#000000",
+              900: "#000000",
+              950: "#000000",
             },
-            white: "#111827",
+            violet: {
+              50: "#F9FAFB",
+              100: "#F3F4F6",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#000000",
+              600: "#000000",
+              700: "#000000",
+              800: "#000000",
+              900: "#000000",
+              950: "#000000",
+            },
+            emerald: {
+              50: "#F9FAFB",
+              100: "#F3F4F6",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#000000",
+              600: "#000000",
+              700: "#000000",
+              800: "#000000",
+              900: "#000000",
+              950: "#000000",
+            },
+            rose: {
+              50: "#F9FAFB",
+              100: "#F3F4F6",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#000000",
+              600: "#000000",
+              700: "#000000",
+              800: "#000000",
+              900: "#000000",
+              950: "#000000",
+            },
+            amber: {
+              50: "#F9FAFB",
+              100: "#F3F4F6",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#000000",
+              600: "#000000",
+              700: "#000000",
+              800: "#000000",
+              900: "#000000",
+              950: "#000000",
+            },
+            slate: {
+              50: "#FFFFFF",
+              100: "#F9FAFB",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#6B7280",
+              600: "#4B5563",
+              700: "#1F2937",
+              800: "#111827",
+              850: "#0C0C0E",
+              900: "#000000",
+              950: "#FFFFFF",
+            },
+            white: "#FFFFFF",
           },
           fontFamily: {
             "sans": ["Geist", "Inter", "sans-serif"],
-            "display": ["Geist", "Inter", "sans-serif"],
+            "display": ["Plus Jakarta Sans", "Inter", "sans-serif"],
             "mono": ["JetBrains Mono", "monospace"]
           },
           boxShadow: {
-            'glow': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
-            'glow-violet': '0 4px 12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            'glow': '0 4px 12px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            'glow-violet': '0 4px 12px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(0, 0, 0, 0.04)',
           }
         }
       }
@@ -64,105 +129,114 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
     
+    /* Global Canvas Styling */
     body {
       font-family: 'Inter', sans-serif;
       background-color: #FFFFFF !important;
-      color: #2D2D2D !important;
+      color: #1F2937 !important;
       letter-spacing: -0.01em;
     }
+    
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Plus Jakarta Sans', sans-serif !important;
       color: #000000 !important;
-      letter-spacing: -0.025em !important;
+      letter-spacing: -0.03em !important;
     }
+    
+    /* Clean Monochrome Base Text & Borders Overrides */
+    .text-slate-100, .text-slate-200 { color: #111827 !important; }
+    .text-slate-300 { color: #1F2937 !important; }
+    .text-slate-400 { color: #6B7280 !important; }
+    .text-slate-505, .text-slate-500 { color: #4B5563 !important; }
+    
     .text-white {
       color: #000000 !important;
     }
-    .text-slate-100, .text-slate-200 {
-      color: #1A1A1A !important;
-    }
-    .text-slate-300 {
-      color: #2D2D2D !important;
-    }
-    .text-slate-400 {
-      color: #555555 !important;
-    }
-    .text-slate-505, .text-slate-500 {
-      color: #676767 !important;
-    }
-    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10 {
-      border-color: rgba(0, 0, 0, 0.08) !important;
+    #technology .text-white, .bg-deep-navy .text-white, #sim-action-btn .text-white, .bg-slate-950 .text-white, #chat-stream > div.ml-auto * {
+      color: #FFFFFF !important;
     }
     
-    /* OpenAI Stark Layering: Premium Cards & Panels */
-    .glass-card, .glass-panel, .toggle-card {
+    .border-white\/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white\/10, .border-slate-250 {
+      border-color: rgba(0, 0, 0, 0.06) !important;
+    }
+    
+    /* Dotted Backdrop Matrix Pattern */
+    .grid-bg {
+      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
+    }
+    
+    /* Premium Cards & Glassmorphism Panels */
+    .glass-card, .glass-panel, .toggle-card, .border-slate-250 {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.01), 0 4px 12px 0 rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+      border-radius: 24px !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-1px) !important;
+    .glass-card:hover, .toggle-card:hover, .border-slate-250:hover {
+      transform: translateY(-2px) !important;
       border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.01), 0 8px 24px 0 rgba(0,0,0,0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
     }
     .glass-card-dark {
       background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.01) !important;
-    }
-    .grid-bg {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px) !important;
-      background-size: 50px 50px !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
     }
     
-    /* Top Header Link Polish */
+    /* Top Header Navbar Polish */
     nav .text-slate-400 {
-      color: #676767 !important;
+      color: #6B7280 !important;
     }
     nav .text-slate-400:hover {
       color: #000000 !important;
     }
     header, nav.fixed {
-      background: rgba(255, 255, 255, 0.9) !important;
+      background: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-    }
-    header h1 {
-      color: #000000 !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
     }
     
-    /* Stark Signature Buttons: OpenAI-grade Black CTAs */
+    /* Stark Monochrome Buttons (OpenAI Style) */
     .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950 {
       background-color: #000000 !important;
       color: #FFFFFF !important;
       border: 1px solid transparent !important;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover {
       background-color: #2D2D2D !important;
       color: #FFFFFF !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
     }
     .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active {
       transform: translateY(0px) !important;
     }
     
-    /* Interactive Simulator Interface Refinements (Strict Light Mode) */
+    /* Outlined Monochrome Button (Secondary CTA) */
+    .bg-clinical-white\/10.backdrop-blur-md.text-slate-200, .border-white\/5.bg-clinical-white\/10 {
+      background-color: transparent !important;
+      border: 1px solid #000000 !important;
+      color: #000000 !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .bg-clinical-white\/10.backdrop-blur-md.text-slate-200:hover, .border-white\/5.bg-clinical-white\/10:hover {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    /* Interactive Simulator Interface Refinements */
     .lg\:col-span-5.bg-slate-900 {
-      background-color: #F9F9F9 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.02) !important;
+      background-color: #F9FAFB !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
     }
     .lg\:col-span-5.bg-slate-900 button {
-      color: #555555 !important;
+      color: #4B5563 !important;
       transition: all 0.2s ease !important;
     }
     .lg\:col-span-5.bg-slate-900 button:hover {
@@ -173,20 +247,23 @@
     /* Dialogue & EHR Sync Cards */
     .lg\:col-span-7 .bg-slate-900 {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.01), 0 8px 24px rgba(0,0,0,0.02) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
     }
     
-    /* Active Dialogue Chat Bubbles Overrides (Monochrome) */
+    /* Active Dialogue Chat Bubbles Overrides (Monochrome Contrast) */
     #chat-stream > div {
       background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      color: #2D2D2D !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+      color: #1F2937 !important;
     }
     #chat-stream > div.ml-auto {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.15) !important;
-      color: #000000 !important;
+      background-color: #000000 !important;
+      border: 1px solid #000000 !important;
+      color: #FFFFFF !important;
+    }
+    #chat-stream > div.ml-auto p {
+      color: #FFFFFF !important;
     }
     #ehr-patient, #ehr-triage, #ehr-insurance, #ehr-status {
       color: #000000 !important;
@@ -213,17 +290,41 @@
     .wave-bar:nth-child(9) { animation-delay: 0.45s !important; }
     .wave-bar:nth-child(10) { animation-delay: 0.6s !important; }
     
-    /* Visual green-state live indicators */
+    /* Concentric Rings Pulser Orb (Mic Node) */
+    @keyframes orbPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05); }
+      50% { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.03), 0 0 0 20px rgba(0, 0, 0, 0.01); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05); }
+    }
+    #sim-orb-center {
+      background-color: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+      width: 56px !important;
+      height: 56px !important;
+      border-radius: 50% !important;
+      transition: all 0.3s ease !important;
+    }
+    .sim-orb-active {
+      animation: orbPulse 2s infinite ease-in-out !important;
+      border-color: #000000 !important;
+    }
+    #sim-orb-icon {
+      color: #000000 !important;
+      font-size: 24px !important;
+    }
+    
+    /* Visual live indicators */
     .animate-pulse.bg-slate-900\/60 {
       background-color: #000000 !important;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.15) !important;
     }
     
-    /* Polished range input track & thumbs (Stark Monochrome) */
+    /* Polished range input track & thumbs */
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
-      background: #ECECEC !important;
+      background: #E5E7EB !important;
       height: 4px !important;
       border-radius: 10px;
     }
@@ -243,55 +344,71 @@
       transform: scale(1.1);
     }
     
-    /* Dialer Mic Node (OpenAI Style) */
-    #sim-orb-center {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
-      width: 56px !important;
-      height: 56px !important;
-      border-radius: 50% !important;
+    /* Latency Pipeline Packet Flow Animations */
+    @keyframes packetFlow {
+      0% { left: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
     }
-    #sim-orb-icon {
-      color: #000000 !important;
-      font-size: 24px !important;
+    .data-track {
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    .data-packet-red, .data-packet-green {
+      position: absolute !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      width: 14px !important;
+      border-radius: 9999px !important;
+      transform: translateY(0) !important;
+    }
+    .data-packet-red {
+      background-color: transparent !important;
+      border: 2px dashed #9CA3AF !important;
+      animation: packetFlow 4.5s linear infinite !important;
+    }
+    .data-packet-green {
+      background-color: #000000 !important;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25) !important;
+      animation: packetFlow 1.2s linear infinite !important;
     }
     
-    /* Latency Paradigm Pipeline Cards (Stark Cards) */
+    /* Technology Section Grayscale Overrides */
+    #technology {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
+    }
     #technology .grid > div {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+      background-color: #0C0C0E !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.8) !important;
       border-radius: 24px !important;
     }
     #technology .grid > div:last-child {
-      border: 2px solid #000000 !important;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02), 0 16px 48px rgba(0, 0, 0, 0.04) !important;
+      border: 2px solid #FFFFFF !important;
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.08) !important;
     }
-    
-    /* Traditional Red vs. Renia Green Pipeline packet animations */
-    .data-packet-red {
-      background-color: #EF4444 !important;
-    }
-    .data-packet-green {
-      background-color: #10B981 !important;
+    #technology .data-packet-green {
+      background-color: #FFFFFF !important;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
     }
     
     /* Financial ROI Ledger Controls & Outputs */
     section#roi {
       background-color: #FFFFFF !important;
-      border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     #roi .lg\:col-span-5 {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.02) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.015) !important;
     }
     #roi .lg\:col-span-7 > div {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.02) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.015) !important;
       border-radius: 24px !important;
     }
     #roi .lg\:col-span-7 > div:last-child {
@@ -299,8 +416,8 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02), 0 16px 48px rgba(0, 0, 0, 0.04) !important;
     }
     #roi .lg\:col-span-7 > div:last-child .bg-deep-navy {
-      background-color: #F9F9F9 !important;
-      border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+      background-color: #F9FAFB !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     #label-missed-calls, #label-patient-val {
       background-color: #000000 !important;
@@ -314,37 +431,34 @@
     /* Interactive Floating Image Widgets */
     .absolute.glass-card {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-    }
-    .absolute.glass-card .text-white {
-      color: #000000 !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
     }
     
     /* Compliance Section Disclosures Warn Box */
     #compliance .md\:col-span-7 {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.02) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 12px 36px rgba(0, 0, 0, 0.015) !important;
       border-radius: 24px !important;
     }
     #compliance .italic.text-slate-300 {
-      background-color: #F9F9F9 !important;
+      background-color: #F9FAFB !important;
       border-left: 4px solid #000000 !important;
-      color: #2D2D2D !important;
+      color: #1F2937 !important;
       font-weight: 500 !important;
     }
     
     /* Stark Stripe-Level Pricing Tiers Grid */
     #pricing .grid > div {
       background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.015) !important;
       border-radius: 24px !important;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     #pricing .grid > div:hover {
-      transform: translateY(-1px) !important;
+      transform: translateY(-2px) !important;
       border-color: rgba(0, 0, 0, 0.15) !important;
       box-shadow: 0 1px 3px rgba(0,0,0,0.01), 0 12px 36px rgba(0,0,0,0.03) !important;
     }
@@ -360,21 +474,9 @@
     
     /* Testimonial Cards Layout Override */
     section.bg-deep-navy\/50 {
-      background-color: #F9F9F9 !important;
-      border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-    }
-    .border-slate-250 {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.015) !important;
-      border-radius: 24px !important;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .border-slate-250:hover {
-      transform: translateY(-1px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.01), 0 8px 24px rgba(0,0,0,0.03) !important;
+      background-color: #F9FAFB !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
     
     /* Scrollbars */
@@ -393,6 +495,7 @@
       background: rgba(0, 0, 0, 0.16) !important;
     }
     
+    /* Material symbols & stars */
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       display: inline-block;
@@ -401,6 +504,46 @@
     }
     .material-symbols-outlined.fill-1 {
       font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Rating stars solid monochrome */
+    .text-amber-400, .text-amber-500 {
+      color: #000000 !important;
+    }
+    
+    /* Table header high contrast monochrome */
+    thead tr {
+      background-color: #000000 !important;
+    }
+    thead th {
+      color: #FFFFFF !important;
+    }
+    
+    /* Compliance Section High Contrast overrides */
+    #compliance * {
+      color: #FFFFFF !important;
+    }
+    #compliance p, #compliance .text-slate-400 {
+      color: #9CA3AF !important;
+    }
+    #compliance .w-12.h-12 {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    #compliance .material-symbols-outlined {
+      color: #FFFFFF !important;
+    }
+    #compliance .bg-deep-navy {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      border-left: 4px solid #FFFFFF !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    /* Toggle Dot White contrast override */
+    #pricing-toggle-dot {
+      background-color: #FFFFFF !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
     }
   </style>
 </head>
@@ -468,7 +611,7 @@
         
         <!-- Main Title -->
         <h1 class="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white max-w-5xl leading-[1.04] tracking-tighter">
-          The front office receptionist, <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent">engineered as light-speed voice AI.</span>
+          The front office receptionist, <span class="text-black">engineered as light-speed voice AI.</span>
         </h1>
         
         <!-- Subheading -->
@@ -685,7 +828,7 @@
     <section id="technology" class="py-16 sm:py-24 lg:py-28 bg-slate-950 text-white relative overflow-hidden">
       
       <!-- Mesh Glow Elements -->
-      <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(0, 206, 209, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 206, 209, 0.3) 1px, transparent 1px); background-size: 40px 40px;"></div>
+      <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px); background-size: 40px 40px;"></div>
       
 
       <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
@@ -948,18 +1091,18 @@
             <div class="mt-8 pt-6 border-t border-white/5 flex flex-col items-center">
               <span class="font-mono text-[9px] text-slate-400 font-extrabold uppercase mb-4">REVENUE MODELING</span>
               <svg width="220" height="120" class="overflow-visible" id="roi-chart">
-                <!-- Red Bar for Loss -->
-                <rect id="chart-loss-bar" x="35" y="30" width="36" height="70" rx="4" fill="#EF4444" opacity="0.85" />
-                <text x="53" y="20" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#EF4444" id="chart-loss-txt">$94.5K</text>
-                <text x="53" y="115" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#94A3B8">LOST VALUE</text>
+                <!-- Red Bar for Loss (Now elegant hollow dashed outline) -->
+                <rect id="chart-loss-bar" x="35" y="30" width="36" height="70" rx="4" fill="none" stroke="#6B7280" stroke-width="2" stroke-dasharray="2,2" />
+                <text x="53" y="20" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#6B7280" id="chart-loss-txt">$94.5K</text>
+                <text x="53" y="115" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#6B7280">LOST VALUE</text>
 
-                <!-- Green Bar for Savings -->
-                <rect id="chart-save-bar" x="135" y="38" width="36" height="62" rx="4" fill="#10B981" opacity="0.85" />
-                <text x="153" y="28" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#10B981" id="chart-save-txt">$86.1K</text>
-                <text x="153" y="115" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#94A3B8">NET REVENUE</text>
+                <!-- Green Bar for Savings (Now solid pure black) -->
+                <rect id="chart-save-bar" x="135" y="38" width="36" height="62" rx="4" fill="#000000" />
+                <text x="153" y="28" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#000000" id="chart-save-txt">$86.1K</text>
+                <text x="153" y="115" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#000000">NET REVENUE</text>
                 
                 <!-- Divider -->
-                <line x1="10" y1="100" x2="210" y2="100" stroke="#E2E8F0" stroke-width="1.5" />
+                <line x1="10" y1="100" x2="210" y2="100" stroke="#CCCCCC" stroke-width="1.5" />
               </svg>
             </div>
           </div>
@@ -1394,7 +1537,7 @@
     <!-- PREMIUM HIGH-CONVERTING CTA -->
     <section class="py-24 sm:py-32 px-6 md:px-12 text-center bg-clinical-white/10 backdrop-blur-md relative overflow-hidden">
       <!-- Gradient mesh bottom -->
-      <div class="absolute inset-0 opacity-[0.03]" style="background: radial-gradient(circle at center, #00CED1 0%, transparent 60%);"></div>
+      <div class="absolute inset-0 opacity-[0.03]" style="background: radial-gradient(circle at center, #000000 0%, transparent 60%);"></div>
       
       <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center gap-6">
         <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
@@ -1658,7 +1801,7 @@
         // Reset Visual Orbs
         orbBg1.classList.add("hidden");
         orbBg2.classList.add("hidden");
-        orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center relative z-10 transition-all duration-300";
+        orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-200 flex items-center justify-center relative z-10 transition-all duration-300";
         orbIcon.textContent = "mic";
         orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
         
@@ -1741,7 +1884,7 @@
         simStatus.textContent = "DIALING PCM LINK...";
         simStatus.className = "font-mono text-xs text-amber-400 font-bold uppercase tracking-widest block";
         
-        orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-amber-500/50 flex items-center justify-center relative z-10 transition-all duration-300 animate-pulse";
+        orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 animate-pulse";
         orbIcon.textContent = "call";
         orbIcon.className = "material-symbols-outlined text-amber-400 text-2xl transition-colors";
         
@@ -1750,7 +1893,7 @@
           simStatus.textContent = "GROK VOICE ACTIVE";
           simStatus.className = "font-mono text-xs text-white font-bold uppercase tracking-widest block";
           
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-white/5 flex items-center justify-center relative z-10 transition-all duration-300 shadow-[0_0_15px_rgba(0,206,209,0.3)]";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
           orbIcon.textContent = "volume_up";
           orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
           
@@ -1769,7 +1912,7 @@
         // 2. Patient speaks in Spanish (4.8s)
         let t2 = setTimeout(() => {
           orbIcon.textContent = "mic";
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center relative z-10 transition-all duration-300";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-300 flex items-center justify-center relative z-10 transition-all duration-300";
           orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
           
           addChatBubble("patient", "Hola, buenas. Tengo un dolor de muela terrible desde anoche y no aguanto más. ¿Tienen alguna cita para hoy mismo en Miami?");
@@ -1780,7 +1923,7 @@
         // 3. AI responds in Spanish immediately (7.8s)
         let t3 = setTimeout(() => {
           orbIcon.textContent = "volume_up";
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-white/5 flex items-center justify-center relative z-10 transition-all duration-300 shadow-[0_0_15px_rgba(0,206,209,0.3)]";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
           orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
           
           addChatBubble("ai", "Lamento mucho escuchar eso. El dolor de muela severo se trata como una emergencia. El Dr. Mitchell tiene una vacante para extracciones y urgencias hoy a la 1:30 PM en Miami. ¿Le reservo esa cita ahora mismo?", "Triage Urgent");
@@ -1795,7 +1938,7 @@
         // 4. Patient provides details (11.8s)
         let t4 = setTimeout(() => {
           orbIcon.textContent = "mic";
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center relative z-10 transition-all duration-300";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-300 flex items-center justify-center relative z-10 transition-all duration-300";
           orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
           
           addChatBubble("patient", "Sí, por favor. Ese horario es ideal. Mi nombre es María Rodríguez y tengo seguro de Delta Dental PPO.");
@@ -1807,7 +1950,7 @@
         // 5. AI verifies insurance portal & locks appointment (14.8s)
         let t5 = setTimeout(() => {
           orbIcon.textContent = "volume_up";
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-white/5 flex items-center justify-center relative z-10 transition-all duration-300 shadow-[0_0_15px_rgba(0,206,209,0.3)]";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
           orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
           
           addChatBubble("ai", "Perfecto, María. He verificado su PPO de Delta Dental en el portal de elegibilidad en segundo plano. Sus beneficios de diagnóstico y extracciones están activos al 100%. He agendado su cita a la 1:30 PM. ¿Le gustaría recibir la confirmación por mensaje de texto?");
@@ -1827,7 +1970,7 @@
         // 6. Patient wrap-up (18.5s)
         let t6 = setTimeout(() => {
           orbIcon.textContent = "mic";
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center relative z-10 transition-all duration-300";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-300 flex items-center justify-center relative z-10 transition-all duration-300";
           orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
           
           addChatBubble("patient", "Sí, a este número de celular. Muchísimas gracias, Renia. Eres extremadamente rápida.");
@@ -1837,7 +1980,7 @@
         // 7. AI sign-off (21s)
         let t7 = setTimeout(() => {
           orbIcon.textContent = "volume_up";
-          orbCenter.className = "w-16 h-16 rounded-full bg-slate-800 border-2 border-white/5 flex items-center justify-center relative z-10 transition-all duration-300 shadow-[0_0_15px_rgba(0,206,209,0.3)]";
+          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
           orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
           
           addChatBubble("ai", "¡De nada, María! Un mensaje de texto de confirmación ya ha sido enviado a su móvil. Estaremos listos para verla hoy a la 1:30 PM. Que tenga un excelente día.");
