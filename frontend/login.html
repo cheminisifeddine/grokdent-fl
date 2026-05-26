@@ -264,108 +264,92 @@
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white flex">
-
-  <!-- Left Panel: Branding & System Specification -->
-  <div class="hidden lg:flex w-[40%] relative bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 flex-col justify-between p-12 text-slate-200 shrink-0">
-    <div>
-      <a href="index.html" class="flex items-center gap-2 mb-16 font-black text-xl tracking-tight text-white">
-        <div class="w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
-        <span>Renia AI</span>
+<body class="min-h-screen text-slate-800 antialiased selection:bg-indigo-500/30 selection:text-white flex flex-col justify-between grid-bg relative overflow-x-hidden pt-28">
+  
+  <!-- Navigation Header (Same as Landing Page) -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a class="flex items-center gap-2.5 font-black text-xl tracking-tight text-slate-900 group" href="index.html">
+        <span class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-base">
+          <svg class="w-5 h-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M8 11h8M12 7v8"/>
+          </svg>
+        </span>
+        <span class="font-display font-black text-lg bg-gradient-to-r from-slate-900 to-indigo-950 bg-clip-text text-transparent group-hover:opacity-85 transition-opacity">Renia AI</span>
       </a>
-      
-      <div class="space-y-12">
-        <div>
-          <span class="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Infrastructure Specification</span>
-          <h1 class="text-4xl font-extrabold text-white tracking-tight leading-none">Renia Core v1.4</h1>
-          <p class="text-slate-400 text-sm mt-3 leading-relaxed max-w-md">System-wide clinical receptionist routing layer running native sub-100ms Speech-to-Speech architecture.</p>
-        </div>
-
-        <div class="border-t border-slate-800/50 pt-6 space-y-4 font-mono text-xs">
-          <div class="flex justify-between py-1 border-b border-slate-50">
-            <span class="text-slate-400">ENGINE MODEL:</span>
-            <span class="text-slate-200 font-bold">Grok Voice Think Fast 1.0</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-slate-50">
-            <span class="text-slate-400">PCM LATENCY:</span>
-            <span class="text-slate-200 font-bold">85ms Native Audio Stream</span>
-          </div>
-          <div class="flex justify-between py-1 border-b border-slate-50">
-            <span class="text-slate-400">COMPLIANCE STATUTE:</span>
-            <span class="text-slate-200 font-bold">FL § 934.03 Two-Party Consent</span>
-          </div>
-          <div class="flex justify-between py-1">
-            <span class="text-slate-400">SECURITY PROTOCOL:</span>
-            <span class="text-white font-bold">HIPAA Compliant Shield</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="text-xs text-slate-400 font-medium">
-      &copy; 2026 Renia AI Technologies Inc. All rights reserved.
-    </div>
-  </div>
-
-  <!-- Right Side: Login Form -->
-  <div class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative bg-slate-950">
-    <div class="w-full max-w-sm">
-      
-      <!-- Mobile Logo -->
-      <a href="index.html" class="lg:hidden flex items-center gap-3 mb-10 justify-center">
-        <div class="w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
-        <span class="font-bold text-xl tracking-tight text-white">Renia AI</span>
+      <a href="signup.html" class="bg-black text-white text-xs font-semibold px-5 py-2.5 rounded-xl hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-glow">
+        Deploy AI
       </a>
+    </div>
+  </nav>
 
-      <div class="mb-10 text-center lg:text-left">
-        <h2 class="text-2xl font-bold text-white tracking-tight">Sign in to Practice</h2>
-        <p class="text-slate-400 text-xs mt-1 font-medium">Enter clinic credentials to view active call transcripts.</p>
+  <!-- Centered Elite Glass Login Card -->
+  <main class="flex-1 flex items-center justify-center p-6 w-full max-w-lg mx-auto z-10">
+    <div class="w-full bg-white border border-slate-200 p-8 sm:p-10 rounded-3xl shadow-glow glass-card">
+      
+      <!-- Brand Icon / Header -->
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M8 11h8M12 7v8"/>
+          </svg>
+        </div>
+        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">Sign in to Practice</h2>
+        <p class="text-slate-400 text-xs mt-1.5 font-medium">Enter clinic credentials to view active call transcripts.</p>
       </div>
 
-      <form id="login-form" class="space-y-4">
+      <!-- Sign In Form -->
+      <form id="login-form" class="space-y-5">
         <div>
           <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Work Email</label>
-          <input type="email" id="login-email" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="dr.smith@clinic.com" required>
+          <input type="email" id="login-email" class="input-field w-full px-4 py-3 text-sm rounded-xl border border-slate-200 bg-white text-slate-950 font-medium outline-none placeholder:text-slate-400 transition-all focus:border-black focus:ring-1 focus:ring-black" placeholder="dr.smith@clinic.com" required>
         </div>
 
         <div>
           <div class="flex justify-between items-center mb-1.5">
             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
-            <a href="#" class="text-[10px] font-bold text-slate-300 hover:text-white uppercase tracking-wider transition-colors">Forgot?</a>
+            <a href="#" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 uppercase tracking-wider transition-colors">Forgot?</a>
           </div>
-          <input type="password" id="login-password" class="input-field w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
+          <input type="password" id="login-password" class="input-field w-full px-4 py-3 text-sm rounded-xl border border-slate-200 bg-white text-slate-950 font-medium outline-none placeholder:text-slate-400 transition-all focus:border-black focus:ring-1 focus:ring-black" placeholder="••••••••" required>
         </div>
 
         <div class="flex items-center gap-2 py-1">
-          <input type="checkbox" id="remember" class="w-4 h-4 text-white border-white/10 rounded focus:ring-0 cursor-pointer">
-          <label for="remember" class="text-xs text-slate-400 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
+          <input type="checkbox" id="remember" class="w-4 h-4 text-indigo-600 border-slate-350 rounded focus:ring-0 cursor-pointer">
+          <label for="remember" class="text-xs text-slate-500 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
         </div>
 
-        <div id="login-error" class="text-xs text-rose-400 font-bold pt-1"></div>
+        <div id="login-error" class="text-xs text-rose-500 font-bold pt-1"></div>
 
-        <button type="submit" id="login-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-slate-950 text-white hover:bg-slate-900 transition-all active:scale-[0.98] border-t border-white/10 mt-2 shadow-none">
+        <button type="submit" id="login-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest bg-black text-white hover:bg-slate-800 transition-all active:scale-[0.98] mt-2 shadow-md">
           Authenticate
         </button>
 
         <div class="relative flex py-2 items-center">
-          <div class="flex-grow border-t border-white/5"></div>
+          <div class="flex-grow border-t border-slate-100"></div>
           <span class="flex-shrink mx-4 text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">or</span>
-          <div class="flex-grow border-t border-white/5"></div>
+          <div class="flex-grow border-t border-slate-100"></div>
         </div>
 
-        <button type="button" id="demo-btn" class="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest bg-clinical-white/10 backdrop-blur-md border border-white/5 text-slate-200 hover:bg-deep-navy transition-all active:scale-[0.98] shadow-none flex items-center justify-center gap-1.5">
-          <span class="material-symbols-outlined text-[15px] text-amber-500 animate-pulse">sports_esports</span> Explore Demo Sandbox
+        <button type="button" id="demo-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-black transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[15px] text-indigo-600 animate-pulse">sports_esports</span> Explore Demo Sandbox
         </button>
       </form>
       
-      <div class="mt-8 text-center lg:text-left">
+      <div class="mt-8 text-center">
         <p class="text-xs text-slate-400 font-medium">
-          New clinic partner? <a href="signup.html" class="font-bold text-white hover:text-slate-200 transition-colors">Register Practice</a>
+          New clinic partner? <a href="signup.html" class="font-bold text-indigo-600 hover:text-indigo-800 transition-colors">Register Practice</a>
         </p>
       </div>
 
     </div>
-  </div>
+  </main>
+
+  <!-- Tiny High-End Copyright Footer -->
+  <footer class="w-full py-6 text-center text-xs text-slate-400 z-10">
+    &copy; 2026 Renia AI Technologies Inc. All rights reserved.
+  </footer>
 
   <!-- App Scripts -->
   <script src="js/utils.js?v=4"></script>
