@@ -150,7 +150,16 @@ Keep responses short and conversational — this is a voice call, not an email.`
     try {
       console.log('Fetching new session token from backend...');
       
-      const response = await fetch(this.config.sessionTokenEndpoint, {
+      let endpoint = this.config.sessionTokenEndpoint;
+      if (endpoint.startsWith('/') && typeof window !== 'undefined' && window.location) {
+        const port = window.location.port;
+        const hostname = window.location.hostname;
+        if (port && port !== '8000' && (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.'))) {
+          endpoint = `http://${hostname}:8000${endpoint}`;
+        }
+      }
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
