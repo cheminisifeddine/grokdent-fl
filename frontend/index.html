@@ -687,10 +687,10 @@
       <div class="max-w-6xl mx-auto">
         
         <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Interactive Visual Demonstration</span>
-          <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 mt-2 tracking-tight">The Grok Voice Think Fast Engine in Action</h2>
+          <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Live Dentist Sales Demo</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 mt-2 tracking-tight">Talk to the AI receptionist before you deploy it</h2>
           <p class="text-slate-400 mt-3 text-sm sm:text-base lg:text-lg">
-            Interact with our simulated inbound patient dashboard. Witness instantaneous Spanish-to-English VAD switching, real-time insurance verification, and Eaglesoft write-back.
+            Ask Renia to handle an emergency toothache, a Spanish caller, insurance eligibility, or a new-patient booking. The landing page speaks back and shows the front-desk workflow a dental office would see.
           </p>
         </div>
 
@@ -768,7 +768,7 @@
               <!-- Main Simulation Click Trigger -->
               <button id="sim-action-btn" class="w-full bg-slate-900/60 backdrop-blur-md hover:bg-white/10 text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]">
                 <span class="material-symbols-outlined text-[20px] font-bold">phone</span>
-                Dial Dental Line
+                Talk to Renia Demo
               </button>
             </div>
           </div>
@@ -794,7 +794,7 @@
               <!-- Dialogue Bubbles Container -->
               <div id="chat-stream" class="flex-1 space-y-4 max-h-[220px] overflow-y-auto pr-2 font-sans text-xs sm:text-sm text-slate-400">
                 <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
-                  Click "Dial Dental Line" to simulate an inbound Spanish caller...
+                  Click "Talk to Renia Demo" and test a real dental front-desk scenario...
                 </div>
               </div>
             </div>
@@ -1776,12 +1776,11 @@
       
       
       // ==========================================
-      // LIVE CONVERSATIONAL SIMULATOR LOGIC
+      // LIVE LANDING-PAGE VOICE DEMO LOGIC
       // ==========================================
       const btnSim = document.getElementById("sim-action-btn");
-      const standbyPrompt = document.getElementById("standby-prompt");
       const chatStream = document.getElementById("chat-stream");
-      const waveContainer = document.getElementById("sim-wave-container");
+      const waveContainers = document.querySelectorAll('[id="sim-wave-container"]');
       
       const orbBg1 = document.getElementById("sim-orb-bg-1");
       const orbBg2 = document.getElementById("sim-orb-bg-2");
@@ -1799,47 +1798,111 @@
       const ehrLogText = document.getElementById("ehr-log-text");
       
       let isSimulating = false;
-      let simTimeoutIds = [];
+      let isListening = false;
+      let isProcessing = false;
+      let isSpeaking = false;
+      let recognition = null;
       let timerInterval = null;
       let timerSecs = 0;
+      let demoHistory = [];
+      let finalTranscript = "";
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const demoGreeting = "Hi, this is Renia for the dental office. I can handle emergency calls, Spanish callers, insurance questions, and appointment booking. Test me with a real scenario from your front desk.";
+
+      const escapeHtml = (value) => String(value || "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+
+      const showWaves = (visible) => {
+        waveContainers.forEach((container) => {
+          container.classList.toggle("hidden", !visible);
+        });
+      };
+
+      const setButton = (icon, label, variant = "primary") => {
+        const base = "w-full text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]";
+        const styles = {
+          primary: "bg-slate-900/60 backdrop-blur-md hover:bg-white/10",
+          danger: "bg-rose-600 hover:bg-rose-500 shadow-rose-500/10",
+          busy: "bg-slate-700 hover:bg-slate-700 cursor-wait"
+        };
+        btnSim.className = `${base} ${styles[variant] || styles.primary}`;
+        btnSim.innerHTML = `<span class="material-symbols-outlined text-[20px] font-bold">${icon}</span> ${label}`;
+      };
+
+      const setVoiceState = (state) => {
+        orbBg1.classList.toggle("hidden", state === "ready");
+        orbBg2.classList.toggle("hidden", state === "ready");
+
+        const isActiveState = state === "speaking" || state === "listening" || state === "thinking";
+        orbCenter.className = `w-16 h-16 rounded-full bg-white border ${isActiveState ? "border-black sim-orb-active" : "border-slate-200"} flex items-center justify-center relative z-10 transition-all duration-300`;
+        orbIcon.className = "material-symbols-outlined text-2xl transition-colors";
+
+        if (state === "speaking") {
+          orbIcon.textContent = "volume_up";
+          simStatus.textContent = "RENIA SPEAKING";
+          simStatus.className = "font-mono text-xs text-white font-bold uppercase tracking-widest block";
+          showWaves(true);
+        } else if (state === "listening") {
+          orbIcon.textContent = "mic";
+          simStatus.textContent = "LISTENING LIVE";
+          simStatus.className = "font-mono text-xs text-emerald-500 font-bold uppercase tracking-widest block";
+          showWaves(true);
+        } else if (state === "thinking") {
+          orbIcon.textContent = "neurology";
+          simStatus.textContent = "GROK REASONING";
+          simStatus.className = "font-mono text-xs text-amber-500 font-bold uppercase tracking-widest block";
+          showWaves(true);
+        } else {
+          orbIcon.textContent = "mic";
+          simStatus.textContent = "READY TO TALK";
+          simStatus.className = "font-mono text-xs text-slate-400 font-bold uppercase tracking-widest block";
+          showWaves(false);
+        }
+      };
       
       const clearSimulation = () => {
         isSimulating = false;
+        isListening = false;
+        isProcessing = false;
+        isSpeaking = false;
+        finalTranscript = "";
+        demoHistory = [];
         
-        // Cancel timer
         clearInterval(timerInterval);
         timerSecs = 0;
         simTimer.textContent = "00:00";
-        
-        // Cancel script delays
-        simTimeoutIds.forEach(id => clearTimeout(id));
-        simTimeoutIds = [];
-        
-        // Reset button
-        btnSim.innerHTML = `<span class="material-symbols-outlined text-[20px] font-bold">phone</span> Dial Dental Line`;
-        btnSim.className = "w-full bg-slate-900/60 backdrop-blur-md hover:bg-white/10 text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]";
+
+        if (recognition) {
+          try { recognition.abort(); } catch (error) {}
+        }
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+
+        setButton("phone", "Talk to Renia Demo");
         
         chatStream.innerHTML = `
           <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
-            Click "Dial Dental Line" to simulate an inbound Spanish caller...
+            Click "Talk to Renia Demo" and test a real dental front-desk scenario...
           </div>
         `;
         
-        // Reset Visual Orbs
-        orbBg1.classList.add("hidden");
-        orbBg2.classList.add("hidden");
-        orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-200 flex items-center justify-center relative z-10 transition-all duration-300";
-        orbIcon.textContent = "mic";
-        orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
-        
-        waveContainer.classList.add("hidden");
-        simStatus.textContent = "AWAITING DIAL";
-        simStatus.className = "font-mono text-xs text-slate-400 font-bold uppercase tracking-widest block";
+        setVoiceState("ready");
         
         ehrPatient.textContent = "—";
+        ehrPatient.className = "text-slate-200 font-bold block mt-0.5";
         ehrTriage.textContent = "—";
+        ehrTriage.className = "text-slate-200 font-bold block mt-0.5";
         ehrInsurance.textContent = "—";
+        ehrInsurance.className = "text-slate-200 font-bold block mt-0.5";
         ehrStatus.textContent = "—";
+        ehrStatus.className = "text-slate-200 font-bold block mt-0.5";
         ehrSyncBadge.textContent = "—";
         ehrSyncBadge.className = "font-mono text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block";
         ehrLogText.textContent = "Sync line offline. Ready to connect...";
@@ -1853,6 +1916,13 @@
           const secs = (timerSecs % 60).toString().padStart(2, '0');
           simTimer.textContent = `${mins}:${secs}`;
         }, 1000);
+      };
+
+      const beginTimer = () => {
+        clearInterval(timerInterval);
+        timerSecs = 0;
+        simTimer.textContent = "00:00";
+        startTimer();
       };
       
       const addChatBubble = (role, text, tag = null) => {
@@ -1868,13 +1938,13 @@
             <div class="flex items-center gap-2 mb-1.5 border-b border-slate-850 pb-1">
               <span class="text-[9px] font-mono font-bold text-slate-400 tracking-widest uppercase">INBOUND CALLER</span>
             </div>
-            <p class="text-xs md:text-sm font-sans leading-relaxed text-slate-300">${text}</p>
+            <p class="text-xs md:text-sm font-sans leading-relaxed text-slate-300">${escapeHtml(text)}</p>
           `;
         } else {
           bubble.className += " bg-slate-900 border-slate-800/20 text-white rounded-tr-none ml-auto shadow-medical-cyan/5";
           let tagHtml = "";
           if (tag) {
-            tagHtml = `<span class="px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-[8px] font-bold text-rose-400 ml-2 font-mono tracking-wider uppercase">${tag}</span>`;
+            tagHtml = `<span class="px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-[8px] font-bold text-rose-400 ml-2 font-mono tracking-wider uppercase">${escapeHtml(tag)}</span>`;
           }
           bubble.innerHTML = `
             <div class="flex items-center justify-between gap-2 mb-1.5 border-b border-slate-850 pb-1">
@@ -1883,7 +1953,7 @@
                 ${tagHtml}
               </div>
             </div>
-            <p class="text-xs md:text-sm font-sans leading-relaxed text-slate-100">${text}</p>
+            <p class="text-xs md:text-sm font-sans leading-relaxed text-slate-100">${escapeHtml(text)}</p>
           `;
         }
         
@@ -1897,137 +1967,245 @@
         // Auto scroll
         chatStream.scrollTop = chatStream.scrollHeight;
       };
-      
-      const runSimulationTimeline = () => {
-        isSimulating = true;
-        
-        // Update Dial Button
-        btnSim.innerHTML = `<span class="material-symbols-outlined text-[20px] font-bold">call_end</span> End Simulation`;
-        btnSim.className = "w-full bg-rose-600 hover:bg-rose-500 text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow shadow-rose-500/10 active:scale-[0.98]";
-        
-        chatStream.innerHTML = "";
-        
-        // Start call connection UI state
-        simStatus.textContent = "DIALING PCM LINK...";
-        simStatus.className = "font-mono text-xs text-amber-400 font-bold uppercase tracking-widest block";
-        
-        orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 animate-pulse";
-        orbIcon.textContent = "call";
-        orbIcon.className = "material-symbols-outlined text-amber-400 text-2xl transition-colors";
-        
-        // 1. Connection established (1.2s)
-        let t1 = setTimeout(() => {
-          simStatus.textContent = "GROK VOICE ACTIVE";
-          simStatus.className = "font-mono text-xs text-white font-bold uppercase tracking-widest block";
-          
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
-          orbIcon.textContent = "volume_up";
-          orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
-          
-          orbBg1.classList.remove("hidden");
-          orbBg2.classList.remove("hidden");
-          waveContainer.classList.remove("hidden");
-          
-          startTimer();
-          
-          addChatBubble("ai", "Thank you for calling Lakeview Dental. My name is Renia, an AI receptionist, and this call is recorded under Florida consent guidelines. How may I help you today?", "Consent Warning");
-          ehrLogText.textContent = "PCM Stream WebSocket established. Connected to xAI Grok Voice. Latency: 22ms.";
-          ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
-        }, 1200);
-        simTimeoutIds.push(t1);
-        
-        // 2. Patient speaks in Spanish (4.8s)
-        let t2 = setTimeout(() => {
-          orbIcon.textContent = "mic";
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-300 flex items-center justify-center relative z-10 transition-all duration-300";
-          orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
-          
-          addChatBubble("patient", "Hola, buenas. Tengo un dolor de muela terrible desde anoche y no aguanto más. ¿Tienen alguna cita para hoy mismo en Miami?");
-          ehrLogText.textContent = "Bilingual voice VAD active. Switched context to Spanish parser.";
-        }, 4800);
-        simTimeoutIds.push(t2);
-        
-        // 3. AI responds in Spanish immediately (7.8s)
-        let t3 = setTimeout(() => {
-          orbIcon.textContent = "volume_up";
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
-          orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
-          
-          addChatBubble("ai", "Lamento mucho escuchar eso. El dolor de muela severo se trata como una emergencia. El Dr. Mitchell tiene una vacante para extracciones y urgencias hoy a la 1:30 PM en Miami. ¿Le reservo esa cita ahora mismo?", "Triage Urgent");
-          
-          ehrPatient.textContent = "Identifying...";
-          ehrTriage.textContent = "Severe Toothache";
-          ehrTriage.className = "text-rose-500 font-bold block mt-0.5";
-          ehrLogText.textContent = "Triage: Emergency. Querying Dentrix calendar operatory Chair 3...";
-        }, 7800);
-        simTimeoutIds.push(t3);
-        
-        // 4. Patient provides details (11.8s)
-        let t4 = setTimeout(() => {
-          orbIcon.textContent = "mic";
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-300 flex items-center justify-center relative z-10 transition-all duration-300";
-          orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
-          
-          addChatBubble("patient", "Sí, por favor. Ese horario es ideal. Mi nombre es María Rodríguez y tengo seguro de Delta Dental PPO.");
-          ehrPatient.textContent = "Maria Rodriguez";
-          ehrLogText.textContent = "Extracting demographics and insurance details via speech parameters...";
-        }, 11800);
-        simTimeoutIds.push(t4);
-        
-        // 5. AI verifies insurance portal & locks appointment (14.8s)
-        let t5 = setTimeout(() => {
-          orbIcon.textContent = "volume_up";
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
-          orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
-          
-          addChatBubble("ai", "Perfecto, María. He verificado su PPO de Delta Dental en el portal de elegibilidad en segundo plano. Sus beneficios de diagnóstico y extracciones están activos al 100%. He agendado su cita a la 1:30 PM. ¿Le gustaría recibir la confirmación por mensaje de texto?");
-          
-          ehrInsurance.textContent = "Delta Dental (PPO)";
-          ehrStatus.textContent = "Active Benefits";
-          ehrStatus.className = "text-emerald-500 font-bold block mt-0.5";
-          
-          ehrSyncBadge.textContent = "Synced (18ms)";
-          ehrSyncBadge.className = "font-mono text-[9px] font-extrabold uppercase text-emerald-500 border border-emerald-500/20 px-2 py-0.5 rounded bg-emerald-500/5 mt-0.5 inline-block";
-          
-          ehrLogText.textContent = "Insurance Portal checked (Humana/Delta). Write-back committed to Eaglesoft v23.";
-          ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
-        }, 14800);
-        simTimeoutIds.push(t5);
-        
-        // 6. Patient wrap-up (18.5s)
-        let t6 = setTimeout(() => {
-          orbIcon.textContent = "mic";
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-slate-300 flex items-center justify-center relative z-10 transition-all duration-300";
-          orbIcon.className = "material-symbols-outlined text-slate-400 text-2xl transition-colors";
-          
-          addChatBubble("patient", "Sí, a este número de celular. Muchísimas gracias, Renia. Eres extremadamente rápida.");
-        }, 18500);
-        simTimeoutIds.push(t6);
 
-        // 7. AI sign-off (21s)
-        let t7 = setTimeout(() => {
-          orbIcon.textContent = "volume_up";
-          orbCenter.className = "w-16 h-16 rounded-full bg-white border border-black flex items-center justify-center relative z-10 transition-all duration-300 sim-orb-active";
-          orbIcon.className = "material-symbols-outlined text-white text-2xl transition-colors";
-          
-          addChatBubble("ai", "¡De nada, María! Un mensaje de texto de confirmación ya ha sido enviado a su móvil. Estaremos listos para verla hoy a la 1:30 PM. Que tenga un excelente día.");
-          
-          ehrLogText.textContent = "Session closed. SMS confirmations dispatched via Twilio integration.";
-          ehrLogText.className = "font-mono text-[9px] text-slate-400 leading-normal mt-3";
-          
-          let tEnd = setTimeout(() => {
-            clearSimulation();
-          }, 3500);
-          simTimeoutIds.push(tEnd);
-        }, 21000);
-        simTimeoutIds.push(t7);
+      const updateWorkflowPanel = (data = {}) => {
+        ehrPatient.textContent = data.patient_name || "Dentist Prospect";
+        ehrTriage.textContent = data.triage || "Demo evaluation";
+        ehrInsurance.textContent = data.insurance || "Demo Mode";
+        ehrStatus.textContent = data.portal_status || "Ready";
+        ehrSyncBadge.textContent = data.pipeline_status || "Voice demo active";
+        ehrLogText.textContent = data.log || "Renia is ready for a live front-desk scenario.";
+
+        const triageText = ehrTriage.textContent.toLowerCase();
+        ehrTriage.className = triageText.includes("emergency") || triageText.includes("pain") || triageText.includes("urgent")
+          ? "text-rose-500 font-bold block mt-0.5"
+          : "text-slate-200 font-bold block mt-0.5";
+        ehrStatus.className = "text-emerald-500 font-bold block mt-0.5";
+        ehrSyncBadge.className = "font-mono text-[9px] font-extrabold uppercase text-emerald-500 border border-emerald-500/20 px-2 py-0.5 rounded bg-emerald-500/5 mt-0.5 inline-block";
+        ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
+      };
+
+      const chooseSpeechVoice = (utterance) => {
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find((voice) => /Google US English|Samantha|Jenny|Aria|Female/i.test(voice.name));
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+      };
+
+      const speakText = (text, onDone) => {
+        if (!("speechSynthesis" in window)) {
+          onDone?.();
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+        isSpeaking = true;
+        setVoiceState("speaking");
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.03;
+        utterance.pitch = 1.02;
+        utterance.lang = /[áéíóúñ¿¡]|\b(hola|gracias|cita|dolor|muela|seguro)\b/i.test(text) ? "es-US" : "en-US";
+        chooseSpeechVoice(utterance);
+
+        const finish = () => {
+          isSpeaking = false;
+          if (isSimulating) {
+            onDone?.();
+          }
+        };
+
+        utterance.onend = finish;
+        utterance.onerror = finish;
+        window.speechSynthesis.speak(utterance);
+      };
+
+      const promptTypedFallback = () => {
+        if (!isSimulating) return;
+        setVoiceState("ready");
+        setButton("keyboard", "Type Scenario");
+        const typed = window.prompt("Microphone speech recognition is not available here. Type a dental front-desk scenario to test Renia:");
+        if (typed && typed.trim()) {
+          processUserMessage(typed.trim());
+        } else {
+          setButton("mic", "Speak Again");
+        }
+      };
+
+      const configureRecognition = () => {
+        if (!SpeechRecognition) return null;
+        const recognizer = new SpeechRecognition();
+        recognizer.continuous = false;
+        recognizer.interimResults = true;
+        recognizer.lang = "en-US";
+
+        recognizer.onresult = (event) => {
+          let latestFinal = "";
+          for (let index = event.resultIndex; index < event.results.length; index++) {
+            const transcript = event.results[index][0].transcript;
+            if (event.results[index].isFinal) {
+              latestFinal += transcript;
+            }
+          }
+          if (latestFinal.trim()) {
+            finalTranscript += ` ${latestFinal.trim()}`;
+          }
+        };
+
+        recognizer.onerror = (event) => {
+          isListening = false;
+          if (!isSimulating) return;
+          if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+            addChatBubble("ai", "The browser blocked microphone access. You can still test the sales demo by typing a scenario.", "Mic Blocked");
+            promptTypedFallback();
+          }
+        };
+
+        recognizer.onend = () => {
+          isListening = false;
+          if (!isSimulating || isProcessing || isSpeaking) return;
+
+          const spokenText = finalTranscript.trim();
+          finalTranscript = "";
+
+          if (spokenText) {
+            processUserMessage(spokenText);
+          } else {
+            setVoiceState("ready");
+            setButton("mic", "Speak Again");
+            ehrLogText.textContent = "No speech detected. Click Speak Again and try an emergency, Spanish, insurance, or booking call.";
+            ehrLogText.className = "font-mono text-[9px] text-slate-400 leading-normal mt-3";
+          }
+        };
+
+        return recognizer;
+      };
+
+      const startListening = () => {
+        if (!isSimulating || isProcessing || isSpeaking) return;
+
+        if (!SpeechRecognition) {
+          promptTypedFallback();
+          return;
+        }
+
+        recognition = recognition || configureRecognition();
+        finalTranscript = "";
+        isListening = true;
+        setVoiceState("listening");
+        setButton("call_end", "End Voice Demo", "danger");
+        ehrLogText.textContent = "Microphone live. Ask Renia to handle a real front-desk call.";
+        ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
+
+        try {
+          recognition.start();
+        } catch (error) {
+          isListening = false;
+          promptTypedFallback();
+        }
+      };
+
+      const processUserMessage = async (message) => {
+        if (!message || !isSimulating) return;
+
+        const outboundHistory = demoHistory.slice(-8);
+        demoHistory.push({ role: "user", content: message });
+        addChatBubble("patient", message);
+
+        isProcessing = true;
+        setVoiceState("thinking");
+        setButton("hourglass_top", "Thinking with Grok", "busy");
+        updateWorkflowPanel({
+          patient_name: "Live Caller",
+          triage: /pain|ache|swelling|bleeding|emergency|muela|dolor/i.test(message) ? "Urgent triage" : "Needs assessment",
+          insurance: /delta|humana|guardian|ppo|medicaid|insurance|seguro/i.test(message) ? "Insurance captured" : "Pending capture",
+          portal_status: "Analyzing",
+          pipeline_status: "Grok reasoning",
+          log: "Caller speech converted to text. Grok is generating the receptionist response."
+        });
+
+        try {
+          const response = await fetch("/api/v1/voice/landing-demo", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message, history: outboundHistory })
+          });
+
+          if (!response.ok) {
+            throw new Error(`Demo request failed with ${response.status}`);
+          }
+
+          const data = await response.json();
+          const reply = data.reply || "I can handle that front-desk scenario. Try me with an emergency, insurance, Spanish, or appointment booking call.";
+
+          demoHistory.push({ role: "assistant", content: reply });
+          demoHistory = demoHistory.slice(-10);
+
+          addChatBubble("ai", reply, "Grok Live");
+          updateWorkflowPanel(data);
+
+          isProcessing = false;
+          setButton("call_end", "End Voice Demo", "danger");
+          speakText(reply, () => {
+            if (isSimulating) {
+              startListening();
+            }
+          });
+        } catch (error) {
+          console.error("Landing demo error:", error);
+          const fallbackReply = "I lost the live Grok link for a moment. In production, I would keep the call moving, capture the patient details, and route or book the appointment.";
+          isProcessing = false;
+          addChatBubble("ai", fallbackReply, "Fallback");
+          updateWorkflowPanel({
+            patient_name: "Live Caller",
+            triage: "Demo fallback",
+            insurance: "Pending capture",
+            portal_status: "Retry ready",
+            pipeline_status: "Fallback mode",
+            log: "The landing demo endpoint did not respond, so the browser served a safe fallback."
+          });
+          speakText(fallbackReply, () => {
+            if (isSimulating) {
+              setVoiceState("ready");
+              setButton("mic", "Speak Again");
+            }
+          });
+        }
+      };
+
+      const startVoiceDemo = () => {
+        isSimulating = true;
+        demoHistory = [];
+        chatStream.innerHTML = "";
+
+        beginTimer();
+        setButton("call_end", "End Voice Demo", "danger");
+        updateWorkflowPanel({
+          patient_name: "Dentist Prospect",
+          triage: "Demo evaluation",
+          insurance: "Demo Mode",
+          portal_status: "Ready",
+          pipeline_status: "Voice demo live",
+          log: "Landing-page voice demo initialized. Grok responses are generated server-side."
+        });
+
+        addChatBubble("ai", demoGreeting, "Live Demo");
+        demoHistory.push({ role: "assistant", content: demoGreeting });
+        speakText(demoGreeting, () => {
+          if (isSimulating) {
+            startListening();
+          }
+        });
       };
       
       btnSim.addEventListener("click", () => {
-        if (isSimulating) {
+        if (!isSimulating) {
+          startVoiceDemo();
+        } else if (isListening || isProcessing || isSpeaking) {
           clearSimulation();
         } else {
-          runSimulationTimeline();
+          startListening();
         }
       });
       

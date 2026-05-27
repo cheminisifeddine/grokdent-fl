@@ -4,10 +4,14 @@ Exposes secure proxy endpoints for xAI Grok Realtime API session tokens and Text
 Ensures zero blocking I/O by utilizing httpx.AsyncClient.
 """
 
+import json
 import logging
+import re
+import time
 import httpx
-from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Response
+from collections import defaultdict, deque
+from typing import Dict, List, Optional
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
@@ -33,6 +37,26 @@ class SimulateRequest(BaseModel):
     voice: Optional[str] = Field("Ash", description="Selected voice persona")
 
 
+class LandingDemoTurn(BaseModel):
+    role: str = Field(..., max_length=16)
+    content: str = Field(..., max_length=700)
+
+
+class LandingDemoRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=700)
+    history: List[LandingDemoTurn] = Field(default_factory=list, max_length=10)
+
+
+class LandingDemoResponse(BaseModel):
+    reply: str
+    patient_name: str = "Prospect"
+    triage: str = "Consultation"
+    insurance: str = "Demo Mode"
+    portal_status: str = "Ready"
+    pipeline_status: str = "Live Demo"
+    log: str = "Conversation handled by Renia voice demo."
+
+
 # --- xAI Voice Map ---
 
 XAI_VOICE_MAP = {
@@ -45,6 +69,109 @@ XAI_VOICE_MAP = {
     "eve": "eve",
     "leo": "leo"
 }
+
+
+_landing_demo_hits: Dict[str, deque[float]] = defaultdict(deque)
+_LANDING_DEMO_LIMIT = 24
+_LANDING_DEMO_WINDOW_SECONDS = 60
+
+
+LANDING_DEMO_SYSTEM_PROMPT = """
+You are Renia, a live voice demo for a Florida dental AI receptionist product.
+
+Your audience is usually a dentist, office manager, or patient role-playing a dental call.
+Your job is to sell the product by demonstrating the receptionist experience, not by giving
+a long sales pitch. Sound warm, human, confident, and fast.
+
+Core capabilities to demonstrate naturally:
+- Answer inbound dental calls 24/7 without voicemail.
+- Triage emergencies such as tooth pain, swelling, trauma, or bleeding.
+- Capture caller name, phone, reason for visit, preferred time, insurance, and language.
+- Offer realistic same-day emergency openings and routine appointment times.
+- Explain that production integrations can write appointments to Dentrix, Eaglesoft, or Open Dental.
+- Explain that production integrations can verify eligibility for Delta Dental PPO, Humana, Guardian,
+  MCNA Florida Medicaid, Florida Blue, and Cigna when the clinic connects its payer workflows.
+- Handle English or Spanish in the caller's language.
+
+Important guardrails:
+- This is a landing-page demo. Do not claim you actually booked a real appointment, verified real
+  insurance, or stored real patient data. Use phrases like "for this demo" or "in production I would".
+- Do not ask for sensitive medical details beyond what is needed for a dental front-desk triage demo.
+- Keep each spoken reply under 55 words.
+- If the caller is evaluating as a dentist, invite them to test you with a hard front-desk scenario.
+- If the caller role-plays as a patient, act like the receptionist and move them toward booking.
+
+Return JSON only with these keys:
+reply, patient_name, triage, insurance, portal_status, pipeline_status, log.
+"""
+
+
+def _enforce_landing_demo_rate_limit(request: Request) -> None:
+    client_ip = request.client.host if request.client else "unknown"
+    now = time.time()
+    hits = _landing_demo_hits[client_ip]
+
+    while hits and now - hits[0] > _LANDING_DEMO_WINDOW_SECONDS:
+        hits.popleft()
+
+    if len(hits) >= _LANDING_DEMO_LIMIT:
+        raise HTTPException(status_code=429, detail="Demo limit reached. Please wait a minute and try again.")
+
+    hits.append(now)
+
+
+def _extract_json_object(text: str) -> dict:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        match = re.search(r"\{.*\}", text, flags=re.DOTALL)
+        if not match:
+            raise
+        return json.loads(match.group(0))
+
+
+def _landing_demo_fallback(user_message: str) -> LandingDemoResponse:
+    lower = user_message.lower()
+    if any(term in lower for term in ("spanish", "español", "espanol", "dolor", "muela")):
+        return LandingDemoResponse(
+            reply=(
+                "Claro. Para esta demo, puedo atender en español, clasificar el dolor como urgencia, "
+                "ofrecer una cita hoy y preparar el registro para Dentrix o Eaglesoft."
+            ),
+            patient_name="Spanish Caller",
+            triage="Emergency tooth pain",
+            insurance="Pending capture",
+            portal_status="Demo ready",
+            pipeline_status="Bilingual flow",
+            log="Spanish triage path selected. Ready to capture appointment and insurance fields.",
+        )
+
+    if any(term in lower for term in ("insurance", "delta", "humana", "ppo", "medicaid")):
+        return LandingDemoResponse(
+            reply=(
+                "For this demo, I can capture payer details, explain eligibility steps, and show how "
+                "production verification flows reduce front-desk hold time."
+            ),
+            patient_name="Insurance Lead",
+            triage="Benefits question",
+            insurance="PPO or Medicaid",
+            portal_status="Eligibility demo",
+            pipeline_status="Payer workflow",
+            log="Insurance-focused demo path selected. Eligibility status is simulated on the landing page.",
+        )
+
+    return LandingDemoResponse(
+        reply=(
+            "Hi, this is Renia for the dental office. Try me with a real front-desk call: emergency pain, "
+            "a Spanish caller, Delta Dental eligibility, or booking a new patient cleaning."
+        ),
+        patient_name="Dentist Prospect",
+        triage="Demo evaluation",
+        insurance="Demo Mode",
+        portal_status="Ready",
+        pipeline_status="Voice demo active",
+        log="Fallback response served because live Grok generation was unavailable.",
+    )
 
 
 # --- Routes ---
@@ -198,3 +325,65 @@ async def simulate_voice_agent(body: SimulateRequest, current_user: User = Depen
         "message": f"Simulation initialized for voice {body.voice} in scenario {body.scenario}",
         "reply": f"Hello! This is {body.voice} AI Receptionist. I am fully provisioned and ready to simulate your dental clinic front desk."
     }
+
+
+@router.post("/landing-demo", response_model=LandingDemoResponse)
+async def landing_voice_demo(body: LandingDemoRequest, request: Request):
+    """
+    Public landing-page voice demo.
+
+    The browser supplies speech-to-text text. The backend calls Grok with the
+    server-side XAI_API_KEY and returns a compact JSON payload the page can speak
+    with browser speech synthesis. No API key is exposed to visitors.
+    """
+    _enforce_landing_demo_rate_limit(request)
+
+    xai_key = settings.XAI_API_KEY
+    if not xai_key or xai_key == "placeholder":
+        logger.warning("XAI_API_KEY not configured; serving landing demo fallback.")
+        return _landing_demo_fallback(body.message)
+
+    messages = [{"role": "system", "content": LANDING_DEMO_SYSTEM_PROMPT}]
+
+    for turn in body.history[-8:]:
+        role = "assistant" if turn.role == "assistant" else "user"
+        messages.append({"role": role, "content": turn.content})
+
+    messages.append({"role": "user", "content": body.message})
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {xai_key}",
+    }
+    payload = {
+        "model": "grok-4.20-reasoning",
+        "messages": messages,
+        "temperature": 0.45,
+        "max_tokens": 360,
+    }
+
+    try:
+        async with httpx.AsyncClient(base_url=settings.XAI_BASE_URL.rstrip("/")) as client:
+            response = await client.post("/chat/completions", headers=headers, json=payload, timeout=20.0)
+
+        if not response.is_success:
+            logger.error("Landing demo Grok call failed: status=%s body=%s", response.status_code, response.text[:300])
+            return _landing_demo_fallback(body.message)
+
+        data = response.json()
+        content = data["choices"][0]["message"]["content"]
+        parsed = _extract_json_object(content)
+
+        return LandingDemoResponse(
+            reply=str(parsed.get("reply") or _landing_demo_fallback(body.message).reply)[:700],
+            patient_name=str(parsed.get("patient_name") or "Prospect")[:80],
+            triage=str(parsed.get("triage") or "Consultation")[:80],
+            insurance=str(parsed.get("insurance") or "Demo Mode")[:80],
+            portal_status=str(parsed.get("portal_status") or "Ready")[:80],
+            pipeline_status=str(parsed.get("pipeline_status") or "Live Demo")[:80],
+            log=str(parsed.get("log") or "Renia handled the landing-page demo turn.")[:180],
+        )
+
+    except Exception as exc:
+        logger.error("Landing demo generation failed: %s", exc)
+        return _landing_demo_fallback(body.message)
