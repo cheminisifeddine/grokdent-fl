@@ -572,6 +572,299 @@
     footer svg {
       color: #000000 !important;
     }
+
+    /*
+      Premium white company refresh.
+      These overrides intentionally de-emphasize the old dark console styling
+      while preserving the existing HTML structure and interactive scripts.
+    */
+    :root {
+      --renia-ink: #0f172a;
+      --renia-muted: #64748b;
+      --renia-line: #e2e8f0;
+      --renia-panel: rgba(255, 255, 255, 0.92);
+      --renia-soft: #f8fafc;
+      --renia-blue: #2563eb;
+      --renia-cyan: #0891b2;
+      --renia-green: #059669;
+      --renia-red: #e11d48;
+      --renia-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+      --renia-shadow-sm: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    body {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.78) 42%, #ffffff 100%) !important;
+      color: var(--renia-ink) !important;
+      letter-spacing: 0 !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--renia-ink) !important;
+      letter-spacing: 0 !important;
+    }
+
+    .text-slate-400, .text-slate-500, .text-slate-550, .text-slate-300 {
+      color: var(--renia-muted) !important;
+    }
+
+    .rounded-3xl, .rounded-\[28px\] {
+      border-radius: 18px !important;
+    }
+
+    .rounded-2xl {
+      border-radius: 14px !important;
+    }
+
+    header, nav.fixed {
+      background: rgba(255, 255, 255, 0.9) !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02) !important;
+    }
+
+    .bg-blue-600,
+    nav .bg-deep-navy,
+    .bg-deep-navy,
+    #sim-action-btn,
+    .bg-black,
+    .bg-slate-950 {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(37, 99, 235, 0.18) !important;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16) !important;
+    }
+
+    .bg-blue-600:hover,
+    nav .bg-deep-navy:hover,
+    .bg-deep-navy:hover,
+    #sim-action-btn:hover,
+    .bg-black:hover,
+    .bg-slate-950:hover {
+      background: linear-gradient(135deg, #172554 0%, #2563eb 100%) !important;
+      box-shadow: 0 18px 42px rgba(37, 99, 235, 0.22) !important;
+    }
+
+    .hero-section {
+      min-height: min(820px, calc(100vh - 80px));
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--renia-line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.82) 48%, rgba(255,255,255,0.96) 100%),
+        linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.72) 46%, rgba(255,255,255,0.45) 100%),
+        url('assets/hero_bg.png') center / cover no-repeat !important;
+    }
+
+    .hero-section h1 {
+      max-width: 980px !important;
+      font-size: clamp(3rem, 7vw, 6.8rem) !important;
+      line-height: 0.96 !important;
+      color: #0b1220 !important;
+      text-wrap: balance;
+    }
+
+    .hero-section p {
+      color: #475569 !important;
+      text-wrap: balance;
+    }
+
+    .hero-proof > div {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: var(--renia-shadow-sm);
+      backdrop-filter: blur(18px);
+      padding: 16px 18px;
+      border-radius: 16px;
+      text-align: left;
+    }
+
+    .hero-proof strong {
+      display: block;
+      color: var(--renia-ink);
+      font: 800 22px/1 'Outfit', sans-serif;
+      margin-bottom: 4px;
+    }
+
+    .hero-proof span {
+      color: var(--renia-muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .glass-card,
+    .glass-panel,
+    .toggle-card,
+    .border-slate-250,
+    #simulator .bg-slate-900,
+    #technology .grid > div,
+    #roi .lg\:col-span-5,
+    #roi .lg\:col-span-7 > div,
+    #pricing .grid > div,
+    section.bg-white .border.border-slate-250 {
+      background: var(--renia-panel) !important;
+      border: 1px solid var(--renia-line) !important;
+      box-shadow: var(--renia-shadow-sm) !important;
+    }
+
+    #simulator {
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+
+    #simulator .grid.lg\:grid-cols-12 {
+      max-width: 1120px !important;
+      background: rgba(255,255,255,0.64);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: var(--renia-shadow);
+      border-radius: 24px;
+      padding: clamp(12px, 2vw, 20px);
+    }
+
+    #simulator .lg\:col-span-5.bg-slate-900,
+    #simulator .lg\:col-span-7 .bg-slate-900 {
+      background: #ffffff !important;
+      border: 1px solid var(--renia-line) !important;
+      box-shadow: none !important;
+    }
+
+    #simulator .border-white\/5,
+    #simulator .border-slate-800\/80,
+    #simulator .border-slate-850 {
+      border-color: var(--renia-line) !important;
+    }
+
+    #simulator .text-white,
+    #simulator .text-slate-200,
+    #simulator .text-slate-300 {
+      color: var(--renia-ink) !important;
+    }
+
+    #chat-stream > div {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: var(--renia-ink) !important;
+      box-shadow: none !important;
+    }
+
+    #chat-stream > div.ml-auto {
+      background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%) !important;
+      border-color: #bfdbfe !important;
+      color: #1e3a8a !important;
+    }
+
+    #chat-stream > div.ml-auto *,
+    #chat-stream > div.ml-auto p {
+      color: #1e3a8a !important;
+    }
+
+    #ehr-patient, #ehr-triage, #ehr-insurance, #ehr-status {
+      color: var(--renia-ink) !important;
+    }
+
+    .wave-bar,
+    .data-packet-green,
+    input[type="range"]::-webkit-slider-thumb {
+      background-color: var(--renia-blue) !important;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.22) !important;
+    }
+
+    .data-packet-red {
+      border-color: #94a3b8 !important;
+    }
+
+    .text-emerald-500,
+    .text-emerald-400 {
+      color: var(--renia-green) !important;
+    }
+
+    .text-rose-500,
+    .text-rose-400 {
+      color: var(--renia-red) !important;
+    }
+
+    #technology,
+    #comparison,
+    #roi,
+    #platform,
+    #compliance,
+    #pricing,
+    section.py-16,
+    footer {
+      background-color: #ffffff !important;
+    }
+
+    #technology .grid > div,
+    #roi .lg\:col-span-5,
+    #roi .lg\:col-span-7 > div,
+    #pricing .grid > div,
+    .testimonial-card {
+      border-radius: 18px !important;
+      box-shadow: var(--renia-shadow-sm) !important;
+    }
+
+    #platform .w-12.h-12,
+    #compliance .w-12.h-12 {
+      background: #eff6ff !important;
+      border: 1px solid #bfdbfe !important;
+      color: var(--renia-blue) !important;
+    }
+
+    #platform .w-12.h-12 .material-symbols-outlined,
+    #compliance .w-12.h-12 .material-symbols-outlined {
+      color: var(--renia-blue) !important;
+    }
+
+    #platform img {
+      border-radius: 22px !important;
+      box-shadow: var(--renia-shadow) !important;
+      border-color: rgba(226, 232, 240, 0.95) !important;
+    }
+
+    #pricing .font-black.text-5xl,
+    #pricing li,
+    #pricing li.font-bold,
+    #pricing .font-bold.text-white {
+      color: var(--renia-ink) !important;
+    }
+
+    #pricing a,
+    #pricing .absolute.-top-4,
+    #pricing a *,
+    #comparison th.bg-blue-600,
+    #label-missed-calls,
+    #label-patient-val {
+      color: #ffffff !important;
+    }
+
+    #pricing .border-2 {
+      border-color: #2563eb !important;
+      box-shadow: 0 28px 80px rgba(37, 99, 235, 0.14) !important;
+    }
+
+    #pricing .absolute.-top-4 {
+      background: #2563eb !important;
+      color: #ffffff !important;
+    }
+
+    .testimonial-card p,
+    .testimonial-card h4 {
+      color: var(--renia-ink) !important;
+    }
+
+    footer a:hover {
+      color: var(--renia-blue) !important;
+    }
+
+    @media (max-width: 640px) {
+      .hero-section {
+        min-height: auto;
+        background-position: center top !important;
+      }
+
+      .hero-proof > div {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body class="text-on-background font-sans antialiased selection:bg-indigo-500/30 selection:text-white">
@@ -626,38 +919,51 @@
   <!-- MAIN WRAPPER -->
   <main class="w-full pt-20">
 
-    <!-- HERO SECTION: Apple-Style Premium Minimalism -->
-    <section class="relative pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-24 lg:pb-28 px-6 md:px-12 grid-bg  overflow-hidden">
+    <!-- HERO SECTION -->
+    <section class="hero-section relative pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-24 lg:pb-28 px-6 md:px-12 grid-bg overflow-hidden">
       <div class="max-w-6xl mx-auto flex flex-col items-center text-center gap-6 sm:gap-7">
         
         <!-- Eyebrow Badge -->
         <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-slate-200 bg-slate-50 text-slate-800 font-mono text-[10px] sm:text-[11px] font-bold tracking-widest uppercase shadow-none mb-1 transition-all hover:border-slate-300">
-          <span class="w-2.5 h-2.5 rounded-full bg-black/60 animate-pulse"></span>
-          REALTIME SPEECH PORT-ENGINE: GROK THINK FAST 1.0
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+          LIVE AI RECEPTIONIST FOR MODERN DENTAL PRACTICES
         </div>
         
         <!-- Main Title -->
         <h1 class="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white max-w-5xl leading-[1.04] tracking-tighter">
-          The front office receptionist, <span class="text-black">engineered as light-speed voice AI.</span>
+          Renia AI voice receptionist for dental clinics.
         </h1>
         
         <!-- Subheading -->
         <p class="text-sm sm:text-lg md:text-xl lg:text-2xl text-slate-400 max-w-4xl leading-relaxed mt-1 font-normal">
-          Operating at sub-100ms conversational latency. Engineered specifically for Florida dental clinics to answer patient phone calls, coordinate emergency toothaches, schedule calendars, and verify insurance benefits 24/7.
+          A premium voice agent that answers patients, handles emergency triage, books appointments, and prepares insurance workflows before your team picks up the phone.
         </p>
         
         <!-- CTA Actions -->
         <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full sm:w-auto z-10">
           <a href="signup.html" class="bg-deep-navy text-white text-sm font-semibold px-8 sm:px-9 py-4 sm:py-5 rounded-2xl hover:bg-slate-800 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-deep-navy/15 flex items-center justify-center gap-3 font-bold">
-            Deploy Virtual Assistant <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+            Deploy AI Receptionist <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
           </a>
           <a href="#simulator" class="border border-slate-200 bg-slate-50 text-slate-800 text-sm font-semibold px-8 sm:px-9 py-4 sm:py-5 rounded-2xl hover:border-slate-300 hover:shadow-md transition-all flex items-center justify-center gap-3">
-            Simulate Live Call <span class="material-symbols-outlined text-[18px]">play_circle</span>
+            Talk to Live Demo <span class="material-symbols-outlined text-[18px]">play_circle</span>
           </a>
         </div>
+
+        <div class="hero-proof grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 w-full max-w-3xl">
+          <div>
+            <strong>24/7</strong>
+            <span>Patient call capture</span>
+          </div>
+          <div>
+            <strong>&lt;100ms</strong>
+            <span>Natural response loop</span>
+          </div>
+          <div>
+            <strong>3 PMS</strong>
+            <span>Dentrix, Eaglesoft, Open Dental</span>
+          </div>
+        </div>
       </div>
-      
-      <!-- Backdrop Glow Circle -->
       
     </section>
 
@@ -1006,7 +1312,7 @@
               <tr class="border-b border-slate-200 bg-slate-50">
                 <th class="p-5 sm:p-6 text-xs font-mono font-bold text-slate-500 uppercase">Capability / Feature</th>
                 <th class="p-5 sm:p-6 text-xs font-mono font-bold text-slate-500 uppercase border-l border-slate-200">Traditional Front Desk Staff</th>
-                <th class="p-5 sm:p-6 text-xs font-mono font-bold text-white bg-black border-l border-slate-200 font-bold shadow-md">Renia AI Autopilot</th>
+                <th class="p-5 sm:p-6 text-xs font-mono font-bold text-white bg-blue-600 border-l border-slate-200 font-bold shadow-md">Renia AI Autopilot</th>
               </tr>
             </thead>
             <tbody class="text-xs sm:text-sm text-slate-600">
@@ -1097,7 +1403,7 @@
               <div class="space-y-3">
                 <div class="flex justify-between items-center">
                   <label class="text-xs sm:text-sm font-semibold text-slate-300" for="slider-missed-calls">Missed Calls per Month</label>
-                  <span id="label-missed-calls" class="font-mono text-xs sm:text-sm font-bold bg-slate-900 px-3 py-1 rounded-md text-white">50</span>
+                  <span id="label-missed-calls" class="font-mono text-xs sm:text-sm font-bold bg-blue-600 px-3 py-1 rounded-md text-white">50</span>
                 </div>
                 <input type="range" id="slider-missed-calls" min="10" max="200" value="50" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-medical-cyan" aria-label="Missed Calls per Month"/>
                 <div class="flex justify-between text-[10px] text-slate-400 font-mono"><span>10 Calls</span> <span>200 Calls</span></div>
@@ -1107,7 +1413,7 @@
               <div class="space-y-3">
                 <div class="flex justify-between items-center">
                   <label class="text-xs sm:text-sm font-semibold text-slate-300" for="slider-patient-val">New Patient Value (LTV)</label>
-                  <span id="label-patient-val" class="font-mono text-xs sm:text-sm font-bold bg-slate-900 px-3 py-1 rounded-md text-white">$450</span>
+                  <span id="label-patient-val" class="font-mono text-xs sm:text-sm font-bold bg-blue-600 px-3 py-1 rounded-md text-white">$450</span>
                 </div>
                 <input type="range" id="slider-patient-val" min="200" max="1500" step="50" value="450" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-medical-cyan" aria-label="New Patient Value"/>
                 <div class="flex justify-between text-[10px] text-slate-400 font-mono"><span>$200</span> <span>$1,500</span></div>
@@ -1199,8 +1505,8 @@
             <div class="w-12 h-12 rounded-2xl bg-deep-navy border border-white/5 flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-xl">verified_user</span>
             </div>
-            <span class="text-xs font-bold font-mono tracking-widest text-white uppercase block">MODULE 01</span>
-            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight leading-tight">
+            <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase block">MODULE 01</span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight leading-tight">
               Intelligent Patient Intake & Insurance Verification
             </h2>
             <p class="text-slate-400 leading-relaxed text-sm sm:text-base font-normal">
@@ -1231,11 +1537,11 @@
             <!-- Floating Widget Overlay -->
             <div class="absolute bottom-6 sm:bottom-8 right-6 sm:right-8 glass-card p-4 sm:p-5 rounded-2xl shadow-2xl border border-slate-800/35 max-w-[220px] sm:max-w-[260px] bg-clinical-white/10 backdrop-blur-md z-20 transition-all hover:scale-[1.03]">
               <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
-                <span class="font-mono text-[9px] text-white font-bold tracking-wider">PORTAL_VERIFY_ACTIVE</span>
+                <span class="font-mono text-[9px] text-slate-700 font-bold tracking-wider">PORTAL_VERIFY_ACTIVE</span>
                 <span class="material-symbols-outlined text-emerald-500 text-[16px] sm:text-[18px]">verified</span>
               </div>
               <div class="space-y-1.5 sm:space-y-2 font-mono text-[10px] sm:text-[11px] text-slate-400">
-                <div class="flex justify-between"><span>Carrier:</span> <span class="text-white font-bold">Delta Dental</span></div>
+                <div class="flex justify-between"><span>Carrier:</span> <span class="text-slate-900 font-bold">Delta Dental</span></div>
                 <div class="flex justify-between"><span>Eligibility:</span> <span class="text-emerald-500 font-bold">Active benefits</span></div>
                 <div class="flex justify-between"><span>Copay:</span> <span class="text-slate-200 font-bold">$20 Standard</span></div>
               </div>
@@ -1258,7 +1564,7 @@
             <div class="absolute top-6 sm:top-8 left-6 sm:left-8 glass-card p-3 sm:p-4 rounded-2xl shadow-2xl border-l-4 border-l-medical-cyan max-w-[200px] sm:max-w-[250px] bg-clinical-white/10 backdrop-blur-md z-20 transition-all hover:scale-[1.03]">
               <div class="flex items-center gap-2 mb-2">
                 <span class="w-2 h-2 rounded-full bg-slate-900/60 backdrop-blur-md animate-pulse"></span>
-                <span class="font-mono text-[9px] text-white font-bold tracking-wider">DATABASE_SYNC</span>
+                <span class="font-mono text-[9px] text-slate-700 font-bold tracking-wider">DATABASE_SYNC</span>
               </div>
               <p class="font-sans text-[10px] sm:text-[11px] text-slate-400 leading-relaxed">
                 Dentrix integration synced. Reserved 1:30 PM slot natively in 18ms.
@@ -1271,8 +1577,8 @@
             <div class="w-12 h-12 rounded-2xl bg-deep-navy border border-white/5 flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-xl">calendar_today</span>
             </div>
-            <span class="text-xs font-bold font-mono tracking-widest text-white uppercase block">MODULE 02</span>
-            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight leading-tight">
+            <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase block">MODULE 02</span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight leading-tight">
               Bidirectional Calendar Sync & Scheduler
             </h2>
             <p class="text-slate-400 leading-relaxed text-sm sm:text-base font-normal">
@@ -1329,7 +1635,7 @@
           
           <h4 class="font-display font-bold text-slate-900 text-lg mb-3">Verbal Disclosures & Encryption</h4>
           <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6">
-            Under Florida Statute § 934.03, call recorders face statutory fines of up to $5,000 per violation. Renia AI resolves this natively by opening every single call session with a natural verbal consent notification before capturing patient microphone streams:
+            Under Florida Statute § 934.03, call recorders face statutory fines of up to $5,000 per violation. Renia AI handles this natively by opening each call with a natural consent disclosure before capturing patient microphone streams:
           </p>
           
           <!-- Disclosure Quote Block -->
@@ -1360,7 +1666,7 @@
           <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">TRANSPARENT VALUE</span>
           <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight mt-1">Simple Plans Fitted to Your Practice</h2>
           <p class="text-slate-550 mt-3 text-sm sm:text-base lg:text-lg">
-            Choose the core autopilot coverage that fits your clinic. Save an extra **30%** by switching to annual plans.
+            Choose the core autopilot coverage that fits your clinic. Save an extra 30% by switching to annual plans.
           </p>
         </div>
 
@@ -1387,11 +1693,11 @@
                 <h3 class="font-display font-extrabold text-2xl text-slate-900 mt-1">Solo Practice</h3>
                 <p class="text-xs text-slate-550 mt-2 leading-relaxed">Perfect for single-doctor startup clinics looking to recover basic off-hours calls.</p>
               </div>
-              <div class="py-4 border-y border-white/5">
+              <div class="py-4 border-y border-slate-200">
                 <span class="font-display font-black text-5xl text-white tracking-tight" id="price-starter">$399</span>
                 <span class="text-xs text-slate-400 font-semibold block mt-1" id="billing-starter">per month, billed monthly</span>
               </div>
-              <ul class="space-y-3 font-sans text-xs text-slate-300">
+              <ul class="space-y-3 font-sans text-xs text-slate-600">
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> 1 Active Inbound Line</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Unlimited Inbound Minutes</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Google Calendar Live Sync</li>
@@ -1408,7 +1714,7 @@
           <!-- Professional Plan (Featured Card) -->
           <div class="border-2 border-slate-900 p-8 rounded-3xl bg-white flex flex-col justify-between shadow-xl relative scale-100 hover:scale-[1.02] transition-all">
             <!-- Most popular tag -->
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white font-mono text-[9px] font-black uppercase tracking-wider px-4 py-1.5 rounded-full shadow-none z-10">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white font-mono text-[9px] font-black uppercase tracking-wider px-4 py-1.5 rounded-full shadow-none z-10">
               Most Popular Autopilot
             </div>
             <div class="space-y-6">
@@ -1417,11 +1723,11 @@
                 <h3 class="font-display font-extrabold text-2xl text-slate-900 mt-1">Growth Clinic</h3>
                 <p class="text-xs text-slate-550 mt-2 leading-relaxed">For busy clinics seeking complete front desk automation and immediate insurance write-backs.</p>
               </div>
-              <div class="py-4 border-y border-white/5">
+              <div class="py-4 border-y border-slate-200">
                 <span class="font-display font-black text-5xl text-white tracking-tight" id="price-professional">$699</span>
                 <span class="text-xs text-slate-400 font-semibold block mt-1" id="billing-professional">per month, billed monthly</span>
               </div>
-              <ul class="space-y-3 font-sans text-xs text-slate-300">
+              <ul class="space-y-3 font-sans text-xs text-slate-600">
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> 3 Simultaneous Active Lines</li>
                 <li class="flex items-center gap-2 font-bold text-white"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Eaglesoft & Dentrix Write-Back</li>
                 <li class="flex items-center gap-2 font-bold text-white"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> English ↔ Spanish Bilingual VAD</li>
@@ -1430,7 +1736,7 @@
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> SMS & Twilio patient alerts</li>
               </ul>
             </div>
-            <a href="signup.html" class="w-full text-center block bg-black hover:bg-slate-800 text-white font-display font-extrabold py-4 rounded-xl transition-all shadow-glow mt-8 active:scale-[0.98]">
+            <a href="signup.html" class="w-full text-center block bg-blue-600 hover:bg-blue-700 text-white font-display font-extrabold py-4 rounded-xl transition-all shadow-glow mt-8 active:scale-[0.98]">
               Start 14-Day Free Trial
             </a>
           </div>
@@ -1443,11 +1749,11 @@
                 <h3 class="font-display font-extrabold text-2xl text-slate-900 mt-1">Multi-Clinic DSO</h3>
                 <p class="text-xs text-slate-550 mt-2 leading-relaxed">For clinic groups, DSOs, or multi-location hubs needing custom EHR integrations and SLAs.</p>
               </div>
-              <div class="py-4 border-y border-white/5">
+              <div class="py-4 border-y border-slate-200">
                 <span class="font-display font-black text-5xl text-white tracking-tight" id="price-enterprise">$999</span>
                 <span class="text-xs text-slate-400 font-semibold block mt-1" id="billing-enterprise">per month, billed monthly</span>
               </div>
-              <ul class="space-y-3 font-sans text-xs text-slate-300">
+              <ul class="space-y-3 font-sans text-xs text-slate-600">
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Unlimited Inbound Lines</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Full-Scale custom EHR socket sync</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Custom Voice Personas & buffers</li>
@@ -1480,7 +1786,7 @@
         <div class="grid md:grid-cols-3 gap-8">
           
           <!-- Card 1 -->
-          <div class="border border-slate-250 p-8 rounded-3xl bg-clinical-white/10 backdrop-blur-md shadow-none flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="testimonial-card border border-slate-250 p-8 rounded-3xl bg-clinical-white/10 backdrop-blur-md shadow-none flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="space-y-4">
               <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined fill-1">star</span>
@@ -1493,10 +1799,10 @@
                 "Our front desk was constantly overwhelmed during peak hours. In the first 30 days of deploying Renia, it answered 140 off-hours calls and scheduled 38 new patient cleanings straight into Dentrix. The ROI was clear in week one!"
               </p>
             </div>
-            <div class="flex items-center gap-4 border-t border-white/5 pt-6 mt-6">
-              <div class="w-10 h-10 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center font-bold text-sm text-white">DM</div>
+            <div class="flex items-center gap-4 border-t border-slate-200 pt-6 mt-6">
+              <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-sm text-slate-700">DM</div>
               <div>
-                <h4 class="font-display font-bold text-sm text-white flex items-center gap-1.5">
+                <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-1.5">
                   Dr. Daniel Mitchell, DDS
                   <span class="material-symbols-outlined text-emerald-500 text-base font-bold" title="Verified Customer">verified</span>
                 </h4>
@@ -1506,7 +1812,7 @@
           </div>
 
           <!-- Card 2 -->
-          <div class="border border-slate-250 p-8 rounded-3xl bg-clinical-white/10 backdrop-blur-md shadow-none flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="testimonial-card border border-slate-250 p-8 rounded-3xl bg-clinical-white/10 backdrop-blur-md shadow-none flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="space-y-4">
               <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined fill-1">star</span>
@@ -1519,10 +1825,10 @@
                 "We were losing a lot of Spanish-speaking emergency patients to hold times. Renia switches languages in milliseconds entirely on its own. The two-party consent warn disclosure is completely seamless and keeps our compliance perfect."
               </p>
             </div>
-            <div class="flex items-center gap-4 border-t border-white/5 pt-6 mt-6">
-              <div class="w-10 h-10 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center font-bold text-sm text-white">AR</div>
+            <div class="flex items-center gap-4 border-t border-slate-200 pt-6 mt-6">
+              <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-sm text-slate-700">AR</div>
               <div>
-                <h4 class="font-display font-bold text-sm text-white flex items-center gap-1.5">
+                <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-1.5">
                   Dr. Amanda Reynolds, DMD
                   <span class="material-symbols-outlined text-emerald-500 text-base font-bold" title="Verified Customer">verified</span>
                 </h4>
@@ -1532,7 +1838,7 @@
           </div>
 
           <!-- Card 3 -->
-          <div class="border border-slate-250 p-8 rounded-3xl bg-clinical-white/10 backdrop-blur-md shadow-none flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="testimonial-card border border-slate-250 p-8 rounded-3xl bg-clinical-white/10 backdrop-blur-md shadow-none flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="space-y-4">
               <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined fill-1">star</span>
@@ -1545,10 +1851,10 @@
                 "Checking PPO portal eligibility manually for walk-in patients was a nightmare. This voice assistant queries the portals and verifies coverage in seconds while remaining 100% HIPAA secure. Absolute game changer."
               </p>
             </div>
-            <div class="flex items-center gap-4 border-t border-white/5 pt-6 mt-6">
-              <div class="w-10 h-10 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center font-bold text-sm text-white">SK</div>
+            <div class="flex items-center gap-4 border-t border-slate-200 pt-6 mt-6">
+              <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-sm text-slate-700">SK</div>
               <div>
-                <h4 class="font-display font-bold text-sm text-white flex items-center gap-1.5">
+                <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-1.5">
                   Dr. Sanjay Kumar, DDS
                   <span class="material-symbols-outlined text-emerald-500 text-base font-bold" title="Verified Customer">verified</span>
                 </h4>
@@ -1598,11 +1904,11 @@
       </div>
 
       <div class="flex flex-wrap justify-center gap-8 text-sm">
-        <a class="hover:text-white transition-colors" href="#">Company</a>
-        <a class="hover:text-white transition-colors" href="#">HIPAA Safety</a>
-        <a class="hover:text-white transition-colors" href="#">Florida Statutes</a>
-        <a class="hover:text-white transition-colors" href="#">Privacy</a>
-        <a class="hover:text-white transition-colors" href="#">Support</a>
+        <a class="hover:text-blue-600 transition-colors" href="#">Company</a>
+        <a class="hover:text-blue-600 transition-colors" href="#">HIPAA Safety</a>
+        <a class="hover:text-blue-600 transition-colors" href="#">Florida Statutes</a>
+        <a class="hover:text-blue-600 transition-colors" href="#">Privacy</a>
+        <a class="hover:text-blue-600 transition-colors" href="#">Support</a>
       </div>
 
       <div class="text-xs text-slate-400 text-center md:text-right flex flex-col gap-2">
@@ -1827,7 +2133,7 @@
       const setButton = (icon, label, variant = "primary") => {
         const base = "w-full text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]";
         const styles = {
-          primary: "bg-slate-900/60 backdrop-blur-md hover:bg-white/10",
+          primary: "bg-blue-600 hover:bg-blue-700",
           danger: "bg-rose-600 hover:bg-rose-500 shadow-rose-500/10",
           busy: "bg-slate-700 hover:bg-slate-700 cursor-wait"
         };
