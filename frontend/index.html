@@ -993,10 +993,10 @@
       <div class="max-w-6xl mx-auto">
         
         <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Live Dentist Sales Demo</span>
+          <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Grok Voice Think Fast 1.0 Demo</span>
           <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 mt-2 tracking-tight">Talk to the AI receptionist before you deploy it</h2>
           <p class="text-slate-400 mt-3 text-sm sm:text-base lg:text-lg">
-            Ask Renia to handle an emergency toothache, a Spanish caller, insurance eligibility, or a new-patient booking. The landing page speaks back and shows the front-desk workflow a dental office would see.
+            Talk live to Renia over Grok Voice Think Fast 1.0. Test emergency tooth pain, a Spanish caller, insurance eligibility, or a new-patient booking and watch the front-desk workflow update in real time.
           </p>
         </div>
 
@@ -1017,7 +1017,7 @@
                   <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
                   <span class="font-mono text-[9px] sm:text-[10px] text-slate-400 tracking-wider">LINE: (305) 555-9831 (MIAMI)</span>
                 </div>
-                <span class="font-mono text-[9px] text-slate-400 border border-white/5 px-2 py-0.5 rounded">PCM SECURE</span>
+                <span class="font-mono text-[9px] text-slate-400 border border-white/5 px-2 py-0.5 rounded">GROK REALTIME</span>
               </div>
 
               <!-- Handcrafted Soundwave Visualizer -->
@@ -1074,7 +1074,7 @@
               <!-- Main Simulation Click Trigger -->
               <button id="sim-action-btn" class="w-full bg-slate-900/60 backdrop-blur-md hover:bg-white/10 text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]">
                 <span class="material-symbols-outlined text-[20px] font-bold">phone</span>
-                Talk to Renia Demo
+                Talk to Grok Voice Demo
               </button>
             </div>
           </div>
@@ -1085,7 +1085,7 @@
             <!-- Dialogue Stream Panel -->
             <div class="bg-slate-900 border border-white/5 rounded-3xl p-5 sm:p-6 shadow-xl flex-1 flex flex-col justify-between min-h-[260px] sm:min-h-[280px]">
               <div class="border-b border-slate-800/80 pb-3 mb-4 flex justify-between items-center">
-                <span class="font-mono text-[8px] sm:text-[9px] text-slate-400 tracking-widest uppercase">REALTIME CONVERSATIONAL TRANSLATION</span>
+                <span class="font-mono text-[8px] sm:text-[9px] text-slate-400 tracking-widest uppercase">GROK REALTIME VOICE TRANSCRIPT</span>
                 
                 <!-- PCM Wave animation -->
                 <div id="sim-wave-container" class="hidden flex items-center gap-1">
@@ -1100,7 +1100,7 @@
               <!-- Dialogue Bubbles Container -->
               <div id="chat-stream" class="flex-1 space-y-4 max-h-[220px] overflow-y-auto pr-2 font-sans text-xs sm:text-sm text-slate-400">
                 <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
-                  Click "Talk to Renia Demo" and test a real dental front-desk scenario...
+                  Click "Talk to Grok Voice Demo" and test a real dental front-desk scenario...
                 </div>
               </div>
             </div>
@@ -1899,7 +1899,7 @@
           Renia<span class="text-slate-900">AI</span>
         </a>
         <div class="text-xs text-slate-400 max-w-[280px] text-center md:text-left leading-relaxed">
-          The ultimate speech-to-speech AI receptionist engine for Florida dental practices. Powered by Grok Voice 1.0.
+          The ultimate speech-to-speech AI receptionist engine for Florida dental practices. Powered by Grok Voice Think Fast 1.0.
         </div>
       </div>
 
@@ -1919,6 +1919,7 @@
     </div>
   </footer>
 
+  <script src="js/voice-agent.js?v=5"></script>
   <!-- DYNAMIC JAVASCRIPT ANIMATIONS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -2104,17 +2105,37 @@
       const ehrLogText = document.getElementById("ehr-log-text");
       
       let isSimulating = false;
-      let isListening = false;
-      let isProcessing = false;
-      let isSpeaking = false;
-      let recognition = null;
+      let isConnecting = false;
+      let voiceAgent = null;
       let timerInterval = null;
       let timerSecs = 0;
-      let demoHistory = [];
-      let finalTranscript = "";
+      let assistantBubble = null;
+      let assistantIdleTimer = null;
+      let connectErrorShown = false;
 
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      const demoGreeting = "Hi, this is Renia for the dental office. I can handle emergency calls, Spanish callers, insurance questions, and appointment booking. Test me with a real scenario from your front desk.";
+      const landingVoiceInstructions = `
+You are Renia, a premium AI receptionist voice demo for dental practice owners.
+You are running live on Grok Voice Think Fast 1.0 for a landing-page demo.
+
+Your job is to sell by performing. Sound warm, confident, fast, and natural, like a top-tier dental front desk lead.
+If the caller is a dentist or office manager, invite them to test you with a hard real front-desk scenario.
+If the caller role-plays as a patient, act as the receptionist and move the call toward the right next step.
+
+Demonstrate these abilities naturally:
+- Emergency dental triage for pain, swelling, trauma, or bleeding.
+- New-patient booking flow with name, phone, reason, insurance, and preferred time.
+- Insurance and eligibility workflow explanation.
+- Spanish caller handling when the caller speaks Spanish.
+- PMS integration language for Dentrix, Eaglesoft, and Open Dental.
+
+Demo guardrails:
+- This landing page does not book real appointments, verify real insurance, or store real patient data.
+- Say "for this demo" or "in production I would" when discussing bookings, eligibility, or PMS write-back.
+- Ask one question at a time.
+- Keep every spoken turn under 45 words.
+- Never read bullet points aloud.
+- Do not sound like a generic chatbot. Be direct, polished, and useful.
+`;
 
       const escapeHtml = (value) => String(value || "").replace(/[&<>"']/g, (char) => ({
         "&": "&amp;",
@@ -2152,17 +2173,17 @@
         if (state === "speaking") {
           orbIcon.textContent = "volume_up";
           simStatus.textContent = "RENIA SPEAKING";
-          simStatus.className = "font-mono text-xs text-white font-bold uppercase tracking-widest block";
+          simStatus.className = "font-mono text-xs text-slate-900 font-bold uppercase tracking-widest block";
           showWaves(true);
         } else if (state === "listening") {
           orbIcon.textContent = "mic";
           simStatus.textContent = "LISTENING LIVE";
-          simStatus.className = "font-mono text-xs text-emerald-500 font-bold uppercase tracking-widest block";
+          simStatus.className = "font-mono text-xs text-emerald-600 font-bold uppercase tracking-widest block";
           showWaves(true);
         } else if (state === "thinking") {
           orbIcon.textContent = "neurology";
           simStatus.textContent = "GROK REASONING";
-          simStatus.className = "font-mono text-xs text-amber-500 font-bold uppercase tracking-widest block";
+          simStatus.className = "font-mono text-xs text-amber-600 font-bold uppercase tracking-widest block";
           showWaves(true);
         } else {
           orbIcon.textContent = "mic";
@@ -2172,35 +2193,7 @@
         }
       };
       
-      const clearSimulation = () => {
-        isSimulating = false;
-        isListening = false;
-        isProcessing = false;
-        isSpeaking = false;
-        finalTranscript = "";
-        demoHistory = [];
-        
-        clearInterval(timerInterval);
-        timerSecs = 0;
-        simTimer.textContent = "00:00";
-
-        if (recognition) {
-          try { recognition.abort(); } catch (error) {}
-        }
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-        }
-
-        setButton("phone", "Talk to Renia Demo");
-        
-        chatStream.innerHTML = `
-          <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
-            Click "Talk to Renia Demo" and test a real dental front-desk scenario...
-          </div>
-        `;
-        
-        setVoiceState("ready");
-        
+      const resetWorkflowPanel = () => {
         ehrPatient.textContent = "—";
         ehrPatient.className = "text-slate-200 font-bold block mt-0.5";
         ehrTriage.textContent = "—";
@@ -2213,6 +2206,35 @@
         ehrSyncBadge.className = "font-mono text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block";
         ehrLogText.textContent = "Sync line offline. Ready to connect...";
         ehrLogText.className = "font-mono text-[9px] text-slate-400 leading-normal mt-3";
+      };
+
+      const clearSimulation = async () => {
+        isSimulating = false;
+        isConnecting = false;
+        connectErrorShown = false;
+        assistantBubble = null;
+        clearTimeout(assistantIdleTimer);
+        
+        clearInterval(timerInterval);
+        timerSecs = 0;
+        simTimer.textContent = "00:00";
+
+        const activeAgent = voiceAgent;
+        voiceAgent = null;
+        if (activeAgent) {
+          try { await activeAgent.disconnect(); } catch (error) {}
+        }
+
+        setButton("phone", "Talk to Grok Voice Demo");
+        
+        chatStream.innerHTML = `
+          <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
+            Click "Talk to Grok Voice Demo" and test a real dental front-desk scenario...
+          </div>
+        `;
+        
+        setVoiceState("ready");
+        resetWorkflowPanel();
       };
       
       const startTimer = () => {
@@ -2244,7 +2266,7 @@
             <div class="flex items-center gap-2 mb-1.5 border-b border-slate-850 pb-1">
               <span class="text-[9px] font-mono font-bold text-slate-400 tracking-widest uppercase">INBOUND CALLER</span>
             </div>
-            <p class="text-xs md:text-sm font-sans leading-relaxed text-slate-300">${escapeHtml(text)}</p>
+            <p data-bubble-text class="text-xs md:text-sm font-sans leading-relaxed text-slate-300">${escapeHtml(text)}</p>
           `;
         } else {
           bubble.className += " bg-slate-900 border-slate-800/20 text-white rounded-tr-none ml-auto shadow-medical-cyan/5";
@@ -2259,7 +2281,7 @@
                 ${tagHtml}
               </div>
             </div>
-            <p class="text-xs md:text-sm font-sans leading-relaxed text-slate-100">${escapeHtml(text)}</p>
+            <p data-bubble-text class="text-xs md:text-sm font-sans leading-relaxed text-slate-100">${escapeHtml(text)}</p>
           `;
         }
         
@@ -2271,6 +2293,16 @@
         }, 30);
         
         // Auto scroll
+        chatStream.scrollTop = chatStream.scrollHeight;
+        return bubble;
+      };
+
+      const updateChatBubble = (bubble, text) => {
+        if (!bubble) return;
+        const body = bubble.querySelector("[data-bubble-text]");
+        if (body) {
+          body.textContent = text || "";
+        }
         chatStream.scrollTop = chatStream.scrollHeight;
       };
 
@@ -2291,227 +2323,210 @@
         ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
       };
 
-      const chooseSpeechVoice = (utterance) => {
-        const voices = window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find((voice) => /Google US English|Samantha|Jenny|Aria|Female/i.test(voice.name));
-        if (preferredVoice) {
-          utterance.voice = preferredVoice;
-        }
-      };
-
-      const speakText = (text, onDone) => {
-        if (!("speechSynthesis" in window)) {
-          onDone?.();
-          return;
-        }
-
-        window.speechSynthesis.cancel();
-        isSpeaking = true;
-        setVoiceState("speaking");
-
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 1.03;
-        utterance.pitch = 1.02;
-        utterance.lang = /[áéíóúñ¿¡]|\b(hola|gracias|cita|dolor|muela|seguro)\b/i.test(text) ? "es-US" : "en-US";
-        chooseSpeechVoice(utterance);
-
-        const finish = () => {
-          isSpeaking = false;
-          if (isSimulating) {
-            onDone?.();
-          }
-        };
-
-        utterance.onend = finish;
-        utterance.onerror = finish;
-        window.speechSynthesis.speak(utterance);
-      };
-
-      const promptTypedFallback = () => {
-        if (!isSimulating) return;
-        setVoiceState("ready");
-        setButton("keyboard", "Type Scenario");
-        const typed = window.prompt("Microphone speech recognition is not available here. Type a dental front-desk scenario to test Renia:");
-        if (typed && typed.trim()) {
-          processUserMessage(typed.trim());
-        } else {
-          setButton("mic", "Speak Again");
-        }
-      };
-
-      const configureRecognition = () => {
-        if (!SpeechRecognition) return null;
-        const recognizer = new SpeechRecognition();
-        recognizer.continuous = false;
-        recognizer.interimResults = true;
-        recognizer.lang = "en-US";
-
-        recognizer.onresult = (event) => {
-          let latestFinal = "";
-          for (let index = event.resultIndex; index < event.results.length; index++) {
-            const transcript = event.results[index][0].transcript;
-            if (event.results[index].isFinal) {
-              latestFinal += transcript;
-            }
-          }
-          if (latestFinal.trim()) {
-            finalTranscript += ` ${latestFinal.trim()}`;
-          }
-        };
-
-        recognizer.onerror = (event) => {
-          isListening = false;
-          if (!isSimulating) return;
-          if (event.error === "not-allowed" || event.error === "service-not-allowed") {
-            addChatBubble("ai", "The browser blocked microphone access. You can still test the sales demo by typing a scenario.", "Mic Blocked");
-            promptTypedFallback();
-          }
-        };
-
-        recognizer.onend = () => {
-          isListening = false;
-          if (!isSimulating || isProcessing || isSpeaking) return;
-
-          const spokenText = finalTranscript.trim();
-          finalTranscript = "";
-
-          if (spokenText) {
-            processUserMessage(spokenText);
-          } else {
-            setVoiceState("ready");
-            setButton("mic", "Speak Again");
-            ehrLogText.textContent = "No speech detected. Click Speak Again and try an emergency, Spanish, insurance, or booking call.";
-            ehrLogText.className = "font-mono text-[9px] text-slate-400 leading-normal mt-3";
-          }
-        };
-
-        return recognizer;
-      };
-
-      const startListening = () => {
-        if (!isSimulating || isProcessing || isSpeaking) return;
-
-        if (!SpeechRecognition) {
-          promptTypedFallback();
-          return;
-        }
-
-        recognition = recognition || configureRecognition();
-        finalTranscript = "";
-        isListening = true;
-        setVoiceState("listening");
-        setButton("call_end", "End Voice Demo", "danger");
-        ehrLogText.textContent = "Microphone live. Ask Renia to handle a real front-desk call.";
-        ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
-
-        try {
-          recognition.start();
-        } catch (error) {
-          isListening = false;
-          promptTypedFallback();
-        }
-      };
-
-      const processUserMessage = async (message) => {
+      const updateWorkflowFromTranscript = (message) => {
         if (!message || !isSimulating) return;
-
-        const outboundHistory = demoHistory.slice(-8);
-        demoHistory.push({ role: "user", content: message });
-        addChatBubble("patient", message);
-
-        isProcessing = true;
-        setVoiceState("thinking");
-        setButton("hourglass_top", "Thinking with Grok", "busy");
         updateWorkflowPanel({
           patient_name: "Live Caller",
           triage: /pain|ache|swelling|bleeding|emergency|muela|dolor/i.test(message) ? "Urgent triage" : "Needs assessment",
           insurance: /delta|humana|guardian|ppo|medicaid|insurance|seguro/i.test(message) ? "Insurance captured" : "Pending capture",
           portal_status: "Analyzing",
           pipeline_status: "Grok reasoning",
-          log: "Caller speech converted to text. Grok is generating the receptionist response."
+          log: "Caller audio streamed directly to Grok Voice Think Fast 1.0. Renia is preparing the next turn."
         });
+      };
 
-        try {
-          const response = await fetch("/api/v1/voice/landing-demo", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message, history: outboundHistory })
-          });
-
-          if (!response.ok) {
-            throw new Error(`Demo request failed with ${response.status}`);
-          }
-
-          const data = await response.json();
-          const reply = data.reply || "I can handle that front-desk scenario. Try me with an emergency, insurance, Spanish, or appointment booking call.";
-
-          demoHistory.push({ role: "assistant", content: reply });
-          demoHistory = demoHistory.slice(-10);
-
-          addChatBubble("ai", reply, "Grok Live");
-          updateWorkflowPanel(data);
-
-          isProcessing = false;
-          setButton("call_end", "End Voice Demo", "danger");
-          speakText(reply, () => {
-            if (isSimulating) {
-              startListening();
-            }
-          });
-        } catch (error) {
-          console.error("Landing demo error:", error);
-          const fallbackReply = "I lost the live Grok link for a moment. In production, I would keep the call moving, capture the patient details, and route or book the appointment.";
-          isProcessing = false;
-          addChatBubble("ai", fallbackReply, "Fallback");
+      const updateWorkflowFromTool = (name, args = {}) => {
+        const patientName = args.patient_name || "Live Caller";
+        if (name === "check_availability") {
           updateWorkflowPanel({
-            patient_name: "Live Caller",
-            triage: "Demo fallback",
+            patient_name: patientName,
+            triage: args.appointment_type || "Availability request",
             insurance: "Pending capture",
-            portal_status: "Retry ready",
-            pipeline_status: "Fallback mode",
-            log: "The landing demo endpoint did not respond, so the browser served a safe fallback."
+            portal_status: "Demo slots found",
+            pipeline_status: "Schedule search",
+            log: `Demo availability checked for ${args.date || "the requested date"}. In production this would query the clinic calendar.`
           });
-          speakText(fallbackReply, () => {
-            if (isSimulating) {
-              setVoiceState("ready");
-              setButton("mic", "Speak Again");
-            }
+        } else if (name === "schedule_appointment") {
+          updateWorkflowPanel({
+            patient_name: patientName,
+            triage: args.reason || "Booking request",
+            insurance: "Ready to capture",
+            portal_status: "Demo hold prepared",
+            pipeline_status: "PMS write-back demo",
+            log: `Demo appointment hold prepared for ${args.date || "requested date"} at ${args.time || "requested time"}. No real appointment was booked.`
+          });
+        } else if (name === "cancel_appointment") {
+          updateWorkflowPanel({
+            patient_name: patientName,
+            triage: "Cancellation request",
+            insurance: "Not required",
+            portal_status: "Demo cancellation path",
+            pipeline_status: "PMS update demo",
+            log: "Demo cancellation workflow displayed. In production this would update the connected PMS."
           });
         }
       };
 
-      const startVoiceDemo = () => {
+      const scheduleAssistantIdle = () => {
+        clearTimeout(assistantIdleTimer);
+        assistantIdleTimer = setTimeout(() => {
+          if (!isSimulating || isConnecting) return;
+          assistantBubble = null;
+          setVoiceState("listening");
+          setButton("call_end", "End Grok Voice Demo", "danger");
+          ehrLogText.textContent = "Microphone live. Keep talking naturally; server VAD handles turn-taking.";
+          ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
+        }, 1800);
+      };
+
+      const createLandingVoiceAgent = () => {
+        const agent = new window.GrokVoiceAgent({
+          model: "grok-voice-think-fast-1.0",
+          voice: "ara",
+          clinicName: "Renia AI Demo Dental",
+          instructions: landingVoiceInstructions,
+          sessionTokenEndpoint: "/api/v1/voice/landing-session-token",
+          demoMode: true,
+          initialMessage: "Start the live landing-page demo now. Greet the dentist or office manager in one confident sentence, invite them to test emergency triage, insurance, Spanish, or booking, and ask what scenario they want to try."
+        });
+
+        agent.on("onConnect", () => {
+          isConnecting = false;
+          isSimulating = true;
+          setButton("call_end", "End Grok Voice Demo", "danger");
+          setVoiceState("speaking");
+          updateWorkflowPanel({
+            patient_name: "Dentist Prospect",
+            triage: "Live sales demo",
+            insurance: "Demo Mode",
+            portal_status: "Realtime connected",
+            pipeline_status: "Grok Voice active",
+            log: "Connected with a short-lived xAI client secret. The raw API key stays server-side."
+          });
+          assistantBubble = addChatBubble("ai", "Connected to Grok Voice Think Fast 1.0. Renia is starting the live demo now.", "Grok Live");
+        });
+
+        agent.on("onTranscript", (text) => {
+          if (!isSimulating || !text || !text.trim()) return;
+          assistantBubble = null;
+          addChatBubble("patient", text.trim());
+          setVoiceState("thinking");
+          setButton("hourglass_top", "Grok Thinking", "busy");
+          updateWorkflowFromTranscript(text);
+        });
+
+        agent.on("onAssistantTranscript", (text) => {
+          if (!isSimulating) return;
+          setVoiceState("speaking");
+          setButton("call_end", "End Grok Voice Demo", "danger");
+          if (!assistantBubble || !assistantBubble.isConnected) {
+            assistantBubble = addChatBubble("ai", "", "Grok Live");
+          }
+          updateChatBubble(assistantBubble, text);
+          scheduleAssistantIdle();
+        });
+
+        agent.on("onToolCall", (name, args) => {
+          updateWorkflowFromTool(name, args);
+        });
+
+        agent.on("onStateChange", (state) => {
+          if (!isSimulating && state !== "connecting") return;
+          if (state === "connecting") {
+            setVoiceState("thinking");
+            setButton("hourglass_top", "Connecting Grok Voice", "busy");
+          } else if (state === "listening") {
+            setVoiceState("listening");
+          } else if (state === "thinking") {
+            setVoiceState("thinking");
+          } else if (state === "speaking") {
+            setVoiceState("speaking");
+          }
+        });
+
+        agent.on("onError", (error) => {
+          if (connectErrorShown || (!isSimulating && !isConnecting)) return;
+          connectErrorShown = true;
+          const message = error?.message || "Realtime voice connection failed.";
+          addChatBubble("ai", `The Grok realtime voice link could not start: ${message}`, "Connection");
+          updateWorkflowPanel({
+            patient_name: "Dentist Prospect",
+            triage: "Connection issue",
+            insurance: "Demo Mode",
+            portal_status: "Retry ready",
+            pipeline_status: "Realtime offline",
+            log: "Check microphone permission, HTTPS, backend availability, and the server-side XAI_API_KEY."
+          });
+          setVoiceState("ready");
+          setButton("phone", "Restart Grok Voice Demo");
+          isConnecting = false;
+          isSimulating = false;
+          clearInterval(timerInterval);
+        });
+
+        agent.on("onDisconnect", () => {
+          if (!isSimulating && !isConnecting) return;
+          isConnecting = false;
+          isSimulating = false;
+          clearTimeout(assistantIdleTimer);
+          clearInterval(timerInterval);
+          setVoiceState("ready");
+          setButton("phone", "Restart Grok Voice Demo");
+          updateWorkflowPanel({
+            patient_name: "Dentist Prospect",
+            triage: "Demo ended",
+            insurance: "Demo Mode",
+            portal_status: "Disconnected",
+            pipeline_status: "Session closed",
+            log: "Realtime Grok Voice session ended. Click restart to open a new short-lived session."
+          });
+        });
+
+        return agent;
+      };
+
+      const startVoiceDemo = async () => {
+        if (isConnecting || isSimulating) return;
+        if (!window.GrokVoiceAgent) {
+          addChatBubble("ai", "The Grok voice client did not load. Refresh the page and try again.", "Client");
+          return;
+        }
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          addChatBubble("ai", "This browser cannot open a live microphone stream. Use Chrome, Edge, or Safari over HTTPS.", "Mic");
+          return;
+        }
+
+        isConnecting = true;
         isSimulating = true;
-        demoHistory = [];
+        connectErrorShown = false;
+        assistantBubble = null;
         chatStream.innerHTML = "";
 
         beginTimer();
-        setButton("call_end", "End Voice Demo", "danger");
+        setVoiceState("thinking");
+        setButton("hourglass_top", "Connecting Grok Voice", "busy");
         updateWorkflowPanel({
           patient_name: "Dentist Prospect",
           triage: "Demo evaluation",
           insurance: "Demo Mode",
-          portal_status: "Ready",
-          pipeline_status: "Voice demo live",
-          log: "Landing-page voice demo initialized. Grok responses are generated server-side."
+          portal_status: "Minting token",
+          pipeline_status: "Realtime handshake",
+          log: "Requesting a short-lived xAI client secret from the backend. The browser never receives the raw API key."
         });
 
-        addChatBubble("ai", demoGreeting, "Live Demo");
-        demoHistory.push({ role: "assistant", content: demoGreeting });
-        speakText(demoGreeting, () => {
-          if (isSimulating) {
-            startListening();
-          }
-        });
+        voiceAgent = createLandingVoiceAgent();
+        try {
+          await voiceAgent.connect();
+        } catch (error) {
+          console.error("Landing Grok voice demo error:", error);
+        }
       };
       
-      btnSim.addEventListener("click", () => {
-        if (!isSimulating) {
-          startVoiceDemo();
-        } else if (isListening || isProcessing || isSpeaking) {
-          clearSimulation();
+      btnSim.addEventListener("click", async () => {
+        if (!isSimulating && !isConnecting) {
+          await startVoiceDemo();
         } else {
-          startListening();
+          await clearSimulation();
         }
       });
       

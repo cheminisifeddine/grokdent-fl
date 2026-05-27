@@ -13,11 +13,19 @@ class GrokVoiceAgent {
     this.isConnected = false;
     this.isConnecting = false;
     
+    const defaultVoice = options.voice || 'eve';
+    const defaultClinicName = options.clinicName || 'Sunshine Smiles Dental';
+
     this.config = {
-      voice: options.voice || 'eve',
-      instructions: options.instructions || this.getDefaultInstructions(),
-      clinicName: options.clinicName || 'Sunshine Smiles Dental',
-      tools: options.tools || this.getDefaultTools()
+      voice: defaultVoice,
+      instructions: options.instructions || this.getDefaultInstructions(defaultVoice, defaultClinicName),
+      clinicName: defaultClinicName,
+      tools: options.tools || this.getDefaultTools(),
+      model: options.model || 'grok-voice-think-fast-1.0',
+      sessionTokenEndpoint: options.sessionTokenEndpoint || '/api/v1/voice/session-token',
+      autoStart: options.autoStart !== false,
+      initialMessage: options.initialMessage || '',
+      demoMode: options.demoMode || false
     };
 
     this.callbacks = {
@@ -36,7 +44,7 @@ class GrokVoiceAgent {
     this._pcmFlushTimer = null;
   }
 
-  getDefaultInstructions() {
+  getDefaultInstructions(voice = this.config?.voice || 'eve', clinicName = this.config?.clinicName || 'Sunshine Smiles Dental') {
     const voiceDisplayNames = {
       'rex': 'Ash',
       'ara': 'Ani',
@@ -44,15 +52,15 @@ class GrokVoiceAgent {
       'sal': 'Verse',
       'leo': 'Leo'
     };
-    const voiceName = voiceDisplayNames[this.config.voice] || 'Eve';
+    const voiceName = voiceDisplayNames[voice] || 'Eve';
     
-    return `You are ${voiceName}, the elite AI voice receptionist for ${this.config.clinicName || 'Sunshine Smiles Dental'} in Florida. 
+    return `You are ${voiceName}, the elite AI voice receptionist for ${clinicName} in Florida.
 
 WHO YOU ARE
 You are highly professional, warm, and speak with a friendly, patient, and empathetic tone. You represent a high-end dental practice. You are NOT an AI assistant, you are the digital receptionist. Never mention that you are an AI or language model. 
 
 CLINIC KNOWLEDGE
-- Name: ${this.config.clinicName || 'Sunshine Smiles Dental'}
+- Name: ${clinicName}
 - Location: Florida
 - Hours: Mon-Fri 9:00 AM to 5:00 PM. Closed weekends.
 - Accepted Insurance: Delta Dental PPO, Humana, Guardian, MCNA (Florida Medicaid).
@@ -142,7 +150,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
     try {
       console.log('Fetching new session token from backend...');
       
-      const response = await fetch('/api/v1/voice/session-token', {
+      const response = await fetch(this.config.sessionTokenEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -235,7 +243,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
        }
 
        console.log('Connecting WebSocket to xAI Realtime API...');
-       console.log('Model: grok-voice-latest');
+       console.log('Model:', this.config.model);
        console.log('Session token (first 20 chars):', sessionToken.substring(0, 20) + '...');
 
        const connectionTimeout = setTimeout(() => {
@@ -252,7 +260,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
        }, 15000);
        
        this.ws = new WebSocket(
-         'wss://api.x.ai/v1/realtime?model=grok-voice-latest',
+         `wss://api.x.ai/v1/realtime?model=${encodeURIComponent(this.config.model)}`,
          [`xai-client-secret.${sessionToken}`]
        );
 
@@ -348,9 +356,13 @@ Keep responses short and conversational — this is a voice call, not an email.`
       session: {
         voice: this.config.voice,
         instructions: this.config.instructions,
-        turn_detection: { type: 'server_vad' },
+        turn_detection: {
+          type: 'server_vad',
+          threshold: 0.82,
+          silence_duration_ms: 850,
+          prefix_padding_ms: 333
+        },
         tools: this.config.tools,
-        input_audio_transcription: { model: 'grok-2-audio' },
         audio: {
           input: { format: { type: 'audio/pcm', rate: 24000 } },
           output: { format: { type: 'audio/pcm', rate: 24000 } }
@@ -362,6 +374,20 @@ Keep responses short and conversational — this is a voice call, not an email.`
     this.isConnecting = false;
     this.setState('connected');
     this.callbacks.onConnect.forEach(cb => cb());
+
+    if (this.config.autoStart) {
+      if (this.config.initialMessage) {
+        this.ws.send(JSON.stringify({
+          type: 'conversation.item.create',
+          item: {
+            type: 'message',
+            role: 'user',
+            content: [{ type: 'input_text', text: this.config.initialMessage }]
+          }
+        }));
+      }
+      this.ws.send(JSON.stringify({ type: 'response.create' }));
+    }
   }
 
   handleMessage(event) {
@@ -395,28 +421,37 @@ Keep responses short and conversational — this is a voice call, not an email.`
           this.ws.send(JSON.stringify({ type: 'response.cancel' }));
         }
         this.currentAssistantMessage = '';
+        this.setState('listening');
         break;
 
       case 'input_audio_buffer.speech_stopped':
         console.log('User stopped speaking');
+        this.setState('thinking');
         break;
 
       case 'conversation.item.input_audio_transcription.completed':
         console.log('User transcript:', data.transcript);
-        this.callbacks.onTranscript.forEach(cb => cb(data.transcript, 'user'));
+        this.callbacks.onTranscript.forEach(cb => cb(data.transcript || data.text || '', 'user'));
         break;
 
       case 'response.output_audio.delta':
+        if (this.state !== 'speaking') {
+          this.setState('speaking');
+        }
         this.playPcmChunk(data.delta);
         break;
 
       case 'response.output_audio_transcript.delta':
-        this.currentAssistantMessage += data.delta;
+      case 'response.output_text.delta':
+      case 'response.text.delta':
+        this.currentAssistantMessage += data.delta || '';
         this.callbacks.onAssistantTranscript.forEach(cb => cb(this.currentAssistantMessage, 'assistant'));
         break;
 
       case 'response.output_audio_transcript.done':
-        console.log('Assistant transcript complete:', data.transcript);
+      case 'response.output_text.done':
+      case 'response.text.done':
+        console.log('Assistant transcript complete:', data.transcript || data.text);
         break;
 
       case 'response.function_call_arguments.done':
@@ -427,6 +462,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
       case 'response.done':
         console.log('Response done, tokens:', data.usage?.total_tokens);
+        this.setState('listening');
         break;
 
       case 'error':
@@ -561,7 +597,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
             result = { 
               success: true, 
               available_slots: ["10:00 AM", "2:30 PM", "4:00 PM"],
-              message: `We have 10:00 AM, 2:30 PM, and 4:00 PM available on ${date}.`
+              message: this.config.demoMode
+                ? `For this demo, I found 10:00 AM, 2:30 PM, and 4:00 PM available on ${date}. In production this would check the clinic calendar.`
+                : `We have 10:00 AM, 2:30 PM, and 4:00 PM available on ${date}.`
             };
           }
         } catch (err) {
@@ -600,7 +638,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
             result = { 
               success: true, 
               confirmation_id: "APT-" + Math.floor(Math.random() * 10000),
-              message: `Successfully booked ${patient_name} for ${reason || 'an appointment'} on ${date} at ${time}.`
+              message: this.config.demoMode
+                ? `For this demo, I prepared an appointment hold for ${patient_name} on ${date} at ${time}. In production this would write to the clinic schedule.`
+                : `Successfully booked ${patient_name} for ${reason || 'an appointment'} on ${date} at ${time}.`
             };
           }
         } catch (err) {
@@ -645,7 +685,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
           } else {
             result = { 
               success: true, 
-              message: `Appointment cancelled successfully for ${patient_name}.`
+              message: this.config.demoMode
+                ? `For this demo, I showed the cancellation workflow for ${patient_name}. In production this would update the clinic schedule.`
+                : `Appointment cancelled successfully for ${patient_name}.`
             };
           }
         } catch (err) {
@@ -692,7 +734,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
       errorMsg = `Connection closed: ${event.reason}`;
     }
     
-    this.callbacks.onError.forEach(cb => cb(new Error(errorMsg)));
+    if (event.code !== 1000) {
+      this.callbacks.onError.forEach(cb => cb(new Error(errorMsg)));
+    }
     this.callbacks.onDisconnect.forEach(cb => cb(event));
   }
 

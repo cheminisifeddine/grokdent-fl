@@ -57,6 +57,12 @@ class LandingDemoResponse(BaseModel):
     log: str = "Conversation handled by Renia voice demo."
 
 
+class RealtimeSessionTokenResponse(BaseModel):
+    token: str
+    expires_at: int
+    model: str = "grok-voice-think-fast-1.0"
+
+
 # --- xAI Voice Map ---
 
 XAI_VOICE_MAP = {
@@ -176,6 +182,63 @@ def _landing_demo_fallback(user_message: str) -> LandingDemoResponse:
 
 # --- Routes ---
 
+async def _mint_realtime_client_secret(xai_key: str) -> dict:
+    url = "https://api.x.ai/v1/realtime/client_secrets"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {xai_key}"
+    }
+    payload = {
+        "expires_after": {"seconds": 300}
+    }
+
+    logger.info("Requesting client secret realtime session token from xAI...")
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers=headers, json=payload, timeout=15.0)
+
+    if not response.is_success:
+        err_text = response.text
+        logger.error("xAI session token minting failed: %s (status %d)", err_text, response.status_code)
+        raise HTTPException(
+            status_code=502,
+            detail=f"Failed to mint session token from xAI: {err_text[:200]}"
+        )
+
+    data = response.json()
+    logger.info("Successfully minted xAI Realtime token. Expires at: %s", data.get("expires_at"))
+    return data
+
+
+@router.post("/landing-session-token", response_model=RealtimeSessionTokenResponse)
+async def get_landing_session_token(request: Request):
+    """
+    Public landing-page token minting for the Grok Voice Agent demo.
+
+    Returns only a short-lived xAI client secret. The raw XAI_API_KEY remains
+    server-side and is never sent to the browser.
+    """
+    _enforce_landing_demo_rate_limit(request)
+
+    xai_key = settings.XAI_API_KEY
+    if not xai_key or xai_key == "placeholder":
+        logger.error("XAI_API_KEY not configured for landing realtime demo")
+        raise HTTPException(status_code=500, detail="Realtime voice demo is not configured.")
+
+    try:
+        data = await _mint_realtime_client_secret(xai_key)
+    except httpx.HTTPError as http_err:
+        logger.error("HTTP error calling xAI Realtime API: %s", http_err)
+        raise HTTPException(status_code=502, detail="Network error contacting xAI Realtime API.")
+
+    token = data.get("value")
+    expires_at = data.get("expires_at")
+    if not token or not expires_at:
+        logger.error("xAI realtime token response missing required fields: %s", data.keys())
+        raise HTTPException(status_code=502, detail="Invalid xAI realtime token response.")
+
+    return RealtimeSessionTokenResponse(token=token, expires_at=expires_at)
+
+
 @router.post("/session-token")
 async def get_session_token(current_user: User = Depends(get_current_user)):
     """
@@ -193,39 +256,25 @@ async def get_session_token(current_user: User = Depends(get_current_user)):
             detail="xAI API key not configured on backend. Please add XAI_API_KEY to your .env file."
         )
 
-    url = "https://api.x.ai/v1/realtime/client_secrets"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {xai_key}"
-    }
-    payload = {
-        "expires_after": {"seconds": 300}
-    }
-
     try:
-        logger.info("Requesting client secret realtime session token from xAI...")
-        async with httpx.AsyncClient() as client:
-            response = await client.post(url, headers=headers, json=payload, timeout=15.0)
-
-        if not response.is_success:
-            err_text = response.text
-            logger.error("xAI session token minting failed: %s (status %d)", err_text, response.status_code)
-            raise HTTPException(
-                status_code=502,
-                detail=f"Failed to mint session token from xAI: {err_text[:200]}"
-            )
-
-        data = response.json()
-        logger.info("Successfully minted xAI Realtime token. Expires at: %s", data.get("expires_at"))
+        data = await _mint_realtime_client_secret(xai_key)
+        token = data.get("value")
+        expires_at = data.get("expires_at")
+        if not token or not expires_at:
+            logger.error("xAI realtime token response missing required fields: %s", data.keys())
+            raise HTTPException(status_code=502, detail="Invalid xAI realtime token response.")
         
         return {
-            "token": data.get("value"),
-            "expires_at": data.get("expires_at")
+            "token": token,
+            "expires_at": expires_at,
+            "model": "grok-voice-think-fast-1.0"
         }
 
     except httpx.HTTPError as http_err:
         logger.error("HTTP error calling xAI Realtime API: %s", http_err)
         raise HTTPException(status_code=502, detail="Network error contacting xAI Realtime API.")
+    except HTTPException:
+        raise
     except Exception as exc:
         logger.error("Unexpected error in session token generation: %s", exc)
         raise HTTPException(status_code=500, detail="Internal server error generating session token.")

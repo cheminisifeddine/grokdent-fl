@@ -9,6 +9,9 @@ import { cors } from 'hono/cors';
 import { SignJWT, jwtVerify } from 'jose';
 
 const app = new Hono();
+const landingVoiceTokenHits = new Map();
+const LANDING_VOICE_TOKEN_LIMIT = 24;
+const LANDING_VOICE_TOKEN_WINDOW_MS = 60 * 1000;
 
 // Enable CORS for dashboard web clients
 app.use('*', cors({
@@ -127,6 +130,21 @@ async function authMiddleware(c, next) {
   } catch (err) {
     return c.json({ error: 'Invalid or expired token' }, 401);
   }
+}
+
+function enforceLandingVoiceTokenRateLimit(c) {
+  const ip = c.req.header('CF-Connecting-IP') || c.req.header('X-Forwarded-For') || 'unknown';
+  const now = Date.now();
+  const hits = landingVoiceTokenHits.get(ip) || [];
+  const recentHits = hits.filter((timestamp) => now - timestamp < LANDING_VOICE_TOKEN_WINDOW_MS);
+
+  if (recentHits.length >= LANDING_VOICE_TOKEN_LIMIT) {
+    return c.json({ error: 'Demo limit reached. Please wait a minute and try again.' }, 429);
+  }
+
+  recentHits.push(now);
+  landingVoiceTokenHits.set(ip, recentHits);
+  return null;
 }
 
 // -------------------------------------------------------------------------
@@ -807,6 +825,59 @@ SCENARIO INSTRUCTIONS:
 // -------------------------------------------------------------------------
 // 🔑 xAI Realtime API Session Token Endpoint (For Browser Voice Agents)
 // -------------------------------------------------------------------------
+async function mintXaiRealtimeClientSecret(xaiKey) {
+  const response = await fetch('https://api.x.ai/v1/realtime/client_secrets', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${xaiKey}`
+    },
+    body: JSON.stringify({
+      expires_after: { seconds: 300 }
+    })
+  });
+
+  console.log('xAI session token response status:', response.status);
+
+  if (!response.ok) {
+    const errText = await response.text();
+    console.error('xAI session token error:', errText);
+    return { error: errText, status: response.status };
+  }
+
+  return { data: await response.json() };
+}
+
+app.post('/api/v1/voice/landing-session-token', async (c) => {
+  const rateLimitResponse = enforceLandingVoiceTokenRateLimit(c);
+  if (rateLimitResponse) return rateLimitResponse;
+
+  const xaiKey = c.env.XAI_API_KEY;
+  if (!xaiKey) {
+    return c.json({ error: 'Realtime voice demo is not configured.' }, 500);
+  }
+
+  try {
+    console.log('Fetching public landing session token from xAI...');
+    const result = await mintXaiRealtimeClientSecret(xaiKey);
+    if (result.error) {
+      return c.json({ error: 'Failed to mint landing session token', details: result.error, status: result.status }, 502);
+    }
+    if (!result.data?.value || !result.data?.expires_at) {
+      return c.json({ error: 'Invalid xAI realtime token response.' }, 502);
+    }
+
+    return c.json({
+      token: result.data.value,
+      expires_at: result.data.expires_at,
+      model: 'grok-voice-think-fast-1.0'
+    });
+  } catch (err) {
+    console.error('Landing session token endpoint error:', err);
+    return c.json({ error: 'Landing session token endpoint error', message: err.message }, 500);
+  }
+});
+
 app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
   const user = c.get('user');
   // Use clinic-level key first, then fall back to server env
@@ -818,30 +889,20 @@ app.post('/api/v1/voice/session-token', authMiddleware, async (c) => {
   
   try {
     console.log('Fetching session token from xAI...');
-    const response = await fetch('https://api.x.ai/v1/realtime/client_secrets', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${xaiKey}`
-      },
-      body: JSON.stringify({
-        expires_after: { seconds: 300 }
-      })
-    });
-
-    console.log('xAI session token response status:', response.status);
-
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error('xAI session token error:', errText);
-      return c.json({ error: 'Failed to mint session token', details: errText, status: response.status }, 502);
+    const result = await mintXaiRealtimeClientSecret(xaiKey);
+    if (result.error) {
+      return c.json({ error: 'Failed to mint session token', details: result.error, status: result.status }, 502);
     }
 
-    const data = await response.json();
+    const data = result.data;
+    if (!data?.value || !data?.expires_at) {
+      return c.json({ error: 'Invalid xAI realtime token response.' }, 502);
+    }
     console.log('Session token received, expires_at:', data.expires_at);
     return c.json({
       token: data.value,
-      expires_at: data.expires_at
+      expires_at: data.expires_at,
+      model: 'grok-voice-think-fast-1.0'
     });
   } catch (err) {
     console.error('Session token endpoint error:', err);
