@@ -927,58 +927,290 @@ html:not(.dark) .status-cancelled {
   border-radius: 10px !important;
 }
 
-/* Appointment category blocks */
+/* ==========================================================================
+   RESTORED & IMPRESSIVELY STYLED SMART SCHEDULER CALENDAR (HIGH-FIDELITY GRID & CARDS)
+   ========================================================================== */
+
+/* Week Grid Layout & Style */
+.light-theme .calendar-grid,
+html:not(.dark) .calendar-grid {
+  display: grid !important;
+  grid-template-columns: 80px repeat(7, minmax(115px, 1fr)) !important;
+  background-color: #FFFFFF !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+}
+
+/* Grid Calendar Cell styling */
+.light-theme .calendar-cell,
+html:not(.dark) .calendar-cell {
+  background-color: #FFFFFF !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 8px !important;
+  min-height: 90px !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-theme .calendar-cell:hover,
+html:not(.dark) .calendar-cell:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Week Grid Header styling */
+.light-theme .calendar-cell.calendar-header,
+html:not(.dark) .calendar-cell.calendar-header {
+  background-color: #F9FAFB !important;
+  color: #000000 !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 11px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 52px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  padding: 6px !important;
+}
+
+.light-theme .calendar-cell.calendar-header span:first-child,
+html:not(.dark) .calendar-cell.calendar-header span:first-child {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* Time labels styling */
+.light-theme .calendar-cell.time-label,
+html:not(.dark) .calendar-cell.time-label {
+  background-color: #F9FAFB !important;
+  color: #4B5563 !important;
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 90px !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Appointment block general cards & scales */
+.light-theme .appt-block,
+html:not(.dark) .appt-block {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 8px 10px !important;
+  border-radius: 14px !important;
+  width: 100% !important;
+  height: 100% !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-theme .appt-block:hover,
+html:not(.dark) .appt-block:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+  z-index: 10 !important;
+}
+
+/* Appointment block category definitions */
 .light-theme .appt-general,
 html:not(.dark) .appt-general {
-  background: #F9FAFB !important;
-  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
   color: #1F2937 !important;
+}
+.light-theme .appt-general strong,
+html:not(.dark) .appt-general strong {
+  color: #000000 !important;
+}
+.light-theme .appt-general div.truncate,
+html:not(.dark) .appt-general div.truncate {
+  color: #000000 !important;
 }
 
 .light-theme .appt-cosmetic,
 html:not(.dark) .appt-cosmetic {
-  background: #F3F4F6 !important;
-  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background-color: #F3F4F6 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #000000 !important;
+}
+.light-theme .appt-cosmetic strong,
+html:not(.dark) .appt-cosmetic strong {
+  color: #000000 !important;
+}
+.light-theme .appt-cosmetic div.truncate,
+html:not(.dark) .appt-cosmetic div.truncate {
   color: #000000 !important;
 }
 
 .light-theme .appt-emergency,
 html:not(.dark) .appt-emergency {
-  background: #000000 !important;
+  background-color: #000000 !important;
   border: 1px solid #000000 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
+}
+.light-theme .appt-emergency strong,
+html:not(.dark) .appt-emergency strong,
+.light-theme .appt-emergency div,
+html:not(.dark) .appt-emergency div,
+.light-theme .appt-emergency span,
+html:not(.dark) .appt-emergency span {
+  color: #FFFFFF !important;
 }
 
-/* Calendar grid cells */
-.light-theme .calendar-cell,
-html:not(.dark) .calendar-cell {
-  border-color: rgba(0, 0, 0, 0.04) !important;
+/* Day View Timeline container */
+.light-theme .day-view-container,
+html:not(.dark) .day-view-container {
+  background-color: #FFFFFF !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+  overflow: hidden !important;
 }
 
-.light-theme .calendar-header,
-html:not(.dark) .calendar-header {
-  background: #F9FAFB !important;
-  color: #4B5563 !important;
-}
-
-.light-theme .time-label,
-html:not(.dark) .time-label {
-  color: #6B7280 !important;
-}
-
+/* Day View Row */
 .light-theme .day-row,
 html:not(.dark) .day-row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+  display: flex !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  transition: background-color 0.2s ease !important;
+  align-items: stretch !important;
 }
 
+.light-theme .day-row:hover,
+html:not(.dark) .day-row:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Day Time label */
+.light-theme .day-time,
+html:not(.dark) .day-time {
+  width: 90px !important;
+  padding: 14px !important;
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #4B5563 !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+  background-color: #F9FAFB !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Day Slot */
+.light-theme .day-slot,
+html:not(.dark) .day-slot {
+  flex: 1 !important;
+  padding: 10px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 56px !important;
+}
+
+/* Month Grid Layout */
+.light-theme .month-grid,
+html:not(.dark) .month-grid {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  background-color: #FFFFFF !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+}
+
+/* Month cell */
 .light-theme .month-cell,
 html:not(.dark) .month-cell {
-  border-color: rgba(0, 0, 0, 0.04) !important;
+  background-color: #FFFFFF !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 10px !important;
+  min-height: 115px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
+.light-theme .month-cell:hover,
+html:not(.dark) .month-cell:hover {
+  background-color: rgba(0, 0, 0, 0.015) !important;
+}
+
+/* Month cell Header */
+.light-theme .month-cell-header,
+html:not(.dark) .month-cell-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 6px !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #1F2937 !important;
+}
+
+/* Month cell Today */
 .light-theme .month-cell.today,
 html:not(.dark) .month-cell.today {
-  background: #F9FAFB !important;
+  background-color: rgba(0, 0, 0, 0.01) !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Month Appointments list */
+.light-theme .month-appts-dots,
+html:not(.dark) .month-appts-dots {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  width: 100% !important;
+}
+
+/* Month Appointment Dot styling */
+.light-theme .month-appt-dot,
+html:not(.dark) .month-appt-dot {
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  padding: 3px 6px !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  cursor: pointer !important;
+  background-color: #F9FAFB !important;
+  color: #1F2937 !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-theme .month-appt-dot:hover,
+html:not(.dark) .month-appt-dot:hover {
+  transform: translateY(-1px) !important;
+  background-color: #F3F4F6 !important;
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Month appt dot specific override for emergency */
+.light-theme .month-appt-dot[class*="rose"],
+html:not(.dark) .month-appt-dot[class*="rose"] {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
   border-color: #000000 !important;
 }
 
@@ -1225,4 +1457,181 @@ input[type="range"]::-webkit-slider-thumb:hover {
 [data-tooltip]:hover::after {
   opacity: 1;
   transform: translateX(-50%) scale(1);
+}
+
+/* ==========================================================================
+   PART 1: FIX BLACK TEXT ON BLACK BACKGROUND (DARK-CONTAINER SAFE TEXT COLOR SAFETY)
+   ========================================================================= */
+
+/* Enforce dark/black backgrounds for elements intended to be dark, and force white text */
+.light-theme .bg-black,
+.light-theme .bg-slate-950.text-white,
+.light-theme .bg-slate-900.text-white,
+.light-theme .bg-deep-navy,
+.light-theme .btn-primary,
+.light-theme #sim-action-btn,
+.light-theme #chat-stream > div.ml-auto,
+.light-theme .status-badge.bg-black,
+.light-theme .appt-emergency,
+html:not(.dark) .bg-black,
+html:not(.dark) .bg-slate-950.text-white,
+html:not(.dark) .bg-slate-900.text-white,
+html:not(.dark) .bg-deep-navy,
+html:not(.dark) .btn-primary,
+html:not(.dark) #sim-action-btn,
+html:not(.dark) #chat-stream > div.ml-auto,
+html:not(.dark) .status-badge.bg-black,
+html:not(.dark) .appt-emergency {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+/* Combination classes (without spaces) must strictly show bright white text */
+.light-theme .bg-black.text-white,
+.light-theme .bg-slate-950.text-white,
+.light-theme .bg-slate-900.text-white,
+.light-theme .bg-deep-navy.text-white,
+html:not(.dark) .bg-black.text-white,
+html:not(.dark) .bg-slate-950.text-white,
+html:not(.dark) .bg-slate-900.text-white,
+html:not(.dark) .bg-deep-navy.text-white {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+/* All descendants inside these dark containers MUST stay bright white or inherit white color */
+.light-theme .bg-black *,
+.light-theme .bg-slate-950.text-white *,
+.light-theme .bg-slate-900.text-white *,
+.light-theme .bg-deep-navy *,
+.light-theme .btn-primary *,
+.light-theme #sim-action-btn *,
+.light-theme #chat-stream > div.ml-auto *,
+.light-theme .status-badge.bg-black *,
+.light-theme .appt-emergency *,
+html:not(.dark) .bg-black *,
+html:not(.dark) .bg-slate-950.text-white *,
+html:not(.dark) .bg-slate-900.text-white *,
+html:not(.dark) .bg-deep-navy *,
+html:not(.dark) .btn-primary *,
+html:not(.dark) #sim-action-btn *,
+html:not(.dark) #chat-stream > div.ml-auto *,
+html:not(.dark) .status-badge.bg-black *,
+html:not(.dark) .appt-emergency * {
+  color: #FFFFFF !important;
+}
+
+/* Ensure light gray text is maintained for any secondary text / muted text inside dark elements */
+.light-theme .bg-black .text-slate-400,
+.light-theme .bg-black .text-gray-400,
+.light-theme .bg-black .text-slate-500,
+.light-theme .bg-black .text-gray-500,
+.light-theme .bg-deep-navy .text-slate-400,
+.light-theme .bg-deep-navy .text-gray-400,
+.light-theme .btn-primary .text-slate-400,
+.light-theme .btn-primary .text-gray-400,
+.light-theme #sim-action-btn .text-slate-400,
+.light-theme #sim-action-btn .text-gray-400,
+.light-theme #chat-stream > div.ml-auto .text-slate-400,
+.light-theme #chat-stream > div.ml-auto .text-gray-400,
+html:not(.dark) .bg-black .text-slate-400,
+html:not(.dark) .bg-black .text-gray-400,
+html:not(.dark) .bg-black .text-slate-500,
+html:not(.dark) .bg-black .text-gray-500,
+html:not(.dark) .bg-deep-navy .text-slate-400,
+html:not(.dark) .bg-deep-navy .text-gray-400,
+html:not(.dark) .btn-primary .text-slate-400,
+html:not(.dark) .btn-primary .text-gray-400,
+html:not(.dark) #sim-action-btn .text-slate-400,
+html:not(.dark) #sim-action-btn .text-gray-400,
+html:not(.dark) #chat-stream > div.ml-auto .text-slate-400,
+html:not(.dark) #chat-stream > div.ml-auto .text-gray-400 {
+  color: #E5E7EB !important;
+}
+
+/* ==========================================================================
+   PART 3: POLISH KNOWLEDGE BASE RULE ENGINE BOX (PREMIUM MONOCHROME TERMINAL)
+   ========================================================================== */
+
+/* Overhaul the AI Decision Rule Engine box to look like a premium developer console terminal */
+.light-theme .bg-deep-navy,
+html:not(.dark) .bg-deep-navy {
+  background-color: #000000 !important;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px) !important;
+  background-size: 16px 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  font-family: 'Geist Mono', 'Fira Code', monospace !important;
+}
+
+/* Header inside AI Decision Rule Engine Terminal */
+.light-theme .bg-deep-navy h4,
+html:not(.dark) .bg-deep-navy h4 {
+  color: #E5E7EB !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 12px !important;
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  display: flex !important;
+  align-items: center;
+}
+
+.light-theme .bg-deep-navy h4 span.material-symbols-outlined,
+html:not(.dark) .bg-deep-navy h4 span.material-symbols-outlined {
+  color: #FFFFFF !important;
+}
+
+/* Monospace text & rules styling */
+.light-theme .bg-deep-navy .mono,
+.light-theme .bg-deep-navy .mono p,
+html:not(.dark) .bg-deep-navy .mono,
+html:not(.dark) .bg-deep-navy .mono p {
+  color: #9CA3AF !important; /* light gray for general rule code */
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 11px !important;
+  line-height: 1.6 !important;
+}
+
+/* Syntactic rules highlighting (IF, THEN, SET, INCLUDE rules in solid white) */
+.light-theme .bg-deep-navy .text-indigo-400,
+html:not(.dark) .bg-deep-navy .text-indigo-400 {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+/* General values/id in bright white and highlight background */
+.light-theme .bg-deep-navy #rule-category,
+.light-theme .bg-deep-navy .text-slate-700.font-bold,
+html:not(.dark) .bg-deep-navy #rule-category,
+html:not(.dark) .bg-deep-navy .text-slate-700.font-bold {
+  color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   PART 4: FIX BILLING & ANALYTICS LAYOUT ELEMENTS (PROGRESS & SLIDER TRACKS)
+   ========================================================================== */
+
+/* Progress bar tracks (.h-2.w-full.bg-slate-900) & range slider tracks to have visible light gray backgrounds */
+.light-theme .h-2.w-full.bg-slate-900,
+html:not(.dark) .h-2.w-full.bg-slate-900,
+.light-theme input[type="range"].bg-slate-900,
+html:not(.dark) input[type="range"].bg-slate-900 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Progress bar fills (#sub-progress-bar.bg-white) to have sleek black color */
+.light-theme #sub-progress-bar.bg-white,
+html:not(.dark) #sub-progress-bar.bg-white,
+.light-theme #sub-progress-bar,
+html:not(.dark) #sub-progress-bar {
+  background-color: #000000 !important;
+  background: #000000 !important;
 }
