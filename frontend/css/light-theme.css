@@ -1676,3 +1676,78 @@ html:not(.dark) #sub-progress-bar {
   color: #000000 !important;
 }
 
+/* ==========================================================================
+   PART 5: KNOWLEDGE BASE PREMIUM WORKSTATION & SIMULATOR OVERRIDES
+   ========================================================================== */
+
+/* Force White Text inside Active Buttons in Protocol Directory */
+.light-theme button.bg-black,
+.light-theme button.bg-black *,
+html:not(.dark) button.bg-black,
+html:not(.dark) button.bg-black * {
+  color: #FFFFFF !important;
+}
+
+/* Simulator Chat Stream Custom Overrides */
+.light-theme .transcript-bubble.ai,
+html:not(.dark) .transcript-bubble.ai {
+  background-color: #F3F4F6 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1F2937 !important;
+}
+
+.light-theme .transcript-bubble.ai *,
+html:not(.dark) .transcript-bubble.ai * {
+  color: #1F2937 !important;
+}
+
+.light-theme .transcript-bubble.patient,
+html:not(.dark) .transcript-bubble.patient {
+  background-color: #000000 !important;
+  border: 1px solid #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.light-theme .transcript-bubble.patient *,
+html:not(.dark) .transcript-bubble.patient * {
+  color: #FFFFFF !important;
+}
+
+/* contenteditable Editor focus states */
+.light-theme #editor-question:focus,
+html:not(.dark) #editor-question:focus,
+.light-theme #editor-answer:focus,
+html:not(.dark) #editor-answer:focus {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.02) !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Category Dropdown and inputs inside KB */
+.light-theme #editor-category,
+html:not(.dark) #editor-category {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #000000 !important;
+}
+.light-theme #editor-category:focus,
+html:not(.dark) #editor-category:focus {
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Pixel perfect search bar search input elements in light theme */
+.light-theme #kb-search-input,
+html:not(.dark) #kb-search-input {
+  color: #000000 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.light-theme #kb-search-input::placeholder,
+html:not(.dark) #kb-search-input::placeholder {
+  color: #9CA3AF !important;
+}
+
+

@@ -148,22 +148,22 @@
     <!-- Column 1: Document Index & Protocol Directory -->
     <section class="w-80 bg-white border-r border-slate-200 flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Search Protocols & Actions -->
-      <div class="p-6 border-b border-white/5 space-y-4">
+      <div class="p-6 border-b border-slate-200/60 space-y-4">
         <div class="flex items-center justify-between">
-          <h2 class="font-bold text-sm text-white uppercase tracking-wider font-mono">Protocols</h2>
-          <button id="seed-defaults-btn" title="Seed Default FAQs" class="p-1 rounded hover:bg-white/10 text-slate-400 transition-colors">
+          <h2 class="font-extrabold text-xs text-black uppercase tracking-wider font-display">Protocols</h2>
+          <button id="seed-defaults-btn" title="Seed Default FAQs" class="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-black transition-colors">
             <span class="material-symbols-outlined text-[16px]">download</span>
           </button>
         </div>
         
-        <div class="relative flex items-center bg-white rounded-full px-4 py-1.5 border border-white/5 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
-          <span class="material-symbols-outlined text-slate-400 text-[16px]">search</span>
-          <input id="kb-search-input" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 focus:outline-none" placeholder="Search protocols..." type="text"/>
+        <div class="relative flex items-center bg-slate-50 border border-slate-200 rounded-full px-3.5 py-2 focus-within:bg-white focus-within:border-black/20 focus-within:ring-2 focus-within:ring-black/5 transition-all">
+          <span class="material-symbols-outlined text-slate-450 text-[16px] shrink-0">search</span>
+          <input id="kb-search-input" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 p-0 focus:outline-none" placeholder="Search protocols..." type="text"/>
         </div>
 
-        <button onclick="createNewProtocol()" class="w-full bg-white hover:bg-blue-50 text-blue-700 py-2 rounded-full flex items-center justify-center gap-2 font-bold text-xs shadow-none transition-all">
-          <span class="material-symbols-outlined text-[15px]">add</span>
-          <span>New Document</span>
+        <button onclick="createNewProtocol()" class="w-full bg-black text-white hover:bg-slate-800 py-2.5 rounded-full flex items-center justify-center gap-2 font-bold text-xs shadow-sm hover:scale-[1.01] active:scale-[0.99] transition-all duration-200">
+          <span class="material-symbols-outlined text-[15px] text-white">add</span>
+          <span class="text-white">New Document</span>
         </button>
       </div>
 
@@ -179,7 +179,7 @@
         <!-- Top Meta header -->
         <div class="flex items-center justify-between mb-8">
           <div class="flex items-center gap-3">
-            <select id="editor-category" class="text-[9px] font-bold tracking-wider uppercase bg-slate-900 border-none rounded-full px-3 py-1 text-slate-700 outline-none focus:ring-1 focus:ring-blue-500">
+            <select id="editor-category" class="bg-white border border-slate-200 text-slate-900 text-[10px] font-extrabold uppercase px-3.5 py-1.5 rounded-full outline-none focus:ring-2 focus:ring-black/10">
               <option value="general">General</option>
               <option value="hours">Hours</option>
               <option value="services">Services</option>
@@ -189,20 +189,20 @@
             </select>
             <span class="text-slate-400 text-[10px]" id="editor-last-saved">Synced with Renia Engine</span>
           </div>
-          <button onclick="deleteActiveProtocol()" class="text-xs text-rose-400 font-bold hover:bg-rose-500/10 px-3 py-1 rounded transition-colors flex items-center gap-1">
+          <button onclick="deleteActiveProtocol()" class="text-xs text-rose-600 font-bold hover:bg-rose-50 px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
             <span class="material-symbols-outlined text-[14px]">delete</span> Delete
           </button>
         </div>
 
         <!-- Question Input (Editable display header) -->
-        <h2 id="editor-question" class="font-display text-2xl font-bold tracking-tight text-white mb-6 border-none focus:outline-none focus:ring-0 w-full resize-none min-h-[36px]" contenteditable="true" placeholder="Enter protocol statement or question..."></h2>
+        <h2 id="editor-question" class="font-display text-2xl font-bold tracking-tight text-slate-900 mb-6 border border-transparent hover:border-slate-100 rounded-xl px-3 py-2 transition-all outline-none w-full resize-none min-h-[48px] focus:border-black/20 focus:ring-0" contenteditable="true" placeholder="Enter protocol statement or question..."></h2>
 
         <!-- Answer / Instruction Body (Contenteditable) -->
-        <div class="space-y-6 text-sm text-slate-300 leading-relaxed font-medium">
-          <p id="editor-answer" class="focus:outline-none focus:ring-0 min-h-[120px]" contenteditable="true" placeholder="Type clinical directions or answer details..."></p>
+        <div class="space-y-6 text-sm text-slate-800 leading-relaxed font-medium">
+          <p id="editor-answer" class="border border-transparent hover:border-slate-100 rounded-xl px-3 py-2.5 transition-all outline-none focus:border-black/20 focus:ring-0 min-h-[140px]" contenteditable="true" placeholder="Type clinical directions or answer details..."></p>
 
           <!-- System AI Logic block -->
-          <div class="p-5 bg-deep-navy rounded-lg border border-slate-800/80">
+          <div class="p-5 bg-deep-navy rounded-lg border border-slate-850">
             <h4 class="font-bold text-slate-700 text-[10px] uppercase tracking-wider mb-3 flex items-center gap-2 font-mono">
               <span class="material-symbols-outlined text-[14px] text-indigo-400">terminal</span>
               AI Decision Rule Engine
@@ -218,46 +218,46 @@
 
       <!-- Floating Action Save bar at bottom of editor -->
       <div class="sticky bottom-0 bg-gradient-to-t from-white via-white to-transparent py-6 px-8 flex justify-center">
-        <div class="glass-panel rounded-full px-6 py-2.5 flex items-center gap-4 shadow-glow border border-slate-800/60">
-          <button onclick="document.execCommand('bold', false, null)" title="Bold" class="p-1 rounded text-slate-600 hover:text-slate-900 transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
-          <button onclick="document.execCommand('italic', false, null)" title="Italic" class="p-1 rounded text-slate-600 hover:text-slate-900 transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+        <div class="bg-white/80 backdrop-blur-md rounded-full px-6 py-2.5 flex items-center gap-4 shadow-lg border border-slate-250 flex-row">
+          <button onclick="document.execCommand('bold', false, null)" title="Bold" class="p-1 rounded text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+          <button onclick="document.execCommand('italic', false, null)" title="Italic" class="p-1 rounded text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
           <div class="w-px h-4 bg-slate-200"></div>
-          <button onclick="saveActiveProtocol()" class="flex items-center gap-2 bg-white text-white px-5 py-1.5 rounded-full text-xs font-bold hover:bg-slate-900 active:scale-[0.98] transition-all uppercase tracking-wider">
-            <span class="material-symbols-outlined text-[14px]">cloud_done</span>
-            <span>Save Directive</span>
+          <button onclick="saveActiveProtocol()" class="flex items-center gap-2 bg-black text-white hover:bg-slate-800 px-5 py-2.5 rounded-full text-xs font-bold active:scale-[0.98] transition-all uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px] text-white">cloud_done</span>
+            <span class="text-white">Save Directive</span>
           </button>
         </div>
       </div>
     </section>
 
     <!-- Column 3: AI Preview Simulator (Real-time Tester) -->
-    <section class="w-96 border-l border-white/5 bg-white flex flex-col flex-shrink-0 h-full overflow-hidden">
+    <section class="w-96 border-l border-slate-200 bg-white flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Preview Header -->
-      <div class="p-6 border-b border-white/5 bg-slate-slate/40">
+      <div class="p-6 border-b border-slate-200/60 bg-slate-50/50">
         <div class="flex items-center justify-between mb-2">
-          <h3 class="font-bold text-xs tracking-wider uppercase font-mono flex items-center gap-2">
+          <h3 class="font-extrabold text-xs tracking-wider uppercase font-display flex items-center gap-2 text-black">
             <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
             </span>
             Renia Voice Engine
           </h3>
-          <button onclick="resetPreviewChat()" class="text-[10px] font-bold text-slate-600 hover:text-slate-900 uppercase">Clear</button>
+          <button onclick="resetPreviewChat()" class="text-[10px] font-extrabold text-slate-500 hover:text-black uppercase tracking-wider transition-colors">Clear</button>
         </div>
         <p class="text-slate-400 text-[10px] font-medium leading-normal">Test guidelines instantly. Renia reads documents live during voice caller simulation.</p>
       </div>
 
       <!-- Preview Chat stream -->
-      <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4" id="simulator-chat-history">
+      <div class="flex-grow overflow-y-auto custom-scrollbar p-6 space-y-5" id="simulator-chat-history">
         <!-- Rendered Dynamically -->
       </div>
 
       <!-- Chat input -->
-      <div class="p-6 border-t border-white/5 bg-slate-slate/30">
-        <form id="simulator-form" class="relative">
-          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-white border border-slate-200 rounded-full py-2.5 pl-4 pr-10 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-white/5 transition-all"/>
-          <button type="submit" class="absolute right-1.5 top-1.5 w-7 h-7 rounded-full bg-white flex items-center justify-center text-white hover:bg-slate-900 transition-all">
-            <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+      <div class="p-6 border-t border-slate-200/60 bg-slate-50/30">
+        <form id="simulator-form" class="relative flex items-center">
+          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-slate-50 border border-slate-200 rounded-full py-3 pl-5 pr-12 text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-black/20 transition-all"/>
+          <button type="submit" class="absolute right-1.5 top-1.5 w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:bg-slate-800 transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[16px] text-white">arrow_upward</span>
           </button>
         </form>
         <div class="flex items-center justify-center gap-3 mt-3 text-[9px] font-mono text-slate-400">
@@ -340,21 +340,23 @@
 
         html += `
           <div class="mb-4">
-            <p class="px-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 font-mono">${cat}</p>
-            <div class="space-y-1">
+            <p class="px-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 font-display">${cat}</p>
+            <div class="space-y-1.5">
         `;
 
         catEntries.forEach(entry => {
           const isActive = entry.id === state.activeId;
-          const bgClass = isActive ? 'bg-white shadow-none border-white/5 text-white font-bold' : 'hover:bg-slate-slate text-slate-500 hover:text-slate-900 border-transparent';
+          const buttonClass = isActive 
+            ? 'w-full flex items-center justify-between px-3.5 py-3 bg-black text-white border border-black font-extrabold shadow-glow hover:bg-black hover:text-white rounded-xl text-xs text-left transition-all my-1.5' 
+            : 'w-full flex items-center justify-between px-3.5 py-3 text-slate-500 hover:bg-slate-100/50 hover:text-slate-900 border-t-transparent border-r-transparent border-b border-b-slate-100/85 border-l-2 border-l-slate-200/80 hover:border-l-black rounded-none text-xs text-left transition-all';
           
           html += `
-            <button onclick="setActiveDocument('${entry.id}')" class="w-full flex items-center justify-between px-3 py-2 border rounded-lg text-xs text-left transition-all ${bgClass}">
-              <span class="flex items-center gap-2 truncate">
-                <span class="material-symbols-outlined text-[16px] text-slate-400">${catIcons[cat] || 'description'}</span>
-                <span class="truncate">${escapeHtml(entry.question)}</span>
+            <button onclick="setActiveDocument('${entry.id}')" class="${buttonClass}">
+              <span class="flex items-center gap-2.5 truncate">
+                <span class="material-symbols-outlined text-[16px] ${isActive ? 'text-white' : 'text-slate-400'}">${catIcons[cat] || 'description'}</span>
+                <span class="truncate font-semibold ${isActive ? 'text-white' : 'text-slate-700 hover:text-slate-900'}">${escapeHtml(entry.question)}</span>
               </span>
-              ${isActive ? '<span class="w-1.5 h-1.5 rounded-full bg-indigo-600 shrink-0 ml-1"></span>' : ''}
+              ${isActive ? '<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0 ml-1.5"></span>' : ''}
             </button>
           `;
         });
@@ -473,10 +475,13 @@
       const history = document.getElementById('simulator-chat-history');
       if (!history) return;
       history.innerHTML = `
-        <div class="flex gap-2">
-          <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-          <div class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-700 shadow-none">
-            Hi! Ask me any question related to clinic directives, accepted insurances, or cleaning policies. I am syncing with your updates in real time!
+        <div class="flex gap-2 items-start animate-fade-in">
+          <div class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[12px] shrink-0 font-bold select-none">🤖</div>
+          <div class="flex flex-col gap-1.5 max-w-[80%]">
+            <span class="text-[9px] font-bold font-display uppercase tracking-widest text-slate-450 leading-none">Renia AI</span>
+            <div class="transcript-bubble ai bg-[#F3F4F6] border border-slate-200 text-slate-900 rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-none">
+              Hi! Ask me any question related to clinic directives, accepted insurances, or cleaning policies. I am syncing with your updates in real time!
+            </div>
           </div>
         </div>
       `;
@@ -547,11 +552,14 @@
           if (!query) return;
 
           simHistory.innerHTML += `
-            <div class="flex gap-2 justify-end">
-              <div class="bg-white text-white px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-right">
-                ${escapeHtml(query)}
+            <div class="flex gap-2 items-start justify-end animate-fade-in">
+              <div class="flex flex-col gap-1.5 items-end max-w-[80%]">
+                <span class="text-[9px] font-bold font-display uppercase tracking-widest text-slate-400 leading-none">Patient</span>
+                <div class="transcript-bubble patient bg-[#000000] text-white font-semibold rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm">
+                  ${escapeHtml(query)}
+                </div>
               </div>
-              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] text-slate-700 font-bold shrink-0 select-none"><span class="material-symbols-outlined text-slate-400 text-lg">person</span></div>
+              <div class="w-7 h-7 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-[12px] text-white font-bold shrink-0 select-none">👤</div>
             </div>
           `;
           
@@ -560,10 +568,13 @@
 
           const typingId = 'typing_' + Date.now();
           simHistory.innerHTML += `
-            <div class="flex gap-2" id="${typingId}">
-              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-              <div class="bg-white border border-slate-150 px-3 py-1.5 rounded-xl text-xs text-slate-400 italic">
-                Thinking...
+            <div class="flex gap-2 items-start animate-fade-in" id="${typingId}">
+              <div class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[12px] shrink-0 font-bold select-none">🤖</div>
+              <div class="flex flex-col gap-1.5 max-w-[80%]">
+                <span class="text-[9px] font-bold font-display uppercase tracking-widest text-slate-450 leading-none">Renia AI</span>
+                <div class="transcript-bubble ai bg-[#F3F4F6] border border-slate-200 text-slate-450 italic rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-none">
+                  Thinking...
+                </div>
               </div>
             </div>
           `;
@@ -574,10 +585,13 @@
             
             const response = getSimulatedAIResponse(query);
             simHistory.innerHTML += `
-              <div class="flex gap-2">
-                <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-                <div class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-700 shadow-none text-left">
-                  ${escapeHtml(response)}
+              <div class="flex gap-2 items-start animate-fade-in">
+                <div class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[12px] shrink-0 font-bold select-none">🤖</div>
+                <div class="flex flex-col gap-1.5 max-w-[80%]">
+                  <span class="text-[9px] font-bold font-display uppercase tracking-widest text-slate-450 leading-none">Renia AI</span>
+                  <div class="transcript-bubble ai bg-[#F3F4F6] border border-slate-200 text-slate-900 rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-none text-left">
+                    ${escapeHtml(response)}
+                  </div>
                 </div>
               </div>
             `;
