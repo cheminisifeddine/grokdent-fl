@@ -248,8 +248,11 @@
             <h2 class="text-2xl font-bold tracking-tight text-slate-900 mb-1 leading-none">Configuration Panel</h2>
             <p class="text-slate-400 text-xs font-medium">Fine-tune clinic particulars, voice responses, and scheduling hours.</p>
           </div>
-          <div class="text-xs font-mono font-bold text-slate-400">
-            SECURED TELEPHONY HUB
+          <div class="flex items-center gap-3">
+            <button onclick="if(typeof showToast==='function')showToast('Configurations synchronized.','success')" class="px-4 py-2 border border-black hover:bg-black hover:text-white rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer">Sync Node</button>
+            <div class="text-xs font-mono font-bold text-slate-400 hidden sm:block">
+              SECURED TELEPHONY HUB
+            </div>
           </div>
         </div>
 
@@ -260,6 +263,7 @@
           <button data-target="services" onclick="switchSettingsTab('services')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Services &amp; Prices</button>
           <button data-target="voice" onclick="switchSettingsTab('voice')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">AI Voice Settings</button>
           <button data-target="emergency" onclick="switchSettingsTab('emergency')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Emergency Protocol</button>
+          <button data-target="integrations" onclick="switchSettingsTab('integrations')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Integrations</button>
         </div>
 
         <!-- Active settings forms container -->
@@ -348,6 +352,24 @@
             </div>
             
             <div class="space-y-4">
+              <!-- Live Waveform Preview console -->
+              <div class="bg-white text-white rounded-lg p-5 shadow-glow relative overflow-hidden flex flex-col justify-between h-[230px] border border-slate-900 mb-6">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase font-bold">Vocalizer preview</span>
+                  <span id="visualizer-status" class="text-[9px] font-mono text-zinc-500 uppercase">IDLE</span>
+                </div>
+                
+                <div class="my-4">
+                  <p class="text-sm font-semibold italic leading-relaxed text-zinc-200" id="live-speech-sample">
+                    "Hello! Thank you for calling Sunshine Smiles Dental. How can I assist you?"
+                  </p>
+                </div>
+
+                <div class="relative w-full h-10 rounded overflow-hidden">
+                  <canvas id="soundwave-canvas" class="w-full h-full bg-slate-50"></canvas>
+                </div>
+              </div>
+
               <!-- API Key block -->
               <div class="p-4 rounded bg-white border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-none">
                 <div>
@@ -441,93 +463,59 @@
             </div>
           </form>
 
+          <!-- Integrations Panel Form -->
+          <div class="settings-form bg-white rounded-lg p-6 border border-white/5 shadow-none space-y-6 hidden" id="integrations-form">
+            <div class="flex items-center justify-between border-b border-slate-800/50 pb-3">
+              <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Third-Party Connected Integrations</h3>
+              <span class="text-slate-400 text-[10px] font-semibold">Instantly connect clinic hooks</span>
+            </div>
+            
+            <div class="space-y-4">
+              <!-- Google Calendar Integration -->
+              <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm"><span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span></div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-700">Google Calendar</h5>
+                    <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
+                      <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Active
+                    </span>
+                  </div>
+                </div>
+                <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-750 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+              </div>
+
+              <!-- Twilio integration -->
+              <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm">📞</div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-700">Twilio Telephony</h5>
+                    <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
+                      <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Live Line
+                    </span>
+                  </div>
+                </div>
+                <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-755 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+              </div>
+
+              <!-- Stripe -->
+              <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
+                <div class="flex items-center gap-3 opacity-60">
+                  <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm">💳</div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-700">Stripe Payments</h5>
+                    <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 block">Configured</span>
+                  </div>
+                </div>
+                <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-750 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
-
-    <!-- Right Column: Interactive console, Wave visualizer, and Integrations -->
-    <aside class="w-[380px] h-full bg-white border-l border-slate-800/80 flex flex-col shadow-none flex-shrink-0">
-      <div class="p-6 border-b border-white/5 bg-slate-50">
-        <h3 class="font-bold text-sm text-slate-900 leading-none">Console &amp; Integrations</h3>
-        <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Live visualizer and hooks</p>
-      </div>
-
-      <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
-        
-        <!-- Live Waveform Preview console -->
-        <div class="bg-white text-white rounded-lg p-5 shadow-glow relative overflow-hidden flex flex-col justify-between h-[230px] border border-slate-900">
-          <div class="flex items-center justify-between">
-            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase font-bold">Vocalizer preview</span>
-            <span id="visualizer-status" class="text-[9px] font-mono text-zinc-500 uppercase">IDLE</span>
-          </div>
-          
-          <div class="my-4">
-            <p class="text-sm font-semibold italic leading-relaxed text-zinc-200" id="live-speech-sample">
-              "Hello! Thank you for calling Sunshine Smiles Dental. How can I assist you?"
-            </p>
-          </div>
-
-          <div class="relative w-full h-10 rounded overflow-hidden">
-            <canvas id="soundwave-canvas" class="w-full h-full bg-slate-50"></canvas>
-          </div>
-        </div>
-
-        <!-- Integrations Workbench list -->
-        <div class="space-y-4">
-          <h4 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Third-party integrations</h4>
-
-          <!-- Google Calendar Integration -->
-          <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm"><span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span></div>
-              <div>
-                <h5 class="text-xs font-bold text-slate-700">Google Calendar</h5>
-                <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
-                  <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Active
-                </span>
-              </div>
-            </div>
-            <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
-          </div>
-
-          <!-- Twilio integration -->
-          <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm">📞</div>
-              <div>
-                <h5 class="text-xs font-bold text-slate-700">Twilio Telephony</h5>
-                <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
-                  <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Live Line
-                </span>
-              </div>
-            </div>
-            <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
-          </div>
-
-          <!-- Stripe -->
-          <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
-            <div class="flex items-center gap-3 opacity-60">
-              <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm">💳</div>
-              <div>
-                <h5 class="text-xs font-bold text-slate-700">Stripe Payments</h5>
-                <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 block">Configured</span>
-              </div>
-            </div>
-            <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="p-6 border-t border-white/5 bg-white flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
-          Sign Out
-        </button>
-        <button onclick="if(typeof showToast==='function')showToast('Configurations synchronized.','success')" class="flex-1 bg-white border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider cursor-pointer">
-          Sync Node
-        </button>
-      </div>
-    </aside>
   </main>
 
   <!-- App Scripts (settings.html is self-contained; does not load app.js to avoid init conflicts) -->
