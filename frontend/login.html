@@ -4,43 +4,63 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Renia AI - Sign In</title>
+  <meta name="description" content="Sign in to your Renia AI dental receptionist dashboard." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Geist:wght@300;400;500;600;700;800&amp;family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  
-    <script id="tailwind-config">
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "slate-350": "#E5E7EB",
-            "slate-550": "#6B7280",
-            "indigo-500/30": "rgba(99, 102, 241, 0.15)",
-            "on-background": "#0F172A",
-            "surface-tint": "#6366F1",
-            "medical-cyan": "#10B981",
-            "medical-blue": "#3B82F6",
-            "deep-navy": "#0F172A",
-            "slate-slate": "#F8FAFC",
+            "slate-350": "#D1D5DB",
+            "slate-550": "#4B5563",
+            "indigo-500/30": "rgba(0, 0, 0, 0.05)",
+            "on-background": "#000000",
+            "surface-tint": "#000000",
+            "medical-cyan": "#000000",
+            "medical-blue": "#4B5563",
+            "deep-navy": "#000000",
+            "slate-slate": "#F9FAFB",
             "clinical-white": "#FFFFFF",
-            "sterile-gray": "#F1F5F9",
-            "success": "#10B981",
-            "error": "#EF4444",
-            "outline": "rgba(0, 0, 0, 0.05)",
+            "sterile-gray": "#F9FAFB",
+            "success": "#000000",
+            "error": "#111827",
+            "outline": "rgba(0, 0, 0, 0.06)",
+            indigo: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            violet: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            emerald: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            rose: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            amber: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
             slate: {
-              50: "#FFFFFF",
-              100: "#F9FAFB",
-              200: "#E5E7EB",
-              300: "#D1D5DB",
-              400: "#9CA3AF",
-              500: "#6B7280",
-              600: "#4B5563",
-              700: "#1F2937",
-              800: "#111827",
-              850: "#0C0C0E",
-              900: "#000000",
-              950: "#FFFFFF",
+              50: "#FFFFFF", 100: "#F9FAFB", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#6B7280", 600: "#4B5563", 700: "#1F2937",
+              800: "#111827", 850: "#0C0C0E", 900: "#000000", 950: "#FFFFFF",
             },
             white: "#FFFFFF",
           },
@@ -58,271 +78,174 @@
     };
   </script>
 
-    <style>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
-    
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
+
+    :root {
+      --renia-ink: #0f172a;
+      --renia-muted: #64748b;
+      --renia-line: #e2e8f0;
+      --renia-panel: rgba(255, 255, 255, 0.92);
+      --renia-soft: #f8fafc;
+      --renia-blue: #2563eb;
+      --renia-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+      --renia-shadow-sm: 0 12px 32px rgba(15, 23, 42, 0.06);
     }
-    
+
+    body {
+      font-family: 'Geist', 'Inter', sans-serif;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.78) 42%, #ffffff 100%) !important;
+      color: var(--renia-ink) !important;
+      letter-spacing: -0.015em;
+      min-height: 100vh;
+    }
+
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Outfit', sans-serif !important;
+      color: #000000 !important;
       letter-spacing: -0.035em !important;
-      color: #000000 !important;
     }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
+
+    .text-slate-400, .text-slate-500, .text-slate-550 { color: var(--renia-muted) !important; }
+    .text-slate-300 { color: #1F2937 !important; }
+
+    nav.fixed {
+      background: rgba(255, 255, 255, 0.9) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02) !important;
     }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
+
+    .glass-card {
+      background: var(--renia-panel) !important;
+      border: 1px solid var(--renia-line) !important;
+      box-shadow: var(--renia-shadow-sm) !important;
+      border-radius: 18px !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+    .glass-card:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(0,0,0,0.15) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.01), 0 16px 48px rgba(0,0,0,0.03) !important;
     }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
+
+    .bg-deep-navy, #login-btn {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(37, 99, 235, 0.18) !important;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
+    .bg-deep-navy:hover, #login-btn:hover {
+      background: linear-gradient(135deg, #172554 0%, #2563eb 100%) !important;
+      box-shadow: 0 18px 42px rgba(37, 99, 235, 0.22) !important;
+      transform: translateY(-1px);
     }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
+
+    .input-field {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
       color: #000000 !important;
-      border-radius: 8px !important;
+      border-radius: 12px !important;
       transition: all 0.2s ease !important;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
     }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+    .input-field:focus {
       outline: none !important;
       border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
     }
-    
-    /* Switch Checkbox Fixes */
-    .switch-dot {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    .input-field::placeholder { color: #9CA3AF !important; }
+
+    #demo-btn {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #475569 !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
+    #demo-btn:hover {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.04) !important;
     }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
+
+    .grid-bg {
+      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
     }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
-    }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.16); }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block; vertical-align: middle; line-height: 1;
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 antialiased selection:bg-indigo-500/30 selection:text-white flex flex-col justify-between grid-bg relative overflow-x-hidden pt-28">
-  
-  <!-- Navigation Header (Same as Landing Page) -->
-  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a class="flex items-center gap-2.5 font-black text-xl tracking-tight text-slate-900 group" href="index.html">
+<body class="min-h-screen text-on-background font-sans antialiased selection:bg-indigo-500/30 selection:text-white flex flex-col grid-bg relative overflow-x-hidden pt-20">
+
+  <!-- TOP NAVIGATION -->
+  <nav class="fixed top-0 w-full z-50">
+    <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
+      <a class="font-display font-extrabold text-2xl tracking-tight text-slate-900 flex items-center gap-3" href="index.html">
         <span class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-base">
-          <svg class="w-5 h-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <path d="M8 11h8M12 7v8"/>
+          <svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/>
           </svg>
         </span>
-        <span class="font-display font-black text-lg bg-gradient-to-r from-slate-900 to-indigo-950 bg-clip-text text-transparent group-hover:opacity-85 transition-opacity">Renia AI</span>
+        Renia<span class="text-slate-900">AI</span>
       </a>
-      <a href="signup.html" class="bg-black text-white text-xs font-semibold px-5 py-2.5 rounded-xl hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-glow">
-        Deploy AI
+      <a href="signup.html" class="bg-deep-navy text-white text-sm font-semibold px-6 py-3 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 shadow-glow">
+        Deploy AI Receptionist
+        <span class="material-symbols-outlined text-[16px] font-bold">arrow_forward</span>
       </a>
     </div>
   </nav>
 
-  <!-- Centered Elite Glass Login Card -->
+  <!-- CENTERED LOGIN CARD -->
   <main class="flex-1 flex items-center justify-center p-6 w-full max-w-lg mx-auto z-10">
-    <div class="w-full bg-white border border-slate-200 p-8 sm:p-10 rounded-3xl shadow-glow glass-card">
-      
+    <div class="w-full glass-card p-8 sm:p-10">
+
       <!-- Brand Icon / Header -->
       <div class="text-center mb-8">
-        <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <path d="M8 11h8M12 7v8"/>
           </svg>
         </div>
         <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">Sign in to Practice</h2>
-        <p class="text-slate-400 text-xs mt-1.5 font-medium">Enter clinic credentials to view active call transcripts.</p>
+        <p class="text-slate-500 text-sm mt-2 font-medium">Enter clinic credentials to view active call transcripts.</p>
       </div>
 
       <!-- Sign In Form -->
       <form id="login-form" class="space-y-5">
         <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Work Email</label>
-          <input type="email" id="login-email" class="input-field w-full px-4 py-3 text-sm rounded-xl border border-slate-200 bg-white text-slate-950 font-medium outline-none placeholder:text-slate-400 transition-all focus:border-black focus:ring-1 focus:ring-black" placeholder="dr.smith@clinic.com" required>
+          <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Work Email</label>
+          <input type="email" id="login-email" class="input-field w-full px-4 py-3.5 text-sm rounded-xl font-medium outline-none placeholder:text-slate-400" placeholder="dr.smith@clinic.com" required>
         </div>
 
         <div>
           <div class="flex justify-between items-center mb-1.5">
-            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
-            <a href="#" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 uppercase tracking-wider transition-colors">Forgot?</a>
+            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Password</label>
+            <a href="#" class="text-[10px] font-bold text-blue-600 hover:text-blue-800 uppercase tracking-wider transition-colors">Forgot?</a>
           </div>
-          <input type="password" id="login-password" class="input-field w-full px-4 py-3 text-sm rounded-xl border border-slate-200 bg-white text-slate-950 font-medium outline-none placeholder:text-slate-400 transition-all focus:border-black focus:ring-1 focus:ring-black" placeholder="••••••••" required>
+          <input type="password" id="login-password" class="input-field w-full px-4 py-3.5 text-sm rounded-xl font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
         </div>
 
         <div class="flex items-center gap-2 py-1">
-          <input type="checkbox" id="remember" class="w-4 h-4 text-indigo-600 border-slate-350 rounded focus:ring-0 cursor-pointer">
+          <input type="checkbox" id="remember" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-0 cursor-pointer">
           <label for="remember" class="text-xs text-slate-500 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
         </div>
 
         <div id="login-error" class="text-xs text-rose-500 font-bold pt-1"></div>
 
-        <button type="submit" id="login-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest bg-black text-white hover:bg-slate-800 transition-all active:scale-[0.98] mt-2 shadow-md">
+        <button type="submit" id="login-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest text-white hover:scale-[1.01] active:scale-[0.98] transition-all mt-2">
           Authenticate
         </button>
 
@@ -332,21 +255,21 @@
           <div class="flex-grow border-t border-slate-100"></div>
         </div>
 
-        <button type="button" id="demo-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-black transition-all active:scale-[0.98] flex items-center justify-center gap-2">
-          <span class="material-symbols-outlined text-[15px] text-indigo-600 animate-pulse">sports_esports</span> Explore Demo Sandbox
+        <button type="button" id="demo-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+          <span class="material-symbols-outlined text-[15px] text-blue-600 animate-pulse">sports_esports</span> Explore Demo Sandbox
         </button>
       </form>
-      
+
       <div class="mt-8 text-center">
-        <p class="text-xs text-slate-400 font-medium">
-          New clinic partner? <a href="signup.html" class="font-bold text-indigo-600 hover:text-indigo-800 transition-colors">Register Practice</a>
+        <p class="text-xs text-slate-500 font-medium">
+          New clinic partner? <a href="signup.html" class="font-bold text-blue-600 hover:text-blue-800 transition-colors">Register Practice</a>
         </p>
       </div>
 
     </div>
   </main>
 
-  <!-- Tiny High-End Copyright Footer -->
+  <!-- Footer -->
   <footer class="w-full py-6 text-center text-xs text-slate-400 z-10">
     &copy; 2026 Renia AI Technologies Inc. All rights reserved.
   </footer>
@@ -356,5 +279,5 @@
   <script src="js/api.js?v=4"></script>
   <script src="js/auth.js?v=4"></script>
   <script src="js/app.js?v=4"></script>
-<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
+</body>
 </html>

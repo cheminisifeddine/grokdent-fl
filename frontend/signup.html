@@ -4,44 +4,63 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Renia AI · Create Your Account</title>
-  
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <meta name="description" content="Register your dental practice with Renia AI. Deploy an AI voice receptionist in minutes." />
+
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Geist:wght@300;400;500;600;700;800&amp;family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  
-    <script id="tailwind-config">
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "slate-350": "#E5E7EB",
-            "slate-550": "#6B7280",
-            "indigo-500/30": "rgba(99, 102, 241, 0.15)",
-            "on-background": "#0F172A",
-            "surface-tint": "#6366F1",
-            "medical-cyan": "#10B981",
-            "medical-blue": "#3B82F6",
-            "deep-navy": "#0F172A",
-            "slate-slate": "#F8FAFC",
+            "slate-350": "#D1D5DB",
+            "slate-550": "#4B5563",
+            "indigo-500/30": "rgba(0, 0, 0, 0.05)",
+            "on-background": "#000000",
+            "surface-tint": "#000000",
+            "medical-cyan": "#000000",
+            "medical-blue": "#4B5563",
+            "deep-navy": "#000000",
+            "slate-slate": "#F9FAFB",
             "clinical-white": "#FFFFFF",
-            "sterile-gray": "#F1F5F9",
-            "success": "#10B981",
-            "error": "#EF4444",
-            "outline": "rgba(0, 0, 0, 0.05)",
+            "sterile-gray": "#F9FAFB",
+            "success": "#000000",
+            "error": "#111827",
+            "outline": "rgba(0, 0, 0, 0.06)",
+            indigo: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            violet: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            emerald: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            rose: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
+            amber: {
+              50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#000000", 600: "#000000", 700: "#000000",
+              800: "#000000", 900: "#000000", 950: "#000000",
+            },
             slate: {
-              50: "#FFFFFF",
-              100: "#F9FAFB",
-              200: "#E5E7EB",
-              300: "#D1D5DB",
-              400: "#9CA3AF",
-              500: "#6B7280",
-              600: "#4B5563",
-              700: "#1F2937",
-              800: "#111827",
-              850: "#0C0C0E",
-              900: "#000000",
-              950: "#FFFFFF",
+              50: "#FFFFFF", 100: "#F9FAFB", 200: "#E5E7EB", 300: "#D1D5DB",
+              400: "#9CA3AF", 500: "#6B7280", 600: "#4B5563", 700: "#1F2937",
+              800: "#111827", 850: "#0C0C0E", 900: "#000000", 950: "#FFFFFF",
             },
             white: "#FFFFFF",
           },
@@ -58,230 +77,193 @@
       }
     };
   </script>
-  
-    <style>
+
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
-    
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
+
+    :root {
+      --renia-ink: #0f172a;
+      --renia-muted: #64748b;
+      --renia-line: #e2e8f0;
+      --renia-panel: rgba(255, 255, 255, 0.92);
+      --renia-soft: #f8fafc;
+      --renia-blue: #2563eb;
+      --renia-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+      --renia-shadow-sm: 0 12px 32px rgba(15, 23, 42, 0.06);
     }
-    
+
+    body {
+      font-family: 'Geist', 'Inter', sans-serif;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.78) 42%, #ffffff 100%) !important;
+      color: var(--renia-ink) !important;
+      letter-spacing: -0.015em;
+      min-height: 100vh;
+    }
+
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Outfit', sans-serif !important;
+      color: #000000 !important;
       letter-spacing: -0.035em !important;
-      color: #000000 !important;
     }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
+
+    .text-slate-400, .text-slate-500, .text-slate-550 { color: var(--renia-muted) !important; }
+    .text-slate-300 { color: #1F2937 !important; }
+
+    nav.fixed {
+      background: rgba(255, 255, 255, 0.9) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02) !important;
     }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
+
+    .glass-card {
+      background: var(--renia-panel) !important;
+      border: 1px solid var(--renia-line) !important;
+      box-shadow: var(--renia-shadow-sm) !important;
+      border-radius: 18px !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+
+    .bg-deep-navy, #signup-next {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(37, 99, 235, 0.18) !important;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
+    .bg-deep-navy:hover, #signup-next:hover {
+      background: linear-gradient(135deg, #172554 0%, #2563eb 100%) !important;
+      box-shadow: 0 18px 42px rgba(37, 99, 235, 0.22) !important;
+      transform: translateY(-1px);
     }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
+
     .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
       color: #000000 !important;
-      border-radius: 8px !important;
+      border-radius: 12px !important;
       transition: all 0.2s ease !important;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
     }
     .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
       outline: none !important;
-      border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
+      border-color: #2563eb !important;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
     }
-    
-    /* Switch Checkbox Fixes */
+    .theme-input::placeholder, .input-field::placeholder { color: #9CA3AF !important; }
+
+    /* Toggle Cards */
+    .toggle-card {
+      background: #FFFFFF !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.01) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      cursor: pointer;
+    }
+    .toggle-card:hover {
+      transform: translateY(-2px) !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.04) !important;
+    }
+    .toggle-card.active {
+      background: #eff6ff !important;
+      border-color: #2563eb !important;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 8px 24px rgba(37, 99, 235, 0.08) !important;
+    }
+    .toggle-card.active .check-icon { color: #2563eb !important; }
+    .toggle-card.active span { color: #0f172a !important; }
+
+    /* Stepper */
+    .signup-step {
+      background-color: #F3F4F6 !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #6B7280 !important;
+      transition: all 0.3s ease;
+    }
+    .signup-step.active {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      color: #FFFFFF !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.18) !important;
+    }
+    .step-connector {
+      background-color: #e2e8f0 !important;
+    }
+    .signup-progress {
+      background: #e2e8f0 !important;
+    }
+    .progress-fill {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+    }
+
+    /* Switch */
+    .switch-label {
+      background-color: #cbd5e1 !important;
+    }
+    .switch-checkbox:checked + .switch-label {
+      background-color: #2563eb !important;
+    }
+    .switch-checkbox:checked + .switch-label .switch-dot {
+      transform: translateX(24px) !important;
+    }
     .switch-dot {
       background-color: #FFFFFF !important;
       border: 1px solid rgba(0, 0, 0, 0.1) !important;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
     }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
+
+    .grid-bg {
+      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
     }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
+
+    /* Back button */
+    #signup-back {
+      border: 1px solid #e2e8f0 !important;
+      color: #475569 !important;
+      background: #f8fafc !important;
+      transition: all 0.2s ease !important;
     }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
+    #signup-back:hover {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
     }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
+
+    /* Pricing toggle bar */
+    .pricing-toggle-bar {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
     }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.16); }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block; vertical-align: middle; line-height: 1;
     }
   </style>
 </head>
-<body class="relative min-h-screen flex flex-col items-center justify-center p-6 bg-slate-950 text-slate-200 antialiased overflow-x-hidden selection:bg-indigo-500/30 selection:text-white">
+<body class="min-h-screen text-on-background font-sans antialiased selection:bg-indigo-500/30 selection:text-white flex flex-col grid-bg relative overflow-x-hidden pt-20">
 
-  <!-- Background Pattern -->
-  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-    <div class="absolute inset-0 grid-bg opacity-100"></div>
-  </div>
-
-  <!-- Top Navigation -->
-  <nav class="fixed top-0 w-full z-40 py-4 pointer-events-none">
-    <div class="max-w-[1200px] mx-auto px-6 pointer-events-auto flex justify-between items-center">
-      <a href="index.html" class="flex items-center gap-2.5 font-black text-xl tracking-tight text-white group">
-        <div class="w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
-        <span>Renia AI</span>
+  <!-- TOP NAVIGATION -->
+  <nav class="fixed top-0 w-full z-40">
+    <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
+      <a class="font-display font-extrabold text-2xl tracking-tight text-slate-900 flex items-center gap-3" href="index.html">
+        <span class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-base">
+          <svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/>
+          </svg>
+        </span>
+        Renia<span class="text-slate-900">AI</span>
       </a>
       <div class="flex items-center gap-4">
-        <span class="text-xs font-semibold text-slate-400 hidden sm:block">Already registered?</span>
-        <a href="login.html" class="text-xs font-bold text-white bg-clinical-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/5 shadow-none hover:shadow transition-all duration-300">
+        <span class="text-xs font-semibold text-slate-500 hidden sm:block">Already registered?</span>
+        <a href="login.html" class="text-xs font-bold text-slate-700 bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl hover:bg-white hover:border-slate-300 hover:text-slate-900 transition-all duration-300">
           Sign In
         </a>
       </div>
@@ -289,70 +271,70 @@
   </nav>
 
   <!-- Main Card Container -->
-  <main class="relative z-10 w-full max-w-[620px] px-4 pt-24 pb-16 mx-auto">
-    
-    <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-800/80 rounded-xl p-8 sm:p-12 shadow-none relative">
-      
+  <main class="relative z-10 w-full max-w-[620px] px-4 pt-8 pb-16 mx-auto">
+
+    <div class="glass-card p-8 sm:p-12 relative">
+
       <!-- Stepper Progress Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
-        <div class="flex items-center gap-1.5 p-1 rounded-lg bg-slate-900 border border-slate-800/60 w-fit">
-          <div class="signup-step w-7 h-7 rounded-md bg-slate-950 text-white flex items-center justify-center text-xs font-bold shadow-none">1</div>
-          <div class="step-connector w-5 h-0.5 bg-slate-200 transition-colors"></div>
-          <div class="signup-step w-7 h-7 rounded-md bg-clinical-white/10 backdrop-blur-md text-slate-400 border border-white/5 flex items-center justify-center text-xs font-bold shadow-none">2</div>
-          <div class="step-connector w-5 h-0.5 bg-slate-200 transition-colors"></div>
-          <div class="signup-step w-7 h-7 rounded-md bg-clinical-white/10 backdrop-blur-md text-slate-400 border border-white/5 flex items-center justify-center text-xs font-bold shadow-none">3</div>
-          <div class="step-connector w-5 h-0.5 bg-slate-200 transition-colors"></div>
-          <div class="signup-step w-7 h-7 rounded-md bg-clinical-white/10 backdrop-blur-md text-slate-400 border border-white/5 flex items-center justify-center text-xs font-bold shadow-none">4</div>
+        <div class="flex items-center gap-1.5 p-1 rounded-lg bg-slate-100 border border-slate-200 w-fit">
+          <div class="signup-step w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold shadow-none active" id="step-dot-1">1</div>
+          <div class="step-connector w-5 h-0.5 transition-colors"></div>
+          <div class="signup-step w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold shadow-none" id="step-dot-2">2</div>
+          <div class="step-connector w-5 h-0.5 transition-colors"></div>
+          <div class="signup-step w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold shadow-none" id="step-dot-3">3</div>
+          <div class="step-connector w-5 h-0.5 transition-colors"></div>
+          <div class="signup-step w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold shadow-none" id="step-dot-4">4</div>
         </div>
 
         <div class="flex items-center gap-3">
-          <div class="signup-progress w-24 h-1 bg-slate-200 rounded overflow-hidden hidden sm:block">
-            <div class="progress-fill h-full bg-slate-950 transition-all duration-300" style="width: 25%;"></div>
+          <div class="signup-progress w-24 h-1 rounded overflow-hidden hidden sm:block">
+            <div class="progress-fill h-full transition-all duration-300" style="width: 25%;"></div>
           </div>
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-900 border border-white/5 px-3 py-1 rounded-md" id="step-label">Step 1 of 4</span>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-slate-100 border border-slate-200 px-3 py-1 rounded-md" id="step-label">Step 1 of 4</span>
         </div>
       </div>
 
       <!-- Form Wizard -->
       <form id="signup-form" class="relative" onsubmit="event.preventDefault()">
-        
+
         <!-- STEP 1: CLINIC PROFILE -->
         <div class="step-section" id="step-1">
           <div class="mb-8">
-            <h2 class="text-3xl font-bold text-white tracking-tight mb-2 leading-none">Register Clinic</h2>
-            <p class="text-slate-400 text-sm leading-relaxed">Establish your public practice credentials to align custom voice models.</p>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">Register Clinic</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">Establish your public practice credentials to align custom voice models.</p>
           </div>
-          
+
           <div class="space-y-4">
             <div>
-              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinic Name</label>
-              <input type="text" id="signup-clinic-name" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="e.g. Sunshine Dental Care" required>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Clinic Name</label>
+              <input type="text" id="signup-clinic-name" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="e.g. Sunshine Dental Care" required>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinic Email</label>
-                <input type="email" id="signup-clinic-email" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="office@sunshinedental.com" required>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Clinic Email</label>
+                <input type="email" id="signup-clinic-email" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="office@sunshinedental.com" required>
               </div>
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinic Phone</label>
-                <input type="tel" id="signup-phone" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="(305) 555-0199" required>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Clinic Phone</label>
+                <input type="tel" id="signup-phone" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="(305) 555-0199" required>
               </div>
             </div>
 
             <div>
-              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Practice Address</label>
-              <input type="text" id="signup-address" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="100 Biscayne Blvd, Suite 400" required>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Practice Address</label>
+              <input type="text" id="signup-address" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="100 Biscayne Blvd, Suite 400" required>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">City</label>
-                <input type="text" id="signup-city" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="Miami" required>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">City</label>
+                <input type="text" id="signup-city" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="Miami" required>
               </div>
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">ZIP Code</label>
-                <input type="text" id="signup-zip" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="33131" required>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">ZIP Code</label>
+                <input type="text" id="signup-zip" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="33131" required>
               </div>
             </div>
           </div>
@@ -361,110 +343,110 @@
         <!-- STEP 2: EHR / SOFTWARE INTEGRATION -->
         <div class="step-section hidden" id="step-2">
           <div class="mb-8">
-            <h2 class="text-3xl font-bold text-white tracking-tight mb-2 leading-none">Database &amp; EHR Integration</h2>
-            <p class="text-slate-400 text-sm leading-relaxed">Select your clinic's patient record software. Renia AI synchronizes real-time appointments and records.</p>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">Database &amp; EHR Integration</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">Select your clinic's patient record software. Renia AI synchronizes real-time appointments and records.</p>
           </div>
-          
+
           <div class="grid grid-cols-2 gap-3" id="ehr-container">
-            <div class="toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="eaglesoft">
-              <span class="font-bold text-sm tracking-tight">Patterson Eaglesoft</span>
+            <div class="toggle-card p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="eaglesoft">
+              <span class="font-bold text-sm tracking-tight text-slate-900">Patterson Eaglesoft</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">SYNC READY</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-400 check-icon">check_circle</span>
               </div>
             </div>
-            <div class="toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="dentrix">
-              <span class="font-bold text-sm tracking-tight">Henry Schein Dentrix</span>
+            <div class="toggle-card p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="dentrix">
+              <span class="font-bold text-sm tracking-tight text-slate-900">Henry Schein Dentrix</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">SYNC READY</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-400 check-icon">check_circle</span>
               </div>
             </div>
-            <div class="toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="opendental">
-              <span class="font-bold text-sm tracking-tight">Open Dental</span>
+            <div class="toggle-card p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="opendental">
+              <span class="font-bold text-sm tracking-tight text-slate-900">Open Dental</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">API ACTIVE</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-400 check-icon">check_circle</span>
               </div>
             </div>
-            <div class="toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="carestream">
-              <span class="font-bold text-sm tracking-tight">Carestream Dental</span>
+            <div class="toggle-card p-4 flex flex-col justify-between h-28 relative overflow-hidden" data-value="carestream">
+              <span class="font-bold text-sm tracking-tight text-slate-900">Carestream Dental</span>
               <div class="flex justify-between items-center w-full">
                 <span class="text-[10px] font-mono text-slate-400">CLOUD INTEGRATION</span>
-                <span class="material-symbols-outlined text-[16px] text-slate-300 check-icon">check_circle</span>
+                <span class="material-symbols-outlined text-[16px] text-slate-400 check-icon">check_circle</span>
               </div>
             </div>
           </div>
-          
+
           <div class="mt-6">
-            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Special Scheduling Directives (Optional)</label>
-            <textarea id="signup-policies" rows="2" class="theme-input w-full px-3.5 py-2 rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none text-xs" placeholder="e.g. Leave a 15-minute gap between cleanings; do not schedule emergency extractions past 3:00 PM."></textarea>
+            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Special Scheduling Directives (Optional)</label>
+            <textarea id="signup-policies" rows="2" class="theme-input w-full px-4 py-2.5 rounded-lg text-xs outline-none" placeholder="e.g. Leave a 15-minute gap between cleanings; do not schedule emergency extractions past 3:00 PM."></textarea>
           </div>
         </div>
 
         <!-- STEP 3: DEPLOYMENT PLAN SELECTION -->
         <div class="step-section hidden" id="step-3">
           <div class="mb-8">
-            <h2 class="text-3xl font-bold text-white tracking-tight mb-2 leading-none">Deploy Dental Intelligence</h2>
-            <p class="text-slate-400 text-sm leading-relaxed">Choose a practice-tier receptionist plan. Risk-free 30-day setup guarantee.</p>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">Deploy Dental Intelligence</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">Choose a practice-tier receptionist plan. Risk-free 30-day setup guarantee.</p>
           </div>
 
           <!-- Price Toggle Switch -->
-          <div class="flex justify-center items-center gap-3 mb-6 bg-slate-900 border border-slate-800/60 p-2.5 rounded-lg w-fit mx-auto">
-            <span id="label-monthly" class="text-xs font-bold text-white transition-colors duration-200">Monthly Billing</span>
+          <div class="flex justify-center items-center gap-3 mb-6 pricing-toggle-bar p-2.5 rounded-lg w-fit mx-auto">
+            <span id="label-monthly" class="text-xs font-bold text-slate-900 transition-colors duration-200">Monthly Billing</span>
             <div class="relative inline-block w-12 mr-2 align-middle select-none">
-              <input type="checkbox" id="pricing-toggle" class="switch-checkbox absolute block w-6 h-6 rounded-full bg-clinical-white/10 backdrop-blur-md border-4 border-transparent appearance-none cursor-pointer outline-none transition-all duration-300" onchange="togglePricing()">
+              <input type="checkbox" id="pricing-toggle" class="switch-checkbox absolute block w-6 h-6 rounded-full border-4 border-transparent appearance-none cursor-pointer outline-none transition-all duration-300" onchange="togglePricing()">
               <label for="pricing-toggle" class="switch-label block overflow-hidden h-6 rounded-full bg-slate-300 cursor-pointer transition-colors duration-300">
-                <span class="switch-dot block w-6 h-6 rounded-full bg-clinical-white/10 backdrop-blur-md shadow transform transition-transform duration-300"></span>
+                <span class="switch-dot block w-6 h-6 rounded-full shadow transform transition-transform duration-300"></span>
               </label>
             </div>
-            <span id="label-yearly" class="text-xs font-bold text-slate-400 transition-colors duration-200 flex items-center gap-1.5">
+            <span id="label-yearly" class="text-xs font-bold text-slate-500 transition-colors duration-200 flex items-center gap-1.5">
               Yearly Plans
-              <span class="px-2 py-0.5 bg-slate-950 text-white rounded-md text-[9px] font-black uppercase tracking-wider">Save 30%</span>
+              <span class="px-2 py-0.5 bg-blue-600 text-white rounded-md text-[9px] font-black uppercase tracking-wider">Save 30%</span>
             </span>
           </div>
 
           <!-- Grid of Plans -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="plans-container">
-            <div class="toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="basic">
+            <div class="toggle-card p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="basic">
               <div>
                 <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Starter</span>
-                <span class="font-bold text-sm tracking-tight block mt-1">Single Chair</span>
+                <span class="font-bold text-sm tracking-tight block mt-1 text-slate-900">Single Chair</span>
               </div>
               <div>
                 <div class="flex items-baseline gap-1">
-                  <span class="font-display font-black text-2xl tracking-tight pr-price" data-monthly="399" data-yearly="279">$399</span>
+                  <span class="font-display font-black text-2xl tracking-tight pr-price text-slate-900" data-monthly="399" data-yearly="279">$399</span>
                   <span class="text-[10px] text-slate-400">/mo</span>
                 </div>
                 <span class="text-[9px] text-slate-400 block mt-1 font-mono bill-desc">Billed monthly</span>
               </div>
             </div>
 
-            <div class="toggle-card border border-slate-950 bg-deep-navy/50 rounded-lg p-4 flex flex-col justify-between h-44 relative overflow-hidden active" data-value="advanced">
+            <div class="toggle-card active p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="advanced">
               <div>
                 <div class="flex justify-between items-start">
-                  <span class="font-mono text-[9px] text-white font-bold uppercase tracking-wider">Growth</span>
-                  <span class="px-1.5 py-0.5 rounded-md bg-slate-950 text-white font-mono text-[8px] font-black uppercase tracking-wider">Popular</span>
+                  <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider">Growth</span>
+                  <span class="px-1.5 py-0.5 rounded-md bg-blue-600 text-white font-mono text-[8px] font-black uppercase tracking-wider">Popular</span>
                 </div>
-                <span class="font-bold text-sm tracking-tight block mt-1">Advanced Dental AI</span>
+                <span class="font-bold text-sm tracking-tight block mt-1 text-slate-900">Advanced Dental AI</span>
               </div>
               <div>
                 <div class="flex items-baseline gap-1">
-                  <span class="font-display font-black text-2xl tracking-tight pr-price" data-monthly="699" data-yearly="489">$699</span>
+                  <span class="font-display font-black text-2xl tracking-tight pr-price text-slate-900" data-monthly="699" data-yearly="489">$699</span>
                   <span class="text-[10px] text-slate-400">/mo</span>
                 </div>
                 <span class="text-[9px] text-slate-400 block mt-1 font-mono bill-desc">Billed monthly</span>
               </div>
             </div>
 
-            <div class="toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="enterprise">
+            <div class="toggle-card p-4 flex flex-col justify-between h-44 relative overflow-hidden" data-value="enterprise">
               <div>
                 <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Enterprise</span>
-                <span class="font-bold text-sm tracking-tight block mt-1">Multi-Clinic</span>
+                <span class="font-bold text-sm tracking-tight block mt-1 text-slate-900">Multi-Clinic</span>
               </div>
               <div>
                 <div class="flex items-baseline gap-1">
-                  <span class="font-display font-black text-2xl tracking-tight pr-price" data-monthly="999" data-yearly="699">$999</span>
+                  <span class="font-display font-black text-2xl tracking-tight pr-price text-slate-900" data-monthly="999" data-yearly="699">$999</span>
                   <span class="text-[10px] text-slate-400">/mo</span>
                 </div>
                 <span class="text-[9px] text-slate-400 block mt-1 font-mono bill-desc">Billed monthly</span>
@@ -476,49 +458,54 @@
         <!-- STEP 4: ACCOUNT CREDENTIALS & FINALIZE -->
         <div class="step-section hidden" id="step-4">
           <div class="mb-6">
-            <h2 class="text-3xl font-bold text-white tracking-tight mb-2 leading-none">Create Admin Profile</h2>
-            <p class="text-slate-400 text-sm leading-relaxed">Establish credentials to secure access and review generated transcripts.</p>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">Create Admin Profile</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">Establish credentials to secure access and review generated transcripts.</p>
           </div>
-          
+
           <div id="signup-summary" class="mb-6"></div>
 
           <div class="space-y-4">
             <div>
-              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Lead Practitioner Name</label>
-              <input type="text" id="signup-admin-name" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="Dr. Sarah Mitchell" required>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Lead Practitioner Name</label>
+              <input type="text" id="signup-admin-name" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="Dr. Sarah Mitchell" required>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Admin Email</label>
-                <input type="email" id="signup-admin-email" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="dr.mitchell@sunshinedental.com" required>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Admin Email</label>
+                <input type="email" id="signup-admin-email" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="dr.mitchell@sunshinedental.com" required>
               </div>
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Admin Password</label>
-                <input type="password" id="signup-admin-password" class="theme-input w-full px-3.5 py-2.5 text-sm rounded-lg border border-white/5 bg-clinical-white/10 backdrop-blur-md text-white outline-none" placeholder="••••••••" required>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Admin Password</label>
+                <input type="password" id="signup-admin-password" class="theme-input w-full px-4 py-3 text-sm outline-none" placeholder="••••••••" required>
               </div>
             </div>
-            
-            <p class="font-mono text-[9px] text-slate-400 leading-normal max-w-sm pt-2">
-              Florida consent statute § 934.03 applies. Renia AI automatically discloses voice transcription recording protocols at the start of call streams.
+
+            <p class="font-mono text-[9px] text-slate-500 leading-normal max-w-sm pt-2">
+              Florida consent statute &sect; 934.03 applies. Renia AI automatically discloses voice transcription recording protocols at the start of call streams.
             </p>
           </div>
         </div>
 
         <!-- Buttons Bar -->
-        <div class="flex items-center justify-between border-t border-white/5 mt-10 pt-6 gap-4">
-          <button id="signup-back" class="px-6 py-2.5 border border-white/5 rounded-lg font-bold text-slate-400 hover:bg-deep-navy hover:text-slate-200 text-xs uppercase tracking-wider transition-all duration-200" style="visibility: hidden;">
-            ← Back
+        <div class="flex items-center justify-between border-t border-slate-100 mt-10 pt-6 gap-4">
+          <button id="signup-back" class="px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all duration-200" style="visibility: hidden;">
+            &larr; Back
           </button>
-          
-          <button id="signup-next" class="px-8 py-3 bg-slate-950 text-white hover:bg-slate-900 rounded-lg text-xs font-bold uppercase tracking-widest shadow-none transition-all duration-300 active:scale-[0.98]">
-            Next →
+
+          <button id="signup-next" class="px-8 py-3 rounded-lg text-xs font-bold uppercase tracking-widest text-white hover:scale-[1.01] active:scale-[0.98] transition-all duration-300">
+            Next &rarr;
           </button>
         </div>
 
       </form>
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-6 text-center text-xs text-slate-400 z-10">
+    &copy; 2026 Renia AI Technologies Inc. All rights reserved.
+  </footer>
 
   <!-- App Scripts -->
   <script src="js/utils.js?v=4"></script>
@@ -538,16 +525,6 @@
       ehrCards.forEach(card => {
         card.addEventListener('click', () => {
           card.classList.toggle('active');
-          const isActive = card.classList.contains('active');
-          
-          // Apply styled clinical borders
-          if (isActive) {
-            card.className = "toggle-card border border-slate-950 bg-deep-navy/50 rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden";
-            card.querySelector('.check-icon').className = "material-symbols-outlined text-[16px] text-white check-icon";
-          } else {
-            card.className = "toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-28 relative overflow-hidden";
-            card.querySelector('.check-icon').className = "material-symbols-outlined text-[16px] text-slate-300 check-icon";
-          }
         });
       });
 
@@ -555,13 +532,8 @@
       const planCards = document.querySelectorAll('#plans-container .toggle-card');
       planCards.forEach(card => {
         card.addEventListener('click', () => {
-          planCards.forEach(c => {
-            c.className = "toggle-card border border-white/5 bg-clinical-white/10 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-44 relative overflow-hidden";
-            c.classList.remove('active');
-          });
-          
+          planCards.forEach(c => c.classList.remove('active'));
           card.classList.add('active');
-          card.className = "toggle-card border border-slate-950 bg-deep-navy/50 rounded-lg p-4 flex flex-col justify-between h-44 relative overflow-hidden";
         });
       });
     });
@@ -573,14 +545,14 @@
       const labelYearly = document.getElementById('label-yearly');
       const prices = document.querySelectorAll('.pr-price');
       const billDescs = document.querySelectorAll('.bill-desc');
-      
+
       const isYearly = checkbox.checked;
-      
+
       if (isYearly) {
         labelMonthly.className = "text-xs font-semibold text-slate-400 transition-colors duration-200";
-        labelYearly.className = "text-xs font-bold text-white transition-colors duration-200 flex items-center gap-1.5";
+        labelYearly.className = "text-xs font-bold text-slate-900 transition-colors duration-200 flex items-center gap-1.5";
       } else {
-        labelMonthly.className = "text-xs font-bold text-white transition-colors duration-200";
+        labelMonthly.className = "text-xs font-bold text-slate-900 transition-colors duration-200";
         labelYearly.className = "text-xs font-semibold text-slate-400 transition-colors duration-200 flex items-center gap-1.5";
       }
 
@@ -600,5 +572,5 @@
       });
     }
   </script>
-<style>.animate-fade-in{animation:fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;} @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}</style></body>
+</body>
 </html>
