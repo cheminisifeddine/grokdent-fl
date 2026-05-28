@@ -19,6 +19,7 @@ class GrokVoiceAgent {
     this._scriptProcessor = null;
     this._speakerGainNode = null;
     this._speakerMuted = false;
+    this._isAssistantInterrupted = false;
     
     const defaultVoice = options.voice || 'eve';
     const defaultClinicName = options.clinicName || 'Sunshine Smiles Dental';
@@ -415,9 +416,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
         instructions: this.config.instructions,
         turn_detection: {
           type: 'server_vad',
-          threshold: 0.82,
-          silence_duration_ms: 850,
-          prefix_padding_ms: 333
+          threshold: 0.5,
+          silence_duration_ms: 600,
+          prefix_padding_ms: 300
         },
         tools: this.config.tools,
         audio: {
@@ -472,8 +473,14 @@ Keep responses short and conversational — this is a voice call, not an email.`
         this.flushMicBuffer();
         break;
 
+      case 'response.created':
+        console.log('Response created:', data.response?.id);
+        this._isAssistantInterrupted = false;
+        break;
+
       case 'input_audio_buffer.speech_started':
         console.log('User started speaking');
+        this._isAssistantInterrupted = true;
         this.interruptPlayback();
         if (this.ws) {
           this.ws.send(JSON.stringify({ type: 'response.cancel' }));
@@ -493,6 +500,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
         break;
 
       case 'response.output_audio.delta':
+        if (this._isAssistantInterrupted) {
+          break;
+        }
         if (this.state !== 'speaking') {
           this.setState('speaking');
         }
@@ -502,6 +512,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
       case 'response.output_audio_transcript.delta':
       case 'response.output_text.delta':
       case 'response.text.delta':
+        if (this._isAssistantInterrupted) {
+          break;
+        }
         this.currentAssistantMessage += data.delta || '';
         this.callbacks.onAssistantTranscript.forEach(cb => cb(this.currentAssistantMessage, 'assistant'));
         break;
@@ -520,6 +533,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
       case 'response.done':
         console.log('Response done, tokens:', data.usage?.total_tokens);
+        this._isAssistantInterrupted = false;
         this.setState('listening');
         break;
 
@@ -925,6 +939,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
     this.isConnecting = false;
     this.isSessionReady = false;
     this.micBuffer = [];
+    this._isAssistantInterrupted = false;
     this.setState('disconnected');
   }
 
