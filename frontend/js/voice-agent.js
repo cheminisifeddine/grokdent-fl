@@ -795,18 +795,35 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   async disconnect() {
+    // 1. Clear any pending debounced audio flushes
+    if (this._pcmFlushTimer) {
+      clearTimeout(this._pcmFlushTimer);
+      this._pcmFlushTimer = null;
+    }
+    this._pcmChunkBuffer = [];
+
+    // 2. Stop all currently playing audio sources immediately
+    this.interruptPlayback();
+
+    // 3. Close the WebSocket connection
     if (this.ws) {
       this.ws.close(1000, 'User disconnected');
       this.ws = null;
     }
 
+    // 4. Stop the microphone stream
     if (this.mediaStream) {
       this.mediaStream.getTracks().forEach(track => track.stop());
       this.mediaStream = null;
     }
 
+    // 5. Close the audio context
     if (this.audioContext) {
-      await this.audioContext.close();
+      try {
+        await this.audioContext.close();
+      } catch (e) {
+        console.warn('Error closing AudioContext:', e);
+      }
       this.audioContext = null;
     }
 
