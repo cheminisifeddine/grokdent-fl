@@ -2019,4 +2019,68 @@ html:not(.dark) #plan-card-enterprise button.bg-white {
   border: 1px solid #000000 !important;
 }
 
+/* 13. Settings Form Cards Layout Overrides */
+.light-theme .settings-form,
+html:not(.dark) .settings-form {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 24px !important;
+  padding: 32px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+  margin-bottom: 24px !important;
+}
+
+/* Override all slate-800 borders (like /50, /80) to be light gray in light theme */
+.light-theme [class*="border-slate-800"],
+html:not(.dark) [class*="border-slate-800"] {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 14. Premium Monochrome Checkbox Overrides */
+.light-theme input[type="checkbox"],
+html:not(.dark) input[type="checkbox"] {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 4px !important;
+  color: #000000 !important; /* Check mark color */
+  transition: all 0.2s ease !important;
+}
+.light-theme input[type="checkbox"]:checked,
+html:not(.dark) input[type="checkbox"]:checked {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+}
+.light-theme input[type="checkbox"]:focus,
+html:not(.dark) input[type="checkbox"]:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
+  border-color: #000000 !important;
+}
+
+/* 15. Spanish Auto-Triage Toggle Box Overrides */
+.light-theme .flex.items-center.justify-between.p-4.bg-deep-navy.rounded.border.border-white\/5,
+html:not(.dark) .flex.items-center.justify-between.p-4.bg-deep-navy.rounded.border.border-white\/5 {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+}
+.light-theme .flex.items-center.justify-between.p-4.bg-deep-navy.rounded.border.border-white\/5 *,
+html:not(.dark) .flex.items-center.justify-between.p-4.bg-deep-navy.rounded.border.border-white\/5 * {
+  color: #1F2937 !important;
+}
+.light-theme .flex.items-center.justify-between.p-4.bg-deep-navy.rounded.border.border-white\/5 h4,
+html:not(.dark) .flex.items-center.justify-between.p-4.bg-deep-navy.rounded.border.border-white\/5 h4 {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+.light-theme .peer-checked\:bg-white,
+html:not(.dark) .peer-checked\:bg-white {
+  background-color: #000000 !important; /* Stark black toggle active state */
+}
+.light-theme .peer-checked\:after\:border-white,
+html:not(.dark) .peer-checked\:after\:border-white {
+  border-color: #000000 !important;
+}
+
 
