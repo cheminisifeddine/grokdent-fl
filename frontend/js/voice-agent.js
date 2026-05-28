@@ -525,7 +525,12 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
       case 'error':
         console.error('Voice Agent error:', data.error || data.message);
-        this.callbacks.onError.forEach(cb => cb(new Error(data.error?.message || data.message || 'Voice Agent error')));
+        const errorMessage = data.error?.message || data.message || '';
+        if (errorMessage.toLowerCase().includes('cancellation failed') || errorMessage.toLowerCase().includes('no active response')) {
+          console.warn('Ignored benign cancellation/response error:', errorMessage);
+          break;
+        }
+        this.callbacks.onError.forEach(cb => cb(new Error(errorMessage || 'Voice Agent error')));
         break;
     }
   }
