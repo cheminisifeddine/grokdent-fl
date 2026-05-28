@@ -2591,7 +2591,8 @@ Demo guardrails:
         const activeAgent = voiceAgent;
         voiceAgent = null;
         if (activeAgent) {
-          try { await activeAgent.disconnect(); } catch (error) {}
+          // Trigger disconnect in background so UI updates immediately and doesn't block on slow AudioContext teardown
+          activeAgent.disconnect().catch(error => console.warn("Background disconnect warning:", error));
         }
 
         setButton("phone", "Talk to Renia AI Demo");
