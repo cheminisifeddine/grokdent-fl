@@ -417,7 +417,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
         turn_detection: {
           type: 'server_vad',
           threshold: 0.5,
-          silence_duration_ms: 600,
+          silence_duration_ms: 500,
           prefix_padding_ms: 300
         },
         tools: this.config.tools,
@@ -585,9 +585,10 @@ Keep responses short and conversational — this is a voice call, not an email.`
       // Buffer small chunks to avoid glitching on rapid-fire deltas
       this._pcmChunkBuffer.push(float32);
 
-      // Debounce flush: schedule playback after a brief coalesce period
-      if (this._pcmFlushTimer) clearTimeout(this._pcmFlushTimer);
-      this._pcmFlushTimer = setTimeout(() => this._flushPcmBuffer(), 50);
+      // Ultra-low latency throttle: coalesce rapid-fire deltas in 15ms batches instead of debouncing
+      if (!this._pcmFlushTimer) {
+        this._pcmFlushTimer = setTimeout(() => this._flushPcmBuffer(), 15);
+      }
     } catch (e) {
       console.warn('Audio playback error:', e);
     }
