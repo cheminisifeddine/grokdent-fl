@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Renia AI — The Ultimate Dental Receptionist AI, Powered by Grok Voice Think Fast 1.0</title>
+  <title>Renia AI — The Ultimate Dental Receptionist AI, Powered by Renia Speech-to-Speech Engine</title>
   <meta name="description" content="A speech-to-speech instant AI receptionist operating at sub-100ms latency. Answers calls, schedules appointments, and verifies insurance natively in Eaglesoft and Dentrix." />
   
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
@@ -865,6 +865,192 @@
         text-align: center;
       }
     }
+
+    /* ==========================================
+       ELITE CALL SIMULATOR (DARK CYBER) THEME
+       ========================================== */
+    .elite-dialer-console, .elite-transcript-panel, .elite-ehr-board {
+      background: #090e1a !important;
+      border: 1px solid rgba(99, 102, 241, 0.25) !important;
+      box-shadow: 0 25px 60px rgba(7, 8, 16, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      position: relative !important;
+      overflow: hidden !important;
+      border-radius: 24px !important;
+    }
+    
+    /* Cyber grid overlay */
+    .elite-dialer-console::before, .elite-transcript-panel::before, .elite-ehr-board::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px) !important;
+      background-size: 16px 16px !important;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Ambient neon fluid glow orbs */
+    .elite-glow-orb {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(16, 185, 129, 0) 70%) !important;
+      filter: blur(45px);
+      z-index: 2;
+      pointer-events: none;
+      transition: all 0.5s ease;
+    }
+    .elite-glow-orb-top { top: -30px; right: -30px; }
+    .elite-glow-orb-bottom { bottom: -30px; left: -30px; }
+
+    /* Force all text in elite sections to have sleek cyber contrast */
+    .elite-dialer-console *, .elite-transcript-panel *, .elite-ehr-board * {
+      position: relative;
+      z-index: 3;
+    }
+
+    .elite-dialer-console .text-white,
+    .elite-transcript-panel .text-white,
+    .elite-ehr-board .text-white,
+    .elite-dialer-console span,
+    .elite-transcript-panel span,
+    .elite-ehr-board span,
+    .elite-dialer-console button,
+    .elite-transcript-panel button,
+    .elite-ehr-board button {
+      color: #e2e8f0 !important;
+    }
+
+    .elite-dialer-console .text-slate-400,
+    .elite-transcript-panel .text-slate-400,
+    .elite-ehr-board .text-slate-400 {
+      color: #94a3b8 !important;
+    }
+
+    /* Keypad buttons custom styling */
+    .elite-dialer-console button.elite-keypad-btn {
+      color: #94a3b8 !important;
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+      background: rgba(255, 255, 255, 0.02) !important;
+      border-radius: 14px !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .elite-dialer-console button.elite-keypad-btn:hover {
+      color: #ffffff !important;
+      border-color: rgba(99, 102, 241, 0.35) !important;
+      background: rgba(99, 102, 241, 0.12) !important;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.15) !important;
+      transform: translateY(-1px);
+    }
+    .elite-dialer-console button.elite-keypad-btn:active {
+      transform: translateY(0px);
+    }
+
+    /* Central Pulse Orb */
+    #sim-orb-center {
+      background: rgba(15, 23, 42, 0.85) !important;
+      border: 1px solid rgba(99, 102, 241, 0.35) !important;
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      width: 76px !important;
+      height: 76px !important;
+      border-radius: 50% !important;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+    #sim-orb-center:hover {
+      transform: scale(1.08);
+      border-color: rgba(16, 185, 129, 0.6) !important;
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.35) !important;
+    }
+    .sim-orb-active {
+      animation: orbPulse 1.8s infinite ease-in-out !important;
+      border-color: #10b981 !important;
+      background: rgba(16, 185, 129, 0.15) !important;
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.25) !important;
+    }
+    #sim-orb-icon {
+      color: #6366f1 !important;
+      font-size: 30px !important;
+      transition: color 0.3s ease;
+    }
+    .sim-orb-active #sim-orb-icon {
+      color: #10b981 !important;
+    }
+
+    /* Premium dynamic soundwave */
+    .elite-wave-bar {
+      width: 4px !important;
+      background: linear-gradient(180deg, #6366f1 0%, #10b981 100%) !important;
+      border-radius: 9999px !important;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.6) !important;
+      transform-origin: bottom;
+      animation: smoothWave 1.2s ease-in-out infinite !important;
+    }
+
+    /* Keyframe Pulse Override */
+    @keyframes orbPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0.05), 0 0 0 30px rgba(16, 185, 129, 0.01); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.2); }
+    }
+
+    /* Telemetry indicators */
+    .elite-telemetry-badge {
+      font-family: 'Geist Mono', monospace;
+      font-size: 8px !important;
+      color: #94a3b8 !important;
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+      background: rgba(255, 255, 255, 0.03) !important;
+      padding: 3px 7px !important;
+      border-radius: 6px !important;
+      letter-spacing: 0.05em;
+    }
+
+    /* Dialogue streams */
+    #chat-stream > div {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+      color: #cbd5e1 !important;
+      border-radius: 16px !important;
+      box-shadow: none !important;
+    }
+    #chat-stream > div.ml-auto {
+      background: rgba(99, 102, 241, 0.12) !important;
+      border: 1px solid rgba(99, 102, 241, 0.3) !important;
+      color: #e2e8f0 !important;
+    }
+    #chat-stream > div.ml-auto * {
+      color: #e2e8f0 !important;
+    }
+
+    /* EHR fields */
+    .elite-ehr-board span.text-slate-400 {
+      color: #64748b !important;
+      font-size: 8px !important;
+      letter-spacing: 0.05em !important;
+    }
+    #ehr-patient, #ehr-triage, #ehr-insurance, #ehr-status {
+      color: #cbd5e1 !important;
+      font-family: 'Geist Mono', monospace !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+    }
+    #ehr-sync-badge {
+      font-family: 'Geist Mono', monospace !important;
+      color: #38bdf8 !important; /* Cyber cyan */
+      font-weight: 800 !important;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.35) !important;
+    }
+    #ehr-log-text {
+      color: #94a3b8 !important;
+      font-family: 'Geist Mono', monospace !important;
+    }
   </style>
 </head>
 <body class="text-on-background font-sans antialiased selection:bg-indigo-500/30 selection:text-white">
@@ -993,35 +1179,55 @@
       <div class="max-w-6xl mx-auto">
         
         <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Grok Voice Think Fast 1.0 Demo</span>
+          <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Renia Voice AI Demo</span>
           <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 mt-2 tracking-tight">Talk to the AI receptionist before you deploy it</h2>
           <p class="text-slate-400 mt-3 text-sm sm:text-base lg:text-lg">
-            Talk live to Renia over Grok Voice Think Fast 1.0. Test emergency tooth pain, a Spanish caller, insurance eligibility, or a new-patient booking and watch the front-desk workflow update in real time.
+            Talk live to Renia over the custom, sub-100ms Renia Speech-to-Speech Engine. Test emergency tooth pain, a Spanish caller, insurance eligibility, or a new-patient booking and watch the front-desk workflow update in real time.
           </p>
         </div>
 
         <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-stretch max-w-5xl mx-auto">
           
-          <!-- Dialer Console UI (Left) -->
-          <div class="lg:col-span-5 bg-slate-900 border border-white/5 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between min-h-[440px] sm:min-h-[480px] relative overflow-hidden">
+          <!-- Dialer Console UI (Left) - Elite Call Simulator -->
+          <div class="lg:col-span-5 elite-dialer-console p-5 sm:p-6 flex flex-col justify-between min-h-[440px] sm:min-h-[480px]">
             
-            <!-- Sleek background radial orb -->
-            
+            <!-- Ambient neon fluid glow orbs -->
+            <div class="elite-glow-orb elite-glow-orb-top"></div>
+            <div class="elite-glow-orb elite-glow-orb-bottom"></div>
             
             <!-- iOS Style Interface -->
-            <div class="relative z-10 space-y-6 flex-1 flex flex-col justify-between">
+            <div class="relative space-y-6 flex-1 flex flex-col justify-between">
               
               <!-- Call Meta Header -->
               <div class="flex items-center justify-between border-b border-white/5 pb-4">
                 <div class="flex items-center gap-3">
-                  <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+                  <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
                   <span class="font-mono text-[9px] sm:text-[10px] text-slate-400 tracking-wider">LINE: (305) 555-9831 (MIAMI)</span>
                 </div>
-                <span class="font-mono text-[9px] text-slate-400 border border-white/5 px-2 py-0.5 rounded">GROK REALTIME</span>
+                <span class="font-mono text-[9px] text-slate-400 border border-white/10 px-2 py-0.5 rounded tracking-wide">RENIA REALTIME</span>
+              </div>
+
+              <!-- Sleek Telemetry Readout -->
+              <div class="grid grid-cols-2 gap-2 border-b border-white/5 pb-4 text-[8px] font-mono">
+                <div class="flex items-center gap-2">
+                  <span class="elite-telemetry-badge">CODEC: OPUS PCM</span>
+                </div>
+                <div class="flex items-center gap-2 justify-end">
+                  <span class="elite-telemetry-badge">LATENCY: ~120MS</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="elite-telemetry-badge">SERVER: MIAMI-EDGE</span>
+                </div>
+                <div class="flex items-center gap-2 justify-end">
+                  <span class="elite-telemetry-badge">SSL: SECURE HIPAA</span>
+                </div>
               </div>
 
               <!-- Handcrafted Soundwave Visualizer -->
-              <div class="py-8 sm:py-12 flex flex-col items-center justify-center relative flex-1">
+              <div class="py-6 sm:py-8 flex flex-col items-center justify-center relative flex-1">
                 
                 <!-- Silent HTML containers to keep JS variables from breaking -->
                 <div id="sim-orb-bg-1" class="hidden"></div>
@@ -1029,27 +1235,27 @@
                 
                 <div id="sim-wave-container" class="hidden flex items-end justify-center gap-1.5 h-16 mb-6 select-none pointer-events-none">
                   <!-- Vertical lines for soundwave -->
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-4"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-8"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-12"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-6"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-10"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-14"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-12"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-6"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-10"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-14"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-8"></div>
-                  <div class="wave-bar w-1 bg-indigo-500 rounded-full h-4"></div>
+                  <div class="elite-wave-bar w-1 h-4"></div>
+                  <div class="elite-wave-bar w-1 h-8"></div>
+                  <div class="elite-wave-bar w-1 h-12"></div>
+                  <div class="elite-wave-bar w-1 h-6"></div>
+                  <div class="elite-wave-bar w-1 h-10"></div>
+                  <div class="elite-wave-bar w-1 h-14"></div>
+                  <div class="elite-wave-bar w-1 h-12"></div>
+                  <div class="elite-wave-bar w-1 h-6"></div>
+                  <div class="elite-wave-bar w-1 h-10"></div>
+                  <div class="elite-wave-bar w-1 h-14"></div>
+                  <div class="elite-wave-bar w-1 h-8"></div>
+                  <div class="elite-wave-bar w-1 h-4"></div>
                 </div>
                 
                 <!-- Quiet mic central button -->
-                <div id="sim-orb-center" class="w-12 h-12 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center relative z-10 transition-all duration-300">
-                  <span id="sim-orb-icon" class="material-symbols-outlined text-slate-400 text-lg transition-colors">mic</span>
+                <div id="sim-orb-center" class="w-12 h-12 rounded-full border flex items-center justify-center relative transition-all duration-300">
+                  <span id="sim-orb-icon" class="material-symbols-outlined text-lg transition-colors">mic</span>
                 </div>
                 
                 <!-- Visual Status Text -->
-                <div class="text-center mt-4 z-10">
+                <div class="text-center mt-4">
                   <span id="sim-visual-status" class="font-mono text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest block">SYSTEM READY</span>
                   <span id="sim-visual-timer" class="font-mono text-[9px] text-slate-500 tracking-wider mt-0.5 block">00:00</span>
                 </div>
@@ -1057,24 +1263,24 @@
 
               <!-- Animated iOS Keypad Control Mockup -->
               <div class="grid grid-cols-3 gap-4 border-t border-white/5 pt-6">
-                <button class="flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 hover:text-slate-300 transition-colors">
+                <button class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-colors">
                   <span class="material-symbols-outlined text-lg sm:text-xl">mic_off</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Mute</span>
                 </button>
-                <button class="flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 hover:text-slate-300 transition-colors">
+                <button class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-colors">
                   <span class="material-symbols-outlined text-lg sm:text-xl">volume_up</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Speaker</span>
                 </button>
-                <button class="flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 hover:text-slate-300 transition-colors">
+                <button class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-colors">
                   <span class="material-symbols-outlined text-lg sm:text-xl">grid_on</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Keypad</span>
                 </button>
               </div>
 
               <!-- Main Simulation Click Trigger -->
-              <button id="sim-action-btn" class="w-full bg-slate-900/60 backdrop-blur-md hover:bg-white/10 text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]">
+              <button id="sim-action-btn" class="w-full text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]">
                 <span class="material-symbols-outlined text-[20px] font-bold">phone</span>
-                Talk to Grok Voice Demo
+                Talk to Renia AI Demo
               </button>
             </div>
           </div>
@@ -1083,64 +1289,63 @@
           <div class="lg:col-span-7 flex flex-col gap-6">
             
             <!-- Dialogue Stream Panel -->
-            <div class="bg-slate-900 border border-white/5 rounded-3xl p-5 sm:p-6 shadow-xl flex-1 flex flex-col justify-between min-h-[260px] sm:min-h-[280px]">
-              <div class="border-b border-slate-800/80 pb-3 mb-4 flex justify-between items-center">
-                <span class="font-mono text-[8px] sm:text-[9px] text-slate-400 tracking-widest uppercase">GROK REALTIME VOICE TRANSCRIPT</span>
+            <div class="elite-transcript-panel p-5 sm:p-6 flex flex-col justify-between min-h-[260px] sm:min-h-[280px]">
+              <div class="border-b border-white/5 pb-3 mb-4 flex justify-between items-center">
+                <span class="font-mono text-[8px] sm:text-[9px] text-slate-400 tracking-widest uppercase">RENIA REALTIME VOICE TRANSCRIPT</span>
                 
                 <!-- PCM Wave animation -->
                 <div id="sim-wave-container" class="hidden flex items-center gap-1">
-                  <span class="wave-bar w-0.5 h-3 bg-slate-900/60 backdrop-blur-md rounded-full"></span>
-                  <span class="wave-bar w-0.5 h-5 bg-slate-900/60 backdrop-blur-md rounded-full"></span>
-                  <span class="wave-bar w-0.5 h-2.5 bg-slate-900/60 backdrop-blur-md rounded-full"></span>
-                  <span class="wave-bar w-0.5 h-6 bg-slate-900/60 backdrop-blur-md rounded-full"></span>
-                  <span class="wave-bar w-0.5 h-4 bg-slate-900/60 backdrop-blur-md rounded-full"></span>
+                  <span class="elite-wave-bar w-0.5 h-3"></span>
+                  <span class="elite-wave-bar w-0.5 h-5"></span>
+                  <span class="elite-wave-bar w-0.5 h-2.5"></span>
+                  <span class="elite-wave-bar w-0.5 h-6"></span>
+                  <span class="elite-wave-bar w-0.5 h-4"></span>
                 </div>
               </div>
 
               <!-- Dialogue Bubbles Container -->
               <div id="chat-stream" class="flex-1 space-y-4 max-h-[220px] overflow-y-auto pr-2 font-sans text-xs sm:text-sm text-slate-400">
                 <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
-                  Click "Talk to Grok Voice Demo" and test a real dental front-desk scenario...
+                  Click "Talk to Renia AI Demo" and test a real dental front-desk scenario...
                 </div>
               </div>
             </div>
 
             <!-- Live Database & EHR Sync Board -->
-            <div class="bg-slate-900 border border-white/5 rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
-              
+            <div class="elite-ehr-board p-5 sm:p-6 relative overflow-hidden">
               
               <div class="relative z-10 flex flex-col sm:flex-row gap-6 justify-between items-stretch">
                 <!-- EHR Fields -->
-                <div class="flex-1 space-y-3.5 border-b sm:border-b-0 sm:border-r border-slate-800/80 pb-5 sm:pb-0 sm:pr-6">
+                <div class="flex-1 space-y-3.5 border-b sm:border-b-0 sm:border-r border-white/5 pb-5 sm:pb-0 sm:pr-6 font-mono text-[9px] sm:text-[10px]">
                   <h4 class="font-mono text-[9px] text-slate-400 tracking-widest font-extrabold uppercase flex items-center gap-1.5 mb-2">
                     <span class="material-symbols-outlined text-white text-xs">database</span>
                     EHR RECORD EXTRACTOR
                   </h4>
-                  <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 font-mono text-[9px] sm:text-[10px] text-slate-400">
+                  <div class="grid grid-cols-2 gap-y-2.5 gap-x-4">
                     <div>
                       <span class="text-slate-400 block text-[8px] sm:text-[9px] uppercase">Patient Profile</span>
-                      <span id="ehr-patient" class="text-slate-200 font-bold block mt-0.5">—</span>
+                      <span id="ehr-patient" class="font-bold block mt-0.5">—</span>
                     </div>
                     <div>
                       <span class="text-slate-400 block text-[8px] sm:text-[9px] uppercase">Triage Assessment</span>
-                      <span id="ehr-triage" class="text-slate-200 font-bold block mt-0.5">—</span>
+                      <span id="ehr-triage" class="font-bold block mt-0.5">—</span>
                     </div>
                     <div>
                       <span class="text-slate-400 block text-[8px] sm:text-[9px] uppercase">Insurance PPO</span>
-                      <span id="ehr-insurance" class="text-slate-200 font-bold block mt-0.5">—</span>
+                      <span id="ehr-insurance" class="font-bold block mt-0.5">—</span>
                     </div>
                     <div>
                       <span class="text-slate-400 block text-[8px] sm:text-[9px] uppercase">Portal Eligibility</span>
-                      <span id="ehr-status" class="text-slate-200 font-bold block mt-0.5">—</span>
+                      <span id="ehr-status" class="font-bold block mt-0.5">—</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Database Status Badge -->
-                <div class="w-full sm:w-48 flex flex-col justify-between pt-4 sm:pt-0">
+                <div class="w-full sm:w-48 flex flex-col justify-between pt-4 sm:pt-0 font-mono">
                   <div>
                     <h4 class="font-mono text-[9px] text-slate-400 tracking-widest font-extrabold uppercase mb-2">PMS PIPELINE STATUS</h4>
-                    <span id="ehr-sync-badge" class="font-mono text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block">—</span>
+                    <span id="ehr-sync-badge" class="font-mono text-[10px] font-extrabold uppercase tracking-wider block">—</span>
                   </div>
                   <div id="ehr-log-text" class="font-mono text-[9px] text-slate-400 leading-normal mt-3">
                     Sync line offline. Ready to connect...
@@ -1171,7 +1376,7 @@
           <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">Native Architecture vs. Old Paradigms</span>
           <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 mt-2 tracking-tight">The 100ms Speech-to-Speech Revolution</h2>
           <p class="text-slate-400 mt-4 text-sm sm:text-base lg:text-lg leading-relaxed">
-            Traditional AI voice receptionists feel frustratingly slow because they stitch separate models together. Grok Voice Think Fast 1.0 streams audio natively for immediate, natural dialogue.
+            Traditional AI voice receptionists feel frustratingly slow because they stitch separate models together. The Renia Speech-to-Speech Engine streams audio natively for immediate, natural dialogue.
           </p>
         </div>
 
@@ -1238,16 +1443,16 @@
             </div>
           </div>
 
-          <!-- Renia AI (Grok Voice Think Fast 1.0 Pipeline) -->
+          <!-- Renia AI (Speech-to-Speech Engine Pipeline) -->
           <div class="bg-white border-2 border-slate-200 p-6 sm:p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden shadow-glow">
             <div>
               <div class="flex items-center gap-2 mb-6">
                 <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono font-bold text-emerald-500">RENIA SPEECH ENGINE</span>
-                <span class="text-xs text-slate-600 font-mono">Grok Voice 1.0 PCM</span>
+                <span class="text-xs text-slate-600 font-mono">Renia Voice 1.0 PCM</span>
               </div>
               <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-900 mb-4">Direct Audio Autopilot</h3>
               <p class="text-slate-550 text-xs sm:text-sm leading-relaxed mb-8 sm:mb-10">
-                Grok Voice Think Fast 1.0 streams raw PCM audio bytes bi-directionally over open WebSockets. It interprets tone, emotion, and language parameters *in audio*, compiling response signals natively within a single, continuous loop.
+                The Renia Speech-to-Speech Engine streams raw PCM audio bytes bi-directionally over open WebSockets. It interprets tone, emotion, and language parameters *in audio*, compiling response signals natively within a single, continuous loop.
               </p>
 
               <!-- Animated Data Track Visual -->
@@ -1777,7 +1982,7 @@
       <div class="max-w-6xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span class="text-xs font-bold font-mono tracking-widest text-slate-500 uppercase">LOVED BY Florida's Top PRACTICES</span>
-          <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight mt-1">Dentists Trust Grok Voice Autopilot</h2>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight mt-1">Dentists Trust Renia AI Autopilot</h2>
           <p class="text-slate-550 mt-3 text-sm sm:text-base lg:text-lg">
             See how Florida clinic owners completely changed their booking workflows, recovered hundreds of missed calls, and expanded revenue.
           </p>
@@ -1877,7 +2082,7 @@
           Capture every patient call. Grow your clinical revenue.
         </h2>
         <p class="text-slate-400 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl">
-          Get started with a 14-day free trial of Grok Voice Think Fast 1.0. Zero long-term contract, seamless Eaglesoft/Dentrix integration, 10-minute automated setup.
+          Get started with a 14-day free trial of Renia AI Receptionist. Zero long-term contract, seamless Eaglesoft/Dentrix integration, 10-minute automated setup.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
           <a href="signup.html" class="bg-deep-navy text-white text-sm font-semibold px-8 py-4 rounded-xl hover:bg-slate-800 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-deep-navy/15 flex items-center justify-center gap-2.5 font-bold">
@@ -1899,7 +2104,7 @@
           Renia<span class="text-slate-900">AI</span>
         </a>
         <div class="text-xs text-slate-400 max-w-[280px] text-center md:text-left leading-relaxed">
-          The ultimate speech-to-speech AI receptionist engine for Florida dental practices. Powered by Grok Voice Think Fast 1.0.
+          The ultimate speech-to-speech AI receptionist engine for Florida dental practices. Powered by the Renia Speech-to-Speech Engine.
         </div>
       </div>
 
@@ -2115,7 +2320,7 @@
 
       const landingVoiceInstructions = `
 You are Renia, a premium AI receptionist voice demo for dental practice owners.
-You are running live on Grok Voice Think Fast 1.0 for a landing-page demo.
+You are running live on the Renia Speech-to-Speech Engine for a landing-page demo.
 
 Your job is to sell by performing. Sound warm, confident, fast, and natural, like a top-tier dental front desk lead.
 If the caller is a dentist or office manager, invite them to test you with a hard real front-desk scenario.
@@ -2182,7 +2387,7 @@ Demo guardrails:
           showWaves(true);
         } else if (state === "thinking") {
           orbIcon.textContent = "neurology";
-          simStatus.textContent = "GROK REASONING";
+          simStatus.textContent = "RENIA THINKING";
           simStatus.className = "font-mono text-xs text-amber-600 font-bold uppercase tracking-widest block";
           showWaves(true);
         } else {
@@ -2225,11 +2430,11 @@ Demo guardrails:
           try { await activeAgent.disconnect(); } catch (error) {}
         }
 
-        setButton("phone", "Talk to Grok Voice Demo");
+        setButton("phone", "Talk to Renia AI Demo");
         
         chatStream.innerHTML = `
           <div id="standby-prompt" class="text-slate-400 italic text-center py-16 font-mono text-xs">
-            Click "Talk to Grok Voice Demo" and test a real dental front-desk scenario...
+            Click "Talk to Renia AI Demo" and test a real dental front-desk scenario...
           </div>
         `;
         
@@ -2330,8 +2535,8 @@ Demo guardrails:
           triage: /pain|ache|swelling|bleeding|emergency|muela|dolor/i.test(message) ? "Urgent triage" : "Needs assessment",
           insurance: /delta|humana|guardian|ppo|medicaid|insurance|seguro/i.test(message) ? "Insurance captured" : "Pending capture",
           portal_status: "Analyzing",
-          pipeline_status: "Grok reasoning",
-          log: "Caller audio streamed directly to Grok Voice Think Fast 1.0. Renia is preparing the next turn."
+          pipeline_status: "Renia reasoning",
+          log: "Caller audio streamed directly to the Renia Speech-to-Speech Engine. Renia is preparing the next turn."
         });
       };
 
@@ -2373,7 +2578,7 @@ Demo guardrails:
           if (!isSimulating || isConnecting) return;
           assistantBubble = null;
           setVoiceState("listening");
-          setButton("call_end", "End Grok Voice Demo", "danger");
+          setButton("call_end", "End Renia Voice Demo", "danger");
           ehrLogText.textContent = "Microphone live. Keep talking naturally; server VAD handles turn-taking.";
           ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
         }, 1800);
@@ -2393,17 +2598,17 @@ Demo guardrails:
         agent.on("onConnect", () => {
           isConnecting = false;
           isSimulating = true;
-          setButton("call_end", "End Grok Voice Demo", "danger");
+          setButton("call_end", "End Renia Voice Demo", "danger");
           setVoiceState("speaking");
           updateWorkflowPanel({
             patient_name: "Dentist Prospect",
             triage: "Live sales demo",
             insurance: "Demo Mode",
             portal_status: "Realtime connected",
-            pipeline_status: "Grok Voice active",
+            pipeline_status: "Renia Voice active",
             log: "Connected with a short-lived xAI client secret. The raw API key stays server-side."
           });
-          assistantBubble = addChatBubble("ai", "Connected to Grok Voice Think Fast 1.0. Renia is starting the live demo now.", "Grok Live");
+          assistantBubble = addChatBubble("ai", "Connected to the Renia Speech-to-Speech Engine. Renia is starting the live demo now.", "Renia Live");
         });
 
         agent.on("onTranscript", (text) => {
@@ -2411,16 +2616,16 @@ Demo guardrails:
           assistantBubble = null;
           addChatBubble("patient", text.trim());
           setVoiceState("thinking");
-          setButton("hourglass_top", "Grok Thinking", "busy");
+          setButton("hourglass_top", "Renia Thinking", "busy");
           updateWorkflowFromTranscript(text);
         });
 
         agent.on("onAssistantTranscript", (text) => {
           if (!isSimulating) return;
           setVoiceState("speaking");
-          setButton("call_end", "End Grok Voice Demo", "danger");
+          setButton("call_end", "End Renia Voice Demo", "danger");
           if (!assistantBubble || !assistantBubble.isConnected) {
-            assistantBubble = addChatBubble("ai", "", "Grok Live");
+            assistantBubble = addChatBubble("ai", "", "Renia Live");
           }
           updateChatBubble(assistantBubble, text);
           scheduleAssistantIdle();
@@ -2434,7 +2639,7 @@ Demo guardrails:
           if (!isSimulating && state !== "connecting") return;
           if (state === "connecting") {
             setVoiceState("thinking");
-            setButton("hourglass_top", "Connecting Grok Voice", "busy");
+            setButton("hourglass_top", "Connecting Renia Voice", "busy");
           } else if (state === "listening") {
             setVoiceState("listening");
           } else if (state === "thinking") {
@@ -2448,7 +2653,7 @@ Demo guardrails:
           if (connectErrorShown || (!isSimulating && !isConnecting)) return;
           connectErrorShown = true;
           const message = error?.message || "Realtime voice connection failed.";
-          addChatBubble("ai", `The Grok realtime voice link could not start: ${message}`, "Connection");
+          addChatBubble("ai", `The Renia realtime voice link could not start: ${message}`, "Connection");
           updateWorkflowPanel({
             patient_name: "Dentist Prospect",
             triage: "Connection issue",
@@ -2458,7 +2663,7 @@ Demo guardrails:
             log: "Check microphone permission, HTTPS, backend availability, and the server-side XAI_API_KEY."
           });
           setVoiceState("ready");
-          setButton("phone", "Restart Grok Voice Demo");
+          setButton("phone", "Restart Renia Voice Demo");
           isConnecting = false;
           isSimulating = false;
           clearInterval(timerInterval);
@@ -2471,14 +2676,14 @@ Demo guardrails:
           clearTimeout(assistantIdleTimer);
           clearInterval(timerInterval);
           setVoiceState("ready");
-          setButton("phone", "Restart Grok Voice Demo");
+          setButton("phone", "Restart Renia Voice Demo");
           updateWorkflowPanel({
             patient_name: "Dentist Prospect",
             triage: "Demo ended",
             insurance: "Demo Mode",
             portal_status: "Disconnected",
             pipeline_status: "Session closed",
-            log: "Realtime Grok Voice session ended. Click restart to open a new short-lived session."
+            log: "Realtime Renia Voice session ended. Click restart to open a new short-lived session."
           });
         });
 
@@ -2488,7 +2693,7 @@ Demo guardrails:
       const startVoiceDemo = async () => {
         if (isConnecting || isSimulating) return;
         if (!window.GrokVoiceAgent) {
-          addChatBubble("ai", "The Grok voice client did not load. Refresh the page and try again.", "Client");
+          addChatBubble("ai", "The Renia voice client did not load. Refresh the page and try again.", "Client");
           return;
         }
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -2504,7 +2709,7 @@ Demo guardrails:
 
         beginTimer();
         setVoiceState("thinking");
-        setButton("hourglass_top", "Connecting Grok Voice", "busy");
+        setButton("hourglass_top", "Connecting Renia Voice", "busy");
         updateWorkflowPanel({
           patient_name: "Dentist Prospect",
           triage: "Demo evaluation",
@@ -2518,7 +2723,7 @@ Demo guardrails:
         try {
           await voiceAgent.connect();
         } catch (error) {
-          console.error("Landing Grok voice demo error:", error);
+          console.error("Landing Renia voice demo error:", error);
         }
       };
       
