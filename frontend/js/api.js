@@ -2,8 +2,27 @@
    Renia AI — API Client Module
    ============================================ */
 
+const getBaseApiUrl = () => {
+  const defaultBase = '/api/v1';
+  if (typeof window !== 'undefined' && window.location) {
+    const hostname = window.location.hostname;
+    const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.') || hostname.startsWith('10.') || hostname.startsWith('172.');
+    if (isLocal) {
+      const port = window.location.port;
+      if (port && port !== '8000') {
+        return `http://${hostname}:8000${defaultBase}`;
+      }
+      return defaultBase;
+    } else {
+      // In production, bypass Cloudflare Pages redirect proxy to avoid 405 error on POST requests
+      return `https://renia-ai-backend.medsaidkichene.workers.dev${defaultBase}`;
+    }
+  }
+  return defaultBase;
+};
+
 const API = {
-  baseUrl: '/api/v1',
+  baseUrl: getBaseApiUrl(),
 
   /**
    * Core request method with auth header and error handling

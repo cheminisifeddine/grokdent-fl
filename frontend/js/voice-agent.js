@@ -152,10 +152,16 @@ Keep responses short and conversational — this is a voice call, not an email.`
       
       let endpoint = this.config.sessionTokenEndpoint;
       if (endpoint.startsWith('/') && typeof window !== 'undefined' && window.location) {
-        const port = window.location.port;
         const hostname = window.location.hostname;
-        if (port && port !== '8000' && (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.'))) {
-          endpoint = `http://${hostname}:8000${endpoint}`;
+        const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.') || hostname.startsWith('10.') || hostname.startsWith('172.');
+        if (isLocal) {
+          const port = window.location.port;
+          if (port && port !== '8000') {
+            endpoint = `http://${hostname}:8000${endpoint}`;
+          }
+        } else {
+          // In production, bypass Cloudflare Pages redirect proxy to avoid 405 error on POST requests
+          endpoint = `https://renia-ai-backend.medsaidkichene.workers.dev${endpoint}`;
         }
       }
       

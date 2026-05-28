@@ -1182,9 +1182,14 @@
           let playSuccess = false;
 
           try {
-            const res = await fetch('/api/v1/voice/tts', {
+            const token = localStorage.getItem('renia_token');
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+              headers['Authorization'] = `Bearer ${token}`;
+            }
+            const res = await fetch(API.baseUrl + '/voice/tts', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: headers,
               body: JSON.stringify({
                 text: greetingText,
                 voice_id: selectedVoice,
