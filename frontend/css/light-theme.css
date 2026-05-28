@@ -29,6 +29,9 @@ html:not(.dark) body {
   font-family: 'Geist', 'Inter', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.015em;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow: hidden !important;
 }
 
 /* ---------- Typography ---------- */
