@@ -18,8 +18,20 @@ class GrokVoiceAgent {
     this._micSource = null;
     this._scriptProcessor = null;
     this._speakerGainNode = null;
+    this._micMonitorGainNode = null;
     this._speakerMuted = false;
     this._isAssistantInterrupted = false;
+    this._inputChunkQueue = [];
+    this._inputQueuedSamples = 0;
+    this._inputFlushTimer = null;
+    this._inputFlushSamples = 960;
+    this._bargeInSpeechMs = 0;
+    this._bargeInThreshold = options.bargeInThreshold || 0.024;
+    this._bargeInRequiredMs = options.bargeInRequiredMs || 50;
+    this._bargeInCooldownMs = 300;
+    this._lastBargeInAt = 0;
+    this._assistantAudioStartedAt = 0;
+    this._responseComplete = false;
     
     const defaultVoice = options.voice || 'eve';
     const defaultClinicName = options.clinicName || 'Sunshine Smiles Dental';
@@ -33,7 +45,8 @@ class GrokVoiceAgent {
       sessionTokenEndpoint: options.sessionTokenEndpoint || '/api/v1/voice/session-token',
       autoStart: options.autoStart !== false,
       initialMessage: options.initialMessage || '',
-      demoMode: options.demoMode || false
+      demoMode: options.demoMode || false,
+      inputChunkMs: options.inputChunkMs || 40
     };
 
     this.callbacks = {
@@ -259,6 +272,10 @@ Keep responses short and conversational — this is a voice call, not an email.`
            this.workletNode = new AudioWorkletNode(this.audioContext, 'pcm-processor');
            this.workletNode.port.onmessage = (event) => this.handleMicData(event.data);
            source.connect(this.workletNode);
+           this._micMonitorGainNode = this.audioContext.createGain();
+           this._micMonitorGainNode.gain.value = 0;
+           this.workletNode.connect(this._micMonitorGainNode);
+           this._micMonitorGainNode.connect(this.audioContext.destination);
          } catch (e) {
            console.warn('Falling back to ScriptProcessorNode:', e);
            this.setupScriptProcessorFallback(source);
@@ -271,6 +288,11 @@ Keep responses short and conversational — this is a voice call, not an email.`
        this.micBuffer = [];
        this.nextPlayTime = 0;
        this.queuedSources = [];
+       this._inputChunkQueue = [];
+       this._inputQueuedSamples = 0;
+       this._bargeInSpeechMs = 0;
+       this._isAssistantInterrupted = false;
+       this._responseComplete = false;
 
        if (!sessionToken) {
          throw new Error('No session token available. Please check your backend connection and API key.');
@@ -349,7 +371,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   setupScriptProcessorFallback(source) {
-    const bufferSize = 4096;
+    const bufferSize = 2048;
     const scriptProcessor = this.audioContext.createScriptProcessor(bufferSize, 1, 1);
     this._scriptProcessor = scriptProcessor;
     
@@ -383,15 +405,122 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
   handleMicData(int16Data) {
     if (this._isDisconnecting) return;
+    this.detectClientBargeIn(int16Data);
     if (this.isSessionReady && this.ws && this.ws.readyState === WebSocket.OPEN) {
-      this.ws.send(JSON.stringify({
-        type: 'input_audio_buffer.append',
-        audio: this.audioToBase64(int16Data)
-      }));
+      this.queueInputAudio(int16Data);
     } else {
       if (this.micBuffer.length < 50) {
         this.micBuffer.push(int16Data);
       }
+    }
+  }
+
+  detectClientBargeIn(int16Data) {
+    if (!int16Data || int16Data.length === 0) return;
+    if (this.state !== 'speaking' || this._isAssistantInterrupted) {
+      this._bargeInSpeechMs = 0;
+      return;
+    }
+    if (this._assistantAudioStartedAt && Date.now() - this._assistantAudioStartedAt < 180) {
+      this._bargeInSpeechMs = 0;
+      return;
+    }
+
+    let sum = 0;
+    for (let i = 0; i < int16Data.length; i++) {
+      const sample = int16Data[i] / 32768;
+      sum += sample * sample;
+    }
+
+    const rms = Math.sqrt(sum / int16Data.length);
+    const chunkMs = (int16Data.length / 24000) * 1000;
+
+    if (rms >= this._bargeInThreshold) {
+      this._bargeInSpeechMs += chunkMs;
+      if (this._bargeInSpeechMs >= this._bargeInRequiredMs) {
+        this.handleBargeIn('client');
+      }
+    } else {
+      this._bargeInSpeechMs = Math.max(0, this._bargeInSpeechMs - chunkMs * 1.5);
+    }
+  }
+
+  handleBargeIn(source = 'client') {
+    this._isAssistantInterrupted = true;
+    this._responseComplete = false;
+    this._bargeInSpeechMs = 0;
+    this._assistantAudioStartedAt = 0;
+    this.currentAssistantMessage = '';
+    this.interruptPlayback();
+
+    const now = Date.now();
+    if (this.ws && this.ws.readyState === WebSocket.OPEN && now - this._lastBargeInAt > this._bargeInCooldownMs) {
+      this._lastBargeInAt = now;
+      try {
+        this.ws.send(JSON.stringify({ type: 'response.cancel' }));
+      } catch (e) {
+        console.warn('response.cancel failed during barge-in:', e);
+      }
+    }
+
+    if (this.state === 'speaking') {
+      console.log(`Assistant interrupted by ${source} barge-in`);
+    }
+    this.setState('listening');
+  }
+
+  queueInputAudio(int16Data) {
+    if (!int16Data || int16Data.length === 0) return;
+    this._inputChunkQueue.push(int16Data);
+    this._inputQueuedSamples += int16Data.length;
+
+    if (this._inputQueuedSamples >= this._inputFlushSamples) {
+      this.flushInputAudio();
+      return;
+    }
+
+    if (!this._inputFlushTimer) {
+      this._inputFlushTimer = setTimeout(() => this.flushInputAudio(), this.config.inputChunkMs);
+    }
+  }
+
+  flushInputAudio() {
+    if (this._inputFlushTimer) {
+      clearTimeout(this._inputFlushTimer);
+      this._inputFlushTimer = null;
+    }
+
+    if (this._inputChunkQueue.length === 0) return;
+
+    const chunks = this._inputChunkQueue;
+    const sampleCount = this._inputQueuedSamples;
+    this._inputChunkQueue = [];
+    this._inputQueuedSamples = 0;
+
+    if (!this.isSessionReady || !this.ws || this.ws.readyState !== WebSocket.OPEN) return;
+
+    // If the socket is backed up, dropping stale mic audio is better than adding turn latency.
+    if (this.ws.bufferedAmount > 262144) return;
+
+    let combined;
+    if (chunks.length === 1) {
+      combined = chunks[0];
+    } else {
+      combined = new Int16Array(sampleCount);
+      let offset = 0;
+      for (const chunk of chunks) {
+        combined.set(chunk, offset);
+        offset += chunk.length;
+      }
+    }
+
+    try {
+      this.ws.send(JSON.stringify({
+        type: 'input_audio_buffer.append',
+        audio: this.audioToBase64(combined)
+      }));
+    } catch (e) {
+      console.warn('Mic audio send failed:', e);
     }
   }
 
@@ -416,9 +545,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
         instructions: this.config.instructions,
         turn_detection: {
           type: 'server_vad',
-          threshold: 0.5,
-          silence_duration_ms: 500,
-          prefix_padding_ms: 300
+          threshold: 0.45,
+          silence_duration_ms: 300,
+          prefix_padding_ms: 250
         },
         tools: this.config.tools,
         audio: {
@@ -476,17 +605,14 @@ Keep responses short and conversational — this is a voice call, not an email.`
       case 'response.created':
         console.log('Response created:', data.response?.id);
         this._isAssistantInterrupted = false;
+        this._bargeInSpeechMs = 0;
+        this._assistantAudioStartedAt = 0;
+        this._responseComplete = false;
         break;
 
       case 'input_audio_buffer.speech_started':
         console.log('User started speaking');
-        this._isAssistantInterrupted = true;
-        this.interruptPlayback();
-        if (this.ws) {
-          this.ws.send(JSON.stringify({ type: 'response.cancel' }));
-        }
-        this.currentAssistantMessage = '';
-        this.setState('listening');
+        this.handleBargeIn('server');
         break;
 
       case 'input_audio_buffer.speech_stopped':
@@ -533,8 +659,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
       case 'response.done':
         console.log('Response done, tokens:', data.usage?.total_tokens);
-        this._isAssistantInterrupted = false;
-        this.setState('listening');
+        this._responseComplete = true;
+        this._setListeningWhenPlaybackComplete();
         break;
 
       case 'error':
@@ -556,17 +682,18 @@ Keep responses short and conversational — this is a voice call, not an email.`
     }
     for (const chunk of this.micBuffer) {
       if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-        this.ws.send(JSON.stringify({
-          type: 'input_audio_buffer.append',
-          audio: this.audioToBase64(chunk)
-        }));
+        this.queueInputAudio(chunk);
       }
     }
     this.micBuffer = [];
+    this.flushInputAudio();
   }
 
   playPcmChunk(base64) {
-    if (this._isDisconnecting || !this.audioContext || this.audioContext.state === 'closed') return;
+    if (this._isDisconnecting || this._isAssistantInterrupted || !this.audioContext || this.audioContext.state === 'closed') return;
+    if (!this._assistantAudioStartedAt) {
+      this._assistantAudioStartedAt = Date.now();
+    }
 
     try {
       // Decode base64 PCM chunk
@@ -595,7 +722,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   _flushPcmBuffer() {
-    if (this._isDisconnecting || !this.audioContext || this.audioContext.state === 'closed') {
+    if (this._isDisconnecting || this._isAssistantInterrupted || !this.audioContext || this.audioContext.state === 'closed') {
       this._pcmChunkBuffer = [];
       this._pcmFlushTimer = null;
       return;
@@ -639,10 +766,18 @@ Keep responses short and conversational — this is a voice call, not an email.`
       src.onended = () => {
         const idx = this.queuedSources.indexOf(src);
         if (idx !== -1) this.queuedSources.splice(idx, 1);
+        this._setListeningWhenPlaybackComplete();
       };
     } catch (e) {
       console.warn('Flush PCM buffer error:', e);
     }
+  }
+
+  _setListeningWhenPlaybackComplete() {
+    if (!this._responseComplete || this._isAssistantInterrupted) return;
+    if (this.queuedSources.length > 0 || this._pcmChunkBuffer.length > 0 || this._pcmFlushTimer) return;
+    this._assistantAudioStartedAt = 0;
+    this.setState('listening');
   }
 
   interruptPlayback(silenceOutput = false) {
@@ -660,6 +795,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
     }
     this.queuedSources.length = 0;
     this.nextPlayTime = 0;
+    this._responseComplete = false;
     if (silenceOutput && this._speakerGainNode && this.audioContext && this.audioContext.state !== 'closed') {
       try {
         this._speakerGainNode.gain.cancelScheduledValues(this.audioContext.currentTime);
@@ -672,6 +808,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
     if (this._isDisconnecting) return;
     let result;
     const args = JSON.parse(argsJson || '{}');
+
+    if (this._isAssistantInterrupted) return;
 
     switch (name) {
       case 'check_availability':
@@ -874,6 +1012,10 @@ Keep responses short and conversational — this is a voice call, not an email.`
       return;
     }
 
+    if (this.state === 'speaking') {
+      this.handleBargeIn('text');
+    }
+
     this.ws.send(JSON.stringify({
       type: 'conversation.item.create',
       item: { 
@@ -889,6 +1031,10 @@ Keep responses short and conversational — this is a voice call, not an email.`
     this._isDisconnecting = true;
     this._connectionId++;
     this._clearConnectionTimeout();
+    if (this._inputFlushTimer) {
+      clearTimeout(this._inputFlushTimer);
+      this._inputFlushTimer = null;
+    }
 
     // Stop all pending and active output before closing slower resources.
     this.interruptPlayback(true);
@@ -906,6 +1052,9 @@ Keep responses short and conversational — this is a voice call, not an email.`
     }
     if (this._speakerGainNode) {
       try { this._speakerGainNode.disconnect(); } catch (e) {}
+    }
+    if (this._micMonitorGainNode) {
+      try { this._micMonitorGainNode.disconnect(); } catch (e) {}
     }
 
     if (this.ws) {
@@ -936,10 +1085,15 @@ Keep responses short and conversational — this is a voice call, not an email.`
     this._scriptProcessor = null;
     this._micSource = null;
     this._speakerGainNode = null;
+    this._micMonitorGainNode = null;
     this.isConnected = false;
     this.isConnecting = false;
     this.isSessionReady = false;
     this.micBuffer = [];
+    this._inputChunkQueue = [];
+    this._inputQueuedSamples = 0;
+    this._bargeInSpeechMs = 0;
+    this._responseComplete = false;
     this._isAssistantInterrupted = false;
     this.setState('disconnected');
   }
