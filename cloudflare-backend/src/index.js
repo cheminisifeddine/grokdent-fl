@@ -84,7 +84,7 @@ async function hashPassword(password) {
     'raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']
   );
   const derivedBits = await crypto.subtle.deriveBits(
-    { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
+    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
     keyMaterial, 256
   );
   const saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -100,7 +100,7 @@ async function verifyPassword(password, stored) {
     'raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']
   );
   const derivedBits = await crypto.subtle.deriveBits(
-    { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
+    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
     keyMaterial, 256
   );
   const verifyHex = Array.from(new Uint8Array(derivedBits)).map(b => b.toString(16).padStart(2, '0')).join('');
