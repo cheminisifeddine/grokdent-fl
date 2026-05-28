@@ -547,7 +547,16 @@ Keep responses short and conversational — this is a voice call, not an email.`
 
       const src = this.audioContext.createBufferSource();
       src.buffer = buf;
-      src.connect(this.audioContext.destination);
+      
+      if (!this._speakerGainNode) {
+        this._speakerGainNode = this.audioContext.createGain();
+        this._speakerGainNode.connect(this.audioContext.destination);
+        // Preserve muted state if already set before connection
+        if (this._speakerMuted) {
+          this._speakerGainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+        }
+      }
+      src.connect(this._speakerGainNode);
 
       const now = this.audioContext.currentTime;
       const startAt = Math.max(now, this.nextPlayTime);
@@ -832,6 +841,25 @@ Keep responses short and conversational — this is a voice call, not an email.`
     this.isSessionReady = false;
     this.micBuffer = [];
     this.setState('disconnected');
+  }
+
+  toggleMute() {
+    if (!this.mediaStream) return false;
+    const tracks = this.mediaStream.getAudioTracks();
+    if (tracks.length === 0) return false;
+    const isMutedNow = !tracks[0].enabled;
+    tracks.forEach(track => {
+      track.enabled = isMutedNow;
+    });
+    return !isMutedNow; // Returns true if muted, false if unmuted
+  }
+
+  toggleSpeaker() {
+    this._speakerMuted = !this._speakerMuted;
+    if (this._speakerGainNode && this.audioContext) {
+      this._speakerGainNode.gain.setValueAtTime(this._speakerMuted ? 0 : 1, this.audioContext.currentTime);
+    }
+    return this._speakerMuted; // Returns true if speaker is muted, false if active
   }
 
   setVoice(voice) {

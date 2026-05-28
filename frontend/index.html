@@ -867,45 +867,45 @@
     }
 
     /* ==========================================
-       ELITE CALL SIMULATOR (DARK CYBER) THEME
+       ELITE CALL SIMULATOR (LIGHT CLINICAL) THEME
        ========================================== */
     .elite-dialer-console, .elite-transcript-panel, .elite-ehr-board {
-      background: #090e1a !important;
-      border: 1px solid rgba(99, 102, 241, 0.25) !important;
-      box-shadow: 0 25px 60px rgba(7, 8, 16, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      background: #ffffff !important;
+      border: 1px solid rgba(226, 232, 240, 0.95) !important;
+      box-shadow: 0 15px 45px rgba(15, 23, 42, 0.045), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
       position: relative !important;
       overflow: hidden !important;
       border-radius: 24px !important;
     }
     
-    /* Cyber grid overlay */
+    /* Cyber grid overlay (very subtle light gray) */
     .elite-dialer-console::before, .elite-transcript-panel::before, .elite-ehr-board::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px) !important;
+      background-image: radial-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px) !important;
       background-size: 16px 16px !important;
-      opacity: 0.8;
+      opacity: 0.9;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Ambient neon fluid glow orbs */
+    /* Ambient fluid glow orbs (light subtle blue/teal radial blurs) */
     .elite-glow-orb {
       position: absolute;
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(16, 185, 129, 0) 70%) !important;
-      filter: blur(45px);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.07) 0%, rgba(16, 185, 129, 0) 70%) !important;
+      filter: blur(35px);
       z-index: 2;
       pointer-events: none;
       transition: all 0.5s ease;
     }
-    .elite-glow-orb-top { top: -30px; right: -30px; }
-    .elite-glow-orb-bottom { bottom: -30px; left: -30px; }
+    .elite-glow-orb-top { top: -40px; right: -40px; }
+    .elite-glow-orb-bottom { bottom: -40px; left: -40px; }
 
-    /* Force all text in elite sections to have sleek cyber contrast */
+    /* Force all text in elite sections to have rich high contrast */
     .elite-dialer-console *, .elite-transcript-panel *, .elite-ehr-board * {
       position: relative;
       z-index: 3;
@@ -920,39 +920,42 @@
     .elite-dialer-console button,
     .elite-transcript-panel button,
     .elite-ehr-board button {
-      color: #e2e8f0 !important;
+      color: #0f172a !important; /* Deep Slate Ink */
     }
 
     .elite-dialer-console .text-slate-400,
     .elite-transcript-panel .text-slate-400,
     .elite-ehr-board .text-slate-400 {
-      color: #94a3b8 !important;
+      color: #64748b !important; /* Slate Muted */
     }
 
     /* Keypad buttons custom styling */
-    .elite-dialer-console button.elite-keypad-btn {
-      color: #94a3b8 !important;
-      border: 1px solid rgba(255, 255, 255, 0.05) !important;
-      background: rgba(255, 255, 255, 0.02) !important;
+    .elite-dialer-console button.elite-keypad-btn,
+    .keypad-digit-btn {
+      color: #334155 !important;
+      border: 1px solid #e2e8f0 !important;
+      background: #f8fafc !important;
       border-radius: 14px !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .elite-dialer-console button.elite-keypad-btn:hover {
-      color: #ffffff !important;
-      border-color: rgba(99, 102, 241, 0.35) !important;
-      background: rgba(99, 102, 241, 0.12) !important;
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.15) !important;
+    .elite-dialer-console button.elite-keypad-btn:hover,
+    .keypad-digit-btn:hover {
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+      background: #f1f5f9 !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03) !important;
       transform: translateY(-1px);
     }
-    .elite-dialer-console button.elite-keypad-btn:active {
+    .elite-dialer-console button.elite-keypad-btn:active,
+    .keypad-digit-btn:active {
       transform: translateY(0px);
     }
 
     /* Central Pulse Orb */
     #sim-orb-center {
-      background: rgba(15, 23, 42, 0.85) !important;
-      border: 1px solid rgba(99, 102, 241, 0.35) !important;
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
       width: 76px !important;
       height: 76px !important;
       border-radius: 50% !important;
@@ -964,17 +967,17 @@
     }
     #sim-orb-center:hover {
       transform: scale(1.08);
-      border-color: rgba(16, 185, 129, 0.6) !important;
-      box-shadow: 0 0 35px rgba(16, 185, 129, 0.35) !important;
+      border-color: #bfdbfe !important;
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.08) !important;
     }
     .sim-orb-active {
       animation: orbPulse 1.8s infinite ease-in-out !important;
       border-color: #10b981 !important;
-      background: rgba(16, 185, 129, 0.15) !important;
-      box-shadow: 0 0 30px rgba(16, 185, 129, 0.25) !important;
+      background: rgba(16, 185, 129, 0.05) !important;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.2) !important;
     }
     #sim-orb-icon {
-      color: #6366f1 !important;
+      color: #2563eb !important;
       font-size: 30px !important;
       transition: color 0.3s ease;
     }
@@ -985,47 +988,48 @@
     /* Premium dynamic soundwave */
     .elite-wave-bar {
       width: 4px !important;
-      background: linear-gradient(180deg, #6366f1 0%, #10b981 100%) !important;
+      background: linear-gradient(180deg, #2563eb 0%, #10b981 100%) !important;
       border-radius: 9999px !important;
-      box-shadow: 0 0 10px rgba(99, 102, 241, 0.6) !important;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.35) !important;
       transform-origin: bottom;
       animation: smoothWave 1.2s ease-in-out infinite !important;
     }
 
     /* Keyframe Pulse Override */
     @keyframes orbPulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.2); }
-      50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0.05), 0 0 0 30px rgba(16, 185, 129, 0.01); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.2); }
+      0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.3), 0 0 0 1px rgba(16, 185, 129, 0.15); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(16, 185, 129, 0.05), 0 0 0 24px rgba(16, 185, 129, 0.01); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.3), 0 0 0 1px rgba(16, 185, 129, 0.15); }
     }
 
     /* Telemetry indicators */
     .elite-telemetry-badge {
       font-family: 'Geist Mono', monospace;
       font-size: 8px !important;
-      color: #94a3b8 !important;
-      border: 1px solid rgba(255, 255, 255, 0.06) !important;
-      background: rgba(255, 255, 255, 0.03) !important;
+      color: #4b5563 !important;
+      border: 1px solid #e2e8f0 !important;
+      background: #f1f5f9 !important;
       padding: 3px 7px !important;
       border-radius: 6px !important;
       letter-spacing: 0.05em;
+      font-weight: 700 !important;
     }
 
     /* Dialogue streams */
     #chat-stream > div {
-      background: rgba(255, 255, 255, 0.03) !important;
-      border: 1px solid rgba(255, 255, 255, 0.05) !important;
-      color: #cbd5e1 !important;
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #334155 !important;
       border-radius: 16px !important;
       box-shadow: none !important;
     }
     #chat-stream > div.ml-auto {
-      background: rgba(99, 102, 241, 0.12) !important;
-      border: 1px solid rgba(99, 102, 241, 0.3) !important;
-      color: #e2e8f0 !important;
+      background: #eff6ff !important;
+      border: 1px solid #bfdbfe !important;
+      color: #1e3a8a !important;
     }
     #chat-stream > div.ml-auto * {
-      color: #e2e8f0 !important;
+      color: #1e3a8a !important;
     }
 
     /* EHR fields */
@@ -1035,21 +1039,55 @@
       letter-spacing: 0.05em !important;
     }
     #ehr-patient, #ehr-triage, #ehr-insurance, #ehr-status {
-      color: #cbd5e1 !important;
+      color: #0f172a !important;
       font-family: 'Geist Mono', monospace !important;
       font-size: 11px !important;
-      font-weight: 600 !important;
+      font-weight: 700 !important;
     }
     #ehr-sync-badge {
       font-family: 'Geist Mono', monospace !important;
-      color: #38bdf8 !important; /* Cyber cyan */
+      color: #2563eb !important; /* Premium blue */
       font-weight: 800 !important;
       letter-spacing: 0.05em;
-      text-shadow: 0 0 10px rgba(56, 189, 248, 0.35) !important;
+      text-shadow: 0 0 6px rgba(37, 99, 235, 0.15) !important;
     }
     #ehr-log-text {
-      color: #94a3b8 !important;
+      color: #475569 !important;
       font-family: 'Geist Mono', monospace !important;
+    }
+
+    /* Active toggled button style */
+    .elite-keypad-btn.toggled-active {
+      background: #eff6ff !important;
+      border-color: #2563eb !important;
+      color: #2563eb !important;
+      box-shadow: inset 0 2px 4px rgba(37, 99, 235, 0.06) !important;
+    }
+    .elite-keypad-btn.toggled-active span {
+      color: #2563eb !important;
+    }
+
+    /* EHR Dynamic Color Overrides */
+    #ehr-triage.text-rose-600, #ehr-triage.text-rose-500 {
+      color: #dc2626 !important;
+    }
+    #ehr-triage.text-slate-800, #ehr-triage.text-slate-200 {
+      color: #1e293b !important;
+    }
+    #ehr-status.text-emerald-600, #ehr-status.text-emerald-500 {
+      color: #16a34a !important;
+    }
+    #ehr-status.text-slate-800, #ehr-status.text-slate-200 {
+      color: #1e293b !important;
+    }
+    #ehr-sync-badge.text-emerald-500, #ehr-sync-badge.text-emerald-700 {
+      color: #047857 !important;
+    }
+    #ehr-log-text.text-emerald-400, #ehr-log-text.text-emerald-700 {
+      color: #047857 !important;
+    }
+    #ehr-log-text.text-slate-700, #ehr-log-text.text-slate-500 {
+      color: #475569 !important;
     }
   </style>
 </head>
@@ -1213,16 +1251,16 @@
               <!-- Sleek Telemetry Readout -->
               <div class="grid grid-cols-2 gap-2 border-b border-white/5 pb-4 text-[8px] font-mono">
                 <div class="flex items-center gap-2">
-                  <span class="elite-telemetry-badge">CODEC: OPUS PCM</span>
+                  <span class="elite-telemetry-badge">HIPAA COMPLIANT</span>
                 </div>
                 <div class="flex items-center gap-2 justify-end">
-                  <span class="elite-telemetry-badge">LATENCY: ~120MS</span>
+                  <span class="elite-telemetry-badge">ZERO-LAG VOIP</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="elite-telemetry-badge">SERVER: MIAMI-EDGE</span>
+                  <span class="elite-telemetry-badge">DENTRIX & EAGLESOFT</span>
                 </div>
                 <div class="flex items-center gap-2 justify-end">
-                  <span class="elite-telemetry-badge">SSL: SECURE HIPAA</span>
+                  <span class="elite-telemetry-badge">BILINGUAL AUTO-DETECT</span>
                 </div>
               </div>
 
@@ -1254,6 +1292,60 @@
                   <span id="sim-orb-icon" class="material-symbols-outlined text-lg transition-colors">mic</span>
                 </div>
                 
+                <!-- Dial Keypad Overlay (Initially Hidden) -->
+                <div id="dial-keypad-overlay" class="hidden absolute inset-0 z-30 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-3 transition-all duration-300 rounded-2xl">
+                  <div class="grid grid-cols-3 gap-2 w-full max-w-[190px] mx-auto select-none">
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('1')">
+                      <span class="text-sm font-bold">1</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">&nbsp;</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('2')">
+                      <span class="text-sm font-bold">2</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">ABC</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('3')">
+                      <span class="text-sm font-bold">3</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">DEF</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('4')">
+                      <span class="text-sm font-bold">4</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">GHI</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('5')">
+                      <span class="text-sm font-bold">5</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">JKL</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('6')">
+                      <span class="text-sm font-bold">6</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">MNO</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('7')">
+                      <span class="text-sm font-bold">7</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">PQRS</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('8')">
+                      <span class="text-sm font-bold">8</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">TUV</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('9')">
+                      <span class="text-sm font-bold">9</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">WXYZ</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('*')">
+                      <span class="text-sm font-bold">*</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">&nbsp;</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('0')">
+                      <span class="text-sm font-bold">0</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">+</span>
+                    </button>
+                    <button class="keypad-digit-btn w-11 h-11 rounded-full border border-slate-200 bg-slate-50 flex flex-col items-center justify-center text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95 transition-all" onclick="playDTMFTone('#')">
+                      <span class="text-sm font-bold">#</span>
+                      <span class="text-[6px] text-slate-400 font-mono -mt-1">&nbsp;</span>
+                    </button>
+                  </div>
+                </div>
+                
                 <!-- Visual Status Text -->
                 <div class="text-center mt-4">
                   <span id="sim-visual-status" class="font-mono text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest block">SYSTEM READY</span>
@@ -1262,16 +1354,16 @@
               </div>
 
               <!-- Animated iOS Keypad Control Mockup -->
-              <div class="grid grid-cols-3 gap-4 border-t border-white/5 pt-6">
-                <button class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-colors">
+              <div class="grid grid-cols-3 gap-4 border-t border-white/5 pt-6 select-none">
+                <button id="btn-mute-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-all duration-200">
                   <span class="material-symbols-outlined text-lg sm:text-xl">mic_off</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Mute</span>
                 </button>
-                <button class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-colors">
+                <button id="btn-speaker-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-all duration-200">
                   <span class="material-symbols-outlined text-lg sm:text-xl">volume_up</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Speaker</span>
                 </button>
-                <button class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-colors">
+                <button id="btn-keypad-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-all duration-200">
                   <span class="material-symbols-outlined text-lg sm:text-xl">grid_on</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Keypad</span>
                 </button>
@@ -1467,7 +1559,7 @@
                   <div class="flex justify-between text-slate-700">
                     <span class="font-bold flex items-center gap-1.5">
                       <span class="material-symbols-outlined text-slate-900 text-xs">record_voice_over</span>
-                      Bi-directional Audio PCM Socket
+                      Real-Time Conversational Stream
                     </span>
                     <span class="text-emerald-500 font-bold">95ms</span>
                   </div>
@@ -1480,7 +1572,7 @@
                 </div>
 
                 <div class="text-[9px] sm:text-[10px] text-slate-500 leading-normal border-t border-slate-200 pt-4 mt-2">
-                  <strong>Zero VAD latency:</strong> Patient interruptions flush active audio packets at the socket layer, allowing immediate, clean conversational override.
+                  <strong>Natural Interruption Handling:</strong> Patients can speak over the AI receptionist at any point, just like talking to a real human receptionist, ensuring a perfectly natural conversation.
                 </div>
 
               </div>
@@ -1935,7 +2027,7 @@
               <ul class="space-y-3 font-sans text-xs text-slate-600">
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> 3 Simultaneous Active Lines</li>
                 <li class="flex items-center gap-2 font-bold text-white"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Eaglesoft & Dentrix Write-Back</li>
-                <li class="flex items-center gap-2 font-bold text-white"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> English ↔ Spanish Bilingual VAD</li>
+                <li class="flex items-center gap-2 font-bold text-white"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> English ↔ Spanish Bilingual Auto-Detect</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Unlimited Portal Eligibility Checks</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> Custom Triage Emergency routing</li>
                 <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[16px] font-bold">check</span> SMS & Twilio patient alerts</li>
@@ -2128,6 +2220,78 @@
   <!-- DYNAMIC JAVASCRIPT ANIMATIONS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      
+      // DTMF frequencies map and dialed digits
+      const dtmfFrequencies = {
+        '1': [697, 1209], '2': [697, 1336], '3': [697, 1477],
+        '4': [770, 1209], '5': [770, 1336], '6': [770, 1477],
+        '7': [852, 1209], '8': [852, 1336], '9': [852, 1477],
+        '*': [941, 1209], '0': [941, 1336], '#': [941, 1477]
+      };
+
+      let dialedNumber = "";
+
+      window.playDTMFTone = function(digit) {
+        const freqs = dtmfFrequencies[digit];
+        if (!freqs) return;
+
+        let ctx = null;
+        if (voiceAgent && voiceAgent.audioContext) {
+          ctx = voiceAgent.audioContext;
+        } else {
+          if (!window._dtmfAudioCtx) {
+            window._dtmfAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          ctx = window._dtmfAudioCtx;
+        }
+
+        if (!ctx || ctx.state === 'closed') {
+          window._dtmfAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          ctx = window._dtmfAudioCtx;
+        }
+
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+
+        try {
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gainNode = ctx.createGain();
+
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(freqs[0], ctx.currentTime);
+
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(freqs[1], ctx.currentTime);
+
+          osc1.connect(gainNode);
+          osc2.connect(gainNode);
+          gainNode.connect(ctx.destination);
+
+          gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
+          
+          const duration = 0.20;
+          gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+          osc1.start(ctx.currentTime);
+          osc2.start(ctx.currentTime);
+
+          osc1.stop(ctx.currentTime + duration);
+          osc2.stop(ctx.currentTime + duration);
+        } catch (err) {
+          console.warn("Error playing DTMF tone:", err);
+        }
+
+        // Display dialed numbers in the log for the dentist
+        dialedNumber += digit;
+        if (dialedNumber.length > 14) dialedNumber = dialedNumber.slice(-14);
+        
+        if (typeof ehrLogText !== 'undefined' && ehrLogText) {
+          ehrLogText.textContent = `Dialed touch-tone: [${digit}]. Current sequence: ${dialedNumber}`;
+          ehrLogText.className = "font-mono text-[9px] text-slate-700 leading-normal mt-3";
+        }
+      };
       
       // ==========================================
       // MOBILE NAVBAR MENU TOGGLE
@@ -2400,17 +2564,17 @@ Demo guardrails:
       
       const resetWorkflowPanel = () => {
         ehrPatient.textContent = "—";
-        ehrPatient.className = "text-slate-200 font-bold block mt-0.5";
+        ehrPatient.className = "text-slate-800 font-bold block mt-0.5";
         ehrTriage.textContent = "—";
-        ehrTriage.className = "text-slate-200 font-bold block mt-0.5";
+        ehrTriage.className = "text-slate-800 font-bold block mt-0.5";
         ehrInsurance.textContent = "—";
-        ehrInsurance.className = "text-slate-200 font-bold block mt-0.5";
+        ehrInsurance.className = "text-slate-800 font-bold block mt-0.5";
         ehrStatus.textContent = "—";
-        ehrStatus.className = "text-slate-200 font-bold block mt-0.5";
+        ehrStatus.className = "text-slate-800 font-bold block mt-0.5";
         ehrSyncBadge.textContent = "—";
-        ehrSyncBadge.className = "font-mono text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block";
+        ehrSyncBadge.className = "font-mono text-[10px] font-extrabold uppercase text-slate-500 tracking-wider block";
         ehrLogText.textContent = "Sync line offline. Ready to connect...";
-        ehrLogText.className = "font-mono text-[9px] text-slate-400 leading-normal mt-3";
+        ehrLogText.className = "font-mono text-[9px] text-slate-500 leading-normal mt-3";
       };
 
       const clearSimulation = async () => {
@@ -2437,6 +2601,18 @@ Demo guardrails:
             Click "Talk to Renia AI Demo" and test a real dental front-desk scenario...
           </div>
         `;
+        
+        // Reset console controls and dialed number
+        const btnMute = document.getElementById("btn-mute-toggle");
+        const btnSpeaker = document.getElementById("btn-speaker-toggle");
+        const btnKeypad = document.getElementById("btn-keypad-toggle");
+        const keypadOverlay = document.getElementById("dial-keypad-overlay");
+        
+        if (btnMute) btnMute.classList.remove("toggled-active");
+        if (btnSpeaker) btnSpeaker.classList.remove("toggled-active");
+        if (btnKeypad) btnKeypad.classList.remove("toggled-active");
+        if (keypadOverlay) keypadOverlay.classList.add("hidden");
+        dialedNumber = "";
         
         setVoiceState("ready");
         resetWorkflowPanel();
@@ -2466,27 +2642,27 @@ Demo guardrails:
         bubble.className = "opacity-0 transform translate-y-2 transition-all duration-300 ease-out flex flex-col max-w-[85%] border shadow-glow p-4.5 rounded-2xl";
         
         if (role === "patient") {
-          bubble.className += " bg-slate-900/40 border-white/5 text-slate-300 rounded-tl-none";
+          bubble.className += " bg-slate-100 border-slate-200 text-slate-800 rounded-tl-none";
           bubble.innerHTML = `
-            <div class="flex items-center gap-2 mb-1.5 border-b border-slate-850 pb-1">
-              <span class="text-[9px] font-mono font-bold text-slate-400 tracking-widest uppercase">INBOUND CALLER</span>
+            <div class="flex items-center gap-2 mb-1.5 border-b border-slate-200 pb-1">
+              <span class="text-[9px] font-mono font-bold text-slate-500 tracking-widest uppercase">INBOUND CALLER</span>
             </div>
-            <p data-bubble-text class="text-xs md:text-sm font-sans leading-relaxed text-slate-300">${escapeHtml(text)}</p>
+            <p data-bubble-text class="text-xs md:text-sm font-sans leading-relaxed text-slate-800">${escapeHtml(text)}</p>
           `;
         } else {
-          bubble.className += " bg-slate-900 border-slate-800/20 text-white rounded-tr-none ml-auto shadow-medical-cyan/5";
+          bubble.className += " bg-blue-50 border-blue-100 text-slate-900 rounded-tr-none ml-auto shadow-blue-500/5";
           let tagHtml = "";
           if (tag) {
-            tagHtml = `<span class="px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-[8px] font-bold text-rose-400 ml-2 font-mono tracking-wider uppercase">${escapeHtml(tag)}</span>`;
+            tagHtml = `<span class="px-2 py-0.5 rounded bg-blue-100 border border-blue-200 text-[8px] font-bold text-blue-700 ml-2 font-mono tracking-wider uppercase">${escapeHtml(tag)}</span>`;
           }
           bubble.innerHTML = `
-            <div class="flex items-center justify-between gap-2 mb-1.5 border-b border-slate-850 pb-1">
+            <div class="flex items-center justify-between gap-2 mb-1.5 border-b border-blue-100 pb-1">
               <div class="flex items-center">
-                <span class="text-[9px] font-mono font-bold text-white tracking-widest uppercase">Renia Voice Autopilot</span>
+                <span class="text-[9px] font-mono font-bold text-blue-900 tracking-widest uppercase">Renia Voice Autopilot</span>
                 ${tagHtml}
               </div>
             </div>
-            <p data-bubble-text class="text-xs md:text-sm font-sans leading-relaxed text-slate-100">${escapeHtml(text)}</p>
+            <p data-bubble-text class="text-xs md:text-sm font-sans leading-relaxed text-slate-900">${escapeHtml(text)}</p>
           `;
         }
         
@@ -2521,11 +2697,11 @@ Demo guardrails:
 
         const triageText = ehrTriage.textContent.toLowerCase();
         ehrTriage.className = triageText.includes("emergency") || triageText.includes("pain") || triageText.includes("urgent")
-          ? "text-rose-500 font-bold block mt-0.5"
-          : "text-slate-200 font-bold block mt-0.5";
-        ehrStatus.className = "text-emerald-500 font-bold block mt-0.5";
-        ehrSyncBadge.className = "font-mono text-[9px] font-extrabold uppercase text-emerald-500 border border-emerald-500/20 px-2 py-0.5 rounded bg-emerald-500/5 mt-0.5 inline-block";
-        ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
+          ? "text-rose-600 font-bold block mt-0.5"
+          : "text-slate-800 font-bold block mt-0.5";
+        ehrStatus.className = "text-emerald-600 font-bold block mt-0.5";
+        ehrSyncBadge.className = "font-mono text-[9px] font-extrabold uppercase text-emerald-700 border border-emerald-600/20 px-2 py-0.5 rounded bg-emerald-50 mt-0.5 inline-block";
+        ehrLogText.className = "font-mono text-[9px] text-slate-700 leading-normal mt-3";
       };
 
       const updateWorkflowFromTranscript = (message) => {
@@ -2579,8 +2755,8 @@ Demo guardrails:
           assistantBubble = null;
           setVoiceState("listening");
           setButton("call_end", "End Renia Voice Demo", "danger");
-          ehrLogText.textContent = "Microphone live. Keep talking naturally; server VAD handles turn-taking.";
-          ehrLogText.className = "font-mono text-[9px] text-emerald-400 leading-normal mt-3";
+          ehrLogText.textContent = "Microphone live. Speak naturally; the AI receptionist is listening to you.";
+          ehrLogText.className = "font-mono text-[9px] text-slate-700 leading-normal mt-3";
         }, 1800);
       };
 
@@ -2606,7 +2782,7 @@ Demo guardrails:
             insurance: "Demo Mode",
             portal_status: "Realtime connected",
             pipeline_status: "Renia Voice active",
-            log: "Connected with a short-lived xAI client secret. The raw API key stays server-side."
+            log: "Secure HIPAA-compliant voice session established. Encrypted data pipeline active."
           });
           assistantBubble = addChatBubble("ai", "Connected to the Renia Speech-to-Speech Engine. Renia is starting the live demo now.", "Renia Live");
         });
@@ -2660,7 +2836,7 @@ Demo guardrails:
             insurance: "Demo Mode",
             portal_status: "Retry ready",
             pipeline_status: "Realtime offline",
-            log: "Check microphone permission, HTTPS, backend availability, and the server-side XAI_API_KEY."
+            log: "Connection paused. Please check your internet connection, allow microphone access in your browser, or contact support."
           });
           setVoiceState("ready");
           setButton("phone", "Restart Renia Voice Demo");
@@ -2716,7 +2892,7 @@ Demo guardrails:
           insurance: "Demo Mode",
           portal_status: "Minting token",
           pipeline_status: "Realtime handshake",
-          log: "Requesting a short-lived xAI client secret from the backend. The browser never receives the raw API key."
+          log: "Opening secure medical-grade audio tunnel... Verifying practice sync bridge."
         });
 
         voiceAgent = createLandingVoiceAgent();
@@ -2734,6 +2910,45 @@ Demo guardrails:
           await clearSimulation();
         }
       });
+      
+      // ==========================================
+      // CONTROLLER TOGGLES & DIAL KEYPAD INTERACTION
+      // ==========================================
+      const btnMute = document.getElementById("btn-mute-toggle");
+      const btnSpeaker = document.getElementById("btn-speaker-toggle");
+      const btnKeypad = document.getElementById("btn-keypad-toggle");
+      const keypadOverlay = document.getElementById("dial-keypad-overlay");
+
+      if (btnMute) {
+        btnMute.addEventListener("click", () => {
+          if (!isSimulating || !voiceAgent) return;
+          const isMuted = voiceAgent.toggleMute();
+          btnMute.classList.toggle("toggled-active", isMuted);
+          if (ehrLogText) {
+            ehrLogText.textContent = isMuted ? "Microphone muted (HIPAA secure standby)." : "Microphone active.";
+          }
+        });
+      }
+
+      if (btnSpeaker) {
+        btnSpeaker.addEventListener("click", () => {
+          if (!isSimulating || !voiceAgent) return;
+          const isMuted = voiceAgent.toggleSpeaker();
+          btnSpeaker.classList.toggle("toggled-active", isMuted);
+          if (ehrLogText) {
+            ehrLogText.textContent = isMuted ? "Speaker muted (privacy standby)." : "Speaker active.";
+          }
+        });
+      }
+
+      if (btnKeypad) {
+        btnKeypad.addEventListener("click", () => {
+          if (keypadOverlay) {
+            keypadOverlay.classList.toggle("hidden");
+            btnKeypad.classList.toggle("toggled-active");
+          }
+        });
+      }
       
     });
   </script>
