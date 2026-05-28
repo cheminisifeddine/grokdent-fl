@@ -56,243 +56,40 @@
       }
     };
   </script>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
     
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Outfit', sans-serif !important;
-      letter-spacing: -0.035em !important;
-      color: #000000 !important;
-    }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
-    }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
-    }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #000000 !important;
-      border-radius: 8px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-      outline: none !important;
-      border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
-    }
-    
-    /* Switch Checkbox Fixes */
-    .switch-dot {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-    }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
-    }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
-    }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
-    }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
-    }
-  </style>
+  <link rel="stylesheet" href="css/light-theme.css" />
 </head>
-<body class="bg-slate-950 text-white h-screen flex overflow-hidden">
+<body class="h-screen flex overflow-hidden bg-white light-theme">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-white/5 h-full z-40 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200 h-full z-40 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
     <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="relative w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-900 text-white">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-white"></div>
+        <div class="p-2 rounded bg-blue-50 text-blue-700">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -300,17 +97,17 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
       
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-700" title="Sign Out">
         SM
       </div>
     </div>
@@ -320,20 +117,20 @@
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
     
     <!-- Top App Bar -->
-    <header class="h-20 bg-clinical-white/10 backdrop-blur-md border-b border-white/5 flex justify-between items-center w-full px-8 z-30">
+    <header class="h-20 bg-white border-b border-slate-200 flex justify-between items-center w-full px-8 z-30">
       <div class="flex items-center gap-4">
         <h1 class="font-display font-bold text-lg text-white tracking-tight">Renia Dental Admin</h1>
-        <span class="hidden md:inline-block px-2.5 py-0.5 rounded bg-slate-900/40 border border-white/5 font-mono text-[10px] text-slate-400 font-bold tracking-widest">CORE v1.4</span>
+        <span class="hidden md:inline-block px-2.5 py-0.5 rounded bg-slate-50 border border-slate-200 font-mono text-[10px] text-slate-400 font-bold tracking-widest">CORE v1.4</span>
       </div>
       <div class="flex items-center gap-4">
         <!-- Status Indicator -->
-        <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-900/40 border border-white/5">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-50 border border-slate-200">
           <div class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></div>
-          <span class="font-mono text-[10px] font-bold text-slate-200 uppercase tracking-widest">AI Receptionist Active</span>
+          <span class="font-mono text-[10px] font-bold text-slate-700 uppercase tracking-widest">AI Receptionist Active</span>
         </div>
         
         <!-- Live Call Simulator Trigger -->
-        <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-slate-950 hover:bg-slate-900 px-4 py-2 rounded text-white text-xs font-bold tracking-wider uppercase border-t border-white/10 active:scale-[0.98] transition-all">
+        <button onclick="openCallSimulatorWidget()" class="flex items-center gap-2 bg-white hover:bg-slate-900 px-4 py-2 rounded text-white text-xs font-bold tracking-wider uppercase border-t border-white/10 active:scale-[0.98] transition-all">
           <span class="material-symbols-outlined text-[16px] animate-pulse">phone_in_talk</span>
           Simulate Call
         </button>
@@ -345,7 +142,7 @@
       
       <!-- Page Header -->
       <div class="mb-8">
-        <h2 class="font-display text-2xl font-bold tracking-tight text-white leading-none mb-1.5">Intake Operations</h2>
+        <h2 class="font-display text-2xl font-bold tracking-tight text-slate-900 leading-none mb-1.5">Intake Operations</h2>
         <p class="text-slate-400 text-xs font-medium">Real-time bilingual caller processing, schedules, and active opportunities.</p>
       </div>
 
@@ -353,12 +150,12 @@
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
         
         <!-- LIVE INTELLIGENCE FEED (Spans 8 cols) -->
-        <div class="col-span-1 md:col-span-8 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded p-6 shadow-none flex flex-col justify-between h-[360px]">
+        <div class="col-span-1 md:col-span-8 bg-white border border-slate-200 rounded p-6 shadow-none flex flex-col justify-between h-[360px]">
           <div>
             <div class="flex justify-between items-start mb-6">
               <div>
                 <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Live Feed</span>
-                <h3 class="font-display font-bold text-md text-white leading-none">Active Caller Status</h3>
+                <h3 class="font-display font-bold text-md text-slate-900 leading-none">Active Caller Status</h3>
               </div>
               <span class="px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-[9px] font-bold tracking-wider">SECURE TWO-PARTY CHANNEL</span>
             </div>
@@ -366,7 +163,7 @@
             <!-- Call List High Density -->
             <div class="flex flex-col gap-3 overflow-y-auto max-h-[220px] pr-1">
               <!-- Call Item 1 -->
-              <div class="flex items-center justify-between p-3 rounded border border-white/5 bg-slate-900/40 hover:bg-white/10 transition-colors">
+              <div class="flex items-center justify-between p-3 rounded border border-white/5 bg-slate-50 hover:bg-white/10 transition-colors">
                 <div class="flex items-center gap-4">
                   <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center text-slate-300">
                     <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
@@ -388,7 +185,7 @@
                 </div>
               </div>
               <!-- Call Item 2 -->
-              <div class="flex items-center justify-between p-3 rounded border border-white/5 bg-slate-900/40 hover:bg-white/10 transition-colors">
+              <div class="flex items-center justify-between p-3 rounded border border-white/5 bg-slate-50 hover:bg-white/10 transition-colors">
                 <div class="flex items-center gap-4">
                   <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center text-slate-300">
                     <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
@@ -421,10 +218,10 @@
         </div>
 
         <!-- OPPORTUNITY METRIC (Spans 4 cols) -->
-        <div class="col-span-1 md:col-span-4 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded p-6 shadow-none flex flex-col justify-between h-[360px]">
+        <div class="col-span-1 md:col-span-4 bg-white border border-slate-200 rounded p-6 shadow-none flex flex-col justify-between h-[360px]">
           <div>
             <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Financial Impact</span>
-            <h3 class="font-display font-bold text-md text-white leading-none mb-6">AI Performance &amp; ROI</h3>
+            <h3 class="font-display font-bold text-md text-slate-900 leading-none mb-6">AI Performance &amp; ROI</h3>
             
             <div class="space-y-6">
               <div>
@@ -446,34 +243,34 @@
 
           <!-- Mini Scaffolding Chart -->
           <div class="h-16 w-full flex items-end gap-1.5 border-b border-white/5 pb-1">
-            <div class="w-full bg-slate-900 rounded-t-sm h-[40%]"></div>
-            <div class="w-full bg-slate-900 rounded-t-sm h-[50%]"></div>
-            <div class="w-full bg-slate-900 rounded-t-sm h-[45%]"></div>
-            <div class="w-full bg-slate-900 rounded-t-sm h-[65%]"></div>
-            <div class="w-full bg-slate-950 rounded-t-sm h-[80%] relative">
+            <div class="w-full bg-slate-200 rounded-t-sm h-[40%]"></div>
+            <div class="w-full bg-slate-200 rounded-t-sm h-[50%]"></div>
+            <div class="w-full bg-slate-200 rounded-t-sm h-[45%]"></div>
+            <div class="w-full bg-slate-200 rounded-t-sm h-[65%]"></div>
+            <div class="w-full bg-white rounded-t-sm h-[80%] relative">
               <div class="absolute -top-5 left-1/2 -translate-x-1/2 font-mono text-[8px] text-white font-bold uppercase">Today</div>
             </div>
           </div>
         </div>
 
         <!-- RECENT INTAKES TABLE (Spans full 12 cols) -->
-        <div class="col-span-1 md:col-span-12 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded shadow-none overflow-hidden mt-2">
+        <div class="col-span-1 md:col-span-12 bg-white border border-slate-200 rounded shadow-none overflow-hidden mt-2">
           <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
             <div>
               <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Intake Records</span>
-              <h3 class="font-display font-bold text-md text-white leading-none">Recent Inquiries</h3>
+              <h3 class="font-display font-bold text-md text-slate-900 leading-none">Recent Inquiries</h3>
             </div>
             <!-- Search bar -->
             <div class="relative w-64">
               <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
-              <input class="w-full bg-slate-900/40 border border-white/5 rounded pl-9 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-slate-950 focus:ring-1 focus:ring-slate-950 transition-all placeholder:text-slate-300" placeholder="Search patients..." type="text"/>
+              <input class="w-full bg-slate-50 border border-slate-200 rounded pl-9 pr-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all placeholder:text-slate-300" placeholder="Search patients..." type="text"/>
             </div>
           </div>
           
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-slate-900/40 border-b border-white/5 text-slate-400 font-mono text-[10px]">
+                <tr class="bg-slate-50 border-b border-slate-200 text-slate-400 font-mono text-[10px]">
                   <th class="py-3 px-6 font-bold uppercase tracking-wider">Patient Name</th>
                   <th class="py-3 px-6 font-bold uppercase tracking-wider">Intake Date</th>
                   <th class="py-3 px-6 font-bold uppercase tracking-wider">Procedure Intent</th>
@@ -482,7 +279,7 @@
                 </tr>
               </thead>
               <tbody class="text-xs text-slate-100 divide-y divide-slate-100 font-medium">
-                <tr class="hover:bg-slate-900/40 transition-colors">
+                <tr class="hover:bg-slate-50 transition-colors">
                   <td class="py-4 px-6 font-bold">Emma Roberts</td>
                   <td class="py-4 px-6 font-mono text-[10px]">Oct 24, 09:15 AM</td>
                   <td class="py-4 px-6">Invisalign Consult</td>
@@ -491,16 +288,16 @@
                     <span class="inline-flex items-center px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-[9px] font-bold uppercase">Booked</span>
                   </td>
                 </tr>
-                <tr class="hover:bg-slate-900/40 transition-colors">
+                <tr class="hover:bg-slate-50 transition-colors">
                   <td class="py-4 px-6 font-bold">James Wilson</td>
                   <td class="py-4 px-6 font-mono text-[10px]">Oct 24, 08:30 AM</td>
                   <td class="py-4 px-6">General Cleaning</td>
                   <td class="py-4 px-6 text-slate-400 max-w-xs truncate text-[11px]">Routine 6-month checkup. Requested early morning slot.</td>
                   <td class="py-4 px-6 text-right">
-                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-900/40 border border-white/5 text-slate-400 font-mono text-[9px] font-bold uppercase">Pending</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-slate-400 font-mono text-[9px] font-bold uppercase">Pending</span>
                   </td>
                 </tr>
-                <tr class="hover:bg-slate-900/40 transition-colors">
+                <tr class="hover:bg-slate-50 transition-colors">
                   <td class="py-4 px-6 font-bold">Elena Rodriguez</td>
                   <td class="py-4 px-6 font-mono text-[10px]">Oct 23, 16:45 PM</td>
                   <td class="py-4 px-6 text-red-600 font-bold">Emergency Molars</td>
@@ -522,11 +319,11 @@
   <!-- ============================================
        FLOATING CALL SIMULATOR WIDGET DIALOG
        ============================================ -->
-  <div id="call-simulator-widget" class="fixed inset-y-0 right-0 z-50 w-full max-w-[420px] bg-clinical-white/10 backdrop-blur-md border-l border-slate-250 shadow-2xl flex flex-col justify-between translate-x-[420px] opacity-0 transition-all duration-400 ease-in-out">
+  <div id="call-simulator-widget" class="fixed inset-y-0 right-0 z-50 w-full max-w-[420px] bg-white border-l border-slate-250 shadow-2xl flex flex-col justify-between translate-x-[420px] opacity-0 transition-all duration-400 ease-in-out">
     <!-- Header -->
-    <div class="p-6 border-b border-white/5 flex justify-between items-center bg-slate-900/40">
+    <div class="p-6 border-b border-white/5 flex justify-between items-center bg-slate-50">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-slate-950 flex items-center justify-center text-white text-xs">
+        <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-white text-xs">
           📞
         </div>
         <div>
@@ -534,7 +331,7 @@
           <span class="text-[9px] font-mono text-slate-400 uppercase block mt-1">Uvicorn pipeline hook</span>
         </div>
       </div>
-      <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full bg-clinical-white/10 backdrop-blur-md border border-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+      <button onclick="closeCallSimulatorWidget()" class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-white/10 transition-colors">
         <span class="material-symbols-outlined text-[16px] text-slate-400">close</span>
       </button>
     </div>
@@ -542,17 +339,17 @@
     <!-- Transcript / Live Screen Area -->
     <div class="flex-1 p-6 overflow-y-auto space-y-4" id="sim-transcript-container">
       <div class="text-center py-12 text-slate-400">
-        <span class="material-symbols-outlined text-[48px] block mb-2 text-slate-200">contact_phone</span>
+        <span class="material-symbols-outlined text-[48px] block mb-2 text-slate-700">contact_phone</span>
         <p class="text-xs font-semibold">Ready to launch simulation pipelines.</p>
         <p class="text-[10px] text-slate-400 mt-1 max-w-[200px] mx-auto">Click simulate below to run full bilingual scheduling call logs.</p>
       </div>
     </div>
 
     <!-- Action Bar / Buttons -->
-    <div class="p-6 border-t border-white/5 bg-slate-900/40 space-y-4">
+    <div class="p-6 border-t border-white/5 bg-slate-50 space-y-4">
       
       <!-- Pulsing Waveform Accent -->
-      <div class="flex items-center justify-center gap-1.5 h-10 w-full bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-xl px-4 hidden" id="waveform-panel">
+      <div class="flex items-center justify-center gap-1.5 h-10 w-full bg-white border border-slate-200 rounded-xl px-4 hidden" id="waveform-panel">
         <span class="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest mr-2">Audio Waves:</span>
         <div class="flex items-end gap-1 h-5 select-none" id="waves-animation">
           <div class="w-1 bg-indigo-500 rounded-t h-[40%] animate-pulse"></div>
@@ -564,7 +361,7 @@
         </div>
       </div>
 
-      <button id="sim-start-btn" onclick="startCallSimulation()" class="w-full py-3.5 bg-slate-950 hover:bg-slate-900 text-white rounded font-bold uppercase tracking-wider text-xs border-t border-white/10 active:scale-[0.98] transition-all">
+      <button id="sim-start-btn" onclick="startCallSimulation()" class="w-full py-3.5 bg-white hover:bg-blue-50 text-blue-700 rounded font-bold uppercase tracking-wider text-xs border-t border-white/10 active:scale-[0.98] transition-all">
          Start Call Simulation
       </button>
     </div>
@@ -633,11 +430,11 @@
 
         let styling = '';
         if (line.role === 'user') {
-          styling = 'bg-slate-slate text-slate-200 rounded-tl-xl rounded-tr-xl rounded-bl-xl border border-white/5';
+          styling = 'bg-slate-slate text-slate-700 rounded-tl-xl rounded-tr-xl rounded-bl-xl border border-white/5';
         } else if (line.role === 'assistant') {
           styling = 'bg-indigo-600 text-white rounded-tl-xl rounded-tr-xl rounded-br-xl';
         } else {
-          styling = 'bg-slate-900/40 text-slate-400 font-mono text-[9px] rounded uppercase border border-slate-150 px-3 py-1.5 text-center w-full max-w-[90%]';
+          styling = 'bg-slate-50 text-slate-400 font-mono text-[9px] rounded uppercase border border-slate-150 px-3 py-1.5 text-center w-full max-w-[90%]';
         }
 
         div.innerHTML = `

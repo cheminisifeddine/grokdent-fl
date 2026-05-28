@@ -58,211 +58,7 @@
     };
   </script>
 
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
     
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Outfit', sans-serif !important;
-      letter-spacing: -0.035em !important;
-      color: #000000 !important;
-    }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
-    }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
-    }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #000000 !important;
-      border-radius: 8px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-      outline: none !important;
-      border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
-    }
-    
-    /* Switch Checkbox Fixes */
-    .switch-dot {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-    }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
-    }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
-    }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
-    }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
-    }
-  </style>
   <!-- Tab switcher defined early so inline onclick handlers always work -->
   <script>
     window.switchSettingsTab = function(target) {
@@ -271,7 +67,7 @@
         // 1. Reset all tabs to inactive
         var tabs = document.querySelectorAll('.settings-tab');
         for (var i = 0; i < tabs.length; i++) {
-          tabs[i].className = 'settings-tab pb-3 text-slate-400 hover:text-white text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
+          tabs[i].className = 'settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer';
         }
         // 2. Highlight the clicked tab
         var activeTab = document.querySelector('.settings-tab[data-target="' + target + '"]');
@@ -293,37 +89,38 @@
       }
     };
   </script>
+  <link rel="stylesheet" href="css/light-theme.css" />
 </head>
-<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
+<body class="min-h-screen overflow-hidden flex text-slate-700 antialiased selection:bg-indigo-500/30 selection: light-theme">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-40 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200 h-full z-40 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
     <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -331,17 +128,17 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="relative w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-900 text-white">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-white"></div>
+        <div class="p-2 rounded bg-blue-50 text-blue-700">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-700" title="Sign Out">
         SM
       </div>
     </div>
@@ -351,11 +148,11 @@
   <main class="flex-1 flex h-full overflow-hidden relative">
     
     <!-- Left Column: Form Configuration Canvas -->
-    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-slate-950">
+    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-white">
       <div>
         <div class="flex flex-col sm:flex-row justify-between sm:items-end mb-8 gap-4">
           <div>
-            <h2 class="text-2xl font-bold tracking-tight text-white mb-1 leading-none">Configuration Panel</h2>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900 mb-1 leading-none">Configuration Panel</h2>
             <p class="text-slate-400 text-xs font-medium">Fine-tune clinic particulars, voice responses, and scheduling hours.</p>
           </div>
           <div class="text-xs font-mono font-bold text-slate-400">
@@ -366,20 +163,20 @@
         <!-- Custom Tab bar switcher (Stitch clinical) -->
         <div class="flex items-center gap-6 border-b border-white/5 mb-8 overflow-x-auto pb-px">
           <button data-target="profile" onclick="switchSettingsTab('profile')" class="settings-tab pb-3 text-white font-bold border-b-2 border-slate-950 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Profile</button>
-          <button data-target="hours" onclick="switchSettingsTab('hours')" class="settings-tab pb-3 text-slate-400 hover:text-white text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Office Hours</button>
-          <button data-target="services" onclick="switchSettingsTab('services')" class="settings-tab pb-3 text-slate-400 hover:text-white text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Services &amp; Prices</button>
-          <button data-target="voice" onclick="switchSettingsTab('voice')" class="settings-tab pb-3 text-slate-400 hover:text-white text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">AI Voice Settings</button>
-          <button data-target="emergency" onclick="switchSettingsTab('emergency')" class="settings-tab pb-3 text-slate-400 hover:text-white text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Emergency Protocol</button>
+          <button data-target="hours" onclick="switchSettingsTab('hours')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Office Hours</button>
+          <button data-target="services" onclick="switchSettingsTab('services')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Services &amp; Prices</button>
+          <button data-target="voice" onclick="switchSettingsTab('voice')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">AI Voice Settings</button>
+          <button data-target="emergency" onclick="switchSettingsTab('emergency')" class="settings-tab pb-3 text-slate-600 hover:text-slate-900 text-xs tracking-wider uppercase whitespace-nowrap transition-all cursor-pointer">Emergency Protocol</button>
         </div>
 
         <!-- Active settings forms container -->
         <div class="space-y-6">
           
           <!-- Clinic Profile Form -->
-          <form class="settings-form bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 border border-white/5 shadow-none space-y-5" id="profile-form">
+          <form class="settings-form bg-white rounded-lg p-6 border border-white/5 shadow-none space-y-5" id="profile-form">
             <div class="flex items-center justify-between border-b border-slate-800/50 pb-3">
               <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Clinic Particulars</h3>
-              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save Changes</button>
+              <button type="submit" class="bg-white hover:bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save Changes</button>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -407,10 +204,10 @@
           </form>
 
           <!-- Office Hours Form -->
-          <form class="settings-form bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 border border-white/5 shadow-none space-y-4 hidden" id="hours-form">
+          <form class="settings-form bg-white rounded-lg p-6 border border-white/5 shadow-none space-y-4 hidden" id="hours-form">
             <div class="flex items-center justify-between border-b border-slate-800/50 pb-3">
               <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Office Hours</h3>
-              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save Hours</button>
+              <button type="submit" class="bg-white hover:bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save Hours</button>
             </div>
             
             <div class="space-y-2.5" id="hours-days-container">
@@ -419,7 +216,7 @@
           </form>
 
           <!-- Services & Prices Form -->
-          <div class="settings-form bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 border border-white/5 shadow-none space-y-6 hidden" id="services-form">
+          <div class="settings-form bg-white rounded-lg p-6 border border-white/5 shadow-none space-y-6 hidden" id="services-form">
             <div class="flex items-center justify-between border-b border-slate-800/50 pb-3">
               <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Services Database</h3>
               <span class="text-slate-400 text-[10px] font-semibold" id="services-count">8 services active</span>
@@ -431,7 +228,7 @@
 
             <!-- Add Service Subform -->
             <form id="add-service-form" class="border-t border-slate-800/50 pt-5 space-y-4">
-              <h4 class="font-bold text-slate-200 text-[10px] uppercase tracking-wider font-mono">Provision New Service</h4>
+              <h4 class="font-bold text-slate-700 text-[10px] uppercase tracking-wider font-mono">Provision New Service</h4>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div class="sm:col-span-2">
                   <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Service Name</label>
@@ -443,7 +240,7 @@
                 </div>
               </div>
               <div class="flex justify-end">
-                <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-none flex items-center gap-1">
+                <button type="submit" class="bg-slate-900 hover:bg-blue-50 text-blue-700 px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-none flex items-center gap-1">
                   <span class="material-symbols-outlined text-[13px]">add</span> Add Service
                 </button>
               </div>
@@ -451,24 +248,24 @@
           </div>
 
           <!-- AI Voice Settings Form -->
-          <form class="settings-form bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 border border-white/5 shadow-none space-y-5 hidden" id="voice-form">
+          <form class="settings-form bg-white rounded-lg p-6 border border-white/5 shadow-none space-y-5 hidden" id="voice-form">
             <div class="flex items-center justify-between border-b border-slate-800/50 pb-3">
               <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Grok Voice Configurations</h3>
-              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save settings</button>
+              <button type="submit" class="bg-white hover:bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save settings</button>
             </div>
             
             <div class="space-y-4">
               <!-- API Key block -->
-              <div class="p-4 rounded bg-deep-navy border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-none">
+              <div class="p-4 rounded bg-white border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-none">
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <h4 class="font-bold text-slate-200 text-xs font-mono uppercase tracking-wider">xAI Telephony Endpoint</h4>
+                    <h4 class="font-bold text-slate-700 text-xs font-mono uppercase tracking-wider">xAI Telephony Endpoint</h4>
                   </div>
                   <p class="text-[9px] text-slate-400 font-semibold mt-0.5">Route wss://api.x.ai/v1/realtime</p>
                 </div>
                 <div class="w-full sm:w-auto">
-                  <input type="password" id="xai-key" class="w-full sm:w-[240px] px-3 py-1.5 rounded border border-white/5 text-xs outline-none bg-clinical-white/10 backdrop-blur-md font-mono" placeholder="xai-api-key...">
+                  <input type="password" id="xai-key" class="w-full sm:w-[240px] px-3 py-1.5 rounded border border-white/5 text-xs outline-none bg-white font-mono" placeholder="xai-api-key...">
                 </div>
               </div>
 
@@ -476,7 +273,7 @@
               <div class="flex flex-col sm:flex-row gap-4 items-center">
                 <div class="w-full">
                   <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Persona</label>
-                  <select id="voice-select" class="w-full px-3 py-2 rounded border border-white/5 text-xs bg-clinical-white/10 backdrop-blur-md outline-none">
+                  <select id="voice-select" class="w-full px-3 py-2 rounded border border-white/5 text-xs bg-white outline-none">
                     <option value="Ash">Ash (US Friendly Male)</option>
                     <option value="Ballad">Ballad (US Professional Female)</option>
                     <option value="Coral">Coral (US Warm Female)</option>
@@ -487,7 +284,7 @@
                     <option value="Leo">Leo (US Deep Male)</option>
                   </select>
                 </div>
-                <button type="button" id="preview-voice-btn" class="w-full sm:w-auto shrink-0 bg-slate-900 hover:bg-white/10 text-slate-200 px-4 py-2 rounded border border-white/5 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 mt-4">
+                <button type="button" id="preview-voice-btn" class="w-full sm:w-auto shrink-0 bg-slate-900 hover:bg-white/10 text-slate-700 px-4 py-2 rounded border border-white/5 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 mt-4">
                   <span class="material-symbols-outlined text-[16px]">volume_up</span> Preview Voice
                 </button>
               </div>
@@ -509,27 +306,27 @@
               <!-- Bilingual Checkbox toggle -->
               <div class="flex items-center justify-between p-4 bg-deep-navy rounded border border-white/5 shadow-none">
                 <div>
-                  <h4 class="font-bold text-slate-200 text-xs leading-none">Spanish Auto-Triage Routing</h4>
+                  <h4 class="font-bold text-slate-700 text-xs leading-none">Spanish Auto-Triage Routing</h4>
                   <p class="text-[10px] text-slate-400 mt-1">Detects Spanish queries and shifts LLM model weights.</p>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer select-none">
                   <input type="checkbox" id="voice-spanish-toggle" class="sr-only peer" checked>
-                  <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-clinical-white/10 backdrop-blur-md after:border-white/5 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-slate-950"></div>
+                  <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/5 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-white"></div>
                 </label>
               </div>
 
               <!-- Sync Telephony deploy button -->
-              <button type="button" id="sync-deploy-btn" class="w-full bg-slate-950 hover:bg-slate-900 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider">
+              <button type="button" id="sync-deploy-btn" class="w-full bg-white hover:bg-blue-50 text-blue-700 py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider">
                 <span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes
               </button>
             </div>
           </form>
 
           <!-- Emergency Protocol Form -->
-          <form class="settings-form bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 border border-white/5 shadow-none space-y-5 hidden" id="emergency-form">
+          <form class="settings-form bg-white rounded-lg p-6 border border-white/5 shadow-none space-y-5 hidden" id="emergency-form">
             <div class="flex items-center justify-between border-b border-slate-800/50 pb-3">
               <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Emergency Protocol</h3>
-              <button type="submit" class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save Protocol</button>
+              <button type="submit" class="bg-white hover:bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider transition-colors shadow-none">Save Protocol</button>
             </div>
             
             <div class="space-y-4">
@@ -556,16 +353,16 @@
     </section>
 
     <!-- Right Column: Interactive console, Wave visualizer, and Integrations -->
-    <aside class="w-[380px] h-full bg-clinical-white/10 backdrop-blur-md border-l border-slate-800/80 flex flex-col shadow-none flex-shrink-0">
-      <div class="p-6 border-b border-white/5 bg-deep-navy/50">
-        <h3 class="font-bold text-sm text-white leading-none">Console &amp; Integrations</h3>
+    <aside class="w-[380px] h-full bg-white border-l border-slate-800/80 flex flex-col shadow-none flex-shrink-0">
+      <div class="p-6 border-b border-white/5 bg-slate-50">
+        <h3 class="font-bold text-sm text-slate-900 leading-none">Console &amp; Integrations</h3>
         <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Live visualizer and hooks</p>
       </div>
 
       <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
         
         <!-- Live Waveform Preview console -->
-        <div class="bg-slate-950 text-white rounded-lg p-5 shadow-glow relative overflow-hidden flex flex-col justify-between h-[230px] border border-slate-900">
+        <div class="bg-white text-white rounded-lg p-5 shadow-glow relative overflow-hidden flex flex-col justify-between h-[230px] border border-slate-900">
           <div class="flex items-center justify-between">
             <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase font-bold">Vocalizer preview</span>
             <span id="visualizer-status" class="text-[9px] font-mono text-zinc-500 uppercase">IDLE</span>
@@ -578,7 +375,7 @@
           </div>
 
           <div class="relative w-full h-10 rounded overflow-hidden">
-            <canvas id="soundwave-canvas" class="w-full h-full bg-slate-900/50"></canvas>
+            <canvas id="soundwave-canvas" class="w-full h-full bg-slate-50"></canvas>
           </div>
         </div>
 
@@ -587,53 +384,53 @@
           <h4 class="font-bold text-white text-xs uppercase tracking-wider font-mono">Third-party integrations</h4>
 
           <!-- Google Calendar Integration -->
-          <div class="p-4 rounded border border-white/5 bg-deep-navy/30 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
+          <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center shadow-none text-sm"><span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span></div>
+              <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm"><span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span></div>
               <div>
-                <h5 class="text-xs font-bold text-slate-200">Google Calendar</h5>
+                <h5 class="text-xs font-bold text-slate-700">Google Calendar</h5>
                 <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
                   <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Active
                 </span>
               </div>
             </div>
-            <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-200 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+            <button onclick="if(typeof showToast==='function')showToast('Google calendar synchronization validated.','success')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
           </div>
 
           <!-- Twilio integration -->
-          <div class="p-4 rounded border border-white/5 bg-deep-navy/30 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
+          <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center shadow-none text-sm">📞</div>
+              <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm">📞</div>
               <div>
-                <h5 class="text-xs font-bold text-slate-200">Twilio Telephony</h5>
+                <h5 class="text-xs font-bold text-slate-700">Twilio Telephony</h5>
                 <span class="text-[9px] font-bold text-emerald-400 flex items-center gap-0.5 leading-none mt-1">
                   <span class="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span> Live Line
                 </span>
               </div>
             </div>
-            <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-200 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+            <button onclick="if(typeof showToast==='function')showToast('Twilio forwarder SIP Trunk validated.','success')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
           </div>
 
           <!-- Stripe -->
-          <div class="p-4 rounded border border-white/5 bg-deep-navy/30 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
+          <div class="p-4 rounded border border-white/5 bg-slate-50 flex items-center justify-between hover:border-white/5 transition-all shadow-none">
             <div class="flex items-center gap-3 opacity-60">
-              <div class="w-9 h-9 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center shadow-none text-sm">💳</div>
+              <div class="w-9 h-9 rounded bg-white border border-slate-800/50 flex items-center justify-center shadow-none text-sm">💳</div>
               <div>
-                <h5 class="text-xs font-bold text-slate-200">Stripe Payments</h5>
+                <h5 class="text-xs font-bold text-slate-700">Stripe Payments</h5>
                 <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 block">Configured</span>
               </div>
             </div>
-            <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-200 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+            <button onclick="if(typeof showToast==='function')showToast('Stripe billing profile configured in Billing tab.','info')" class="text-slate-400 hover:text-slate-700 cursor-pointer"><span class="material-symbols-outlined text-[18px]">settings</span></button>
           </div>
         </div>
 
       </div>
 
-      <div class="p-6 border-t border-white/5 bg-deep-navy flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-white/5 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
+      <div class="p-6 border-t border-white/5 bg-white flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-[10px] font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
           Sign Out
         </button>
-        <button onclick="if(typeof showToast==='function')showToast('Configurations synchronized.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider cursor-pointer">
+        <button onclick="if(typeof showToast==='function')showToast('Configurations synchronized.','success')" class="flex-1 bg-white border border-t border-white/10 py-3 rounded text-[10px] font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider cursor-pointer">
           Sync Node
         </button>
       </div>
@@ -797,18 +594,18 @@
         const closeOptions = timeOptions.map(t => `<option value="${t}" ${config.close === t ? 'selected' : ''}>${t}</option>`).join('');
 
         return `
-          <div class="flex items-center justify-between gap-4 p-3 rounded border border-slate-800/50 bg-slate-950/50">
+          <div class="flex items-center justify-between gap-4 p-3 rounded border border-slate-800/50 bg-slate-50">
             <div class="w-24 flex items-center gap-2">
               <input type="checkbox" id="hour_active_${day}" ${config.active ? 'checked' : ''} class="w-4 h-4 rounded text-white border-white/10 focus:ring-0">
-              <label for="hour_active_${day}" class="text-xs font-bold text-slate-200 capitalize select-none">${day}</label>
+              <label for="hour_active_${day}" class="text-xs font-bold text-slate-700 capitalize select-none">${day}</label>
             </div>
             
             <div class="flex items-center gap-2" id="time_selects_${day}" style="${config.active ? '' : 'opacity: 0.4; pointer-events: none;'}">
-              <select id="hour_open_${day}" class="px-2.5 py-1 rounded border border-white/5 text-xs bg-clinical-white/10 backdrop-blur-md outline-none">
+              <select id="hour_open_${day}" class="px-2.5 py-1 rounded border border-white/5 text-xs bg-white outline-none">
                 ${openOptions}
               </select>
               <span class="text-[10px] text-slate-400 font-mono">to</span>
-              <select id="hour_close_${day}" class="px-2.5 py-1 rounded border border-white/5 text-xs bg-clinical-white/10 backdrop-blur-md outline-none">
+              <select id="hour_close_${day}" class="px-2.5 py-1 rounded border border-white/5 text-xs bg-white outline-none">
                 ${closeOptions}
               </select>
             </div>
@@ -849,10 +646,10 @@
       }
 
       container.innerHTML = list.map((srv, idx) => `
-        <div class="flex items-center justify-between p-3 rounded border border-slate-800/50 bg-slate-950/50 hover:bg-slate-950 transition-colors shadow-none">
+        <div class="flex items-center justify-between p-3 rounded border border-slate-800/50 bg-slate-50 hover:bg-white transition-colors shadow-none">
           <div class="flex items-center gap-2.5 truncate">
-            <div class="w-7 h-7 rounded bg-clinical-white/10 backdrop-blur-md border border-slate-800/50 flex items-center justify-center text-slate-400 text-xs font-black"></div>
-            <div class="font-bold text-slate-200 text-xs truncate">${escapeHtml(srv.name)}</div>
+            <div class="w-7 h-7 rounded bg-white border border-slate-800/50 flex items-center justify-center text-slate-400 text-xs font-black"></div>
+            <div class="font-bold text-slate-700 text-xs truncate">${escapeHtml(srv.name)}</div>
           </div>
           <div class="flex items-center gap-3">
             <span class="font-bold text-white text-xs font-mono">$${srv.price}</span>
@@ -1336,7 +1133,7 @@
 
             setTimeout(() => {
               btn.innerHTML = '<span class="material-symbols-outlined text-[15px] animate-pulse">sync_alt</span> Sync &amp; Provision Grok Telephony Nodes';
-              btn.className = 'w-full bg-slate-950 hover:bg-slate-900 text-white py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider';
+              btn.className = 'w-full bg-white hover:bg-blue-50 text-blue-700 py-3 rounded font-bold text-xs transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider';
             }, 3000);
           }, 1200);
         });

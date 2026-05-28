@@ -57,243 +57,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Geist:wght@300;400;500;600;700;800&amp;family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
   
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
     
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Outfit', sans-serif !important;
-      letter-spacing: -0.035em !important;
-      color: #000000 !important;
-    }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
-    }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
-    }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #000000 !important;
-      border-radius: 8px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-      outline: none !important;
-      border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
-    }
-    
-    /* Switch Checkbox Fixes */
-    .switch-dot {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-    }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
-    }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
-    }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
-    }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
-    }
-  </style>
+  <link rel="stylesheet" href="css/light-theme.css" />
 </head>
-<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
+<body class="min-h-screen overflow-hidden flex text-slate-700 antialiased selection:bg-indigo-500/30 selection: light-theme">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
     <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-900 text-white">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-white"></div>
+        <div class="p-2 rounded bg-blue-50 text-blue-700">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -301,16 +98,16 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-700" title="Sign Out">
         SM
       </div>
     </div>
@@ -320,11 +117,11 @@
   <main class="flex-1 flex h-full overflow-hidden relative">
     
     <!-- Left Column: Calls List -->
-    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-slate-950">
+    <section class="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col justify-between h-full bg-white">
       <div>
         <div class="flex flex-col sm:flex-row justify-between sm:items-end mb-8 gap-4">
           <div>
-            <h2 class="font-display text-2xl font-bold tracking-tight text-white mb-1 leading-none">Call Activity</h2>
+            <h2 class="font-display text-2xl font-bold tracking-tight text-slate-900 mb-1 leading-none">Call Activity</h2>
             <p class="text-slate-400 text-xs font-medium">Manage and review your AI receptionist interactions.</p>
           </div>
           <div class="text-xs font-mono font-bold text-slate-400">
@@ -334,12 +131,12 @@
 
         <!-- Filter Controls -->
         <div class="flex flex-wrap gap-3 mb-6">
-          <div class="relative flex-1 min-w-[200px] flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/5 group focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+          <div class="relative flex-1 min-w-[200px] flex items-center bg-white rounded-full px-4 py-2 border border-white/5 group focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
             <span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
             <input id="call-search" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 focus:outline-none" placeholder="Search callers or summaries..." type="text"/>
           </div>
           
-          <select id="call-status-filter" class="px-4 py-2 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
+          <select id="call-status-filter" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500">
             <option value="">All Statuses</option>
             <option value="completed">Completed</option>
             <option value="transferred">Transferred</option>
@@ -347,7 +144,7 @@
             <option value="voicemail">Voicemail</option>
           </select>
           
-          <select id="call-language-filter" class="px-4 py-2 bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-950">
+          <select id="call-language-filter" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500">
             <option value="">All Languages</option>
             <option value="english">🇺🇸 English</option>
             <option value="spanish">🇪🇸 Spanish</option>
@@ -364,23 +161,23 @@
       <div class="border-t border-slate-800/60 pt-4 flex justify-between items-center text-xs mt-8">
         <span class="text-slate-400 font-medium" id="pagination-info">Showing 1-15 of 15 calls</span>
         <div class="flex gap-1.5" id="pagination-controls">
-          <button class="page-btn px-3 py-1.5 rounded border border-white/5 bg-clinical-white/10 backdrop-blur-md hover:bg-deep-navy text-slate-400 font-bold transition-all">&larr;</button>
-          <button class="page-btn px-3 py-1.5 rounded bg-slate-950 text-white font-bold transition-all">1</button>
-          <button class="page-btn px-3 py-1.5 rounded border border-white/5 bg-clinical-white/10 backdrop-blur-md hover:bg-deep-navy text-slate-400 font-bold transition-all">&rarr;</button>
+          <button class="page-btn px-3 py-1.5 rounded border border-white/5 bg-white hover:bg-deep-navy text-slate-400 font-bold transition-all">&larr;</button>
+          <button class="page-btn px-3 py-1.5 rounded bg-white text-white font-bold transition-all">1</button>
+          <button class="page-btn px-3 py-1.5 rounded border border-white/5 bg-white hover:bg-deep-navy text-slate-400 font-bold transition-all">&rarr;</button>
         </div>
       </div>
     </section>
 
     <!-- Right Column: Detail Panel -->
-    <aside class="w-[440px] h-full bg-clinical-white/10 backdrop-blur-md border-l border-slate-800/80 flex flex-col shadow-none">
-      <div id="detail-header" class="p-6 flex items-center justify-between border-b border-white/5 bg-deep-navy/50">
+    <aside class="w-[440px] h-full bg-white border-l border-slate-800/80 flex flex-col shadow-none">
+      <div id="detail-header" class="p-6 flex items-center justify-between border-b border-white/5 bg-slate-50">
         <!-- Dynamic Patient Header -->
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded bg-slate-950 flex items-center justify-center text-white text-md font-bold" id="detail-avatar">
+          <div class="w-12 h-12 rounded bg-white flex items-center justify-center text-white text-md font-bold" id="detail-avatar">
             SJ
           </div>
           <div>
-            <h4 class="font-bold text-md text-white leading-none" id="detail-name">Sarah Jenkins</h4>
+            <h4 class="font-bold text-md text-slate-900 leading-none" id="detail-name">Sarah Jenkins</h4>
             <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase" id="detail-meta">Selected Call Record</p>
           </div>
         </div>
@@ -429,11 +226,11 @@
       </div>
 
       <!-- Detail Footer Actions -->
-      <div class="p-6 border-t border-white/5 bg-deep-navy flex gap-3">
-        <button onclick="Auth.logout()" class="flex-1 bg-clinical-white/10 backdrop-blur-md border border-white/5 py-3 rounded text-xs font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
+      <div class="p-6 border-t border-white/5 bg-white flex gap-3">
+        <button onclick="Auth.logout()" class="flex-1 bg-white border border-slate-200 py-3 rounded text-xs font-bold hover:bg-deep-navy transition-colors uppercase tracking-wider">
           Sign Out
         </button>
-        <button onclick="if(typeof showToast === 'function') showToast('Live take-over session routed to front desk.','success')" class="flex-1 bg-slate-950 border border-t border-white/10 py-3 rounded text-xs font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
+        <button onclick="if(typeof showToast === 'function') showToast('Live take-over session routed to front desk.','success')" class="flex-1 bg-white border border-t border-white/10 py-3 rounded text-xs font-bold text-white hover:bg-slate-900 transition-all uppercase tracking-wider">
           Take Over Call
         </button>
       </div>
@@ -513,7 +310,7 @@
         const callJSON = JSON.stringify(call).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
         return `
-          <div onclick="selectCallRecord(${callJSON})" class="bg-clinical-white/10 backdrop-blur-md hover:bg-deep-navy/50 p-4 rounded border border-white/5 flex items-center gap-4 cursor-pointer transition-all duration-200">
+          <div onclick="selectCallRecord(${callJSON})" class="bg-white hover:bg-slate-50 p-4 rounded border border-white/5 flex items-center gap-4 cursor-pointer transition-all duration-200">
             <div class="w-10 h-10 rounded bg-slate-900 flex items-center justify-center text-slate-300 shrink-0">
               <span class="material-symbols-outlined text-[20px]">person</span>
             </div>

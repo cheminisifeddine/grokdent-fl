@@ -58,243 +58,40 @@
     };
   </script>
 
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
     
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Outfit', sans-serif !important;
-      letter-spacing: -0.035em !important;
-      color: #000000 !important;
-    }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
-    }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
-    }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #000000 !important;
-      border-radius: 8px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-      outline: none !important;
-      border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
-    }
-    
-    /* Switch Checkbox Fixes */
-    .switch-dot {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-    }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
-    }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
-    }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
-    }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
-    }
-  </style>
+  <link rel="stylesheet" href="css/light-theme.css" />
 </head>
-<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
+<body class="min-h-screen overflow-hidden flex text-slate-700 antialiased selection:bg-indigo-500/30 selection: light-theme">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200 h-full z-45 flex-shrink-0 items-center py-6">
     <!-- Brand Icon -->
     <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <!-- Nav Icons -->
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-900 text-white">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-white"></div>
+        <div class="p-2 rounded bg-blue-50 text-blue-700">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">menu_book</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">insights</span>
         </div>
       </a>
@@ -302,16 +99,16 @@
     <!-- Bottom Rail Items -->
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-700" title="Sign Out">
         SM
       </div>
     </div>
@@ -321,7 +118,7 @@
   <main class="flex-1 flex h-full overflow-hidden relative">
     
     <!-- Column 1: Document Index & Protocol Directory -->
-    <section class="w-80 bg-slate-950 border-r border-white/5 flex flex-col flex-shrink-0 h-full overflow-hidden">
+    <section class="w-80 bg-white border-r border-slate-200 flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Search Protocols & Actions -->
       <div class="p-6 border-b border-white/5 space-y-4">
         <div class="flex items-center justify-between">
@@ -331,12 +128,12 @@
           </button>
         </div>
         
-        <div class="relative flex items-center bg-clinical-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-white/5 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
+        <div class="relative flex items-center bg-white rounded-full px-4 py-1.5 border border-white/5 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
           <span class="material-symbols-outlined text-slate-400 text-[16px]">search</span>
           <input id="kb-search-input" class="bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 w-full ml-2 focus:outline-none" placeholder="Search protocols..." type="text"/>
         </div>
 
-        <button onclick="createNewProtocol()" class="w-full bg-slate-950 hover:bg-slate-900 text-white py-2 rounded-full flex items-center justify-center gap-2 font-bold text-xs shadow-none transition-all">
+        <button onclick="createNewProtocol()" class="w-full bg-white hover:bg-blue-50 text-blue-700 py-2 rounded-full flex items-center justify-center gap-2 font-bold text-xs shadow-none transition-all">
           <span class="material-symbols-outlined text-[15px]">add</span>
           <span>New Document</span>
         </button>
@@ -349,12 +146,12 @@
     </section>
 
     <!-- Column 2: Document Editor Workstation -->
-    <section class="flex-1 bg-clinical-white/10 backdrop-blur-md overflow-y-auto custom-scrollbar relative h-full flex flex-col justify-between">
+    <section class="flex-1 bg-white overflow-y-auto custom-scrollbar relative h-full flex flex-col justify-between">
       <div class="max-w-2xl mx-auto py-12 px-6 w-full flex-1">
         <!-- Top Meta header -->
         <div class="flex items-center justify-between mb-8">
           <div class="flex items-center gap-3">
-            <select id="editor-category" class="text-[9px] font-bold tracking-wider uppercase bg-slate-900 border-none rounded-full px-3 py-1 text-slate-200 outline-none focus:ring-1 focus:ring-slate-950">
+            <select id="editor-category" class="text-[9px] font-bold tracking-wider uppercase bg-slate-900 border-none rounded-full px-3 py-1 text-slate-700 outline-none focus:ring-1 focus:ring-blue-500">
               <option value="general">General</option>
               <option value="hours">Hours</option>
               <option value="services">Services</option>
@@ -378,12 +175,12 @@
 
           <!-- System AI Logic block -->
           <div class="p-5 bg-deep-navy rounded-lg border border-slate-800/80">
-            <h4 class="font-bold text-slate-200 text-[10px] uppercase tracking-wider mb-3 flex items-center gap-2 font-mono">
+            <h4 class="font-bold text-slate-700 text-[10px] uppercase tracking-wider mb-3 flex items-center gap-2 font-mono">
               <span class="material-symbols-outlined text-[14px] text-indigo-400">terminal</span>
               AI Decision Rule Engine
             </h4>
             <div class="mono text-[11px] text-slate-400 space-y-2">
-              <p><span class="text-indigo-400">IF</span> category == "<span id="rule-category" class="text-slate-200 font-bold">general</span>" <span class="text-indigo-400">THEN</span> apply_tone("empathetic")</p>
+              <p><span class="text-indigo-400">IF</span> category == "<span id="rule-category" class="text-slate-700 font-bold">general</span>" <span class="text-indigo-400">THEN</span> apply_tone("empathetic")</p>
               <p><span class="text-indigo-400">SET</span> response_delay = "instant_0.3s"</p>
               <p><span class="text-indigo-400">INCLUDE</span> scheduling_availability = "EHR_calendar_slots"</p>
             </div>
@@ -394,10 +191,10 @@
       <!-- Floating Action Save bar at bottom of editor -->
       <div class="sticky bottom-0 bg-gradient-to-t from-white via-white to-transparent py-6 px-8 flex justify-center">
         <div class="glass-panel rounded-full px-6 py-2.5 flex items-center gap-4 shadow-glow border border-slate-800/60">
-          <button onclick="document.execCommand('bold', false, null)" title="Bold" class="p-1 rounded text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
-          <button onclick="document.execCommand('italic', false, null)" title="Italic" class="p-1 rounded text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+          <button onclick="document.execCommand('bold', false, null)" title="Bold" class="p-1 rounded text-slate-600 hover:text-slate-900 transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+          <button onclick="document.execCommand('italic', false, null)" title="Italic" class="p-1 rounded text-slate-600 hover:text-slate-900 transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
           <div class="w-px h-4 bg-slate-200"></div>
-          <button onclick="saveActiveProtocol()" class="flex items-center gap-2 bg-slate-950 text-white px-5 py-1.5 rounded-full text-xs font-bold hover:bg-slate-900 active:scale-[0.98] transition-all uppercase tracking-wider">
+          <button onclick="saveActiveProtocol()" class="flex items-center gap-2 bg-white text-white px-5 py-1.5 rounded-full text-xs font-bold hover:bg-slate-900 active:scale-[0.98] transition-all uppercase tracking-wider">
             <span class="material-symbols-outlined text-[14px]">cloud_done</span>
             <span>Save Directive</span>
           </button>
@@ -406,7 +203,7 @@
     </section>
 
     <!-- Column 3: AI Preview Simulator (Real-time Tester) -->
-    <section class="w-96 border-l border-white/5 bg-deep-navy flex flex-col flex-shrink-0 h-full overflow-hidden">
+    <section class="w-96 border-l border-white/5 bg-white flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Preview Header -->
       <div class="p-6 border-b border-white/5 bg-slate-slate/40">
         <div class="flex items-center justify-between mb-2">
@@ -417,7 +214,7 @@
             </span>
             Renia Voice Engine
           </h3>
-          <button onclick="resetPreviewChat()" class="text-[10px] font-bold text-slate-400 hover:text-white uppercase">Clear</button>
+          <button onclick="resetPreviewChat()" class="text-[10px] font-bold text-slate-600 hover:text-slate-900 uppercase">Clear</button>
         </div>
         <p class="text-slate-400 text-[10px] font-medium leading-normal">Test guidelines instantly. Renia reads documents live during voice caller simulation.</p>
       </div>
@@ -430,8 +227,8 @@
       <!-- Chat input -->
       <div class="p-6 border-t border-white/5 bg-slate-slate/30">
         <form id="simulator-form" class="relative">
-          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-clinical-white/10 backdrop-blur-md border border-white/5 rounded-full py-2.5 pl-4 pr-10 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-950/10 focus:border-white/5 transition-all"/>
-          <button type="submit" class="absolute right-1.5 top-1.5 w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center text-white hover:bg-slate-900 transition-all">
+          <input type="text" id="simulator-input" placeholder="Ask a simulation question..." required class="w-full bg-white border border-slate-200 rounded-full py-2.5 pl-4 pr-10 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-white/5 transition-all"/>
+          <button type="submit" class="absolute right-1.5 top-1.5 w-7 h-7 rounded-full bg-white flex items-center justify-center text-white hover:bg-slate-900 transition-all">
             <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
           </button>
         </form>
@@ -521,7 +318,7 @@
 
         catEntries.forEach(entry => {
           const isActive = entry.id === state.activeId;
-          const bgClass = isActive ? 'bg-clinical-white/10 backdrop-blur-md shadow-none border-white/5 text-white font-bold' : 'hover:bg-slate-slate text-slate-300 hover:text-white border-transparent';
+          const bgClass = isActive ? 'bg-white shadow-none border-white/5 text-white font-bold' : 'hover:bg-slate-slate text-slate-500 hover:text-slate-900 border-transparent';
           
           html += `
             <button onclick="setActiveDocument('${entry.id}')" class="w-full flex items-center justify-between px-3 py-2 border rounded-lg text-xs text-left transition-all ${bgClass}">
@@ -650,7 +447,7 @@
       history.innerHTML = `
         <div class="flex gap-2">
           <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-          <div class="bg-clinical-white/10 backdrop-blur-md border border-white/5 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-200 shadow-none">
+          <div class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-700 shadow-none">
             Hi! Ask me any question related to clinic directives, accepted insurances, or cleaning policies. I am syncing with your updates in real time!
           </div>
         </div>
@@ -723,10 +520,10 @@
 
           simHistory.innerHTML += `
             <div class="flex gap-2 justify-end">
-              <div class="bg-slate-950 text-white px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-right">
+              <div class="bg-white text-white px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-right">
                 ${escapeHtml(query)}
               </div>
-              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] text-slate-200 font-bold shrink-0 select-none"><span class="material-symbols-outlined text-slate-400 text-lg">person</span></div>
+              <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] text-slate-700 font-bold shrink-0 select-none"><span class="material-symbols-outlined text-slate-400 text-lg">person</span></div>
             </div>
           `;
           
@@ -737,7 +534,7 @@
           simHistory.innerHTML += `
             <div class="flex gap-2" id="${typingId}">
               <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-              <div class="bg-clinical-white/10 backdrop-blur-md border border-slate-150 px-3 py-1.5 rounded-xl text-xs text-slate-400 italic">
+              <div class="bg-white border border-slate-150 px-3 py-1.5 rounded-xl text-xs text-slate-400 italic">
                 Thinking...
               </div>
             </div>
@@ -751,7 +548,7 @@
             simHistory.innerHTML += `
               <div class="flex gap-2">
                 <div class="w-6 h-6 rounded bg-slate-200 border border-white/10 flex items-center justify-center text-[11px] shrink-0 font-bold select-none">🤖</div>
-                <div class="bg-clinical-white/10 backdrop-blur-md border border-white/5 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-200 shadow-none text-left">
+                <div class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs max-w-[85%] leading-relaxed text-slate-700 shadow-none text-left">
                   ${escapeHtml(response)}
                 </div>
               </div>

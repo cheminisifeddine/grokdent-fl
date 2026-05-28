@@ -1,0 +1,1112 @@
+/* ============================================
+   Renia AI — Light Clinical Theme
+   White theme overrides for all SaaS pages
+   ============================================ */
+
+/* ---------- Root Variables (Light) ---------- */
+:root {
+  --renia-ink: #0f172a;
+  --renia-muted: #64748b;
+  --renia-line: #e2e8f0;
+  --renia-panel: rgba(255, 255, 255, 0.92);
+  --renia-soft: #f8fafc;
+  --renia-blue: #2563eb;
+  --renia-cyan: #0891b2;
+  --renia-green: #059669;
+  --renia-red: #e11d48;
+  --renia-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  --renia-shadow-sm: 0 12px 32px rgba(15, 23, 42, 0.06);
+  --renia-shadow-xs: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+/* ---------- Body & Base ---------- */
+body.light-theme,
+html:not(.dark) body {
+  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.78) 42%, #ffffff 100%) !important;
+  color: #0f172a !important;
+  font-family: 'Geist', 'Inter', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Typography ---------- */
+.light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4, .light-theme h5, .light-theme h6,
+html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4, html:not(.dark) h5, html:not(.dark) h6 {
+  font-family: 'Outfit', sans-serif !important;
+  color: #0f172a !important;
+  letter-spacing: -0.035em !important;
+}
+
+.light-theme .text-white,
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+
+.light-theme .text-slate-100,
+.light-theme .text-slate-200,
+.light-theme .text-slate-300,
+.light-theme .text-slate-400,
+.light-theme .text-slate-500,
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-slate-200,
+html:not(.dark) .text-slate-300,
+html:not(.dark) .text-slate-400,
+html:not(.dark) .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Exception: elements inside dark buttons/containers should stay white */
+.light-theme .bg-deep-navy .text-white,
+.light-theme .bg-black .text-white,
+.light-theme .bg-slate-950 .text-white,
+.light-theme .bg-blue-600 .text-white,
+html:not(.dark) .bg-deep-navy .text-white,
+html:not(.dark) .bg-black .text-white,
+html:not(.dark) .bg-slate-950 .text-white,
+html:not(.dark) .bg-blue-600 .text-white {
+  color: #ffffff !important;
+}
+
+/* ---------- Backgrounds ---------- */
+.light-theme .bg-slate-900,
+.light-theme .bg-slate-950,
+.light-theme .bg-slate-850,
+.light-theme .bg-slate-800,
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-950,
+html:not(.dark) .bg-slate-850,
+html:not(.dark) .bg-slate-800 {
+  background-color: #ffffff !important;
+}
+
+.light-theme .bg-slate-900\/40,
+.light-theme .bg-slate-900\/60,
+.light-theme .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900\/40,
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900\/80 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* ---------- Borders ---------- */
+.light-theme .border-white\/5,
+.light-theme .border-white\/10,
+.light-theme .border-slate-800,
+.light-theme .border-slate-800\/80,
+.light-theme .border-slate-700,
+.light-theme .border-slate-900,
+.light-theme .border-slate-850,
+html:not(.dark) .border-white\/5,
+html:not(.dark) .border-white\/10,
+html:not(.dark) .border-slate-800,
+html:not(.dark) .border-slate-800\/80,
+html:not(.dark) .border-slate-700,
+html:not(.dark) .border-slate-900,
+html:not(.dark) .border-slate-850 {
+  border-color: #e2e8f0 !important;
+}
+
+/* ---------- Glass Cards ---------- */
+.light-theme .glass-card,
+.light-theme .glass-panel,
+.light-theme .card,
+html:not(.dark) .glass-card,
+html:not(.dark) .glass-panel,
+html:not(.dark) .card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.01), 0 8px 24px rgba(0,0,0,0.015) !important;
+  border-radius: 18px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-theme .glass-card:hover,
+.light-theme .glass-panel:hover,
+.light-theme .card:hover,
+html:not(.dark) .glass-card:hover,
+html:not(.dark) .glass-panel:hover,
+html:not(.dark) .card:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(0,0,0,0.15) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.01), 0 16px 48px rgba(0,0,0,0.03) !important;
+}
+
+/* ---------- Sidebar (Light) ---------- */
+.light-theme .sidebar,
+html:not(.dark) .sidebar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(40px) !important;
+  -webkit-backdrop-filter: blur(40px) !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .sidebar-nav a,
+html:not(.dark) .sidebar-nav a {
+  color: #64748b !important;
+  border: 1px solid transparent;
+}
+
+.light-theme .sidebar-nav a:hover,
+html:not(.dark) .sidebar-nav a:hover {
+  background: rgba(37, 99, 235, 0.05) !important;
+  color: #0f172a !important;
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+.light-theme .sidebar-nav a.active,
+html:not(.dark) .sidebar-nav a.active {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.04)) !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(37, 99, 235, 0.25) !important;
+  box-shadow: inset 0 0 12px rgba(37, 99, 235, 0.06), 0 0 15px rgba(37, 99, 235, 0.05) !important;
+}
+
+.light-theme .sidebar-divider,
+html:not(.dark) .sidebar-divider {
+  background: #e2e8f0 !important;
+}
+
+.light-theme .sidebar-user,
+html:not(.dark) .sidebar-user {
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+/* ---------- Buttons ---------- */
+.light-theme .btn-primary,
+.light-theme .bg-deep-navy,
+.light-theme .bg-indigo-600,
+.light-theme .bg-slate-950,
+html:not(.dark) .btn-primary,
+html:not(.dark) .bg-deep-navy,
+html:not(.dark) .bg-indigo-600,
+html:not(.dark) .bg-slate-950 {
+  background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(37, 99, 235, 0.18) !important;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-theme .btn-primary:hover,
+.light-theme .bg-deep-navy:hover,
+.light-theme .bg-indigo-600:hover,
+.light-theme .bg-slate-950:hover,
+html:not(.dark) .btn-primary:hover,
+html:not(.dark) .bg-deep-navy:hover,
+html:not(.dark) .bg-indigo-600:hover,
+html:not(.dark) .bg-slate-950:hover {
+  background: linear-gradient(135deg, #172554 0%, #2563eb 100%) !important;
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.22) !important;
+  transform: translateY(-1px) !important;
+}
+
+.light-theme .btn-secondary,
+html:not(.dark) .btn-secondary {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .btn-secondary:hover,
+html:not(.dark) .btn-secondary:hover {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* ---------- Inputs ---------- */
+.light-theme .input,
+.light-theme input[type="text"],
+.light-theme input[type="email"],
+.light-theme input[type="password"],
+.light-theme input[type="number"],
+.light-theme input[type="tel"],
+.light-theme input[type="date"],
+.light-theme input[type="search"],
+.light-theme select,
+.light-theme textarea,
+html:not(.dark) .input,
+html:not(.dark) input[type="text"],
+html:not(.dark) input[type="email"],
+html:not(.dark) input[type="password"],
+html:not(.dark) input[type="number"],
+html:not(.dark) input[type="tel"],
+html:not(.dark) input[type="date"],
+html:not(.dark) input[type="search"],
+html:not(.dark) select,
+html:not(.dark) textarea {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-theme .input:focus,
+.light-theme input:focus,
+.light-theme select:focus,
+.light-theme textarea:focus,
+html:not(.dark) .input:focus,
+html:not(.dark) input:focus,
+html:not(.dark) select:focus,
+html:not(.dark) textarea:focus {
+  outline: none !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
+}
+
+.light-theme .input::placeholder,
+.light-theme input::placeholder,
+.light-theme textarea::placeholder,
+html:not(.dark) .input::placeholder,
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ---------- Tables ---------- */
+.light-theme .table th,
+html:not(.dark) .table th {
+  color: #64748b !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  background: #f8fafc !important;
+}
+
+.light-theme .table td,
+html:not(.dark) .table td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+.light-theme .table tr:hover td,
+html:not(.dark) .table tr:hover td {
+  background: #f8fafc !important;
+}
+
+/* ---------- Tabs ---------- */
+.light-theme .tabs,
+html:not(.dark) .tabs {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .tab.active,
+html:not(.dark) .tab.active {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+/* ---------- Metric Cards ---------- */
+.light-theme .metric-card,
+html:not(.dark) .metric-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.01), 0 8px 24px rgba(0,0,0,0.015) !important;
+}
+
+.light-theme .metric-card:hover,
+html:not(.dark) .metric-card:hover {
+  border-color: rgba(37, 99, 235, 0.3) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.04), 0 0 20px rgba(37, 99, 235, 0.06) !important;
+}
+
+.light-theme .metric-card .value,
+html:not(.dark) .metric-card .value {
+  background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.light-theme .metric-card .label,
+html:not(.dark) .metric-card .label {
+  color: #64748b !important;
+}
+
+/* ---------- Modal ---------- */
+.light-theme .modal-overlay,
+html:not(.dark) .modal-overlay {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.light-theme .modal,
+html:not(.dark) .modal {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.12) !important;
+}
+
+.light-theme .modal-close,
+html:not(.dark) .modal-close {
+  background: #f8fafc !important;
+  color: #64748b !important;
+}
+
+.light-theme .modal-close:hover,
+html:not(.dark) .modal-close:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* ---------- Notification Bell ---------- */
+.light-theme .notification-bell,
+html:not(.dark) .notification-bell {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+.light-theme .notification-bell:hover,
+html:not(.dark) .notification-bell:hover {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* ---------- Topbar ---------- */
+.light-theme .topbar h1,
+html:not(.dark) .topbar h1 {
+  color: #0f172a !important;
+}
+
+/* ---------- Call Items ---------- */
+.light-theme .call-item,
+html:not(.dark) .call-item {
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.light-theme .call-item:hover,
+html:not(.dark) .call-item:hover {
+  background: #f8fafc !important;
+}
+
+.light-theme .call-item-avatar,
+html:not(.dark) .call-item-avatar {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+}
+
+.light-theme .call-item-name,
+html:not(.dark) .call-item-name {
+  color: #0f172a !important;
+}
+
+.light-theme .call-item-meta,
+html:not(.dark) .call-item-meta {
+  color: #64748b !important;
+}
+
+/* ---------- Appointment Items ---------- */
+.light-theme .appointment-item,
+html:not(.dark) .appointment-item {
+  background: #f8fafc !important;
+}
+
+.light-theme .appointment-item:hover,
+html:not(.dark) .appointment-item:hover {
+  background: #f1f5f9 !important;
+}
+
+.light-theme .appointment-time,
+html:not(.dark) .appointment-time {
+  color: #2563eb !important;
+}
+
+.light-theme .appointment-patient,
+html:not(.dark) .appointment-patient {
+  color: #0f172a !important;
+}
+
+.light-theme .appointment-service,
+html:not(.dark) .appointment-service {
+  color: #64748b !important;
+}
+
+/* ---------- Transcript Bubbles ---------- */
+.light-theme .transcript-bubble.ai,
+html:not(.dark) .transcript-bubble.ai {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+.light-theme .transcript-bubble.patient,
+html:not(.dark) .transcript-bubble.patient {
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1e3a8a !important;
+}
+
+/* ---------- Toast ---------- */
+.light-theme .toast-success,
+html:not(.dark) .toast-success {
+  background: #059669 !important;
+  color: white !important;
+}
+
+.light-theme .toast-error,
+html:not(.dark) .toast-error {
+  background: #dc2626 !important;
+  color: white !important;
+}
+
+.light-theme .toast-warning,
+html:not(.dark) .toast-warning {
+  background: #d97706 !important;
+  color: white !important;
+}
+
+.light-theme .toast-info,
+html:not(.dark) .toast-info {
+  background: #2563eb !important;
+  color: white !important;
+}
+
+/* ---------- Pagination ---------- */
+.light-theme .pagination-btn,
+html:not(.dark) .pagination-btn {
+  border: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+.light-theme .pagination-btn:hover,
+html:not(.dark) .pagination-btn:hover {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.light-theme .pagination-btn.active,
+html:not(.dark) .pagination-btn.active {
+  background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+  color: white !important;
+}
+
+/* ---------- Plan Cards ---------- */
+.light-theme .plan-card,
+html:not(.dark) .plan-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .plan-card.featured,
+html:not(.dark) .plan-card.featured {
+  border-color: #2563eb !important;
+  box-shadow: 0 28px 80px rgba(37, 99, 235, 0.14) !important;
+}
+
+/* ---------- Empty State ---------- */
+.light-theme .empty-state-icon,
+html:not(.dark) .empty-state-icon {
+  color: #cbd5e1 !important;
+}
+
+.light-theme .empty-state-title,
+html:not(.dark) .empty-state-title {
+  color: #0f172a !important;
+}
+
+.light-theme .empty-state-desc,
+html:not(.dark) .empty-state-desc {
+  color: #64748b !important;
+}
+
+/* ---------- Date Range ---------- */
+.light-theme .date-range,
+html:not(.dark) .date-range {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .date-range-btn.active,
+html:not(.dark) .date-range-btn.active {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+/* ---------- Side Panel ---------- */
+.light-theme .side-panel,
+html:not(.dark) .side-panel {
+  background: #ffffff !important;
+  border-left: 1px solid #e2e8f0 !important;
+  box-shadow: -24px 0 64px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ---------- Filters Bar ---------- */
+.light-theme .filters-bar .input,
+.light-theme .filters-bar .select,
+html:not(.dark) .filters-bar .input,
+html:not(.dark) .filters-bar .select {
+  background: #ffffff !important;
+}
+
+/* ---------- Checkbox Items ---------- */
+.light-theme .checkbox-item,
+html:not(.dark) .checkbox-item {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .checkbox-item.checked,
+.light-theme .checkbox-item:has(input:checked),
+html:not(.dark) .checkbox-item.checked,
+html:not(.dark) .checkbox-item:has(input:checked) {
+  border-color: #2563eb !important;
+  background: #eff6ff !important;
+}
+
+/* ---------- Toggle Switch ---------- */
+.light-theme .toggle-slider,
+html:not(.dark) .toggle-slider {
+  background: #e2e8f0 !important;
+}
+
+.light-theme .toggle input:checked + .toggle-slider,
+html:not(.dark) .toggle input:checked + .toggle-slider {
+  background: #2563eb !important;
+}
+
+/* ---------- Scrollbar ---------- */
+.light-theme ::-webkit-scrollbar-thumb,
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-radius: 10px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb:hover,
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.16) !important;
+}
+
+/* ---------- Progress Bar ---------- */
+.light-theme .progress-bar,
+html:not(.dark) .progress-bar {
+  background: #e2e8f0 !important;
+}
+
+.light-theme .progress-fill,
+html:not(.dark) .progress-fill {
+  background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+}
+
+/* ---------- KB Items ---------- */
+.light-theme .kb-item,
+html:not(.dark) .kb-item {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .kb-question,
+html:not(.dark) .kb-question {
+  color: #0f172a !important;
+}
+
+.light-theme .kb-answer,
+html:not(.dark) .kb-answer {
+  color: #64748b !important;
+}
+
+/* ---------- Skeleton ---------- */
+.light-theme .skeleton,
+html:not(.dark) .skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%) !important;
+  background-size: 400px 100%;
+}
+
+/* ---------- Loading State ---------- */
+.light-theme .loading-state,
+html:not(.dark) .loading-state {
+  color: #64748b !important;
+}
+
+/* ---------- Stats Bar ---------- */
+.light-theme .stat-mini,
+html:not(.dark) .stat-mini {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .stat-mini-value,
+html:not(.dark) .stat-mini-value {
+  color: #0f172a !important;
+}
+
+.light-theme .stat-mini-label,
+html:not(.dark) .stat-mini-label {
+  color: #64748b !important;
+}
+
+/* ---------- Badges ---------- */
+.light-theme .badge-neutral,
+html:not(.dark) .badge-neutral {
+  background: #f8fafc !important;
+  color: #64748b !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* ---------- Nav Header (Fixed top nav for SaaS pages) ---------- */
+.light-theme .saas-nav,
+html:not(.dark) .saas-nav {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* ---------- Week View ---------- */
+.light-theme .week-cell,
+html:not(.dark) .week-cell {
+  border-left: 1px solid #f1f5f9 !important;
+}
+
+.light-theme .week-time,
+html:not(.dark) .week-time {
+  color: #94a3b8 !important;
+}
+
+/* ---------- Summary Dashboard ---------- */
+.light-theme .summary-dashboard,
+html:not(.dark) .summary-dashboard {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .summary-header,
+html:not(.dark) .summary-header {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .summary-clinic-name,
+html:not(.dark) .summary-clinic-name {
+  color: #0f172a !important;
+}
+
+.light-theme .summary-card,
+html:not(.dark) .summary-card {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* ---------- Invoice Table ---------- */
+.light-theme .invoice-table,
+html:not(.dark) .invoice-table {
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+/* ---------- Form Groups ---------- */
+.light-theme .form-group label,
+html:not(.dark) .form-group label {
+  color: #64748b !important;
+}
+
+.light-theme .form-error,
+html:not(.dark) .form-error {
+  color: #dc2626 !important;
+}
+
+/* ---------- Signup Steps ---------- */
+.light-theme .step-number,
+html:not(.dark) .step-number {
+  background: #f8fafc !important;
+  color: #64748b !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .signup-step.active .step-number,
+html:not(.dark) .signup-step.active .step-number {
+  background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+.light-theme .step-connector,
+html:not(.dark) .step-connector {
+  background: #e2e8f0 !important;
+}
+
+.light-theme .signup-step.completed + .step-connector,
+html:not(.dark) .signup-step.completed + .step-connector {
+  background: #2563eb !important;
+}
+
+/* ---------- Live Indicator ---------- */
+.light-theme .live-indicator,
+html:not(.dark) .live-indicator {
+  color: #059669 !important;
+}
+
+.light-theme .live-indicator::before,
+html:not(.dark) .live-indicator::before {
+  background: #059669 !important;
+}
+
+/* ---------- Card Footer ---------- */
+.light-theme .card-footer,
+html:not(.dark) .card-footer {
+  border-top: 1px solid #f1f5f9 !important;
+}
+
+/* ---------- Hover accent fixes ---------- */
+.light-theme a:hover,
+html:not(.dark) a:hover {
+  color: #2563eb !important;
+}
+
+/* Material symbols sizing fix */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Animation utilities */
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================
+   EXTRA OVERRIDES FOR REMAINING DARK CLASSES
+   ========================================== */
+
+/* Deep navy overlays used in headers/cards */
+.light-theme .bg-deep-navy\/50,
+.light-theme .bg-deep-navy\/40,
+.light-theme .bg-deep-navy\/30,
+.light-theme .bg-deep-navy\/60,
+html:not(.dark) .bg-deep-navy\/50,
+html:not(.dark) .bg-deep-navy\/40,
+html:not(.dark) .bg-deep-navy\/30,
+html:not(.dark) .bg-deep-navy\/60 {
+  background: rgba(248, 250, 252, 0.95) !important;
+}
+
+/* Clinical white glass on white body */
+.light-theme .bg-clinical-white\/10,
+html:not(.dark) .bg-clinical-white\/10 {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Hover states that reference dark bg */
+.light-theme .hover\:bg-white\/10:hover,
+html:not(.dark) .hover\:bg-white\/10:hover {
+  background: rgba(37, 99, 235, 0.06) !important;
+}
+
+.light-theme .hover\:bg-deep-navy:hover,
+html:not(.dark) .hover\:bg-deep-navy:hover {
+  background: #eff6ff !important;
+}
+
+.light-theme .hover\:bg-slate-900:hover,
+.light-theme .hover\:bg-slate-950:hover,
+html:not(.dark) .hover\:bg-slate-900:hover,
+html:not(.dark) .hover\:bg-slate-950:hover {
+  background: #f8fafc !important;
+}
+
+/* Active/selected states */
+.light-theme .active\:bg-slate-950:active,
+.light-theme .active\:bg-slate-900:active,
+html:not(.dark) .active\:bg-slate-950:active,
+html:not(.dark) .active\:bg-slate-900:active {
+  background: #f1f5f9 !important;
+}
+
+/* Slate-50 cards on white body should stay subtle */
+.light-theme .bg-slate-50,
+html:not(.dark) .bg-slate-50 {
+  background-color: #f8fafc !important;
+}
+
+/* Focus rings for light theme */
+.light-theme .focus\:ring-slate-950:focus,
+.light-theme .focus\:ring-white:focus,
+html:not(.dark) .focus\:ring-slate-950:focus,
+html:not(.dark) .focus\:ring-white:focus {
+  --tw-ring-color: rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Status badges */
+.light-theme .status-scheduled,
+html:not(.dark) .status-scheduled {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+.light-theme .status-confirmed,
+html:not(.dark) .status-confirmed {
+  background: #dcfce7 !important;
+  color: #16a34a !important;
+  border: 1px solid #bbf7d0 !important;
+}
+
+.light-theme .status-checked-in,
+html:not(.dark) .status-checked-in {
+  background: #ccfbf1 !important;
+  color: #0f766e !important;
+  border: 1px solid #99f6e4 !important;
+}
+
+.light-theme .status-completed,
+html:not(.dark) .status-completed {
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .status-cancelled,
+html:not(.dark) .status-cancelled {
+  background: #fee2e2 !important;
+  color: #dc2626 !important;
+  border: 1px solid #fecaca !important;
+}
+
+/* Appointment category blocks */
+.light-theme .appt-general,
+html:not(.dark) .appt-general {
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1e3a8a !important;
+}
+
+.light-theme .appt-cosmetic,
+html:not(.dark) .appt-cosmetic {
+  background: #f3e8ff !important;
+  border: 1px solid #d8b4fe !important;
+  color: #6b21a8 !important;
+}
+
+.light-theme .appt-emergency,
+html:not(.dark) .appt-emergency {
+  background: #fee2e2 !important;
+  border: 1px solid #fecaca !important;
+  color: #991b1b !important;
+}
+
+/* Calendar grid cells */
+.light-theme .calendar-cell,
+html:not(.dark) .calendar-cell {
+  border-color: #f1f5f9 !important;
+}
+
+.light-theme .calendar-header,
+html:not(.dark) .calendar-header {
+  background: #f8fafc !important;
+  color: #64748b !important;
+}
+
+.light-theme .time-label,
+html:not(.dark) .time-label {
+  color: #94a3b8 !important;
+}
+
+.light-theme .day-row,
+html:not(.dark) .day-row {
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.light-theme .month-cell,
+html:not(.dark) .month-cell {
+  border-color: #f1f5f9 !important;
+}
+
+.light-theme .month-cell.today,
+html:not(.dark) .month-cell.today {
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+}
+
+/* Chart bars */
+.light-theme [class*="bg-slate-900"][class*="h-"],
+.light-theme [class*="bg-slate-950"][class*="h-"],
+html:not(.dark) [class*="bg-slate-900"][class*="h-"],
+html:not(.dark) [class*="bg-slate-950"][class*="h-"] {
+  background-color: #e2e8f0 !important;
+}
+
+/* Indicators & dots */
+.light-theme .bg-indigo-500\/10,
+html:not(.dark) .bg-indigo-500\/10 {
+  background: rgba(37, 99, 235, 0.08) !important;
+}
+
+.light-theme .border-indigo-500\/20,
+html:not(.dark) .border-indigo-500\/20 {
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+.light-theme .text-indigo-400,
+html:not(.dark) .text-indigo-400 {
+  color: #2563eb !important;
+}
+
+.light-theme .text-emerald-400,
+html:not(.dark) .text-emerald-400 {
+  color: #059669 !important;
+}
+
+.light-theme .text-rose-400,
+html:not(.dark) .text-rose-400 {
+  color: #e11d48 !important;
+}
+
+.light-theme .text-rose-500,
+html:not(.dark) .text-rose-500 {
+  color: #dc2626 !important;
+}
+
+/* Shadow glow override for light */
+.light-theme .shadow-glow,
+html:not(.dark) .shadow-glow {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.01), 0 8px 24px rgba(0,0,0,0.015) !important;
+}
+
+/* Glass panel on light */
+.light-theme .glass-panel,
+html:not(.dark) .glass-panel {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Ensure all main text is dark */
+.light-theme,
+html:not(.dark) {
+  color: #0f172a !important;
+}
+
+/* Sidebar icon colors */
+.light-theme aside nav a div,
+html:not(.dark) aside nav a div {
+  color: #64748b !important;
+}
+
+.light-theme aside nav a div span.material-symbols-outlined,
+html:not(.dark) aside nav a div span.material-symbols-outlined {
+  color: #64748b !important;
+}
+
+.light-theme aside nav a:hover div,
+html:not(.dark) aside nav a:hover div {
+  color: #0f172a !important;
+  background: rgba(37, 99, 235, 0.06) !important;
+}
+
+.light-theme aside nav a:hover div span.material-symbols-outlined,
+html:not(.dark) aside nav a:hover div span.material-symbols-outlined {
+  color: #2563eb !important;
+}
+
+.light-theme aside nav a div.bg-slate-900,
+html:not(.dark) aside nav a div.bg-slate-900,
+.light-theme aside nav a div.bg-slate-950,
+html:not(.dark) aside nav a div.bg-slate-950 {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+}
+
+.light-theme aside nav a div.bg-slate-900 span.material-symbols-outlined,
+html:not(.dark) aside nav a div.bg-slate-900 span.material-symbols-outlined,
+.light-theme aside nav a div.bg-slate-950 span.material-symbols-outlined,
+html:not(.dark) aside nav a div.bg-slate-950 span.material-symbols-outlined {
+  color: #2563eb !important;
+}
+
+/* Header title colors */
+.light-theme header h1,
+html:not(.dark) header h1 {
+  color: #0f172a !important;
+}
+
+.light-theme header h2,
+html:not(.dark) header h2 {
+  color: #0f172a !important;
+}
+
+/* Page heading overrides */
+.light-theme main h2,
+html:not(.dark) main h2 {
+  color: #0f172a !important;
+}
+
+.light-theme main h3,
+html:not(.dark) main h3 {
+  color: #0f172a !important;
+}
+
+/* Table specific overrides */
+.light-theme table thead tr,
+html:not(.dark) table thead tr {
+  background: #f8fafc !important;
+}
+
+.light-theme table tbody tr td,
+html:not(.dark) table tbody tr td {
+  color: #334155 !important;
+}
+
+.light-theme table tbody tr td.font-bold,
+html:not(.dark) table tbody tr td.font-bold {
+  color: #0f172a !important;
+}
+
+.light-theme table tbody tr:hover,
+html:not(.dark) table tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+/* Input overrides */
+.light-theme input[type="text"],
+.light-theme input[type="search"],
+.light-theme select,
+html:not(.dark) input[type="text"],
+html:not(.dark) input[type="search"],
+html:not(.dark) select {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Placeholder color */
+.light-theme ::placeholder,
+html:not(.dark) ::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Modal overlay fix */
+.light-theme div[style*="background:rgba(15,23,42"],
+html:not(.dark) div[style*="background:rgba(15,23,42"] {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Global text safety */
+.light-theme p,
+html:not(.dark) p {
+  color: #334155 !important;
+}
+
+.light-theme span,
+html:not(.dark) span {
+  color: inherit !important;
+}
+
+.light-theme .text-slate-100,
+html:not(.dark) .text-slate-100 {
+  color: #0f172a !important;
+}
+
+.light-theme .text-slate-700,
+html:not(.dark) .text-slate-700 {
+  color: #334155 !important;
+}
+
+.light-theme .text-slate-800,
+html:not(.dark) .text-slate-800 {
+  color: #1e293b !important;
+}
+
+.light-theme .text-slate-900,
+html:not(.dark) .text-slate-900 {
+  color: #0f172a !important;
+}

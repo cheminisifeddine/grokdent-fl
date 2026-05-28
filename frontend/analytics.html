@@ -58,257 +58,54 @@
     };
   </script>
 
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
     
-    /* Ultimate Light Mode Canvas Overrides */
-    body {
-      font-family: 'Geist', 'Inter', sans-serif !important;
-      letter-spacing: -0.015em !important;
-      background-color: #FFFFFF !important;
-      color: #1F2937 !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Outfit', sans-serif !important;
-      letter-spacing: -0.035em !important;
-      color: #000000 !important;
-    }
-    
-    /* Global Text Visibility & High Contrast Overrides */
-    .text-white {
-      color: #000000 !important;
-    }
-    .text-slate-100, .text-slate-200 {
-      color: #111827 !important;
-    }
-    .text-slate-300 {
-      color: #1F2937 !important;
-    }
-    .text-slate-400 {
-      color: #4B5563 !important;
-    }
-    .text-slate-500, .text-slate-505, .text-slate-550 {
-      color: #6B7280 !important;
-    }
-    
-    /* White Text Preservation inside Dark Elements */
-    .bg-black, .bg-black *, 
-    .bg-slate-950, .bg-slate-950 *, 
-    .bg-slate-900, .bg-slate-900 *, 
-    .bg-deep-navy, .bg-deep-navy *, 
-    .hover\:bg-black:hover, .hover\:bg-black:hover *,
-    .hover\:bg-slate-950:hover, .hover\:bg-slate-950:hover *,
-    .hover\:bg-deep-navy:hover, .hover\:bg-deep-navy:hover *,
-    #sim-action-btn, #sim-action-btn *,
-    #signup-next, #signup-next *,
-    #login-btn, #login-btn *,
-    #sim-start-btn, #sim-start-btn *,
-    .signup-step.active, .signup-step.active * {
-      color: #FFFFFF !important;
-    }
-    
-    /* Fine-tune Active States and Hover Contrast */
-    .hover\:text-white:hover {
-      color: #000000 !important;
-    }
-    
-    /* Borders & Grid Systems */
-    .border-white/5, .border-slate-800, .border-slate-700, .border-slate-900, .border-white/10, .border-slate-800/80, .border-slate-800/60, .border-slate-250 {
-      border-color: rgba(0, 0, 0, 0.06) !important;
-    }
-    
-    /* Cards and Glassmorphic Panels */
-    .glass-card, .glass-panel, .toggle-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .glass-card:hover, .toggle-card:hover {
-      transform: translateY(-2px) !important;
-      border-color: rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
-    }
-    .text-gradient {
-      color: #000000 !important;
-      background: none !important;
-      -webkit-text-fill-color: initial !important;
-    }
-    .glass-card-dark {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
-      background-size: 24px 24px !important;
-    }
-    
-    /* Navigation Sidebar & Header Overrides */
-    aside, .sidebar {
-      background: #F9F9F9 !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
-      transition: all 0.25s ease !important;
-    }
-    aside a {
-      color: #6B7280 !important;
-      transition: all 0.2s ease !important;
-      border-radius: 8px !important;
-    }
-    aside a:hover {
-      background-color: rgba(0, 0, 0, 0.03) !important;
-      color: #000000 !important;
-    }
-    aside .bg-slate-900 {
-      background-color: #FFFFFF !important;
-      color: #000000 !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-    }
-    header, nav.fixed {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    }
-    header h1 {
-      color: #000000 !important;
-    }
-    
-    /* Stark Monochrome Buttons (OpenAI Style) */
-    .bg-deep-navy, #sim-action-btn, .bg-indigo-600, .bg-slate-950, #signup-next, #login-btn, #sim-start-btn {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border: 1px solid transparent !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .bg-deep-navy:hover, #sim-action-btn:hover, .bg-indigo-600:hover, .bg-slate-950:hover, #signup-next:hover, #login-btn:hover, #sim-start-btn:hover {
-      background-color: #1F2937 !important;
-      color: #FFFFFF !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
-    }
-    .bg-deep-navy:active, #sim-action-btn:active, .bg-indigo-600:active, .bg-slate-950:active, #signup-next:active, #login-btn:active, #sim-start-btn:active {
-      transform: translateY(0px) !important;
-    }
-    
-    /* Interactive Sliders (Monochrome Stark) */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #E5E7EB !important;
-      height: 4px !important;
-      border-radius: 10px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px !important;
-      height: 16px !important;
-      border-radius: 50%;
-      background: #000000 !important;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-      border: 2px solid #FFFFFF;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Theme Inputs & Focus Rings */
-    .theme-input, .input-field, input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea, select {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #000000 !important;
-      border-radius: 8px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
-    }
-    .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-      outline: none !important;
-      border-color: #000000 !important;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
-    }
-    
-    /* Switch Checkbox Fixes */
-    .switch-dot {
-      background-color: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-    }
-    .switch-checkbox:checked + .switch-label {
-      background-color: #000000 !important;
-    }
-    
-    /* Layout & Section Backgrounds (Absolute white) */
-    body, section, main, .bg-slate-950, .bg-slate-900 {
-      background-color: #FFFFFF !important;
-    }
-    
-    /* Stepper connectors */
-    .step-connector {
-      background-color: rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    /* Onboarding steps progress dots */
-    .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
-    }
-    .signup-step.bg-slate-950, .signup-step.active {
-      background-color: #000000 !important;
-      color: #FFFFFF !important;
-      border-color: transparent !important;
-    }
-  </style>
+  <link rel="stylesheet" href="css/light-theme.css" />
 </head>
-<body class="bg-slate-950 min-h-screen overflow-hidden flex text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
+<body class="min-h-screen overflow-hidden flex text-slate-700 antialiased selection:bg-indigo-500/30 selection: light-theme">
 
   <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-clinical-white/10 backdrop-blur-md border-r border-slate-800/80 h-full z-45 flex-shrink-0 items-center py-6">
+  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200 h-full z-45 flex-shrink-0 items-center py-6">
     <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
     <nav class="flex flex-col gap-6 items-center flex-1 w-full">
       <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">dashboard</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">call</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">calendar_month</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">menu_book</span>
         </div>
       </a>
       <a class="relative w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-950"></div>
-        <div class="p-2 rounded bg-slate-900 text-white">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-white"></div>
+        <div class="p-2 rounded bg-blue-50 text-blue-700">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">insights</span>
         </div>
       </a>
     </nav>
     <div class="mt-auto flex flex-col gap-4 items-center w-full">
       <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">settings</span>
         </div>
       </a>
       <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-deep-navy hover:text-white transition-colors">
+        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
           <span class="material-symbols-outlined text-[22px]">credit_card</span>
         </div>
       </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-200" title="Sign Out">
+      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-700" title="Sign Out">
         SM
       </div>
     </div>
@@ -316,17 +113,17 @@
 
   <!-- Main Content Area -->
   <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-    <header class="h-16 px-8 flex items-center justify-between border-b border-white/5 bg-clinical-white/10 backdrop-blur-md shrink-0">
+    <header class="h-16 px-8 flex items-center justify-between border-b border-white/5 bg-white shrink-0">
       <h1 class="text-lg font-bold tracking-tight text-white">Analytics</h1>
       <div class="flex items-center gap-4">
-        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-clinical-white/10 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full text-xs font-bold text-slate-300 hover:bg-deep-navy transition-all shadow-none">
+        <button onclick="Analytics.exportCSV()" class="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-full text-xs font-bold text-slate-300 hover:bg-deep-navy transition-all shadow-none">
           <span class="material-symbols-outlined text-[16px]">download</span> Export CSV
         </button>
         <div class="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full shadow-none">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">AI Receptionist Active</span>
         </div>
-        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-clinical-white/10 backdrop-blur-md border border-white/5 flex items-center justify-center text-slate-400 hover:bg-deep-navy transition-colors shadow-none">
+        <button onclick="if(typeof showToast==='function')showToast('No new notifications.','info');" class="relative w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-deep-navy transition-colors shadow-none">
           <span class="material-symbols-outlined text-[18px]">notifications</span>
           <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
         </button>
@@ -337,8 +134,8 @@
       <div class="max-w-[1200px] mx-auto">
         
         <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-1.5 bg-clinical-white/10 backdrop-blur-md rounded-full border border-white/5 p-1 shadow-none">
-            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-white bg-clinical-white/10 backdrop-blur-md border border-white/5 transition-all">7 Days</button>
+          <div class="flex items-center gap-1.5 bg-white rounded-full border border-white/5 p-1 shadow-none">
+            <button onclick="Analytics.setDateRange(7, this)" data-days="7" class="date-range-btn active px-4 py-1.5 rounded-full text-[10px] font-bold text-white bg-white border border-slate-200 transition-all">7 Days</button>
             <button onclick="Analytics.setDateRange(30, this)" data-days="30" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 hover:bg-deep-navy transition-all">30 Days</button>
             <button onclick="Analytics.setDateRange(90, this)" data-days="90" class="date-range-btn px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 hover:bg-deep-navy transition-all">90 Days</button>
           </div>
@@ -346,7 +143,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-total-calls">
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-total-calls">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">call</span></div>
               <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-calls-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 18%</span>
@@ -354,7 +151,7 @@
             <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="number">304</div>
             <div class="text-[11px] font-medium text-slate-400">Total Calls</div>
           </div>
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-total-booked">
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-total-booked">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400"><span class="material-symbols-outlined text-[18px]">event</span></div>
               <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-booked-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 12%</span>
@@ -362,7 +159,7 @@
             <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="number">82</div>
             <div class="text-[11px] font-medium text-slate-400">Appointments Booked</div>
           </div>
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-avg-duration">
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-avg-duration">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400"><span class="material-symbols-outlined text-[18px]">timer</span></div>
               <span class="text-[9px] font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-duration-trend"><span class="material-symbols-outlined text-[10px]">trending_flat</span> 0%</span>
@@ -370,7 +167,7 @@
             <div class="text-3xl font-bold text-white mb-0.5 font-mono kpi-value" data-format="duration">3:18</div>
             <div class="text-[11px] font-medium text-slate-400">Avg Call Duration</div>
           </div>
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-5 relative overflow-hidden group" id="kpi-resolution-rate">
+          <div class="glass-panel bg-white rounded-lg p-5 relative overflow-hidden group" id="kpi-resolution-rate">
             <div class="flex items-center justify-between mb-3">
               <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-500"><span class="material-symbols-outlined text-[18px]">done_all</span></div>
               <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1" id="kpi-resolution-trend"><span class="material-symbols-outlined text-[10px]">trending_up</span> 3%</span>
@@ -381,13 +178,13 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+          <div class="glass-panel bg-white rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Calls Over Time</h3>
             <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-calls-chart" class="w-full h-full"></canvas>
             </div>
           </div>
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+          <div class="glass-panel bg-white rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Bookings Over Time</h3>
             <div class="h-[260px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-bookings-chart" class="w-full h-full"></canvas>
@@ -396,13 +193,13 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+          <div class="glass-panel bg-white rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Top Services by Volume</h3>
             <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-services-chart" class="w-full h-full"></canvas>
             </div>
           </div>
-          <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6">
+          <div class="glass-panel bg-white rounded-lg p-6">
             <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Language Distribution</h3>
             <div class="h-[280px] w-full bg-deep-navy rounded-lg border border-white/5 flex items-center justify-center">
               <canvas id="analytics-language-chart" class="w-full h-full"></canvas>
@@ -410,7 +207,7 @@
           </div>
         </div>
 
-        <div class="glass-panel bg-clinical-white/10 backdrop-blur-md rounded-lg p-6 mb-8">
+        <div class="glass-panel bg-white rounded-lg p-6 mb-8">
           <h3 class="text-xs font-bold text-white mb-5 uppercase tracking-widest font-mono">Revenue Attribution</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div class="bg-emerald-500/10 rounded-lg p-5 border border-emerald-500/20 flex flex-col items-center text-center">
@@ -603,10 +400,10 @@
       setDateRange(days, btn) {
         if (!btn) return;
         document.querySelectorAll('.date-range-btn').forEach(b => {
-          b.classList.remove('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-white');
+          b.classList.remove('bg-white', 'border-slate-800', 'text-white');
           b.classList.add('text-slate-400');
         });
-        btn.classList.add('bg-clinical-white/10 backdrop-blur-md', 'border-slate-800', 'text-white');
+        btn.classList.add('bg-white', 'border-slate-800', 'text-white');
         btn.classList.remove('text-slate-400');
         this.load(days);
       },
