@@ -869,13 +869,18 @@
     /* ==========================================
        ELITE CALL SIMULATOR (LIGHT CLINICAL) THEME
        ========================================== */
+    #simulator {
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+
     .elite-dialer-console, .elite-transcript-panel, .elite-ehr-board {
       background: #ffffff !important;
       border: 1px solid rgba(226, 232, 240, 0.95) !important;
-      box-shadow: 0 15px 45px rgba(15, 23, 42, 0.045), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
       position: relative !important;
       overflow: hidden !important;
-      border-radius: 24px !important;
+      border-radius: 18px !important;
     }
     
     /* Cyber grid overlay (very subtle light gray) */
@@ -890,20 +895,36 @@
       z-index: 1;
     }
 
-    /* Ambient fluid glow orbs (light subtle blue/teal radial blurs) */
-    .elite-glow-orb {
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.07) 0%, rgba(16, 185, 129, 0) 70%) !important;
-      filter: blur(35px);
-      z-index: 2;
-      pointer-events: none;
-      transition: all 0.5s ease;
+    .elite-call-header {
+      background: #0f172a !important;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+      padding: 14px 16px !important;
+      margin: -20px -20px 18px !important;
     }
-    .elite-glow-orb-top { top: -40px; right: -40px; }
-    .elite-glow-orb-bottom { bottom: -40px; left: -40px; }
+    @media (min-width: 640px) {
+      .elite-call-header {
+        margin: -24px -24px 20px !important;
+        padding: 15px 18px !important;
+      }
+    }
+    .elite-call-header span,
+    .elite-call-header .material-symbols-outlined {
+      color: #ffffff !important;
+    }
+    .elite-call-header .elite-call-meta {
+      color: #cbd5e1 !important;
+      letter-spacing: 0.06em !important;
+    }
+    .elite-call-header .elite-call-tag {
+      color: #dbeafe !important;
+      background: rgba(37, 99, 235, 0.16) !important;
+      border: 1px solid rgba(147, 197, 253, 0.28) !important;
+      border-radius: 9999px !important;
+    }
+    .elite-signal-dot {
+      background: #34d399 !important;
+      box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.14), 0 0 18px rgba(52, 211, 153, 0.4) !important;
+    }
 
     /* Force all text in elite sections to have rich high contrast */
     .elite-dialer-console *, .elite-transcript-panel *, .elite-ehr-board * {
@@ -951,6 +972,15 @@
       transform: translateY(0px);
     }
 
+    .elite-call-stage {
+      min-height: 214px !important;
+      border: 1px solid #e2e8f0 !important;
+      background:
+        linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, #ffffff 100%) !important;
+      border-radius: 16px !important;
+      padding: 20px 16px !important;
+    }
+
     /* Central Pulse Orb */
     #sim-orb-center {
       background: #ffffff !important;
@@ -988,7 +1018,7 @@
     /* Premium dynamic soundwave */
     .elite-wave-bar {
       width: 4px !important;
-      background: linear-gradient(180deg, #2563eb 0%, #10b981 100%) !important;
+      background: #2563eb !important;
       border-radius: 9999px !important;
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.35) !important;
       transform-origin: bottom;
@@ -1009,10 +1039,15 @@
       color: #4b5563 !important;
       border: 1px solid #e2e8f0 !important;
       background: #f1f5f9 !important;
-      padding: 3px 7px !important;
+      padding: 5px 8px !important;
       border-radius: 6px !important;
       letter-spacing: 0.05em;
       font-weight: 700 !important;
+      min-height: 24px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
     }
 
     /* Dialogue streams */
@@ -1030,6 +1065,19 @@
     }
     #chat-stream > div.ml-auto * {
       color: #1e3a8a !important;
+    }
+    #standby-prompt {
+      background: #f8fafc !important;
+      border: 1px dashed #cbd5e1 !important;
+      border-radius: 14px !important;
+      color: #64748b !important;
+      padding: 32px 20px !important;
+    }
+    #dial-keypad-overlay {
+      background: rgba(248, 250, 252, 0.96) !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 16px !important;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12) !important;
     }
 
     /* EHR fields */
@@ -1224,32 +1272,30 @@
           </p>
         </div>
 
-        <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-stretch max-w-5xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch max-w-5xl mx-auto">
           
           <!-- Dialer Console UI (Left) - Elite Call Simulator -->
-          <div class="lg:col-span-5 elite-dialer-console p-5 sm:p-6 flex flex-col justify-between min-h-[440px] sm:min-h-[480px]">
-            
-            <!-- Ambient neon fluid glow orbs -->
-            <div class="elite-glow-orb elite-glow-orb-top"></div>
-            <div class="elite-glow-orb elite-glow-orb-bottom"></div>
-            
+          <div class="lg:col-span-5 elite-dialer-console p-5 sm:p-6 flex flex-col justify-between min-h-[430px] sm:min-h-[470px]">
             <!-- iOS Style Interface -->
-            <div class="relative space-y-6 flex-1 flex flex-col justify-between">
+            <div class="relative space-y-5 flex-1 flex flex-col justify-between">
               
               <!-- Call Meta Header -->
-              <div class="flex items-center justify-between border-b border-white/5 pb-4">
-                <div class="flex items-center gap-3">
-                  <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <div class="elite-call-header flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="relative flex h-2.5 w-2.5 shrink-0">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 elite-signal-dot"></span>
                   </span>
-                  <span class="font-mono text-[9px] sm:text-[10px] text-slate-400 tracking-wider">LINE: (305) 555-9831 (MIAMI)</span>
+                  <div class="min-w-0">
+                    <span class="elite-call-meta font-mono text-[9px] sm:text-[10px] tracking-wider block truncate">LINE: (305) 555-9831 (MIAMI)</span>
+                    <span class="font-mono text-[8px] tracking-wider text-slate-300 uppercase block">Live browser call console</span>
+                  </div>
                 </div>
-                <span class="font-mono text-[9px] text-slate-400 border border-white/10 px-2 py-0.5 rounded tracking-wide">RENIA REALTIME</span>
+                <span class="elite-call-tag shrink-0 font-mono text-[8px] sm:text-[9px] px-2.5 py-1 tracking-wide">RENIA REALTIME</span>
               </div>
 
               <!-- Sleek Telemetry Readout -->
-              <div class="grid grid-cols-2 gap-2 border-b border-white/5 pb-4 text-[8px] font-mono">
+              <div class="grid grid-cols-2 gap-2 text-[8px] font-mono">
                 <div class="flex items-center gap-2">
                   <span class="elite-telemetry-badge">HIPAA COMPLIANT</span>
                 </div>
@@ -1265,13 +1311,13 @@
               </div>
 
               <!-- Handcrafted Soundwave Visualizer -->
-              <div class="py-6 sm:py-8 flex flex-col items-center justify-center relative flex-1">
+              <div class="elite-call-stage flex flex-col items-center justify-center relative flex-1">
                 
                 <!-- Silent HTML containers to keep JS variables from breaking -->
                 <div id="sim-orb-bg-1" class="hidden"></div>
                 <div id="sim-orb-bg-2" class="hidden"></div>
                 
-                <div id="sim-wave-container" class="hidden flex items-end justify-center gap-1.5 h-16 mb-6 select-none pointer-events-none">
+                <div id="sim-wave-container" class="hidden flex items-end justify-center gap-1.5 h-12 mb-5 select-none pointer-events-none">
                   <!-- Vertical lines for soundwave -->
                   <div class="elite-wave-bar w-1 h-4"></div>
                   <div class="elite-wave-bar w-1 h-8"></div>
@@ -1348,29 +1394,29 @@
                 
                 <!-- Visual Status Text -->
                 <div class="text-center mt-4">
-                  <span id="sim-visual-status" class="font-mono text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest block">SYSTEM READY</span>
+                  <span id="sim-visual-status" class="font-mono text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest block">READY TO TALK</span>
                   <span id="sim-visual-timer" class="font-mono text-[9px] text-slate-500 tracking-wider mt-0.5 block">00:00</span>
                 </div>
               </div>
 
               <!-- Animated iOS Keypad Control Mockup -->
-              <div class="grid grid-cols-3 gap-4 border-t border-white/5 pt-6 select-none">
-                <button id="btn-mute-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-all duration-200">
+              <div class="grid grid-cols-3 gap-3 select-none">
+                <button id="btn-mute-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl text-slate-505 transition-all duration-200">
                   <span class="material-symbols-outlined text-lg sm:text-xl">mic_off</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Mute</span>
                 </button>
-                <button id="btn-speaker-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-all duration-200">
+                <button id="btn-speaker-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl text-slate-505 transition-all duration-200">
                   <span class="material-symbols-outlined text-lg sm:text-xl">volume_up</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Speaker</span>
                 </button>
-                <button id="btn-keypad-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-1 sm:py-2 rounded-xl text-slate-505 transition-all duration-200">
+                <button id="btn-keypad-toggle" class="elite-keypad-btn flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl text-slate-505 transition-all duration-200">
                   <span class="material-symbols-outlined text-lg sm:text-xl">grid_on</span>
                   <span class="text-[8px] sm:text-[9px] font-mono uppercase">Keypad</span>
                 </button>
               </div>
 
               <!-- Main Simulation Click Trigger -->
-              <button id="sim-action-btn" class="w-full text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]">
+              <button id="sim-action-btn" class="w-full text-white font-display font-extrabold px-6 py-4 rounded-xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]">
                 <span class="material-symbols-outlined text-[20px] font-bold">phone</span>
                 Talk to Renia AI Demo
               </button>
@@ -2216,7 +2262,7 @@
     </div>
   </footer>
 
-  <script src="js/voice-agent.js?v=5"></script>
+  <script src="js/voice-agent.js?v=6"></script>
   <!-- DYNAMIC JAVASCRIPT ANIMATIONS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -2521,7 +2567,7 @@ Demo guardrails:
       };
 
       const setButton = (icon, label, variant = "primary") => {
-        const base = "w-full text-white font-display font-extrabold px-6 py-4 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]";
+        const base = "w-full text-white font-display font-extrabold px-6 py-4 rounded-xl transition-all flex items-center justify-center gap-3 shadow-glow active:scale-[0.98]";
         const styles = {
           primary: "bg-blue-600 hover:bg-blue-700",
           danger: "bg-rose-600 hover:bg-rose-500 shadow-rose-500/10",
@@ -2542,7 +2588,7 @@ Demo guardrails:
         if (state === "speaking") {
           orbIcon.textContent = "volume_up";
           simStatus.textContent = "RENIA SPEAKING";
-          simStatus.className = "font-mono text-xs text-slate-900 font-bold uppercase tracking-widest block";
+          simStatus.className = "font-mono text-xs text-blue-600 font-bold uppercase tracking-widest block";
           showWaves(true);
         } else if (state === "listening") {
           orbIcon.textContent = "mic";
@@ -2591,8 +2637,8 @@ Demo guardrails:
         const activeAgent = voiceAgent;
         voiceAgent = null;
         if (activeAgent) {
-          // Trigger disconnect in background so UI updates immediately and doesn't block on slow AudioContext teardown
-          activeAgent.disconnect().catch(error => console.warn("Background disconnect warning:", error));
+          setButton("hourglass_top", "Ending Voice Session", "busy");
+          await activeAgent.disconnect().catch(error => console.warn("Disconnect warning:", error));
         }
 
         setButton("phone", "Talk to Renia AI Demo");

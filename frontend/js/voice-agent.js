@@ -12,6 +12,13 @@ class GrokVoiceAgent {
     this.tokenExpiresAt = 0;
     this.isConnected = false;
     this.isConnecting = false;
+    this._isDisconnecting = false;
+    this._connectionId = 0;
+    this._connectionTimeout = null;
+    this._micSource = null;
+    this._scriptProcessor = null;
+    this._speakerGainNode = null;
+    this._speakerMuted = false;
     
     const defaultVoice = options.voice || 'eve';
     const defaultClinicName = options.clinicName || 'Sunshine Smiles Dental';
@@ -199,11 +206,14 @@ Keep responses short and conversational — this is a voice call, not an email.`
       return;
     }
 
+    const connectionId = ++this._connectionId;
+    this._isDisconnecting = false;
     this.isConnecting = true;
     this.setState('connecting');
 
     try {
       const sessionToken = await this.fetchSessionToken();
+      if (!this._isCurrentConnection(connectionId)) return;
 
       if (!this.audioContext) {
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
@@ -212,6 +222,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
       if (this.audioContext.state === 'suspended') {
         await this.audioContext.resume();
       }
+      if (!this._isCurrentConnection(connectionId)) return;
 
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: {
@@ -221,6 +232,11 @@ Keep responses short and conversational — this is a voice call, not an email.`
           sampleRate: 24000
         }
       });
+      if (!this._isCurrentConnection(connectionId)) {
+        this.mediaStream.getTracks().forEach(track => track.stop());
+        this.mediaStream = null;
+        return;
+      }
 
       try {
         await this.audioContext.audioWorklet.addModule('js/pcm-processor-worklet.js');
@@ -232,8 +248,10 @@ Keep responses short and conversational — this is a voice call, not an email.`
           console.warn('Worklet loading failed, using ScriptProcessor fallback:', e2);
         }
       }
+      if (!this._isCurrentConnection(connectionId)) return;
 
        const source = this.audioContext.createMediaStreamSource(this.mediaStream);
+       this._micSource = source;
        
        if (this.audioContext.audioWorklet) {
          try {
@@ -261,8 +279,8 @@ Keep responses short and conversational — this is a voice call, not an email.`
        console.log('Model:', this.config.model);
        console.log('Session token (first 20 chars):', sessionToken.substring(0, 20) + '...');
 
-       const connectionTimeout = setTimeout(() => {
-         if (!this.isConnected) {
+       this._connectionTimeout = setTimeout(() => {
+         if (this._isCurrentConnection(connectionId) && !this.isConnected) {
            console.log('WebSocket connection timeout (10s)');
            if (this.ws) {
              try { this.ws.close(); } catch (e) {}
@@ -280,28 +298,37 @@ Keep responses short and conversational — this is a voice call, not an email.`
        );
 
        this.ws.onopen = () => {
-         clearTimeout(connectionTimeout);
+         this._clearConnectionTimeout();
+         if (!this._isCurrentConnection(connectionId)) {
+           try { this.ws?.close(1000, 'User disconnected'); } catch (e) {}
+           return;
+         }
          console.log('WebSocket connection opened successfully!');
          this.handleOpen();
        };
 
        this.ws.onmessage = (event) => {
+         if (!this._isCurrentConnection(connectionId)) return;
          this.handleMessage(event);
        };
 
        this.ws.onclose = (event) => {
-         clearTimeout(connectionTimeout);
+         this._clearConnectionTimeout();
+         if (!this._isCurrentConnection(connectionId)) return;
          console.log('WebSocket closed - code:', event.code, 'reason:', event.reason || '(none)');
          this.handleClose(event);
        };
 
        this.ws.onerror = (error) => {
-         clearTimeout(connectionTimeout);
+         this._clearConnectionTimeout();
+         if (!this._isCurrentConnection(connectionId)) return;
          console.error('WebSocket error:', error);
          this.handleError(error);
        };
 
     } catch (err) {
+      this._clearConnectionTimeout();
+      if (!this._isCurrentConnection(connectionId)) return;
       this.isConnecting = false;
       this.setState('disconnected');
       this.callbacks.onError.forEach(cb => cb(err));
@@ -309,11 +336,24 @@ Keep responses short and conversational — this is a voice call, not an email.`
     }
   }
 
+  _isCurrentConnection(connectionId = this._connectionId) {
+    return !this._isDisconnecting && connectionId === this._connectionId;
+  }
+
+  _clearConnectionTimeout() {
+    if (this._connectionTimeout) {
+      clearTimeout(this._connectionTimeout);
+      this._connectionTimeout = null;
+    }
+  }
+
   setupScriptProcessorFallback(source) {
     const bufferSize = 4096;
     const scriptProcessor = this.audioContext.createScriptProcessor(bufferSize, 1, 1);
+    this._scriptProcessor = scriptProcessor;
     
     scriptProcessor.onaudioprocess = (e) => {
+      if (this._isDisconnecting) return;
       const input = e.inputBuffer.getChannelData(0);
       const int16 = new Int16Array(input.length);
       for (let i = 0; i < input.length; i++) {
@@ -341,6 +381,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   handleMicData(int16Data) {
+    if (this._isDisconnecting) return;
     if (this.isSessionReady && this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({
         type: 'input_audio_buffer.append',
@@ -364,6 +405,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   handleOpen() {
+    if (this._isDisconnecting || !this.ws) return;
     console.log('Grok Voice Agent WebSocket connected');
     
     this.ws.send(JSON.stringify({
@@ -406,6 +448,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   handleMessage(event) {
+    if (this._isDisconnecting || !this.ws) return;
     let data;
     try {
       if (typeof event.data === 'string') {
@@ -488,6 +531,10 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   flushMicBuffer() {
+    if (this._isDisconnecting) {
+      this.micBuffer = [];
+      return;
+    }
     for (const chunk of this.micBuffer) {
       if (this.ws && this.ws.readyState === WebSocket.OPEN) {
         this.ws.send(JSON.stringify({
@@ -500,7 +547,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   playPcmChunk(base64) {
-    if (!this.audioContext) return;
+    if (this._isDisconnecting || !this.audioContext || this.audioContext.state === 'closed') return;
 
     try {
       // Decode base64 PCM chunk
@@ -528,6 +575,11 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   _flushPcmBuffer() {
+    if (this._isDisconnecting || !this.audioContext || this.audioContext.state === 'closed') {
+      this._pcmChunkBuffer = [];
+      this._pcmFlushTimer = null;
+      return;
+    }
     if (this._pcmChunkBuffer.length === 0) return;
     this._pcmFlushTimer = null;
 
@@ -573,7 +625,12 @@ Keep responses short and conversational — this is a voice call, not an email.`
     }
   }
 
-  interruptPlayback() {
+  interruptPlayback(silenceOutput = false) {
+    if (this._pcmFlushTimer) {
+      clearTimeout(this._pcmFlushTimer);
+      this._pcmFlushTimer = null;
+    }
+    this._pcmChunkBuffer = [];
     for (const src of this.queuedSources) {
       try {
         src.stop();
@@ -583,13 +640,16 @@ Keep responses short and conversational — this is a voice call, not an email.`
     }
     this.queuedSources.length = 0;
     this.nextPlayTime = 0;
-    // Flush any pending audio in the buffer
-    if (this.audioContext && this.audioContext.state !== 'closed') {
-      this.audioContext.suspend().then(() => this.audioContext.resume()).catch(() => {});
+    if (silenceOutput && this._speakerGainNode && this.audioContext && this.audioContext.state !== 'closed') {
+      try {
+        this._speakerGainNode.gain.cancelScheduledValues(this.audioContext.currentTime);
+        this._speakerGainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+      } catch (e) {}
     }
   }
 
   async handleToolCall(name, argsJson, callId) {
+    if (this._isDisconnecting) return;
     let result;
     const args = JSON.parse(argsJson || '{}');
 
@@ -741,6 +801,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   handleClose(event) {
+    if (this._isDisconnecting) return;
     console.log('WebSocket closed:', event.code, event.reason);
     this.isConnected = false;
     this.isConnecting = false;
@@ -765,6 +826,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   handleError(error) {
+    if (this._isDisconnecting) return;
     console.error('WebSocket error:', error);
     
     let errorMsg = 'WebSocket error occurred';
@@ -788,7 +850,7 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   sendText(text) {
-    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+    if (this._isDisconnecting || !this.ws || this.ws.readyState !== WebSocket.OPEN) {
       return;
     }
 
@@ -804,29 +866,42 @@ Keep responses short and conversational — this is a voice call, not an email.`
   }
 
   async disconnect() {
-    // 1. Clear any pending debounced audio flushes
-    if (this._pcmFlushTimer) {
-      clearTimeout(this._pcmFlushTimer);
-      this._pcmFlushTimer = null;
+    this._isDisconnecting = true;
+    this._connectionId++;
+    this._clearConnectionTimeout();
+
+    // Stop all pending and active output before closing slower resources.
+    this.interruptPlayback(true);
+
+    if (this.workletNode) {
+      try { this.workletNode.port.onmessage = null; } catch (e) {}
+      try { this.workletNode.disconnect(); } catch (e) {}
     }
-    this._pcmChunkBuffer = [];
+    if (this._scriptProcessor) {
+      try { this._scriptProcessor.onaudioprocess = null; } catch (e) {}
+      try { this._scriptProcessor.disconnect(); } catch (e) {}
+    }
+    if (this._micSource) {
+      try { this._micSource.disconnect(); } catch (e) {}
+    }
+    if (this._speakerGainNode) {
+      try { this._speakerGainNode.disconnect(); } catch (e) {}
+    }
 
-    // 2. Stop all currently playing audio sources immediately
-    this.interruptPlayback();
-
-    // 3. Close the WebSocket connection
     if (this.ws) {
-      this.ws.close(1000, 'User disconnected');
+      this.ws.onopen = null;
+      this.ws.onmessage = null;
+      this.ws.onclose = null;
+      this.ws.onerror = null;
+      try { this.ws.close(1000, 'User disconnected'); } catch (e) {}
       this.ws = null;
     }
 
-    // 4. Stop the microphone stream
     if (this.mediaStream) {
       this.mediaStream.getTracks().forEach(track => track.stop());
       this.mediaStream = null;
     }
 
-    // 5. Close the audio context
     if (this.audioContext) {
       try {
         await this.audioContext.close();
@@ -836,8 +911,13 @@ Keep responses short and conversational — this is a voice call, not an email.`
       this.audioContext = null;
     }
 
+    this._isDisconnecting = false;
     this.workletNode = null;
+    this._scriptProcessor = null;
+    this._micSource = null;
+    this._speakerGainNode = null;
     this.isConnected = false;
+    this.isConnecting = false;
     this.isSessionReady = false;
     this.micBuffer = [];
     this.setState('disconnected');
