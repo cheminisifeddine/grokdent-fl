@@ -82,20 +82,22 @@
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
 
     :root {
-      --renia-ink: #0f172a;
-      --renia-muted: #64748b;
-      --renia-line: #e2e8f0;
-      --renia-panel: rgba(255, 255, 255, 0.92);
-      --renia-soft: #f8fafc;
-      --renia-blue: #2563eb;
-      --renia-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
-      --renia-shadow-sm: 0 12px 32px rgba(15, 23, 42, 0.06);
+      --renia-ink: #000000;
+      --renia-muted: #4B5563;
+      --renia-line: rgba(0, 0, 0, 0.06);
+      --renia-panel: #FFFFFF;
+      --renia-soft: #F9FAFB;
+      --renia-blue: #000000;
+      --renia-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015);
+      --renia-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.01);
     }
 
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.78) 42%, #ffffff 100%) !important;
-      color: var(--renia-ink) !important;
+      background-color: #FFFFFF !important;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
+      color: #1F2937 !important;
       letter-spacing: -0.015em;
       min-height: 100vh;
     }
@@ -110,30 +112,35 @@
     .text-slate-300 { color: #1F2937 !important; }
 
     nav.fixed {
-      background: rgba(255, 255, 255, 0.9) !important;
+      background: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
-      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      box-shadow: none !important;
     }
 
     .glass-card {
-      background: var(--renia-panel) !important;
-      border: 1px solid var(--renia-line) !important;
-      box-shadow: var(--renia-shadow-sm) !important;
-      border-radius: 18px !important;
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+      border-radius: 24px !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .glass-card:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
     }
 
     .bg-deep-navy, #signup-next {
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      background: #000000 !important;
       color: #ffffff !important;
-      border: 1px solid rgba(37, 99, 235, 0.18) !important;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16) !important;
+      border: 1px solid #000000 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     .bg-deep-navy:hover, #signup-next:hover {
-      background: linear-gradient(135deg, #172554 0%, #2563eb 100%) !important;
-      box-shadow: 0 18px 42px rgba(37, 99, 235, 0.22) !important;
+      background: #2D2D2D !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
       transform: translateY(-1px);
     }
 
@@ -147,62 +154,64 @@
     }
     .theme-input:focus, .input-field:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
       outline: none !important;
-      border-color: #2563eb !important;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
+      border-color: #000000 !important;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05) !important;
     }
     .theme-input::placeholder, .input-field::placeholder { color: #9CA3AF !important; }
 
     /* Toggle Cards */
     .toggle-card {
       background: #FFFFFF !important;
-      border: 1px solid #e2e8f0 !important;
-      border-radius: 14px !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-radius: 16px !important;
       box-shadow: 0 1px 2px rgba(0,0,0,0.01) !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
       cursor: pointer;
     }
     .toggle-card:hover {
       transform: translateY(-2px) !important;
-      border-color: #cbd5e1 !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
       box-shadow: 0 6px 16px rgba(0,0,0,0.04) !important;
     }
     .toggle-card.active {
-      background: #eff6ff !important;
-      border-color: #2563eb !important;
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 8px 24px rgba(37, 99, 235, 0.08) !important;
+      background: #000000 !important;
+      border-color: #000000 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
     }
-    .toggle-card.active .check-icon { color: #2563eb !important; }
-    .toggle-card.active span { color: #0f172a !important; }
+    .toggle-card.active .check-icon { color: #ffffff !important; }
+    .toggle-card.active span { color: #ffffff !important; }
+    .toggle-card.active div { color: #ffffff !important; }
 
     /* Stepper */
     .signup-step {
-      background-color: #F3F4F6 !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #6B7280 !important;
+      background-color: #F9FAFB !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      color: #4B5563 !important;
       transition: all 0.3s ease;
     }
     .signup-step.active {
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      background: #000000 !important;
       color: #FFFFFF !important;
       border-color: transparent !important;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.18) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
     }
     .step-connector {
-      background-color: #e2e8f0 !important;
+      background-color: rgba(0, 0, 0, 0.06) !important;
     }
     .signup-progress {
-      background: #e2e8f0 !important;
+      background: rgba(0, 0, 0, 0.06) !important;
     }
     .progress-fill {
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      background: #000000 !important;
     }
 
     /* Switch */
     .switch-label {
-      background-color: #cbd5e1 !important;
+      background-color: #E5E7EB !important;
     }
     .switch-checkbox:checked + .switch-label {
-      background-color: #2563eb !important;
+      background-color: #000000 !important;
     }
     .switch-checkbox:checked + .switch-label .switch-dot {
       transform: translateX(24px) !important;
@@ -214,27 +223,26 @@
     }
 
     .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
       background-size: 24px 24px !important;
     }
 
     /* Back button */
     #signup-back {
-      border: 1px solid #e2e8f0 !important;
-      color: #475569 !important;
-      background: #f8fafc !important;
+      border: 1px solid #000000 !important;
+      color: #000000 !important;
+      background: transparent !important;
       transition: all 0.2s ease !important;
     }
     #signup-back:hover {
-      background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      background: #000000 !important;
+      color: #ffffff !important;
     }
 
     /* Pricing toggle bar */
     .pricing-toggle-bar {
-      background: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
+      background: #F9FAFB !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
 
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -255,7 +263,7 @@
     <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
       <a class="font-display font-extrabold text-2xl tracking-tight text-slate-900 flex items-center gap-3" href="index.html">
         <span class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-base">
-          <svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="w-5 h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/>
           </svg>
         </span>
@@ -402,7 +410,7 @@
             </div>
             <span id="label-yearly" class="text-xs font-bold text-slate-500 transition-colors duration-200 flex items-center gap-1.5">
               Yearly Plans
-              <span class="px-2 py-0.5 bg-blue-600 text-white rounded-md text-[9px] font-black uppercase tracking-wider">Save 30%</span>
+              <span class="px-2 py-0.5 bg-black text-white rounded-md text-[9px] font-black uppercase tracking-wider">Save 30%</span>
             </span>
           </div>
 
@@ -426,7 +434,7 @@
               <div>
                 <div class="flex justify-between items-start">
                   <span class="font-mono text-[9px] text-slate-400 font-bold uppercase tracking-wider">Growth</span>
-                  <span class="px-1.5 py-0.5 rounded-md bg-blue-600 text-white font-mono text-[8px] font-black uppercase tracking-wider">Popular</span>
+                  <span class="px-1.5 py-0.5 rounded-md bg-black text-white font-mono text-[8px] font-black uppercase tracking-wider">Popular</span>
                 </div>
                 <span class="font-bold text-sm tracking-tight block mt-1 text-slate-900">Advanced Dental AI</span>
               </div>

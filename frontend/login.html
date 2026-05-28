@@ -82,20 +82,22 @@
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&display=swap');
 
     :root {
-      --renia-ink: #0f172a;
-      --renia-muted: #64748b;
-      --renia-line: #e2e8f0;
-      --renia-panel: rgba(255, 255, 255, 0.92);
-      --renia-soft: #f8fafc;
-      --renia-blue: #2563eb;
-      --renia-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
-      --renia-shadow-sm: 0 12px 32px rgba(15, 23, 42, 0.06);
+      --renia-ink: #000000;
+      --renia-muted: #4B5563;
+      --renia-line: rgba(0, 0, 0, 0.06);
+      --renia-panel: #FFFFFF;
+      --renia-soft: #F9FAFB;
+      --renia-blue: #000000;
+      --renia-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015);
+      --renia-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.01);
     }
 
     body {
       font-family: 'Geist', 'Inter', sans-serif;
-      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.78) 42%, #ffffff 100%) !important;
-      color: var(--renia-ink) !important;
+      background-color: #FFFFFF !important;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
+      color: #1F2937 !important;
       letter-spacing: -0.015em;
       min-height: 100vh;
     }
@@ -110,35 +112,35 @@
     .text-slate-300 { color: #1F2937 !important; }
 
     nav.fixed {
-      background: rgba(255, 255, 255, 0.9) !important;
+      background: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
-      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      box-shadow: none !important;
     }
 
     .glass-card {
-      background: var(--renia-panel) !important;
-      border: 1px solid var(--renia-line) !important;
-      box-shadow: var(--renia-shadow-sm) !important;
-      border-radius: 18px !important;
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+      border-radius: 24px !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     .glass-card:hover {
       transform: translateY(-2px) !important;
-      border-color: rgba(0,0,0,0.15) !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.01), 0 16px 48px rgba(0,0,0,0.03) !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 16px 48px rgba(0, 0, 0, 0.03) !important;
     }
 
     .bg-deep-navy, #login-btn {
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%) !important;
+      background: #000000 !important;
       color: #ffffff !important;
-      border: 1px solid rgba(37, 99, 235, 0.18) !important;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16) !important;
+      border: 1px solid #000000 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     .bg-deep-navy:hover, #login-btn:hover {
-      background: linear-gradient(135deg, #172554 0%, #2563eb 100%) !important;
-      box-shadow: 0 18px 42px rgba(37, 99, 235, 0.22) !important;
+      background: #2D2D2D !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
       transform: translateY(-1px);
     }
 
@@ -153,26 +155,26 @@
     .input-field:focus {
       outline: none !important;
       border-color: #000000 !important;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05) !important;
     }
     .input-field::placeholder { color: #9CA3AF !important; }
 
     #demo-btn {
-      background: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #475569 !important;
+      background: transparent !important;
+      border: 1px solid #000000 !important;
+      color: #000000 !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     #demo-btn:hover {
-      background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      background: #000000 !important;
+      border-color: #000000 !important;
+      color: #ffffff !important;
       transform: translateY(-1px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.04) !important;
     }
 
     .grid-bg {
-      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px) !important;
       background-size: 24px 24px !important;
     }
 
@@ -194,7 +196,7 @@
     <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
       <a class="font-display font-extrabold text-2xl tracking-tight text-slate-900 flex items-center gap-3" href="index.html">
         <span class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-base">
-          <svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="w-5 h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/>
           </svg>
         </span>
@@ -213,8 +215,8 @@
 
       <!-- Brand Icon / Header -->
       <div class="text-center mb-8">
-        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-4">
-          <svg class="w-7 h-7 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <path d="M8 11h8M12 7v8"/>
           </svg>
@@ -233,13 +235,13 @@
         <div>
           <div class="flex justify-between items-center mb-1.5">
             <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Password</label>
-            <a href="#" class="text-[10px] font-bold text-blue-600 hover:text-blue-800 uppercase tracking-wider transition-colors">Forgot?</a>
+            <a href="#" class="text-[10px] font-bold text-black hover:text-slate-800 uppercase tracking-wider transition-colors">Forgot?</a>
           </div>
           <input type="password" id="login-password" class="input-field w-full px-4 py-3.5 text-sm rounded-xl font-medium outline-none placeholder:text-slate-400" placeholder="••••••••" required>
         </div>
 
         <div class="flex items-center gap-2 py-1">
-          <input type="checkbox" id="remember" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-0 cursor-pointer">
+          <input type="checkbox" id="remember" class="w-4 h-4 text-black border-slate-300 rounded focus:ring-0 cursor-pointer">
           <label for="remember" class="text-xs text-slate-500 font-medium cursor-pointer select-none">Keep me signed in for 30 days</label>
         </div>
 
@@ -256,13 +258,13 @@
         </div>
 
         <button type="button" id="demo-btn" class="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
-          <span class="material-symbols-outlined text-[15px] text-blue-600 animate-pulse">sports_esports</span> Explore Demo Sandbox
+          <span class="material-symbols-outlined text-[15px] text-black animate-pulse">sports_esports</span> Explore Demo Sandbox
         </button>
       </form>
 
       <div class="mt-8 text-center">
         <p class="text-xs text-slate-500 font-medium">
-          New clinic partner? <a href="signup.html" class="font-bold text-blue-600 hover:text-blue-800 transition-colors">Register Practice</a>
+          New clinic partner? <a href="signup.html" class="font-bold text-black hover:text-slate-800 transition-colors">Register Practice</a>
         </p>
       </div>
 
