@@ -62,54 +62,82 @@
 </head>
 <body class="min-h-screen overflow-hidden flex text-slate-700 antialiased selection:bg-indigo-500/30 selection: light-theme">
 
-  <!-- Asymmetrical Rail System (Sidebar) -->
-  <aside class="hidden md:flex flex-col w-[72px] bg-white border-r border-slate-200 h-full z-45 flex-shrink-0 items-center py-6">
-    <!-- Brand Icon -->
-    <div class="mb-8 w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8 11h8M12 7v8"/></svg></div>
-    <!-- Nav Icons -->
-    <nav class="flex flex-col gap-6 items-center flex-1 w-full">
-      <a class="w-full flex justify-center group" href="dashboard.html" title="Dashboard">
-        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-          <span class="material-symbols-outlined text-[22px]">dashboard</span>
-        </div>
+  <!-- Premium Full-Width Enterprise Sidebar -->
+  <aside class="hidden md:flex flex-col w-[240px] bg-white border-r border-slate-200 h-full z-40 flex-shrink-0">
+    <!-- Brand / Workspace Header -->
+    <div class="h-20 border-b border-slate-200 flex items-center px-6 gap-3">
+      <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-white">
+        <span class="material-symbols-outlined text-[18px]">neurology</span>
+      </div>
+      <div class="flex-1 flex flex-col justify-center min-w-0">
+        <span class="font-display font-extrabold text-[13px] text-black tracking-tight leading-none mb-1 flex items-center gap-1">
+          Renia AI
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        </span>
+        <span class="text-[9px] font-bold text-slate-400 font-mono tracking-wider uppercase leading-none truncate flex items-center gap-0.5 cursor-pointer">
+          Bou Saâda Clinic
+          <span class="material-symbols-outlined text-[10px]">expand_more</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Navigation List -->
+    <nav class="flex-grow py-6 flex flex-col gap-1.5 select-none">
+      <span class="px-6 text-[9px] font-black text-slate-350 tracking-widest uppercase mb-2 block font-mono">Operations</span>
+      
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] text-slate-500 hover:bg-slate-100/50 hover:text-slate-900" href="dashboard.html" title="Dashboard">
+        <span class="material-symbols-outlined text-[18px]">dashboard</span>
+        <span>Dashboard</span>
       </a>
-      <a class="relative w-full flex justify-center group" href="calls.html" title="Calls">
-        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-white"></div>
-        <div class="p-2 rounded bg-blue-50 text-blue-700">
-          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">call</span>
-        </div>
+      
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] bg-black text-white hover:bg-black hover:text-white shadow-glow" href="calls.html" title="Calls">
+        <span class="material-symbols-outlined text-[18px]">call</span>
+        <span>Call Log</span>
       </a>
-      <a class="w-full flex justify-center group" href="appointments.html" title="Appointments">
-        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-          <span class="material-symbols-outlined text-[22px]">calendar_month</span>
-        </div>
+      
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] text-slate-500 hover:bg-slate-100/50 hover:text-slate-900" href="appointments.html" title="Appointments">
+        <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+        <span>Smart Scheduler</span>
       </a>
-      <a class="w-full flex justify-center group" href="knowledge-base.html" title="Knowledge Base">
-        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-          <span class="material-symbols-outlined text-[22px]">menu_book</span>
-        </div>
+
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] text-slate-500 hover:bg-slate-100/50 hover:text-slate-900" href="knowledge-base.html" title="Knowledge Base">
+        <span class="material-symbols-outlined text-[18px]">menu_book</span>
+        <span>Knowledge Base</span>
       </a>
-      <a class="w-full flex justify-center group" href="analytics.html" title="Analytics">
-        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-          <span class="material-symbols-outlined text-[22px]">insights</span>
-        </div>
+
+      <div class="h-px bg-slate-100 my-4 mx-6"></div>
+      <span class="px-6 text-[9px] font-black text-slate-350 tracking-widest uppercase mb-2 block font-mono">Management</span>
+
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] text-slate-500 hover:bg-slate-100/50 hover:text-slate-900" href="analytics.html" title="Analytics">
+        <span class="material-symbols-outlined text-[18px]">insights</span>
+        <span>Analytics</span>
+      </a>
+
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] text-slate-500 hover:bg-slate-100/50 hover:text-slate-900" href="billing.html" title="Billing">
+        <span class="material-symbols-outlined text-[18px]">credit_card</span>
+        <span>Billing & Usage</span>
+      </a>
+
+      <a class="flex items-center gap-3 px-4 py-2.5 mx-3 rounded-xl text-xs font-bold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] text-slate-500 hover:bg-slate-100/50 hover:text-slate-900" href="settings.html" title="Settings">
+        <span class="material-symbols-outlined text-[18px]">settings</span>
+        <span>Settings</span>
       </a>
     </nav>
-    <!-- Bottom Rail Items -->
-    <div class="mt-auto flex flex-col gap-4 items-center w-full">
-      <a class="w-full flex justify-center group" href="settings.html" title="Settings">
-        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-          <span class="material-symbols-outlined text-[22px]">settings</span>
+
+    <!-- Bottom Profile Area -->
+    <div class="mt-auto p-4 border-t border-slate-200 bg-slate-50/50 flex items-center justify-between gap-2.5">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-[10px] font-mono font-bold text-white shrink-0">
+          SM
         </div>
-      </a>
-      <a class="w-full flex justify-center group" href="billing.html" title="Billing">
-        <div class="p-2 rounded text-slate-400 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-          <span class="material-symbols-outlined text-[22px]">credit_card</span>
+        <div class="flex flex-col justify-center min-w-0">
+          <span class="font-bold text-xs text-black truncate">Dr. Oussama</span>
+          <span class="text-[9px] font-bold text-slate-400 font-mono leading-none">Bou Saâda</span>
         </div>
-      </a>
-      <div onclick="Auth.logout()" class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center cursor-pointer hover:bg-white/10 border border-white/5 text-xs font-bold font-mono text-slate-700" title="Sign Out">
-        SM
       </div>
+      <button onclick="Auth.logout()" class="w-8 h-8 rounded-lg hover:bg-slate-200 flex items-center justify-center text-slate-450 hover:text-rose-600 transition-colors duration-200" title="Sign Out">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+      </button>
     </div>
   </aside>
 

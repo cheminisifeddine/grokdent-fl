@@ -1653,3 +1653,26 @@ html:not(.dark) #sub-progress-bar {
   background-color: #000000 !important;
   background: #000000 !important;
 }
+
+/* Premium Sidebar Overrides */
+.light-theme aside a.bg-black.text-white {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+.light-theme aside a.bg-black.text-white span {
+  color: #FFFFFF !important;
+}
+.light-theme aside a:not(.bg-black) {
+  color: #4B5563 !important;
+}
+.light-theme aside a:not(.bg-black) span {
+  color: #4B5563 !important;
+}
+.light-theme aside a:not(.bg-black):hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  color: #000000 !important;
+}
+.light-theme aside a:not(.bg-black):hover span {
+  color: #000000 !important;
+}
+
