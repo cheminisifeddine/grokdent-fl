@@ -1750,4 +1750,273 @@ html:not(.dark) #kb-search-input::placeholder {
   color: #9CA3AF !important;
 }
 
+/* ==========================================================================
+   Renia AI — Premium Custom SaaS Overrides (Stripe/Vercel/Linear Style)
+   Specifically targeting Settings, Billing, Navigation, & Scrollability
+   ========================================================================== */
+
+/* 1. Global Navigation & Sidebar Active Text Colors */
+.light-theme nav a.bg-black.text-white,
+html:not(.dark) nav a.bg-black.text-white {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+.light-theme nav a.bg-black.text-white *,
+html:not(.dark) nav a.bg-black.text-white * {
+  color: #FFFFFF !important;
+}
+
+/* 2. Scrollbar Smoothness & Flex Heights */
+.light-theme .overflow-y-auto,
+html:not(.dark) .overflow-y-auto {
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* 3. Range Sliders Tracks (ROI Calculator) */
+.light-theme input[type="range"],
+html:not(.dark) input[type="range"] {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  height: 4px !important;
+}
+
+/* 4. Translucent Containers Opacity Overrides */
+.light-theme .bg-deep-navy\/20,
+html:not(.dark) .bg-deep-navy\/20 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+.light-theme .bg-deep-navy\/10,
+html:not(.dark) .bg-deep-navy\/10 {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+/* 5. Stark Visual Mock Credit Card */
+.light-theme .credit-card-shape,
+html:not(.dark) .credit-card-shape {
+  background: linear-gradient(135deg, #18181B 0%, #09090B 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  position: relative;
+  overflow: hidden;
+}
+.light-theme .credit-card-shape::before,
+html:not(.dark) .credit-card-shape::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%) !important;
+  pointer-events: none;
+}
+.light-theme .credit-card-shape *,
+html:not(.dark) .credit-card-shape * {
+  color: #FFFFFF !important;
+}
+.light-theme .credit-card-shape .text-slate-400,
+html:not(.dark) .credit-card-shape .text-slate-400 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 6. Invoice Ledger Table Styles */
+.light-theme #invoices-list tr,
+html:not(.dark) #invoices-list tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+.light-theme #invoices-list td.font-black,
+html:not(.dark) #invoices-list td.font-black {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+.light-theme #invoices-list button,
+html:not(.dark) #invoices-list button {
+  color: #000000 !important;
+  background: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 4px 12px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+.light-theme #invoices-list button:hover,
+html:not(.dark) #invoices-list button:hover {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #000000 !important;
+}
+
+/* 7. Settings Page Tabs Switcher Underline */
+.light-theme .settings-tab,
+html:not(.dark) .settings-tab {
+  color: #6B7280 !important;
+  border-bottom: 2px solid transparent !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+.light-theme .settings-tab:hover,
+html:not(.dark) .settings-tab:hover {
+  color: #000000 !important;
+}
+.light-theme .settings-tab.text-white,
+.light-theme .settings-tab.border-slate-950,
+html:not(.dark) .settings-tab.text-white,
+html:not(.dark) .settings-tab.border-slate-950 {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+/* 8. Settings Forms Buttons & Voice Preview */
+.light-theme .settings-form button[type="submit"],
+.light-theme #sync-deploy-btn,
+.light-theme #add-service-form button,
+html:not(.dark) .settings-form button[type="submit"],
+html:not(.dark) #sync-deploy-btn,
+html:not(.dark) #add-service-form button {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #000000 !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+  border-radius: 9999px !important;
+}
+.light-theme .settings-form button[type="submit"]:hover,
+.light-theme #sync-deploy-btn:hover,
+.light-theme #add-service-form button:hover,
+html:not(.dark) .settings-form button[type="submit"]:hover,
+html:not(.dark) #sync-deploy-btn:hover,
+html:not(.dark) #add-service-form button:hover {
+  background-color: #27272A !important;
+  color: #FFFFFF !important;
+  border-color: #27272A !important;
+}
+.light-theme #preview-voice-btn,
+html:not(.dark) #preview-voice-btn {
+  background-color: transparent !important;
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s ease !important;
+}
+.light-theme #preview-voice-btn:hover,
+html:not(.dark) #preview-voice-btn:hover {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+/* 9. Vocalizer Telemetry Live Speech Preview */
+.light-theme #live-speech-sample,
+html:not(.dark) #live-speech-sample {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+.light-theme #soundwave-canvas,
+html:not(.dark) #soundwave-canvas {
+  background-color: #F9FAFB !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-radius: 8px !important;
+}
+.light-theme .bg-white.text-white.rounded-lg.border.border-slate-900,
+html:not(.dark) .bg-white.text-white.rounded-lg.border.border-slate-900 {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.015) !important;
+}
+
+/* 10. High-Contrast Status Badges */
+.light-theme .text-emerald-400,
+html:not(.dark) .text-emerald-400 {
+  color: #16A34A !important;
+}
+.light-theme .bg-emerald-500\/10,
+html:not(.dark) .bg-emerald-500\/10 {
+  background-color: rgba(22, 163, 74, 0.08) !important;
+  border-color: rgba(22, 163, 74, 0.15) !important;
+}
+
+/* 11. Bento KPI ROI Cards overrides */
+.light-theme .p-3.bg-deep-navy.rounded.border.border-slate-150,
+.light-theme .p-3.bg-white.text-white.rounded.border.border-slate-900,
+html:not(.dark) .p-3.bg-deep-navy.rounded.border.border-slate-150,
+html:not(.dark) .p-3.bg-white.text-white.rounded.border.border-slate-900 {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+}
+.light-theme .p-3.bg-deep-navy.rounded.border.border-slate-150 *,
+.light-theme .p-3.bg-white.text-white.rounded.border.border-slate-900 *,
+html:not(.dark) .p-3.bg-deep-navy.rounded.border.border-slate-150 *,
+html:not(.dark) .p-3.bg-white.text-white.rounded.border.border-slate-900 * {
+  color: #1F2937 !important;
+}
+.light-theme #roi-leakage,
+html:not(.dark) #roi-leakage {
+  color: #DC2626 !important;
+  font-weight: 850 !important;
+}
+.light-theme #roi-protected,
+html:not(.dark) #roi-protected {
+  color: #16A34A !important;
+  font-weight: 850 !important;
+}
+
+/* 12. Dynamic Pricing Tiers Grid */
+.light-theme .bg-white.border.border-slate-200.p-6.rounded-lg,
+.light-theme .bg-white.border-2.border-slate-950.p-6.rounded-lg,
+html:not(.dark) .bg-white.border.border-slate-200.p-6.rounded-lg,
+html:not(.dark) .bg-white.border-2.border-slate-950.p-6.rounded-lg {
+  background-color: #FFFFFF !important;
+  border-radius: 24px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01), 0 8px 24px rgba(0, 0, 0, 0.01) !important;
+}
+.light-theme .border-2.border-slate-950,
+html:not(.dark) .border-2.border-slate-950 {
+  border: 2px solid #000000 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+.light-theme .border-2.border-slate-950 .absolute.top-0.bg-white.text-white,
+html:not(.dark) .border-2.border-slate-950 .absolute.top-0.bg-white.text-white {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-radius: 9999px !important;
+  border: 1px solid #000000 !important;
+}
+.light-theme .border-2.border-slate-950 *,
+html:not(.dark) .border-2.border-slate-950 * {
+  color: #000000 !important;
+}
+.light-theme #plan-card-starter button.bg-slate-900,
+.light-theme #plan-card-professional button.bg-slate-900,
+.light-theme #plan-card-enterprise button.bg-slate-900,
+html:not(.dark) #plan-card-starter button.bg-slate-900,
+html:not(.dark) #plan-card-professional button.bg-slate-900,
+html:not(.dark) #plan-card-enterprise button.bg-slate-900 {
+  background-color: transparent !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  transition: all 0.25s ease !important;
+  cursor: pointer !important;
+}
+.light-theme #plan-card-starter button.bg-slate-900:hover,
+.light-theme #plan-card-professional button.bg-slate-900:hover,
+.light-theme #plan-card-enterprise button.bg-slate-900:hover,
+html:not(.dark) #plan-card-starter button.bg-slate-900:hover,
+html:not(.dark) #plan-card-professional button.bg-slate-900:hover,
+html:not(.dark) #plan-card-enterprise button.bg-slate-900:hover {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+.light-theme #plan-card-starter button.bg-white,
+.light-theme #plan-card-professional button.bg-white,
+.light-theme #plan-card-enterprise button.bg-white,
+html:not(.dark) #plan-card-starter button.bg-white,
+html:not(.dark) #plan-card-professional button.bg-white,
+html:not(.dark) #plan-card-enterprise button.bg-white {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #000000 !important;
+}
+
 
