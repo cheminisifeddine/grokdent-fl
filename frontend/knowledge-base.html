@@ -189,9 +189,14 @@
             </select>
             <span class="text-slate-400 text-[10px]" id="editor-last-saved">Synced with Renia Engine</span>
           </div>
-          <button onclick="deleteActiveProtocol()" class="text-xs text-rose-600 font-bold hover:bg-rose-50 px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
-            <span class="material-symbols-outlined text-[14px]">delete</span> Delete
-          </button>
+          <div class="flex items-center gap-3">
+            <button onclick="toggleSimulator()" class="px-4 py-1.5 border border-black hover:bg-black hover:text-white rounded-full text-[10px] font-bold transition-all uppercase tracking-wider flex items-center gap-1.5 cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">play_circle</span> Test Voice Engine
+            </button>
+            <button onclick="deleteActiveProtocol()" class="text-xs text-rose-600 font-bold hover:bg-rose-50 px-3 py-1.5 rounded-full transition-all flex items-center gap-1 cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+            </button>
+          </div>
         </div>
 
         <!-- Question Input (Editable display header) -->
@@ -231,7 +236,7 @@
     </section>
 
     <!-- Column 3: AI Preview Simulator (Real-time Tester) -->
-    <section class="w-96 border-l border-slate-200 bg-white flex flex-col flex-shrink-0 h-full overflow-hidden">
+    <section id="simulator-drawer" class="hidden w-96 border-l border-slate-200 bg-white flex flex-col flex-shrink-0 h-full overflow-hidden">
       <!-- Preview Header (Compact 80px) -->
       <div class="h-20 border-b border-slate-200 bg-white flex items-center justify-between px-6 shrink-0">
         <h3 class="font-display font-extrabold text-xs text-black uppercase tracking-wider flex items-center gap-2">
@@ -275,6 +280,13 @@
   <script src="js/app.js?v=4"></script>
 
   <script>
+    window.toggleSimulator = function() {
+      const drawer = document.getElementById('simulator-drawer');
+      if (drawer) {
+        drawer.classList.toggle('hidden');
+      }
+    };
+
     const state = {
       knowledgeBase: [],
       searchQuery: '',
