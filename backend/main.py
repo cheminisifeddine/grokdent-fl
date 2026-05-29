@@ -17,7 +17,7 @@ from fastapi.responses import FileResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from backend.config import settings
-from backend.database import engine, Base, SessionLocal
+from backend.database import engine, Base, SessionLocal, is_sqlite
 from backend.middleware.hipaa_audit import HIPAAAuditMiddleware
 
 _thread_pool = ThreadPoolExecutor(max_workers=2)

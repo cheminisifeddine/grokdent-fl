@@ -154,7 +154,7 @@
             <p class="text-slate-400 text-xs font-medium">Coordinate visits and monitor automated bookings.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
-            <button id="new-appointment-btn" class="flex items-center gap-2 bg-white border border-t border-white/10 text-white px-4 py-2 rounded-full font-bold text-xs hover:bg-slate-900 transition-all shadow-none">
+            <button id="new-appointment-btn" class="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-full font-bold text-xs hover:bg-black transition-all shadow-none">
               <span class="material-symbols-outlined text-[16px]">add</span> Book Appointment
             </button>
             <div class="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full shadow-none">
@@ -206,7 +206,7 @@
 
         <!-- Weekly Title -->
         <div class="mb-4">
-          <h3 id="calendar-title" class="text-sm font-bold text-white uppercase tracking-widest font-mono">Week of May 19 - May 25, 2026</h3>
+          <h3 id="calendar-title" class="text-sm font-bold text-slate-900 uppercase tracking-widest font-mono">Week of May 19 - May 25, 2026</h3>
         </div>
 
         <!-- Dynamic Calendar Canvas -->
@@ -225,7 +225,7 @@
           <h3 class="font-bold text-sm text-slate-900 leading-none">AI Intake Engine</h3>
           <p class="text-slate-400 text-[10px] mt-1 font-mono uppercase">Automated Requests queue</p>
         </div>
-        <span class="bg-white text-white px-2 py-0.5 rounded text-[9px] font-bold tracking-widest uppercase">4 Pending</span>
+        <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[9px] font-bold tracking-widest uppercase">4 Pending</span>
       </div>
 
       <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
@@ -236,7 +236,7 @@
               <span class="material-symbols-outlined text-indigo-400 text-sm">smart_toy</span>
             </div>
             <div>
-              <p class="font-bold text-xs text-white">New Patient Inquiry</p>
+              <p class="font-bold text-xs text-slate-900">New Patient Inquiry</p>
               <p class="text-slate-400 text-[9px] font-mono">AUDIO AGENT • 1m ago</p>
             </div>
           </div>
@@ -258,7 +258,7 @@
               <span class="material-symbols-outlined text-indigo-400 text-sm">smart_toy</span>
             </div>
             <div>
-              <p class="font-bold text-xs text-white">Reschedule Request</p>
+              <p class="font-bold text-xs text-slate-900">Reschedule Request</p>
               <p class="text-slate-400 text-[9px] font-mono">SMS AGENT • 10m ago</p>
             </div>
           </div>
@@ -986,6 +986,13 @@
     };
 
     window.rescheduleIntake = function(intakeId) {
+      const processed = JSON.parse(localStorage.getItem('renia_processed_intakes') || '[]');
+      if (processed.includes(intakeId)) {
+        showToast('This intake has already been processed.', 'info');
+        return;
+      }
+      processed.push(intakeId);
+      localStorage.setItem('renia_processed_intakes', JSON.stringify(processed));
       const today = new Date();
       const tomorrow = new Date(today);
       tomorrow.setDate(today.getDate() + 1);

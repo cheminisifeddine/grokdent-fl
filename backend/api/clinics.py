@@ -38,6 +38,7 @@ class ClinicResponse(BaseModel):
     insurance_accepted: Optional[List[str]] = None
     emergency_contact_name: Optional[str] = None
     emergency_contact_phone: Optional[str] = None
+    policies: Optional[str] = None
     grok_voice_id: Optional[str] = None
     welcome_message: Optional[str] = None
     instructions: Optional[str] = None
