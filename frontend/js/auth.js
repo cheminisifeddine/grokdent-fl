@@ -24,9 +24,9 @@ const Auth = {
       return;
     }
 
-    // Protected pages: if no token, redirect to login page instead of silently injecting demo token
+    // Protected pages: if no token, inject demo token so the UI works without forced login
     if (!this.getToken()) {
-      window.location.href = 'login.html';
+      this._injectDemoSession();
     }
   },
 

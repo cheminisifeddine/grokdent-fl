@@ -78,6 +78,7 @@ class VoiceSettingsUpdate(BaseModel):
     welcome_message: Optional[str] = None
     spanish_enabled: Optional[bool] = None
     xai_key: Optional[str] = None
+    instructions: Optional[str] = None
 
 
 # ---------------------------------------------------------------------------

@@ -1008,7 +1008,8 @@
             const resp = await API.updateVoiceSettings({
               grok_voice_id: state.settings.voice.voice,
               welcome_message: state.settings.voice.greeting,
-              spanish_enabled: state.settings.voice.spanish
+              spanish_enabled: state.settings.voice.spanish,
+              instructions: state.settings.voice.instructions
             });
             console.debug('Voice settings persisted to backend:', resp);
             if (typeof showToast === 'function') showToast('Voice config saved & synced to server!', 'success');
@@ -1136,7 +1137,8 @@
             await API.updateVoiceSettings({
               grok_voice_id: state.settings.voice.voice,
               welcome_message: state.settings.voice.greeting,
-              spanish_enabled: state.settings.voice.spanish
+              spanish_enabled: state.settings.voice.spanish,
+              instructions: state.settings.voice.instructions
             });
           } catch (err) {
             console.error('Database sync failed during deploy:', err);
@@ -1184,10 +1186,29 @@
 
           saveSettingsToStorage();
 
+          // Persist to backend
+          let syncSuccess = true;
+          try {
+            await API.updateClinic({
+              emergency_contact_name: state.settings.emergency.name,
+              emergency_contact_phone: state.settings.emergency.phone,
+              policies: state.settings.emergency.protocol
+            });
+          } catch (err) {
+            console.error('Backend emergency save failed:', err);
+            syncSuccess = false;
+          }
+
           setTimeout(() => {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Save Protocol';
-            if (typeof showToast === 'function') showToast('Emergency triage protocol saved!', 'success');
+            if (typeof showToast === 'function') {
+              if (syncSuccess) {
+                showToast('Emergency triage protocol saved & synced to server!', 'success');
+              } else {
+                showToast('Saved locally but server sync failed.', 'error');
+              }
+            }
           }, 200);
         });
       } catch (err) { console.warn('settings: emergency form listener failed', err); }

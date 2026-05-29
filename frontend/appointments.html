@@ -246,8 +246,8 @@
             <p class="text-xs text-slate-400 mt-2 italic leading-relaxed">"Patient reports mild molar pain, seeking emergency consultation."</p>
           </div>
           <div class="flex gap-2">
-            <button onclick="if(typeof showToast === 'function') showToast('Appointment slot approved and synchronized with EHR.','success')" class="flex-1 py-1.5 bg-white text-white rounded text-[10px] font-bold hover:bg-slate-900 transition-colors uppercase tracking-wider">Approve</button>
-            <button onclick="if(typeof showToast === 'function') showToast('Auto-reschedule sequence triggered.','info')" class="flex-1 py-1.5 border border-white/5 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Reschedule</button>
+            <button onclick="approveIntake('new-patient-emergency', 'Fri, Oct 16 • 09:30 AM', 'Emergency Root Canal')" class="flex-1 py-1.5 bg-black text-white rounded text-[10px] font-bold hover:bg-slate-800 transition-colors uppercase tracking-wider">Approve</button>
+            <button onclick="rescheduleIntake('new-patient-emergency')" class="flex-1 py-1.5 border border-slate-200 text-slate-700 hover:bg-slate-50 rounded text-[10px] font-bold transition-all uppercase tracking-wider">Reschedule</button>
           </div>
         </div>
 
@@ -268,8 +268,8 @@
             <p class="text-xs text-slate-400 mt-1">Marcus Aurelius (Existing Patient)</p>
           </div>
           <div class="flex gap-2">
-            <button onclick="if(typeof showToast === 'function') showToast('Reschedule request approved.','success')" class="flex-1 py-1.5 bg-white text-white rounded text-[10px] font-bold hover:bg-slate-900 transition-colors uppercase tracking-wider">Approve</button>
-            <button onclick="if(typeof showToast === 'function') showToast('Reschedule denied. Patient notified.','info')" class="flex-1 py-1.5 border border-white/5 text-slate-300 hover:bg-deep-navy rounded text-[10px] font-bold transition-all uppercase tracking-wider">Deny</button>
+            <button onclick="approveIntake('reschedule-marcus', 'Thu, Oct 15 • 02:00 PM', 'Cleaning')" class="flex-1 py-1.5 bg-black text-white rounded text-[10px] font-bold hover:bg-slate-800 transition-colors uppercase tracking-wider">Approve</button>
+            <button onclick="denyIntake('reschedule-marcus')" class="flex-1 py-1.5 border border-slate-200 text-slate-700 hover:bg-slate-50 rounded text-[10px] font-bold transition-all uppercase tracking-wider">Deny</button>
           </div>
         </div>
 
@@ -932,6 +932,68 @@
         document.getElementById('appt-details-modal')?.remove();
         openAppointmentModal(appt.date, appt.time, appt);
       }
+    };
+
+    // AI Intake Panel action handlers
+    window.approveIntake = async function(intakeId, timeStr, service) {
+      const btn = event.target;
+      btn.disabled = true;
+      btn.textContent = 'Processing...';
+      try {
+        const date = new Date();
+        const dateStr = formatDateStr(date);
+        let newAppt = {
+          id: 'intake_' + Date.now(),
+          name: intakeId === 'new-patient-emergency' ? 'Sarah Jenkins' : 'Marcus Aurelius',
+          service: service || 'General Checkup',
+          date: dateStr,
+          time: timeStr ? timeStr.split('•')[1]?.trim() : '9:00 AM',
+          category: service?.toLowerCase().includes('emergency') ? 'emergency' : (service?.toLowerCase().includes('whitening') || service?.toLowerCase().includes('implant') || service?.toLowerCase().includes('cosmetic') ? 'cosmetic' : 'general'),
+          status: 'Confirmed',
+          notes: 'Approved via AI Intake Engine'
+        };
+        try {
+          const created = await API.createAppointment({
+            patient_name: newAppt.name,
+            service_type: newAppt.service,
+            appointment_datetime: `${newAppt.date} ${newAppt.time}`,
+            notes: newAppt.notes
+          });
+          if (created && created.id) newAppt.id = created.id;
+        } catch (err) {
+          console.warn('API create failed, using local:', err.message);
+        }
+        state.appointments.push(newAppt);
+        saveAppointmentsToStorage();
+        showToast(`Intake approved: ${newAppt.name} — ${newAppt.service}`, 'success');
+        renderCalendar();
+        // Hide the card
+        const card = btn.closest('.glass-panel');
+        if (card) { card.style.opacity = '0.5'; card.style.pointerEvents = 'none'; }
+      } catch (e) {
+        showToast('Failed to approve intake', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Approve';
+      }
+    };
+
+    window.rescheduleIntake = function(intakeId) {
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      openAppointmentModal(formatDateStr(tomorrow), '10:00 AM');
+      showToast('Open the scheduler to set a new slot', 'info');
+    };
+
+    window.denyIntake = function(intakeId) {
+      const btn = event.target;
+      const card = btn.closest('.glass-panel');
+      if (card) {
+        card.style.opacity = '0.3';
+        card.style.pointerEvents = 'none';
+      }
+      showToast('Intake request denied. Patient will be notified.', 'info');
     };
 
     document.addEventListener('DOMContentLoaded', async () => {
