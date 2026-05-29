@@ -99,6 +99,20 @@ async def on_startup():
     finally:
         db.close()
     
+    # Ensure schema migrations for added columns (SQLite dev convenience)
+    if is_sqlite:
+        try:
+            from sqlalchemy import inspect, text
+            inspector = inspect(engine)
+            columns = [c['name'] for c in inspector.get_columns('clinics')]
+            if 'instructions' not in columns:
+                logger.info("Adding 'instructions' column to clinics table...")
+                with engine.begin() as conn:
+                    conn.execute(text("ALTER TABLE clinics ADD COLUMN instructions TEXT"))
+                logger.info("Column 'instructions' added successfully.")
+        except Exception as exc:
+            logger.warning("Schema migration check failed (non-critical): %s", exc)
+
     logger.info("GrokDent FL backend API startup complete.")
 
 # 4. API Routes Registration (v1)

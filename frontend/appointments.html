@@ -938,6 +938,13 @@
     window.approveIntake = async function(intakeId, timeStr, service) {
       const btn = event.currentTarget || event.target;
       if (btn) { btn.disabled = true; btn.textContent = 'Processing...'; }
+      // Prevent duplicate processing
+      const processed = JSON.parse(localStorage.getItem('renia_processed_intakes') || '[]');
+      if (processed.includes(intakeId)) {
+        showToast('This intake has already been processed.', 'info');
+        if (btn) { btn.disabled = false; btn.textContent = 'Approve'; }
+        return;
+      }
       try {
         const date = new Date();
         const dateStr = formatDateStr(date);
@@ -964,11 +971,13 @@
         }
         state.appointments.push(newAppt);
         saveAppointmentsToStorage();
+        processed.push(intakeId);
+        localStorage.setItem('renia_processed_intakes', JSON.stringify(processed));
         showToast(`Intake approved: ${newAppt.name} — ${newAppt.service}`, 'success');
         renderCalendar();
-        // Hide the card
+        // Hide the card immediately to prevent double-clicks
         const card = btn.closest('.glass-panel');
-        if (card) { card.style.opacity = '0.5'; card.style.pointerEvents = 'none'; }
+        if (card) { card.style.opacity = '0.3'; card.style.pointerEvents = 'none'; }
       } catch (e) {
         showToast('Failed to approve intake', 'error');
       } finally {
@@ -986,6 +995,13 @@
 
     window.denyIntake = function(intakeId) {
       const btn = event.currentTarget || event.target;
+      const processed = JSON.parse(localStorage.getItem('renia_processed_intakes') || '[]');
+      if (processed.includes(intakeId)) {
+        showToast('This intake has already been processed.', 'info');
+        return;
+      }
+      processed.push(intakeId);
+      localStorage.setItem('renia_processed_intakes', JSON.stringify(processed));
       const card = btn.closest('.glass-panel');
       if (card) {
         card.style.opacity = '0.3';
