@@ -118,10 +118,13 @@ class AnalyticsService:
             "calls_today": calls_today,
             "calls_week": calls_week,
             "calls_month": calls_month,
+            "booked_today": bookings_today,
             "bookings_today": bookings_today,
             "bookings_week": bookings_week,
+            "revenue_today": revenue_estimate,
             "revenue_estimate": revenue_estimate,
             "avg_call_duration": avg_call_duration,
+            "satisfaction": satisfaction_score,
             "satisfaction_score": satisfaction_score,
         }
 

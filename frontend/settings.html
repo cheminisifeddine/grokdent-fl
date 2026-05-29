@@ -370,17 +370,18 @@
                 </div>
               </div>
 
-              <!-- API Key block -->
+              <!-- Server-managed voice access -->
               <div class="p-4 rounded bg-white border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-none">
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <h4 class="font-bold text-slate-700 text-xs font-mono uppercase tracking-wider">xAI Telephony Endpoint</h4>
+                    <h4 class="font-bold text-slate-700 text-xs font-mono uppercase tracking-wider">Grok Voice Endpoint</h4>
                   </div>
-                  <p class="text-[9px] text-slate-400 font-semibold mt-0.5">Route wss://api.x.ai/v1/realtime</p>
+                  <p class="text-[9px] text-slate-400 font-semibold mt-0.5">Server-managed grok-voice-think-fast-1.0. No client API key required.</p>
                 </div>
                 <div class="w-full sm:w-auto">
-                  <input type="password" id="xai-key" class="w-full sm:w-[240px] px-3 py-1.5 rounded border border-white/5 text-xs outline-none bg-white font-mono" placeholder="xai-api-key...">
+                  <input type="hidden" id="xai-key" value="">
+                  <span class="inline-flex px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-[10px] font-black uppercase tracking-wider">Provisioned by backend</span>
                 </div>
               </div>
 
@@ -389,6 +390,7 @@
                 <div class="w-full">
                   <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Persona</label>
                   <select id="voice-select" class="w-full px-3 py-2 rounded border border-white/5 text-xs bg-white outline-none">
+                    <option value="Aria">Aria (Grok Think Fast Receptionist)</option>
                     <option value="Ash">Ash (US Friendly Male)</option>
                     <option value="Ballad">Ballad (US Professional Female)</option>
                     <option value="Coral">Coral (US Warm Female)</option>
@@ -408,7 +410,7 @@
               <div>
                 <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Greeting Welcome Message</label>
                 <textarea id="voice-greeting" rows="2" required class="w-full px-3 py-2 rounded border border-white/5 text-xs leading-relaxed outline-none"></textarea>
-                <p class="text-[9px] text-slate-400 mt-1 leading-normal font-semibold">Elena / Ash's opening phrase when incoming dentist calls connect.</p>
+                <p class="text-[9px] text-slate-400 mt-1 leading-normal font-semibold">Aria's opening phrase when incoming dentist calls connect.</p>
               </div>
 
               <!-- Persona Prompt Instructions -->
@@ -556,8 +558,8 @@
         { name: 'Emergency', price: 199 }
       ],
        voice: {
-         voice: 'Ash',
-         greeting: 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Ash. How can I help you today?',
+         voice: 'Aria',
+         greeting: 'Thank you for calling Sunshine Smiles Dental. This is your AI receptionist Aria. How can I help you today?',
          spanish: true,
          instructions: '',
          xai_key: ''
@@ -593,7 +595,7 @@
               voice: clinic.grok_voice_id || DEFAULT_SETTINGS.voice.voice,
               greeting: clinic.welcome_message || DEFAULT_SETTINGS.voice.greeting,
               spanish: clinic.spanish_enabled !== undefined ? clinic.spanish_enabled : DEFAULT_SETTINGS.voice.spanish,
-              xai_key: clinic.xai_key || '',
+              xai_key: '',
               instructions: (storedParsed && storedParsed.voice && storedParsed.voice.instructions) || DEFAULT_SETTINGS.voice.instructions || ''
             },
             emergency: {
@@ -603,16 +605,7 @@
             }
           };
 
-          if (!state.settings.voice.xai_key) {
-            try {
-              const resp = await API.request('GET', '/voice/xai-key');
-              if (resp && resp.xai_key) {
-                state.settings.voice.xai_key = resp.xai_key;
-              }
-            } catch (e) {
-              console.warn('Could not fetch default xAI key from backend:', e.message);
-            }
-          }
+          state.settings.voice.xai_key = '';
 
           saveSettingsToStorage();
           return;
@@ -633,14 +626,7 @@
         state.settings = { ...DEFAULT_SETTINGS };
       }
 
-      if (!state.settings.voice.xai_key) {
-        try {
-          const resp = await API.request('GET', '/voice/xai-key');
-          if (resp && resp.xai_key) {
-            state.settings.voice.xai_key = resp.xai_key;
-          }
-        } catch (e) {}
-      }
+      state.settings.voice.xai_key = '';
       saveSettingsToStorage();
     }
 
@@ -755,17 +741,17 @@
 
     function getDefaultInstructions() {
       const clinicName = state.settings.profile?.name || 'Sunshine Smiles Dental';
-      return `You are Ash, the elite AI voice receptionist for ${clinicName} in Florida. 
+      return `You are Aria, the elite AI voice receptionist for ${clinicName} in Florida.
       Speak concisely, empathetically, and keep responses audio-friendly. Ensure HIPAA safety limits.`;
     }
 
     function populateVoice() {
       const voice = state.settings.voice;
-      const vsEl = $('voice-select'); if (vsEl) vsEl.value = voice.voice || 'Ash';
+      const vsEl = $('voice-select'); if (vsEl) vsEl.value = voice.voice || 'Aria';
       const vgEl = $('voice-greeting'); if (vgEl) vgEl.value = voice.greeting || '';
       const vstEl = $('voice-spanish-toggle'); if (vstEl) vstEl.checked = voice.spanish;
       const viEl = $('voice-instructions'); if (viEl) viEl.value = voice.instructions || getDefaultInstructions();
-      const xkEl = $('xai-key'); if (xkEl) xkEl.value = voice.xai_key || '';
+      const xkEl = $('xai-key'); if (xkEl) xkEl.value = '';
       updateSpeechSampleText();
     }
 
@@ -917,7 +903,17 @@
           };
 
           saveSettingsToStorage();
-          try { await API.updateClinic({ clinic_name: state.settings.profile.name }); } catch {}
+          try {
+            await API.updateClinic({
+              clinic_name: state.settings.profile.name,
+              email: state.settings.profile.email,
+              phone: state.settings.profile.phone,
+              city: state.settings.profile.city,
+              zip: state.settings.profile.zip
+            });
+          } catch (err) {
+            console.warn('Profile API sync failed:', err.message);
+          }
           
           setTimeout(() => {
             submitBtn.disabled = false;
@@ -996,14 +992,13 @@
           const vsEl = document.getElementById('voice-select');
           const vgEl = document.getElementById('voice-greeting');
           const vstEl = document.getElementById('voice-spanish-toggle');
-          const xkEl = document.getElementById('xai-key');
           const viEl = document.getElementById('voice-instructions');
 
           state.settings.voice = {
-            voice: vsEl ? vsEl.value : 'Ash',
+            voice: vsEl ? vsEl.value : 'Aria',
             greeting: vgEl ? vgEl.value.trim() : '',
             spanish: vstEl ? vstEl.checked : false,
-            xai_key: xkEl ? xkEl.value.trim() : '',
+            xai_key: '',
             instructions: viEl ? viEl.value.trim() : ''
           };
 
@@ -1013,8 +1008,7 @@
             const resp = await API.updateVoiceSettings({
               grok_voice_id: state.settings.voice.voice,
               welcome_message: state.settings.voice.greeting,
-              spanish_enabled: state.settings.voice.spanish,
-              xai_key: state.settings.voice.xai_key
+              spanish_enabled: state.settings.voice.spanish
             });
             console.debug('Voice settings persisted to backend:', resp);
             if (typeof showToast === 'function') showToast('Voice config saved & synced to server!', 'success');
@@ -1099,59 +1093,16 @@
           } catch (err) {}
 
           if (!playSuccess) {
-            try {
-              const xkEl = document.getElementById('xai-key');
-              const xaiKey = xkEl ? xkEl.value.trim() : '';
-              const voiceMap = { 'Ash': 'rex', 'Ballad': 'ara', 'Coral': 'eve', 'Sage': 'eve', 'Verse': 'sal', 'Ani': 'ara', 'Eve': 'eve', 'Leo': 'leo' };
-              const realVoiceId = voiceMap[selectedVoice] || 'eve';
+            console.warn('Backend voice synthesis unavailable; using browser speech fallback.');
+            setVisualizerState(false, 'ERROR');
+            if (typeof showToast === 'function') showToast('Backend voice preview unavailable. Browser fallback started.', 'error');
 
-              const res = await fetch('https://api.x.ai/v1/audio/speech', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${xaiKey}`
-                },
-                body: JSON.stringify({
-                  input: greetingText,
-                  voice: realVoiceId,
-                  model: 'tts-1',
-                  speed: 1.0
-                })
-              });
-
-              if (res.ok) {
-                const blob = await res.blob();
-                const audioUrl = URL.createObjectURL(blob);
-                const audio = new Audio(audioUrl);
-                activePreviewAudio = audio;
-
-                audio.onplay = () => {
-                  setVisualizerState(true, 'GROK ACTIVE - ' + selectedVoice.toUpperCase());
-                };
-                audio.onended = () => {
-                  setVisualizerState(false, 'IDLE');
-                  activePreviewAudio = null;
-                };
-                audio.onerror = () => {
-                  setVisualizerState(false, 'IDLE');
-                  activePreviewAudio = null;
-                };
-
-                await audio.play();
-                playSuccess = true;
-              }
-            } catch (err) {
-              console.warn(err);
-              setVisualizerState(false, 'ERROR');
-              if (typeof showToast === 'function') showToast('xAI Connection failed. Direct browser audio fallback initiated.', 'error');
-              
-              if (window.speechSynthesis) {
-                const utterance = new SpeechSynthesisUtterance(greetingText);
-                utterance.onstart = () => setVisualizerState(true, 'SYNTHETIC FALLBACK');
-                utterance.onend = () => setVisualizerState(false, 'IDLE');
-                utterance.onerror = () => setVisualizerState(false, 'IDLE');
-                window.speechSynthesis.speak(utterance);
-              }
+            if (window.speechSynthesis) {
+              const utterance = new SpeechSynthesisUtterance(greetingText);
+              utterance.onstart = () => setVisualizerState(true, 'SYNTHETIC FALLBACK');
+              utterance.onend = () => setVisualizerState(false, 'IDLE');
+              utterance.onerror = () => setVisualizerState(false, 'IDLE');
+              window.speechSynthesis.speak(utterance);
             }
           }
         });
@@ -1162,16 +1113,9 @@
         const syncBtn = $('sync-deploy-btn');
         if (syncBtn) syncBtn.addEventListener('click', async () => {
           const btn = document.getElementById('sync-deploy-btn');
-          const xkEl = document.getElementById('xai-key');
           const vsEl = document.getElementById('voice-select');
-          if (!btn || !xkEl || !vsEl) return;
-          const key = xkEl.value.trim();
+          if (!btn || !vsEl) return;
           const voice = vsEl.value;
-
-          if (!key) {
-            if (typeof showToast === 'function') showToast('Please specify a valid xAI API Key.', 'error');
-            return;
-          }
 
           btn.disabled = true;
           btn.innerHTML = '<span class="material-symbols-outlined text-[15px] animate-spin">sync</span> Syncing Grok real-time voice trunks...';
@@ -1182,7 +1126,7 @@
           const vstEl = document.getElementById('voice-spanish-toggle');
           if (vgEl) state.settings.voice.greeting = vgEl.value.trim();
           if (vstEl) state.settings.voice.spanish = vstEl.checked;
-          state.settings.voice.xai_key = key;
+          state.settings.voice.xai_key = '';
           
           saveSettingsToStorage();
 
@@ -1192,8 +1136,7 @@
             await API.updateVoiceSettings({
               grok_voice_id: state.settings.voice.voice,
               welcome_message: state.settings.voice.greeting,
-              spanish_enabled: state.settings.voice.spanish,
-              xai_key: state.settings.voice.xai_key
+              spanish_enabled: state.settings.voice.spanish
             });
           } catch (err) {
             console.error('Database sync failed during deploy:', err);

@@ -33,8 +33,14 @@ class WebSocketClient {
       return;
     }
 
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.host;
+    let protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    let host = window.location.host;
+    const hostname = window.location.hostname;
+    const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.') || hostname.startsWith('10.') || hostname.startsWith('172.');
+    if (!isLocal && !host.includes('workers.dev')) {
+      protocol = 'wss:';
+      host = 'renia-ai-backend.medsaidkichene.workers.dev';
+    }
     const wsUrl = `${protocol}//${host}/ws/${clinicId}?token=${token}`;
 
     try {

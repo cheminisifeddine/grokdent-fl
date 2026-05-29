@@ -572,7 +572,7 @@
     const basePrices = { starter: 399, professional: 699, enterprise: 999 };
     const addonPrices = { bilingual: 49, pmssync: 29, voiceclone: 199 };
 
-    function loadBillingState() {
+    async function loadBillingState() {
       const stored = localStorage.getItem('renia_billing');
       if (stored) {
         try {
@@ -581,6 +581,17 @@
         } catch (e) {}
       } else {
         saveBillingState();
+      }
+
+      try {
+        const subscription = await API.getSubscription();
+        if (subscription) {
+          state.plan = subscription.plan || subscription.subscription_plan || state.plan;
+          state.status = subscription.status || subscription.subscription_status || state.status;
+          saveBillingState();
+        }
+      } catch (err) {
+        console.warn('Billing API unavailable, using local subscription state:', err.message);
       }
     }
 
@@ -760,7 +771,7 @@
       }
     }
 
-    function switchPlan(plan) {
+    async function switchPlan(plan) {
       if (state.plan === plan) return;
       
       let basePrice = basePrices[plan];
@@ -778,7 +789,18 @@
       });
       const selectedPrice = basePrice + activeAddonsPrice;
 
+      try {
+        const checkout = await API.createCheckout(plan);
+        if (checkout && checkout.checkout_url && checkout.checkout_url !== null && !checkout.checkout_url.includes('mock_checkout')) {
+          window.location.href = checkout.checkout_url;
+          return;
+        }
+      } catch (err) {
+        console.warn('Checkout API failed, applying local billing state:', err.message);
+      }
+
       state.plan = plan;
+      state.status = 'active';
       
       const newInv = {
         id: 'INV-' + (new Date().getFullYear()) + '-NEW' + Math.floor(Math.random()*900 + 100),
@@ -1009,8 +1031,8 @@
       });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadBillingState();
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadBillingState();
       renderBillingPage();
       initRoiCalculator();
       initAddonsHandlers();
@@ -1039,9 +1061,14 @@
       });
 
       // Cancellation
-      document.getElementById('cancel-sub-btn')?.addEventListener('click', () => {
+      document.getElementById('cancel-sub-btn')?.addEventListener('click', async () => {
         if (state.status === 'active') {
           if (confirm('Cancel your Renia AI subscription?')) {
+            try {
+              await API.cancelSubscription();
+            } catch (err) {
+              console.warn('Cancel subscription API failed:', err.message);
+            }
             state.status = 'cancelled';
             saveBillingState();
             showToast('Subscription scheduled for cancellation', 'info');

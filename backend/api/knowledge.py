@@ -187,3 +187,12 @@ async def seed_defaults(
 
     logger.info("Seeded %d FAQ entries for clinic %s", len(new_entries), clinic_id)
     return [KBEntryResponse.model_validate(e) for e in new_entries]
+
+
+@router.post("/seed", response_model=List[KBEntryResponse], status_code=status.HTTP_201_CREATED)
+async def seed_defaults_alias(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Cloudflare Worker-compatible alias used by the static dashboard."""
+    return await seed_defaults(current_user, db)

@@ -307,7 +307,7 @@
   <script>
     // State management for appointments
     const state = {
-      currentDate: new Date(2026, 4, 23), // Friday May 23, 2026
+      currentDate: new Date(),
       currentView: 'week', // 'day' | 'week' | 'month'
       searchQuery: '',
       selectedCategory: 'all',
@@ -335,7 +335,18 @@
       { id: '17', date: '2026-05-22', time: '3:00 PM', name: 'Hannah Lee', service: 'General Checkup', category: 'general', status: 'Scheduled', notes: 'Cavity filling.' }
     ];
 
-    function loadAppointments() {
+    async function loadAppointments() {
+      try {
+        const apiAppointments = await API.getAppointments();
+        if (Array.isArray(apiAppointments) && apiAppointments.length > 0) {
+          state.appointments = apiAppointments.map(appt => API.normalizeAppointment ? API.normalizeAppointment(appt) : appt);
+          saveAppointmentsToStorage();
+          return;
+        }
+      } catch (err) {
+        console.warn('Appointments API unavailable, using local cache:', err.message);
+      }
+
       const stored = localStorage.getItem('renia_appointments');
       if (stored) {
         try { state.appointments = JSON.parse(stored); } catch (e) { state.appointments = [...DEFAULT_APPTS]; }
@@ -429,7 +440,7 @@
       weekDays.forEach((dayDate, idx) => {
         const dayNum = dayDate.getDate();
         const dayName = dayNames[idx];
-        const isToday = isSameDay(dayDate, new Date(2026, 4, 23));
+        const isToday = isSameDay(dayDate, new Date());
         
         let headerClass = "calendar-cell calendar-header";
         if (isToday) {
@@ -583,15 +594,17 @@
           <div class="calendar-cell calendar-header border-none">Sun</div>
       `;
       
-      const startDay = new Date(2026, 3, 27); // Apr 27, 2026
+      const firstOfMonth = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth(), 1);
+      const startDay = new Date(firstOfMonth);
+      startDay.setDate(firstOfMonth.getDate() - ((firstOfMonth.getDay() + 6) % 7));
       
       for (let i = 0; i < 35; i++) {
         const dayDate = new Date(startDay.getTime());
         dayDate.setDate(startDay.getDate() + i);
         
         const dateStr = formatDateStr(dayDate);
-        const isToday = isSameDay(dayDate, new Date(2026, 4, 23));
-        const isCurrentMonth = dayDate.getMonth() === 4; // May
+        const isToday = isSameDay(dayDate, new Date());
+        const isCurrentMonth = dayDate.getMonth() === state.currentDate.getMonth();
         
         const slotAppts = state.appointments.filter(appt => appt.status !== 'Cancelled' && appt.date === dateStr);
         const filteredAppts = slotAppts.filter(appt => matchesFilters(appt));
@@ -643,7 +656,7 @@
       
       const patientValue = apptToEdit ? apptToEdit.name : '';
       const serviceValue = apptToEdit ? apptToEdit.service : 'General Checkup';
-      const dateValue = apptToEdit ? apptToEdit.date : (prefillDate || '2026-05-23');
+      const dateValue = apptToEdit ? apptToEdit.date : (prefillDate || formatDateStr(new Date()));
       const timeValue = apptToEdit ? apptToEdit.time : (prefillTime || '9:00 AM');
       const notesValue = apptToEdit ? (apptToEdit.notes || '') : '';
       
@@ -715,8 +728,9 @@
       document.getElementById('close-appt-modal')?.addEventListener('click', () => overlay.remove());
       document.getElementById('cancel-appt-btn')?.addEventListener('click', () => overlay.remove());
       
-      document.getElementById('appointment-form')?.addEventListener('submit', (e) => {
+      document.getElementById('appointment-form')?.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitBtn = e.target.querySelector('[type="submit"]');
         const patient = document.getElementById('appt-patient')?.value;
         const service = document.getElementById('appt-service')?.value;
         const date = document.getElementById('appt-date')?.value;
@@ -726,6 +740,10 @@
         if (!patient || !date) {
           showToast('Patient name and date are required', 'error');
           return;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = apptToEdit ? 'Saving...' : 'Booking...';
         }
         
         let category = 'general';
@@ -738,7 +756,7 @@
         if (apptToEdit) {
           const idx = state.appointments.findIndex(a => a.id === apptToEdit.id);
           if (idx !== -1) {
-            state.appointments[idx] = {
+            const updatedAppt = {
               ...apptToEdit,
               name: patient,
               service: service,
@@ -747,11 +765,23 @@
               category: category,
               notes: notes
             };
+            try {
+              await API.updateAppointment(apptToEdit.id, {
+                patient_name: patient,
+                service_type: service,
+                appointment_datetime: `${date} ${time}`,
+                status: apptToEdit.status.toLowerCase(),
+                notes
+              });
+            } catch (err) {
+              console.warn('Appointment update API failed, keeping local change:', err.message);
+            }
+            state.appointments[idx] = updatedAppt;
             saveAppointmentsToStorage();
             showToast(`Appointment rescheduled for ${patient}`, 'success');
           }
         } else {
-          const newAppt = {
+          let newAppt = {
             id: 'appt_' + Date.now(),
             name: patient,
             service: service,
@@ -761,6 +791,17 @@
             status: 'Scheduled',
             notes: notes
           };
+          try {
+            const created = await API.createAppointment({
+              patient_name: patient,
+              service_type: service,
+              appointment_datetime: `${date} ${time}`,
+              notes
+            });
+            newAppt = API.normalizeAppointment ? API.normalizeAppointment({ ...created, patient_name: patient, service_type: service, appointment_datetime: `${date} ${time}`, notes }) : newAppt;
+          } catch (err) {
+            console.warn('Appointment create API failed, keeping local change:', err.message);
+          }
           state.appointments.push(newAppt);
           saveAppointmentsToStorage();
           showToast(`Appointment scheduled for ${patient}`, 'success');
@@ -846,9 +887,19 @@
       overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
     };
 
-    window.updateApptStatus = function(apptId, newStatus) {
+    window.updateApptStatus = async function(apptId, newStatus) {
       const appt = state.appointments.find(a => a.id === apptId);
       if (appt) {
+        try {
+          await API.updateAppointment(apptId, {
+            appointment_datetime: `${appt.date} ${appt.time}`,
+            service_type: appt.service,
+            status: newStatus.toLowerCase(),
+            notes: appt.notes || ''
+          });
+        } catch (err) {
+          console.warn('Appointment status API update failed:', err.message);
+        }
         appt.status = newStatus;
         saveAppointmentsToStorage();
         showToast(`Status updated to ${newStatus}`, 'success');
@@ -857,10 +908,15 @@
       }
     };
 
-    window.cancelAppt = function(apptId) {
+    window.cancelAppt = async function(apptId) {
       if (confirm('Cancel this appointment?')) {
         const appt = state.appointments.find(a => a.id === apptId);
         if (appt) {
+          try {
+            await API.deleteAppointment(apptId);
+          } catch (err) {
+            console.warn('Appointment cancel API failed:', err.message);
+          }
           appt.status = 'Cancelled';
           saveAppointmentsToStorage();
           showToast('Appointment cancelled', 'info');
@@ -878,8 +934,8 @@
       }
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadAppointments();
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadAppointments();
       renderCalendar();
 
       document.getElementById('new-appointment-btn')?.addEventListener('click', () => openAppointmentModal());
@@ -921,7 +977,7 @@
       });
 
       document.getElementById('today-btn')?.addEventListener('click', () => {
-        state.currentDate = new Date(2026, 4, 23);
+        state.currentDate = new Date();
         renderCalendar();
       });
 

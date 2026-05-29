@@ -151,7 +151,7 @@ SAMPLE_CLINIC_DATA: Dict = {
     ],
     "emergency_contact_name": "Dr. Priya Patel",
     "emergency_contact_phone": "(407) 555-0199",
-    "grok_voice_id": "Ash",
+    "grok_voice_id": "Aria",
     "twilio_phone_number": "+14075550100",
     "subscription_plan": "professional",
     "subscription_status": "active",

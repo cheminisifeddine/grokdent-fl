@@ -50,8 +50,8 @@ PLANS = {
 # ---------------------------------------------------------------------------
 class CheckoutRequest(BaseModel):
     plan_name: str  # starter | professional | enterprise
-    success_url: str
-    cancel_url: str
+    success_url: str = "http://localhost:8000/billing.html?checkout=success"
+    cancel_url: str = "http://localhost:8000/billing.html?checkout=cancelled"
 
 class CheckoutResponse(BaseModel):
     checkout_url: str
@@ -110,7 +110,8 @@ async def create_checkout_session(
     if not settings.STRIPE_SECRET_KEY or settings.STRIPE_SECRET_KEY == "sk_test_placeholder":
         logger.warning("STRIPE_SECRET_KEY is placeholder — simulating success redirect URL")
         # Direct them back with a simulated success
-        simulated_url = f"{body.success_url}?session_id=mock_checkout_session_{clinic.id}_{plan_key}"
+        separator = "&" if "?" in body.success_url else "?"
+        simulated_url = f"{body.success_url}{separator}session_id=mock_checkout_session_{clinic.id}_{plan_key}"
         return CheckoutResponse(checkout_url=simulated_url)
 
     try:
@@ -146,6 +147,25 @@ async def create_checkout_session(
     except Exception as exc:
         logger.error("Failed to create Stripe checkout session: %s", exc)
         raise HTTPException(status_code=500, detail=f"Stripe initialization error: {str(exc)}")
+
+
+@router.post("/checkout")
+async def checkout_alias(
+    body: CheckoutRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Dashboard-friendly checkout alias that also updates local plan state."""
+    response = await create_checkout_session(body, current_user, db)
+    clinic = db.query(Clinic).filter(Clinic.id == current_user.clinic_id).first()
+    if clinic:
+        clinic.subscription_plan = body.plan_name.lower()
+        clinic.subscription_status = "active"
+        db.commit()
+    return {
+        "message": f"Subscribed to {body.plan_name.lower()} plan",
+        "checkout_url": response.checkout_url,
+    }
 
 @router.post("/cancel")
 async def cancel_subscription(

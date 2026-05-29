@@ -293,9 +293,21 @@
       { time: 'Yesterday, 11:42 AM', caller: 'Robert Taylor', phone: '(305) 555-0444', duration: '0:00', language: 'English', status: 'Abandoned', statusClass: 'abandoned', service: '—', transcriptSummary: 'Call abandoned during interactive voice routing setup.' }
     ];
 
-    function loadCalls() {
+    async function loadCalls() {
+      try {
+        const apiCalls = await API.getCalls();
+        if (Array.isArray(apiCalls) && apiCalls.length > 0) {
+          CallsState.calls = apiCalls.map(call => API.normalizeCall ? API.normalizeCall(call) : call);
+          saveCalls();
+        }
+      } catch (err) {
+        console.warn('Calls API unavailable, using local cache:', err.message);
+      }
+
       const stored = localStorage.getItem('renia_calls');
-      if (stored) {
+      if (CallsState.calls.length > 0) {
+        // Already loaded from API.
+      } else if (stored) {
         try { CallsState.calls = JSON.parse(stored); } catch (e) { CallsState.calls = [...DEFAULT_CALLS]; }
       } else {
         CallsState.calls = [...DEFAULT_CALLS];
@@ -407,8 +419,8 @@
     }
 
     // Initial triggers
-    document.addEventListener('DOMContentLoaded', () => {
-      loadCalls();
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadCalls();
       
       document.getElementById('call-search')?.addEventListener('input', debounce(() => applyFilters(), 300));
       document.getElementById('call-status-filter')?.addEventListener('change', applyFilters);

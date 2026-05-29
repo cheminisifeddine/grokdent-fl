@@ -301,9 +301,27 @@
       { id: '5', category: 'policies', question: 'What is your appointment cancellation policy?', answer: 'We value your schedule. We kindly request at least 24 hours notice for any rescheduling or cancellations. Late notice changes may result in a standard $50 clinical slot fee.', active: true }
     ];
 
-    function loadKnowledgeBase() {
+    async function loadKnowledgeBase() {
+      try {
+        const apiEntries = await API.getKnowledge();
+        if (Array.isArray(apiEntries) && apiEntries.length > 0) {
+          state.knowledgeBase = apiEntries.map(entry => ({
+            id: entry.id,
+            category: entry.category || 'general',
+            question: entry.question || '',
+            answer: entry.answer || '',
+            active: entry.is_active !== false
+          }));
+          saveKBToStorage();
+        }
+      } catch (err) {
+        console.warn('Knowledge API unavailable, using local cache:', err.message);
+      }
+
       const stored = localStorage.getItem('renia_knowledge_base');
-      if (stored) {
+      if (state.knowledgeBase.length > 0) {
+        // Already loaded from API.
+      } else if (stored) {
         try { state.knowledgeBase = JSON.parse(stored); } catch (e) { state.knowledgeBase = [...DEFAULT_KB]; }
       } else {
         state.knowledgeBase = [...DEFAULT_KB];
@@ -415,7 +433,7 @@
       if (ruleCatEl) ruleCatEl.textContent = entry.category;
     }
 
-    function saveActiveProtocol() {
+    async function saveActiveProtocol() {
       const entry = state.knowledgeBase.find(e => e.id === state.activeId);
       if (!entry) return;
 
@@ -445,12 +463,22 @@
         lastSavedEl.textContent = `Saved at ${time}`;
       }
 
-      showToast('Directive protocol successfully synchronized. <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>', 'success');
-      try { API.updateKnowledge(entry.id, entry); } catch {}
+      try {
+        await API.updateKnowledge(entry.id, {
+          category: entry.category,
+          question: entry.question,
+          answer: entry.answer,
+          is_active: entry.active !== false
+        });
+        showToast('Directive protocol synchronized to server.', 'success');
+      } catch (err) {
+        console.warn('Knowledge update API failed:', err.message);
+        showToast('Saved locally, but server sync failed.', 'error');
+      }
     }
 
-    function createNewProtocol() {
-      const newEntry = {
+    async function createNewProtocol() {
+      let newEntry = {
         id: 'kb_' + Date.now(),
         category: 'general',
         question: 'Untitled Directive FAQ',
@@ -463,21 +491,43 @@
       renderKnowledgeBase();
       loadActiveDocument();
       showToast('New directive drafted. Edit details now.', 'info');
-      try { API.createKnowledge(newEntry); } catch {}
+      try {
+        const created = await API.createKnowledge({
+          category: newEntry.category,
+          question: newEntry.question,
+          answer: newEntry.answer,
+          is_active: true
+        });
+        if (created && created.id) {
+          newEntry.id = created.id;
+          state.knowledgeBase[0] = newEntry;
+          state.activeId = created.id;
+          saveKBToStorage();
+          renderKnowledgeBase();
+          loadActiveDocument();
+        }
+      } catch (err) {
+        console.warn('Knowledge create API failed:', err.message);
+      }
     }
 
-    function deleteActiveProtocol() {
+    async function deleteActiveProtocol() {
       if (!state.activeId) return;
       if (confirm('Delete active protocol?')) {
         const idToDelete = state.activeId;
         const idx = state.knowledgeBase.findIndex(e => e.id === idToDelete);
         if (idx !== -1) {
+          try {
+            await API.deleteKnowledge(idToDelete);
+          } catch (err) {
+            console.warn('Knowledge delete API failed:', err.message);
+          }
           state.knowledgeBase.splice(idx, 1);
           state.activeId = state.knowledgeBase[0]?.id || null;
           saveKBToStorage();
-          loadKnowledgeBase();
+          renderKnowledgeBase();
+          loadActiveDocument();
           showToast('Directive deleted.', 'info');
-          try { API.deleteKnowledge(idToDelete); } catch {}
         }
       }
     }
@@ -537,8 +587,8 @@
       return "That is an excellent inquiry! I couldn't locate a precise match in our clinical protocols guidelines. You can reach the clinic desk at (305) 555-0100 to discuss this, or save a new directive in the panel to teach me immediately!";
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadKnowledgeBase();
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadKnowledgeBase();
       resetPreviewChat();
 
       document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
@@ -615,9 +665,10 @@
       document.getElementById('seed-defaults-btn')?.addEventListener('click', async () => {
         if (confirm('Re-seed knowledge base FAQs?')) {
           localStorage.removeItem('renia_knowledge_base');
-          try { await API.seedKnowledge(); } catch {}
+          try { await API.seedKnowledge(); } catch (err) { console.warn('Knowledge seed API failed:', err.message); }
           state.activeId = null;
-          loadKnowledgeBase();
+          state.knowledgeBase = [];
+          await loadKnowledgeBase();
           showToast('Default training seed loaded! <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>', 'success');
         }
       });

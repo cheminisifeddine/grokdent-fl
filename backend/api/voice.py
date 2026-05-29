@@ -34,7 +34,7 @@ class TTSRequest(BaseModel):
 
 class SimulateRequest(BaseModel):
     scenario: Optional[str] = Field("general", description="Scenario type for simulation")
-    voice: Optional[str] = Field("Ash", description="Selected voice persona")
+    voice: Optional[str] = Field("Aria", description="Selected voice persona")
 
 
 class LandingDemoTurn(BaseModel):
@@ -72,6 +72,7 @@ XAI_VOICE_MAP = {
     "sage": "eve",
     "verse": "sal",
     "ani": "ara",
+    "aria": "ara",
     "eve": "eve",
     "leo": "leo"
 }
@@ -355,13 +356,15 @@ async def text_to_speech(body: TTSRequest, current_user: User = Depends(get_curr
 @router.get("/xai-key")
 async def get_default_xai_key(current_user: User = Depends(get_current_user)):
     """
-    Returns the default xAI API key for the frontend to use.
-    Checks clinic-level key first, then falls back to server environment.
+    Report whether xAI voice is configured server-side without exposing secrets.
     """
-    xai_key = getattr(current_user.clinic, 'xai_key', None) if current_user.clinic else None
-    if not xai_key:
-        xai_key = settings.XAI_API_KEY
-    return {"xai_key": xai_key or ""}
+    clinic_key = getattr(current_user.clinic, 'xai_key', None) if current_user.clinic else None
+    return {
+        "configured": bool(clinic_key or settings.XAI_API_KEY),
+        "xai_key": "",
+        "model": "grok-voice-think-fast-1.0",
+        "message": "xAI is configured server-side. Browser clients do not need or receive the API key.",
+    }
 
 
 @router.post("/simulate")

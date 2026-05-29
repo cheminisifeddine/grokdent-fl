@@ -145,7 +145,8 @@ def signup(body: SignupRequest, db: Session = Depends(get_db)):
         slug=slug,
         state="FL",
         timezone="US/Eastern",
-        xai_key=settings.XAI_API_KEY,  # default xAI key for new accounts
+        grok_voice_id="Aria",
+        welcome_message=f"Thank you for calling {body.clinic_name}. This is Aria, your AI receptionist. How can I help you today?",
     )
     db.add(clinic)
     db.flush()  # get clinic.id

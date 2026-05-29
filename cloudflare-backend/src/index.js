@@ -23,6 +23,15 @@ app.use('*', cors({
   credentials: true,
 }));
 
+app.use('*', async (c, next) => {
+  const url = new URL(c.req.url);
+  if (url.pathname.length > 1 && url.pathname.endsWith('/')) {
+    url.pathname = url.pathname.replace(/\/+$/, '');
+    return app.fetch(new Request(url.toString(), c.req.raw), c.env, c.executionCtx);
+  }
+  await next();
+});
+
 // -------------------------------------------------------------------------
 // Crypto Helpers (AES-GCM Web Crypto for HIPAA ePHI Protection)
 // -------------------------------------------------------------------------
@@ -107,6 +116,23 @@ async function verifyPassword(password, stored) {
   return verifyHex === hashHex;
 }
 
+function splitPatientName(name = '') {
+  const cleaned = String(name || '').trim();
+  if (!cleaned) return { firstName: 'Patient', lastName: '' };
+  const parts = cleaned.split(/\s+/);
+  if (parts.length === 1) return { firstName: parts[0], lastName: '' };
+  return { firstName: parts.slice(0, -1).join(' '), lastName: parts[parts.length - 1] };
+}
+
+function timeFromAppointmentDateTime(value) {
+  const match = String(value || '').match(/T?(\d{1,2}):(\d{2})/);
+  if (!match) return '';
+  let hours = Number(match[1]);
+  const suffix = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  return `${hours}:${match[2]} ${suffix}`;
+}
+
 // -------------------------------------------------------------------------
 // JWT Authentication Middleware
 // -------------------------------------------------------------------------
@@ -170,8 +196,15 @@ app.post('/api/v1/auth/signup', async (c) => {
   
   // Insert Clinic & User in D1
   await db.batch([
-    db.prepare('INSERT INTO clinics (id, name, slug, spanish_enabled) VALUES (?, ?, ?, 1)')
-      .bind(clinicId, body.clinic_name, slug),
+    db.prepare('INSERT INTO clinics (id, name, slug, spanish_enabled, grok_voice_id, xai_key, welcome_message) VALUES (?, ?, ?, 1, ?, ?, ?)')
+      .bind(
+        clinicId,
+        body.clinic_name,
+        slug,
+        'Aria',
+        '',
+        `Thank you for calling ${body.clinic_name}. This is Aria, your AI receptionist. How can I help you today?`
+      ),
     db.prepare('INSERT INTO users (id, clinic_id, email, hashed_password, full_name, role) VALUES (?, ?, ?, ?, ?, "admin")')
       .bind(userId, clinicId, body.email, await hashPassword(body.password), body.full_name)
   ]);
@@ -234,11 +267,12 @@ app.get('/api/v1/clinics', authMiddleware, async (c) => {
 });
 
 app.get('/api/v1/voice/xai-key', authMiddleware, async (c) => {
-  const user = c.get('user');
-  const clinic = await c.env.DB.prepare('SELECT xai_key FROM clinics WHERE id = ?').bind(user.clinic_id).first();
-  const clinicKey = clinic?.xai_key || '';
-  const envKey = c.env.XAI_API_KEY || '';
-  return c.json({ xai_key: clinicKey || envKey });
+  return c.json({
+    configured: Boolean(c.env.XAI_API_KEY),
+    xai_key: '',
+    model: 'grok-voice-think-fast-1.0',
+    message: 'xAI is configured server-side. Browser clients do not need or receive the API key.'
+  });
 });
 
 app.put('/api/v1/clinics', authMiddleware, async (c) => {
@@ -309,21 +343,70 @@ app.post('/api/v1/patients', authMiddleware, async (c) => {
 // -------------------------------------------------------------------------
 app.get('/api/v1/appointments', authMiddleware, async (c) => {
   const user = c.get('user');
-  const appointments = await c.env.DB.prepare('SELECT * FROM appointments WHERE clinic_id = ? ORDER BY appointment_datetime')
+  const appointments = await c.env.DB.prepare(`
+    SELECT
+      a.*,
+      TRIM(COALESCE(p.first_name, '') || ' ' || COALESCE(p.last_name, '')) AS patient_name
+    FROM appointments a
+    LEFT JOIN patients p ON p.id = a.patient_id
+    WHERE a.clinic_id = ?
+    ORDER BY a.appointment_datetime
+  `)
     .bind(user.clinic_id).all();
-  return c.json(appointments.results);
+  return c.json(appointments.results.map((a) => ({
+    ...a,
+    time: timeFromAppointmentDateTime(a.appointment_datetime),
+    service: a.service_type,
+    name: a.patient_name || 'Patient'
+  })));
 });
 
 app.post('/api/v1/appointments', authMiddleware, async (c) => {
   const user = c.get('user');
   const body = await c.req.json();
+  const db = c.env.DB;
   const apptId = crypto.randomUUID();
+  let patientId = body.patient_id || null;
+
+  if (!patientId && body.patient_name) {
+    const { firstName, lastName } = splitPatientName(body.patient_name);
+    const existingPatient = await db.prepare(
+      'SELECT id FROM patients WHERE clinic_id = ? AND lower(first_name) = lower(?) AND lower(last_name) = lower(?) LIMIT 1'
+    ).bind(user.clinic_id, firstName, lastName).first();
+
+    if (existingPatient) {
+      patientId = existingPatient.id;
+    } else {
+      const newPatientId = crypto.randomUUID();
+      const encKey = c.env.ENCRYPTION_KEY || '';
+      const phoneEnc = body.phone && encKey ? await encryptData(body.phone, encKey) : '';
+      await db.prepare(
+        'INSERT INTO patients (id, clinic_id, first_name, last_name, phone_encrypted, preferred_language) VALUES (?, ?, ?, ?, ?, ?)'
+      ).bind(newPatientId, user.clinic_id, firstName, lastName, phoneEnc, body.language || 'en').run();
+      patientId = newPatientId;
+    }
+  }
   
-  await c.env.DB.prepare('INSERT INTO appointments (id, clinic_id, patient_id, appointment_datetime, service_type, notes) VALUES (?, ?, ?, ?, ?, ?)')
-    .bind(apptId, user.clinic_id, body.patient_id, body.appointment_datetime, body.service_type, body.notes)
+  await db.prepare('INSERT INTO appointments (id, clinic_id, patient_id, appointment_datetime, service_type, notes, created_via) VALUES (?, ?, ?, ?, ?, ?, ?)')
+    .bind(apptId, user.clinic_id, patientId, body.appointment_datetime, body.service_type || body.service || 'General Checkup', body.notes || '', body.created_via || 'web_dashboard')
     .run();
-    
-  return c.json({ id: apptId, message: 'Appointment created successfully' }, 201);
+
+  await broadcastToClinic(c.env, user.clinic_id, 'appointment_created', {
+    id: apptId,
+    patient_name: body.patient_name || 'Patient',
+    appointment_datetime: body.appointment_datetime,
+    service_type: body.service_type || body.service || 'General Checkup'
+  });
+
+  return c.json({
+    id: apptId,
+    patient_id: patientId,
+    patient_name: body.patient_name || 'Patient',
+    appointment_datetime: body.appointment_datetime,
+    service_type: body.service_type || body.service || 'General Checkup',
+    status: 'scheduled',
+    message: 'Appointment created successfully'
+  }, 201);
 });
 
 // -------------------------------------------------------------------------
@@ -383,10 +466,15 @@ app.get('/api/v1/analytics/dashboard', authMiddleware, async (c) => {
   const callCount = await db.prepare('SELECT COUNT(id) as count FROM call_logs WHERE clinic_id = ?').bind(user.clinic_id).first();
   const apptCount = await db.prepare('SELECT COUNT(id) as count FROM appointments WHERE clinic_id = ?').bind(user.clinic_id).first();
   
+  const bookingsToday = apptCount ? apptCount.count : 0;
+  const revenueEstimate = bookingsToday * 150.00;
   return c.json({
     calls_today: callCount ? callCount.count : 0,
-    bookings_today: apptCount ? apptCount.count : 0,
-    revenue_estimate: (apptCount ? apptCount.count : 0) * 150.00,
+    booked_today: bookingsToday,
+    bookings_today: bookingsToday,
+    revenue_today: revenueEstimate,
+    revenue_estimate: revenueEstimate,
+    satisfaction: 95.5,
     satisfaction_score: 95.5
   });
 });
@@ -408,9 +496,20 @@ app.get('/api/v1/appointments/today', authMiddleware, async (c) => {
   const user = c.get('user');
   const today = new Date().toISOString().split('T')[0];
   const appts = await c.env.DB.prepare(
-    "SELECT * FROM appointments WHERE clinic_id = ? AND appointment_datetime LIKE ? ORDER BY appointment_datetime"
+    `SELECT
+      a.*,
+      TRIM(COALESCE(p.first_name, '') || ' ' || COALESCE(p.last_name, '')) AS patient_name
+    FROM appointments a
+    LEFT JOIN patients p ON p.id = a.patient_id
+    WHERE a.clinic_id = ? AND a.appointment_datetime LIKE ?
+    ORDER BY a.appointment_datetime`
   ).bind(user.clinic_id, today + '%').all();
-  return c.json(appts.results);
+  return c.json(appts.results.map((a) => ({
+    ...a,
+    time: timeFromAppointmentDateTime(a.appointment_datetime),
+    service: a.service_type,
+    name: a.patient_name || 'Patient'
+  })));
 });
 
 app.get('/api/v1/appointments/availability', authMiddleware, async (c) => {
@@ -432,6 +531,7 @@ app.put('/api/v1/appointments/:id', authMiddleware, async (c) => {
   await c.env.DB.prepare(
     'UPDATE appointments SET appointment_datetime = ?, service_type = ?, status = ?, notes = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?'
   ).bind(body.appointment_datetime || '', body.service_type || '', body.status || 'scheduled', body.notes || '', id, user.clinic_id).run();
+  await broadcastToClinic(c.env, user.clinic_id, 'appointment_updated', { id, ...body });
   return c.json({ message: 'Appointment updated' });
 });
 
@@ -441,6 +541,7 @@ app.delete('/api/v1/appointments/:id', authMiddleware, async (c) => {
   await c.env.DB.prepare(
     "UPDATE appointments SET status = 'cancelled', updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?"
   ).bind(id, user.clinic_id).run();
+  await broadcastToClinic(c.env, user.clinic_id, 'appointment_cancelled', { id });
   return c.json({ message: 'Appointment cancelled' });
 });
 
@@ -507,7 +608,7 @@ app.post('/api/v1/knowledge', authMiddleware, async (c) => {
   const id = crypto.randomUUID();
   await c.env.DB.prepare(
     'INSERT INTO knowledge_base (id, clinic_id, category, question, answer, answer_spanish, priority) VALUES (?, ?, ?, ?, ?, ?, ?)'
-  ).bind(id, user.clinic_id, body.category || 'general', body.question, body.answer, body.answer_es || '', body.priority || 0).run();
+  ).bind(id, user.clinic_id, body.category || 'general', body.question, body.answer, body.answer_spanish || body.answer_es || '', body.priority || 0).run();
   return c.json({ id, message: 'Knowledge entry created' }, 201);
 });
 
@@ -515,9 +616,10 @@ app.put('/api/v1/knowledge/:id', authMiddleware, async (c) => {
   const user = c.get('user');
   const id = c.req.param('id');
   const body = await c.req.json();
+  const active = body.is_active !== undefined ? body.is_active : body.active;
   await c.env.DB.prepare(
     'UPDATE knowledge_base SET category = ?, question = ?, answer = ?, answer_spanish = ?, priority = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND clinic_id = ?'
-  ).bind(body.category || 'general', body.question, body.answer, body.answer_es || '', body.priority || 0, body.active ? 1 : 0, id, user.clinic_id).run();
+  ).bind(body.category || 'general', body.question, body.answer, body.answer_spanish || body.answer_es || '', body.priority || 0, active === false ? 0 : 1, id, user.clinic_id).run();
   return c.json({ message: 'Knowledge entry updated' });
 });
 
@@ -528,7 +630,7 @@ app.delete('/api/v1/knowledge/:id', authMiddleware, async (c) => {
   return c.json({ message: 'Knowledge entry deleted' });
 });
 
-app.post('/api/v1/knowledge/seed', authMiddleware, async (c) => {
+async function seedDefaultKnowledge(c) {
   const user = c.get('user');
   const defaults = [
     { category: 'hours', question: 'What are your office hours?', answer: 'We are open Monday through Friday, 8:00 AM to 5:00 PM, and Saturday 9:00 AM to 1:00 PM. We are closed on Sundays.', answer_es: 'Estamos abiertos de lunes a viernes de 8:00 AM a 5:00 PM, y sábados de 9:00 AM a 1:00 PM. Los domingos estamos cerrados.' },
@@ -547,7 +649,11 @@ app.post('/api/v1/knowledge/seed', authMiddleware, async (c) => {
   );
   await c.env.DB.batch(stmts);
   return c.json({ message: `Seeded ${defaults.length} default knowledge base entries` }, 201);
-});
+}
+
+app.post('/api/v1/knowledge/seed', authMiddleware, seedDefaultKnowledge);
+
+app.post('/api/v1/knowledge/seed-defaults', authMiddleware, seedDefaultKnowledge);
 
 // -------------------------------------------------------------------------
 // 🏥 Clinic — Hours, Voice Settings
@@ -580,7 +686,7 @@ app.put('/api/v1/clinics/voice-settings', authMiddleware, async (c) => {
   const user = c.get('user');
   const body = await c.req.json();
   await c.env.DB.prepare('UPDATE clinics SET grok_voice_id = ?, welcome_message = ?, spanish_enabled = ?, xai_key = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
-    .bind(body.grok_voice_id || body.voice || 'Ash', body.welcome_message || '', body.spanish_enabled ? 1 : 0, body.xai_key || '', user.clinic_id).run();
+    .bind(body.grok_voice_id || body.voice || 'Aria', body.welcome_message || '', body.spanish_enabled ? 1 : 0, body.xai_key || '', user.clinic_id).run();
   return c.json({ message: 'Voice settings updated' });
 });
 
@@ -641,7 +747,7 @@ app.get('/api/v1/analytics/language-breakdown', authMiddleware, async (c) => {
 app.post('/api/v1/billing/checkout', authMiddleware, async (c) => {
   const user = c.get('user');
   const body = await c.req.json();
-  const plan = body.plan || 'starter';
+  const plan = body.plan || body.plan_name || 'starter';
   // In production, this would create a Stripe checkout session
   // For now, update the subscription directly
   await c.env.DB.prepare('UPDATE clinics SET subscription_plan = ?, subscription_status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
@@ -743,7 +849,7 @@ app.post('/api/v1/voice/simulate', authMiddleware, async (c) => {
     }
     
     // Construct dynamic system prompt based on active dentist setup
-    const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Ash';
+    const activeVoice = (settings && settings.voice && settings.voice.voice) || 'Aria';
     let systemPrompt = `You are the Elite AI Voice Receptionist named ${activeVoice} for "${clinicName || 'Sunshine Smiles Dental'}". 
     Your tone is warm, professional, and Florida-friendly. You represent a real dental clinic.
 
@@ -934,6 +1040,7 @@ app.post('/api/v1/voice/tts', authMiddleware, async (c) => {
       'sage': 'eve',
       'verse': 'sal',
       'ani': 'ara',
+      'aria': 'ara',
       'eve': 'eve',
       'leo': 'leo'
     };
@@ -989,7 +1096,7 @@ async function broadcastToClinic(env, clinicId, eventType, data) {
   const doStub = env.REALTIME_DO.get(doId);
   await doStub.fetch('http://broadcast/', {
     method: 'POST',
-    body: JSON.stringify({ event: eventType, data, timestamp: Date.now() }),
+    body: JSON.stringify({ clinic_id: clinicId, event: eventType, type: eventType, data, timestamp: Date.now() }),
   });
 }
 

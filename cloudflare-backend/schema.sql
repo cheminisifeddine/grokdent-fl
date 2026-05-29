@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS clinics (
   insurance_accepted TEXT, -- JSON string array
   emergency_contact_name TEXT,
   emergency_contact_phone TEXT,
-  grok_voice_id TEXT DEFAULT 'Ash',
+  grok_voice_id TEXT DEFAULT 'Aria',
   xai_key TEXT DEFAULT '',
   twilio_phone_number TEXT,
   stripe_customer_id TEXT,

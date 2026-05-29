@@ -69,11 +69,12 @@ class GrokVoiceAgent {
     const voiceDisplayNames = {
       'rex': 'Ash',
       'ara': 'Ani',
+      'aria': 'Aria',
       'eve': 'Eve',
       'sal': 'Verse',
       'leo': 'Leo'
     };
-    const voiceName = voiceDisplayNames[voice] || 'Eve';
+    const voiceName = voiceDisplayNames[String(voice).toLowerCase()] || voice || 'Eve';
     
     return `You are ${voiceName}, the elite AI voice receptionist for ${clinicName} in Florida.
 
@@ -186,9 +187,15 @@ Keep responses short and conversational — this is a voice call, not an email.`
         }
       }
       
+      const headers = { 'Content-Type': 'application/json' };
+      const authToken = localStorage.getItem('renia_token');
+      if (authToken && !authToken.startsWith('demo_token_') && !endpoint.includes('landing-session-token')) {
+        headers.Authorization = `Bearer ${authToken}`;
+      }
+
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers
       });
 
       console.log('Session token endpoint response status:', response.status);

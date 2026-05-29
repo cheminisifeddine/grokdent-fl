@@ -45,9 +45,9 @@ const Dashboard = {
 
     const cards = [
       { id: 'metric-calls', value: data.calls_today || 47, trend: data.calls_trend || '+12%', trendDir: 'up' },
-      { id: 'metric-booked', value: data.booked_today || 12, trend: data.booked_trend || '+8%', trendDir: 'up' },
-      { id: 'metric-revenue', value: data.revenue_today || 3240, trend: data.revenue_trend || '+15%', trendDir: 'up' },
-      { id: 'metric-satisfaction', value: data.satisfaction || 96, trend: data.satisfaction_trend || '+2%', trendDir: 'up' }
+      { id: 'metric-booked', value: data.booked_today ?? data.bookings_today ?? 12, trend: data.booked_trend || '+8%', trendDir: 'up' },
+      { id: 'metric-revenue', value: data.revenue_today ?? data.revenue_estimate ?? 3240, trend: data.revenue_trend || '+15%', trendDir: 'up' },
+      { id: 'metric-satisfaction', value: data.satisfaction ?? data.satisfaction_score ?? 96, trend: data.satisfaction_trend || '+2%', trendDir: 'up' }
     ];
 
     cards.forEach(card => {
@@ -77,7 +77,7 @@ const Dashboard = {
     const container = document.getElementById('recent-calls-list');
     if (!container) return;
 
-    const data = calls || this.getSampleCalls();
+      const data = (calls || this.getSampleCalls()).map(call => API.normalizeCall ? API.normalizeCall(call) : call);
 
     container.innerHTML = data.map(call => {
       const isSpanish = call.language === 'es';
@@ -115,7 +115,7 @@ const Dashboard = {
     const container = document.getElementById('today-appointments-list');
     if (!container) return;
 
-    const data = appointments || this.getSampleAppointments();
+      const data = (appointments || this.getSampleAppointments()).map(appt => API.normalizeAppointment ? API.normalizeAppointment(appt) : appt);
 
     container.innerHTML = data.map(appt => {
       const timeVal = appt.time || '9:00 AM';

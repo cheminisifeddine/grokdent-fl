@@ -42,6 +42,8 @@ router = APIRouter(tags=["Appointments"])
 # ---------------------------------------------------------------------------
 class AppointmentCreate(BaseModel):
     patient_id: Optional[str] = None
+    patient_name: Optional[str] = None
+    phone: Optional[str] = None
     appointment_datetime: datetime
     duration_minutes: int = 30
     service_type: str
@@ -61,6 +63,7 @@ class AppointmentResponse(BaseModel):
     id: str
     clinic_id: str
     patient_id: Optional[str] = None
+    patient_name: Optional[str] = None
     appointment_datetime: datetime
     duration_minutes: int
     service_type: Optional[str] = None
@@ -96,6 +99,38 @@ class BookFromCallRequest(BaseModel):
     language: str = "en"
 
 
+def _split_patient_name(name: str) -> tuple[str, str]:
+    parts = (name or "").strip().split()
+    if not parts:
+        return "Patient", ""
+    if len(parts) == 1:
+        return parts[0], ""
+    return " ".join(parts[:-1]), parts[-1]
+
+
+def _to_response(appointment: Appointment) -> AppointmentResponse:
+    patient_name = None
+    if appointment.patient:
+        patient_name = f"{appointment.patient.first_name} {appointment.patient.last_name}".strip()
+
+    return AppointmentResponse(
+        id=appointment.id,
+        clinic_id=appointment.clinic_id,
+        patient_id=appointment.patient_id,
+        patient_name=patient_name,
+        appointment_datetime=appointment.appointment_datetime,
+        duration_minutes=appointment.duration_minutes,
+        service_type=appointment.service_type,
+        status=appointment.status,
+        notes=appointment.notes,
+        google_calendar_event_id=appointment.google_calendar_event_id,
+        created_via=appointment.created_via,
+        reminder_sent=appointment.reminder_sent,
+        created_at=appointment.created_at,
+        updated_at=appointment.updated_at,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
@@ -120,7 +155,7 @@ async def list_appointments(
         query = query.filter(Appointment.status == status)
 
     appointments = query.order_by(Appointment.appointment_datetime).all()
-    return [AppointmentResponse.model_validate(a) for a in appointments]
+    return [_to_response(a) for a in appointments]
 
 
 @router.get("/today", response_model=List[AppointmentResponse])
@@ -144,7 +179,7 @@ async def todays_appointments(
         .order_by(Appointment.appointment_datetime)
         .all()
     )
-    return [AppointmentResponse.model_validate(a) for a in appointments]
+    return [_to_response(a) for a in appointments]
 
 
 @router.post("/", response_model=AppointmentResponse, status_code=201)
@@ -164,6 +199,27 @@ async def create_appointment(
         ).first()
         if not patient:
             raise HTTPException(status_code=404, detail="Patient not found in this clinic")
+    elif body.patient_name:
+        first_name, last_name = _split_patient_name(body.patient_name)
+        patient = (
+            db.query(Patient)
+            .filter(
+                Patient.clinic_id == current_user.clinic_id,
+                Patient.first_name.ilike(first_name),
+                Patient.last_name.ilike(last_name),
+            )
+            .first()
+        )
+        if not patient:
+            patient = Patient(
+                clinic_id=current_user.clinic_id,
+                first_name=first_name,
+                last_name=last_name,
+                phone_encrypted=encryption_service.encrypt(body.phone) if body.phone else None,
+            )
+            db.add(patient)
+            db.flush()
+        body.patient_id = patient.id
 
     appointment = Appointment(
         clinic_id=current_user.clinic_id,
@@ -192,7 +248,7 @@ async def create_appointment(
 
     db.commit()
     db.refresh(appointment)
-    return AppointmentResponse.model_validate(appointment)
+    return _to_response(appointment)
 
 
 @router.put("/{appointment_id}", response_model=AppointmentResponse)
@@ -220,7 +276,7 @@ async def update_appointment(
 
     db.commit()
     db.refresh(appointment)
-    return AppointmentResponse.model_validate(appointment)
+    return _to_response(appointment)
 
 
 @router.delete("/{appointment_id}")
@@ -385,4 +441,4 @@ async def book_from_call(
         body.patient_name, body.service, body.preferred_time,
     )
 
-    return AppointmentResponse.model_validate(appointment)
+    return _to_response(appointment)
