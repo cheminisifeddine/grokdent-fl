@@ -40,6 +40,7 @@ class ClinicResponse(BaseModel):
     emergency_contact_phone: Optional[str] = None
     grok_voice_id: Optional[str] = None
     welcome_message: Optional[str] = None
+    instructions: Optional[str] = None
     spanish_enabled: Optional[bool] = None
     subscription_plan: Optional[str] = None
     subscription_status: Optional[str] = None

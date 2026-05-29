@@ -65,6 +65,7 @@ class Clinic(Base):
 
     # Policies & Messaging
     policies = Column(Text, nullable=True, doc="Cancellation, late, payment policies")
+    instructions = Column(Text, nullable=True, doc="AI voice system instructions / persona prompt")
     welcome_message = Column(
         Text,
         nullable=True,

@@ -936,9 +936,8 @@
 
     // AI Intake Panel action handlers
     window.approveIntake = async function(intakeId, timeStr, service) {
-      const btn = event.target;
-      btn.disabled = true;
-      btn.textContent = 'Processing...';
+      const btn = event.currentTarget || event.target;
+      if (btn) { btn.disabled = true; btn.textContent = 'Processing...'; }
       try {
         const date = new Date();
         const dateStr = formatDateStr(date);
@@ -947,7 +946,7 @@
           name: intakeId === 'new-patient-emergency' ? 'Sarah Jenkins' : 'Marcus Aurelius',
           service: service || 'General Checkup',
           date: dateStr,
-          time: timeStr ? timeStr.split('•')[1]?.trim() : '9:00 AM',
+          time: timeStr ? ((timeStr.split('•')[1] || timeStr).trim() || '9:00 AM') : '9:00 AM',
           category: service?.toLowerCase().includes('emergency') ? 'emergency' : (service?.toLowerCase().includes('whitening') || service?.toLowerCase().includes('implant') || service?.toLowerCase().includes('cosmetic') ? 'cosmetic' : 'general'),
           status: 'Confirmed',
           notes: 'Approved via AI Intake Engine'
@@ -973,8 +972,7 @@
       } catch (e) {
         showToast('Failed to approve intake', 'error');
       } finally {
-        btn.disabled = false;
-        btn.textContent = 'Approve';
+        if (btn) { btn.disabled = false; btn.textContent = 'Approve'; }
       }
     };
 
@@ -987,7 +985,7 @@
     };
 
     window.denyIntake = function(intakeId) {
-      const btn = event.target;
+      const btn = event.currentTarget || event.target;
       const card = btn.closest('.glass-panel');
       if (card) {
         card.style.opacity = '0.3';

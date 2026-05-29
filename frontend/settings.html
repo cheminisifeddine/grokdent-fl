@@ -596,7 +596,7 @@
               greeting: clinic.welcome_message || DEFAULT_SETTINGS.voice.greeting,
               spanish: clinic.spanish_enabled !== undefined ? clinic.spanish_enabled : DEFAULT_SETTINGS.voice.spanish,
               xai_key: '',
-              instructions: (storedParsed && storedParsed.voice && storedParsed.voice.instructions) || DEFAULT_SETTINGS.voice.instructions || ''
+              instructions: clinic.instructions || (storedParsed && storedParsed.voice && storedParsed.voice.instructions) || DEFAULT_SETTINGS.voice.instructions || ''
             },
             emergency: {
               name: clinic.emergency_contact_name || DEFAULT_SETTINGS.emergency.name,
